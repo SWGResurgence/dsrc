@@ -1,17 +1,24 @@
 package script.npe;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.groundquests;
 import script.location;
 import script.obj_id;
 
 public class handoff_to_tatooine extends script.base_script
 {
-    public handoff_to_tatooine()
-    {
-    }
     public static final String questNewbieStart = "quest/speeder_quest";
     public static final String questNewbieStartBH = "quest/speeder_quest";
     public static final String questCrafterEntertainer = "quest/tatooine_eisley_noncombat";
+    public handoff_to_tatooine()
+    {
+    }
+
     public int OnLogin(obj_id self) throws InterruptedException
     {
         location origin = getLocation(self);
@@ -34,18 +41,18 @@ public class handoff_to_tatooine extends script.base_script
             {
                 detachScript(self, "npe.handoff_to_tatooine");
             }
-            else 
+            else
             {
                 groundquests.requestGrantQuest(self, questNewbieStartBH);
             }
         }
-        else 
+        else
         {
             if (groundquests.hasCompletedQuest(self, questNewbieStart) || groundquests.isQuestActive(self, questNewbieStart))
             {
                 detachScript(self, "npe.handoff_to_tatooine");
             }
-            else 
+            else
             {
                 groundquests.requestGrantQuest(self, questNewbieStart);
             }

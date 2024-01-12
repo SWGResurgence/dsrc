@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.groundquests;
@@ -8,76 +14,68 @@ import script.*;
 
 public class ep3_myyydril_cantina_girl extends script.base_script
 {
+    public static String c_stringFile = "conversation/ep3_myyydril_cantina_girl";
+
     public ep3_myyydril_cantina_girl()
     {
     }
-    public static String c_stringFile = "conversation/ep3_myyydril_cantina_girl";
+
     public boolean ep3_myyydril_cantina_girl_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean ep3_myyydril_cantina_girl_condition_hasCompletedTaskOne(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.hasCompletedTask(player, "ep3_myyydril_kirirr_gather_1", 0) && !groundquests.hasCompletedQuest(player, "ep3_myyydril_kirirr_gather_1"));
     }
+
     public boolean ep3_myyydril_cantina_girl_condition_hasCompletedQuestTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "ep3_myyydril_kirrir_talkto_4");
     }
+
     public boolean ep3_myyydril_cantina_girl_condition_hasCompletedQuestOther(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.isTaskActive(player, "ep3_myyydril_talaoree_talkto_3", 0) || groundquests.hasCompletedTask(player, "ep3_myyydril_talaoree_talkto_3", 0))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return groundquests.isTaskActive(player, "ep3_myyydril_talaoree_talkto_3", 0) || groundquests.hasCompletedTask(player, "ep3_myyydril_talaoree_talkto_3", 0);
     }
+
     public boolean ep3_myyydril_cantina_girl_condition_isActiveTaskOne(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.isTaskActive(player, "ep3_myyydril_kirirr_gather_1", 0) || groundquests.hasCompletedTask(player, "ep3_myyydril_kirirr_gather_1", 0))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return groundquests.isTaskActive(player, "ep3_myyydril_kirirr_gather_1", 0) || groundquests.hasCompletedTask(player, "ep3_myyydril_kirirr_gather_1", 0);
     }
+
     public boolean ep3_myyydril_cantina_girl_condition_hasCompletedQuestOne(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "ep3_myyydril_kirirr_gather_1");
     }
+
     public boolean ep3_myyydril_cantina_girl_condition_isTaskActiveTwo(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.isTaskActive(player, "ep3_myyydril_kirrir_talkto_4", 0) || groundquests.hasCompletedTask(player, "ep3_myyydril_kirrir_talkto_4", 0))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return groundquests.isTaskActive(player, "ep3_myyydril_kirrir_talkto_4", 0) || groundquests.hasCompletedTask(player, "ep3_myyydril_kirrir_talkto_4", 0);
     }
+
     public void ep3_myyydril_cantina_girl_action_giveQuestOne(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "ep3_myyydril_kirirr_gather_1");
         groundquests.sendSignal(player, "talktokirrir");
     }
+
     public void ep3_myyydril_cantina_girl_action_giveQuestTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "ep3_myyydril_kirrir_talkto_4");
     }
+
     public void ep3_myyydril_cantina_girl_action_giveSignal(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "giveReward");
     }
+
     public void ep3_myyydril_cantina_girl_action_giveSignal2(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "talktokirrir");
     }
+
     public int ep3_myyydril_cantina_girl_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_334"))
@@ -93,6 +91,7 @@ public class ep3_myyydril_cantina_girl extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_cantina_girl_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_347"))
@@ -107,6 +106,7 @@ public class ep3_myyydril_cantina_girl extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_cantina_girl_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_342"))
@@ -126,7 +126,7 @@ public class ep3_myyydril_cantina_girl extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_365");
@@ -135,7 +135,7 @@ public class ep3_myyydril_cantina_girl extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_myyydril_cantina_girl.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -155,6 +155,7 @@ public class ep3_myyydril_cantina_girl extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_cantina_girl_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_365"))
@@ -170,6 +171,7 @@ public class ep3_myyydril_cantina_girl extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_cantina_girl_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_301"))
@@ -223,7 +225,7 @@ public class ep3_myyydril_cantina_girl extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_307");
@@ -240,7 +242,7 @@ public class ep3_myyydril_cantina_girl extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_myyydril_cantina_girl.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -250,6 +252,7 @@ public class ep3_myyydril_cantina_girl extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_cantina_girl_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_307"))
@@ -276,7 +279,7 @@ public class ep3_myyydril_cantina_girl extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_308");
@@ -289,7 +292,7 @@ public class ep3_myyydril_cantina_girl extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_myyydril_cantina_girl.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -321,7 +324,7 @@ public class ep3_myyydril_cantina_girl extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_94");
@@ -334,7 +337,7 @@ public class ep3_myyydril_cantina_girl extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_myyydril_cantina_girl.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -366,7 +369,7 @@ public class ep3_myyydril_cantina_girl extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_106");
@@ -379,7 +382,7 @@ public class ep3_myyydril_cantina_girl extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_myyydril_cantina_girl.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -389,6 +392,7 @@ public class ep3_myyydril_cantina_girl extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_cantina_girl_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_308"))
@@ -408,7 +412,7 @@ public class ep3_myyydril_cantina_girl extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_153");
@@ -417,7 +421,7 @@ public class ep3_myyydril_cantina_girl extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_myyydril_cantina_girl.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -437,6 +441,7 @@ public class ep3_myyydril_cantina_girl extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_cantina_girl_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_153"))
@@ -463,7 +468,7 @@ public class ep3_myyydril_cantina_girl extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_155");
@@ -476,7 +481,7 @@ public class ep3_myyydril_cantina_girl extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_myyydril_cantina_girl.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -486,6 +491,7 @@ public class ep3_myyydril_cantina_girl extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_cantina_girl_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_155"))
@@ -515,7 +521,7 @@ public class ep3_myyydril_cantina_girl extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_160");
@@ -524,7 +530,7 @@ public class ep3_myyydril_cantina_girl extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_myyydril_cantina_girl.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -534,6 +540,7 @@ public class ep3_myyydril_cantina_girl extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_cantina_girl_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_160"))
@@ -548,6 +555,7 @@ public class ep3_myyydril_cantina_girl extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_cantina_girl_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_94"))
@@ -567,7 +575,7 @@ public class ep3_myyydril_cantina_girl extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_163");
@@ -576,7 +584,7 @@ public class ep3_myyydril_cantina_girl extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_myyydril_cantina_girl.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -596,6 +604,7 @@ public class ep3_myyydril_cantina_girl extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_cantina_girl_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_163"))
@@ -622,7 +631,7 @@ public class ep3_myyydril_cantina_girl extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_166");
@@ -635,7 +644,7 @@ public class ep3_myyydril_cantina_girl extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_myyydril_cantina_girl.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -645,6 +654,7 @@ public class ep3_myyydril_cantina_girl extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_cantina_girl_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_166"))
@@ -664,7 +674,7 @@ public class ep3_myyydril_cantina_girl extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_171");
@@ -673,7 +683,7 @@ public class ep3_myyydril_cantina_girl extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_myyydril_cantina_girl.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -693,6 +703,7 @@ public class ep3_myyydril_cantina_girl extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_cantina_girl_handleBranch26(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_171"))
@@ -712,7 +723,7 @@ public class ep3_myyydril_cantina_girl extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_173");
@@ -721,7 +732,7 @@ public class ep3_myyydril_cantina_girl extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_myyydril_cantina_girl.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -731,6 +742,7 @@ public class ep3_myyydril_cantina_girl extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_cantina_girl_handleBranch27(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_173"))
@@ -745,6 +757,7 @@ public class ep3_myyydril_cantina_girl extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_cantina_girl_handleBranch31(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_106"))
@@ -764,7 +777,7 @@ public class ep3_myyydril_cantina_girl extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_175");
@@ -773,7 +786,7 @@ public class ep3_myyydril_cantina_girl extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_myyydril_cantina_girl.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -798,7 +811,7 @@ public class ep3_myyydril_cantina_girl extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_185");
@@ -807,7 +820,7 @@ public class ep3_myyydril_cantina_girl extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_myyydril_cantina_girl.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -817,6 +830,7 @@ public class ep3_myyydril_cantina_girl extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_cantina_girl_handleBranch32(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_175"))
@@ -836,7 +850,7 @@ public class ep3_myyydril_cantina_girl extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_178");
@@ -845,7 +859,7 @@ public class ep3_myyydril_cantina_girl extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_myyydril_cantina_girl.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -855,6 +869,7 @@ public class ep3_myyydril_cantina_girl extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_cantina_girl_handleBranch33(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_178"))
@@ -874,7 +889,7 @@ public class ep3_myyydril_cantina_girl extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_181");
@@ -883,7 +898,7 @@ public class ep3_myyydril_cantina_girl extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_myyydril_cantina_girl.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -893,6 +908,7 @@ public class ep3_myyydril_cantina_girl extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_cantina_girl_handleBranch34(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_181"))
@@ -912,7 +928,7 @@ public class ep3_myyydril_cantina_girl extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_183");
@@ -921,7 +937,7 @@ public class ep3_myyydril_cantina_girl extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_myyydril_cantina_girl.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -931,6 +947,7 @@ public class ep3_myyydril_cantina_girl extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_cantina_girl_handleBranch35(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_183"))
@@ -945,6 +962,7 @@ public class ep3_myyydril_cantina_girl extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_cantina_girl_handleBranch37(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_185"))
@@ -964,7 +982,7 @@ public class ep3_myyydril_cantina_girl extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_188");
@@ -973,7 +991,7 @@ public class ep3_myyydril_cantina_girl extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_myyydril_cantina_girl.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -983,6 +1001,7 @@ public class ep3_myyydril_cantina_girl extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_cantina_girl_handleBranch38(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_188"))
@@ -1002,7 +1021,7 @@ public class ep3_myyydril_cantina_girl extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_192");
@@ -1011,7 +1030,7 @@ public class ep3_myyydril_cantina_girl extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_myyydril_cantina_girl.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1021,6 +1040,7 @@ public class ep3_myyydril_cantina_girl extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_cantina_girl_handleBranch39(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_192"))
@@ -1040,7 +1060,7 @@ public class ep3_myyydril_cantina_girl extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_208");
@@ -1049,7 +1069,7 @@ public class ep3_myyydril_cantina_girl extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_myyydril_cantina_girl.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1059,6 +1079,7 @@ public class ep3_myyydril_cantina_girl extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_cantina_girl_handleBranch40(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_208"))
@@ -1073,6 +1094,7 @@ public class ep3_myyydril_cantina_girl extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -1084,6 +1106,7 @@ public class ep3_myyydril_cantina_girl extends script.base_script
         setInvulnerable(self, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
@@ -1091,6 +1114,7 @@ public class ep3_myyydril_cantina_girl extends script.base_script
         setInvulnerable(self, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -1100,18 +1124,21 @@ public class ep3_myyydril_cantina_girl extends script.base_script
         faceTo(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.ep3_myyydril_cantina_girl");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -1146,7 +1173,7 @@ public class ep3_myyydril_cantina_girl extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_334");
@@ -1154,7 +1181,7 @@ public class ep3_myyydril_cantina_girl extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_myyydril_cantina_girl.branchId", 3);
                 npcStartConversation(player, npc, "ep3_myyydril_cantina_girl", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1176,7 +1203,7 @@ public class ep3_myyydril_cantina_girl extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_347");
@@ -1184,7 +1211,7 @@ public class ep3_myyydril_cantina_girl extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_myyydril_cantina_girl.branchId", 5);
                 npcStartConversation(player, npc, "ep3_myyydril_cantina_girl", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1218,7 +1245,7 @@ public class ep3_myyydril_cantina_girl extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_342");
@@ -1230,7 +1257,7 @@ public class ep3_myyydril_cantina_girl extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_myyydril_cantina_girl.branchId", 8);
                 npcStartConversation(player, npc, "ep3_myyydril_cantina_girl", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1265,7 +1292,7 @@ public class ep3_myyydril_cantina_girl extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_301");
@@ -1281,7 +1308,7 @@ public class ep3_myyydril_cantina_girl extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_myyydril_cantina_girl.branchId", 12);
                 npcStartConversation(player, npc, "ep3_myyydril_cantina_girl", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1290,6 +1317,7 @@ public class ep3_myyydril_cantina_girl extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("ep3_myyydril_cantina_girl"))

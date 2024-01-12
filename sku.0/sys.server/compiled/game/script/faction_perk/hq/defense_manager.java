@@ -1,5 +1,11 @@
 package script.faction_perk.hq;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -7,10 +13,12 @@ import java.util.Vector;
 
 public class defense_manager extends script.base_script
 {
+    private static final float RESOURCE_REPAIR_RATIO = 0.5f;
+
     public defense_manager()
     {
     }
-    private static final float RESOURCE_REPAIR_RATIO = 0.5f;
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (!isInvulnerable(self))
@@ -20,6 +28,7 @@ public class defense_manager extends script.base_script
         hq.prepareHqDefenses(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (!isInvulnerable(self))
@@ -29,22 +38,26 @@ public class defense_manager extends script.base_script
         messageTo(self, "handleDefenseValidation", null, 10.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         hq.cleanupHqDefenses(self);
         hq.cleanupHqSecurityTeam(self);
         return SCRIPT_CONTINUE;
     }
+
     public int handleCreateMinefield(obj_id self, dictionary params) throws InterruptedException
     {
         hq.createMinefield(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnMaintenanceLoop(obj_id self, dictionary params) throws InterruptedException
     {
         messageTo(self, "handleRepairDefenses", null, 10.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleRepairDefenses(obj_id self, dictionary params) throws InterruptedException
     {
         if (!hasObjVar(self, hq.VAR_DEFENSE_BASE))
@@ -74,19 +87,25 @@ public class defense_manager extends script.base_script
             }
             ov = ovl.getObjVar(i);
             defenses = ov.getObjIdArrayData();
-            if (defenses != null && defenses.length > 0)
+            if (defenses != null)
             {
-                for (obj_id defense : defenses) {
+                for (obj_id defense : defenses)
+                {
                     int curres = getIntObjVar(self, hq.VAR_HQ_RESOURCE_CNT);
-                    if (isIdValid(defense)) {
+                    if (isIdValid(defense))
+                    {
                         int hp = getHitpoints(defense);
                         int max = getMaxHitpoints(defense);
-                        if (hp < 1) {
+                        if (hp < 1)
+                        {
                             destroyObject(defense);
-                        } else if (hp < max) {
+                        }
+                        else if (hp < max)
+                        {
                             int diff = max - hp;
                             float cost = diff * RESOURCE_REPAIR_RATIO;
-                            if (cost > curres) {
+                            if (cost > curres)
+                            {
                                 diff = (int) (curres / RESOURCE_REPAIR_RATIO);
                                 cost = curres;
                             }
@@ -94,12 +113,14 @@ public class defense_manager extends script.base_script
                             setHitpoints(defense, hp + diff);
                             int used = (int) cost;
                             int total = curres - used;
-                            if (total < 0) {
+                            if (total < 0)
+                            {
                                 removeObjVar(self, hq.VAR_HQ_RESOURCE_CNT);
                                 break;
                             }
                             setObjVar(self, hq.VAR_HQ_RESOURCE_CNT, total);
-                            if (curres < 1.0f) {
+                            if (curres < 1.0f)
+                            {
                                 break;
                             }
                         }
@@ -110,6 +131,7 @@ public class defense_manager extends script.base_script
         messageTo(self, "handleDefenseValidation", null, 10.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleAddDefense(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -225,7 +247,7 @@ public class defense_manager extends script.base_script
             }
             defense = advanced_turret.createTurret(there, (yaw + dyaw), turretType, turretSize, DAMAGE_ENERGY, turretMinDam, turretMaxDam, turretHitpoints, turretRange, turretSpeed, myFacName);
         }
-        else 
+        else
         {
             defense = createObject(template, there);
             if (isIdValid(defense))
@@ -261,6 +283,7 @@ public class defense_manager extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleRemoveDefense(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -309,11 +332,13 @@ public class defense_manager extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleDefenseValidation(obj_id self, dictionary params) throws InterruptedException
     {
         hq.validateDefenseTracking(self);
         return SCRIPT_CONTINUE;
     }
+
     public int handleMinefieldValidation(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "mines"))
@@ -333,8 +358,10 @@ public class defense_manager extends script.base_script
         if (hasObjVar(self, hq.VAR_DEFENSE_BASE + ".minefield"))
         {
             obj_id[] old_minefields = getObjIdArrayObjVar(self, hq.VAR_DEFENSE_BASE + ".minefield");
-            for (obj_id old_minefield : old_minefields) {
-                if (isIdValid(old_minefield)) {
+            for (obj_id old_minefield : old_minefields)
+            {
+                if (isIdValid(old_minefield))
+                {
                     destroyObject(old_minefield);
                 }
             }
@@ -343,6 +370,7 @@ public class defense_manager extends script.base_script
         setObjVar(self, "mines", new int[hq.MAX_MINE_TYPES]);
         return SCRIPT_CONTINUE;
     }
+
     public int handleTurretControl(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id turret = params.getObjId("defense");
@@ -368,6 +396,7 @@ public class defense_manager extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleResetTurretControl(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id turret = params.getObjId("sender");
@@ -397,6 +426,7 @@ public class defense_manager extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleSpawnSecurityRover(obj_id self, dictionary params) throws InterruptedException
     {
         String guardType = params.getString("guard");
@@ -411,7 +441,7 @@ public class defense_manager extends script.base_script
                 securityTeam = utils.addElement(securityTeam, guard);
                 utils.setScriptVar(self, "hq.spawn.security", securityTeam);
             }
-            else 
+            else
             {
                 Vector securityTeam = new Vector();
                 securityTeam.setSize(0);
@@ -421,6 +451,7 @@ public class defense_manager extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     private boolean addMine(obj_id self, int mineType) throws InterruptedException
     {
         if (mineType == -1)

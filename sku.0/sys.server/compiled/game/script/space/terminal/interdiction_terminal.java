@@ -1,29 +1,36 @@
 package script.space.terminal;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.space_transition;
 import script.library.utils;
 import script.*;
 
 public class interdiction_terminal extends script.base_script
 {
-    public interdiction_terminal()
-    {
-    }
     public static final string_id SID_ACTIVATE_FALSE = new string_id("space/space_terminal", "activate_unencoded");
     public static final string_id SID_ACTIVATE_WAYPOINT = new string_id("space/space_terminal", "create_waypoint");
     public static final string_id SID_ACTIVATE_EVENT = new string_id("space/space_terminal", "activate_event");
     public static final string_id SID_NO_USE = new string_id("space/space_terminal", "no_use");
-    public static final String[] VALID_REGIONS = 
+    public static final String[] VALID_REGIONS =
+            {
+                    "space_tatooine",
+                    "space_corellia",
+                    "space_dantooine",
+                    "space_dathomir",
+                    "space_endor",
+                    "space_lok",
+                    "space_naboo",
+                    "space_yavin4"
+            };
+    public interdiction_terminal()
     {
-        "space_tatooine",
-        "space_corellia",
-        "space_dantooine",
-        "space_dathomir",
-        "space_endor",
-        "space_lok",
-        "space_naboo",
-        "space_yavin4"
-    };
+    }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         if (!isIdValid(self))
@@ -44,17 +51,14 @@ public class interdiction_terminal extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!isIdValid(player) || !isIdValid(self))
         {
             return SCRIPT_CONTINUE;
         }
-        boolean isNested = true;
-        if (!utils.isNestedWithin(self, player))
-        {
-            isNested = false;
-        }
+        boolean isNested = utils.isNestedWithin(self, player);
         boolean readyForEvent = false;
         if (hasObjVar(self, "region") && hasObjVar(self, "location") && hasObjVar(self, "difficulty"))
         {
@@ -74,32 +78,33 @@ public class interdiction_terminal extends script.base_script
                 inSpaceShip = true;
             }
         }
-        if (isNested == false)
+        if (!isNested)
         {
             mi.addRootMenu(menu_info_types.ITEM_USE, SID_ACTIVATE_FALSE);
             return SCRIPT_CONTINUE;
         }
-        if (readyForEvent == false)
+        if (!readyForEvent)
         {
             mi.addRootMenu(menu_info_types.ITEM_USE, SID_ACTIVATE_FALSE);
         }
-        if (readyForEvent == true && inSpaceShip == false)
+        if (readyForEvent && !inSpaceShip)
         {
             mi.addRootMenu(menu_info_types.ITEM_USE, SID_ACTIVATE_WAYPOINT);
         }
-        if (readyForEvent == true && inSpaceShip == true)
+        if (readyForEvent && inSpaceShip)
         {
             if (atLocation(self, player))
             {
                 mi.addRootMenu(menu_info_types.ITEM_USE, SID_ACTIVATE_EVENT);
             }
-            else 
+            else
             {
                 mi.addRootMenu(menu_info_types.ITEM_USE, SID_ACTIVATE_WAYPOINT);
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (!isIdValid(player) || !isIdValid(self) || item <= 0)
@@ -145,6 +150,7 @@ public class interdiction_terminal extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);
@@ -188,6 +194,7 @@ public class interdiction_terminal extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void createWaypoint(obj_id self, obj_id player) throws InterruptedException
     {
         if (!isIdValid(player) || !isIdValid(self))
@@ -217,8 +224,8 @@ public class interdiction_terminal extends script.base_script
             setWaypointColor(waypoint, "space");
             setObjVar(self, "waypoint", waypoint);
         }
-        return;
     }
+
     public boolean isRegionValid(obj_id self) throws InterruptedException
     {
         if (!isIdValid(self))
@@ -227,13 +234,16 @@ public class interdiction_terminal extends script.base_script
         }
         String region = getStringObjVar(self, "region");
         boolean isRegionValid = false;
-        for (String validRegion : VALID_REGIONS) {
-            if (region.equals(validRegion)) {
+        for (String validRegion : VALID_REGIONS)
+        {
+            if (region.equals(validRegion))
+            {
                 return true;
             }
         }
         return false;
     }
+
     public boolean atLocation(obj_id self, obj_id player) throws InterruptedException
     {
         if (!isIdValid(player) || !isIdValid(self))
@@ -243,12 +253,9 @@ public class interdiction_terminal extends script.base_script
         obj_id ship = space_transition.getContainingShip(player);
         location eventLoc = getLocationObjVar(self, "location");
         float fltDistance = getDistance(getLocation(ship), eventLoc);
-        if (fltDistance < 200 && fltDistance >= 0)
-        {
-            return true;
-        }
-        return false;
+        return fltDistance < 200 && fltDistance >= 0;
     }
+
     public void startEvent(obj_id self, obj_id player) throws InterruptedException
     {
         if (!isIdValid(player) || !isIdValid(self))

@@ -1,21 +1,28 @@
 package script.developer.soe.beta;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.menu_info_types;
 import script.obj_id;
 import script.string_id;
 
 public class terminal_food extends script.terminal.base.terminal_add_use
 {
+    public static final string_id SID_ORDER_FOOD = new string_id("sui", "order_food");
+    public static final String[] TEMPLATES =
+            {
+                    "object/tangible/food/bread_loaf_full_s1.iff",
+                    "object/tangible/food/fruit_melon.iff",
+                    "object/tangible/food/meat_kabob.iff"
+            };
     public terminal_food()
     {
     }
-    public static final string_id SID_ORDER_FOOD = new string_id("sui", "order_food");
-    public static final String[] TEMPLATES = 
-    {
-        "object/tangible/food/bread_loaf_full_s1.iff",
-        "object/tangible/food/fruit_melon.iff",
-        "object/tangible/food/meat_kabob.iff"
-    };
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (isGod(player) || hasObjVar(player, "beta.terminal_ok"))
@@ -29,14 +36,14 @@ public class terminal_food extends script.terminal.base.terminal_add_use
                 {
                     broadcast(player, "Unable to create food. Make sure you have space in your inventory.");
                 }
-                else 
+                else
                 {
                     broadcast(player, "A random foodstuff has been created in your inventory.");
                 }
             }
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             broadcast(player, "Only authorized users may access this terminal.");
             return SCRIPT_CONTINUE;

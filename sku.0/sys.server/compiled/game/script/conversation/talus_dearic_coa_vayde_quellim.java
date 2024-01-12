@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.groundquests;
@@ -8,55 +14,59 @@ import script.*;
 
 public class talus_dearic_coa_vayde_quellim extends script.base_script
 {
+    public static String c_stringFile = "conversation/talus_dearic_coa_vayde_quellim";
+
     public talus_dearic_coa_vayde_quellim()
     {
     }
-    public static String c_stringFile = "conversation/talus_dearic_coa_vayde_quellim";
+
     public boolean talus_dearic_coa_vayde_quellim_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean talus_dearic_coa_vayde_quellim_condition_supplies_deliverable(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "talus_dearic_coa_rebel_view_end", "talus_dearic_coa_med_supplies_delivered_wfs");
     }
+
     public boolean talus_dearic_coa_vayde_quellim_condition_rebel_quest_accepted(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.isTaskActive(player, "talus_dearic_coa_rebel_view_end", "talus_dearic_coa_report_to_trezya_wfs") || groundquests.isQuestActive(player, "talus_dearic_coa_rebel_view"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return groundquests.isTaskActive(player, "talus_dearic_coa_rebel_view_end", "talus_dearic_coa_report_to_trezya_wfs") || groundquests.isQuestActive(player, "talus_dearic_coa_rebel_view");
     }
+
     public boolean talus_dearic_coa_vayde_quellim_condition_rebel_quest_complete(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "talus_dearic_coa_rebel_view_end");
     }
+
     public boolean talus_dearic_coa_vayde_quellim_condition_rebel_tasks_complete(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "talus_dearic_coa_rebel_view_end", "talus_dearic_coa_rebel_gratitude_wfs");
     }
+
     public boolean talus_dearic_coa_vayde_quellim_condition_main_quest_accepted(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "talus_dearic_crisis_of_allegiance");
     }
+
     public void talus_dearic_coa_vayde_quellim_action_accept_rebel_quest(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "talus_dearic_coa_rebel_view");
         groundquests.sendSignal(player, "talus_dearic_coa_spoke_with_vayde");
     }
+
     public void talus_dearic_coa_vayde_quellim_action_deliver_supplies(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "talus_dearic_coa_med_supplies_delivered");
     }
+
     public void talus_dearic_coa_vayde_quellim_action_complete_rebel_quests(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "talus_dearic_coa_rebel_gratitude_accepted");
         groundquests.sendSignal(player, "talus_dearic_aclo_investigated");
     }
+
     public int talus_dearic_coa_vayde_quellim_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_45"))
@@ -78,7 +88,7 @@ public class talus_dearic_coa_vayde_quellim extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_47");
@@ -87,7 +97,7 @@ public class talus_dearic_coa_vayde_quellim extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.talus_dearic_coa_vayde_quellim.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -109,6 +119,7 @@ public class talus_dearic_coa_vayde_quellim extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int talus_dearic_coa_vayde_quellim_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_47"))
@@ -125,6 +136,7 @@ public class talus_dearic_coa_vayde_quellim extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int talus_dearic_coa_vayde_quellim_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_29"))
@@ -146,7 +158,7 @@ public class talus_dearic_coa_vayde_quellim extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_55");
@@ -155,7 +167,7 @@ public class talus_dearic_coa_vayde_quellim extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.talus_dearic_coa_vayde_quellim.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -177,6 +189,7 @@ public class talus_dearic_coa_vayde_quellim extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int talus_dearic_coa_vayde_quellim_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_55"))
@@ -205,7 +218,7 @@ public class talus_dearic_coa_vayde_quellim extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_63");
@@ -218,7 +231,7 @@ public class talus_dearic_coa_vayde_quellim extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.talus_dearic_coa_vayde_quellim.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -228,6 +241,7 @@ public class talus_dearic_coa_vayde_quellim extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int talus_dearic_coa_vayde_quellim_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_63"))
@@ -256,6 +270,7 @@ public class talus_dearic_coa_vayde_quellim extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int talus_dearic_coa_vayde_quellim_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_65"))
@@ -273,6 +288,7 @@ public class talus_dearic_coa_vayde_quellim extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int talus_dearic_coa_vayde_quellim_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_51"))
@@ -288,6 +304,7 @@ public class talus_dearic_coa_vayde_quellim extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int talus_dearic_coa_vayde_quellim_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_64"))
@@ -310,7 +327,7 @@ public class talus_dearic_coa_vayde_quellim extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_68");
@@ -319,7 +336,7 @@ public class talus_dearic_coa_vayde_quellim extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.talus_dearic_coa_vayde_quellim.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -346,7 +363,7 @@ public class talus_dearic_coa_vayde_quellim extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_68");
@@ -355,7 +372,7 @@ public class talus_dearic_coa_vayde_quellim extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.talus_dearic_coa_vayde_quellim.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -377,6 +394,7 @@ public class talus_dearic_coa_vayde_quellim extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int talus_dearic_coa_vayde_quellim_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_68"))
@@ -406,7 +424,7 @@ public class talus_dearic_coa_vayde_quellim extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_72");
@@ -419,7 +437,7 @@ public class talus_dearic_coa_vayde_quellim extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.talus_dearic_coa_vayde_quellim.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -429,6 +447,7 @@ public class talus_dearic_coa_vayde_quellim extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int talus_dearic_coa_vayde_quellim_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_72"))
@@ -458,7 +477,7 @@ public class talus_dearic_coa_vayde_quellim extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_76");
@@ -471,7 +490,7 @@ public class talus_dearic_coa_vayde_quellim extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.talus_dearic_coa_vayde_quellim.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -493,6 +512,7 @@ public class talus_dearic_coa_vayde_quellim extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int talus_dearic_coa_vayde_quellim_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_76"))
@@ -514,7 +534,7 @@ public class talus_dearic_coa_vayde_quellim extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_81");
@@ -523,7 +543,7 @@ public class talus_dearic_coa_vayde_quellim extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.talus_dearic_coa_vayde_quellim.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -545,6 +565,7 @@ public class talus_dearic_coa_vayde_quellim extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int talus_dearic_coa_vayde_quellim_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_81"))
@@ -561,6 +582,7 @@ public class talus_dearic_coa_vayde_quellim extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int talus_dearic_coa_vayde_quellim_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_68"))
@@ -590,7 +612,7 @@ public class talus_dearic_coa_vayde_quellim extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_72");
@@ -603,7 +625,7 @@ public class talus_dearic_coa_vayde_quellim extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.talus_dearic_coa_vayde_quellim.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -613,6 +635,7 @@ public class talus_dearic_coa_vayde_quellim extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isTangible(self)) || (isPlayer(self)))
@@ -622,11 +645,13 @@ public class talus_dearic_coa_vayde_quellim extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -635,18 +660,21 @@ public class talus_dearic_coa_vayde_quellim extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.talus_dearic_coa_vayde_quellim");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -678,7 +706,7 @@ public class talus_dearic_coa_vayde_quellim extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_45");
@@ -690,7 +718,7 @@ public class talus_dearic_coa_vayde_quellim extends script.base_script
                 utils.setScriptVar(player, "conversation.talus_dearic_coa_vayde_quellim.branchId", 1);
                 npcStartConversation(player, npc, "talus_dearic_coa_vayde_quellim", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -719,7 +747,7 @@ public class talus_dearic_coa_vayde_quellim extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_29");
@@ -731,7 +759,7 @@ public class talus_dearic_coa_vayde_quellim extends script.base_script
                 utils.setScriptVar(player, "conversation.talus_dearic_coa_vayde_quellim.branchId", 5);
                 npcStartConversation(player, npc, "talus_dearic_coa_vayde_quellim", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -754,7 +782,7 @@ public class talus_dearic_coa_vayde_quellim extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_65");
@@ -762,7 +790,7 @@ public class talus_dearic_coa_vayde_quellim extends script.base_script
                 utils.setScriptVar(player, "conversation.talus_dearic_coa_vayde_quellim.branchId", 11);
                 npcStartConversation(player, npc, "talus_dearic_coa_vayde_quellim", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -784,7 +812,7 @@ public class talus_dearic_coa_vayde_quellim extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_51");
@@ -792,7 +820,7 @@ public class talus_dearic_coa_vayde_quellim extends script.base_script
                 utils.setScriptVar(player, "conversation.talus_dearic_coa_vayde_quellim.branchId", 13);
                 npcStartConversation(player, npc, "talus_dearic_coa_vayde_quellim", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -828,7 +856,7 @@ public class talus_dearic_coa_vayde_quellim extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_64");
@@ -844,7 +872,7 @@ public class talus_dearic_coa_vayde_quellim extends script.base_script
                 utils.setScriptVar(player, "conversation.talus_dearic_coa_vayde_quellim.branchId", 15);
                 npcStartConversation(player, npc, "talus_dearic_coa_vayde_quellim", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -860,6 +888,7 @@ public class talus_dearic_coa_vayde_quellim extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("talus_dearic_coa_vayde_quellim"))

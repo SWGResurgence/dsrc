@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 
 import java.util.Enumeration;
@@ -106,6 +112,7 @@ public class loot extends script.base_script
     private static final String CHEST_BASE = "rare_loot_chest_quality_";
     private static final String RLS_EFFECT = "appearance/pt_rare_chest.prt";
     private static final String RLS_SOUND = "sound/rare_loot_chest.snd";
+
     public loot()
     {
     }

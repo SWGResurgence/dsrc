@@ -1,5 +1,11 @@
 package script.item.medicine;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.buff;
 import script.library.healing;
 import script.library.utils;
@@ -9,6 +15,7 @@ public class stimpack_crafted extends script.base_script
 {
     public static final string_id SID_ITEM_LEVEL_TOO_LOW = new string_id("healing", "item_level_too_low");
     public static final string_id SID_STIMPACK_TOO_SOON = new string_id("healing", "channel_heal_stimpack_too_soon");
+
     public stimpack_crafted()
     {
     }

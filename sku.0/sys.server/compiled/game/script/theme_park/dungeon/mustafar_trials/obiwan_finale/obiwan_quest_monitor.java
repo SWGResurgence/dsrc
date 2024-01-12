@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.mustafar_trials.obiwan_finale;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.groundquests;
 import script.library.mustafar;
@@ -9,11 +15,12 @@ import script.obj_id;
 
 public class obiwan_quest_monitor extends script.base_script
 {
+    public static final String TRIGGER_QUEST = "som_prelude_obiwan_check";
+    public static final boolean CONST_FLAG_DO_LOGGING = false;
     public obiwan_quest_monitor()
     {
     }
-    public static final String TRIGGER_QUEST = "som_prelude_obiwan_check";
-    public static final boolean CONST_FLAG_DO_LOGGING = false;
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "didMustafarCrystalLair"))
@@ -30,6 +37,7 @@ public class obiwan_quest_monitor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnDetach(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "waitingOnObiwan"))
@@ -38,6 +46,7 @@ public class obiwan_quest_monitor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "didMustafarCrystalLair"))
@@ -50,6 +59,7 @@ public class obiwan_quest_monitor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnLogin(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "didMustafarCrystalLair"))
@@ -70,6 +80,7 @@ public class obiwan_quest_monitor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnQuestCompleted(obj_id self, int questNameCrc) throws InterruptedException
     {
         String questName = questGetQuestName(questNameCrc);
@@ -87,7 +98,7 @@ public class obiwan_quest_monitor extends script.base_script
                 {
                     messageTo(self, "callObiWanNow", null, 5.0f, false);
                 }
-                else 
+                else
                 {
                     setObjVar(self, "waitingOnObiwan", 1);
                     dictionary params = new dictionary();
@@ -98,6 +109,7 @@ public class obiwan_quest_monitor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnSomeTaskActivated(obj_id self, int questCrc, int taskId) throws InterruptedException
     {
         int appearanceComment = 0;
@@ -115,7 +127,7 @@ public class obiwan_quest_monitor extends script.base_script
             {
                 messageTo(self, "callObiWanNow", null, 5.0f, false);
             }
-            else 
+            else
             {
                 setObjVar(self, "waitingOnObiwan", appearanceComment);
                 dictionary params = new dictionary();
@@ -125,6 +137,7 @@ public class obiwan_quest_monitor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnSomeTaskCompleted(obj_id self, int questCrc, int taskId) throws InterruptedException
     {
         location currentLoc = getLocation(self);
@@ -135,6 +148,7 @@ public class obiwan_quest_monitor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void debugLogging(String section, String message) throws InterruptedException
     {
         if (CONST_FLAG_DO_LOGGING)
@@ -142,6 +156,7 @@ public class obiwan_quest_monitor extends script.base_script
             LOG("debug/obiwan_quest_monitor/" + section, message);
         }
     }
+
     public int recallObiwanDelay(obj_id self, dictionary params) throws InterruptedException
     {
         debugLogging("recallObiwanDelay: ", " entered.");
@@ -156,11 +171,13 @@ public class obiwan_quest_monitor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int callObiWanNow(obj_id self, dictionary params) throws InterruptedException
     {
         mustafar.callObiwan(self, true, 1);
         return SCRIPT_CONTINUE;
     }
+
     public int removeMonitor(obj_id self, dictionary params) throws InterruptedException
     {
         removeObjVar(self, "waitingOnObiwan");

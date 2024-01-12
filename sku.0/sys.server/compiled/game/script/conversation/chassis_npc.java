@@ -1,26 +1,37 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
 public class chassis_npc extends script.base_script
 {
+    public static String c_stringFile = "conversation/chassis_npc";
+
     public chassis_npc()
     {
     }
-    public static String c_stringFile = "conversation/chassis_npc";
+
     public boolean chassis_npc_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean chassis_npc_condition_hasLoot(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_crafting.hasLootToSell(player);
     }
+
     public void chassis_npc_action_showComponentList(obj_id player, obj_id npc) throws InterruptedException
     {
         space_crafting.purchaseChassisFromBroker(player, npc);
     }
+
     public int handleCheckShip(obj_id self, dictionary params) throws InterruptedException
     {
         final String TBL = "datatables/space_crafting/chassis_npc.iff";
@@ -67,6 +78,7 @@ public class chassis_npc extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleBuyShip(obj_id self, dictionary params) throws InterruptedException
     {
         final String TBL = "datatables/space_crafting/chassis_npc.iff";
@@ -113,7 +125,7 @@ public class chassis_npc extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             if (utils.getContainingPlayer(deed) == player)
             {
@@ -129,7 +141,7 @@ public class chassis_npc extends script.base_script
                     d.put("blueprints", deed);
                     money.requestPayment(player, self, price, "handleChassisTransaction", d, false);
                 }
-                else 
+                else
                 {
                     string_id msgInvFull = new string_id(STF, "inv_full");
                     chat.chat(self, player, msgInvFull);
@@ -138,7 +150,7 @@ public class chassis_npc extends script.base_script
                 }
                 cleanUpScriptVars(player);
             }
-            else 
+            else
             {
                 string_id msgNotInInv = new string_id(STF, "not_in_inv");
                 chat.chat(self, player, msgNotInInv);
@@ -147,6 +159,7 @@ public class chassis_npc extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleChassisTransaction(obj_id self, dictionary params) throws InterruptedException
     {
         final String STF = "chassis_npc";
@@ -173,7 +186,7 @@ public class chassis_npc extends script.base_script
         {
             setObjVar(deed, "strParkingLocation", strParkingLocation);
         }
-        else 
+        else
         {
             setName(deed, "This pcd was made in a starport without a landing location");
         }
@@ -184,6 +197,7 @@ public class chassis_npc extends script.base_script
         destroyObject(blueprints);
         return SCRIPT_CONTINUE;
     }
+
     public void cleanUpScriptVars(obj_id player) throws InterruptedException
     {
         final String SCRIPTVAR_CHASSIS_SUI = "chassis_npc.sui";
@@ -192,10 +206,12 @@ public class chassis_npc extends script.base_script
         utils.removeBatchScriptVar(player, "chassis_npc.type");
         utils.removeScriptVar(player, "chassis_npc.deed");
     }
+
     public void chassis_npc_action_sellComponents(obj_id player, obj_id npc) throws InterruptedException
     {
         space_crafting.sellComponentsToBroker(player, npc);
     }
+
     public int sellLootComponents(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id objPlayer = sui.getPlayerId(params);
@@ -233,10 +249,12 @@ public class chassis_npc extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public String chassis_npc_tokenTO_tokenTO0001(obj_id player, obj_id npc) throws InterruptedException
     {
-        return new String();
+        return "";
     }
+
     public int chassis_npc_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_94e3013f"))
@@ -293,6 +311,7 @@ public class chassis_npc extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -304,6 +323,7 @@ public class chassis_npc extends script.base_script
         setCondition(self, CONDITION_SPACE_INTERESTING);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
@@ -311,6 +331,7 @@ public class chassis_npc extends script.base_script
         setCondition(self, CONDITION_SPACE_INTERESTING);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -326,18 +347,21 @@ public class chassis_npc extends script.base_script
         faceTo(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.chassis_npc");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -382,7 +406,7 @@ public class chassis_npc extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_94e3013f");
@@ -402,7 +426,7 @@ public class chassis_npc extends script.base_script
                 utils.setScriptVar(player, "conversation.chassis_npc.branchId", 1);
                 npcStartConversation(player, npc, "chassis_npc", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -411,6 +435,7 @@ public class chassis_npc extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("chassis_npc"))

@@ -1,26 +1,36 @@
 package script.theme_park.dungeon.mustafar_trials.volcano_battlefield;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.trial;
 import script.obj_id;
 
 public class event_five_midguard extends script.base_script
 {
+    public static final boolean LOGGING = false;
+
     public event_five_midguard()
     {
     }
-    public static final boolean LOGGING = false;
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         beginAttack(self);
         trial.setHp(self, trial.HP_VOLCANO_FIVE_MIDGUARD);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         messageTo(self, "destroySelf", null, 5, false);
         return SCRIPT_CONTINUE;
     }
+
     public int destroySelf(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id parent = trial.getParent(self);
@@ -33,6 +43,7 @@ public class event_five_midguard extends script.base_script
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public void beginAttack(obj_id self) throws InterruptedException
     {
         obj_id[] players = trial.getValidTargetsInRadius(self, 150.0f);
@@ -48,8 +59,8 @@ public class event_five_midguard extends script.base_script
             return;
         }
         startCombat(self, toAttack);
-        return;
     }
+
     public void doLogging(String section, String message) throws InterruptedException
     {
         if (LOGGING || trial.VOLCANO_LOGGING)

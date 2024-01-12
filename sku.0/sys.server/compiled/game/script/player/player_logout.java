@@ -1,5 +1,11 @@
 package script.player;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.obj_id;
 import script.prose_package;
@@ -7,35 +13,40 @@ import script.string_id;
 
 public class player_logout extends script.base_script
 {
-    public player_logout()
-    {
-    }
     public static final string_id SID_LOGOUT_TIME_LEFT = new string_id("logout", "time_left");
     public static final string_id SID_LOGOUT_SAFE_TO_LOG_OUT = new string_id("logout", "safe_to_log_out");
     public static final string_id SID_LOGOUT_ABORTED = new string_id("logout", "aborted");
     public static final string_id SID_LOGOUT_MUST_BE_SITTING = new string_id("logout", "must_be_sitting");
+    public player_logout()
+    {
+    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         removeObjVar(self, "safeLogout");
         detachScript(self, "player.player_logout");
         return SCRIPT_CONTINUE;
     }
+
     public int OnLogin(obj_id self) throws InterruptedException
     {
         removeObjVar(self, "safeLogout");
         detachScript(self, "player.player_logout");
         return SCRIPT_CONTINUE;
     }
+
     public int OnEnteredCombat(obj_id self) throws InterruptedException
     {
         abortLogout(self);
         return SCRIPT_CONTINUE;
     }
+
     public void abortLogout(obj_id self) throws InterruptedException
     {
         sendSystemMessage(self, SID_LOGOUT_ABORTED);
         detachScript(self, "player.player_logout");
     }
+
     public int OnLogoutPulse(obj_id self, dictionary params) throws InterruptedException
     {
         if (getPosture(self) != POSTURE_SITTING)
@@ -43,7 +54,7 @@ public class player_logout extends script.base_script
             sendSystemMessage(self, SID_LOGOUT_MUST_BE_SITTING);
             abortLogout(self);
         }
-        else 
+        else
         {
             int timeLeft = params.getInt("timeLeft");
             int countInterval = params.getInt("countInterval");
@@ -52,7 +63,7 @@ public class player_logout extends script.base_script
                 setObjVar(self, "safeLogout", 1);
                 disconnectPlayer(self);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = SID_LOGOUT_TIME_LEFT;

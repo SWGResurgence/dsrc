@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.obj_id;
 import script.string_id;
 
@@ -10,6 +16,7 @@ public class expertise extends script.base_script
     public static final String JEDI_AUTO_ALLOCATION_TABLE = "datatables/expertise/autoallocation_jedi.iff";
     public static final string_id SID_SUI_EXPERTISE_INTRODUCTION_TITLE = new string_id("expertise_d", "sui_expertise_introduction_title");
     public static final string_id SID_SUI_EXPERTISE_INTRODUCTION_BODY = new string_id("expertise_d", "sui_expertise_introduction_body");
+
     public expertise()
     {
     }

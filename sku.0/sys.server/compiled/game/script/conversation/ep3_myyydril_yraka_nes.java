@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.groundquests;
@@ -8,137 +14,127 @@ import script.*;
 
 public class ep3_myyydril_yraka_nes extends script.base_script
 {
+    public static String c_stringFile = "conversation/ep3_myyydril_yraka_nes";
+
     public ep3_myyydril_yraka_nes()
     {
     }
-    public static String c_stringFile = "conversation/ep3_myyydril_yraka_nes";
+
     public boolean ep3_myyydril_yraka_nes_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean ep3_myyydril_yraka_nes_condition_hasCompletedOther(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "ep3_myyydril_nawika_escort_1");
     }
+
     public boolean ep3_myyydril_yraka_nes_condition_hasCompletedTaskOne(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.hasCompletedTask(player, "ep3_myyydril_yraka_destroyloot_1", 0) && !groundquests.hasCompletedQuest(player, "ep3_myyydril_yraka_destroyloot_1"));
     }
+
     public boolean ep3_myyydril_yraka_nes_condition_isActiveTaskOne(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.isTaskActive(player, "ep3_myyydril_yraka_destroyloot_1", 0) || groundquests.hasCompletedTask(player, "ep3_myyydril_yraka_destroyloot_1", 0))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return groundquests.isTaskActive(player, "ep3_myyydril_yraka_destroyloot_1", 0) || groundquests.hasCompletedTask(player, "ep3_myyydril_yraka_destroyloot_1", 0);
     }
+
     public boolean ep3_myyydril_yraka_nes_condition_hasCompletedQuestOne(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "ep3_myyydril_yraka_destroyloot_1");
     }
+
     public boolean ep3_myyydril_yraka_nes_condition_isActiveTaskTwo(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.isTaskActive(player, "ep3_myyydril_yraka_retrieve_2", 0) || groundquests.hasCompletedTask(player, "ep3_myyydril_yraka_retrieve_2", 0))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return groundquests.isTaskActive(player, "ep3_myyydril_yraka_retrieve_2", 0) || groundquests.hasCompletedTask(player, "ep3_myyydril_yraka_retrieve_2", 0);
     }
+
     public boolean ep3_myyydril_yraka_nes_condition_hasCompletedTaskTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.hasCompletedTask(player, "ep3_myyydril_yraka_retrieve_2", 0) && !groundquests.hasCompletedQuest(player, "ep3_myyydril_yraka_retrieve_2"));
     }
+
     public boolean ep3_myyydril_yraka_nes_condition_hasCompletedQuestTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "ep3_myyydril_yraka_retrieve_2");
     }
+
     public boolean ep3_myyydril_yraka_nes_condition_isActiveTaskThree(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.isTaskActive(player, "ep3_myyydril_yraka_retrieve_3", 0) || groundquests.hasCompletedTask(player, "ep3_myyydril_yraka_retrieve_3", 0))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return groundquests.isTaskActive(player, "ep3_myyydril_yraka_retrieve_3", 0) || groundquests.hasCompletedTask(player, "ep3_myyydril_yraka_retrieve_3", 0);
     }
+
     public boolean ep3_myyydril_yraka_nes_condition_hasCompletedTaskThree(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.hasCompletedTask(player, "ep3_myyydril_yraka_retrieve_3", 0) && !groundquests.hasCompletedQuest(player, "ep3_myyydril_yraka_retrieve_3"));
     }
+
     public boolean ep3_myyydril_yraka_nes_condition_hasCompletedQuestThree(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "ep3_myyydril_yraka_retrieve_3");
     }
+
     public boolean ep3_myyydril_yraka_nes_condition_isTaskActiveFour(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.isTaskActive(player, "ep3_myyydril_yraka_talkto_6", 0) || groundquests.hasCompletedTask(player, "ep3_myyydril_yraka_talkto_6", 0))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return groundquests.isTaskActive(player, "ep3_myyydril_yraka_talkto_6", 0) || groundquests.hasCompletedTask(player, "ep3_myyydril_yraka_talkto_6", 0);
     }
+
     public boolean ep3_myyydril_yraka_nes_condition_hasCompletedQuestFour(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "ep3_myyydril_yraka_talkto_6");
     }
+
     public boolean ep3_myyydril_yraka_nes_condition_completeEpic1(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "ep3_myyydril_yraka_epic_1");
     }
+
     public boolean ep3_myyydril_yraka_nes_condition_isActiveQuestEpic(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.isTaskActive(player, "ep3_myyydril_yraka_epic_1", 0) || groundquests.hasCompletedTask(player, "ep3_myyydril_yraka_epic_1", 0))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return groundquests.isTaskActive(player, "ep3_myyydril_yraka_epic_1", 0) || groundquests.hasCompletedTask(player, "ep3_myyydril_yraka_epic_1", 0);
     }
+
     public boolean ep3_myyydril_yraka_nes_condition_hasCompletedTaskEpic(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.hasCompletedTask(player, "ep3_myyydril_yraka_epic_1", 0) && !groundquests.hasCompletedQuest(player, "ep3_myyydril_yraka_epic_1"));
     }
+
     public void ep3_myyydril_yraka_nes_action_giveQuestOne(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "ep3_myyydril_yraka_destroyloot_1");
     }
+
     public void ep3_myyydril_yraka_nes_action_giveQuestTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "ep3_myyydril_yraka_retrieve_2");
     }
+
     public void ep3_myyydril_yraka_nes_action_giveQuestThree(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "ep3_myyydril_yraka_retrieve_3");
     }
+
     public void ep3_myyydril_yraka_nes_action_giveSignal1(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "giveReward");
     }
+
     public void ep3_myyydril_yraka_nes_action_giveQuestFour(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "ep3_myyydril_yraka_talkto_6");
     }
+
     public void ep3_myyydril_yraka_nes_action_grantQuestEpic(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "ep3_myyydril_yraka_epic_1");
     }
+
     public void ep3_myyydril_yraka_nes_action_giveSignal2(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "partsrule");
     }
+
     public int ep3_myyydril_yraka_nes_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_898"))
@@ -153,6 +149,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_yraka_nes_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_910"))
@@ -173,7 +170,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_916");
@@ -182,7 +179,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_myyydril_yraka_nes.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -192,6 +189,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_yraka_nes_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_916"))
@@ -206,6 +204,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_yraka_nes_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_922"))
@@ -220,6 +219,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_yraka_nes_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_928"))
@@ -246,7 +246,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_932");
@@ -259,7 +259,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_myyydril_yraka_nes.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -269,6 +269,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_yraka_nes_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_932"))
@@ -288,7 +289,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_936");
@@ -297,7 +298,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_myyydril_yraka_nes.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -317,6 +318,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_yraka_nes_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_936"))
@@ -343,7 +345,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_940");
@@ -356,7 +358,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_myyydril_yraka_nes.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -366,6 +368,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_yraka_nes_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_940"))
@@ -391,6 +394,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_yraka_nes_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_957"))
@@ -410,7 +414,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_961");
@@ -419,7 +423,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_myyydril_yraka_nes.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -429,6 +433,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_yraka_nes_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_961"))
@@ -449,7 +454,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_965");
@@ -458,7 +463,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_myyydril_yraka_nes.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -468,6 +473,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_yraka_nes_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_965"))
@@ -482,6 +488,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_yraka_nes_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_971"))
@@ -502,7 +509,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_975");
@@ -511,7 +518,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_myyydril_yraka_nes.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -521,6 +528,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_yraka_nes_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_975"))
@@ -535,6 +543,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_yraka_nes_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_983"))
@@ -554,7 +563,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_987");
@@ -563,7 +572,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_myyydril_yraka_nes.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -583,6 +592,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_yraka_nes_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_987"))
@@ -603,7 +613,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_991");
@@ -612,7 +622,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_myyydril_yraka_nes.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -622,6 +632,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_yraka_nes_handleBranch26(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_991"))
@@ -636,6 +647,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_yraka_nes_handleBranch29(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1001"))
@@ -656,7 +668,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1005");
@@ -665,7 +677,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_myyydril_yraka_nes.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -675,6 +687,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_yraka_nes_handleBranch30(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1005"))
@@ -689,6 +702,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_yraka_nes_handleBranch32(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1011"))
@@ -703,6 +717,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_yraka_nes_handleBranch34(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1017"))
@@ -729,7 +744,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1021");
@@ -742,7 +757,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_myyydril_yraka_nes.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -762,6 +777,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_yraka_nes_handleBranch35(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1021"))
@@ -787,6 +803,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_yraka_nes_handleBranch39(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1035"))
@@ -802,6 +819,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_yraka_nes_handleBranch42(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1043"))
@@ -821,7 +839,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1047");
@@ -830,7 +848,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_myyydril_yraka_nes.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -840,6 +858,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_yraka_nes_handleBranch43(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1047"))
@@ -866,7 +885,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1051");
@@ -879,7 +898,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_myyydril_yraka_nes.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -889,6 +908,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_yraka_nes_handleBranch44(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1051"))
@@ -908,7 +928,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1055");
@@ -917,7 +937,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_myyydril_yraka_nes.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -949,7 +969,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1100");
@@ -962,7 +982,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_myyydril_yraka_nes.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -972,6 +992,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_yraka_nes_handleBranch45(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1055"))
@@ -991,7 +1012,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1059");
@@ -1000,7 +1021,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_myyydril_yraka_nes.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1010,6 +1031,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_yraka_nes_handleBranch46(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1059"))
@@ -1029,7 +1051,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1063");
@@ -1038,7 +1060,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_myyydril_yraka_nes.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1048,6 +1070,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_yraka_nes_handleBranch47(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1063"))
@@ -1074,7 +1097,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1067");
@@ -1087,7 +1110,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_myyydril_yraka_nes.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1097,6 +1120,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_yraka_nes_handleBranch48(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1067"))
@@ -1123,7 +1147,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1071");
@@ -1136,7 +1160,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_myyydril_yraka_nes.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1161,7 +1185,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1084");
@@ -1170,7 +1194,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_myyydril_yraka_nes.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1180,6 +1204,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_yraka_nes_handleBranch49(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1071"))
@@ -1205,6 +1230,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_yraka_nes_handleBranch52(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1084"))
@@ -1231,7 +1257,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1088");
@@ -1244,7 +1270,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_myyydril_yraka_nes.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1254,6 +1280,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_yraka_nes_handleBranch53(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1088"))
@@ -1279,6 +1306,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_yraka_nes_handleBranch56(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1100"))
@@ -1305,7 +1333,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1104");
@@ -1318,7 +1346,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_myyydril_yraka_nes.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1343,7 +1371,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1120");
@@ -1352,7 +1380,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_myyydril_yraka_nes.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1362,6 +1390,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_yraka_nes_handleBranch57(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1104"))
@@ -1387,6 +1416,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_yraka_nes_handleBranch60(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1120"))
@@ -1413,7 +1443,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1125");
@@ -1426,7 +1456,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_myyydril_yraka_nes.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1436,6 +1466,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_myyydril_yraka_nes_handleBranch61(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1125"))
@@ -1461,6 +1492,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -1472,6 +1504,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
         setInvulnerable(self, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
@@ -1479,6 +1512,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
         setInvulnerable(self, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -1487,18 +1521,21 @@ public class ep3_myyydril_yraka_nes extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.ep3_myyydril_yraka_nes");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -1521,7 +1558,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_898");
@@ -1529,7 +1566,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_myyydril_yraka_nes.branchId", 1);
                 npcStartConversation(player, npc, "ep3_myyydril_yraka_nes", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1550,7 +1587,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_910");
@@ -1558,7 +1595,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_myyydril_yraka_nes.branchId", 3);
                 npcStartConversation(player, npc, "ep3_myyydril_yraka_nes", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1579,7 +1616,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_922");
@@ -1587,7 +1624,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_myyydril_yraka_nes.branchId", 6);
                 npcStartConversation(player, npc, "ep3_myyydril_yraka_nes", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1608,7 +1645,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_928");
@@ -1616,7 +1653,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_myyydril_yraka_nes.branchId", 8);
                 npcStartConversation(player, npc, "ep3_myyydril_yraka_nes", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1643,7 +1680,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_957");
@@ -1651,7 +1688,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_myyydril_yraka_nes.branchId", 16);
                 npcStartConversation(player, npc, "ep3_myyydril_yraka_nes", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1672,7 +1709,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_971");
@@ -1680,7 +1717,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_myyydril_yraka_nes.branchId", 20);
                 npcStartConversation(player, npc, "ep3_myyydril_yraka_nes", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1714,7 +1751,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_983");
@@ -1726,7 +1763,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_myyydril_yraka_nes.branchId", 24);
                 npcStartConversation(player, npc, "ep3_myyydril_yraka_nes", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1747,7 +1784,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_1001");
@@ -1755,7 +1792,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_myyydril_yraka_nes.branchId", 29);
                 npcStartConversation(player, npc, "ep3_myyydril_yraka_nes", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1776,7 +1813,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_1011");
@@ -1784,7 +1821,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_myyydril_yraka_nes.branchId", 32);
                 npcStartConversation(player, npc, "ep3_myyydril_yraka_nes", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1812,7 +1849,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_1017");
@@ -1824,7 +1861,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_myyydril_yraka_nes.branchId", 34);
                 npcStartConversation(player, npc, "ep3_myyydril_yraka_nes", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1846,7 +1883,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_1035");
@@ -1854,7 +1891,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_myyydril_yraka_nes.branchId", 39);
                 npcStartConversation(player, npc, "ep3_myyydril_yraka_nes", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1881,7 +1918,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_1043");
@@ -1889,7 +1926,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_myyydril_yraka_nes.branchId", 42);
                 npcStartConversation(player, npc, "ep3_myyydril_yraka_nes", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1904,6 +1941,7 @@ public class ep3_myyydril_yraka_nes extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("ep3_myyydril_yraka_nes"))

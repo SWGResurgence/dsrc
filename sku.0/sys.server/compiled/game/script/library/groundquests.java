@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 
 import java.util.Vector;
@@ -158,6 +164,7 @@ public class groundquests extends script.base_script
     public static final String objvarEntranceWaypoint = "entranceWaypoint";
     public static final String objvarWaypointInActive = "waypointInactive";
     public static final String timeObjVar = "playedTimeEnd";
+
     public groundquests()
     {
     }

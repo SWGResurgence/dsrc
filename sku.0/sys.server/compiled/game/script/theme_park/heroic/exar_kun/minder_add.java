@@ -1,5 +1,11 @@
 package script.theme_park.heroic.exar_kun;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.buff;
 import script.library.trial;
 import script.obj_id;
@@ -9,6 +15,7 @@ public class minder_add extends script.base_script
     public minder_add()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         buff.applyBuff(self, "minder_add_debuff");

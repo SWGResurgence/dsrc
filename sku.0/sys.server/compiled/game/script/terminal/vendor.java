@@ -1,13 +1,16 @@
 package script.terminal;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
 public class vendor extends script.terminal.base.base_terminal
 {
-    public vendor()
-    {
-    }
     public static final string_id SID_GIVE_VENDOR_MAINTENANCE = new string_id("player_structure", "give_maintenance");
     public static final string_id SID_TAKE_VENDOR_MAINTENANCE = new string_id("player_structure", "take_maintenance");
     public static final string_id SID_REGISTER_VENDOR = new string_id("player_structure", "register_vendor");
@@ -45,6 +48,10 @@ public class vendor extends script.terminal.base.base_terminal
     public static final string_id SID_TCG_VENDOR_CTS_WARNING = new string_id("player_vendor", "packup_vendor_cts_warning");
     public static final String TBL_VENDOR_SUBCATEGORIES = "datatables/vendor/vendor_map_subcategories.iff";
     public static final String DESTROY_PID = "player_vendor.destroyVendor.pid";
+    public vendor()
+    {
+    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         int time_stamp = getIntObjVar(self, vendor_lib.VAR_LAST_MAINTANENCE);
@@ -61,6 +68,7 @@ public class vendor extends script.terminal.base.base_terminal
         updateAccessFee(self);
         return super.OnInitialize(self);
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "vendor.map_registered"))
@@ -83,18 +91,11 @@ public class vendor extends script.terminal.base.base_terminal
             int skillModCurrentAmount = getSkillStatMod(owner, skillMod);
             playerMessage.put("skillModCurrentAmount", skillModCurrentAmount);
         }
-        else 
+        else
         {
             playerMessage.put("isSpecialVendor", false);
         }
-        if (hasObjVar(self, "vendor.special_decrement_skillmod") || hasObjVar(self, "vendor.special_vendor_skillmod"))
-        {
-            playerMessage.put("canBeIncremented", true);
-        }
-        else 
-        {
-            playerMessage.put("canBeIncremented", false);
-        }
+        playerMessage.put("canBeIncremented", hasObjVar(self, "vendor.special_decrement_skillmod") || hasObjVar(self, "vendor.special_vendor_skillmod"));
         playerMessage.put("vendorTemplate", getTemplateName(self));
         playerMessage.put("destroyLocation", getLocation(self));
         obj_id topContainer = getTopMostContainer(self);
@@ -103,10 +104,12 @@ public class vendor extends script.terminal.base.base_terminal
         messageTo(owner, "handleVendorDestroy", playerMessage, 0.0f, true);
         return SCRIPT_CONTINUE;
     }
+
     public void registerVendorOnMap(obj_id self) throws InterruptedException
     {
         requestVendorItemCount(self);
     }
+
     public void destroyVendor(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "vendor_initialized") && !isCommoditiesServerAvailable())
@@ -116,6 +119,7 @@ public class vendor extends script.terminal.base.base_terminal
         CustomerServiceLog("vendor", "Vendor destroyed by owner. Vendor: " + self + " Location: " + getLocation(self));
         destroyObject(self);
     }
+
     public void doMapRegistration(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "vendor.map_registered") && hasObjVar(self, "vendor.map_subcat"))
@@ -125,14 +129,16 @@ public class vendor extends script.terminal.base.base_terminal
             String subcat = getStringObjVar(self, "vendor.map_subcat");
             obj_id structure = player_structure.getStructure(self);
             location myloc = getLocation(structure);
-            addPlanetaryMapLocation(self, displayName, (int)myloc.x, (int)myloc.z, "vendor", subcat, MLT_DYNAMIC, 0);
+            addPlanetaryMapLocation(self, displayName, (int) myloc.x, (int) myloc.z, "vendor", subcat, MLT_DYNAMIC, 0);
         }
     }
+
     public int vendorItemRetry(obj_id self, dictionary params) throws InterruptedException
     {
         registerVendorOnMap(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnVendorItemCountReply(obj_id self, int count, int search_enabled) throws InterruptedException
     {
         if (hasObjVar(self, "vendor.getItemCountDisplay"))
@@ -151,13 +157,14 @@ public class vendor extends script.terminal.base.base_terminal
             {
                 messageTo(self, "vendorItemRetry", null, 51800 + rand(1, 600), false);
             }
-            else 
+            else
             {
                 removePlanetaryMapLocation(self);
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnVendorStatusChange(obj_id self, int newStatus) throws InterruptedException
     {
         final int VENDOR_EMPTY = 20;
@@ -170,25 +177,25 @@ public class vendor extends script.terminal.base.base_terminal
         switch (newStatus)
         {
             case VENDOR_EMPTY:
-            removePlanetaryMapLocation(self);
-            body = new string_id("auction", "vendor_status_empty");
-            break;
+                removePlanetaryMapLocation(self);
+                body = new string_id("auction", "vendor_status_empty");
+                break;
             case VENDOR_NORMAL:
-            doMapRegistration(self);
-            body = new string_id("auction", "vendor_status_normal");
-            break;
+                doMapRegistration(self);
+                body = new string_id("auction", "vendor_status_normal");
+                break;
             case VENDOR_UNACCESSED:
-            registerVendorOnMap(self);
-            body = new string_id("auction", "vendor_status_unaccessed");
-            break;
+                registerVendorOnMap(self);
+                body = new string_id("auction", "vendor_status_unaccessed");
+                break;
             case VENDOR_ENDANGERED:
-            registerVendorOnMap(self);
-            body = new string_id("auction", "vendor_status_endangered");
-            break;
+                registerVendorOnMap(self);
+                body = new string_id("auction", "vendor_status_endangered");
+                break;
             case VENDOR_REMOVED:
-            body = new string_id("auction", "vendor_status_deleted");
+                body = new string_id("auction", "vendor_status_deleted");
             default:
-            break;
+                break;
         }
         prose_package pp = new prose_package();
         pp.stringId = body;
@@ -207,6 +214,7 @@ public class vendor extends script.terminal.base.base_terminal
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         obj_id ownerId = getObjIdObjVar(self, "vendor_owner");
@@ -222,7 +230,7 @@ public class vendor extends script.terminal.base.base_terminal
             {
                 mi.addSubMenu(menu, menu_info_types.SERVER_MENU7, SID_VENDOR_INIT);
             }
-            else 
+            else
             {
                 boolean isSpecialVendor = vendor_lib.isSpecialVendor(self);
                 boolean speacialVendorCanBeDressed = false;
@@ -242,7 +250,7 @@ public class vendor extends script.terminal.base.base_terminal
                         {
                             mi.addSubMenu(menu, menu_info_types.SERVER_MENU4, SID_VENDOR_AREABARKS_ON);
                         }
-                        else 
+                        else
                         {
                             mi.addSubMenu(menu, menu_info_types.SERVER_MENU4, SID_VENDOR_AREABARKS_OFF);
                         }
@@ -256,7 +264,7 @@ public class vendor extends script.terminal.base.base_terminal
                     {
                         mi.addSubMenu(menu, menu_info_types.SERVER_MENU3, SID_REGISTER_VENDOR);
                     }
-                    else 
+                    else
                     {
                         mi.addSubMenu(menu, menu_info_types.SERVER_MENU3, SID_UNREGISTER_VENDOR);
                     }
@@ -281,7 +289,7 @@ public class vendor extends script.terminal.base.base_terminal
             }
             mi.addSubMenu(menu, menu_info_types.SERVER_MENU6, SID_REMOVE_VENDOR);
         }
-        else 
+        else
         {
             obj_id inventory = getObjectInSlot(player, "inventory");
             if (contains(inventory, self) && !isGod(player))
@@ -292,6 +300,7 @@ public class vendor extends script.terminal.base.base_terminal
         }
         return super.OnObjectMenuRequest(self, player, mi);
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         obj_id ownerId = getObjIdObjVar(self, "vendor_owner");
@@ -324,7 +333,7 @@ public class vendor extends script.terminal.base.base_terminal
                 }
                 sui.listbox(self, player, "@player_structure:vendor_mapcat_d", sui.OK_CANCEL, "@player_structure:vendor_mapcat_t", subcategories, "handleMapCatSelect", true);
             }
-            else 
+            else
             {
                 removeObjVar(self, "vendor.map_registered");
                 removePlanetaryMapLocation(self);
@@ -355,7 +364,7 @@ public class vendor extends script.terminal.base.base_terminal
                     sui.setPid(self, destroyPid, DESTROY_PID);
                 }
             }
-            else 
+            else
             {
                 int destroyPid = sui.msgbox(self, player, "@player_structure:destroy_vendor_d", sui.YES_NO, "@player_structure:destroy_vendor_t", "handleDestroyVendor");
                 if (destroyPid > -1)
@@ -382,12 +391,12 @@ public class vendor extends script.terminal.base.base_terminal
                     sendDirtyObjectMenuNotification(self);
                     CustomerServiceLog("vendor", "Vendor initialized.  Owner: " + owner + " Vendor: " + self + " Location: " + getLocation(self));
                 }
-                else 
+                else
                 {
                     sendSystemMessage(player, SID_VENDOR_NOT_IN_SAME_BUILDING);
                 }
             }
-            else 
+            else
             {
                 sendSystemMessage(player, SID_VENDOR_ALREADY_INITIALIZED);
             }
@@ -424,6 +433,7 @@ public class vendor extends script.terminal.base.base_terminal
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleDestroyVendor(obj_id self, dictionary params) throws InterruptedException
     {
         if (sui.hasPid(self, DESTROY_PID))
@@ -446,6 +456,7 @@ public class vendor extends script.terminal.base.base_terminal
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleDeleteVendorConfirmed(obj_id self, dictionary params) throws InterruptedException
     {
         if (sui.hasPid(self, DESTROY_PID))
@@ -471,13 +482,14 @@ public class vendor extends script.terminal.base.base_terminal
         {
             destroyVendor(self);
         }
-        else 
+        else
         {
             sui.msgbox(player, "@player_structure:incorrect_destroy_all_items_code");
             clearVendorDestroyData(self);
         }
         return SCRIPT_CONTINUE;
     }
+
     public void clearVendorDestroyData(obj_id vendor) throws InterruptedException
     {
         if (!isIdValid(vendor))
@@ -487,6 +499,7 @@ public class vendor extends script.terminal.base.base_terminal
         sui.removePid(vendor, DESTROY_PID);
         utils.removeScriptVarTree(vendor, "player_vendor.destroyVendor");
     }
+
     public int msgVendorWithdrawSuccess(obj_id self, dictionary params) throws InterruptedException
     {
         if (params != null)
@@ -501,6 +514,7 @@ public class vendor extends script.terminal.base.base_terminal
         }
         return SCRIPT_CONTINUE;
     }
+
     public int msgVendorWithdrawFail(obj_id self, dictionary params) throws InterruptedException
     {
         if (params != null)
@@ -515,6 +529,7 @@ public class vendor extends script.terminal.base.base_terminal
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleSetVendorName(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -541,12 +556,13 @@ public class vendor extends script.terminal.base.base_terminal
             removePlanetaryMapLocation(self);
             sendSystemMessage(player, SID_VENDOR_RENAME_UNREG);
         }
-        else 
+        else
         {
             sendSystemMessage(player, SID_VENDOR_RENAME);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleMapCatSelect(obj_id self, dictionary params) throws InterruptedException
     {
         utils.removeScriptVar(self, "vendor.registering");
@@ -573,6 +589,7 @@ public class vendor extends script.terminal.base.base_terminal
         sendSystemMessage(player, SID_REGISTER_VENDOR_NOT);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToBeTransferred(obj_id self, obj_id dest, obj_id transferer) throws InterruptedException
     {
         obj_id from = getContainedBy(self);
@@ -623,6 +640,7 @@ public class vendor extends script.terminal.base.base_terminal
         sui.msgbox(transferer, transferer, msg, sui.OK_ONLY, title, "noHandler");
         return SCRIPT_OVERRIDE;
     }
+
     public int msgGiveMaintenanceToVendor(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -652,6 +670,7 @@ public class vendor extends script.terminal.base.base_terminal
         vendor_lib.payMaintenance(player, self, amt);
         return SCRIPT_CONTINUE;
     }
+
     public int msgTakeMaintenanceFromVendor(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -677,6 +696,7 @@ public class vendor extends script.terminal.base.base_terminal
         vendor_lib.withdrawMaintenance(player, self, amt);
         return SCRIPT_CONTINUE;
     }
+
     public void updateSalesTax(obj_id self) throws InterruptedException
     {
         obj_id structure = getTopMostContainer(self);
@@ -693,7 +713,7 @@ public class vendor extends script.terminal.base.base_terminal
             CustomerServiceLog("vendor", "Vendor sales tax update.  Vendor " + self + " Amount: " + sales_tax);
             setSalesTax(sales_tax * 100, city_hall, inv);
         }
-        else 
+        else
         {
             obj_id inv = utils.getInventoryContainer(self);
             if (inv == null)
@@ -703,6 +723,7 @@ public class vendor extends script.terminal.base.base_terminal
             setSalesTax(0, null, inv);
         }
     }
+
     public int OnMaintenanceLoop(obj_id self, dictionary params) throws InterruptedException
     {
         updateSalesTax(self);
@@ -732,13 +753,13 @@ public class vendor extends script.terminal.base.base_terminal
                 cost *= 1.2;
                 CustomerServiceLog("vendor", "Vendor calculating maintenance fees.  Vendor " + self + ", vendor is registered. Because the owner is a trader this increases the maintenance fees by 20% (cost * 1.2). cost is now " + cost);
             }
-            else 
+            else
             {
                 cost *= 1.4;
                 CustomerServiceLog("vendor", "Vendor calculating maintenance fees.  Vendor " + self + ", vendor is registered. Because the owner is NOT a trader this increases the maintenance fees by 40% (cost * 1.4). cost is now " + cost);
             }
         }
-        int expertiseMaintenanceDecrease = (int)getSkillStatisticModifier(owner, "expertise_vendor_cost_decrease");
+        int expertiseMaintenanceDecrease = getSkillStatisticModifier(owner, "expertise_vendor_cost_decrease");
         if (expertiseMaintenanceDecrease > 0)
         {
             cost -= expertiseMaintenanceDecrease;
@@ -754,7 +775,7 @@ public class vendor extends script.terminal.base.base_terminal
             pool_remaining = vendor_lib.decrementMaintenancePool(self, cost);
             CustomerServiceLog("vendor", "Vendor calculating maintenance fees.  Vendor " + self + ", calling vendor_lib.decrementMaintenancePool with a cost of " + cost);
         }
-        else 
+        else
         {
             dictionary new_params = new dictionary();
             setObjVar(self, vendor_lib.VAR_LAST_MAINTANENCE, current_time);
@@ -814,7 +835,7 @@ public class vendor extends script.terminal.base.base_terminal
                     amt_paid = amt_repaired * per_point_cost;
                     CustomerServiceLog("vendor", "Vendor calculating maintenance fees.  Vendor " + self + ", amt_paid: " + amt_paid + ". determined by amt_repaired(" + amt_repaired + ") * per_point_cost(" + per_point_cost + ")");
                 }
-                else 
+                else
                 {
                     CustomerServiceLog("vendor", "Vendor calculating maintenance fees.  Vendor " + self + ", maint_pool(" + maint_pool + ") is greater than repair_cost(" + repair_cost + "). repairing entire amount");
                     amt_paid = damage * per_point_cost;
@@ -830,7 +851,7 @@ public class vendor extends script.terminal.base.base_terminal
                     LOG("LOG_CHANNEL", "2cond ->" + condition);
                     CustomerServiceLog("vendor", "Vendor calculating maintenance fees.  Vendor " + self + ", was repaired by amt_repaired(" + amt_repaired + "). this makes the condition " + condition);
                 }
-                else 
+                else
                 {
                     CustomerServiceLog("vendor", "Vendor calculating maintenance fees.  Vendor " + self + ", payment failed, unable to repair the costs.");
                     LOG("LOG_CHANNEL", "permanent_structure::OnMaintenanceLoop -- unable to pay repair costs.");
@@ -844,6 +865,7 @@ public class vendor extends script.terminal.base.base_terminal
         LOG("LOG_CHANNEL", "New Maintenance Loop set. -----" + vendor_lib.MAINTENANCE_HEARTBEAT);
         return SCRIPT_CONTINUE;
     }
+
     public void displayStatus(obj_id self, obj_id player, int itemCount, int search_enabled) throws InterruptedException
     {
         obj_id ownerId = getObjIdObjVar(self, "vendor_owner");
@@ -851,7 +873,7 @@ public class vendor extends script.terminal.base.base_terminal
         {
             return;
         }
-        String dsrc[] = new String[6];
+        String[] dsrc = new String[6];
         int condition = vendor_lib.getVendorCondition(self);
         int max_condition = vendor_lib.getMaxCondition(self);
         int perc_condition = condition * 100 / max_condition;
@@ -859,7 +881,7 @@ public class vendor extends script.terminal.base.base_terminal
         {
             dsrc[0] = "Condition: " + perc_condition + "%";
         }
-        else 
+        else
         {
             int maint_rate = 15;
             int total_cost = (max_condition - condition) * maint_rate;
@@ -882,12 +904,12 @@ public class vendor extends script.terminal.base.base_terminal
             {
                 cost *= 1.2;
             }
-            else 
+            else
             {
                 cost *= 1.4;
             }
         }
-        int expertiseMaintenanceDecrease = (int)getSkillStatisticModifier(player, "expertise_vendor_cost_decrease");
+        int expertiseMaintenanceDecrease = getSkillStatisticModifier(player, "expertise_vendor_cost_decrease");
         if (expertiseMaintenanceDecrease > 0)
         {
             cost -= expertiseMaintenanceDecrease;
@@ -909,7 +931,7 @@ public class vendor extends script.terminal.base.base_terminal
             String time_str = player_structure.assembleTimeRemaining(convert_time);
             dsrc[2] = "Maintenance Pool: " + m_pool + "   (" + time_str + ")";
         }
-        else 
+        else
         {
             dsrc[2] = "Maintenance Pool: " + m_pool;
         }
@@ -922,7 +944,7 @@ public class vendor extends script.terminal.base.base_terminal
         {
             dsrc[4] = "Vendor Search: Disabled";
         }
-        else 
+        else
         {
             dsrc[4] = "Vendor Search: Unknown";
         }
@@ -935,13 +957,13 @@ public class vendor extends script.terminal.base.base_terminal
         {
             dsrc[5] = "\\#FF0000Vendor Deactivated - Please Pay Maintenance!\\#";
         }
-        else 
+        else
         {
             dsrc[5] = "\\#00FF00Vendor Operating Normally\\#";
         }
         sui.listbox(player, "Vendor Status", "Vendor Status", sui.OK_CANCEL, dsrc);
-        return;
     }
+
     public int OnAboutToReceiveItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         if (transferer == null || transferer == obj_id.NULL_ID || isGod(transferer))
@@ -950,6 +972,7 @@ public class vendor extends script.terminal.base.base_terminal
         }
         return SCRIPT_OVERRIDE;
     }
+
     public int OnAboutToLoseItem(obj_id self, obj_id destContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         if (transferer == null || transferer == obj_id.NULL_ID || isGod(transferer))
@@ -958,6 +981,7 @@ public class vendor extends script.terminal.base.base_terminal
         }
         return SCRIPT_OVERRIDE;
     }
+
     public int OnAboutToOpenContainer(obj_id self, obj_id whoIsOpeningMe) throws InterruptedException
     {
         if (isGod(whoIsOpeningMe))
@@ -966,6 +990,7 @@ public class vendor extends script.terminal.base.base_terminal
         }
         return SCRIPT_OVERRIDE;
     }
+
     public void updateAccessFee(obj_id self) throws InterruptedException
     {
         obj_id structure = player_structure.getStructure(self);
@@ -973,7 +998,7 @@ public class vendor extends script.terminal.base.base_terminal
         {
             setEntranceCharge(self, turnstile.getFee(structure));
         }
-        else 
+        else
         {
             setEntranceCharge(self, 0);
         }

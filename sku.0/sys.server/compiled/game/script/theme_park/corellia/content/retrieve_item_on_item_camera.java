@@ -1,5 +1,11 @@
 package script.theme_park.corellia.content;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.groundquests;
 import script.library.utils;
@@ -9,11 +15,13 @@ public class retrieve_item_on_item_camera extends script.base_script
     public retrieve_item_on_item_camera()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "getQuestPlayerName", null, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int getQuestPlayerName(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id questPlayer = utils.getContainingPlayer(self);
@@ -23,6 +31,7 @@ public class retrieve_item_on_item_camera extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         if (hasScript(player, "quest.task.ground.retrieve_item"))
@@ -38,6 +47,7 @@ public class retrieve_item_on_item_camera extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (hasScript(player, "quest.task.ground.retrieve_item"))
@@ -62,7 +72,7 @@ public class retrieve_item_on_item_camera extends script.base_script
                                 sendSystemMessage(player, new string_id("theme_park/corellia/quest", "camera_target_is_dead"));
                                 return SCRIPT_CONTINUE;
                             }
-                            else 
+                            else
                             {
                                 String intendedCreatureName = getCreatureName(intendedTarget);
                                 if (cameraSubject.equals(intendedCreatureName))
@@ -90,7 +100,7 @@ public class retrieve_item_on_item_camera extends script.base_script
                                 sendSystemMessage(player, new string_id("theme_park/corellia/quest", "camera_target_is_dead"));
                                 return SCRIPT_CONTINUE;
                             }
-                            else 
+                            else
                             {
                                 String lookatCreatureName = getCreatureName(lookatTarget);
                                 if (cameraSubject.equals(lookatCreatureName))
@@ -119,6 +129,7 @@ public class retrieve_item_on_item_camera extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int destroyMe(obj_id self, dictionary params) throws InterruptedException
     {
         if (!hasObjVar(self, "doNotDestroyMe"))
@@ -127,6 +138,7 @@ public class retrieve_item_on_item_camera extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, "questItemUsed"))

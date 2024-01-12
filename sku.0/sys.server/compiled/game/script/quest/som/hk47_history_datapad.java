@@ -1,12 +1,15 @@
 package script.quest.som;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 
 public class hk47_history_datapad extends script.base_script
 {
-    public hk47_history_datapad()
-    {
-    }
     public static final String STF = "som/som_quest";
     public static final string_id ACCESS = new string_id(STF, "hk_history_datapad");
     public static final string_id SID_PART1 = new string_id(STF, "hk_history_datapad_01");
@@ -30,6 +33,10 @@ public class hk47_history_datapad extends script.base_script
     public static final string_id SID_MESSAGE08 = new string_id(STF, "hk_history_message_08");
     public static final string_id SID_MESSAGE09 = new string_id(STF, "hk_history_message_09");
     public static final string_id SID_MESSAGE10 = new string_id(STF, "hk_history_message_10");
+    public hk47_history_datapad()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         int menu = mi.addRootMenu(menu_info_types.ITEM_USE, ACCESS);
@@ -45,6 +52,7 @@ public class hk47_history_datapad extends script.base_script
         mi.addSubMenu(menu, menu_info_types.SERVER_MENU10, SID_PART10);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.SERVER_MENU1)
@@ -127,7 +135,7 @@ public class hk47_history_datapad extends script.base_script
             commPlayer(self, player, pp, appearance);
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             sendSystemMessage(player, CHOOSE);
         }

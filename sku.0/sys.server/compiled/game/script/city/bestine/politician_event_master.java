@@ -1,5 +1,11 @@
 package script.city.bestine;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.utils;
 import script.obj_id;
@@ -9,11 +15,13 @@ public class politician_event_master extends script.base_script
     public politician_event_master()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "beginBestineElection", null, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int getElectionDuration() throws InterruptedException
     {
         String durationConfigSetting = getConfigSetting("BestineEvents", "PoliticianEventDuration");
@@ -24,6 +32,7 @@ public class politician_event_master extends script.base_script
         }
         return electionDuration;
     }
+
     public int beginBestineElection(obj_id self, dictionary params) throws InterruptedException
     {
         int electionNum = 1;
@@ -49,6 +58,7 @@ public class politician_event_master extends script.base_script
         messageTo(self, "endBestineElection", null, electionDuration, true);
         return SCRIPT_CONTINUE;
     }
+
     public int endBestineElection(obj_id self, dictionary params) throws InterruptedException
     {
         int electionNum = 1;

@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.death_watch_bunker;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.location;
@@ -10,11 +16,13 @@ public class rc_mouse extends script.base_script
     public rc_mouse()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setInvulnerable(self, true);
         return SCRIPT_CONTINUE;
     }
+
     public int moveLeft(obj_id self, dictionary params) throws InterruptedException
     {
         location here = getLocation(self);
@@ -31,6 +39,7 @@ public class rc_mouse extends script.base_script
         ai_lib.aiPathTo(self, here);
         return SCRIPT_CONTINUE;
     }
+
     public int moveRight(obj_id self, dictionary params) throws InterruptedException
     {
         location here = getLocation(self);
@@ -47,6 +56,7 @@ public class rc_mouse extends script.base_script
         ai_lib.aiPathTo(self, here);
         return SCRIPT_CONTINUE;
     }
+
     public int moveForward(obj_id self, dictionary params) throws InterruptedException
     {
         location here = getLocation(self);
@@ -63,6 +73,7 @@ public class rc_mouse extends script.base_script
         ai_lib.aiPathTo(self, here);
         return SCRIPT_CONTINUE;
     }
+
     public int moveBackward(obj_id self, dictionary params) throws InterruptedException
     {
         location here = getLocation(self);
@@ -79,6 +90,7 @@ public class rc_mouse extends script.base_script
         ai_lib.aiPathTo(self, here);
         return SCRIPT_CONTINUE;
     }
+
     public int detonate(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id viewer = params.getObjId("player");
@@ -96,12 +108,15 @@ public class rc_mouse extends script.base_script
             destroyObject(self);
             return SCRIPT_CONTINUE;
         }
-        for (obj_id thing : objects) {
+        for (obj_id thing : objects)
+        {
             String name = getTemplateName(thing);
-            if (name.equals("object/tangible/dungeon/death_watch_bunker/invulnerable_debris.iff")) {
+            if (name.equals("object/tangible/dungeon/death_watch_bunker/invulnerable_debris.iff"))
+            {
                 int spawnNum = getIntObjVar(thing, "spawn_number");
                 obj_id mom = getObjIdObjVar(thing, "mom");
-                if (mom != null && spawnNum != 0) {
+                if (mom != null && spawnNum != 0)
+                {
                     dictionary info = new dictionary();
                     info.put("spawnNumber", spawnNum);
                     info.put("spawnMob", thing);

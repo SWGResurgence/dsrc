@@ -1,20 +1,27 @@
 package script.npc;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.utils;
 import script.obj_id;
 import script.string_id;
 
 public class special_item extends script.base_script
 {
-    public special_item()
-    {
-    }
     public static final String VAR_FACTION = "faction_recruiter.faction";
     public static final String VAR_DECLARED = "faction_recruiter.declared";
     public static final string_id SID_MUST_BE_DECLARED = new string_id("faction_recruiter", "must_be_declared");
     public static final string_id SID_MUST_BE_FACTION_MEMBER = new string_id("faction_recruiter", "must_be_faction_member");
     public static final string_id SID_MUST_BE_DECLARED_USE = new string_id("faction_recruiter", "must_be_declared_use");
     public static final string_id SID_MUST_BE_FACTION_MEMBER_USE = new string_id("faction_recruiter", "must_be_faction_member_use");
+    public special_item()
+    {
+    }
+
     public int OnAboutToBeTransferred(obj_id self, obj_id destContainer, obj_id transferer) throws InterruptedException
     {
         obj_id appearanceInventory = getAppearanceInventory(transferer);

@@ -1,5 +1,11 @@
 package script.theme_park.kashyyyk;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.utils;
 import script.location;
@@ -10,16 +16,19 @@ public class rodian_shuttle_spawner extends script.base_script
     public rodian_shuttle_spawner()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "doShuttleSpawnEvent", null, 9, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "doShuttleSpawnEvent", null, 19, false);
         return SCRIPT_CONTINUE;
     }
+
     public int doShuttleSpawnEvent(obj_id self, dictionary params) throws InterruptedException
     {
         int maxPop = 1;
@@ -46,6 +55,7 @@ public class rodian_shuttle_spawner extends script.base_script
         utils.setScriptVar(self, "myCreation", shuttle);
         return SCRIPT_CONTINUE;
     }
+
     public int shuttleDestroyed(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id deadNpc = params.getObjId("destroyedShuttle");
@@ -61,6 +71,7 @@ public class rodian_shuttle_spawner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "myCreation"))
@@ -69,6 +80,7 @@ public class rodian_shuttle_spawner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void destroySpawnedShuttles(obj_id self) throws InterruptedException
     {
         obj_id shuttle = utils.getObjIdScriptVar(self, "myCreation");
@@ -77,6 +89,5 @@ public class rodian_shuttle_spawner extends script.base_script
             destroyObject(shuttle);
         }
         utils.removeScriptVar(self, "myCreation");
-        return;
     }
 }

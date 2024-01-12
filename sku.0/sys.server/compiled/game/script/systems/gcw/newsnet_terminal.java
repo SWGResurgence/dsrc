@@ -1,5 +1,11 @@
 package script.systems.gcw;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.chat;
 import script.library.gcw;
@@ -39,6 +45,7 @@ public class newsnet_terminal extends script.base_script
                     "newsnet_extra",
                     "newsnet_read_all"
             };
+
     public newsnet_terminal()
     {
     }

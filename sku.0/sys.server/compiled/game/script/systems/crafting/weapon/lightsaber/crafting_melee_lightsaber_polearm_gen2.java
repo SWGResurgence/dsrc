@@ -1,5 +1,11 @@
 package script.systems.crafting.weapon.lightsaber;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.draft_schematic;
 import script.library.craftinglib;
 import script.obj_id;
@@ -39,6 +45,7 @@ public class crafting_melee_lightsaber_polearm_gen2 extends script.systems.craft
                             })
             };
     public static final resource_weight[] OBJ_MAX_ATTRIBUTE_RESOURCES = OBJ_ASSEMBLY_ATTRIBUTE_RESOURCES;
+
     public crafting_melee_lightsaber_polearm_gen2()
     {
     }

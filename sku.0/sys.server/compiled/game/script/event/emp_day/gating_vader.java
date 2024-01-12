@@ -1,5 +1,11 @@
 package script.event.emp_day;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.create;
 import script.library.factions;
@@ -13,16 +19,18 @@ public class gating_vader extends script.base_script
     public gating_vader()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "spawnStormtroopers", null, 30, false);
         return SCRIPT_CONTINUE;
     }
+
     public int spawnStormtroopers(obj_id self, dictionary params) throws InterruptedException
     {
         String spawn = "stormtrooper_novatrooper";
         location here = getLocation(self);
-        location outsideLoc = (location)here.clone();
+        location outsideLoc = (location) here.clone();
         outsideLoc.z += 15;
         for (int i = 0; i < 10; i++)
         {
@@ -35,9 +43,9 @@ public class gating_vader extends script.base_script
         obj_id room1Cell = getCellId(self, "room1");
         obj_id room2Cell = getCellId(self, "room2");
         obj_id room3Cell = getCellId(self, "room3");
-        location room1Loc = (location)here.clone();
-        location room2Loc = (location)here.clone();
-        location room3Loc = (location)here.clone();
+        location room1Loc = (location) here.clone();
+        location room2Loc = (location) here.clone();
+        location room3Loc = (location) here.clone();
         room1Loc.x = 2.1f;
         room1Loc.z = 1.5f;
         room1Loc.cell = room1Cell;
@@ -55,6 +63,7 @@ public class gating_vader extends script.base_script
         setYaw(room3St, 90);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToReceiveItem(obj_id self, obj_id destinationCell, obj_id transferrer, obj_id item) throws InterruptedException
     {
         if (!isPlayer(item))

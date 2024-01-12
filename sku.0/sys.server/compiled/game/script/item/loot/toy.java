@@ -1,5 +1,11 @@
 package script.item.loot;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.buff;
 import script.library.utils;
 import script.menu_info;
@@ -11,6 +17,7 @@ public class toy extends script.base_script
 {
     public static int COOLDOWN_TIME = 14400; // 4 hours
     public static int currentGameTime = getCalendarTime();
+
     public toy()
     {
     }
@@ -72,6 +79,7 @@ public class toy extends script.base_script
             else
             {
                 buff.applyBuff(player, "nova_orion_rank6_lucky_salvage", 3600, 50);
+                LOG("developer", "Player " + getName(player) + " has used " + getName(self) + " at " + getLocation(player) + " at " + getCalendarTimeStringLocal_YYYYMMDDHHMMSS(currentGameTime));
                 setObjVar(self, "used.timestamp", currentGameTime);
             }
         }

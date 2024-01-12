@@ -1,5 +1,11 @@
 package script.space.combat;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.location;
 import script.obj_id;
 
@@ -8,6 +14,7 @@ public class combat_ship_security_terminal extends script.base_script
     public combat_ship_security_terminal()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         String strCellToLock = getStringObjVar(self, "strCellToLock");
@@ -26,6 +33,7 @@ public class combat_ship_security_terminal extends script.base_script
         LOG("space", "made " + strCellToLock + " private");
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         String strCellToLock = getStringObjVar(self, "strCellToLock");
@@ -44,6 +52,7 @@ public class combat_ship_security_terminal extends script.base_script
         LOG("space", "made " + strCellToLock + " public");
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "lairDestroyed"))
@@ -53,6 +62,7 @@ public class combat_ship_security_terminal extends script.base_script
         attachScript(self, "systems.npc_lair.lair_interactivity");
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectDisabled(obj_id self, obj_id killer) throws InterruptedException
     {
         location death = getLocation(self);
@@ -61,6 +71,7 @@ public class combat_ship_security_terminal extends script.base_script
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectDamaged(obj_id self, obj_id objAttacker, obj_id objWeapon, int intDamage) throws InterruptedException
     {
         return SCRIPT_CONTINUE;

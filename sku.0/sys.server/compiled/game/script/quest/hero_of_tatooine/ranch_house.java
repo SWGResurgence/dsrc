@@ -1,5 +1,11 @@
 package script.quest.hero_of_tatooine;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.create;
 import script.location;
@@ -8,9 +14,6 @@ import script.string_id;
 
 public class ranch_house extends script.base_script
 {
-    public ranch_house()
-    {
-    }
     public static final String RUG = "object/tangible/furniture/all/frn_all_rug_rectangle_large_style_04.iff";
     public static final String STATUE01 = "object/tangible/furniture/all/frn_all_decorative_lg_s1.iff";
     public static final String STATUE02 = "object/tangible/furniture/all/frn_all_decorative_lg_s2.iff";
@@ -20,6 +23,10 @@ public class ranch_house extends script.base_script
     public static final string_id RESTART = new string_id("quest/hero_of_tatooine/system_messages", "restart");
     public static final string_id ENTER = new string_id("quest/hero_of_tatooine/system_messages", "enter");
     public static final string_id RESET = new string_id("quest/hero_of_tatooine/system_messages", "reset");
+    public ranch_house()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "spawnDudes", null, 1, false);
@@ -27,6 +34,7 @@ public class ranch_house extends script.base_script
         permissionsMakePrivate(getCellId(self, "bedroom1"));
         return SCRIPT_CONTINUE;
     }
+
     public int OnHearSpeech(obj_id self, obj_id speaker, String text) throws InterruptedException
     {
         if (isGod(speaker))
@@ -39,12 +47,14 @@ public class ranch_house extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "cleanUp", null, 0.0f, false);
         permissionsMakePrivate(getCellId(self, "bedroom1"));
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToReceiveItem(obj_id self, obj_id destinationCell, obj_id transferrer, obj_id item) throws InterruptedException
     {
         if (!isPlayer(item))
@@ -70,6 +80,7 @@ public class ranch_house extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int spawnDudes(obj_id self, dictionary params) throws InterruptedException
     {
         if (!hasObjVar(self, "quest.hero_of_tatooine.spawned"))
@@ -101,6 +112,7 @@ public class ranch_house extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int piratesEscape(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id guy = getObjIdObjVar(self, "quest.hero_of_tatooine.progress");
@@ -127,6 +139,7 @@ public class ranch_house extends script.base_script
         messageTo(self, "failed", null, 3.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int piratesLose(obj_id self, dictionary params) throws InterruptedException
     {
         location rancherLocation = new location(-9.03f, -3.97f, -8.63f, "tatooine", getCellId(self, "hall1"));
@@ -145,6 +158,7 @@ public class ranch_house extends script.base_script
         messageTo(self, "success", null, 10.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int piratesCaptured(obj_id self, dictionary params) throws InterruptedException
     {
         location pirate01Location = new location(-9.03f, -3.97f, -8.63f, "tatooine", getCellId(self, "stair1"));
@@ -157,6 +171,7 @@ public class ranch_house extends script.base_script
         setObjVar(self, "pirate02", pirate02);
         return SCRIPT_CONTINUE;
     }
+
     public int cleanUp(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id wife = getObjIdObjVar(self, "wife");
@@ -237,6 +252,7 @@ public class ranch_house extends script.base_script
         messageTo(self, "spawnDudes", null, 5.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int failed(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player01 = getObjIdObjVar(self, "quest.hero_of_tatooine.progress");
@@ -250,6 +266,7 @@ public class ranch_house extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int success(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player01 = getObjIdObjVar(self, "quest.hero_of_tatooine.progress");
@@ -261,6 +278,7 @@ public class ranch_house extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int restart(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "quest.hero_of_tatooine.timer"))
@@ -272,7 +290,7 @@ public class ranch_house extends script.base_script
                 messageTo(self, "restart", null, 5.0f, false);
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 obj_id wife = getObjIdObjVar(self, "wife");
                 destroyObject(wife);
@@ -321,6 +339,7 @@ public class ranch_house extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int reset(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id wife = getObjIdObjVar(self, "wife");

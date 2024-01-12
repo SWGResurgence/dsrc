@@ -1,5 +1,11 @@
 package script.poi.heromark;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.poi;
@@ -9,9 +15,6 @@ import script.obj_id;
 
 public class master extends script.theme_park.poi.base
 {
-    public master()
-    {
-    }
     public static final String SCENARIO_NAME = "heromark";
     public static final String LOG_NAME = "poiHeroMark Master";
     public static final String BASE_PATH = "poi." + SCENARIO_NAME;
@@ -19,24 +22,28 @@ public class master extends script.theme_park.poi.base
     public static final String MEDIATOR_TYPE = "MEDIATOR_TYPE";
     public static final String SCENARIO_THEATER = "object/building/poi/camp/tatooine_traders_camp_small.iff";
     public static final String TBL = "datatables/poi/" + SCENARIO_NAME + "/setup.iff";
-    public static final int mediatorCoordsX[] = 
+    public static final int[] mediatorCoordsX =
+            {
+                    8,
+                    -2,
+                    6,
+                    -3,
+                    -5,
+                    0
+            };
+    public static final int[] mediatorCoordsZ =
+            {
+                    2,
+                    0,
+                    1,
+                    -10,
+                    1,
+                    -6
+            };
+    public master()
     {
-        8,
-        -2,
-        6,
-        -3,
-        -5,
-        0
-    };
-    public static final int mediatorCoordsZ[] = 
-    {
-        2,
-        0,
-        1,
-        -10,
-        1,
-        -6
-    };
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (!scenario.initScenario(self, TBL))
@@ -45,26 +52,31 @@ public class master extends script.theme_park.poi.base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         scenario.cleanup(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnUnloadedFromMemory(obj_id self) throws InterruptedException
     {
         scenario.cleanup(self);
         return SCRIPT_CONTINUE;
     }
+
     public int cleanupScenario(obj_id self, dictionary params) throws InterruptedException
     {
         scenario.cleanup(self);
         return SCRIPT_CONTINUE;
     }
+
     public int destroySelf(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int initScenario(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))
@@ -82,6 +94,7 @@ public class master extends script.theme_park.poi.base
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean createTheaters(obj_id self) throws InterruptedException
     {
         obj_id theater = poi.createObject(SCENARIO_THEATER, 0, 0);
@@ -92,6 +105,7 @@ public class master extends script.theme_park.poi.base
         setObjVar(self, "theater", theater);
         return true;
     }
+
     public int handleTheaterComplete(obj_id self, dictionary params) throws InterruptedException
     {
         if (!createMediator(self))
@@ -101,6 +115,7 @@ public class master extends script.theme_park.poi.base
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean createMediator(obj_id self) throws InterruptedException
     {
         String type = getStringObjVar(self, MEDIATOR_TYPE);

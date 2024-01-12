@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.obj_id;
 
@@ -7,6 +13,7 @@ public class sequencer extends script.base_script
 {
     public static final int STOP_SEQUENCE = -1;
     public static final int CHANGE_TABLE = -2;
+
     public sequencer()
     {
     }

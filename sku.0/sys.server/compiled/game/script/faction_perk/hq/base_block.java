@@ -1,5 +1,11 @@
 package script.faction_perk.hq;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.pclib;
 import script.library.utils;
@@ -11,6 +17,7 @@ public class base_block extends script.base_script
     public base_block()
     {
     }
+
     public int OnAboutToReceiveItem(obj_id self, obj_id destinationCell, obj_id transferrer, obj_id item) throws InterruptedException
     {
         if (!isPlayer(item))
@@ -23,6 +30,7 @@ public class base_block extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ejectPlayer(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");

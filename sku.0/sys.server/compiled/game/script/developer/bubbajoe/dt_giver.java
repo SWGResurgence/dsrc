@@ -4,6 +4,12 @@ package script.developer.bubbajoe;/*
 @Purpose:
 */
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.utils;
 
@@ -32,6 +38,7 @@ public class dt_giver extends script.base_script
         mi.addRootMenu(menu_info_types.ITEM_USE, new string_id("Claim"));
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int mi) throws InterruptedException
     {
         if (mi == menu_info_types.ITEM_USE)

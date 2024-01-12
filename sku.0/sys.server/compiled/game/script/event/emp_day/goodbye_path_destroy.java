@@ -1,5 +1,11 @@
 package script.event.emp_day;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.chat;
 import script.library.groundquests;
@@ -10,12 +16,13 @@ import script.string_id;
 
 public class goodbye_path_destroy extends script.base_script
 {
-    public goodbye_path_destroy()
-    {
-    }
     public static final boolean LOGGING_ON = true;
     public static final String MEATLUMP_LOG = "empire_day_trigger";
     public static final String CLIENT_EFFECT = "appearance/pt_smoke_puff.prt";
+    public goodbye_path_destroy()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         blog("GOODBYE OnAttach");
@@ -23,6 +30,7 @@ public class goodbye_path_destroy extends script.base_script
         messageTo(self, "selfDestruct", null, 120, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnMovePathComplete(obj_id self) throws InterruptedException
     {
         blog("GOODBYE OnMovePathComplete");
@@ -43,6 +51,7 @@ public class goodbye_path_destroy extends script.base_script
         pathTo(self, getLocationObjVar(self, "exitLocation"));
         return SCRIPT_CONTINUE;
     }
+
     public int OnMoveMoving(obj_id self) throws InterruptedException
     {
         blog("GOODBYE OnMoveMoving");
@@ -73,6 +82,7 @@ public class goodbye_path_destroy extends script.base_script
         setObjVar(self, "saidGoodbye", true);
         return SCRIPT_CONTINUE;
     }
+
     public int pathToExit(obj_id self, dictionary params) throws InterruptedException
     {
         blog("GOODBYE pathToExit");
@@ -94,9 +104,11 @@ public class goodbye_path_destroy extends script.base_script
         }
         obj_id point = obj_id.NULL_ID;
         String var;
-        for (obj_id exitPoint : exitPoints) {
+        for (obj_id exitPoint : exitPoints)
+        {
             var = getStringObjVar(exitPoint, "disguise_exit");
-            if (var == null || !var.equals(mobDisguise)) {
+            if (var == null || !var.equals(mobDisguise))
+            {
                 blog("GOODBYE pathToExit - var: " + var + " mobDisguise: " + mobDisguise);
                 continue;
             }
@@ -125,6 +137,7 @@ public class goodbye_path_destroy extends script.base_script
         messageTo(self, "selfDestruct", null, 9, false);
         return SCRIPT_CONTINUE;
     }
+
     public int selfDestruct(obj_id self, dictionary params) throws InterruptedException
     {
         blog("GOODBYE selfDestruct");
@@ -135,6 +148,7 @@ public class goodbye_path_destroy extends script.base_script
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public boolean blog(String msg) throws InterruptedException
     {
         if (LOGGING_ON)
@@ -143,6 +157,7 @@ public class goodbye_path_destroy extends script.base_script
         }
         return true;
     }
+
     public boolean signal(obj_id mob) throws InterruptedException
     {
         blog("GOODBYE signal");

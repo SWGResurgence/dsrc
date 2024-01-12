@@ -1,5 +1,11 @@
 package script.npc.celebrity;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.colors;
@@ -11,6 +17,7 @@ public class klaatu extends script.base_script
     public klaatu()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         obj_id shirt = createObject("object/tangible/wearables/shirt/shirt_s09.iff", self, "");
@@ -23,6 +30,7 @@ public class klaatu extends script.base_script
         debugSpeakMsg(self, "The day Tatooine Stood Still!");
         return SCRIPT_CONTINUE;
     }
+
     public int work(obj_id self, dictionary params) throws InterruptedException
     {
         return SCRIPT_CONTINUE;

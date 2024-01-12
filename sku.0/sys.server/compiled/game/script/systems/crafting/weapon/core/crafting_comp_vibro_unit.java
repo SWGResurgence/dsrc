@@ -1,5 +1,11 @@
 package script.systems.crafting.weapon.core;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.craftinglib;
 import script.resource_weight;
 
@@ -44,6 +50,7 @@ public class crafting_comp_vibro_unit extends script.systems.crafting.weapon.cra
                                     new resource_weight.weight(craftinglib.RESOURCE_SHOCK_RESIST, 2)
                             })
             };
+
     public crafting_comp_vibro_unit()
     {
     }

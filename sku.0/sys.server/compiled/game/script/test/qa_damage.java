@@ -1,5 +1,11 @@
 package script.test;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.qa;
 import script.library.sui;
@@ -8,9 +14,6 @@ import script.obj_id;
 
 public class qa_damage extends script.base_script
 {
-    public qa_damage()
-    {
-    }
     public static final String DAMAGE_PID_SCRIPTVAR = "doDamage.pid";
     public static final String DAMAGE_SCRIPTVAR = "doDamageVar";
     public static final String HEAL_PID_SCRIPTVAR = "healDamage.pid";
@@ -19,6 +22,10 @@ public class qa_damage extends script.base_script
     public static final String HEAL_TOOL_TITLE = "HEAL AMOUNT";
     public static final String DAMAGE_TOOL_PROMPT = "Give the amount you want to damage the target for.  This tool will cause damage in the amount you specify.  ARMOR AND OTHER MITIGATION WILL NOT BE CONSIDERED.  Use the Mitigation Tool to test Mitigation.";
     public static final String DAMAGE_TOOL_TITLE = "DAMAGE AMOUNT";
+    public qa_damage()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (isGod(self))
@@ -35,6 +42,7 @@ public class qa_damage extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnSpeaking(obj_id self, String text) throws InterruptedException
     {
         if (isGod(self))
@@ -50,6 +58,7 @@ public class qa_damage extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int doTheDamage(obj_id self, dictionary params) throws InterruptedException
     {
         if (isGod(self))
@@ -68,7 +77,7 @@ public class qa_damage extends script.base_script
                     removePlayer(self, "Tool Exiting");
                     return SCRIPT_CONTINUE;
                 }
-                else 
+                else
                 {
                     if (damageAmount > 0 && isIdValid(lookAtTarget))
                     {
@@ -76,7 +85,7 @@ public class qa_damage extends script.base_script
                         CustomerServiceLog("qaTool", "User: (" + self + ") " + getName(self) + " has healed (" + lookAtTarget + ") using the QA Damage Tool.");
                         broadcast(self, "Damage to target completed.");
                     }
-                    else 
+                    else
                     {
                         broadcast(self, "Variables not valid");
                     }
@@ -86,6 +95,7 @@ public class qa_damage extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int healDamage(obj_id self, dictionary params) throws InterruptedException
     {
         if (isGod(self))
@@ -104,7 +114,7 @@ public class qa_damage extends script.base_script
                     removePlayer(self, "Tool Exiting");
                     return SCRIPT_CONTINUE;
                 }
-                else 
+                else
                 {
                     if (healAmount > 0 && isIdValid(lookAtTarget))
                     {
@@ -113,7 +123,7 @@ public class qa_damage extends script.base_script
                         CustomerServiceLog("qaTool", "User: (" + self + ") " + getName(self) + " has healed (" + lookAtTarget + ") using the QA Heal Tool.");
                         broadcast(self, "Heal target completed.");
                     }
-                    else 
+                    else
                     {
                         broadcast(self, "Variables not valid");
                     }
@@ -123,6 +133,7 @@ public class qa_damage extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void removePlayer(obj_id self, String err) throws InterruptedException
     {
         broadcast(self, err);

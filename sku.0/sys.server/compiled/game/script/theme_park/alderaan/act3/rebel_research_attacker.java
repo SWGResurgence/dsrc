@@ -1,5 +1,11 @@
 package script.theme_park.alderaan.act3;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.location;
@@ -12,6 +18,7 @@ public class rebel_research_attacker extends script.base_script
     public rebel_research_attacker()
     {
     }
+
     public int OnIncapacitated(obj_id self, obj_id attacker) throws InterruptedException
     {
         obj_id facility = getObjIdObjVar(self, "coa3.rebel.facility");
@@ -23,11 +30,13 @@ public class rebel_research_attacker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "startAttack", null, 5, false);
         return SCRIPT_CONTINUE;
     }
+
     public int startAttack(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id facility = getObjIdObjVar(self, "coa3.rebel.facility");
@@ -37,17 +46,20 @@ public class rebel_research_attacker extends script.base_script
         setMovementRun(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnMovePathComplete(obj_id self) throws InterruptedException
     {
         stop(self);
         attackNewTarget(self);
         return SCRIPT_CONTINUE;
     }
+
     public int postCombatPathHome(obj_id self, dictionary params) throws InterruptedException
     {
         attackNewTarget(self);
         return SCRIPT_OVERRIDE;
     }
+
     public void attackNewTarget(obj_id self) throws InterruptedException
     {
         obj_id facility = getObjIdObjVar(self, "coa3.rebel.facility");
@@ -62,7 +74,7 @@ public class rebel_research_attacker extends script.base_script
                 int x = 0;
                 while (target == null)
                 {
-                    obj_id newTarget = ((obj_id)objectList.get(rand(0, objectList.size() - 1)));
+                    obj_id newTarget = ((obj_id) objectList.get(rand(0, objectList.size() - 1)));
                     if (isIdValid(newTarget) && exists(newTarget) && ai_lib.isNpc(newTarget))
                     {
                         target = newTarget;
@@ -81,7 +93,6 @@ public class rebel_research_attacker extends script.base_script
             if (isIdValid(player) && exists(player))
             {
                 startCombat(self, player);
-                return;
             }
         }
     }

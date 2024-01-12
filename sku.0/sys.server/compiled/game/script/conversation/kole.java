@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.groundquests;
@@ -8,59 +14,71 @@ import script.*;
 
 public class kole extends script.base_script
 {
+    public static String c_stringFile = "conversation/kole";
+
     public kole()
     {
     }
-    public static String c_stringFile = "conversation/kole";
+
     public boolean kole_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean kole_condition_hasCompletedMine(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return groundquests.isQuestActiveOrComplete(player, "u16_nym_themepark_jinkins_kole") && !groundquests.isQuestActiveOrComplete(player, "u16_nym_themepark_second_interview_moore");
     }
+
     public boolean kole_condition_hasCompletedMoore(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return groundquests.isTaskActive(player, "u16_nym_themepark_second_interview_moore", "tellKoleMoore");
     }
+
     public boolean kole_condition_hasMooreQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return groundquests.isQuestActive(player, "u16_nym_themepark_second_interview_moore");
     }
+
     public boolean kole_condition_hasMooreNotResearch(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return (groundquests.hasCompletedQuest(player, "u16_nym_themepark_second_interview_moore") && !groundquests.isQuestActiveOrComplete(player, "u16_nym_themepark_research_facility"));
     }
+
     public boolean kole_condition_hasDoneResearchFacility(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return groundquests.isTaskActive(player, "u16_nym_themepark_research_facility", "returnResearchFacilityComplete");
     }
+
     public boolean kole_condition_hasCompletedResearchFacilityDoesntHaveArena(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return groundquests.hasCompletedQuest(player, "u16_nym_themepark_research_facility") && !groundquests.isQuestActiveOrComplete(player, "u16_nym_themepark_nym_arena");
     }
+
     public boolean kole_condition_hasResearchQuestOrNeedsQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return groundquests.isQuestActive(player, "u16_nym_themepark_research_facility") || kole_condition_hasMooreNotResearch(player, npc);
     }
+
     public boolean kole_condition_hasCompletedThemepark(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return groundquests.hasCompletedQuest(player, "u16_nym_themepark_shuttle_ambush");
     }
+
     public void kole_action_grantInterviewMoore(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         groundquests.grantQuest(player, "u16_nym_themepark_second_interview_moore");
     }
+
     public void kole_action_grantFacilityQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
@@ -81,20 +99,24 @@ public class kole extends script.base_script
             groundquests.sendSignal(player, "hasToldKoleMoore");
         }
     }
+
     public void kole_action_finishMooreQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         groundquests.sendSignal(player, "hasToldKoleMoore");
     }
+
     public void kole_action_completeResearchFacility(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         groundquests.sendSignal(player, "hasCompletedResearchFacility");
     }
+
     public void kole_action_hasFoundKole(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "hasFoundKole");
     }
+
     public void kole_action_gotoNym(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!groundquests.hasCompletedQuest(player, "u16_nym_themepark_kole_to_nym"))
@@ -102,6 +124,7 @@ public class kole extends script.base_script
             groundquests.grantQuest(player, "u16_nym_themepark_kole_to_nym");
         }
     }
+
     public int kole_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_57"))
@@ -121,7 +144,7 @@ public class kole extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_59");
@@ -130,7 +153,7 @@ public class kole extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.kole.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -140,6 +163,7 @@ public class kole extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int kole_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_59"))
@@ -159,6 +183,7 @@ public class kole extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int kole_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_73"))
@@ -174,6 +199,7 @@ public class kole extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int kole_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_25"))
@@ -193,7 +219,7 @@ public class kole extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_27");
@@ -202,7 +228,7 @@ public class kole extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.kole.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -212,6 +238,7 @@ public class kole extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int kole_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_27"))
@@ -231,7 +258,7 @@ public class kole extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_69");
@@ -240,7 +267,7 @@ public class kole extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.kole.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -250,6 +277,7 @@ public class kole extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int kole_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_69"))
@@ -265,6 +293,7 @@ public class kole extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int kole_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_23"))
@@ -284,7 +313,7 @@ public class kole extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_32");
@@ -293,7 +322,7 @@ public class kole extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.kole.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -303,6 +332,7 @@ public class kole extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int kole_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_32"))
@@ -329,7 +359,7 @@ public class kole extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_36");
@@ -342,7 +372,7 @@ public class kole extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.kole.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -352,6 +382,7 @@ public class kole extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int kole_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_36"))
@@ -378,7 +409,7 @@ public class kole extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_40");
@@ -391,7 +422,7 @@ public class kole extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.kole.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -416,7 +447,7 @@ public class kole extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_66");
@@ -425,7 +456,7 @@ public class kole extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.kole.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -435,6 +466,7 @@ public class kole extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int kole_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_40"))
@@ -454,7 +486,7 @@ public class kole extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_46");
@@ -463,7 +495,7 @@ public class kole extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.kole.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -488,7 +520,7 @@ public class kole extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_46");
@@ -497,7 +529,7 @@ public class kole extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.kole.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -507,6 +539,7 @@ public class kole extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int kole_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_46"))
@@ -526,7 +559,7 @@ public class kole extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_50");
@@ -535,7 +568,7 @@ public class kole extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.kole.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -545,6 +578,7 @@ public class kole extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int kole_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_50"))
@@ -560,6 +594,7 @@ public class kole extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int kole_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_66"))
@@ -579,7 +614,7 @@ public class kole extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_72");
@@ -588,7 +623,7 @@ public class kole extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.kole.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -598,6 +633,7 @@ public class kole extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int kole_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_72"))
@@ -624,7 +660,7 @@ public class kole extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_40");
@@ -637,7 +673,7 @@ public class kole extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.kole.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -647,6 +683,7 @@ public class kole extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isTangible(self)) || (isPlayer(self)))
@@ -656,11 +693,13 @@ public class kole extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -669,18 +708,21 @@ public class kole extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.kole");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -721,7 +763,7 @@ public class kole extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_57");
@@ -729,7 +771,7 @@ public class kole extends script.base_script
                 utils.setScriptVar(player, "conversation.kole.branchId", 3);
                 npcStartConversation(player, npc, "kole", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -750,7 +792,7 @@ public class kole extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_73");
@@ -758,7 +800,7 @@ public class kole extends script.base_script
                 utils.setScriptVar(player, "conversation.kole.branchId", 6);
                 npcStartConversation(player, npc, "kole", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -781,7 +823,7 @@ public class kole extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_25");
@@ -789,7 +831,7 @@ public class kole extends script.base_script
                 utils.setScriptVar(player, "conversation.kole.branchId", 7);
                 npcStartConversation(player, npc, "kole", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -819,7 +861,7 @@ public class kole extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_23");
@@ -827,7 +869,7 @@ public class kole extends script.base_script
                 utils.setScriptVar(player, "conversation.kole.branchId", 12);
                 npcStartConversation(player, npc, "kole", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -843,6 +885,7 @@ public class kole extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("kole"))

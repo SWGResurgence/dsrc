@@ -1,5 +1,11 @@
 package script.quest.force_sensitive;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.quests;
 import script.obj_id;
@@ -9,10 +15,12 @@ public class fs_reflex2_crate extends script.base_script
     public fs_reflex2_crate()
     {
     }
+
     public int OnAboutToBeTransferred(obj_id self, obj_id destContainer, obj_id transferer) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "player"))
@@ -22,6 +30,7 @@ public class fs_reflex2_crate extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleSetupCrate(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("newquests", "REFLEX2: crate script - setting up crate");

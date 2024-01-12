@@ -1,5 +1,11 @@
 package script.systems.crafting.weapon.component;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.craftinglib;
 import script.library.utils;
@@ -286,7 +292,7 @@ public class crafting_weapon_component_attribute extends script.base_script
                 int tableMax = weaponCoreDat.getInt("pistol_max_damage");
                 int pistolMaxDamage = (int) (tableMax * pistolMaxDamageBonus);
                 names[idx] = "cat_wp_dmge_range.wpn_pistol_damage_range";
-                attribs[idx] = "" + pistolMinDamage + "-" + pistolMaxDamage;
+                attribs[idx] = pistolMinDamage + "-" + pistolMaxDamage;
                 idx++;
                 if (idx >= names.length)
                 {
@@ -301,7 +307,7 @@ public class crafting_weapon_component_attribute extends script.base_script
                 tableMax = weaponCoreDat.getInt("carbine_max_damage");
                 int carbineMaxDamage = (int) (tableMax * carbineMaxDamageBonus);
                 names[idx] = "cat_wp_dmge_range.wpn_carbine_damage_range";
-                attribs[idx] = "" + carbineMinDamage + "-" + carbineMaxDamage;
+                attribs[idx] = carbineMinDamage + "-" + carbineMaxDamage;
                 idx++;
                 if (idx >= names.length)
                 {
@@ -316,7 +322,7 @@ public class crafting_weapon_component_attribute extends script.base_script
                 tableMax = weaponCoreDat.getInt("rifle_max_damage");
                 int rifleMaxDamage = (int) (tableMax * rifleMaxDamageBonus);
                 names[idx] = "cat_wp_dmge_range.wpn_rifle_damage_range";
-                attribs[idx] = "" + rifleMinDamage + "-" + rifleMaxDamage;
+                attribs[idx] = rifleMinDamage + "-" + rifleMaxDamage;
                 idx++;
                 if (idx >= names.length)
                 {
@@ -334,7 +340,7 @@ public class crafting_weapon_component_attribute extends script.base_script
                 int tableMax = weaponCoreDat.getInt("directional_max_damage");
                 int directionalMaxDamage = (int) (tableMax * directionalMaxDamageBonus);
                 names[idx] = "cat_wp_dmge_range.wpn_directional_damage_range";
-                attribs[idx] = "" + directionalMinDamage + "-" + directionalMaxDamage;
+                attribs[idx] = directionalMinDamage + "-" + directionalMaxDamage;
                 idx++;
                 if (idx >= names.length)
                 {
@@ -349,7 +355,7 @@ public class crafting_weapon_component_attribute extends script.base_script
                 tableMax = weaponCoreDat.getInt("heavy_max_damage");
                 int heavyMaxDamage = (int) (tableMax * heavyMaxDamageBonus);
                 names[idx] = "cat_wp_dmge_range.wpn_heavy_damage_range";
-                attribs[idx] = "" + heavyMinDamage + "-" + heavyMaxDamage;
+                attribs[idx] = heavyMinDamage + "-" + heavyMaxDamage;
                 idx++;
                 if (idx >= names.length)
                 {
@@ -367,7 +373,7 @@ public class crafting_weapon_component_attribute extends script.base_script
                 int tableMax = weaponCoreDat.getInt("melee_max_damage");
                 int meleeMaxDamage = (int) (tableMax * meleeMaxDamageBonus);
                 names[idx] = "cat_wp_dmge_range.wpn_melee_damage_range";
-                attribs[idx] = "" + meleeMinDamage + "-" + meleeMaxDamage;
+                attribs[idx] = meleeMinDamage + "-" + meleeMaxDamage;
                 idx++;
                 if (idx >= names.length)
                 {
@@ -522,7 +528,7 @@ public class crafting_weapon_component_attribute extends script.base_script
             if (hasObjVar(self, craftinglib.OBJVAR_RE_VALUE) && !weapons.isRangedCore(self) && !weapons.isMeleeCore(self) && !weapons.isHeavyCore(self))
             {
                 names[idx] = "@crafting:power_bit_power";
-                attribs[idx] = "" + getFloatObjVar(self, craftinglib.OBJVAR_RE_VALUE);
+                attribs[idx] = String.valueOf(getFloatObjVar(self, craftinglib.OBJVAR_RE_VALUE));
                 idx++;
                 if (idx >= names.length)
                 {

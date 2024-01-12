@@ -1,5 +1,11 @@
 package script.npc.epic_quest.zicx_bug_bomb;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.utils;
@@ -8,10 +14,12 @@ import script.string_id;
 
 public class rori_goru_rainstealer extends script.base_script
 {
+    public static final String CONVO = "epic_quest/zicx_bug_bomb/rori_goru_rainstealer";
+
     public rori_goru_rainstealer()
     {
     }
-    public static final String CONVO = "epic_quest/zicx_bug_bomb/rori_goru_rainstealer";
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         attachScript(self, "npc.converse.npc_converse_menu");
@@ -19,6 +27,7 @@ public class rori_goru_rainstealer extends script.base_script
         setInvulnerable(self, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id speaker) throws InterruptedException
     {
         if (!hasObjVar(speaker, "zicx"))
@@ -28,13 +37,13 @@ public class rori_goru_rainstealer extends script.base_script
             String response2 = "make_me_a_bomb";
             String response3 = "just_passing";
             string_id greeting = new string_id(CONVO, npcGreet);
-            string_id response[] = new string_id[3];
+            string_id[] response = new string_id[3];
             response[0] = new string_id(CONVO, response1);
             response[1] = new string_id(CONVO, response2);
             response[2] = new string_id(CONVO, response3);
             npcStartConversation(speaker, self, "questConvo", greeting, response);
         }
-        else 
+        else
         {
             String zicx = getStringObjVar(speaker, "zicx");
             if (zicx.equals("reset"))
@@ -43,7 +52,7 @@ public class rori_goru_rainstealer extends script.base_script
                 String response1 = "yes_please";
                 String response2 = "no_thanks";
                 string_id greeting = new string_id(CONVO, npcGreet);
-                string_id response[] = new string_id[2];
+                string_id[] response = new string_id[2];
                 response[0] = new string_id(CONVO, response1);
                 response[1] = new string_id(CONVO, response2);
                 npcStartConversation(speaker, self, "questConvo", greeting, response);
@@ -55,7 +64,7 @@ public class rori_goru_rainstealer extends script.base_script
                 String response2 = "i_quit";
                 String response3 = "need_help";
                 string_id greeting = new string_id(CONVO, npcGreet);
-                string_id response[] = new string_id[3];
+                string_id[] response = new string_id[3];
                 response[0] = new string_id(CONVO, response1);
                 response[1] = new string_id(CONVO, response2);
                 response[2] = new string_id(CONVO, response3);
@@ -67,7 +76,7 @@ public class rori_goru_rainstealer extends script.base_script
                 String response1 = "ill_get_bile";
                 String response2 = "i_quit";
                 string_id greeting = new string_id(CONVO, npcGreet);
-                string_id response[] = new string_id[2];
+                string_id[] response = new string_id[2];
                 response[0] = new string_id(CONVO, response1);
                 response[1] = new string_id(CONVO, response2);
                 npcStartConversation(speaker, self, "questConvo", greeting, response);
@@ -78,7 +87,7 @@ public class rori_goru_rainstealer extends script.base_script
                 String response1 = "ill_get_bugs";
                 String response2 = "i_quit";
                 string_id greeting = new string_id(CONVO, npcGreet);
-                string_id response[] = new string_id[2];
+                string_id[] response = new string_id[2];
                 response[0] = new string_id(CONVO, response1);
                 response[1] = new string_id(CONVO, response2);
                 npcStartConversation(speaker, self, "questConvo", greeting, response);
@@ -88,7 +97,7 @@ public class rori_goru_rainstealer extends script.base_script
                 String npcGreet = "good_work";
                 String response1 = "gimme_the_bomb";
                 string_id greeting = new string_id(CONVO, npcGreet);
-                string_id response[] = new string_id[1];
+                string_id[] response = new string_id[1];
                 response[0] = new string_id(CONVO, response1);
                 npcStartConversation(speaker, self, "questConvo", greeting, response);
             }
@@ -102,6 +111,7 @@ public class rori_goru_rainstealer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String convo, obj_id player, string_id response) throws InterruptedException
     {
         String response1 = "what_thugs";
@@ -294,6 +304,7 @@ public class rori_goru_rainstealer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnGiveItem(obj_id self, obj_id item, obj_id player) throws InterruptedException
     {
         if (!hasObjVar(player, "zicx"))
@@ -312,7 +323,7 @@ public class rori_goru_rainstealer extends script.base_script
                 destroyObject(item);
                 setObjVar(player, "zicx", "done");
             }
-            else 
+            else
             {
                 string_id finishMessage = new string_id(CONVO, "bring_me_the_bile");
                 chat.chat(self, finishMessage);
@@ -329,7 +340,7 @@ public class rori_goru_rainstealer extends script.base_script
                 destroyObject(item);
                 setObjVar(player, "zicx", "done");
             }
-            else 
+            else
             {
                 string_id finishMessage = new string_id(CONVO, "bring_me_the_bugs");
                 chat.chat(self, finishMessage);
@@ -337,7 +348,7 @@ public class rori_goru_rainstealer extends script.base_script
                 setObjVar(player, "zicx", "bile");
             }
         }
-        else 
+        else
         {
             string_id npcwhat = new string_id(CONVO, "what_is_this");
             chat.chat(self, npcwhat);

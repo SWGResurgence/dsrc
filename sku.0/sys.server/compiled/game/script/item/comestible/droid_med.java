@@ -1,5 +1,11 @@
 package script.item.comestible;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -18,6 +24,7 @@ public class droid_med extends script.base_script
     public static final string_id SID_YOU_IN_COMBAT = new string_id("error_message", "droid_repair_you_in_combat");
     public static final string_id SID_DROID_IN_COMBAT = new string_id("error_message", "droid_repair_droid_in_combat");
     public static final string_id SID_BAD_LOCATION = new string_id("error_message", "droid_repair_not_valid_location");
+
     public droid_med()
     {
     }

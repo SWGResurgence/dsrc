@@ -1,5 +1,11 @@
 package script.theme_park.nym;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.quests;
 import script.location;
@@ -8,14 +14,17 @@ import script.string_id;
 
 public class player extends script.base_script
 {
+    public static final String msg = "theme_park_nym/messages";
+
     public player()
     {
     }
-    public static final String msg = "theme_park_nym/messages";
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int finishDroidQuest(obj_id self, dictionary params) throws InterruptedException
     {
         string_id droidMessage = new string_id(msg, "acquired_memory");
@@ -23,6 +32,7 @@ public class player extends script.base_script
         setObjVar(self, "nym.kole.droid", 1);
         return SCRIPT_CONTINUE;
     }
+
     public int finishGasQuest(obj_id self, dictionary params) throws InterruptedException
     {
         string_id gasMessage = new string_id(msg, "acquired_gas");
@@ -30,6 +40,7 @@ public class player extends script.base_script
         setObjVar(self, "nym.jinkins.gotgas", 1);
         return SCRIPT_CONTINUE;
     }
+
     public int gotImggcu(obj_id self, dictionary params) throws InterruptedException
     {
         setObjVar(self, "nym.nym.imggcu", 1);
@@ -38,7 +49,7 @@ public class player extends script.base_script
             string_id haveAll = new string_id(msg, "all_nym_needed");
             sendSystemMessage(self, haveAll);
         }
-        else 
+        else
         {
             debugSpeakMsg(self, "GOT IMGGCU");
             string_id imggcu = new string_id(msg, "acquired_imggcu");
@@ -46,6 +57,7 @@ public class player extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int gotHarddrive(obj_id self, dictionary params) throws InterruptedException
     {
         setObjVar(self, "nym.nym.harddrive", 1);
@@ -54,13 +66,14 @@ public class player extends script.base_script
             string_id haveAll = new string_id(msg, "all_nym_needed");
             sendSystemMessage(self, haveAll);
         }
-        else 
+        else
         {
             string_id hardDrive = new string_id(msg, "acquired_hard_drive");
             sendSystemMessage(self, hardDrive);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int goSeeGuy(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id waypointToGuy = getObjIdObjVar(self, "nym.jinkins.guypoint");
@@ -76,6 +89,7 @@ public class player extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int goToCave(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id waypointToCave = getObjIdObjVar(self, "nym.jinkins.cavepoint");
@@ -91,6 +105,7 @@ public class player extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int goSeeImperial(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id waypointToGuy = getObjIdObjVar(self, "nym.kole.officerPoint");
@@ -106,6 +121,7 @@ public class player extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int goGetGas(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id waypointToCave = getObjIdObjVar(self, "nym.kole.gasPoint");
@@ -121,6 +137,7 @@ public class player extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnWaypointDestroyed(obj_id self, obj_id waypoint) throws InterruptedException
     {
         obj_id kolecave = getObjIdObjVar(self, "nym.kole.cavepoint");
@@ -155,6 +172,7 @@ public class player extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int goSeeRetired(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id waypointToGuy = getObjIdObjVar(self, "nym.nym.retiredGuy");
@@ -170,6 +188,7 @@ public class player extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int goResearchLab(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id waypointToGuy = getObjIdObjVar(self, "nym.nym.researchlab");

@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.location;
 import script.obj_id;
@@ -27,6 +33,7 @@ public class advanced_turret extends script.base_script
     public static final int SIZE_MEDIUM = 2;
     public static final int SIZE_LARGE = 3;
     public static final int SIZE_MINI = 4;
+
     public advanced_turret()
     {
     }

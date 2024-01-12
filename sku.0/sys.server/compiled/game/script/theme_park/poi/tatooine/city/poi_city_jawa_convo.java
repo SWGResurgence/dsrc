@@ -1,5 +1,11 @@
 package script.theme_park.poi.tatooine.city;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.create;
 import script.location;
@@ -10,6 +16,7 @@ public class poi_city_jawa_convo extends script.base_script
     public poi_city_jawa_convo()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         obj_id jawa = spawnGuyOne(self);
@@ -19,6 +26,7 @@ public class poi_city_jawa_convo extends script.base_script
         messageTo(self, "checkForScripts", null, 10, true);
         return SCRIPT_CONTINUE;
     }
+
     public obj_id spawnGuyOne(obj_id baseObject) throws InterruptedException
     {
         location here = getLocation(baseObject);
@@ -27,6 +35,7 @@ public class poi_city_jawa_convo extends script.base_script
         setObjVar(baseObject, "jawa1", jawa1);
         return jawa1;
     }
+
     public obj_id spawnGuyTwo(obj_id baseObject) throws InterruptedException
     {
         location here = getLocation(baseObject);
@@ -35,6 +44,7 @@ public class poi_city_jawa_convo extends script.base_script
         setObjVar(baseObject, "jawa2", jawa2);
         return jawa2;
     }
+
     public obj_id spawnGuy3(obj_id baseObject) throws InterruptedException
     {
         location here = getLocation(baseObject);
@@ -43,21 +53,25 @@ public class poi_city_jawa_convo extends script.base_script
         setObjVar(baseObject, "jawa3", jawa3);
         return jawa3;
     }
+
     public int handleDeadGuyOne(obj_id self, dictionary params) throws InterruptedException
     {
         spawnGuyOne(self);
         return SCRIPT_CONTINUE;
     }
+
     public int handleDeadGuyTwo(obj_id self, dictionary params) throws InterruptedException
     {
         spawnGuyTwo(self);
         return SCRIPT_CONTINUE;
     }
+
     public int handleDeadDroid(obj_id self, dictionary params) throws InterruptedException
     {
         spawnGuy3(self);
         return SCRIPT_CONTINUE;
     }
+
     public int handleChatting(obj_id self, dictionary params) throws InterruptedException
     {
         messageTo(self, "handleChatting", null, 600, false);
@@ -76,12 +90,14 @@ public class poi_city_jawa_convo extends script.base_script
         setAnimationMood(jawa3, "conversation");
         return SCRIPT_CONTINUE;
     }
+
     public String getRandomDroid() throws InterruptedException
     {
         int dnum = rand(2, 5);
         String droid = "r" + dnum;
         return droid;
     }
+
     public int checkForScripts(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasScript(self, "theme_park.poi.launch"))

@@ -1,5 +1,11 @@
 package script.item.doctor_bag;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.doctor_bag;
 import script.library.prose;
@@ -18,6 +24,7 @@ public class doc_bag extends script.base_script
     public static final string_id SID_LABEL_ALREADY = new string_id("doctor_bag", "label_already_assigned");
     public static final string_id SID_NEW_LABEL = new string_id("doctor_bag", "new_label");
     public static final string_id SID_LABEL_NO_SPACES = new string_id("doctor_bag", "label_no_spaces");
+
     public doc_bag()
     {
     }

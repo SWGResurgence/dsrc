@@ -1,5 +1,11 @@
 package script.holocron;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.obj_id;
@@ -9,11 +15,13 @@ public class destroy_target extends script.base_script
     public destroy_target()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         obj_id player = getObjIdObjVar(self, "newbie_handoff.mission.player");

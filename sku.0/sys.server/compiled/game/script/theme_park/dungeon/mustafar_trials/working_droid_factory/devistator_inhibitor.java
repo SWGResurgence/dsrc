@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.mustafar_trials.working_droid_factory;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.trial;
 import script.library.utils;
 import script.menu_info;
@@ -11,14 +17,17 @@ public class devistator_inhibitor extends script.base_script
     public devistator_inhibitor()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!trial.isRruDeactivated(self) && trial.isDevistatorEngaged(self))
@@ -33,13 +42,14 @@ public class devistator_inhibitor extends script.base_script
         {
             mi.addRootMenu(menu_info_types.ITEM_USE, trial.WORKING_INHIBITOR_RECHARGE);
         }
-        else 
+        else
         {
             mi.addRootMenu(menu_info_types.ITEM_USE, trial.WORKING_INHIBITOR_INACTIVE);
         }
         sendDirtyObjectMenuNotification(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)
@@ -57,7 +67,7 @@ public class devistator_inhibitor extends script.base_script
             {
                 sendSystemMessage(player, trial.WORKING_INHIBITOR_RECHARGE);
             }
-            else 
+            else
             {
                 sendSystemMessage(player, trial.WORKING_INHIBITOR_INACTIVE);
             }

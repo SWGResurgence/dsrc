@@ -1,5 +1,11 @@
 package script.systems.gcw;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.force_rank;
 import script.library.sui;
 import script.library.utils;
@@ -14,6 +20,7 @@ public class terminal_frs_voting extends script.base_script
 {
     public static final String SCRIPT_VAR_SUI_PID = "force_rank.vote_sui";
     public static final String SCRIPT_VAR_TERMINAL = "force_rank.vote_terminal";
+
     public terminal_frs_voting()
     {
     }
@@ -124,7 +131,7 @@ public class terminal_frs_voting extends script.base_script
                         Vector players_voted = utils.getResizeableStringBatchObjVar(self, force_rank.BATCH_VAR_VOTERS + (i + 1));
                         if (players_voted != null)
                         {
-                            if (players_voted.indexOf(getFirstName(player)) == -1)
+                            if (!players_voted.contains(getFirstName(player)))
                             {
                                 dsrc[i] += " *";
                             }

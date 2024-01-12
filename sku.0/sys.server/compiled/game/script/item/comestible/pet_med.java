@@ -1,5 +1,11 @@
 package script.item.comestible;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -12,6 +18,7 @@ public class pet_med extends script.base_script
     public static final string_id SID_CANNOT_DO_THAT_NOW = new string_id("pet/pet_menu", "cannot_do_that_now");
     public static final string_id SID_DO_NOT_HEAL = new string_id("pet/pet_menu", "do_not_heal");
     public static final string_id SID_NOTHING_TO_HEAL = new string_id("pet/pet_menu", "nothing_to_heal");
+
     public pet_med()
     {
     }

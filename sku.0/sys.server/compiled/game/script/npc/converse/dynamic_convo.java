@@ -1,5 +1,11 @@
 package script.npc.converse;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.chat;
@@ -12,9 +18,6 @@ import java.util.Vector;
 
 public class dynamic_convo extends script.base_script
 {
-    public dynamic_convo()
-    {
-    }
     public static final string_id GIVE_ITEM_SUCCESS = new string_id("system_msg", "give_item_success");
     public static final string_id GIVE_ITEM_FAILURE = new string_id("system_msg", "give_item_failure");
     public static final string_id SCHEMATIC_GRANTED = new string_id("system_msg", "schematic_granted");
@@ -30,21 +33,21 @@ public class dynamic_convo extends script.base_script
     public static final int GIVE_ITEM = 9;
     public static final int GRANT_SCHEMATIC = 10;
     public static final int REWARD_FACTION = 11;
-    public static final String[] actionList = 
-    {
-        "speak",
-        "add",
-        "remove",
-        "branch",
-        "end",
-        "setObjvar",
-        "removeObjvar",
-        "messagePlayer",
-        "messageNpc",
-        "giveItem",
-        "grantSchematic",
-        "rewardFaction"
-    };
+    public static final String[] actionList =
+            {
+                    "speak",
+                    "add",
+                    "remove",
+                    "branch",
+                    "end",
+                    "setObjvar",
+                    "removeObjvar",
+                    "messagePlayer",
+                    "messageNpc",
+                    "giveItem",
+                    "grantSchematic",
+                    "rewardFaction"
+            };
     public static final int HAS_OBJVAR = 0;
     public static final int NOT_HAS_OBJVAR = 1;
     public static final int EQUAL = 2;
@@ -54,18 +57,18 @@ public class dynamic_convo extends script.base_script
     public static final int LESS_THAN_OR_EQUAL = 6;
     public static final int GREATER_THAN_OR_EQUAL = 7;
     public static final int BETWEEN = 8;
-    public static final String[] conditionList = 
-    {
-        "**",
-        "!*",
-        "==",
-        "!=",
-        "<",
-        ">",
-        "<=",
-        ">=",
-        "><"
-    };
+    public static final String[] conditionList =
+            {
+                    "**",
+                    "!*",
+                    "==",
+                    "!=",
+                    "<",
+                    ">",
+                    "<=",
+                    ">=",
+                    "><"
+            };
     public static final int NEUTRAL = 0;
     public static final int REBEL = 1;
     public static final int REBEL_OVERT = 2;
@@ -73,22 +76,27 @@ public class dynamic_convo extends script.base_script
     public static final int IMPERIAL = 4;
     public static final int IMPERIAL_OVERT = 5;
     public static final int IMPERIAL_COVERT = 6;
-    public static final String[] pvpFactionList = 
+    public static final String[] pvpFactionList =
+            {
+                    "Neutral",
+                    "Rebel",
+                    "RebelOvert",
+                    "RebelCovert",
+                    "Imperial",
+                    "ImperialOvert",
+                    "ImperialCovert"
+            };
+    public dynamic_convo()
     {
-        "Neutral",
-        "Rebel",
-        "RebelOvert",
-        "RebelCovert",
-        "Imperial",
-        "ImperialOvert",
-        "ImperialCovert"
-    };
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         attachScript(self, "npc.converse.npc_converse_menu");
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id speaker) throws InterruptedException
     {
         if (ai_lib.isInCombat(self) || ai_lib.isInCombat(speaker))
@@ -111,7 +119,7 @@ public class dynamic_convo extends script.base_script
                     entry = null;
                     continue;
                 }
-                else 
+                else
                 {
                     break;
                 }
@@ -164,7 +172,7 @@ public class dynamic_convo extends script.base_script
                 }
                 executeAction(entry, speaker, self);
             }
-            else 
+            else
             {
                 break;
             }
@@ -177,6 +185,7 @@ public class dynamic_convo extends script.base_script
         npcStartConversation(speaker, self, "dynamicConvo", openDialog, dialogResponse);
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String convo, obj_id player, string_id response) throws InterruptedException
     {
         if (!convo.equals("dynamicConvo"))
@@ -211,7 +220,7 @@ public class dynamic_convo extends script.base_script
                         }
                         executeAction(entry, player, self);
                     }
-                    else 
+                    else
                     {
                         break;
                     }
@@ -220,6 +229,7 @@ public class dynamic_convo extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void executeAction(dictionary entry, obj_id player, obj_id npc) throws InterruptedException
     {
         String action = entry.getString("action");
@@ -231,75 +241,76 @@ public class dynamic_convo extends script.base_script
         switch (getActionId(action))
         {
             case SPEAK:
-            message = new string_id(entry.getString("convoFile"), entry.getString("convoText"));
-            npcSpeak(player, message);
-            break;
+                message = new string_id(entry.getString("convoFile"), entry.getString("convoText"));
+                npcSpeak(player, message);
+                break;
             case ADD:
-            response = getResponseEntry(npc, data1);
-            if (response == null)
-            {
-                LOG("dynamic_convo", "WARNING: No response entry found to add!!");
+                response = getResponseEntry(npc, data1);
+                if (response == null)
+                {
+                    LOG("dynamic_convo", "WARNING: No response entry found to add!!");
+                    break;
+                }
+                npcAddConversationResponse(player, response);
                 break;
-            }
-            npcAddConversationResponse(player, response);
-            break;
             case REMOVE:
-            response = getResponseEntry(npc, data1);
-            if (response == null)
-            {
-                LOG("dynamic_convo", "WARNING: No response entry found to remove!!");
+                response = getResponseEntry(npc, data1);
+                if (response == null)
+                {
+                    LOG("dynamic_convo", "WARNING: No response entry found to remove!!");
+                    break;
+                }
+                npcRemoveConversationResponse(player, response);
                 break;
-            }
-            npcRemoveConversationResponse(player, response);
-            break;
             case BRANCH:
-            startNewConvoBranch(npc, player, data1);
-            break;
+                startNewConvoBranch(npc, player, data1);
+                break;
             case END:
-            npcEndConversation(player);
-            break;
+                npcEndConversation(player);
+                break;
             case SET_OBJVAR:
-            setObjVar(player, data1, data2);
-            break;
+                setObjVar(player, data1, data2);
+                break;
             case REMOVE_OBJVAR:
-            removeObjVar(player, data1);
-            break;
+                removeObjVar(player, data1);
+                break;
             case MESSAGE_PLAYER:
-            params.put("player", player);
-            params.put("npc", npc);
-            params.put("value", data2);
-            messageTo(player, data1, params, 0, false);
-            break;
+                params.put("player", player);
+                params.put("npc", npc);
+                params.put("value", data2);
+                messageTo(player, data1, params, 0, false);
+                break;
             case MESSAGE_NPC:
-            params.put("player", player);
-            params.put("npc", npc);
-            params.put("value", data2);
-            messageTo(npc, data1, params, 0, false);
-            break;
+                params.put("player", player);
+                params.put("npc", npc);
+                params.put("value", data2);
+                messageTo(npc, data1, params, 0, false);
+                break;
             case GIVE_ITEM:
-            obj_id inventory = getObjectInSlot(player, "inventory");
-            obj_id object = createObject(data1, inventory, "");
-            if (!isIdValid(object))
-            {
-                sendSystemMessage(player, GIVE_ITEM_FAILURE);
-            }
-            else 
-            {
-                sendSystemMessage(player, GIVE_ITEM_SUCCESS);
-            }
-            break;
+                obj_id inventory = getObjectInSlot(player, "inventory");
+                obj_id object = createObject(data1, inventory, "");
+                if (!isIdValid(object))
+                {
+                    sendSystemMessage(player, GIVE_ITEM_FAILURE);
+                }
+                else
+                {
+                    sendSystemMessage(player, GIVE_ITEM_SUCCESS);
+                }
+                break;
             case GRANT_SCHEMATIC:
-            grantSchematic(player, data1);
-            sendSystemMessage(player, SCHEMATIC_GRANTED);
-            break;
+                grantSchematic(player, data1);
+                sendSystemMessage(player, SCHEMATIC_GRANTED);
+                break;
             case REWARD_FACTION:
-            factions.awardFactionStanding(player, data1, data2);
-            break;
+                factions.awardFactionStanding(player, data1, data2);
+                break;
             default:
-            LOG("dynamic_convo", "WARNING: Unknown response action defined!!");
-            break;
+                LOG("dynamic_convo", "WARNING: Unknown response action defined!!");
+                break;
         }
     }
+
     public void startNewConvoBranch(obj_id npc, obj_id player, String dialogEntry) throws InterruptedException
     {
         String datatable = getStringObjVar(npc, "convo_table");
@@ -352,6 +363,7 @@ public class dynamic_convo extends script.base_script
         }
         npcSetConversationResponses(player, dialogResponse);
     }
+
     public string_id getResponseEntry(obj_id npc, String responseEntry) throws InterruptedException
     {
         String datatable = getStringObjVar(npc, "convo_table");
@@ -374,6 +386,7 @@ public class dynamic_convo extends script.base_script
         }
         return null;
     }
+
     public boolean isGated(dictionary entry, obj_id player) throws InterruptedException
     {
         boolean gated = false;
@@ -394,63 +407,63 @@ public class dynamic_convo extends script.base_script
             switch (getConditionId(condition))
             {
                 case HAS_OBJVAR:
-                if (hasObjvar)
-                {
-                    gatedObjvar = false;
-                }
-                break;
+                    if (hasObjvar)
+                    {
+                        gatedObjvar = false;
+                    }
+                    break;
                 case NOT_HAS_OBJVAR:
-                if (!hasObjvar)
-                {
-                    gatedObjvar = false;
-                }
-                break;
+                    if (!hasObjvar)
+                    {
+                        gatedObjvar = false;
+                    }
+                    break;
                 case EQUAL:
-                LOG("dynamic_convo", "Gating on HAS_OBJVAR");
-                if (hasObjvar && playerObjvar == value1)
-                {
-                    gatedObjvar = false;
-                }
-                break;
+                    LOG("dynamic_convo", "Gating on HAS_OBJVAR");
+                    if (hasObjvar && playerObjvar == value1)
+                    {
+                        gatedObjvar = false;
+                    }
+                    break;
                 case NOT_EQUAL:
-                if (hasObjvar && playerObjvar != value1)
-                {
-                    gatedObjvar = false;
-                }
-                break;
+                    if (hasObjvar && playerObjvar != value1)
+                    {
+                        gatedObjvar = false;
+                    }
+                    break;
                 case LESS_THAN:
-                if (hasObjvar && playerObjvar < value1)
-                {
-                    gatedObjvar = false;
-                }
-                break;
+                    if (hasObjvar && playerObjvar < value1)
+                    {
+                        gatedObjvar = false;
+                    }
+                    break;
                 case GREATER_THAN:
-                if (hasObjvar && playerObjvar > value1)
-                {
-                    gatedObjvar = false;
-                }
-                break;
+                    if (hasObjvar && playerObjvar > value1)
+                    {
+                        gatedObjvar = false;
+                    }
+                    break;
                 case LESS_THAN_OR_EQUAL:
-                if (hasObjvar && playerObjvar <= value1)
-                {
-                    gatedObjvar = false;
-                }
-                break;
+                    if (hasObjvar && playerObjvar <= value1)
+                    {
+                        gatedObjvar = false;
+                    }
+                    break;
                 case GREATER_THAN_OR_EQUAL:
-                if (hasObjvar && playerObjvar >= value1)
-                {
-                    gatedObjvar = false;
-                }
-                break;
+                    if (hasObjvar && playerObjvar >= value1)
+                    {
+                        gatedObjvar = false;
+                    }
+                    break;
                 case BETWEEN:
-                if (hasObjvar && playerObjvar > value1 && playerObjvar < value2)
-                {
-                    gatedObjvar = false;
-                }
-                break;
+                    if (hasObjvar && playerObjvar > value1 && playerObjvar < value2)
+                    {
+                        gatedObjvar = false;
+                    }
+                    break;
                 default:
-                LOG("dynamic_convo", "WARNING: Unknown Objvar gating condition!!");
-                break;
+                    LOG("dynamic_convo", "WARNING: Unknown Objvar gating condition!!");
+                    break;
             }
             gated |= gatedObjvar;
         }
@@ -465,50 +478,50 @@ public class dynamic_convo extends script.base_script
             switch (getConditionId(condition))
             {
                 case EQUAL:
-                if (playerFaction == value1)
-                {
-                    gatedFaction = false;
-                }
-                break;
+                    if (playerFaction == value1)
+                    {
+                        gatedFaction = false;
+                    }
+                    break;
                 case NOT_EQUAL:
-                if (playerFaction != value1)
-                {
-                    gatedFaction = false;
-                }
-                break;
+                    if (playerFaction != value1)
+                    {
+                        gatedFaction = false;
+                    }
+                    break;
                 case LESS_THAN:
-                if (playerFaction < value1)
-                {
-                    gatedFaction = false;
-                }
-                break;
+                    if (playerFaction < value1)
+                    {
+                        gatedFaction = false;
+                    }
+                    break;
                 case GREATER_THAN:
-                if (playerFaction > value1)
-                {
-                    gatedFaction = false;
-                }
-                break;
+                    if (playerFaction > value1)
+                    {
+                        gatedFaction = false;
+                    }
+                    break;
                 case LESS_THAN_OR_EQUAL:
-                if (playerFaction <= value1)
-                {
-                    gatedFaction = false;
-                }
-                break;
+                    if (playerFaction <= value1)
+                    {
+                        gatedFaction = false;
+                    }
+                    break;
                 case GREATER_THAN_OR_EQUAL:
-                if (playerFaction >= value1)
-                {
-                    gatedFaction = false;
-                }
-                break;
+                    if (playerFaction >= value1)
+                    {
+                        gatedFaction = false;
+                    }
+                    break;
                 case BETWEEN:
-                if (playerFaction > value1 && playerFaction < value2)
-                {
-                    gatedFaction = false;
-                }
-                break;
+                    if (playerFaction > value1 && playerFaction < value2)
+                    {
+                        gatedFaction = false;
+                    }
+                    break;
                 default:
-                LOG("dynamic_convo", "WARNING: Unknown Faction gating condition!!");
-                break;
+                    LOG("dynamic_convo", "WARNING: Unknown Faction gating condition!!");
+                    break;
             }
             gated |= gatedFaction;
         }
@@ -516,11 +529,7 @@ public class dynamic_convo extends script.base_script
         if (gatingObject != null && !gatingObject.equals(""))
         {
             boolean destroyItem = (entry.getInt("destroyGatingObject") != 0);
-            boolean gatedItem = true;
-            if (hasItem(player, gatingObject, destroyItem))
-            {
-                gatedItem = false;
-            }
+            boolean gatedItem = !hasItem(player, gatingObject, destroyItem);
             gated |= gatedItem;
         }
         String gatingPvpFaction = entry.getString("gatingPvpFaction");
@@ -535,55 +544,56 @@ public class dynamic_convo extends script.base_script
             switch (getPvpFactionId(gatingPvpFaction))
             {
                 case NEUTRAL:
-                if (factions.isNeutral(player))
-                {
-                    gatedPvpFaction = false;
-                }
-                break;
+                    if (factions.isNeutral(player))
+                    {
+                        gatedPvpFaction = false;
+                    }
+                    break;
                 case REBEL:
-                if (playerFaction.equals("Rebel"))
-                {
-                    gatedPvpFaction = false;
-                }
-                break;
+                    if (playerFaction.equals("Rebel"))
+                    {
+                        gatedPvpFaction = false;
+                    }
+                    break;
                 case REBEL_OVERT:
-                if (playerFaction.equals("Rebel") && factions.isDeclared(player))
-                {
-                    gatedPvpFaction = false;
-                }
-                break;
+                    if (playerFaction.equals("Rebel") && factions.isDeclared(player))
+                    {
+                        gatedPvpFaction = false;
+                    }
+                    break;
                 case REBEL_COVERT:
-                if (playerFaction.equals("Rebel") && factions.isCovert(player) && !factions.isDeclared(player))
-                {
-                    gatedPvpFaction = false;
-                }
-                break;
+                    if (playerFaction.equals("Rebel") && factions.isCovert(player) && !factions.isDeclared(player))
+                    {
+                        gatedPvpFaction = false;
+                    }
+                    break;
                 case IMPERIAL:
-                if (playerFaction.equals("Imperial"))
-                {
-                    gatedPvpFaction = false;
-                }
-                break;
+                    if (playerFaction.equals("Imperial"))
+                    {
+                        gatedPvpFaction = false;
+                    }
+                    break;
                 case IMPERIAL_OVERT:
-                if (playerFaction.equals("Imperial") && factions.isDeclared(player))
-                {
-                    gatedPvpFaction = false;
-                }
-                break;
+                    if (playerFaction.equals("Imperial") && factions.isDeclared(player))
+                    {
+                        gatedPvpFaction = false;
+                    }
+                    break;
                 case IMPERIAL_COVERT:
-                if (playerFaction.equals("Imperial") && factions.isCovert(player) && !factions.isDeclared(player))
-                {
-                    gatedPvpFaction = false;
-                }
-                break;
+                    if (playerFaction.equals("Imperial") && factions.isCovert(player) && !factions.isDeclared(player))
+                    {
+                        gatedPvpFaction = false;
+                    }
+                    break;
                 default:
-                LOG("dynamic_convo", "WARNING: Unknown gating PVP Faction!!");
-                break;
+                    LOG("dynamic_convo", "WARNING: Unknown gating PVP Faction!!");
+                    break;
             }
             gated |= gatedPvpFaction;
         }
         return gated;
     }
+
     public int getConditionId(String condition) throws InterruptedException
     {
         for (int i = 0; i < conditionList.length; i++)
@@ -595,6 +605,7 @@ public class dynamic_convo extends script.base_script
         }
         return -1;
     }
+
     public int getActionId(String action) throws InterruptedException
     {
         for (int i = 0; i < actionList.length; i++)
@@ -606,6 +617,7 @@ public class dynamic_convo extends script.base_script
         }
         return -1;
     }
+
     public int getPvpFactionId(String pvpFaction) throws InterruptedException
     {
         for (int i = 0; i < pvpFactionList.length; i++)
@@ -617,14 +629,18 @@ public class dynamic_convo extends script.base_script
         }
         return -1;
     }
+
     public boolean hasItem(obj_id player, String template, boolean destroyItem) throws InterruptedException
     {
         obj_id playerInv = utils.getInventoryContainer(player);
         obj_id[] contents = utils.getContents(playerInv, true);
-        for (obj_id content : contents) {
+        for (obj_id content : contents)
+        {
             String itemInInventory = getTemplateName(content);
-            if (itemInInventory.equals(template)) {
-                if (destroyItem) {
+            if (itemInInventory.equals(template))
+            {
+                if (destroyItem)
+                {
                     destroyObject(content);
                 }
                 return true;

@@ -1,26 +1,37 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.*;
 
 public class fs_combat_healing_quest extends script.base_script
 {
+    public static String c_stringFile = "conversation/fs_combat_healing_quest";
+
     public fs_combat_healing_quest()
     {
     }
-    public static String c_stringFile = "conversation/fs_combat_healing_quest";
+
     public boolean fs_combat_healing_quest_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean fs_combat_healing_quest_condition_canTalkToVillagers(obj_id player, obj_id npc) throws InterruptedException
     {
         return fs_quests.isVillageEligible(player);
     }
+
     public boolean fs_combat_healing_quest_condition_Finished(obj_id player, obj_id npc) throws InterruptedException
     {
         return quests.isComplete("fs_combat_healing_finish", player);
     }
+
     public boolean fs_combat_healing_quest_condition_inProgress(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(player, "quest.fs_combat_healing.totalhealed"))
@@ -30,25 +41,21 @@ public class fs_combat_healing_quest extends script.base_script
             {
                 return true;
             }
-            else if (totalhealed < 100 && quests.isActive("fs_combat_healing_2", player))
-            {
-                return true;
-            }
+            else return totalhealed < 100 && quests.isActive("fs_combat_healing_2", player);
         }
         return false;
     }
+
     public boolean fs_combat_healing_quest_condition_hasCompletedFirstSet(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(player, "quest.fs_combat_healing.totalhealed"))
         {
             int totalhealed = getIntObjVar(player, "quest.fs_combat_healing.totalhealed");
-            if (totalhealed >= 50 && !quests.isComplete("fs_combat_healing_1", player))
-            {
-                return true;
-            }
+            return totalhealed >= 50 && !quests.isComplete("fs_combat_healing_1", player);
         }
         return false;
     }
+
     public boolean fs_combat_healing_quest_condition_intentroyCheck(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id inv = utils.getInventoryContainer(player);
@@ -58,42 +65,37 @@ public class fs_combat_healing_quest extends script.base_script
             if (hasObjVar(player, "quest.fs_combat_healing.totalhealed"))
             {
                 int totalhealed = getIntObjVar(player, "quest.fs_combat_healing.totalhealed");
-                if (totalhealed >= 100 && !quests.isComplete("fs_combat_healing_2", player))
-                {
-                    return true;
-                }
+                return totalhealed >= 100 && !quests.isComplete("fs_combat_healing_2", player);
             }
         }
         return false;
     }
+
     public boolean fs_combat_healing_quest_condition_hasCompletedSecondSet(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(player, "quest.fs_combat_healing.totalhealed"))
         {
             int totalhealed = getIntObjVar(player, "quest.fs_combat_healing.totalhealed");
-            if (totalhealed >= 100 && quests.isComplete("fs_combat_healing_1", player))
-            {
-                return true;
-            }
+            return totalhealed >= 100 && quests.isComplete("fs_combat_healing_1", player);
         }
         return false;
     }
+
     public boolean fs_combat_healing_quest_condition_ableToDoQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return fs_quests.hasQuestAccepted(player);
     }
+
     public boolean fs_combat_healing_quest_condition_doneFirstSet(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (quests.canActivate("fs_combat_healing_2", player) && quests.isComplete("fs_combat_healing_1", player))
-        {
-            return true;
-        }
-        return false;
+        return quests.canActivate("fs_combat_healing_2", player) && quests.isComplete("fs_combat_healing_1", player);
     }
+
     public boolean fs_combat_healing_quest_condition_hasMedicSkill(obj_id player, obj_id npc) throws InterruptedException
     {
         return hasSkill(player, "science_medic_novice");
     }
+
     public void fs_combat_healing_quest_action_giveQuest1(obj_id player, obj_id npc) throws InterruptedException
     {
         quests.activate("fs_combat_healing_1", player, npc);
@@ -101,10 +103,12 @@ public class fs_combat_healing_quest extends script.base_script
         attachScript(player, "quest.force_sensitive.fs_combat_healing");
         setObjVar(player, "quest.fs_combat_healing.totalhealed", 0);
     }
+
     public void fs_combat_healing_quest_action_giveQuest2(obj_id player, obj_id npc) throws InterruptedException
     {
         quests.activate("fs_combat_healing_2", player, npc);
     }
+
     public void fs_combat_healing_quest_action_giveReward(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id playerInventory = utils.getInventoryContainer(player);
@@ -112,11 +116,13 @@ public class fs_combat_healing_quest extends script.base_script
         quests.complete("fs_combat_healing_2", player, true);
         detachScript(player, "quest.force_sensitive.fs_combat_healing");
     }
+
     public void fs_combat_healing_quest_action_unlockMedicBranch(obj_id player, obj_id npc) throws InterruptedException
     {
         fs_quests.unlockBranch(player, "force_sensitive_heightened_senses_healing");
         quests.complete("fs_combat_healing_1", player, true);
     }
+
     public String fs_combat_healing_quest_tokenTO_numberHealed(obj_id player, obj_id npc) throws InterruptedException
     {
         int totalhealed = -1;
@@ -132,6 +138,7 @@ public class fs_combat_healing_quest extends script.base_script
         String healingCountPartTwo = localize(new string_id("quest/force_sensitive/fs_medic", "combat_healing_count_part2"));
         return healingCountPartOne + " " + totalhealed + " " + healingCountPartTwo;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -141,11 +148,13 @@ public class fs_combat_healing_quest extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -154,18 +163,21 @@ public class fs_combat_healing_quest extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "npc.conversation.fs_combat_healing_quest");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         if (ai_lib.isInCombat(self) || ai_lib.isInCombat(player))
@@ -199,7 +211,7 @@ public class fs_combat_healing_quest extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_67e6df55");
@@ -212,7 +224,7 @@ public class fs_combat_healing_quest extends script.base_script
                 pp.other.set(fs_combat_healing_quest_tokenTO_numberHealed(player, self));
                 npcStartConversation(player, self, "fs_combat_healing_quest", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -265,7 +277,7 @@ public class fs_combat_healing_quest extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_aa2e6c00");
@@ -277,7 +289,7 @@ public class fs_combat_healing_quest extends script.base_script
                 setObjVar(player, "conversation.fs_combat_healing_quest.branchId", 8);
                 npcStartConversation(player, self, "fs_combat_healing_quest", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(self, message);
             }
@@ -317,7 +329,7 @@ public class fs_combat_healing_quest extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_8fddaea0");
@@ -329,7 +341,7 @@ public class fs_combat_healing_quest extends script.base_script
                 setObjVar(player, "conversation.fs_combat_healing_quest.branchId", 13);
                 npcStartConversation(player, self, "fs_combat_healing_quest", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(self, message);
             }
@@ -338,6 +350,7 @@ public class fs_combat_healing_quest extends script.base_script
         chat.chat(self, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("fs_combat_healing_quest"))
@@ -409,7 +422,7 @@ public class fs_combat_healing_quest extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_25b83816");
@@ -422,7 +435,7 @@ public class fs_combat_healing_quest extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.fs_combat_healing_quest.branchId");
                     npcSpeak(player, message);

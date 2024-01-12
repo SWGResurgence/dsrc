@@ -1,5 +1,11 @@
 package script.quest.force_sensitive;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.obj_id;
 
@@ -8,10 +14,12 @@ public class fs_reflex2_theater extends script.base_script
     public fs_reflex2_theater()
     {
     }
+
     public int OnTheaterCreated(obj_id self, obj_id[] objects, obj_id player, obj_id creator) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int handleSetupCrate(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("newquests", "REFLEX2: attempting to initialize crate");
@@ -26,7 +34,7 @@ public class fs_reflex2_theater extends script.base_script
             LOG("newquests", "REFLEX2: crate found, sending init message");
             messageTo(crate, "handleSetupCrate", d, 1.0f, false);
         }
-        else 
+        else
         {
             LOG("newquests", "REFLEX2: crate not found, trying again");
             if (retry < 5)

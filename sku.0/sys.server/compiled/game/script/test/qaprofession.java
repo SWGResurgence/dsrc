@@ -1,5 +1,11 @@
 package script.test;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.qa;
 import script.library.skill;
@@ -9,13 +15,11 @@ import script.obj_id;
 import script.string_id;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Vector;
 
 public class qaprofession extends script.base_script
 {
-    public qaprofession()
-    {
-    }
     public static final String SCRIPTVAR = "qaprofession";
     public static final String SKILL_TEMPLATE = "datatables/skill_template/skill_template.iff";
     public static final String SKILL_TABLE = "datatables/skill/skills.iff";
@@ -28,93 +32,93 @@ public class qaprofession extends script.base_script
     public static final String PROFESSION_TRADER_SELECT = "Select Specific Trader Type\n\n*This is hard coded trader profession data.  Contact the tool team if it is incorrect*";
     public static final String ABILITY_TOOL_TITLE = "QA ABILITY TO PROFESSION CROSS-REFERENCE";
     public static final String ABILITY_TOOL_PROMPT = "This tool allows the tester to find an ability (AKA command) and trace it back to it's profession.";
-    public static final String[] PROFESSION_TOOL_MENU = 
-    {
-        "Abilities Alphabetically",
-        "Profession Details",
-        "Export Profession Details"
-    };
-    public static final String[] TRADER_TOOL_MENU = 
-    {
-        "Domestics ( trader_1a )",
-        "Structures ( trader_1b )",
-        "Munitions ( trader_1c )",
-        "Engineer ( trader_1d )"
-    };
-    public static final String[] PROFESSION_DETAILS_MENU = 
-    {
-        "Master this Profession",
-        "Export this data"
-    };
-    public static final String[] ABILITY_TO_SKILL_FORMULA = 
-    {
-        "_phase1_novice",
-        "_phase1_02",
-        "_phase1_03",
-        "_phase1_04",
-        "_phase1_05",
-        "_phase1_master",
-        "_phase2_novice",
-        "_phase2_02",
-        "_phase2_03",
-        "_phase2_04",
-        "_phase2_05",
-        "_phase2_master",
-        "_phase3_novice",
-        "_phase3_02",
-        "_phase3_03",
-        "_phase3_04",
-        "_phase3_05",
-        "_phase3_master",
-        "_phase4_novice",
-        "_phase4_02",
-        "_phase4_03",
-        "_phase4_04",
-        "_phase4_05",
-        "_phase4_master"
-    };
-    public static final int[] HARD_CODED_LEVELS = 
-    {
-        1,
-        4,
-        7,
-        10,
-        14,
-        18,
-        22,
-        26,
-        30,
-        34,
-        38,
-        42,
-        46,
-        50,
-        54,
-        58,
-        62,
-        66,
-        70,
-        74,
-        78,
-        82,
-        86,
-        90
-    };
-    public static final String[] PROFESSION_NAME_LIST = 
-    {
-        "smuggler_1a",
-        "bounty_hunter_1a",
-        "officer_1a",
-        "commando_1a",
-        "force_sensitive_1a",
-        "medic_1a",
-        "spy_1a",
-        "entertainer_2a",
-        "trader_1a",
-        "trader_1b",
-        "trader_1c",
-        "trader_1d"
-    };
+    public static final String[] PROFESSION_TOOL_MENU =
+            {
+                    "Abilities Alphabetically",
+                    "Profession Details",
+                    "Export Profession Details"
+            };
+    public static final String[] TRADER_TOOL_MENU =
+            {
+                    "Domestics ( trader_1a )",
+                    "Structures ( trader_1b )",
+                    "Munitions ( trader_1c )",
+                    "Engineer ( trader_1d )"
+            };
+    public static final String[] PROFESSION_DETAILS_MENU =
+            {
+                    "Master this Profession",
+                    "Export this data"
+            };
+    public static final String[] ABILITY_TO_SKILL_FORMULA =
+            {
+                    "_phase1_novice",
+                    "_phase1_02",
+                    "_phase1_03",
+                    "_phase1_04",
+                    "_phase1_05",
+                    "_phase1_master",
+                    "_phase2_novice",
+                    "_phase2_02",
+                    "_phase2_03",
+                    "_phase2_04",
+                    "_phase2_05",
+                    "_phase2_master",
+                    "_phase3_novice",
+                    "_phase3_02",
+                    "_phase3_03",
+                    "_phase3_04",
+                    "_phase3_05",
+                    "_phase3_master",
+                    "_phase4_novice",
+                    "_phase4_02",
+                    "_phase4_03",
+                    "_phase4_04",
+                    "_phase4_05",
+                    "_phase4_master"
+            };
+    public static final int[] HARD_CODED_LEVELS =
+            {
+                    1,
+                    4,
+                    7,
+                    10,
+                    14,
+                    18,
+                    22,
+                    26,
+                    30,
+                    34,
+                    38,
+                    42,
+                    46,
+                    50,
+                    54,
+                    58,
+                    62,
+                    66,
+                    70,
+                    74,
+                    78,
+                    82,
+                    86,
+                    90
+            };
+    public static final String[] PROFESSION_NAME_LIST =
+            {
+                    "smuggler_1a",
+                    "bounty_hunter_1a",
+                    "officer_1a",
+                    "commando_1a",
+                    "force_sensitive_1a",
+                    "medic_1a",
+                    "spy_1a",
+                    "entertainer_2a",
+                    "trader_1a",
+                    "trader_1b",
+                    "trader_1c",
+                    "trader_1d"
+            };
     public static final int SEARCH_ALL_ABILITIES = 0;
     public static final int REVIEW_SPECIFIC_PROFESSION = 1;
     public static final int EXPORT_ENTIRE_PROFESSION = 2;
@@ -126,6 +130,10 @@ public class qaprofession extends script.base_script
     public static final int EXPORT_DATA = 1;
     public static final String NONE_STRING = "None";
     public static final String FILEEXTENSION = "txt";
+    public qaprofession()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (isGod(self))
@@ -142,6 +150,7 @@ public class qaprofession extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnSpeaking(obj_id self, String text) throws InterruptedException
     {
         if (isGod(self))
@@ -154,6 +163,7 @@ public class qaprofession extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleMainMenuOptions(obj_id self, dictionary params) throws InterruptedException
     {
         if (isGod(self))
@@ -175,7 +185,7 @@ public class qaprofession extends script.base_script
                     qa.refreshMenu(self, "Choose the tool you want to use", "QA Tools", tool_options, "toolMainMenu", true, "qatool.pid");
                     return SCRIPT_CONTINUE;
                 }
-                else 
+                else
                 {
                     String[] professionMenuCodeStrings = qa.populateArray(self, "startingTemplateName", SKILL_TEMPLATE, "");
                     utils.setScriptVar(self, SCRIPTVAR + ".professionMenuCodeStrings", professionMenuCodeStrings);
@@ -185,33 +195,34 @@ public class qaprofession extends script.base_script
                     switch (idx)
                     {
                         case SEARCH_ALL_ABILITIES:
-                        String[] allAbilityCodeStrings = getAllAbilityCodeStrings(self, professionMenuCodeStrings);
-                        String[] allAbilityStrings = getAbilityStrings(self, allAbilityCodeStrings);
-                        String[] abilityMenu = combineAndSortAbilities(self, allAbilityStrings, allAbilityCodeStrings);
-                        qa.refreshMenu(self, ABILITY_TOOL_PROMPT, ABILITY_TOOL_TITLE, abilityMenu, "handleAbilitySelection", SCRIPTVAR + ".pid", SCRIPTVAR + ".abilitySelected", sui.OK_CANCEL_REFRESH);
-                        break;
+                            String[] allAbilityCodeStrings = getAllAbilityCodeStrings(self, professionMenuCodeStrings);
+                            String[] allAbilityStrings = getAbilityStrings(self, allAbilityCodeStrings);
+                            String[] abilityMenu = combineAndSortAbilities(self, allAbilityStrings, allAbilityCodeStrings);
+                            qa.refreshMenu(self, ABILITY_TOOL_PROMPT, ABILITY_TOOL_TITLE, abilityMenu, "handleAbilitySelection", SCRIPTVAR + ".pid", SCRIPTVAR + ".abilitySelected", sui.OK_CANCEL_REFRESH);
+                            break;
                         case REVIEW_SPECIFIC_PROFESSION:
-                        if (professionMenu.length > 0)
-                        {
-                            qa.refreshMenu(self, PROFESSION_TOOL_PROMPT, PROFESSION_TOOL_TITLE, professionMenu, "handleProfessionOptions", SCRIPTVAR + ".pid", SCRIPTVAR + ".professionMenu", sui.OK_CANCEL_REFRESH);
-                        }
-                        else 
-                        {
-                            removePlayer(self, "Tool failed to get a menu. Exiting.");
-                        }
-                        break;
+                            if (professionMenu.length > 0)
+                            {
+                                qa.refreshMenu(self, PROFESSION_TOOL_PROMPT, PROFESSION_TOOL_TITLE, professionMenu, "handleProfessionOptions", SCRIPTVAR + ".pid", SCRIPTVAR + ".professionMenu", sui.OK_CANCEL_REFRESH);
+                            }
+                            else
+                            {
+                                removePlayer(self, "Tool failed to get a menu. Exiting.");
+                            }
+                            break;
                         case EXPORT_ENTIRE_PROFESSION:
-                        qa.refreshMenu(self, PROFESSION_TOOL_PROMPT, PROFESSION_TOOL_TITLE, professionMenu, "handleExportProfession", SCRIPTVAR + ".pid", SCRIPTVAR + ".exportMenu", sui.OK_CANCEL_REFRESH);
-                        break;
+                            qa.refreshMenu(self, PROFESSION_TOOL_PROMPT, PROFESSION_TOOL_TITLE, professionMenu, "handleExportProfession", SCRIPTVAR + ".pid", SCRIPTVAR + ".exportMenu", sui.OK_CANCEL_REFRESH);
+                            break;
                         default:
-                        removePlayer(self, "");
-                        return SCRIPT_CONTINUE;
+                            removePlayer(self, "");
+                            return SCRIPT_CONTINUE;
                     }
                 }
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleExportProfession(obj_id self, dictionary params) throws InterruptedException
     {
         if (isGod(self))
@@ -232,7 +243,7 @@ public class qaprofession extends script.base_script
                     toolMainMenu(self);
                     return SCRIPT_CONTINUE;
                 }
-                String previousMainMenuArray[] = utils.getStringArrayScriptVar(self, SCRIPTVAR + ".exportMenu");
+                String[] previousMainMenuArray = utils.getStringArrayScriptVar(self, SCRIPTVAR + ".exportMenu");
                 String professionStringSelection = previousMainMenuArray[idx];
                 if (!professionStringSelection.equals(""))
                 {
@@ -244,7 +255,7 @@ public class qaprofession extends script.base_script
                     {
                         qa.refreshMenu(self, PROFESSION_TRADER_SELECT, PROFESSION_TOOL_TITLE, TRADER_TOOL_MENU, "handleExportTrader", SCRIPTVAR + ".pid", SCRIPTVAR + ".traderCode", sui.OK_CANCEL_REFRESH);
                     }
-                    else 
+                    else
                     {
                         String dataReadyForExport = prepareDataForExport(self, professionCodeSelection);
                         saveDataToClient(self, professionCodeSelection, dataReadyForExport, FILEEXTENSION);
@@ -255,6 +266,7 @@ public class qaprofession extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleExportTrader(obj_id self, dictionary params) throws InterruptedException
     {
         if (isGod(self))
@@ -275,46 +287,47 @@ public class qaprofession extends script.base_script
                     toolMainMenu(self);
                     return SCRIPT_CONTINUE;
                 }
-                String previousMainMenuArray[] = utils.getStringArrayScriptVar(self, SCRIPTVAR + ".traderCode");
+                String[] previousMainMenuArray = utils.getStringArrayScriptVar(self, SCRIPTVAR + ".traderCode");
                 String professionStringSelection = previousMainMenuArray[idx];
                 if (previousMainMenuArray.length < 0)
                 {
                     removePlayer(self, "There was an error in the tool.  Exiting.");
                     return SCRIPT_CONTINUE;
                 }
-                else 
+                else
                 {
                     switch (idx)
                     {
                         case TRADER_DOMESTICS:
-                        String trader_1aDataReadyForExport = prepareDataForExport(self, "trader_1a");
-                        saveDataToClient(self, "trader_1a", trader_1aDataReadyForExport, FILEEXTENSION);
-                        toolMainMenu(self);
-                        break;
+                            String trader_1aDataReadyForExport = prepareDataForExport(self, "trader_1a");
+                            saveDataToClient(self, "trader_1a", trader_1aDataReadyForExport, FILEEXTENSION);
+                            toolMainMenu(self);
+                            break;
                         case TRADER_STRUCTURES:
-                        String trader_1bDataReadyForExport = prepareDataForExport(self, "trader_1b");
-                        saveDataToClient(self, "trader_1b", trader_1bDataReadyForExport, FILEEXTENSION);
-                        toolMainMenu(self);
-                        break;
+                            String trader_1bDataReadyForExport = prepareDataForExport(self, "trader_1b");
+                            saveDataToClient(self, "trader_1b", trader_1bDataReadyForExport, FILEEXTENSION);
+                            toolMainMenu(self);
+                            break;
                         case TRADER_MUNITIONS:
-                        String trader_1cDataReadyForExport = prepareDataForExport(self, "trader_1c");
-                        saveDataToClient(self, "trader_1c", trader_1cDataReadyForExport, FILEEXTENSION);
-                        toolMainMenu(self);
-                        break;
+                            String trader_1cDataReadyForExport = prepareDataForExport(self, "trader_1c");
+                            saveDataToClient(self, "trader_1c", trader_1cDataReadyForExport, FILEEXTENSION);
+                            toolMainMenu(self);
+                            break;
                         case TRADER_ENGINEERING:
-                        String trader_1dDataReadyForExport = prepareDataForExport(self, "trader_1d");
-                        saveDataToClient(self, "trader_1d", trader_1dDataReadyForExport, FILEEXTENSION);
-                        toolMainMenu(self);
-                        break;
+                            String trader_1dDataReadyForExport = prepareDataForExport(self, "trader_1d");
+                            saveDataToClient(self, "trader_1d", trader_1dDataReadyForExport, FILEEXTENSION);
+                            toolMainMenu(self);
+                            break;
                         default:
-                        removePlayer(self, "");
-                        return SCRIPT_CONTINUE;
+                            removePlayer(self, "");
+                            return SCRIPT_CONTINUE;
                     }
                 }
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleAbilitySelection(obj_id self, dictionary params) throws InterruptedException
     {
         if (isGod(self))
@@ -335,7 +348,7 @@ public class qaprofession extends script.base_script
                     toolMainMenu(self);
                     return SCRIPT_CONTINUE;
                 }
-                String previousMainMenuArray[] = utils.getStringArrayScriptVar(self, SCRIPTVAR + ".abilitySelected");
+                String[] previousMainMenuArray = utils.getStringArrayScriptVar(self, SCRIPTVAR + ".abilitySelected");
                 String professionStringSelection = previousMainMenuArray[idx];
                 if (!professionStringSelection.equals(""))
                 {
@@ -379,7 +392,7 @@ public class qaprofession extends script.base_script
                                                     {
                                                         skillXPCodeData = getSkillXPCodeData(self, skillRow, skillLevel);
                                                     }
-                                                    else 
+                                                    else
                                                     {
                                                         skillXPCodeData = getSkillXPCodeData(self, skillRow);
                                                     }
@@ -394,47 +407,47 @@ public class qaprofession extends script.base_script
                                                         utils.setScriptVar(self, SCRIPTVAR + ".fileTitle", fileTitle);
                                                         qa.refreshMenu(self, suiPrompt, PROFESSION_DETAILS_TITLE, PROFESSION_DETAILS_MENU, "handleProfessionDetails", SCRIPTVAR + ".pid", SCRIPTVAR + ".theDataOptions", sui.OK_CANCEL_REFRESH);
                                                     }
-                                                    else 
+                                                    else
                                                     {
                                                         removePlayer(self, "Prompt text error. Exiting.");
                                                     }
                                                 }
-                                                else 
+                                                else
                                                 {
                                                     removePlayer(self, "Skill ability strings were not received. Exiting.");
                                                 }
                                             }
-                                            else 
+                                            else
                                             {
                                                 removePlayer(self, "There were no skill abilities codes received and this caused the application to malfunction. Exiting.");
                                             }
                                         }
-                                        else 
+                                        else
                                         {
                                             removePlayer(self, "Skill row data not attained. Exiting.");
                                         }
                                     }
-                                    else 
+                                    else
                                     {
                                         removePlayer(self, "A Profession Skill could not be found. Exiting.");
                                     }
                                 }
-                                else 
+                                else
                                 {
                                     removePlayer(self, "A Profession Skill could not be found. Exiting.");
                                 }
                             }
-                            else 
+                            else
                             {
                                 removePlayer(self, "A Profession Localized String could not be found. Exiting.");
                             }
                         }
-                        else 
+                        else
                         {
                             removePlayer(self, "A Profession Code String could not be found. Exiting.");
                         }
                     }
-                    else 
+                    else
                     {
                         removePlayer(self, "A Profession Ability could not be found.  Inform the tool team. Exiting.");
                     }
@@ -443,6 +456,7 @@ public class qaprofession extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleProfessionOptions(obj_id self, dictionary params) throws InterruptedException
     {
         if (isGod(self))
@@ -463,7 +477,7 @@ public class qaprofession extends script.base_script
                     toolMainMenu(self);
                     return SCRIPT_CONTINUE;
                 }
-                String previousMainMenuArray[] = utils.getStringArrayScriptVar(self, SCRIPTVAR + ".professionMenu");
+                String[] previousMainMenuArray = utils.getStringArrayScriptVar(self, SCRIPTVAR + ".professionMenu");
                 String professionStringSelection = previousMainMenuArray[idx];
                 if (!professionStringSelection.equals(""))
                 {
@@ -475,7 +489,7 @@ public class qaprofession extends script.base_script
                     {
                         qa.refreshMenu(self, PROFESSION_TRADER_SELECT, PROFESSION_TOOL_TITLE, TRADER_TOOL_MENU, "handleTraderSelection", SCRIPTVAR + ".pid", SCRIPTVAR + ".traderCode", sui.OK_CANCEL_REFRESH);
                     }
-                    else 
+                    else
                     {
                         String[] theProfessionSkillMenu = buildProfessionSkillMenu(self, professionCodeSelection);
                         Vector professionCombatLevelMenuResized = new Vector();
@@ -488,13 +502,13 @@ public class qaprofession extends script.base_script
                                 {
                                     utils.addElement(professionCombatLevelMenuResized, theProfessionSkillMenu[i] + " - Level " + HARD_CODED_LEVELS[i]);
                                 }
-                                else 
+                                else
                                 {
                                     utils.addElement(professionCombatLevelMenuResized, theProfessionSkillMenu[i] + " - Combat Level " + HARD_CODED_LEVELS[i]);
                                 }
                             }
                         }
-                        else 
+                        else
                         {
                             for (int i = 0; i < HARD_CODED_LEVELS.length; i++)
                             {
@@ -511,6 +525,7 @@ public class qaprofession extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleProfessionSkillNameList(obj_id self, dictionary params) throws InterruptedException
     {
         if (isGod(self))
@@ -531,14 +546,14 @@ public class qaprofession extends script.base_script
                     toolMainMenu(self);
                     return SCRIPT_CONTINUE;
                 }
-                String previousMainMenuArray[] = utils.getStringArrayScriptVar(self, SCRIPTVAR + ".theProfessionSkillStrings");
+                String[] previousMainMenuArray = utils.getStringArrayScriptVar(self, SCRIPTVAR + ".theProfessionSkillStrings");
                 String skillSelectionString = previousMainMenuArray[idx];
                 if (previousMainMenuArray.length < 0)
                 {
                     removePlayer(self, "There was an error in the tool.  Exiting.");
                     return SCRIPT_CONTINUE;
                 }
-                else 
+                else
                 {
                     String[] professionSkillCodeStrings = utils.getStringArrayScriptVar(self, SCRIPTVAR + ".professionSkillCodes");
                     if (!professionSkillCodeStrings[0].equals(""))
@@ -549,7 +564,7 @@ public class qaprofession extends script.base_script
                         {
                             skillLevel = HARD_CODED_LEVELS[idx];
                         }
-                        else 
+                        else
                         {
                             broadcast(self, "professionSkillCodeStrings not same lenght as HARD_CODED_LEVELS");
                         }
@@ -569,7 +584,7 @@ public class qaprofession extends script.base_script
                                     {
                                         skillXPCodeData = getSkillXPCodeData(self, skillRow, skillLevel);
                                     }
-                                    else 
+                                    else
                                     {
                                         skillXPCodeData = getSkillXPCodeData(self, skillRow);
                                     }
@@ -583,22 +598,22 @@ public class qaprofession extends script.base_script
                                     suiPrompt = suiPrompt + "\r\n\r\n\r\n* Unlocalized Data will not export correctly";
                                     qa.refreshMenu(self, suiPrompt, PROFESSION_DETAILS_TITLE, PROFESSION_DETAILS_MENU, "handleProfessionDetails", SCRIPTVAR + ".pid", SCRIPTVAR + ".theDataOptions", sui.OK_CANCEL_REFRESH);
                                 }
-                                else 
+                                else
                                 {
                                     removePlayer(self, "A Profession ability string could not be attained Inform the tool team. Exiting.");
                                 }
                             }
-                            else 
+                            else
                             {
                                 removePlayer(self, "A Profession ability code string could not be attained Inform the tool team. Exiting.");
                             }
                         }
-                        else 
+                        else
                         {
                             removePlayer(self, "A Profession skill code string could not be attained Inform the tool team. Exiting.");
                         }
                     }
-                    else 
+                    else
                     {
                         removePlayer(self, "A Profession skill code string could not be attained Inform the tool team. Exiting.");
                     }
@@ -607,6 +622,7 @@ public class qaprofession extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleProfessionDetails(obj_id self, dictionary params) throws InterruptedException
     {
         if (isGod(self))
@@ -627,50 +643,52 @@ public class qaprofession extends script.base_script
                     toolMainMenu(self);
                     return SCRIPT_CONTINUE;
                 }
-                String previousMainMenuArray[] = utils.getStringArrayScriptVar(self, SCRIPTVAR + ".theDataOptions");
+                String[] previousMainMenuArray = utils.getStringArrayScriptVar(self, SCRIPTVAR + ".theDataOptions");
                 String previousSelection = previousMainMenuArray[idx];
                 if (previousMainMenuArray.length < 0)
                 {
                     removePlayer(self, "There was an error in the tool.  Exiting.");
                     return SCRIPT_CONTINUE;
                 }
-                else 
+                else
                 {
                     String fileTitle = utils.getStringScriptVar(self, SCRIPTVAR + ".fileTitle");
                     String suiPrompt = utils.getStringScriptVar(self, SCRIPTVAR + ".suiPrompt");
                     switch (idx)
                     {
                         case MASTER_PROFESSION:
-                        String professionCodeSelection = utils.getStringScriptVar(self, SCRIPTVAR + ".professionCodeSelection");
-                        String[] professionSkillCodes = utils.getStringArrayScriptVar(self, SCRIPTVAR + ".professionSkillCodes");
-                        String[] professionTemplateNames = utils.getStringArrayScriptVar(self, SCRIPTVAR + ".professionTemplateNames");
-                        int arrayLength = professionSkillCodes.length;
-                        String templateName = getTemplateCodeString(self, professionCodeSelection, professionSkillCodes, professionTemplateNames);
-                        if (!templateName.equals(""))
-                        {
-                            qa.revokeAllSkills(self);
-                            setSkillTemplate(self, templateName);
-                            for (String professionSkillCode : professionSkillCodes) {
-                                skill.grantSkillToPlayer(self, professionSkillCode);
+                            String professionCodeSelection = utils.getStringScriptVar(self, SCRIPTVAR + ".professionCodeSelection");
+                            String[] professionSkillCodes = utils.getStringArrayScriptVar(self, SCRIPTVAR + ".professionSkillCodes");
+                            String[] professionTemplateNames = utils.getStringArrayScriptVar(self, SCRIPTVAR + ".professionTemplateNames");
+                            int arrayLength = professionSkillCodes.length;
+                            String templateName = getTemplateCodeString(self, professionCodeSelection, professionSkillCodes, professionTemplateNames);
+                            if (!templateName.equals(""))
+                            {
+                                qa.revokeAllSkills(self);
+                                setSkillTemplate(self, templateName);
+                                for (String professionSkillCode : professionSkillCodes)
+                                {
+                                    skill.grantSkillToPlayer(self, professionSkillCode);
+                                }
+                                setWorkingSkill(self, professionSkillCodes[arrayLength - 1]);
+                                CustomerServiceLog("qaTool", "User: (" + self + ") " + getName(self) + " has attained a Master Profession (" + templateName + ") using the QA Profession Tool.");
                             }
-                            setWorkingSkill(self, professionSkillCodes[arrayLength - 1]);
-                            CustomerServiceLog("qaTool", "User: (" + self + ") " + getName(self) + " has attained a Master Profession (" + templateName + ") using the QA Profession Tool.");
-                        }
-                        qa.refreshMenu(self, suiPrompt, PROFESSION_DETAILS_TITLE, PROFESSION_DETAILS_MENU, "handleProfessionDetails", SCRIPTVAR + ".pid", SCRIPTVAR + ".theDataOptions", sui.OK_CANCEL_REFRESH);
-                        break;
+                            qa.refreshMenu(self, suiPrompt, PROFESSION_DETAILS_TITLE, PROFESSION_DETAILS_MENU, "handleProfessionDetails", SCRIPTVAR + ".pid", SCRIPTVAR + ".theDataOptions", sui.OK_CANCEL_REFRESH);
+                            break;
                         case EXPORT_DATA:
-                        saveDataToClient(self, fileTitle, suiPrompt, FILEEXTENSION);
-                        qa.refreshMenu(self, suiPrompt, PROFESSION_DETAILS_TITLE, PROFESSION_DETAILS_MENU, "handleProfessionDetails", SCRIPTVAR + ".pid", SCRIPTVAR + ".theDataOptions", sui.OK_CANCEL_REFRESH);
-                        break;
+                            saveDataToClient(self, fileTitle, suiPrompt, FILEEXTENSION);
+                            qa.refreshMenu(self, suiPrompt, PROFESSION_DETAILS_TITLE, PROFESSION_DETAILS_MENU, "handleProfessionDetails", SCRIPTVAR + ".pid", SCRIPTVAR + ".theDataOptions", sui.OK_CANCEL_REFRESH);
+                            break;
                         default:
-                        removePlayer(self, "Default Option on Switch");
-                        return SCRIPT_CONTINUE;
+                            removePlayer(self, "Default Option on Switch");
+                            return SCRIPT_CONTINUE;
                     }
                 }
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleTraderSelection(obj_id self, dictionary params) throws InterruptedException
     {
         if (isGod(self))
@@ -691,56 +709,59 @@ public class qaprofession extends script.base_script
                     toolMainMenu(self);
                     return SCRIPT_CONTINUE;
                 }
-                String previousMainMenuArray[] = utils.getStringArrayScriptVar(self, SCRIPTVAR + ".traderCode");
+                String[] previousMainMenuArray = utils.getStringArrayScriptVar(self, SCRIPTVAR + ".traderCode");
                 String previousSelection = previousMainMenuArray[idx];
                 if (previousMainMenuArray.length < 0)
                 {
                     removePlayer(self, "There was an error in the tool.  Exiting.");
                     return SCRIPT_CONTINUE;
                 }
-                else 
+                else
                 {
                     switch (idx)
                     {
                         case TRADER_DOMESTICS:
-                        utils.setScriptVar(self, SCRIPTVAR + ".traderTemplate", "trader_1a");
-                        String[] traderMenu_1a = buildProfessionSkillMenu(self, "trader_1a");
-                        qa.refreshMenu(self, PROFESSION_TOOL_PROMPT, PROFESSION_TOOL_TITLE, traderMenu_1a, "handleProfessionSkillNameList", SCRIPTVAR + ".pid", SCRIPTVAR + ".theProfessionSkillStrings", sui.OK_CANCEL_REFRESH);
-                        break;
+                            utils.setScriptVar(self, SCRIPTVAR + ".traderTemplate", "trader_1a");
+                            String[] traderMenu_1a = buildProfessionSkillMenu(self, "trader_1a");
+                            qa.refreshMenu(self, PROFESSION_TOOL_PROMPT, PROFESSION_TOOL_TITLE, traderMenu_1a, "handleProfessionSkillNameList", SCRIPTVAR + ".pid", SCRIPTVAR + ".theProfessionSkillStrings", sui.OK_CANCEL_REFRESH);
+                            break;
                         case TRADER_STRUCTURES:
-                        utils.setScriptVar(self, SCRIPTVAR + ".traderTemplate", "trader_1b");
-                        String[] traderMenu_1b = buildProfessionSkillMenu(self, "trader_1b");
-                        qa.refreshMenu(self, PROFESSION_TOOL_PROMPT, PROFESSION_TOOL_TITLE, traderMenu_1b, "handleProfessionSkillNameList", SCRIPTVAR + ".pid", SCRIPTVAR + ".theProfessionSkillStrings", sui.OK_CANCEL_REFRESH);
-                        break;
+                            utils.setScriptVar(self, SCRIPTVAR + ".traderTemplate", "trader_1b");
+                            String[] traderMenu_1b = buildProfessionSkillMenu(self, "trader_1b");
+                            qa.refreshMenu(self, PROFESSION_TOOL_PROMPT, PROFESSION_TOOL_TITLE, traderMenu_1b, "handleProfessionSkillNameList", SCRIPTVAR + ".pid", SCRIPTVAR + ".theProfessionSkillStrings", sui.OK_CANCEL_REFRESH);
+                            break;
                         case TRADER_MUNITIONS:
-                        utils.setScriptVar(self, SCRIPTVAR + ".traderTemplate", "trader_1c");
-                        String[] traderMenu_1c = buildProfessionSkillMenu(self, "trader_1c");
-                        qa.refreshMenu(self, PROFESSION_TOOL_PROMPT, PROFESSION_TOOL_TITLE, traderMenu_1c, "handleProfessionSkillNameList", SCRIPTVAR + ".pid", SCRIPTVAR + ".theProfessionSkillStrings", sui.OK_CANCEL_REFRESH);
-                        break;
+                            utils.setScriptVar(self, SCRIPTVAR + ".traderTemplate", "trader_1c");
+                            String[] traderMenu_1c = buildProfessionSkillMenu(self, "trader_1c");
+                            qa.refreshMenu(self, PROFESSION_TOOL_PROMPT, PROFESSION_TOOL_TITLE, traderMenu_1c, "handleProfessionSkillNameList", SCRIPTVAR + ".pid", SCRIPTVAR + ".theProfessionSkillStrings", sui.OK_CANCEL_REFRESH);
+                            break;
                         case TRADER_ENGINEERING:
-                        utils.setScriptVar(self, SCRIPTVAR + ".traderTemplate", "trader_1d");
-                        String[] traderMenu_1d = buildProfessionSkillMenu(self, "trader_1d");
-                        qa.refreshMenu(self, PROFESSION_TOOL_PROMPT, PROFESSION_TOOL_TITLE, traderMenu_1d, "handleProfessionSkillNameList", SCRIPTVAR + ".pid", SCRIPTVAR + ".theProfessionSkillStrings", sui.OK_CANCEL_REFRESH);
-                        break;
+                            utils.setScriptVar(self, SCRIPTVAR + ".traderTemplate", "trader_1d");
+                            String[] traderMenu_1d = buildProfessionSkillMenu(self, "trader_1d");
+                            qa.refreshMenu(self, PROFESSION_TOOL_PROMPT, PROFESSION_TOOL_TITLE, traderMenu_1d, "handleProfessionSkillNameList", SCRIPTVAR + ".pid", SCRIPTVAR + ".theProfessionSkillStrings", sui.OK_CANCEL_REFRESH);
+                            break;
                         default:
-                        removePlayer(self, "");
-                        return SCRIPT_CONTINUE;
+                            removePlayer(self, "");
+                            return SCRIPT_CONTINUE;
                     }
                 }
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public void toolMainMenu(obj_id self) throws InterruptedException
     {
         qa.refreshMenu(self, PROFESSION_TOOL_PROMPT, PROFESSION_TOOL_TITLE, PROFESSION_TOOL_MENU, "handleMainMenuOptions", SCRIPTVAR + ".pid", SCRIPTVAR + ".mainMenu", sui.OK_CANCEL_REFRESH);
     }
+
     public void removePlayer(obj_id self, String err) throws InterruptedException
     {
         broadcast(self, err);
         qa.removeScriptVars(self, SCRIPTVAR);
         utils.removeScriptVarTree(self, SCRIPTVAR);
     }
+
     public String[] buildProfessionSkillMenu(obj_id self, String professionCodeSelection) throws InterruptedException
     {
         String[] professionSkillCodes = getProfessionSkillCodes(self, professionCodeSelection);
@@ -748,6 +769,7 @@ public class qaprofession extends script.base_script
         String[] professionSkillMenu = getProfessionSkillMenu(self, professionSkillCodes);
         return professionSkillMenu;
     }
+
     public String[] getProfessionSkillCodes(obj_id self, String strTemplate) throws InterruptedException
     {
         if (!strTemplate.startsWith("trader"))
@@ -756,35 +778,36 @@ public class qaprofession extends script.base_script
             dictionary dictionaryRow = dataTableGetRow(SKILL_TEMPLATE, rowNum);
             if (dictionaryRow != null)
             {
-                String arrayOfSkills[] = split(dictionaryRow.getString("template"), ',');
+                String[] arrayOfSkills = split(dictionaryRow.getString("template"), ',');
                 return arrayOfSkills;
             }
-            else 
+            else
             {
                 removePlayer(self, "The Program failed to return Profession Code String data.  Inform the tool team.");
                 return null;
             }
         }
-        else 
+        else
         {
             int rowNum = dataTableSearchColumnForString(strTemplate, "templateName", SKILL_TEMPLATE);
             dictionary dictionaryRow = dataTableGetRow(SKILL_TEMPLATE, rowNum);
             if (dictionaryRow != null)
             {
-                String arrayOfSkills[] = split(dictionaryRow.getString("template"), ',');
+                String[] arrayOfSkills = split(dictionaryRow.getString("template"), ',');
                 return arrayOfSkills;
             }
-            else 
+            else
             {
                 removePlayer(self, "The Program failed to return Profession Code String data.  Inform the tool team.");
                 return null;
             }
         }
     }
+
     public String[] getProfessionSkillMenu(obj_id self, String[] arrayOfSkills) throws InterruptedException
     {
         int arrayLength = arrayOfSkills.length;
-        String arrayOfSkillNames[] = new String[arrayLength];
+        String[] arrayOfSkillNames = new String[arrayLength];
         if (arrayLength > 0)
         {
             for (int i = 0; i < arrayLength; i++)
@@ -793,16 +816,17 @@ public class qaprofession extends script.base_script
             }
             return arrayOfSkillNames;
         }
-        else 
+        else
         {
             removePlayer(self, "The Program failed to return Profession Skill String data.  Inform the tool team.");
             return null;
         }
     }
+
     public String[] getProfessionMenuStrings(obj_id self, String[] professionCodes) throws InterruptedException
     {
         int arrayLength = professionCodes.length;
-        String arrayOfProfessionNames[] = new String[arrayLength];
+        String[] arrayOfProfessionNames = new String[arrayLength];
         if (arrayLength > 0)
         {
             for (int i = 0; i < arrayLength; i++)
@@ -812,16 +836,17 @@ public class qaprofession extends script.base_script
             }
             return arrayOfProfessionNames;
         }
-        else 
+        else
         {
             removePlayer(self, "The Program failed to return Profession Menu String data.  Inform the tool team.");
             return null;
         }
     }
+
     public String[] getAbilityStrings(obj_id self, String[] abilityCodes) throws InterruptedException
     {
         int arrayLength = abilityCodes.length;
-        String arrayOfAbilityNames[] = new String[arrayLength];
+        String[] arrayOfAbilityNames = new String[arrayLength];
         if (arrayLength > 0)
         {
             for (int i = 0; i < arrayLength; i++)
@@ -834,19 +859,20 @@ public class qaprofession extends script.base_script
                 {
                     arrayOfAbilityNames[i] = NONE_STRING;
                 }
-                else 
+                else
                 {
                     arrayOfAbilityNames[i] = abilityCodes[i];
                 }
             }
             return arrayOfAbilityNames;
         }
-        else 
+        else
         {
             removePlayer(self, "The Program failed to return Ability String data.  Inform the tool team.");
             return null;
         }
     }
+
     public String getSkillXPCodeData(obj_id self, dictionary skillRow) throws InterruptedException
     {
         String xpType = skillRow.getString("XP_TYPE");
@@ -854,12 +880,13 @@ public class qaprofession extends script.base_script
         {
             return "XP Type:\t" + xpType;
         }
-        else 
+        else
         {
             removePlayer(self, "The Program failed to return Skill XP Data.  Inform the tool team.");
             return null;
         }
     }
+
     public String getSkillXPCodeData(obj_id self, dictionary skillRow, int skillLevel) throws InterruptedException
     {
         int experienceRow = dataTableSearchColumnForInt(skillLevel, "level", PLAYER_XP_LEVEL_TABLE);
@@ -869,12 +896,13 @@ public class qaprofession extends script.base_script
         {
             return "Level:\t" + skillLevel + "\r\n\t\tXP Required:\t" + experienceAmount + "\r\n\t\tXP Type:\t" + xpType;
         }
-        else 
+        else
         {
             removePlayer(self, "The Program failed to return Skill XP Data.  Inform the tool team.");
             return null;
         }
     }
+
     public String[] getSkillMods(obj_id self, dictionary skillRow) throws InterruptedException
     {
         String skillModString = skillRow.getString("SKILL_MODS");
@@ -885,32 +913,34 @@ public class qaprofession extends script.base_script
             {
                 return skillMods;
             }
-            else 
+            else
             {
                 removePlayer(self, "The Program failed to return Skill Mod data.  Inform the tool team.");
                 return null;
             }
         }
-        else 
+        else
         {
             String[] noneArray = new String[1];
             noneArray[0] = NONE_STRING;
             return noneArray;
         }
     }
+
     public String createAPrompt(obj_id self, boolean clientLocalized, String professionStringSelection, String professionCodeSelection, String skillSelectionString, String skillSelectionCode, String skillXPCodeData, String[] skillMods, String roadMapString, String roadMapSpawnStrings, String[] abilityString, String[] abilityCodes) throws InterruptedException
     {
         String prompt = "";
-        if (clientLocalized == true)
+        if (clientLocalized)
         {
             prompt = "@ui:button_bar_skills - " + professionStringSelection;
         }
-        else 
+        else
         {
             prompt = professionStringSelection;
         }
         prompt = prompt + "\t ( " + professionCodeSelection + " )\r\n\t" + skillSelectionString + " \t ( " + skillSelectionCode + " )\r\n\t\t" + skillXPCodeData;
-        for (String skillMod : skillMods) {
+        for (String skillMod : skillMods)
+        {
             prompt = prompt + "\r\n\t\tSkill Mod:\t" + skillMod;
         }
         prompt = prompt + "\r\n\r\n\t\tRoad Map Item:\t\t" + roadMapString;
@@ -933,17 +963,18 @@ public class qaprofession extends script.base_script
                     }
                 }
             }
-            else 
+            else
             {
                 removePlayer(self, "The Program failed to detail the Skill Ability Data.  Inform the tool team.");
             }
         }
-        else 
+        else
         {
             prompt = prompt + "\r\n\r\n\t\tAbilites Awarded:\r\n\t\t\t" + abilityString[0] + "\t\tSlash Command: " + abilityCodes[0];
         }
         return prompt;
     }
+
     public String getRoadMapString(obj_id self, String skillSelection) throws InterruptedException
     {
         String stringId = "";
@@ -960,26 +991,27 @@ public class qaprofession extends script.base_script
                     {
                         int obj_nStringIndex = stringId.indexOf(":");
                         String obj_nSubStringString = stringId.substring(obj_nStringIndex + 1);
-                        stringId = "" + localize(new string_id("obj_n", obj_nSubStringString));
+                        stringId = localize(new string_id("obj_n", obj_nSubStringString));
                     }
                     if (stringId.startsWith("@ui_roadmap"))
                     {
                         stringId = " " + stringId + " <-- UNLOCALIZED DATA";
                     }
                 }
-                else 
+                else
                 {
                     stringId = NONE_STRING;
                     return stringId;
                 }
             }
         }
-        else 
+        else
         {
             stringId = skillSelection + " ( *No Roadmap Name Found* )";
         }
         return stringId;
     }
+
     public String getRoadMapSpawnStrings(obj_id self, String skillSelection) throws InterruptedException
     {
         String roadmapData = "";
@@ -994,36 +1026,38 @@ public class qaprofession extends script.base_script
                 {
                     if (itemDefault.contains(","))
                     {
-                        String arrayOfCodes[] = split(dictionaryRow.getString("itemDefault"), ',');
-                        for (String arrayOfCode : arrayOfCodes) {
+                        String[] arrayOfCodes = split(dictionaryRow.getString("itemDefault"), ',');
+                        for (String arrayOfCode : arrayOfCodes)
+                        {
                             roadmapData = roadmapData + "\r\n\t\tSpawn String:\t\t" + arrayOfCode;
                         }
                         return roadmapData;
                     }
-                    else 
+                    else
                     {
                         roadmapData = "\r\n\t\tSpawn String:\t\t" + itemDefault;
                         return roadmapData;
                     }
                 }
-                else 
+                else
                 {
                     roadmapData = "\r\n\t\tSpawn String:\t\t" + NONE_STRING;
                     return roadmapData;
                 }
             }
-            else 
+            else
             {
                 removePlayer(self, "The Program failed to return the Roadmap Item Row.  Inform the tool team.");
                 return null;
             }
         }
-        else 
+        else
         {
             roadmapData = "\r\n\t\tSpawn String:\t\t" + NONE_STRING;
             return roadmapData;
         }
     }
+
     public String getAbilityData(obj_id self, String abilityCode) throws InterruptedException
     {
         String abilityData = "";
@@ -1041,17 +1075,18 @@ public class qaprofession extends script.base_script
             {
                 abilityData = "\r\n\t\t\t\tWarm Up Time:\t\t" + warmupTime + "\r\n\t\t\t\tExecute Time:\t\t" + executeTime + "\r\n\t\t\t\tCool Down Time:\t\t" + cooldownTime + "\r\n\t\t\t\tCool Down Group:\t" + cooldownGroup + "\r\n\t\t\t\tSecond Cool Down Group:\t" + cooldownGroup2 + "\r\n\t\t\t\tSecond Cool Down Time:\t" + cooldownTime2;
             }
-            else 
+            else
             {
                 abilityData = "\r\n\t\t\t\tWarm Up Time:\t\t" + warmupTime + "\r\n\t\t\t\tExecute Time:\t\t" + executeTime + "\r\n\t\t\t\tCool Down Time:\t\t" + cooldownTime + "\r\n\t\t\t\tCool Down Group:\t" + cooldownGroup;
             }
         }
-        else 
+        else
         {
             abilityData = "\r\n\t\t\t\tAbility Data:\t\t *This ability is not in the command table*";
         }
         return abilityData;
     }
+
     public void saveDataToClient(obj_id self, String fileTitle, String stringData, String fileExtension) throws InterruptedException
     {
         int parseUnlocalized = stringData.indexOf("@ui:button_bar_skills -");
@@ -1062,6 +1097,7 @@ public class qaprofession extends script.base_script
         }
         saveTextOnClient(self, fileTitle + "." + fileExtension, stringData);
     }
+
     public String[] getAllAbilityCodeStrings(obj_id self, String[] professionMenuCodeStrings) throws InterruptedException
     {
         int professionMenuLength = professionMenuCodeStrings.length;
@@ -1070,15 +1106,15 @@ public class qaprofession extends script.base_script
             Vector allSkills = new Vector();
             Vector allAbilities = new Vector();
             Vector filteredAbilities = new Vector();
-            for (String professionMenuCodeString : professionMenuCodeStrings) {
+            for (String professionMenuCodeString : professionMenuCodeStrings)
+            {
                 int rowNum = dataTableSearchColumnForString(professionMenuCodeString, "startingTemplateName", SKILL_TEMPLATE);
                 dictionary dictionaryRow = dataTableGetRow(SKILL_TEMPLATE, rowNum);
-                if (dictionaryRow != null) {
-                    String arrayOfSkills[] = split(dictionaryRow.getString("template"), ',');
+                if (dictionaryRow != null)
+                {
+                    String[] arrayOfSkills = split(dictionaryRow.getString("template"), ',');
                     int arrayLength = arrayOfSkills.length;
-                    for (String arrayOfSkill : arrayOfSkills) {
-                        allSkills.add(arrayOfSkill);
-                    }
+                    Collections.addAll(allSkills, arrayOfSkills);
                 }
             }
             int skillListSize = allSkills.size();
@@ -1089,8 +1125,10 @@ public class qaprofession extends script.base_script
                 dictionary eachSkillRow = getEntireSkillRow(self, allSkillCodeStrings[y]);
                 String[] arrayOfAbilities = getAbilityCodes(self, eachSkillRow);
                 int abilityArrayLength = arrayOfAbilities.length;
-                for (String arrayOfAbility : arrayOfAbilities) {
-                    if (!arrayOfAbility.equals("None")) {
+                for (String arrayOfAbility : arrayOfAbilities)
+                {
+                    if (!arrayOfAbility.equals("None"))
+                    {
                         allAbilities.add(arrayOfAbility);
                     }
                 }
@@ -1110,12 +1148,13 @@ public class qaprofession extends script.base_script
             filteredAbilities.toArray(allCodeStrings);
             return allCodeStrings;
         }
-        else 
+        else
         {
             removePlayer(self, "The Program failed to return a list of Abilites.  Inform the tool team.");
             return null;
         }
     }
+
     public dictionary getEntireSkillRow(obj_id self, String skillSelection) throws InterruptedException
     {
         int rowNum = dataTableSearchColumnForString(skillSelection, "NAME", SKILL_TABLE);
@@ -1124,15 +1163,16 @@ public class qaprofession extends script.base_script
         {
             return dictionaryRow;
         }
-        else 
+        else
         {
             removePlayer(self, "The Program failed to return the Data Source Row.  Inform the tool team.");
             return null;
         }
     }
+
     public String[] getAbilityCodes(obj_id self, dictionary skillRow) throws InterruptedException
     {
-        String arrayOfAbilities[] = split(skillRow.getString("COMMANDS"), ',');
+        String[] arrayOfAbilities = split(skillRow.getString("COMMANDS"), ',');
         int abilityArrayLength = arrayOfAbilities.length;
         String firstVar = arrayOfAbilities[0];
         if (abilityArrayLength > 0)
@@ -1141,19 +1181,20 @@ public class qaprofession extends script.base_script
             {
                 return arrayOfAbilities;
             }
-            else 
+            else
             {
                 String[] tempArray = new String[1];
                 tempArray[0] = NONE_STRING;
                 return tempArray;
             }
         }
-        else 
+        else
         {
             removePlayer(self, "The Program failed to return Ability Code String data.  Inform the tool team.");
             return null;
         }
     }
+
     public String[] combineAndSortAbilities(obj_id self, String[] allAbilityStrings, String[] allAbilityCodeStrings) throws InterruptedException
     {
         int stringListLength = allAbilityStrings.length;
@@ -1168,12 +1209,13 @@ public class qaprofession extends script.base_script
             Arrays.sort(combinedArray);
             return combinedArray;
         }
-        else 
+        else
         {
             removePlayer(self, "The Program failed to return the sorted and combined ability data.  Inform the tool team.");
             return null;
         }
     }
+
     public String getSkillWithAbility(obj_id self, String abilitySelection) throws InterruptedException
     {
         int firstChar = abilitySelection.indexOf("( ");
@@ -1186,10 +1228,12 @@ public class qaprofession extends script.base_script
             int commandColLength = entireCommandCol.length;
             for (int i = 0; i < commandColLength; i++)
             {
-                String arrayOfCommands[] = split(entireCommandCol[i], ',');
+                String[] arrayOfCommands = split(entireCommandCol[i], ',');
                 int commandArrayLength = arrayOfCommands.length;
-                for (String arrayOfCommand : arrayOfCommands) {
-                    if (arrayOfCommand.equals(abilityCode)) {
+                for (String arrayOfCommand : arrayOfCommands)
+                {
+                    if (arrayOfCommand.equals(abilityCode))
+                    {
                         rowNum = i;
                         break;
                     }
@@ -1208,6 +1252,7 @@ public class qaprofession extends script.base_script
         removePlayer(self, "The Program failed to receive a valid string from another part of the application.  Inform the tool team.");
         return null;
     }
+
     public String getProfessionWithSkill(obj_id self, String skillCode) throws InterruptedException
     {
         if (!skillCode.equals(""))
@@ -1217,10 +1262,12 @@ public class qaprofession extends script.base_script
             int skillColLength = entireSkillCol.length;
             for (int i = 0; i < skillColLength; i++)
             {
-                String arrayOfSkills[] = split(entireSkillCol[i], ',');
+                String[] arrayOfSkills = split(entireSkillCol[i], ',');
                 int skillArrayLength = arrayOfSkills.length;
-                for (String arrayOfSkill : arrayOfSkills) {
-                    if (arrayOfSkill.equals(skillCode)) {
+                for (String arrayOfSkill : arrayOfSkills)
+                {
+                    if (arrayOfSkill.equals(skillCode))
+                    {
                         rowNum = i;
                         break;
                     }
@@ -1244,6 +1291,7 @@ public class qaprofession extends script.base_script
         removePlayer(self, "The Program failed to receive a valid string from another part of the application.  Inform the tool team.");
         return null;
     }
+
     public String[] getProfessionTemplateNames(obj_id self, String[] professionMenuCodeStrings) throws InterruptedException
     {
         int professionMenuLength = professionMenuCodeStrings.length;
@@ -1251,7 +1299,8 @@ public class qaprofession extends script.base_script
         {
             Vector allTemplates = new Vector();
             String professionTemplateName = "";
-            for (String professionMenuCodeString : professionMenuCodeStrings) {
+            for (String professionMenuCodeString : professionMenuCodeStrings)
+            {
                 int rowNum = dataTableSearchColumnForString(professionMenuCodeString, "startingTemplateName", SKILL_TEMPLATE);
                 professionTemplateName = dataTableGetString(SKILL_TEMPLATE, rowNum, "templateName");
                 allTemplates.add(professionTemplateName);
@@ -1262,19 +1311,20 @@ public class qaprofession extends script.base_script
                 removePlayer(self, "The Program failed to receive an accurate list of profession template strings.  Inform the tool team.");
                 return null;
             }
-            else 
+            else
             {
                 String[] allProfessionTemplates = new String[vectorSize];
                 allTemplates.toArray(allProfessionTemplates);
                 return allProfessionTemplates;
             }
         }
-        else 
+        else
         {
             removePlayer(self, "The Program failed to receive a list of profession template strings.  Inform the tool team.");
             return null;
         }
     }
+
     public String getTemplateCodeString(obj_id self, String professionCodeSelection, String[] professionSkillCodes, String[] professionTemplateNames) throws InterruptedException
     {
         int arrayLength = professionSkillCodes.length;
@@ -1285,10 +1335,12 @@ public class qaprofession extends script.base_script
             String traderTemplate = utils.getStringScriptVar(self, SCRIPTVAR + ".traderTemplate");
             templateName = traderTemplate;
         }
-        else 
+        else
         {
-            for (String professionTemplateName : professionTemplateNames) {
-                if (professionTemplateName.startsWith(professionCodeSelection)) {
+            for (String professionTemplateName : professionTemplateNames)
+            {
+                if (professionTemplateName.startsWith(professionCodeSelection))
+                {
                     templateName = professionTemplateName;
                     break;
                 }
@@ -1296,6 +1348,7 @@ public class qaprofession extends script.base_script
         }
         return templateName;
     }
+
     public String buildPrompt(obj_id self, String skillSelectionCode, String skillSelectionString, int skillLevel) throws InterruptedException
     {
         if (!skillSelectionCode.equals(""))
@@ -1314,7 +1367,7 @@ public class qaprofession extends script.base_script
                     {
                         skillXPCodeData = getSkillXPCodeData(self, skillRow, skillLevel);
                     }
-                    else 
+                    else
                     {
                         skillXPCodeData = getSkillXPCodeData(self, skillRow);
                     }
@@ -1329,6 +1382,7 @@ public class qaprofession extends script.base_script
         }
         return "Error in buildPrompt funciton!";
     }
+
     public String prepareDataForExport(obj_id self, String professionCodeSelection) throws InterruptedException
     {
         String[] theProfessionSkillList = getProfessionSkillCodes(self, professionCodeSelection);
@@ -1344,7 +1398,7 @@ public class qaprofession extends script.base_script
                     fileData = fileData + buildPrompt(self, theProfessionSkillList[i], theProfessionSkillMenu[i], HARD_CODED_LEVELS[i]);
                 }
             }
-            else 
+            else
             {
                 for (int i = 0; i < skillLength; i++)
                 {
@@ -1353,7 +1407,7 @@ public class qaprofession extends script.base_script
             }
             return fileData;
         }
-        else 
+        else
         {
             removePlayer(self, "The export program failed to receive data correctly.");
         }

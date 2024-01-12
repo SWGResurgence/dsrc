@@ -1,5 +1,11 @@
 package script.poi.city;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.create;
 import script.location;
@@ -10,6 +16,7 @@ public class taike_tusken_spawner extends script.base_script
     public taike_tusken_spawner()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, "waiting"))
@@ -44,6 +51,7 @@ public class taike_tusken_spawner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public location getStartLocation() throws InterruptedException
     {
         location raid = new location(3802, 13, 2359, "tatooine", null);
@@ -51,17 +59,18 @@ public class taike_tusken_spawner extends script.base_script
         switch (raidSpot)
         {
             case 1:
-            raid = new location(3802, 13, 2359, "tatooine", null);
-            break;
+                raid = new location(3802, 13, 2359, "tatooine", null);
+                break;
             case 2:
-            raid = new location(0, 0, 0, "tatooine", null);
-            break;
+                raid = new location(0, 0, 0, "tatooine", null);
+                break;
             case 3:
-            raid = new location(0, 0, 0, "tatooine", null);
-            break;
+                raid = new location(0, 0, 0, "tatooine", null);
+                break;
         }
         return raid;
     }
+
     public int resetTuskens(obj_id self, dictionary params) throws InterruptedException
     {
         removeObjVar(self, "waiting");

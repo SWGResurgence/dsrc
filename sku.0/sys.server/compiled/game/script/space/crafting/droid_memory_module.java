@@ -1,5 +1,11 @@
 package script.space.crafting;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.space_combat;
 import script.library.space_pilot_command;
@@ -11,6 +17,7 @@ public class droid_memory_module extends script.base_script
     public droid_memory_module()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         string_id strSpam = getNameStringId(self);
@@ -24,18 +31,20 @@ public class droid_memory_module extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id objPlayer, menu_info menuInfo) throws InterruptedException
     {
         if (!hasObjVar(self, "strDroidCommand"))
         {
             menuInfo.addRootMenu(menu_info_types.MEMORY_CHIP_PROGRAM, new string_id("space/space_interaction", "memory_chip_program"));
         }
-        else 
+        else
         {
             menuInfo.addRootMenu(menu_info_types.MEMORY_CHIP_ANALYZE, new string_id("space/space_interaction", "memory_chip_analyze"));
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id objPlayer, int item) throws InterruptedException
     {
         obj_id objContainingPlayer = utils.getContainingPlayer(self);
@@ -75,9 +84,11 @@ public class droid_memory_module extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
-        if(!isIdValid(self) || !exists(self) || self == null || self == obj_id.NULL_ID){
+        if (!isIdValid(self) || !exists(self) || self == null || self == obj_id.NULL_ID)
+        {
             return SCRIPT_CONTINUE;
         }
         int idx = utils.getValidAttributeIndex(names);
@@ -105,6 +116,7 @@ public class droid_memory_module extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int programMemoryChip(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)

@@ -1,5 +1,11 @@
 package script.theme_park.recruitment;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.obj_id;
 
@@ -8,18 +14,21 @@ public class respawner extends script.base_script
     public respawner()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         stop(self);
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         stop(self);
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         obj_id master = getObjIdObjVar(self, "spawner");

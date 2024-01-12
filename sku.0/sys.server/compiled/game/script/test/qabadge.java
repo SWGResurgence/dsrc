@@ -1,5 +1,11 @@
 package script.test;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.badge;
 import script.library.qa;
@@ -14,6 +20,7 @@ public class qabadge extends script.base_script
     public qabadge()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (isGod(self))
@@ -30,6 +37,7 @@ public class qabadge extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnSpeaking(obj_id self, String text) throws InterruptedException
     {
         obj_id player = self;
@@ -41,10 +49,12 @@ public class qabadge extends script.base_script
                 vectorMenuArray.addElement("*Add All Badges*");
                 vectorMenuArray.addElement("*Remove All Badges*");
                 String[] badgePages = getAllCollectionPagesInBook("badge_book");
-                if ((badgePages != null) && (badgePages.length > 0))
+                if (badgePages != null)
                 {
-                    for (String badgePage : badgePages) {
-                        if (!badgePage.equals("bdg_accumulation")) {
+                    for (String badgePage : badgePages)
+                    {
+                        if (!badgePage.equals("bdg_accumulation"))
+                        {
                             vectorMenuArray.addElement(badgePage);
                         }
                     }
@@ -56,7 +66,7 @@ public class qabadge extends script.base_script
                 {
                     broadcast(player, "Badge UI creation failed.");
                 }
-                else 
+                else
                 {
                     utils.setScriptVar(player, "qabadge.mainMenu", mainMenuArray);
                     qa.refreshMenu(player, "Choose the Badge", "Badge Granter", mainMenuArray, "mainMenuOptions", true, "qabadge.pid");
@@ -66,13 +76,14 @@ public class qabadge extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mainMenuOptions(obj_id self, dictionary params) throws InterruptedException
     {
         if (isGod(self))
         {
             if (utils.hasScriptVar(self, "qabadge.pid"))
             {
-                String previousBadgeArray[] = utils.getStringArrayScriptVar(self, "qabadge.mainMenu");
+                String[] previousBadgeArray = utils.getStringArrayScriptVar(self, "qabadge.mainMenu");
                 obj_id player = sui.getPlayerId(params);
                 if ((params == null) || (params.isEmpty()))
                 {
@@ -101,7 +112,7 @@ public class qabadge extends script.base_script
                         qa.refreshMenu(player, "Choose the Badge", "Badge Granter", mainMenuArray, "mainMenuOptions", true, "qabadge.pid");
                         return SCRIPT_CONTINUE;
                     }
-                    else 
+                    else
                     {
                         qa.refreshMenu(self, mainPrompt, mainTitle, options, "toolMainMenu", true, "qatool.pid");
                         utils.removeScriptVarTree(player, "qabadge");
@@ -119,9 +130,10 @@ public class qabadge extends script.base_script
                 if (badgeChoice.equals("*Add All Badges*"))
                 {
                     String[] allBadges = getAllCollectionSlotsInBook("badge_book");
-                    if ((allBadges != null) && (allBadges.length > 0))
+                    if (allBadges != null)
                     {
-                        for (String allBadge : allBadges) {
+                        for (String allBadge : allBadges)
+                        {
                             badge.grantBadge(player, allBadge);
                         }
                     }
@@ -133,9 +145,10 @@ public class qabadge extends script.base_script
                 if (badgeChoice.equals("*Remove All Badges*"))
                 {
                     String[] allBadges = getAllCollectionSlotsInBook("badge_book");
-                    if ((allBadges != null) && (allBadges.length > 0))
+                    if (allBadges != null)
                     {
-                        for (String allBadge : allBadges) {
+                        for (String allBadge : allBadges)
+                        {
                             badge.revokeBadge(player, allBadge, true);
                         }
                     }
@@ -149,7 +162,7 @@ public class qabadge extends script.base_script
                 {
                     broadcast(player, "Badge UI creation failed.");
                 }
-                else 
+                else
                 {
                     qa.refreshMenu(self, "Choose the Badge", "Badge Granter", menuArray, "assignMenuOptions", "qabadge.pid", sui.OK_CANCEL_REFRESH);
                     utils.setScriptVar(self, "qabadge.Menu", menuArray);
@@ -159,13 +172,14 @@ public class qabadge extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int assignMenuOptions(obj_id self, dictionary params) throws InterruptedException
     {
         if (isGod(self))
         {
             if (utils.hasScriptVar(self, "qabadge.pid"))
             {
-                String previousBadgeArray[] = utils.getStringArrayScriptVar(self, "qabadge.Menu");
+                String[] previousBadgeArray = utils.getStringArrayScriptVar(self, "qabadge.Menu");
                 obj_id player = sui.getPlayerId(params);
                 if ((params == null) || (params.isEmpty()))
                 {
@@ -205,12 +219,13 @@ public class qabadge extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void badgeAssign(obj_id player, String badgeName) throws InterruptedException
     {
         if (isGod(player))
         {
             boolean hasBadge = badge.hasBadge(player, badgeName);
-            if (hasBadge != true)
+            if (!hasBadge)
             {
                 badge.grantBadge(player, badgeName);
                 broadcast(player, "Badge granted");
@@ -218,7 +233,7 @@ public class qabadge extends script.base_script
                 CustomerServiceLog("qaTool", "User: (" + player + ") " + getName(player) + " has added a badge to their current character using the QA Badge Tool.");
                 explorerBadge(player);
             }
-            else 
+            else
             {
                 badge.revokeBadge(player, badgeName, true);
                 broadcast(player, "Badge revoked");
@@ -228,15 +243,18 @@ public class qabadge extends script.base_script
             }
         }
     }
+
     public void explorerBadge(obj_id self) throws InterruptedException
     {
         if (isGod(self))
         {
             int[] intExplorerBadges = dataTableGetIntColumn("datatables/badge/exploration_badges.iff", "intIndex");
             int intExplBadgeCount = 0;
-            for (int intExplorerBadge : intExplorerBadges) {
+            for (int intExplorerBadge : intExplorerBadges)
+            {
                 String badgeName = getCollectionSlotName(intExplorerBadge);
-                if ((badgeName != null) && (badgeName.length() > 0) && badge.hasBadge(self, badgeName)) {
+                if ((badgeName != null) && (badgeName.length() > 0) && badge.hasBadge(self, badgeName))
+                {
                     intExplBadgeCount = intExplBadgeCount + 1;
                 }
             }
@@ -277,7 +295,6 @@ public class qabadge extends script.base_script
                 if (!badge.hasBadge(self, "bdg_exp_45_badges"))
                 {
                     badge.grantBadge(self, "bdg_exp_45_badges");
-                    return;
                 }
             }
         }

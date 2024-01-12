@@ -1,5 +1,11 @@
 package script.theme_park.lair;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.location;
@@ -7,16 +13,18 @@ import script.obj_id;
 
 public class lair_base extends script.theme_park.poi.base
 {
+    public static final int LAIR_RANGE = 200;
+    public static final int LAIR_LIMIT = 2;
     public lair_base()
     {
     }
-    public static final int LAIR_RANGE = 200;
-    public static final int LAIR_LIMIT = 2;
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         createTriggerVolume("lairBreached", 30.0f, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         spawnAllCreatures(self);
@@ -25,6 +33,7 @@ public class lair_base extends script.theme_park.poi.base
         messageTo(self, "expireLair", null, 604800, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectDisabled(obj_id self, obj_id killer) throws InterruptedException
     {
         location death = getLocation(self);
@@ -33,6 +42,7 @@ public class lair_base extends script.theme_park.poi.base
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public void spawnAllCreatures(obj_id lair) throws InterruptedException
     {
         setObjVar(lair, POI_BASE_OBJECT, lair);
@@ -43,8 +53,8 @@ public class lair_base extends script.theme_park.poi.base
             messageTo(lair, "respawnCreature", null, 1 + intI, true);
             intI = intI + 1;
         }
-        return;
     }
+
     public int respawnCreature(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "lair.deadLair"))
@@ -82,6 +92,7 @@ public class lair_base extends script.theme_park.poi.base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectDamaged(obj_id self, obj_id attacker, obj_id weapon, int damage) throws InterruptedException
     {
         int curHP = getHitpoints(self);
@@ -99,7 +110,7 @@ public class lair_base extends script.theme_park.poi.base
                     messageTo(self, "effectManager", null, 15, true);
                     spawnWave(self, 1);
                 }
-                else 
+                else
                 {
                     location death = getLocation(self);
                     playClientEffectLoc(attacker, "clienteffect/lair_med_damage_smoke.cef", death, 0);
@@ -111,11 +122,13 @@ public class lair_base extends script.theme_park.poi.base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int effectManager(obj_id self, dictionary params) throws InterruptedException
     {
         removeObjVar(self, "playingEffect");
         return SCRIPT_CONTINUE;
     }
+
     public int OnRemovingFromWorld(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "lair.deadLair"))
@@ -124,11 +137,13 @@ public class lair_base extends script.theme_park.poi.base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int expireLair(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public void spawnWave(obj_id lair, int wave) throws InterruptedException
     {
         int lastSpawn = getIntObjVar(lair, "lair.waveSpawned");
@@ -139,6 +154,7 @@ public class lair_base extends script.theme_park.poi.base
         setObjVar(lair, "lair.waveSpawned", wave);
         spawnAllCreatures(lair);
     }
+
     public void spawnBossMob(obj_id lair, obj_id killer) throws InterruptedException
     {
         if (!hasObjVar(lair, "lair.bossTemplate"))

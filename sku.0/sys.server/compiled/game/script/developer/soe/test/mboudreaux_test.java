@@ -1,5 +1,11 @@
 package script.developer.soe.test;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.prose;
 import script.library.sui;
@@ -7,15 +13,16 @@ import script.library.utils;
 
 public class mboudreaux_test extends script.base.remote_object_requester
 {
-    public mboudreaux_test()
-    {
-    }
     public static final String FINISH_PLANET = "tatooine";
     public static final float FINISH_X = 3528.0f;
     public static final float FINISH_Z = -4804.0f;
     public static final String PGC_QUEST_CONTROL_DEVICE = "object/intangible/saga_system/sage_intangible_holocron.iff";
     public static final int PQ_TASK_FINISHED = 2;
     public static final int PQ_TASK_INACTIVE = 4;
+    public mboudreaux_test()
+    {
+    }
+
     public int OnSpeaking(obj_id self, String text) throws InterruptedException
     {
         if (true)
@@ -64,8 +71,8 @@ public class mboudreaux_test extends script.base.remote_object_requester
                                 localDict.put("cachedCanSee", cache);
                             }
                             long endTimeLocalCache = queryPerformanceCounter();
-                            totalCanSee += (float)(endTimeCanSee - startTimeCanSee) / frequency;
-                            totalCached += (float)(endTimeLocalCache - startTimeLocalCache) / frequency;
+                            totalCanSee += (float) (endTimeCanSee - startTimeCanSee) / frequency;
+                            totalCached += (float) (endTimeLocalCache - startTimeLocalCache) / frequency;
                         }
                         debugConsoleMsg(self, "Average Times for " + rounds + " of " + iterations + " iterations each were: canSee (" + totalCanSee + "), Java Cache (" + totalCached + ")");
                     }
@@ -84,7 +91,7 @@ public class mboudreaux_test extends script.base.remote_object_requester
                         long object_id = Long.parseLong(object);
                         addObjectEffect(getObjIdWithNull(object_id), filename, "head", vec, scaleFloat, label);
                     }
-                    else 
+                    else
                     {
                         addObjectEffect(self, "appearance/pt_green_fire_base.prt", "head", vec, 0.25f, "TestGreenFire");
                     }
@@ -99,7 +106,7 @@ public class mboudreaux_test extends script.base.remote_object_requester
                         long object_id = Long.parseLong(object);
                         removeObjectEffect(getObjIdWithNull(object_id), label);
                     }
-                    else 
+                    else
                     {
                         removeObjectEffect(self, "TestGreenFire");
                     }
@@ -114,7 +121,7 @@ public class mboudreaux_test extends script.base.remote_object_requester
                         long object_id = Long.parseLong(object);
                         debugConsoleMsg(self, "Has Effect = " + hasObjectEffect(getObjIdWithNull(object_id), label));
                     }
-                    else 
+                    else
                     {
                         debugConsoleMsg(self, "Has Effect = " + hasObjectEffect(self, "TestGreenFire"));
                     }
@@ -144,7 +151,7 @@ public class mboudreaux_test extends script.base.remote_object_requester
                     {
                         debugConsoleMsg(self, "did NOT find goodLocation");
                     }
-                    else 
+                    else
                     {
                         debugConsoleMsg(self, "did find goodlocation");
                     }
@@ -183,27 +190,13 @@ public class mboudreaux_test extends script.base.remote_object_requester
                 {
                     debugConsoleMsg(self, "hit mb_acidBurned");
                     int active = getState(self, 38);
-                    if (active == 0)
-                    {
-                        setState(self, 38, true);
-                    }
-                    else 
-                    {
-                        setState(self, 38, false);
-                    }
+                    setState(self, 38, active == 0);
                 }
                 if (command.equalsIgnoreCase("mb_energyBurned"))
                 {
                     debugConsoleMsg(self, "hit mb_energyBurned");
                     int active = getState(self, 39);
-                    if (active == 0)
-                    {
-                        setState(self, 39, true);
-                    }
-                    else 
-                    {
-                        setState(self, 39, false);
-                    }
+                    setState(self, 39, active == 0);
                 }
                 if (command.equalsIgnoreCase("mb_helmetbackpack"))
                 {
@@ -355,99 +348,99 @@ public class mboudreaux_test extends script.base.remote_object_requester
                     {
                         String title = "My Guild";
                         String prompt = "This is my prompt. Text is going in here!";
-                        String[] colTitles = 
-                        {
-                            "Name",
-                            "Guild Rank",
-                            "PvP Kills",
-                            "Last Login Date"
-                        };
-                        String[] colTypes = 
-                        {
-                            "text",
-                            "text",
-                            "integer",
-                            "text"
-                        };
-                        String[][] data = 
-                        {
-                            
-                            {
-                                "PlayerA",
-                                "PlayerB",
-                                "PlayerC",
-                                "PlayerD",
-                                "PlayerE"
-                            },
-                            
-                            {
-                                "Awesome Dude",
-                                "Great Dude",
-                                "Okay Dude",
-                                "Meh Dude",
-                                "Poor Dude"
-                            },
-                            
-                            {
-                                "200",
-                                "150",
-                                "100",
-                                "50",
-                                "0"
-                            },
-                            
-                            {
-                                "01/04/2009",
-                                "01/03/2009",
-                                "01/02/2009",
-                                "01/01/2009",
-                                "01/05/2009"
-                            }
-                        };
+                        String[] colTitles =
+                                {
+                                        "Name",
+                                        "Guild Rank",
+                                        "PvP Kills",
+                                        "Last Login Date"
+                                };
+                        String[] colTypes =
+                                {
+                                        "text",
+                                        "text",
+                                        "integer",
+                                        "text"
+                                };
+                        String[][] data =
+                                {
+
+                                        {
+                                                "PlayerA",
+                                                "PlayerB",
+                                                "PlayerC",
+                                                "PlayerD",
+                                                "PlayerE"
+                                        },
+
+                                        {
+                                                "Awesome Dude",
+                                                "Great Dude",
+                                                "Okay Dude",
+                                                "Meh Dude",
+                                                "Poor Dude"
+                                        },
+
+                                        {
+                                                "200",
+                                                "150",
+                                                "100",
+                                                "50",
+                                                "0"
+                                        },
+
+                                        {
+                                                "01/04/2009",
+                                                "01/03/2009",
+                                                "01/02/2009",
+                                                "01/01/2009",
+                                                "01/05/2009"
+                                        }
+                                };
                         int id = sui.table(self, self, sui.OK_CANCEL, title, "tableHandler", prompt, colTitles, colTypes, data, false, true);
                         debugConsoleMsg(self, "Table PID is " + id);
                     }
                     else if (type.equalsIgnoreCase("row"))
                     {
                         String title = "My Table";
-                        String[] colTitles = 
-                        {
-                            "Name",
-                            "Weight",
-                            "BMI",
-                            "BMI"
-                        };
-                        String[] colTypes = 
-                        {
-                            "text",
-                            "integer",
-                            "percent",
-                            "text"
-                        };
-                        String[][] data = 
-                        {
-                            
-                            {
-                                "John",
-                                "180",
-                                "12",
-                                "12"
-                            },
-                            
-                            {
-                                "Steve",
-                                "190",
-                                "20",
-                                "12"
-                            },
-                            
-                            {
-                                "Andy",
-                                "230",
-                                "40",
-                                "12"
-                            }
-                        };
+                        String[] colTitles =
+                                {
+                                        "Name",
+                                        "Weight",
+                                        "BMI",
+                                        "BMI"
+                                };
+                        String[] colTypes =
+                                {
+                                        "text",
+                                        "integer",
+                                        "percent",
+                                        "text"
+                                };
+                        String[][] data =
+                                {
+
+                                        {
+                                                "John",
+                                                "180",
+                                                "12",
+                                                "12"
+                                        },
+
+                                        {
+                                                "Steve",
+                                                "190",
+                                                "20",
+                                                "12"
+                                        },
+
+                                        {
+                                                "Andy",
+                                                "230",
+                                                "40",
+                                                "12"
+                                        }
+                                };
                         int id = sui.table(self, self, sui.OK_CANCEL, title, "tableHandler", null, colTitles, colTypes, data, true, false);
                         debugConsoleMsg(self, "Table PID is " + id);
                     }
@@ -518,9 +511,10 @@ public class mboudreaux_test extends script.base.remote_object_requester
                 else if (command.equalsIgnoreCase("mb_getUserAccess"))
                 {
                     obj_id[] items = getUserAccessList(getIntendedTarget(self));
-                    if (items != null && items.length > 0)
+                    if (items != null)
                     {
-                        for (obj_id item : items) {
+                        for (obj_id item : items)
+                        {
                             debugConsoleMsg(self, "User: " + item);
                         }
                     }
@@ -528,9 +522,10 @@ public class mboudreaux_test extends script.base.remote_object_requester
                 else if (command.equalsIgnoreCase("mb_getGuildAccess"))
                 {
                     int[] items = getGuildAccessList(getIntendedTarget(self));
-                    if (items != null && items.length > 0)
+                    if (items != null)
                     {
-                        for (int item : items) {
+                        for (int item : items)
+                        {
                             debugConsoleMsg(self, "Guild: " + item);
                         }
                     }
@@ -538,9 +533,10 @@ public class mboudreaux_test extends script.base.remote_object_requester
                 else if (command.equalsIgnoreCase("mb_getObjects"))
                 {
                     obj_id[] items = getObjectsInRange(self, 64.0f);
-                    if (items != null && items.length > 0)
+                    if (items != null)
                     {
-                        for (obj_id item : items) {
+                        for (obj_id item : items)
+                        {
                             debugConsoleMsg(self, "Object in range: " + item);
                         }
                     }
@@ -548,9 +544,10 @@ public class mboudreaux_test extends script.base.remote_object_requester
                 else if (command.equalsIgnoreCase("mb_getCreatureObjects"))
                 {
                     obj_id[] items = getCreaturesInRange(self, 64.0f);
-                    if (items != null && items.length > 0)
+                    if (items != null)
                     {
-                        for (obj_id item : items) {
+                        for (obj_id item : items)
+                        {
                             debugConsoleMsg(self, "Creature Object in range: " + item);
                         }
                     }
@@ -577,11 +574,13 @@ public class mboudreaux_test extends script.base.remote_object_requester
                 else if (command.equalsIgnoreCase("mb_removedynamic"))
                 {
                     region[] regionsHere = getRegionsAtPoint(getLocation(self));
-                    if (regionsHere != null && regionsHere.length > 0)
+                    if (regionsHere != null)
                     {
-                        for (region currentRegion : regionsHere) {
+                        for (region currentRegion : regionsHere)
+                        {
                             String regionName = currentRegion.getName();
-                            if (regionName.equals("mboudreaux2")) {
+                            if (regionName.equals("mboudreaux2"))
+                            {
                                 debugConsoleMsg(self, "Found region, removing it");
                                 deleteRegion(currentRegion);
                             }
@@ -613,7 +612,7 @@ public class mboudreaux_test extends script.base.remote_object_requester
                     {
                         returnVal = addPlayerQuestTask(pq, "Matt's Kill Task", "I hate kreetles! Go kill 10 of them!", 10, getLocation(self));
                     }
-                    else 
+                    else
                     {
                         returnVal = addPlayerQuestTask(pq, "Matt's Kill Task", "I hate kreetles! Go kill 10 of them!", 10, null);
                     }
@@ -652,7 +651,7 @@ public class mboudreaux_test extends script.base.remote_object_requester
                         int iValue = Integer.parseInt(value);
                         debugConsoleMsg(self, "Status for Index " + iValue + " is " + getPlayerQuestTaskStatus(pq, iValue));
                     }
-                    else 
+                    else
                     {
                         int[] status = getAllPlayerQuestTaskStatus(pq);
                         if (status != null && status.length > 0)
@@ -690,7 +689,7 @@ public class mboudreaux_test extends script.base.remote_object_requester
                         long lValue = Long.parseLong(value);
                         pq = getObjIdWithNull(lValue);
                     }
-                    else 
+                    else
                     {
                         return SCRIPT_CONTINUE;
                     }
@@ -703,7 +702,7 @@ public class mboudreaux_test extends script.base.remote_object_requester
                             putIn(pq, controlDevice, self);
                             debugConsoleMsg(self, "PQ Activated");
                         }
-                        else 
+                        else
                         {
                             debugConsoleMsg(self, "Failed to create PQ control device.");
                         }
@@ -791,7 +790,7 @@ public class mboudreaux_test extends script.base.remote_object_requester
                         long lValue = Long.parseLong(value);
                         pq = getObjIdWithNull(lValue);
                     }
-                    else 
+                    else
                     {
                         return SCRIPT_CONTINUE;
                     }
@@ -807,7 +806,7 @@ public class mboudreaux_test extends script.base.remote_object_requester
                         long lValue = Long.parseLong(value);
                         pq = getObjIdWithNull(lValue);
                     }
-                    else 
+                    else
                     {
                         return SCRIPT_CONTINUE;
                     }
@@ -873,37 +872,45 @@ public class mboudreaux_test extends script.base.remote_object_requester
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tableHandler(obj_id self, dictionary params) throws InterruptedException
     {
         debugConsoleMsg(self, "handler hit. Params = " + params);
         debugConsoleMsg(self, "Visual Index = " + sui.getTableSelectedRow(params) + " Logic Index = " + sui.getTableLogicalIndex(params));
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
-        if (!isGod(self) || getGodLevel(self) < 50 || !isPlayer(self)) {
+        if (!isGod(self) || getGodLevel(self) < 50 || !isPlayer(self))
+        {
             detachScript(self, "test.mboudreaux_test");
         }
         return SCRIPT_CONTINUE;
     }
+
     public int startPerform(obj_id self, dictionary params) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int stopPerform(obj_id self, dictionary params) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnCreateSaga(obj_id self, dictionary params) throws InterruptedException
     {
         debugConsoleMsg(self, "Params = " + params.toString());
         return SCRIPT_CONTINUE;
     }
+
     public int OnRatingFinished(obj_id self, int rating) throws InterruptedException
     {
         debugConsoleMsg(self, "OnRatingFinished: Params = " + rating);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAbandonPlayerQuest(obj_id self, obj_id playerQuest) throws InterruptedException
     {
         debugConsoleMsg(self, "OnAbandonPlayerQuest: Params = " + playerQuest);

@@ -1,5 +1,11 @@
 package script.quest.task;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.quests;
 import script.obj_id;
 
@@ -8,6 +14,7 @@ public class give_object_to_player extends script.base_script
     public give_object_to_player()
     {
     }
+
     public int OnQuestActivated(obj_id self, int questRow) throws InterruptedException
     {
         LOG("newquests", "give_object_to_player - OnQuestActivated(+ " + questRow + ")");
@@ -22,7 +29,7 @@ public class give_object_to_player extends script.base_script
                 {
                     attachedScriptName = getStringObjVar(self, parameterObjVarName);
                 }
-                else 
+                else
                 {
                     attachedScriptName = quests.getDataEntry(questRow, "PARAMETER");
                 }
@@ -32,7 +39,7 @@ public class give_object_to_player extends script.base_script
                 {
                     templateName = getStringObjVar(self, targetObjVarName);
                 }
-                else 
+                else
                 {
                     templateName = quests.getDataEntry(questRow, "TARGET");
                 }
@@ -46,7 +53,7 @@ public class give_object_to_player extends script.base_script
                         attachScript(createdObject, attachedScriptName);
                     }
                 }
-                else 
+                else
                 {
                     CustomerServiceLog("fs_quests", "give_object_to_player: failed to create " + templateName + " in inventory for %TU ", self, null);
                     success = false;
@@ -54,7 +61,7 @@ public class give_object_to_player extends script.base_script
                 LOG("newquests", "give_object_to_player - success = " + success);
                 quests.complete(questName, self, success);
             }
-            else 
+            else
             {
                 CustomerServiceLog("fs_quests", "give_object_to_player: failed to retrieve quest name for quest id" + questRow + " for %TU ", self, null);
             }

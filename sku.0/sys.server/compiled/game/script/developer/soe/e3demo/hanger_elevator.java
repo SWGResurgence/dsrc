@@ -1,5 +1,11 @@
 package script.developer.soe.e3demo;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.location;
 import script.menu_info;
 import script.obj_id;
@@ -9,11 +15,13 @@ public class hanger_elevator extends script.base_script
     public hanger_elevator()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setName(self, "an elevator terminal");
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         location myLoc = getLocation(player);
@@ -30,7 +38,7 @@ public class hanger_elevator extends script.base_script
             myLoc.z = 341.8f;
             setLocation(player, myLoc);
         }
-        else 
+        else
         {
             playClientEffectObj(player, "clienteffect/elevator_descend.cef", player, null);
             obj_id objCell = getCellId(building, "elevator_e3_down");

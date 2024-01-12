@@ -1,5 +1,11 @@
 package script.city.bestine;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.utils;
 
@@ -7,9 +13,6 @@ import java.util.Vector;
 
 public class museum_event_grandparent extends script.base_script
 {
-    public museum_event_grandparent()
-    {
-    }
     public static final String MASTER_OBJECT_TEMPLATE = "object/tangible/poi/tatooine/bestine/bestine_museum_event_master_object.iff";
     public static final String VARNAME_MUSEUM_STATUS = "strMuseumEventStatus";
     public static final String VARNAME_MUSEUM_WINNER = "strMuseumEventWinner";
@@ -17,11 +20,16 @@ public class museum_event_grandparent extends script.base_script
     public static final String VARNAME_MUSEUM_WINNER_ARTWORK_INDEX = "intMuseumWinnerArtworkIndex";
     public static final String OBJVAR_MUSEUM_BUILDING = "bestine.objMuseumBuilding";
     public static final String DATATABLE_NAME = "datatables/city/bestine/bestine_museum_event.iff";
+    public museum_event_grandparent()
+    {
+    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "bootStrap", null, 2, false);
         return SCRIPT_CONTINUE;
     }
+
     public int bootStrap(obj_id self, dictionary params) throws InterruptedException
     {
         deltadictionary dctScriptVars = self.getScriptVars();
@@ -55,7 +63,7 @@ public class museum_event_grandparent extends script.base_script
                 dctScriptVars.put("objFeaturedArtwork", objNewArtwork);
             }
         }
-        else 
+        else
         {
             location locTest = getLocation(self);
             locTest.x = locTest.x + 1;
@@ -71,6 +79,7 @@ public class museum_event_grandparent extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void updateMuseumEventStatus(obj_id self) throws InterruptedException
     {
         deltadictionary dctScriptVars = self.getScriptVars();
@@ -123,7 +132,8 @@ public class museum_event_grandparent extends script.base_script
             {
                 var = varList.getObjVar(i);
                 varName = var.getName();
-                switch (varName) {
+                switch (varName)
+                {
                     case "museumEventStarted":
                         intMuseumEventNum = var.getIntData();
                         dctScriptVars.put(VARNAME_MUSEUM_STATUS, "museumEventStarted");
@@ -136,7 +146,8 @@ public class museum_event_grandparent extends script.base_script
                         break;
                     case "museumEventWinner":
                         String strVarValue = var.getStringData();
-                        if (strVarValue == null || strVarValue.equals("")) {
+                        if (strVarValue == null || strVarValue.equals(""))
+                        {
                             strVarValue = "none";
                         }
                         dctScriptVars.put(VARNAME_MUSEUM_WINNER, strVarValue);
@@ -189,6 +200,7 @@ public class museum_event_grandparent extends script.base_script
             }
         }
     }
+
     public int handleMuseumEventStateChange(obj_id self, dictionary params) throws InterruptedException
     {
         updateMuseumEventStatus(self);
@@ -211,6 +223,7 @@ public class museum_event_grandparent extends script.base_script
 
         return SCRIPT_CONTINUE;
     }
+
     public int handleSetMuseumEventWinner(obj_id self, dictionary params) throws InterruptedException
     {
         String strMuseumEventWinner = params.getString(VARNAME_MUSEUM_WINNER);
@@ -293,6 +306,7 @@ public class museum_event_grandparent extends script.base_script
 
         return SCRIPT_CONTINUE;
     }
+
     public int handleCuratorSetupRequest(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id objRequester = params.getObjId("objRequester");
@@ -328,6 +342,7 @@ public class museum_event_grandparent extends script.base_script
         messageTo(objRequester, "handleCuratorSetupResponse", dctParams, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int processCuratorDataStorageRequest(obj_id self, dictionary params) throws InterruptedException
     {
         int intVotesForEntry01 = params.getInt("intVotesForEntry01");
@@ -343,6 +358,7 @@ public class museum_event_grandparent extends script.base_script
 
         return SCRIPT_CONTINUE;
     }
+
     public int handleMuseumEventStatusRequest(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id objRequester = params.getObjId("objRequester");

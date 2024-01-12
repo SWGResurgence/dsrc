@@ -1,5 +1,11 @@
 package script.theme_park.jedi_trials;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -7,25 +13,28 @@ import java.util.Vector;
 
 public class padawan_trials extends script.base_script
 {
-    public padawan_trials()
-    {
-    }
     public static final String CITIES_DATATABLE = "datatables/jedi_trials/cities.iff";
     public static final String TRIAL_NPC_SCRIPT = "theme_park.jedi_trials.padawan_trial_npc";
     public static final String TRIAL_SCRIPT_PREFIX = "conversation.padawan_";
     public static final String LOC_NAME_BEGIN_NPC = "padawan_trials_begin_npc";
     public static final String LOC_NAME_SECOND_LOC = "padawan_trials_second_loc";
     public static final String LOC_NAME_THIRD_LOC = "padawan_trials_third_loc";
+    public padawan_trials()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "handleOnAttach", null, 2, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "handleScriptInitialized", null, 2, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleOnAttach(obj_id self, dictionary params) throws InterruptedException
     {
         if (!jedi_trials.isEligibleForJediPadawanTrials(self))
@@ -39,12 +48,13 @@ public class padawan_trials extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        else 
+        else
         {
             messageTo(self, "handleScriptInitialized", null, 1, false);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleScriptInitialized(obj_id self, dictionary params) throws InterruptedException
     {
         if (!hasObjVar(self, jedi_trials.PADAWAN_QUESTLIST_OBJVAR))
@@ -53,11 +63,13 @@ public class padawan_trials extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleDoPadawanTrialsSetup(obj_id self, dictionary params) throws InterruptedException
     {
         jedi_trials.doPadawanTrialsSetup(self);
         return SCRIPT_CONTINUE;
     }
+
     public int handleForceShrineTrialMessage(obj_id self, dictionary params) throws InterruptedException
     {
         if (!hasObjVar(self, jedi_trials.PADAWAN_QUESTLIST_OBJVAR) || !hasObjVar(self, jedi_trials.JEDI_TRIALS_TRIALNUMBER_OBJVAR))
@@ -118,7 +130,7 @@ public class padawan_trials extends script.base_script
                 String str_craftingmsg = utils.packStringId(sid_craftingmsg);
                 jedi_trials.oneButtonMsgBox(self, self, "noHandler", jedi_trials.SID_PADAWAN_TRIALS_TITLE, str_craftingmsg, jedi_trials.SID_CLOSE_BUTTON);
             }
-            else 
+            else
             {
                 string_id sid_craftingmsg = new string_id("jedi_trials", trialName + "_02");
                 String str_craftingmsg = utils.packStringId(sid_craftingmsg);
@@ -140,7 +152,7 @@ public class padawan_trials extends script.base_script
             }
             jedi_trials.threeButtonMsgBox(self, self, "handleRestartOrAbortPadawanTrialsChoice", jedi_trials.SID_PADAWAN_TRIALS_TITLE, str_msg, jedi_trials.SID_RESTART_BUTTON, jedi_trials.SID_CLOSE_BUTTON, jedi_trials.SID_ABORT_BUTTON);
         }
-        else 
+        else
         {
             if (!hasObjVar(self, jedi_trials.PADAWAN_TARGET_PLANET_OBJVAR))
             {
@@ -184,7 +196,7 @@ public class padawan_trials extends script.base_script
                     CustomerServiceLog(jedi_trials.PADAWAN_TRIALS_LOG, custLogMsg02, self);
                 }
             }
-            else 
+            else
             {
                 String targetPlanet = getStringObjVar(self, jedi_trials.PADAWAN_TARGET_PLANET_OBJVAR);
                 String targetCityName;
@@ -192,7 +204,7 @@ public class padawan_trials extends script.base_script
                 {
                     targetCityName = "Aurilia";
                 }
-                else 
+                else
                 {
                     int targetCityRow = getIntObjVar(self, jedi_trials.PADAWAN_TARGET_CITY_ROW_OBJVAR);
                     targetCityName = dataTableGetString(CITIES_DATATABLE, targetCityRow, "cityName");
@@ -209,6 +221,7 @@ public class padawan_trials extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleQuestCraftingAction(obj_id self, dictionary params) throws InterruptedException
     {
         int[] questList = getIntArrayObjVar(self, jedi_trials.PADAWAN_QUESTLIST_OBJVAR);
@@ -241,6 +254,7 @@ public class padawan_trials extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnLogin(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, jedi_trials.PADAWAN_TARGET_PLANET_OBJVAR) && !hasObjVar(self, jedi_trials.PADAWAN_TARGET_LOC_OBJVAR))
@@ -255,6 +269,7 @@ public class padawan_trials extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleSetBeginLoc(obj_id self, dictionary params) throws InterruptedException
     {
         int[] questList = getIntArrayObjVar(self, jedi_trials.PADAWAN_QUESTLIST_OBJVAR);
@@ -273,7 +288,7 @@ public class padawan_trials extends script.base_script
             {
                 targetLoc = new location(5291.3f, 78.5f, -4037.8f, targetPlanet, null);
             }
-            else 
+            else
             {
                 int cityRow = getIntObjVar(self, jedi_trials.PADAWAN_TARGET_CITY_ROW_OBJVAR);
                 float cityX = dataTableGetFloat(CITIES_DATATABLE, cityRow, "locX");
@@ -304,7 +319,7 @@ public class padawan_trials extends script.base_script
                     messageTo(self, "tryToRequestLocation", webster, 1, false);
                 }
             }
-            else 
+            else
             {
                 messageTo(self, "handleSetBeginLoc", null, 2, false);
             }
@@ -326,6 +341,7 @@ public class padawan_trials extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tryToRequestLocation(obj_id self, dictionary params) throws InterruptedException
     {
         location targetLoc = params.getLocation("targetLoc");
@@ -340,7 +356,7 @@ public class padawan_trials extends script.base_script
             String custLogMsg = "theme_park.jedi_trials.padawan_trials: requestLocation( " + self + ", " + locationName + ", " + randomLoc + ", 500.0f, 32.0f, true, false )";
             CustomerServiceLog("Request_Location", custLogMsg, self);
         }
-        else 
+        else
         {
             if (locationAttempts <= 10)
             {
@@ -354,6 +370,7 @@ public class padawan_trials extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnLocationReceived(obj_id self, String locationId, obj_id locationObject, location locationLocation, float locationRadius) throws InterruptedException
     {
         if (locationId == null)
@@ -398,6 +415,7 @@ public class padawan_trials extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleSetSecondLoc(obj_id self, dictionary params) throws InterruptedException
     {
         int[] questList = getIntArrayObjVar(self, jedi_trials.PADAWAN_QUESTLIST_OBJVAR);
@@ -420,7 +438,7 @@ public class padawan_trials extends script.base_script
             {
                 secondLoc = getLocationObjVar(self, jedi_trials.PADAWAN_SECOND_LOC_OBJVAR);
             }
-            else 
+            else
             {
                 secondLoc = locations.getRandomGoodLocation(here, 900.0f, 1800.0f, 32.0f);
             }
@@ -441,13 +459,14 @@ public class padawan_trials extends script.base_script
                 setWaypointActive(waypoint, true);
                 setObjVar(self, jedi_trials.PADAWAN_WAYPOINT_OBJVAR, waypoint);
             }
-            else 
+            else
             {
                 messageTo(self, "handleSetSecondLoc", null, 2, false);
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleSetThirdLoc(obj_id self, dictionary params) throws InterruptedException
     {
         int[] questList = getIntArrayObjVar(self, jedi_trials.PADAWAN_QUESTLIST_OBJVAR);
@@ -470,7 +489,7 @@ public class padawan_trials extends script.base_script
             {
                 thirdLoc = getLocationObjVar(self, jedi_trials.PADAWAN_THIRD_LOC_OBJVAR);
             }
-            else 
+            else
             {
                 thirdLoc = locations.getRandomGoodLocation(here, 900.0f, 1800.0f, 32.0f);
             }
@@ -491,13 +510,14 @@ public class padawan_trials extends script.base_script
                 setWaypointActive(waypoint, true);
                 setObjVar(self, jedi_trials.PADAWAN_WAYPOINT_OBJVAR, waypoint);
             }
-            else 
+            else
             {
                 messageTo(self, "handleSetThirdLoc", null, 2, false);
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnArrivedAtLocation(obj_id self, String locationName) throws InterruptedException
     {
         int[] questList = getIntArrayObjVar(self, jedi_trials.PADAWAN_QUESTLIST_OBJVAR);
@@ -508,20 +528,25 @@ public class padawan_trials extends script.base_script
         int trialNum = getIntObjVar(self, jedi_trials.JEDI_TRIALS_TRIALNUMBER_OBJVAR);
         int datatableRow = questList[trialNum];
         String trialName = dataTableGetString(jedi_trials.PADAWAN_TRIALS_DATATABLE, datatableRow, "trialName");
-        switch (locationName) {
+        switch (locationName)
+        {
             case LOC_NAME_BEGIN_NPC:
-                if (!trialName.equals("pannaqa")) {
+                if (!trialName.equals("pannaqa"))
+                {
                     location beginLoc = getLocationObjVar(self, jedi_trials.PADAWAN_TARGET_LOC_OBJVAR);
                     String beginSpawnType = dataTableGetString(jedi_trials.PADAWAN_TRIALS_DATATABLE, datatableRow, "trialNpc");
-                    if (beginSpawnType == null || beginSpawnType.equals("null") || beginSpawnType.equals("")) {
+                    if (beginSpawnType == null || beginSpawnType.equals("null") || beginSpawnType.equals(""))
+                    {
                         beginSpawnType = "commoner";
                     }
                     obj_id beginTrialNpc = create.staticObject(beginSpawnType, beginLoc);
-                    if (isIdValid(beginTrialNpc)) {
+                    if (isIdValid(beginTrialNpc))
+                    {
                         setInvulnerable(beginTrialNpc, true);
                         setCreatureStatic(beginTrialNpc, true);
                         String beginTrialNpcName = dataTableGetString(jedi_trials.PADAWAN_TRIALS_DATATABLE, datatableRow, "trialNpcName");
-                        if (beginTrialNpcName != null && !beginTrialNpcName.equals("null") && !beginTrialNpcName.equals("")) {
+                        if (beginTrialNpcName != null && !beginTrialNpcName.equals("null") && !beginTrialNpcName.equals(""))
+                        {
                             setName(beginTrialNpc, beginTrialNpcName);
                         }
                         String beginScriptName = TRIAL_SCRIPT_PREFIX + trialName + "_01";
@@ -535,27 +560,37 @@ public class padawan_trials extends script.base_script
             case LOC_NAME_SECOND_LOC:
                 location secondTargetLoc = getLocationObjVar(self, jedi_trials.PADAWAN_SECOND_LOC_OBJVAR);
                 String secondSpawnType = dataTableGetString(jedi_trials.PADAWAN_TRIALS_DATATABLE, datatableRow, "trialTarget");
-                if (secondSpawnType.endsWith(".iff")) {
+                if (secondSpawnType.endsWith(".iff"))
+                {
                     obj_id skeleton = createObject(secondSpawnType, secondTargetLoc);
                     setObjVar(skeleton, jedi_trials.PADAWAN_TRIAL_PLAYER_OBJVAR, self);
                     setObjVar(self, jedi_trials.PADAWAN_TRIAL_NPC_OBJVAR, skeleton);
                     attachScript(skeleton, "theme_park.jedi_trials.padawan_trials_search");
                     setName(skeleton, "The remains of Josef Thelcar");
-                } else {
+                }
+                else
+                {
                     int isVulnerable = dataTableGetInt(jedi_trials.PADAWAN_TRIALS_DATATABLE, datatableRow, "trialTargetVulnerable");
                     obj_id secondTrialNpc = null;
-                    if (isVulnerable > 0) {
+                    if (isVulnerable > 0)
+                    {
                         secondTrialNpc = create.object(secondSpawnType, secondTargetLoc);
-                    } else {
+                    }
+                    else
+                    {
                         secondTrialNpc = create.staticObject(secondSpawnType, secondTargetLoc);
                     }
-                    if (isIdValid(secondTrialNpc)) {
-                        if (isVulnerable > 0) {
+                    if (isIdValid(secondTrialNpc))
+                    {
+                        if (isVulnerable > 0)
+                        {
                             ai_lib.setDefaultCalmBehavior(secondTrialNpc, ai_lib.BEHAVIOR_SENTINEL);
                             pvpSetAlignedFaction(secondTrialNpc, (221551254));
                             pvpMakeDeclared(secondTrialNpc);
                             setObjVar(secondTrialNpc, "ai.faction.nonAggro", true);
-                        } else {
+                        }
+                        else
+                        {
                             setInvulnerable(secondTrialNpc, true);
                             setCreatureStatic(secondTrialNpc, true);
                         }
@@ -564,12 +599,15 @@ public class padawan_trials extends script.base_script
                         setObjVar(self, jedi_trials.PADAWAN_TRIAL_NPC_OBJVAR, secondTrialNpc);
                         attachScript(secondTrialNpc, secondScriptName);
                         attachScript(secondTrialNpc, TRIAL_NPC_SCRIPT);
-                        if (trialName.equals("spice_mom")) {
+                        if (trialName.equals("spice_mom"))
+                        {
                             setName(secondTrialNpc, "Evif Sulp");
                         }
-                        if (utils.hasScriptVar(self, jedi_trials.SECOND_LOC_OBJECT_OBJID_OBJVAR)) {
+                        if (utils.hasScriptVar(self, jedi_trials.SECOND_LOC_OBJECT_OBJID_OBJVAR))
+                        {
                             obj_id secondLocObject = utils.getObjIdScriptVar(self, jedi_trials.SECOND_LOC_OBJECT_OBJID_OBJVAR);
-                            if (isIdValid(secondLocObject)) {
+                            if (isIdValid(secondLocObject))
+                            {
                                 locations.destroyLocationObject(secondLocObject);
                             }
                         }
@@ -580,7 +618,8 @@ public class padawan_trials extends script.base_script
                 location thirdTargetLoc = getLocationObjVar(self, jedi_trials.PADAWAN_THIRD_LOC_OBJVAR);
                 String thirdSpawnType = dataTableGetString(jedi_trials.PADAWAN_TRIALS_DATATABLE, datatableRow, "trialTarget");
                 obj_id thirdTrialNpc = create.staticObject(thirdSpawnType, thirdTargetLoc);
-                if (isIdValid(thirdTrialNpc)) {
+                if (isIdValid(thirdTrialNpc))
+                {
                     setInvulnerable(thirdTrialNpc, true);
                     setCreatureStatic(thirdTrialNpc, true);
                     String thirdScriptName = TRIAL_SCRIPT_PREFIX + trialName + "_03";
@@ -588,12 +627,15 @@ public class padawan_trials extends script.base_script
                     setObjVar(self, jedi_trials.PADAWAN_TRIAL_NPC_OBJVAR, thirdTrialNpc);
                     attachScript(thirdTrialNpc, thirdScriptName);
                     attachScript(thirdTrialNpc, TRIAL_NPC_SCRIPT);
-                    if (trialName.equals("pannaqa")) {
+                    if (trialName.equals("pannaqa"))
+                    {
                         setName(thirdTrialNpc, "Shendo");
                     }
-                    if (utils.hasScriptVar(self, jedi_trials.THIRD_LOC_OBJECT_OBJID_OBJVAR)) {
+                    if (utils.hasScriptVar(self, jedi_trials.THIRD_LOC_OBJECT_OBJID_OBJVAR))
+                    {
                         obj_id thirdLocObject = utils.getObjIdScriptVar(self, jedi_trials.THIRD_LOC_OBJECT_OBJID_OBJVAR);
-                        if (isIdValid(thirdLocObject)) {
+                        if (isIdValid(thirdLocObject))
+                        {
                             locations.destroyLocationObject(thirdLocObject);
                         }
                     }
@@ -602,6 +644,7 @@ public class padawan_trials extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handlerTrialNpcKilled(obj_id self, dictionary params) throws InterruptedException
     {
         int[] questList = getIntArrayObjVar(self, jedi_trials.PADAWAN_QUESTLIST_OBJVAR);
@@ -623,6 +666,7 @@ public class padawan_trials extends script.base_script
         messageTo(self, "handleSetBeginLoc", null, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handlePlayerCombatKill(obj_id self, dictionary params) throws InterruptedException
     {
         if (!hasObjVar(self, jedi_trials.PADAWAN_QUESTLIST_OBJVAR) || !hasObjVar(self, jedi_trials.JEDI_TRIALS_TRIALNUMBER_OBJVAR))
@@ -664,13 +708,14 @@ public class padawan_trials extends script.base_script
                 removeObjVar(self, "handlePlayerCombatKill");
                 messageTo(self, "handleSetBeginLoc", null, 1, false);
             }
-            else 
+            else
             {
                 setObjVar(self, jedi_trials.JEDI_TRIALS_CUR_TRIAL_TOTAL_OBJVAR, currentKills);
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleTrialComplete(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, jedi_trials.JEDI_TRIALS_CUR_TRIAL_TOTAL_OBJVAR))
@@ -721,7 +766,7 @@ public class padawan_trials extends script.base_script
         {
             messageTo(self, "handleJediPadawanTrialsComplete", null, 1, false);
         }
-        else 
+        else
         {
             jedi_trials.setClosestForceShrineWaypoint(self);
             String str_message = utils.packStringId(jedi_trials.SID_PADAWAN_NEXT_TRIAL);
@@ -729,6 +774,7 @@ public class padawan_trials extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleJediPadawanTrialsComplete(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasSkill(self, jedi_trials.JEDI_PADAWAN_SKBOX))
@@ -789,6 +835,7 @@ public class padawan_trials extends script.base_script
         messageTo(self, "jediTrialsCleanup", null, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleQuestFailure(obj_id self, dictionary params) throws InterruptedException
     {
         int numTimesFailed = 1;
@@ -805,7 +852,7 @@ public class padawan_trials extends script.base_script
             String custLogMsg = "Padawan trials failure: Player %TU has failed their third trial and will now be expelled.";
             CustomerServiceLog(jedi_trials.PADAWAN_TRIALS_LOG, custLogMsg, self);
         }
-        else 
+        else
         {
             if (numTimesFailed == 2)
             {
@@ -814,7 +861,7 @@ public class padawan_trials extends script.base_script
                 String custLogMsg = "Padawan trials failure: Player %TU has failed their second trial.";
                 CustomerServiceLog(jedi_trials.PADAWAN_TRIALS_LOG, custLogMsg, self);
             }
-            else 
+            else
             {
                 str_message = utils.packStringId(jedi_trials.SID_PADAWAN_TRIAL_FAILED_FIRST);
                 handleResult = "jediTrialsRestartCurrentTrial";
@@ -827,6 +874,7 @@ public class padawan_trials extends script.base_script
         messageTo(self, handleResult, null, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int jediTrialsRestartCurrentTrial(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, jedi_trials.PADAWAN_WAYPOINT_OBJVAR))
@@ -849,6 +897,7 @@ public class padawan_trials extends script.base_script
         removeObjVar(self, jedi_trials.PADAWAN_TRIALS_TEMP_OBJVAR);
         return SCRIPT_CONTINUE;
     }
+
     public int jediTrialsFailedCleanup(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasSkill(self, jedi_trials.PADAWAN_INITIATE_SKBOX))
@@ -860,6 +909,7 @@ public class padawan_trials extends script.base_script
         messageTo(self, "jediTrialsCleanup", null, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int jediTrialsCleanup(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, jedi_trials.PADAWAN_WAYPOINT_OBJVAR))
@@ -877,11 +927,13 @@ public class padawan_trials extends script.base_script
         jedi_trials.doJediTrialsCleanup(self);
         return SCRIPT_CONTINUE;
     }
+
     public int handleTellAboutRestart(obj_id self, dictionary params) throws InterruptedException
     {
         sendSystemMessage(self, jedi_trials.SID_PADAWAN_TELL_ABOUT_RESTART);
         return SCRIPT_CONTINUE;
     }
+
     public int handleRestartOrAbortPadawanTrialsChoice(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))
@@ -894,22 +946,23 @@ public class padawan_trials extends script.base_script
         switch (bp)
         {
             case sui.BP_OK:
-            if (revert != null && !revert.equals(""))
-            {
-                str_message = utils.packStringId(jedi_trials.SID_PADAWAN_ABORTED_CONFIRMATION);
-                jedi_trials.twoButtonMsgBox(self, self, "handleAbortPadawanTrials", jedi_trials.SID_PADAWAN_TRIALS_TITLE, str_message, jedi_trials.SID_ABORT_BUTTON, jedi_trials.SID_CLOSE_BUTTON);
-            }
-            else 
-            {
-                str_message = utils.packStringId(jedi_trials.SID_PADAWAN_RESTART_CONFIRMATION);
-                jedi_trials.twoButtonMsgBox(self, self, "handleRestartCurrentPadawanTrial", jedi_trials.SID_PADAWAN_TRIALS_TITLE, str_message, jedi_trials.SID_RESTART_BUTTON, jedi_trials.SID_CLOSE_BUTTON);
-            }
-            break;
+                if (revert != null && !revert.equals(""))
+                {
+                    str_message = utils.packStringId(jedi_trials.SID_PADAWAN_ABORTED_CONFIRMATION);
+                    jedi_trials.twoButtonMsgBox(self, self, "handleAbortPadawanTrials", jedi_trials.SID_PADAWAN_TRIALS_TITLE, str_message, jedi_trials.SID_ABORT_BUTTON, jedi_trials.SID_CLOSE_BUTTON);
+                }
+                else
+                {
+                    str_message = utils.packStringId(jedi_trials.SID_PADAWAN_RESTART_CONFIRMATION);
+                    jedi_trials.twoButtonMsgBox(self, self, "handleRestartCurrentPadawanTrial", jedi_trials.SID_PADAWAN_TRIALS_TITLE, str_message, jedi_trials.SID_RESTART_BUTTON, jedi_trials.SID_CLOSE_BUTTON);
+                }
+                break;
             case sui.BP_CANCEL:
-            break;
+                break;
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleRestartCurrentPadawanTrial(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))
@@ -921,16 +974,17 @@ public class padawan_trials extends script.base_script
         switch (bp)
         {
             case sui.BP_OK:
-            String custLogMsg = "Padawan trials failure: Player %TU has opted to restart their current trial.";
-            CustomerServiceLog(jedi_trials.PADAWAN_TRIALS_LOG, custLogMsg, self);
-            sendSystemMessage(self, jedi_trials.SID_PADAWAN_TRIAL_RESTARTED);
-            messageTo(self, "jediTrialsRestartCurrentTrial", null, 1, false);
-            break;
+                String custLogMsg = "Padawan trials failure: Player %TU has opted to restart their current trial.";
+                CustomerServiceLog(jedi_trials.PADAWAN_TRIALS_LOG, custLogMsg, self);
+                sendSystemMessage(self, jedi_trials.SID_PADAWAN_TRIAL_RESTARTED);
+                messageTo(self, "jediTrialsRestartCurrentTrial", null, 1, false);
+                break;
             case sui.BP_CANCEL:
-            break;
+                break;
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleAbortPadawanTrials(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))
@@ -942,16 +996,17 @@ public class padawan_trials extends script.base_script
         switch (bp)
         {
             case sui.BP_OK:
-            String custLogMsg = "Padawan trials failure: Player %TU has opted to quit the Jedi PAdawan trials.";
-            CustomerServiceLog(jedi_trials.PADAWAN_TRIALS_LOG, custLogMsg, self);
-            sendSystemMessage(self, jedi_trials.SID_PADAWAN_TRIALS_ABORTED);
-            messageTo(self, "jediTrialsFailedCleanup", null, 1, false);
-            break;
+                String custLogMsg = "Padawan trials failure: Player %TU has opted to quit the Jedi PAdawan trials.";
+                CustomerServiceLog(jedi_trials.PADAWAN_TRIALS_LOG, custLogMsg, self);
+                sendSystemMessage(self, jedi_trials.SID_PADAWAN_TRIALS_ABORTED);
+                messageTo(self, "jediTrialsFailedCleanup", null, 1, false);
+                break;
             case sui.BP_CANCEL:
-            break;
+                break;
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnSkillRevoked(obj_id self, String skillName) throws InterruptedException
     {
         if (skillName.startsWith("force_sensitive"))
@@ -969,6 +1024,7 @@ public class padawan_trials extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int[] getDatatableRowsForStringsInColumn(String datatable, String column, String targetString) throws InterruptedException
     {
         Vector rows = new Vector();

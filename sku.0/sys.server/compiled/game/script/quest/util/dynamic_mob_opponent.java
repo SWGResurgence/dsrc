@@ -1,18 +1,25 @@
 package script.quest.util;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.obj_id;
 
 public class dynamic_mob_opponent extends script.base_script
 {
-    public dynamic_mob_opponent()
-    {
-    }
     public static final String CLIENT_EFFECT = "appearance/pt_smoke_puff.prt";
     public static final String FAIL_SIGNAL = "fail_signal";
     public static final String CREATURE_TABLE = "datatables/mob/creatures.iff";
     public static final String STAT_BALANCE_TABLE = "datatables/mob/stat_balance.iff";
+    public dynamic_mob_opponent()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         CustomerServiceLog("quest", "dynamic_mob_opponent.OnAttach() Attempting to spawn and modify wave event dynamic enemy.");
@@ -20,6 +27,7 @@ public class dynamic_mob_opponent extends script.base_script
         messageTo(self, "setDynamicDataOnMob", null, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitateTarget(obj_id self, obj_id victim) throws InterruptedException
     {
         CustomerServiceLog("quest", "dynamic_mob_opponent.OnIncapacitateTarget() Dynamic Enemy Incapacitated a target.");
@@ -52,14 +60,17 @@ public class dynamic_mob_opponent extends script.base_script
         messageTo(parent, "cleanupEvent", null, 2, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDeath(obj_id self, obj_id killer, obj_id corpseId) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnExitedCombat(obj_id self) throws InterruptedException
     {
         if (ai_lib.isDead(self))
@@ -89,6 +100,7 @@ public class dynamic_mob_opponent extends script.base_script
         messageTo(parent, "cleanupEvent", null, 2, false);
         return SCRIPT_CONTINUE;
     }
+
     public int setDynamicDataOnMob(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id parent = getObjIdObjVar(self, trial.PARENT);

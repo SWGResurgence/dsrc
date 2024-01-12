@@ -1,5 +1,11 @@
 package script.item.container;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.obj_id;
 import script.obj_var;
@@ -10,6 +16,7 @@ public class factory_crate extends script.item.container.remove_only
     public static final String SCRIPT_FACTORY_CRATE = "item.container.factory_crate";
     public static final String VAR_TO_ATTACH = "to_attach";
     public static final String VAR_ITEMS_LEFT = "items_left";
+
     public factory_crate()
     {
     }

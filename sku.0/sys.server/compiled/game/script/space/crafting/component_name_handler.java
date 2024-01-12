@@ -1,5 +1,11 @@
 package script.space.crafting;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.space_crafting;
 import script.library.sui;
@@ -12,6 +18,7 @@ public class component_name_handler extends script.base_script
     public component_name_handler()
     {
     }
+
     public int handleComponentNameSui(obj_id self, dictionary params) throws InterruptedException
     {
         int intButton = sui.getIntButtonPressed(params);
@@ -20,13 +27,14 @@ public class component_name_handler extends script.base_script
             detachScript(self, space_crafting.SCRIPT_COMPONENT_NAME_HANDLER);
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             obj_id player = sui.getPlayerId(params);
             showComponentNameSui(self, player);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleSetComponentName(obj_id self, dictionary params) throws InterruptedException
     {
         int intButton = sui.getIntButtonPressed(params);
@@ -37,12 +45,12 @@ public class component_name_handler extends script.base_script
         }
         String newComponentName = sui.getInputBoxText(params);
         obj_id player = sui.getPlayerId(params);
-        if (isNameReserved(newComponentName) != true)
+        if (!isNameReserved(newComponentName))
         {
             setName(self, newComponentName);
             detachScript(self, space_crafting.SCRIPT_COMPONENT_NAME_HANDLER);
         }
-        else 
+        else
         {
             string_id msg2 = new string_id(space_crafting.STF_COMPONENT_TOOL, "reserved");
             sendSystemMessage(player, msg2);
@@ -50,6 +58,7 @@ public class component_name_handler extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void showComponentNameSui(obj_id owner, obj_id target) throws InterruptedException
     {
         String prompt2 = utils.packStringId(new string_id(space_crafting.STF_COMPONENT_TOOL, "prompt2"));

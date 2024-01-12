@@ -1,5 +1,11 @@
 package script.theme_park.poi.general;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.obj_id;
@@ -9,16 +15,19 @@ public class duelist extends script.theme_park.poi.base
     public duelist()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "createDuelists", null, 3, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "createDuelists", null, 3, true);
         return SCRIPT_CONTINUE;
     }
+
     public int createDuelists(obj_id self, dictionary params) throws InterruptedException
     {
         String objective = poiGetObjective(self);

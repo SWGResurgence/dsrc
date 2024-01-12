@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.utils;
@@ -7,69 +13,54 @@ import script.*;
 
 public class lifeday04a extends script.base_script
 {
+    public static String c_stringFile = "conversation/lifeday04a";
+
     public lifeday04a()
     {
     }
-    public static String c_stringFile = "conversation/lifeday04a";
+
     public boolean lifeday04a_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean lifeday04a_condition_hasBeenRewarded(obj_id player, obj_id npc) throws InterruptedException
     {
         int convTracker = getIntObjVar(player, "lifeday04.convTracker");
-        if (hasObjVar(player, "lifeday04.rewarded") || convTracker == 15)
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return hasObjVar(player, "lifeday04.rewarded") || convTracker == 15;
     }
+
     public boolean lifeday04a_condition_hasSpokenOnce(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (hasObjVar(player, "lifeday04.convTracker"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return hasObjVar(player, "lifeday04.convTracker");
     }
+
     public boolean lifeday04a_condition_isaWookiee(obj_id player, obj_id npc) throws InterruptedException
     {
         int species = getSpecies(player);
-        if (species == SPECIES_WOOKIEE)
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return species == SPECIES_WOOKIEE;
     }
+
     public void lifeday04a_action_giveWaypoint(obj_id player, obj_id npc) throws InterruptedException
     {
-        int[] coordinates = 
-        {
-            -2579,
-            0,
-            -5520,
-            -1090,
-            0,
-            -1000,
-            -5,
-            0,
-            -3922
-        };
-        String[] planet = 
-        {
-            "dathomir",
-            "endor",
-            "yavin4"
-        };
+        int[] coordinates =
+                {
+                        -2579,
+                        0,
+                        -5520,
+                        -1090,
+                        0,
+                        -1000,
+                        -5,
+                        0,
+                        -3922
+                };
+        String[] planet =
+                {
+                        "dathomir",
+                        "endor",
+                        "yavin4"
+                };
         string_id waypointName = new string_id("quest/lifeday/lifeday", "waypoint_name");
         string_id waypointUpdated = new string_id("quest/lifeday/lifeday", "waypoint_updated");
         int roll = rand(0, 2);
@@ -82,27 +73,28 @@ public class lifeday04a extends script.base_script
         }
         sendSystemMessage(player, waypointUpdated);
     }
+
     public void lifeday04a_action_finishedConversation(obj_id player, obj_id npc) throws InterruptedException
     {
         setObjVar(player, "lifeday04.convTracker", 0);
-        int[] coordinates = 
-        {
-            -2579,
-            0,
-            -5520,
-            -1090,
-            0,
-            -1000,
-            -5,
-            0,
-            -3922
-        };
-        String[] planet = 
-        {
-            "dathomir",
-            "endor",
-            "yavin4"
-        };
+        int[] coordinates =
+                {
+                        -2579,
+                        0,
+                        -5520,
+                        -1090,
+                        0,
+                        -1000,
+                        -5,
+                        0,
+                        -3922
+                };
+        String[] planet =
+                {
+                        "dathomir",
+                        "endor",
+                        "yavin4"
+                };
         string_id waypointName = new string_id("quest/lifeday/lifeday", "waypoint_name");
         string_id waypointUpdated = new string_id("quest/lifeday/lifeday", "waypoint_updated");
         int roll = rand(0, 2);
@@ -115,6 +107,7 @@ public class lifeday04a extends script.base_script
         }
         sendSystemMessage(player, waypointUpdated);
     }
+
     public int lifeday04a_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_8fa670"))
@@ -132,6 +125,7 @@ public class lifeday04a extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int lifeday04a_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_20e6f0a5"))
@@ -149,6 +143,7 @@ public class lifeday04a extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int lifeday04a_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_643fa34"))
@@ -176,7 +171,7 @@ public class lifeday04a extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_2a85dd74");
@@ -189,7 +184,7 @@ public class lifeday04a extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.lifeday04a.branchId");
                     chat.chat(npc, player, message);
@@ -212,6 +207,7 @@ public class lifeday04a extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int lifeday04a_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_2a85dd74"))
@@ -241,6 +237,7 @@ public class lifeday04a extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -250,11 +247,13 @@ public class lifeday04a extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -263,18 +262,21 @@ public class lifeday04a extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.lifeday04a");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -304,7 +306,7 @@ public class lifeday04a extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_8fa670");
@@ -312,7 +314,7 @@ public class lifeday04a extends script.base_script
                 utils.setScriptVar(player, "conversation.lifeday04a.branchId", 2);
                 npcStartConversation(player, npc, "lifeday04a", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -334,7 +336,7 @@ public class lifeday04a extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_20e6f0a5");
@@ -342,7 +344,7 @@ public class lifeday04a extends script.base_script
                 utils.setScriptVar(player, "conversation.lifeday04a.branchId", 4);
                 npcStartConversation(player, npc, "lifeday04a", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -371,7 +373,7 @@ public class lifeday04a extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_643fa34");
@@ -383,7 +385,7 @@ public class lifeday04a extends script.base_script
                 utils.setScriptVar(player, "conversation.lifeday04a.branchId", 6);
                 npcStartConversation(player, npc, "lifeday04a", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -392,6 +394,7 @@ public class lifeday04a extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("lifeday04a"))

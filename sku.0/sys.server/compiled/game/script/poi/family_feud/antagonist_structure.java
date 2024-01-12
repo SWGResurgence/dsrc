@@ -1,5 +1,11 @@
 package script.poi.family_feud;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.location;
@@ -7,14 +13,17 @@ import script.obj_id;
 
 public class antagonist_structure extends script.theme_park.poi.base
 {
+    public static final int ATTACK_DELAY = 600;
+
     public antagonist_structure()
     {
     }
-    public static final int ATTACK_DELAY = 600;
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         obj_id poiMaster = poi.getBaseObject(self);
@@ -28,6 +37,7 @@ public class antagonist_structure extends script.theme_park.poi.base
         messageTo(poiMaster, scenario.HANDLER_ONLINE_STATUS_UPDATE, d, 0, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnUnloadedFromMemory(obj_id self) throws InterruptedException
     {
         obj_id poiMaster = poi.getBaseObject(self);
@@ -41,10 +51,12 @@ public class antagonist_structure extends script.theme_park.poi.base
         messageTo(poiMaster, scenario.HANDLER_ONLINE_STATUS_UPDATE, d, 0, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectDisabled(obj_id self, obj_id killer) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int handleSpawnActors(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id poiMaster = poi.getBaseObject(self);
@@ -83,10 +95,10 @@ public class antagonist_structure extends script.theme_park.poi.base
         if ((leader == null) || (leader == obj_id.NULL_ID))
         {
         }
-        else 
+        else
         {
             persistObject(leader);
-            factions.setFaction(leader, poiMaster.toString() + "_antagonist", false);
+            factions.setFaction(leader, poiMaster + "_antagonist", false);
             attachScript(leader, "poi." + scenario_name + ".antagonist");
             setObjVar(leader, scenario.VAR_MY_NAME, myName);
             setObjVar(leader, scenario.VAR_RANK, scenario.SR_ANTAGONIST);
@@ -109,11 +121,11 @@ public class antagonist_structure extends script.theme_park.poi.base
                 if ((m == null) || (m == obj_id.NULL_ID))
                 {
                 }
-                else 
+                else
                 {
                     persistObject(m);
                     setYaw(m, rand(0, 359));
-                    factions.setFaction(m, poiMaster.toString() + "_antagonist", false);
+                    factions.setFaction(m, poiMaster + "_antagonist", false);
                     attachScript(m, "poi." + scenario_name + ".antagonist");
                     setObjVar(m, scenario.VAR_MY_NAME, myName);
                     setObjVar(m, scenario.VAR_RANK, scenario.SR_ANTAGONIST_MINION);

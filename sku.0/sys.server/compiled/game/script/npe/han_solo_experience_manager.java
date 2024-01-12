@@ -1,5 +1,11 @@
 package script.npe;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.location;
@@ -9,28 +15,34 @@ import java.util.Vector;
 
 public class han_solo_experience_manager extends script.base_script
 {
+    public static final String STF = "npe/han_solo_experience";
+
     public han_solo_experience_manager()
     {
     }
-    public static final String STF = "npe/han_solo_experience";
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "checkForDestroy", null, 300.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public boolean containsPlayer(obj_id bldg) throws InterruptedException
     {
         obj_id[] contents = getContents(bldg);
         if (contents != null)
         {
-            for (obj_id content : contents) {
-                if (isPlayer(content) || containsPlayer(content)) {
+            for (obj_id content : contents)
+            {
+                if (isPlayer(content) || containsPlayer(content))
+                {
                     return true;
                 }
             }
         }
         return false;
     }
+
     public int checkForDestroy(obj_id self, dictionary params) throws InterruptedException
     {
         if (!containsPlayer(self))
@@ -40,6 +52,7 @@ public class han_solo_experience_manager extends script.base_script
         messageTo(self, "checkForDestroy", null, 20, false);
         return SCRIPT_CONTINUE;
     }
+
     public int setupArea(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = utils.getObjIdScriptVar(self, "npe.player");
@@ -56,9 +69,11 @@ public class han_solo_experience_manager extends script.base_script
             obj_id[] objContents = getContents(medBayCell);
             if (objContents != null)
             {
-                for (obj_id objContent : objContents) {
+                for (obj_id objContent : objContents)
+                {
                     String strItemTemplate = getTemplateName(objContent);
-                    if (strItemTemplate.equals("object/tangible/npe/npe_target_crate.iff")) {
+                    if (strItemTemplate.equals("object/tangible/npe/npe_target_crate.iff"))
+                    {
                         crates[crateCount] = objContent;
                         crateCount++;
                     }
@@ -69,10 +84,12 @@ public class han_solo_experience_manager extends script.base_script
         if (utils.hasScriptVar(self, "objAlarms"))
         {
             Vector alarms = utils.getResizeableObjIdArrayScriptVar(self, "objAlarms");
-            for (Object alarm : alarms) {
-                if (isIdValid(((obj_id) alarm))) {
+            for (Object alarm : alarms)
+            {
+                if (isIdValid(((obj_id) alarm)))
+                {
                     setCondition(((obj_id) alarm), CONDITION_ON);
-                    LOG("npe_alarm", "Condition is on for alarm " + ((obj_id) alarm));
+                    LOG("npe_alarm", "Condition is on for alarm " + alarm);
                 }
             }
         }
@@ -92,6 +109,7 @@ public class han_solo_experience_manager extends script.base_script
         LOG("hangar_event", "Important objects have been placed:  meddroid is " + medDroid + " invis 3po is " + droidInvis);
         return SCRIPT_CONTINUE;
     }
+
     public int setuphan(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = utils.getObjIdScriptVar(self, "npe.player");
@@ -124,6 +142,7 @@ public class han_solo_experience_manager extends script.base_script
         LOG("hangar_event", "Important actors have been placed:  hanSolo is " + hanSolo + "  chewie is " + chewie + " and r2 is " + r2 + ".  Player is " + player);
         return SCRIPT_CONTINUE;
     }
+
     public int setuphuttwave1(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = utils.getObjIdScriptVar(self, "npe.player");
@@ -165,6 +184,7 @@ public class han_solo_experience_manager extends script.base_script
         LOG("hangar_event", "Hutts were set up.  Hutt 1 is " + hutt1 + " Hutt 2 is " + hutt2 + " Hutt 3 is " + hutt3 + ".  Player is " + player);
         return SCRIPT_CONTINUE;
     }
+
     public int setuphanpath(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id han1 = sequencer.getSequenceObject("han1");
@@ -172,12 +192,14 @@ public class han_solo_experience_manager extends script.base_script
         createClientPathAdvanced(player, getLocation(player), getLocation(han1), "default");
         return SCRIPT_CONTINUE;
     }
+
     public int showJournal(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = utils.getObjIdScriptVar(self, "npe.player");
         newbieTutorialHighlightUIElement(player, "/GroundHUD.Quest", 7.0f);
         return SCRIPT_CONTINUE;
     }
+
     public int showHelper(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = utils.getObjIdScriptVar(self, "npe.player");
@@ -186,6 +208,7 @@ public class han_solo_experience_manager extends script.base_script
         npe.giveQuestHelperPopUp2(player);
         return SCRIPT_CONTINUE;
     }
+
     public int makehuttwave1attack(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id hutt1 = sequencer.getSequenceObject("hutt1");
@@ -196,6 +219,7 @@ public class han_solo_experience_manager extends script.base_script
         setInvulnerable(hutt3, false);
         return SCRIPT_CONTINUE;
     }
+
     public int setuphuttwave2(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = utils.getObjIdScriptVar(self, "npe.player");
@@ -268,6 +292,7 @@ public class han_solo_experience_manager extends script.base_script
         LOG("hangar_event", "Second Hutts were set up.  Hutt 1 is " + hutt1 + " Hutt 2 is " + hutt2 + " Hutt 3 is " + hutt3 + " Hutt 4 is " + hutt4 + " Hutt 5 is " + hutt5 + " Hutt 6 is " + hutt6 + ".  Player is " + player);
         return SCRIPT_CONTINUE;
     }
+
     public int endEncounter(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = utils.getObjIdScriptVar(self, "npe.player");
@@ -285,8 +310,10 @@ public class han_solo_experience_manager extends script.base_script
         obj_id[] contents = getBuildingContents(self);
         if (contents != null)
         {
-            for (obj_id content : contents) {
-                if (!isPlayer(content) && isMob(content)) {
+            for (obj_id content : contents)
+            {
+                if (!isPlayer(content) && isMob(content))
+                {
                     destroyObject(content);
                 }
             }
@@ -298,13 +325,14 @@ public class han_solo_experience_manager extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int huttMinionDied(obj_id self, dictionary params) throws InterruptedException
     {
         if (!utils.hasScriptVar(self, "huttMinionsDead"))
         {
             utils.setScriptVar(self, "huttMinionsDead", 1);
         }
-        else 
+        else
         {
             int dead = utils.getIntScriptVar(self, "huttMinionsDead");
             dead++;
@@ -316,12 +344,14 @@ public class han_solo_experience_manager extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int droidconverse1(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id droid = sequencer.getSequenceObject("droid");
         attachScript(droid, "conversation.npe_tutorial_droid_1");
         return SCRIPT_CONTINUE;
     }
+
     public int conversed1(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id droid = sequencer.getSequenceObject("droid");
@@ -329,6 +359,7 @@ public class han_solo_experience_manager extends script.base_script
         messageTo(self, "continueMainTable", null, 0, false);
         return SCRIPT_CONTINUE;
     }
+
     public int giveterminalquest(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = utils.getObjIdScriptVar(self, "npe.player");
@@ -337,6 +368,7 @@ public class han_solo_experience_manager extends script.base_script
         messageTo(self, "showHelper", null, 8, false);
         return SCRIPT_CONTINUE;
     }
+
     public int allMinionsDead(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = utils.getObjIdScriptVar(self, "npe.player");
@@ -345,6 +377,7 @@ public class han_solo_experience_manager extends script.base_script
         messageTo(self, "continueMainTable", null, 0, false);
         return SCRIPT_CONTINUE;
     }
+
     public int checkmovement(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = utils.getObjIdScriptVar(self, "npe.player");
@@ -355,6 +388,7 @@ public class han_solo_experience_manager extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int finishedtutorial(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = utils.getObjIdScriptVar(self, "npe.player");
@@ -364,12 +398,14 @@ public class han_solo_experience_manager extends script.base_script
         LOG("hangar_event", "Hangar event has finished for dungeon " + self + " and player " + player);
         return SCRIPT_CONTINUE;
     }
+
     public int setuptrigger(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id triggerObj = sequencer.getSequenceObject("playerStart");
         messageTo(triggerObj, "setupTriggerVolume", null, 0, false);
         return SCRIPT_CONTINUE;
     }
+
     public int setupdroidconversation(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id medDroid = sequencer.getSequenceObject("medDroid");
@@ -378,6 +414,7 @@ public class han_solo_experience_manager extends script.base_script
         createClientPathAdvanced(player, getLocation(player), getLocation(medDroid), "default");
         return SCRIPT_CONTINUE;
     }
+
     public int setupwalktrigger(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id triggerObj = sequencer.getSequenceObject("walkPoint");
@@ -387,6 +424,7 @@ public class han_solo_experience_manager extends script.base_script
         createClientPathAdvanced(player, getLocation(player), getLocation(triggerObj), "default");
         return SCRIPT_CONTINUE;
     }
+
     public int setupcabinet(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id cabinet = sequencer.getSequenceObject("cabinet");
@@ -395,6 +433,7 @@ public class han_solo_experience_manager extends script.base_script
         createClientPathAdvanced(player, getLocation(player), getLocation(cabinet), "default");
         return SCRIPT_CONTINUE;
     }
+
     public int setupinv(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sequencer.getSequenceObject("player");
@@ -402,12 +441,14 @@ public class han_solo_experience_manager extends script.base_script
         newbieTutorialRequest(player, "openInventory");
         return SCRIPT_CONTINUE;
     }
+
     public int setuppistol(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sequencer.getSequenceObject("player");
         utils.setScriptVar(player, "npe.pistolReady", true);
         return SCRIPT_CONTINUE;
     }
+
     public int setupterminal(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id terminal = utils.getObjIdScriptVar(self, "objTerminal");
@@ -416,11 +457,14 @@ public class han_solo_experience_manager extends script.base_script
         createClientPathAdvanced(player, getLocation(player), getLocation(terminal), "default");
         return SCRIPT_CONTINUE;
     }
+
     public int setupcrates(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id[] crates = utils.getObjIdArrayScriptVar(self, "objArrayCrates");
-        for (obj_id crate : crates) {
-            if (isIdValid(crate)) {
+        for (obj_id crate : crates)
+        {
+            if (isIdValid(crate))
+            {
                 setInvulnerable(crate, false);
             }
         }
@@ -428,6 +472,7 @@ public class han_solo_experience_manager extends script.base_script
         createClientPathAdvanced(player, getLocation(player), getLocation(crates[0]), "default");
         return SCRIPT_CONTINUE;
     }
+
     public int crateDestroyed(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sequencer.getSequenceObject("player");
@@ -442,6 +487,7 @@ public class han_solo_experience_manager extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int terminalDestroyed(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id hallwayCell = getCellId(self, "hall4");
@@ -453,6 +499,7 @@ public class han_solo_experience_manager extends script.base_script
         messageTo(self, "continueMainTable", null, 0, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnReceivedItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         if (isPlayer(item))
@@ -469,13 +516,14 @@ public class han_solo_experience_manager extends script.base_script
                 attachScript(item, "npe.han_solo_experience_player");
                 npe.resetPlayerForNpe(item);
             }
-            else 
+            else
             {
                 return SCRIPT_CONTINUE;
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnLostItem(obj_id self, obj_id destContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         if (isPlayer(item))
@@ -489,22 +537,26 @@ public class han_solo_experience_manager extends script.base_script
                 utils.removeScriptVar(self, "intMainIndex");
                 messageTo(self, "endEncounter", null, 1, false);
             }
-            else 
+            else
             {
                 return SCRIPT_CONTINUE;
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public obj_id[] getBuildingContents(obj_id objObject) throws InterruptedException
     {
         Vector objContents = new Vector();
         objContents.setSize(0);
         obj_id[] objCells = getContents(objObject);
-        for (obj_id objCell : objCells) {
+        for (obj_id objCell : objCells)
+        {
             obj_id[] objTestContents = getContents(objCell);
-            if ((objTestContents != null) && (objTestContents.length > 0)) {
-                for (obj_id objTestContent : objTestContents) {
+            if (objTestContents != null)
+            {
+                for (obj_id objTestContent : objTestContents)
+                {
                     objContents = utils.addElement(objContents, objTestContent);
                 }
             }

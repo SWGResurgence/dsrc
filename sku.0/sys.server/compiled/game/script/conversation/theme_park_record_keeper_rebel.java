@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.factions;
@@ -7,14 +13,17 @@ import script.*;
 
 public class theme_park_record_keeper_rebel extends script.base_script
 {
+    public static String c_stringFile = "conversation/theme_park_record_keeper_rebel";
+
     public theme_park_record_keeper_rebel()
     {
     }
-    public static String c_stringFile = "conversation/theme_park_record_keeper_rebel";
+
     public boolean theme_park_record_keeper_rebel_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean theme_park_record_keeper_rebel_condition_theme_park_complete(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!hasObjVar(player, "theme_park_reset.rebel"))
@@ -22,14 +31,12 @@ public class theme_park_record_keeper_rebel extends script.base_script
             if (hasObjVar(player, "theme_park_rebel"))
             {
                 int gating = getIntObjVar(player, "theme_park_rebel");
-                if (gating >= 49)
-                {
-                    return true;
-                }
+                return gating >= 49;
             }
         }
         return false;
     }
+
     public boolean theme_park_record_keeper_rebel_condition_theme_park_in_progress(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!hasObjVar(player, "theme_park_reset.rebel"))
@@ -37,22 +44,17 @@ public class theme_park_record_keeper_rebel extends script.base_script
             if (hasObjVar(player, "theme_park_rebel"))
             {
                 int gating = getIntObjVar(player, "theme_park_rebel");
-                if (gating > 0)
-                {
-                    return true;
-                }
+                return gating > 0;
             }
         }
         return false;
     }
+
     public boolean theme_park_record_keeper_rebel_condition_already_reset(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (hasObjVar(player, "theme_park_reset.rebel"))
-        {
-            return true;
-        }
-        return false;
+        return hasObjVar(player, "theme_park_reset.rebel");
     }
+
     public boolean theme_park_record_keeper_rebel_condition_not_rebel(obj_id player, obj_id npc) throws InterruptedException
     {
         String playerFaction = factions.getFaction(player);
@@ -60,15 +62,13 @@ public class theme_park_record_keeper_rebel extends script.base_script
         {
             playerFaction = "neutral";
         }
-        if (!playerFaction.equals(factions.FACTION_REBEL))
-        {
-            return true;
-        }
-        return false;
+        return !playerFaction.equals(factions.FACTION_REBEL);
     }
+
     public void theme_park_record_keeper_rebel_action__defaultAction(obj_id player, obj_id npc) throws InterruptedException
     {
     }
+
     public void theme_park_record_keeper_rebel_action_reset_gating(obj_id player, obj_id npc) throws InterruptedException
     {
         setObjVar(player, "theme_park_reset.rebel", true);
@@ -76,15 +76,18 @@ public class theme_park_record_keeper_rebel extends script.base_script
         removeObjVar(player, "theme_park_rebel");
         CustomerServiceLog("ThemePark", "RESET OPTION: Rebel -- " + getName(player) + " (" + player + ") has opted to RESET his/her theme park obj var [" + gating + "] and START OVER");
     }
+
     public void theme_park_record_keeper_rebel_action_set_redo(obj_id player, obj_id npc) throws InterruptedException
     {
         setObjVar(player, "theme_park_reset.rebel", true);
         CustomerServiceLog("ThemePark", "RESET OPTION: Rebel -- " + getName(player) + " (" + player + ") has opted to NOT RESET his/her theme park obj var and CONTINUE");
     }
+
     public void theme_park_record_keeper_rebel_action_face_to(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -94,11 +97,13 @@ public class theme_park_record_keeper_rebel extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -107,12 +112,14 @@ public class theme_park_record_keeper_rebel extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "npc.conversation.theme_park_record_keeper_rebel");
         return SCRIPT_CONTINUE;
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         if (ai_lib.isInCombat(self) || ai_lib.isInCombat(player))
@@ -156,7 +163,7 @@ public class theme_park_record_keeper_rebel extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_f51b07ff");
@@ -168,7 +175,7 @@ public class theme_park_record_keeper_rebel extends script.base_script
                 setObjVar(player, "conversation.theme_park_record_keeper_rebel.branchId", 3);
                 npcStartConversation(player, self, "theme_park_record_keeper_rebel", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(self, message);
             }
@@ -197,7 +204,7 @@ public class theme_park_record_keeper_rebel extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_f51b07ff");
@@ -209,7 +216,7 @@ public class theme_park_record_keeper_rebel extends script.base_script
                 setObjVar(player, "conversation.theme_park_record_keeper_rebel.branchId", 20);
                 npcStartConversation(player, self, "theme_park_record_keeper_rebel", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(self, message);
             }
@@ -225,6 +232,7 @@ public class theme_park_record_keeper_rebel extends script.base_script
         chat.chat(self, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("theme_park_record_keeper_rebel"))
@@ -256,7 +264,7 @@ public class theme_park_record_keeper_rebel extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_edb238bc");
@@ -269,7 +277,7 @@ public class theme_park_record_keeper_rebel extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.theme_park_record_keeper_rebel.branchId");
                     npcSpeak(player, message);
@@ -317,7 +325,7 @@ public class theme_park_record_keeper_rebel extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_866cf013");
@@ -330,7 +338,7 @@ public class theme_park_record_keeper_rebel extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.theme_park_record_keeper_rebel.branchId");
                     npcSpeak(player, message);
@@ -378,7 +386,7 @@ public class theme_park_record_keeper_rebel extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_b7023094");
@@ -391,7 +399,7 @@ public class theme_park_record_keeper_rebel extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.theme_park_record_keeper_rebel.branchId");
                     npcSpeak(player, message);
@@ -446,7 +454,7 @@ public class theme_park_record_keeper_rebel extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_3cf75f2d");
@@ -463,7 +471,7 @@ public class theme_park_record_keeper_rebel extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.theme_park_record_keeper_rebel.branchId");
                     npcSpeak(player, message);
@@ -504,7 +512,7 @@ public class theme_park_record_keeper_rebel extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_9bc93d72");
@@ -513,7 +521,7 @@ public class theme_park_record_keeper_rebel extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.theme_park_record_keeper_rebel.branchId");
                     npcSpeak(player, message);
@@ -548,7 +556,7 @@ public class theme_park_record_keeper_rebel extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_dc1c8663");
@@ -561,7 +569,7 @@ public class theme_park_record_keeper_rebel extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.theme_park_record_keeper_rebel.branchId");
                     npcSpeak(player, message);
@@ -609,7 +617,7 @@ public class theme_park_record_keeper_rebel extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_dc1c8663");
@@ -622,7 +630,7 @@ public class theme_park_record_keeper_rebel extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.theme_park_record_keeper_rebel.branchId");
                     npcSpeak(player, message);
@@ -711,7 +719,7 @@ public class theme_park_record_keeper_rebel extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_edb238bc");
@@ -724,7 +732,7 @@ public class theme_park_record_keeper_rebel extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.theme_park_record_keeper_rebel.branchId");
                     npcSpeak(player, message);
@@ -772,7 +780,7 @@ public class theme_park_record_keeper_rebel extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_866cf013");
@@ -785,7 +793,7 @@ public class theme_park_record_keeper_rebel extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.theme_park_record_keeper_rebel.branchId");
                     npcSpeak(player, message);
@@ -833,7 +841,7 @@ public class theme_park_record_keeper_rebel extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_b7023094");
@@ -846,7 +854,7 @@ public class theme_park_record_keeper_rebel extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.theme_park_record_keeper_rebel.branchId");
                     npcSpeak(player, message);
@@ -915,7 +923,7 @@ public class theme_park_record_keeper_rebel extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a76f22bf");
@@ -940,7 +948,7 @@ public class theme_park_record_keeper_rebel extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.theme_park_record_keeper_rebel.branchId");
                     npcSpeak(player, message);
@@ -1002,7 +1010,7 @@ public class theme_park_record_keeper_rebel extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_14693cf1");
@@ -1023,7 +1031,7 @@ public class theme_park_record_keeper_rebel extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.theme_park_record_keeper_rebel.branchId");
                     npcSpeak(player, message);
@@ -1072,7 +1080,7 @@ public class theme_park_record_keeper_rebel extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a76f22bf");
@@ -1093,7 +1101,7 @@ public class theme_park_record_keeper_rebel extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.theme_park_record_keeper_rebel.branchId");
                     npcSpeak(player, message);
@@ -1128,7 +1136,7 @@ public class theme_park_record_keeper_rebel extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_dc1c8663");
@@ -1141,7 +1149,7 @@ public class theme_park_record_keeper_rebel extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.theme_park_record_keeper_rebel.branchId");
                     npcSpeak(player, message);
@@ -1176,7 +1184,7 @@ public class theme_park_record_keeper_rebel extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f7565bbd");
@@ -1189,7 +1197,7 @@ public class theme_park_record_keeper_rebel extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.theme_park_record_keeper_rebel.branchId");
                     npcSpeak(player, message);
@@ -1251,7 +1259,7 @@ public class theme_park_record_keeper_rebel extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a76f22bf");
@@ -1272,7 +1280,7 @@ public class theme_park_record_keeper_rebel extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.theme_park_record_keeper_rebel.branchId");
                     npcSpeak(player, message);
@@ -1307,7 +1315,7 @@ public class theme_park_record_keeper_rebel extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_dc1c8663");
@@ -1320,7 +1328,7 @@ public class theme_park_record_keeper_rebel extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.theme_park_record_keeper_rebel.branchId");
                     npcSpeak(player, message);
@@ -1355,7 +1363,7 @@ public class theme_park_record_keeper_rebel extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f7565bbd");
@@ -1368,7 +1376,7 @@ public class theme_park_record_keeper_rebel extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.theme_park_record_keeper_rebel.branchId");
                     npcSpeak(player, message);
@@ -1430,7 +1438,7 @@ public class theme_park_record_keeper_rebel extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_14693cf1");
@@ -1451,7 +1459,7 @@ public class theme_park_record_keeper_rebel extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.theme_park_record_keeper_rebel.branchId");
                     npcSpeak(player, message);
@@ -1486,7 +1494,7 @@ public class theme_park_record_keeper_rebel extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_dc1c8663");
@@ -1499,7 +1507,7 @@ public class theme_park_record_keeper_rebel extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.theme_park_record_keeper_rebel.branchId");
                     npcSpeak(player, message);
@@ -1534,7 +1542,7 @@ public class theme_park_record_keeper_rebel extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f7565bbd");
@@ -1547,7 +1555,7 @@ public class theme_park_record_keeper_rebel extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.theme_park_record_keeper_rebel.branchId");
                     npcSpeak(player, message);
@@ -1630,7 +1638,7 @@ public class theme_park_record_keeper_rebel extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a76f22bf");
@@ -1655,7 +1663,7 @@ public class theme_park_record_keeper_rebel extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.theme_park_record_keeper_rebel.branchId");
                     npcSpeak(player, message);
@@ -1704,7 +1712,7 @@ public class theme_park_record_keeper_rebel extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_14693cf1");
@@ -1725,7 +1733,7 @@ public class theme_park_record_keeper_rebel extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.theme_park_record_keeper_rebel.branchId");
                     npcSpeak(player, message);
@@ -1774,7 +1782,7 @@ public class theme_park_record_keeper_rebel extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a76f22bf");
@@ -1795,7 +1803,7 @@ public class theme_park_record_keeper_rebel extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.theme_park_record_keeper_rebel.branchId");
                     npcSpeak(player, message);
@@ -1830,7 +1838,7 @@ public class theme_park_record_keeper_rebel extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_dc1c8663");
@@ -1843,7 +1851,7 @@ public class theme_park_record_keeper_rebel extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.theme_park_record_keeper_rebel.branchId");
                     npcSpeak(player, message);
@@ -1878,7 +1886,7 @@ public class theme_park_record_keeper_rebel extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f7565bbd");
@@ -1891,7 +1899,7 @@ public class theme_park_record_keeper_rebel extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.theme_park_record_keeper_rebel.branchId");
                     npcSpeak(player, message);
@@ -1974,7 +1982,7 @@ public class theme_park_record_keeper_rebel extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a76f22bf");
@@ -1999,7 +2007,7 @@ public class theme_park_record_keeper_rebel extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.theme_park_record_keeper_rebel.branchId");
                     npcSpeak(player, message);
@@ -2048,7 +2056,7 @@ public class theme_park_record_keeper_rebel extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_14693cf1");
@@ -2069,7 +2077,7 @@ public class theme_park_record_keeper_rebel extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.theme_park_record_keeper_rebel.branchId");
                     npcSpeak(player, message);
@@ -2118,7 +2126,7 @@ public class theme_park_record_keeper_rebel extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a76f22bf");
@@ -2139,7 +2147,7 @@ public class theme_park_record_keeper_rebel extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.theme_park_record_keeper_rebel.branchId");
                     npcSpeak(player, message);
@@ -2174,7 +2182,7 @@ public class theme_park_record_keeper_rebel extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_dc1c8663");
@@ -2187,7 +2195,7 @@ public class theme_park_record_keeper_rebel extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.theme_park_record_keeper_rebel.branchId");
                     npcSpeak(player, message);
@@ -2222,7 +2230,7 @@ public class theme_park_record_keeper_rebel extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f7565bbd");
@@ -2235,7 +2243,7 @@ public class theme_park_record_keeper_rebel extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.theme_park_record_keeper_rebel.branchId");
                     npcSpeak(player, message);

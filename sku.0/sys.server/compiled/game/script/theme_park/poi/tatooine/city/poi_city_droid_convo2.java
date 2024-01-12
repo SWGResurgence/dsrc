@@ -1,5 +1,11 @@
 package script.theme_park.poi.tatooine.city;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.create;
 import script.obj_id;
@@ -9,6 +15,7 @@ public class poi_city_droid_convo2 extends script.base_script
     public poi_city_droid_convo2()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         spawnDroid(self);
@@ -17,6 +24,7 @@ public class poi_city_droid_convo2 extends script.base_script
         messageTo(self, "checkForScripts", null, 10, true);
         return SCRIPT_CONTINUE;
     }
+
     public int handleChatting(obj_id self, dictionary params) throws InterruptedException
     {
         messageTo(self, "handleChatting", null, 600, false);
@@ -31,16 +39,19 @@ public class poi_city_droid_convo2 extends script.base_script
         setAnimationMood(guy1, "conversation");
         return SCRIPT_CONTINUE;
     }
+
     public void spawnGuy(obj_id baseObject) throws InterruptedException
     {
         obj_id guy1 = create.themeParkObject(getRandomGuy(), 1.0f, 0.0f, "handleDeadGuy", 0.0f);
         setObjVar(baseObject, "guy1", guy1);
     }
+
     public int handleDeadGuy(obj_id self, dictionary params) throws InterruptedException
     {
         spawnGuy(self);
         return SCRIPT_CONTINUE;
     }
+
     public void spawnDroid(obj_id baseObject) throws InterruptedException
     {
         String[] droids = new String[4];
@@ -51,11 +62,13 @@ public class poi_city_droid_convo2 extends script.base_script
         obj_id droid = create.themeParkObject(droids[rand(0, 3)], 2.0f, 1.0f, "handleDeadDroid", 0.0f);
         setObjVar(baseObject, "droidSpawn", true);
     }
+
     public int handleDeadDroid(obj_id self, dictionary params) throws InterruptedException
     {
         spawnDroid(self);
         return SCRIPT_CONTINUE;
     }
+
     public String getRandomGuy() throws InterruptedException
     {
         int whichGuy = rand(1, 5);
@@ -64,12 +77,13 @@ public class poi_city_droid_convo2 extends script.base_script
         {
             guy = "commoner";
         }
-        else 
+        else
         {
             guy = "noble";
         }
         return guy;
     }
+
     public int checkForScripts(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasScript(self, "theme_park.poi.launch"))

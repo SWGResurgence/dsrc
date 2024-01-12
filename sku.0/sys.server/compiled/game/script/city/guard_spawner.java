@@ -1,5 +1,11 @@
 package script.city;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.location;
@@ -9,15 +15,18 @@ import java.util.Vector;
 
 public class guard_spawner extends script.base_script
 {
+    public static final String guardTable = "datatables/npc/guard_spawner/guard.iff";
+
     public guard_spawner()
     {
     }
-    public static final String guardTable = "datatables/npc/guard_spawner/guard.iff";
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "checkForStart", null, 3, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         location here = getLocation(self);
@@ -46,7 +55,7 @@ public class guard_spawner extends script.base_script
             killAll(self);
             messageTo(self, "checkForStart", null, 30, false);
         }
-        else 
+        else
         {
             messageTo(self, "checkForStart", null, 30, false);
         }
@@ -56,6 +65,7 @@ public class guard_spawner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnHearSpeech(obj_id self, obj_id speaker, String text) throws InterruptedException
     {
         if (!hasObjVar(speaker, "gm"))
@@ -63,7 +73,7 @@ public class guard_spawner extends script.base_script
             return SCRIPT_OVERRIDE;
         }
         int stringCheck = text.indexOf("max");
-        String population = text.substring(text.indexOf(" ") + 1, text.length());
+        String population = text.substring(text.indexOf(" ") + 1);
         int maxPop = utils.stringToInt(population);
         if (stringCheck > -1)
         {
@@ -79,6 +89,7 @@ public class guard_spawner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int checkForStart(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "pop"))
@@ -86,13 +97,14 @@ public class guard_spawner extends script.base_script
             messageTo(self, "startSpawning", null, 10, false);
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             setObjVar(self, "pop", 5);
             messageTo(self, "checkForStart", null, 3, false);
             return SCRIPT_CONTINUE;
         }
     }
+
     public int startSpawning(obj_id self, dictionary params) throws InterruptedException
     {
         if (!utils.hasScriptVar(self, "police"))
@@ -101,7 +113,7 @@ public class guard_spawner extends script.base_script
             {
                 utils.setScriptVar(self, "police", 1);
             }
-            else 
+            else
             {
                 utils.setScriptVar(self, "police", 0);
             }
@@ -118,11 +130,11 @@ public class guard_spawner extends script.base_script
                     String electionWinner = getStringObjVar(self, "bestine.electionWinner");
                     if (electionWinner.equals("victor") || electionWinner.equals("Victor"))
                     {
-                        maxPop = (int)(maxPop * 2.5);
+                        maxPop = (int) (maxPop * 2.5);
                     }
-                    else 
+                    else
                     {
-                        maxPop = (int)(maxPop * 1.5);
+                        maxPop = (int) (maxPop * 1.5);
                     }
                 }
             }
@@ -132,14 +144,14 @@ public class guard_spawner extends script.base_script
             setObjVar(self, "current", 0);
             doSpawn(self, false);
         }
-        else 
+        else
         {
             int currentPop = getIntObjVar(self, "current");
             if (currentPop < maxPop)
             {
                 doSpawn(self, false);
             }
-            else 
+            else
             {
                 utils.removeScriptVar(self, "police");
                 return SCRIPT_OVERRIDE;
@@ -147,11 +159,13 @@ public class guard_spawner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int guardSpawnerRespawnNpc(obj_id self, dictionary params) throws InterruptedException
     {
         doSpawn(self, true);
         return SCRIPT_CONTINUE;
     }
+
     public void doSpawn(obj_id self, boolean onlySpawnOne) throws InterruptedException
     {
         String type = getGuardArea(self);
@@ -173,7 +187,7 @@ public class guard_spawner extends script.base_script
             utils.addElement(myCreations, npc);
             setObjVar(self, "myCreations", myCreations);
         }
-        else 
+        else
         {
             Vector theList = getResizeableObjIdArrayObjVar(self, "myCreations");
             int maxPop = getIntObjVar(self, "pop");
@@ -182,7 +196,7 @@ public class guard_spawner extends script.base_script
                 CustomerServiceLog("SPAWNER_OVERLOAD", "Tried to spawn something even though the list was full.");
                 return;
             }
-            else 
+            else
             {
                 theList.add(npc);
                 setObjVar(self, "myCreations", theList);
@@ -194,7 +208,7 @@ public class guard_spawner extends script.base_script
         {
             setObjVar(self, "leader", npc);
         }
-        else 
+        else
         {
             obj_id leader = getObjIdObjVar(self, "leader");
             ai_lib.followInFormation(npc, leader, ai_lib.FORMATION_COLUMN, currentPop - 1);
@@ -205,8 +219,8 @@ public class guard_spawner extends script.base_script
         {
             messageTo(self, "startSpawning", null, 10, false);
         }
-        return;
     }
+
     public String npcToSpawn(String type) throws InterruptedException
     {
         String[] guardList = dataTableGetStringColumnNoDefaults(guardTable, type);
@@ -214,6 +228,7 @@ public class guard_spawner extends script.base_script
         String guard = guardList[guardNum];
         return guard;
     }
+
     public int cityMobKilled(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id deadNpc = params.getObjId("deadNpc");
@@ -238,18 +253,19 @@ public class guard_spawner extends script.base_script
             {
                 setObjVar(self, "myCreations", spawnedList);
             }
-            else 
+            else
             {
                 removeObjVar(self, "myCreations");
             }
             messageTo(self, "guardSpawnerRespawnNpc", null, 10, false);
         }
-        else 
+        else
         {
             CustomerServiceLog("SPAWNER_OVERLOAD", "Spawner " + self + " tried to spawn a replacement for " + deadNpc + " but he's not on my list!");
         }
         return SCRIPT_CONTINUE;
     }
+
     public void killAll(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "spawn"))
@@ -271,14 +287,15 @@ public class guard_spawner extends script.base_script
         if (hasObjVar(self, "myCreations"))
         {
             Vector theList = getResizeableObjIdArrayObjVar(self, "myCreations");
-            for (Object o : theList) {
+            for (Object o : theList)
+            {
                 destroyObject(((obj_id) o));
             }
             removeObjVar(self, "myCreations");
         }
         removeObjVar(self, "current");
-        return;
     }
+
     public String getGuardArea(obj_id self) throws InterruptedException
     {
         String guardAreaName = "tatooine";
@@ -320,19 +337,19 @@ public class guard_spawner extends script.base_script
                 {
                     test_city = test_city + "_imperial_hard";
                 }
-                else 
+                else
                 {
                     test_city = test_city + "_imperial";
                 }
             }
-            else 
+            else
             {
                 float delta = reb_r - imp_r;
                 if (delta > 2.0f)
                 {
                     test_city = test_city + "_rebel_hard";
                 }
-                else 
+                else
                 {
                     test_city = test_city + "_rebel";
                 }
@@ -355,13 +372,13 @@ public class guard_spawner extends script.base_script
         {
             guardAreaName = planet;
         }
-        else 
+        else
         {
             if (dataTableHasColumn(guardTable, city))
             {
                 guardAreaName = city;
             }
-            else 
+            else
             {
                 guardAreaName = planet;
             }

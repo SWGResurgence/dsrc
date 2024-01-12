@@ -1,5 +1,11 @@
 package script.npc.vendor;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.obj_id;
@@ -7,9 +13,6 @@ import script.string_id;
 
 public class vendor extends script.base_script
 {
-    public vendor()
-    {
-    }
     public static final String VENDOR_TABLE_DIRECTORY = "datatables/item/vendor/";
     public static final String VENDOR_TABLE_OBJVAR = "item.vendor.vendor_table";
     public static final String VENDOR_CONTAINER_TEMPLATE = "object/tangible/container/vendor/npc_only.iff";
@@ -20,16 +23,22 @@ public class vendor extends script.base_script
     public static final String VENDOR_TOKEN_TYPE = "item.token.type";
     public static final int IMPERIAL = 10;
     public static final int REBEL = 11;
+    public vendor()
+    {
+    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "handleInitializeVendor", null, 10, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "handleInitializeVendor", null, 10, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleInitializeVendor(obj_id self, dictionary params) throws InterruptedException
     {
         if (!hasObjVar(self, VENDOR_TABLE_OBJVAR))
@@ -175,6 +184,7 @@ public class vendor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int showInventorySUI(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -215,6 +225,7 @@ public class vendor extends script.base_script
         queueCommand(player, (1880585606), container, "", COMMAND_PRIORITY_DEFAULT);
         return SCRIPT_CONTINUE;
     }
+
     public int showNonClassInventory(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -241,12 +252,16 @@ public class vendor extends script.base_script
     Cleanup is handled by deleting both all items in the containers and the containers themselves to avoid orphaning random objects, and then triggering initialization again.
      */
     //TODO full implementation with versioning
-    public void handleCleanVendor(obj_id self) throws InterruptedException {
+    public void handleCleanVendor(obj_id self) throws InterruptedException
+    {
         obj_id[] containers = getContents(utils.getInventoryContainer(self));
-        for (obj_id container : containers) {
-            if(getTemplateName(container).equals(VENDOR_CONTAINER_TEMPLATE)) {
+        for (obj_id container : containers)
+        {
+            if (getTemplateName(container).equals(VENDOR_CONTAINER_TEMPLATE))
+            {
                 obj_id[] contents = getContents(container);
-                for (obj_id item : contents) {
+                for (obj_id item : contents)
+                {
                     destroyObject(item);
                 }
                 destroyObject(container);

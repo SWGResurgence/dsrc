@@ -1,5 +1,11 @@
 package script.theme_park.gating.jabba;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.groundquests;
 import script.obj_id;
 import script.string_id;
@@ -9,6 +15,7 @@ public class garage_block extends script.base_script
     public garage_block()
     {
     }
+
     public int OnAboutToReceiveItem(obj_id self, obj_id destinationCell, obj_id transferrer, obj_id item) throws InterruptedException
     {
         if (!isPlayer(item))
@@ -27,7 +34,7 @@ public class garage_block extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             string_id warning = new string_id("theme_park_jabba/warning", "porcellus");
             sendSystemMessage(item, warning);

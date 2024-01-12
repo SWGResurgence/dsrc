@@ -1,5 +1,11 @@
 package script.npe;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.attrib;
 import script.library.utils;
@@ -10,12 +16,14 @@ public class npe_follow_han_object extends script.base_script
     public npe_follow_han_object()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setObjVar(self, "hanHere", false);
         setObjVar(self, "playerHere", false);
         return SCRIPT_CONTINUE;
     }
+
     public int setupTriggerVolume(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id building = getTopMostContainer(self);
@@ -26,10 +34,13 @@ public class npe_follow_han_object extends script.base_script
         setAttributeInterested(self, attrib.ALL);
         setAttributeAttained(player, attrib.ALL);
         setAttributeAttained(hanSolo, attrib.ALL);
-        for (obj_id content : contents) {
-            if (isIdValid(content) && isPlayer(content)) {
+        for (obj_id content : contents)
+        {
+            if (isIdValid(content) && isPlayer(content))
+            {
                 setObjVar(self, "playerHere", true);
-                if (getBooleanObjVar(self, "playerHere") && getBooleanObjVar(self, "hanHere")) {
+                if (getBooleanObjVar(self, "playerHere") && getBooleanObjVar(self, "hanHere"))
+                {
                     messageTo(building, "continueMainTable", null, 0, false);
                     destroyClientPath(content);
                     removeTriggerVolume("npeFollowHan");
@@ -38,6 +49,7 @@ public class npe_follow_han_object extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id player) throws InterruptedException
     {
         if (volumeName.equals("npeFollowHan"))

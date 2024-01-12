@@ -1,5 +1,11 @@
 package script.npc.celebrity;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.chat;
@@ -9,11 +15,12 @@ import script.string_id;
 
 public class kole extends script.base_script
 {
+    public static final String CONVO = "celebrity/kole";
+    public static final String FACETO_VOLUME_NAME = "faceToTriggerVolume";
     public kole()
     {
     }
-    public static final String CONVO = "celebrity/kole";
-    public static final String FACETO_VOLUME_NAME = "faceToTriggerVolume";
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setName(self, "Kole");
@@ -25,6 +32,7 @@ public class kole extends script.base_script
         messageTo(self, "doISetup", null, 2, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id speaker) throws InterruptedException
     {
         String questInfo = "tell_me_quest";
@@ -38,7 +46,7 @@ public class kole extends script.base_script
         if (hasObjVar(speaker, "nym.kole.done"))
         {
             string_id greeting = new string_id(CONVO, "good_work");
-            string_id response[] = new string_id[2];
+            string_id[] response = new string_id[2];
             response[0] = new string_id(CONVO, "what_now");
             response[1] = new string_id(CONVO, "see_ya");
             setObjVar(speaker, "nym.kole.finished", 1);
@@ -62,7 +70,7 @@ public class kole extends script.base_script
         if (hasObjVar(speaker, "nym.kole.gotgas"))
         {
             string_id greeting = new string_id(CONVO, "bring_gas");
-            string_id response[] = new string_id[2];
+            string_id[] response = new string_id[2];
             response[0] = new string_id(CONVO, "yes");
             response[1] = new string_id(CONVO, "no");
             npcStartConversation(speaker, self, "celebConvo", greeting, response);
@@ -78,7 +86,7 @@ public class kole extends script.base_script
         if (hasObjVar(speaker, "nym.kole.everyone"))
         {
             string_id greeting = new string_id(CONVO, "hello_again");
-            string_id response[] = new string_id[1];
+            string_id[] response = new string_id[1];
             response[0] = new string_id(CONVO, questInfo);
             npcStartConversation(speaker, self, "celebConvo", greeting, response);
         }
@@ -89,14 +97,14 @@ public class kole extends script.base_script
             removeObjVar(speaker, "nym.kole.nym");
             removeObjVar(speaker, "nym.kole.jinkins");
             string_id greeting = new string_id(CONVO, "hello_again");
-            string_id response[] = new string_id[1];
+            string_id[] response = new string_id[1];
             response[0] = new string_id(CONVO, questInfo);
             npcStartConversation(speaker, self, "celebConvo", greeting, response);
         }
         else if (hasObjVar(speaker, "nym.kole.jinkins"))
         {
             string_id greeting = new string_id(CONVO, "hello_again");
-            string_id response[] = new string_id[2];
+            string_id[] response = new string_id[2];
             response[0] = new string_id(CONVO, questInfo);
             response[1] = new string_id(CONVO, "who_is_nym");
             npcStartConversation(speaker, self, "celebConvo", greeting, response);
@@ -104,7 +112,7 @@ public class kole extends script.base_script
         else if (hasObjVar(speaker, "nym.kole.nym"))
         {
             string_id greeting = new string_id(CONVO, "hello_again");
-            string_id response[] = new string_id[2];
+            string_id[] response = new string_id[2];
             response[0] = new string_id(CONVO, questInfo);
             response[1] = new string_id(CONVO, "who_is_jinkins");
             npcStartConversation(speaker, self, "celebConvo", greeting, response);
@@ -112,7 +120,7 @@ public class kole extends script.base_script
         else if (hasObjVar(speaker, "nym.kole.kole"))
         {
             string_id greeting = new string_id(CONVO, "hello_again");
-            string_id response[] = new string_id[3];
+            string_id[] response = new string_id[3];
             response[0] = new string_id(CONVO, questInfo);
             response[1] = new string_id(CONVO, "who_is_nym");
             response[2] = new string_id(CONVO, "who_is_jinkins");
@@ -121,21 +129,22 @@ public class kole extends script.base_script
         else if (hasObjVar(speaker, "nym.kole.talked"))
         {
             string_id greeting = new string_id(CONVO, "hello_again");
-            string_id response[] = new string_id[2];
+            string_id[] response = new string_id[2];
             response[0] = new string_id(CONVO, questInfo);
             response[1] = new string_id(CONVO, "who_are_you");
             npcStartConversation(speaker, self, "celebConvo", greeting, response);
         }
-        else 
+        else
         {
             string_id greeting = new string_id(CONVO, "first_time_hello");
-            string_id response[] = new string_id[2];
+            string_id[] response = new string_id[2];
             response[0] = new string_id(CONVO, questInfo);
             response[1] = new string_id(CONVO, "who_are_you");
             npcStartConversation(speaker, self, "celebConvo", greeting, response);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String convo, obj_id player, string_id response) throws InterruptedException
     {
         setObjVar(player, "nym.kole.talked", 1);
@@ -325,6 +334,7 @@ public class kole extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnGiveItem(obj_id self, obj_id item, obj_id player) throws InterruptedException
     {
         String gaveMe = getTemplateName(item);
@@ -335,13 +345,14 @@ public class kole extends script.base_script
             chat.chat(self, message);
             return SCRIPT_OVERRIDE;
         }
-        else 
+        else
         {
             string_id message = new string_id(CONVO, "whats_this");
             chat.chat(self, message);
             return SCRIPT_CONTINUE;
         }
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id breacher) throws InterruptedException
     {
         if (!isPlayer(breacher))
@@ -362,12 +373,14 @@ public class kole extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int doISetup(obj_id self, dictionary params) throws InterruptedException
     {
         setCondition(self, CONDITION_INTERESTING);
         messageTo(self, "unkillable", null, 2, false);
         return SCRIPT_CONTINUE;
     }
+
     public int unkillable(obj_id self, dictionary params) throws InterruptedException
     {
         setInvulnerable(self, true);

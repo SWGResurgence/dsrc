@@ -1,5 +1,11 @@
 package script.quest.util;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.groundquests;
@@ -12,11 +18,13 @@ public class retrieve_item_vulnerable extends script.base_script
     public retrieve_item_vulnerable()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         location here = getLocation(player);
@@ -44,6 +52,7 @@ public class retrieve_item_vulnerable extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleSetVulnerable(obj_id self, dictionary params) throws InterruptedException
     {
         setInvulnerable(self, false);

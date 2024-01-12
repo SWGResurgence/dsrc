@@ -1,5 +1,11 @@
 package script;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import javax.tools.*;
 import java.io.File;
 import java.io.RandomAccessFile;
@@ -13,25 +19,17 @@ import java.util.logging.SimpleFormatter;
 /**
  * script_class_loader represents a custom wrapping of Java's
  * native ClassLoader for applications appropriate to SWG Scripting.
- * @see script_entry
  *
- * @since SWG Source 3.1 - August 2021 (Refactored)
  * @author Aconite
  * @author SOE (prior to 3.1 refactor)
  * @author BubbaJoe, resurgence compatability.
+ * @see script_entry
+ * @since SWG Source 3.1 - August 2021 (Refactored)
  */
 public class script_class_loader extends ClassLoader
 {
     // keep a dummy method object around to identify methods that are missing from scripts
     private static final Object NO_OBJECT = new Object();
-    /**
-     * Contains an immutable collection of script names from the "script"
-     * package (root package) and inner classes of library classes that
-     * should be included during class initialization.
-     *
-     * @since SWG Source 3.1 - August 2021
-     */
-    private static final Set<String> DEFAULT_LOAD = getDefaultLoad();
     /**
      * A class whose name is prefixed with any of the items in this array will
      * be handled through the default load process which uses Java's native
@@ -49,7 +47,61 @@ public class script_class_loader extends ClassLoader
             "jdk.",
             "oracle.",
     };
+    /**
+     * Hash Table of Cached Script Class Loader Classes
+     */
+    private static final Hashtable<String, script_class_loader> LOADER_CACHE = new Hashtable<>();
+    /**
+     * Set to true to enable debugging script class loader. See: LOGGER
+     */
+    private static final boolean DEBUG = false;
+    /**
+     * Because we can't use SRC logging due to its inaccessibility while we
+     * are in the process of initialization, we just use Java's Native Logging
+     * API for a simple logging implementation that only runs if DEBUG = true.
+     * <p>
+     * The log writes to swg-main/exe/linux/script_class_loader.log
+     */
+    private static final Logger LOGGER = DEBUG ? Logger.getLogger(script_class_loader.class.getName()) : null;
+    /**
+     * Contains an immutable collection of script names from the "script"
+     * package (root package) and inner classes of library classes that
+     * should be included during class initialization.
+     *
+     * @since SWG Source 3.1 - August 2021
+     */
+    private static final Set<String> DEFAULT_LOAD = getDefaultLoad();
     public static Method NO_METHOD = null;
+
+    static
+    {
+
+        // Handle Logger Setup
+        if (DEBUG && LOGGER != null)
+        {
+            try
+            {
+                FileHandler file = new FileHandler("script_class_loader.log");
+                file.setFormatter(new SimpleFormatter());
+                LOGGER.setUseParentHandlers(false);
+                LOGGER.addHandler(file);
+            } catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+        }
+
+        // initialize the NO_METHOD object
+        try
+        {
+            NO_METHOD = NO_OBJECT.getClass().getMethod("hashCode", (Class<?>[]) null);
+        } catch (NoSuchMethodException err)
+        {
+            System.err.println("WARNING: " + err);
+        }
+
+    }
+
     /**
      * Hash Table of Methods for this Class Loader Object with String
      * Method Name used by SRC mapped to a Java Method Object.
@@ -62,67 +114,21 @@ public class script_class_loader extends ClassLoader
      * @since SWG Source 3.1 - August 2021
      */
     private final ArrayList<String> DERIVED_CLASSES = new ArrayList<>();
-    private String 		myClassName;		// class this loader is responsible for
-    /**
-     * Hash Table of Cached Script Class Loader Classes
-     */
-    private static final Hashtable<String, script_class_loader> LOADER_CACHE = new Hashtable<>();
-    private Class<?>	myClass;			// class this loader has loaded
-    private Object		myObject;			// object instance of our class
-    /**
-     * Set to true to enable debugging script class loader. See: LOGGER
-     */
-    private static final boolean DEBUG = false;
-    /**
-     * Because we can't use SRC logging due to its inaccessibility while we
-     * are in the process of initialization, we just use Java's Native Logging
-     * API for a simple logging implementation that only runs if DEBUG = true.
-     *
-     * The log writes to swg-main/exe/linux/script_class_loader.log
-     */
-    private static final Logger LOGGER = DEBUG ? Logger.getLogger(script_class_loader.class.getName()) : null;
-
-    static
-    {
-
-        // Handle Logger Setup
-        if(DEBUG && LOGGER != null)
-        {
-            try
-            {
-                FileHandler file = new FileHandler("script_class_loader.log");
-                file.setFormatter(new SimpleFormatter());
-                LOGGER.setUseParentHandlers(false);
-                LOGGER.addHandler(file);
-            }
-            catch (Exception e)
-            {
-                e.printStackTrace();
-            }
-        }
-
-        // initialize the NO_METHOD object
-        try
-        {
-            NO_METHOD = NO_OBJECT.getClass().getMethod("hashCode", (Class<?>[]) null);
-        }
-        catch( NoSuchMethodException err )
-        {
-            System.err.println("WARNING: " + err);
-        }
-
-    }
+    private String myClassName;        // class this loader is responsible for
+    private Class<?> myClass;            // class this loader has loaded
+    private Object myObject;            // object instance of our class
 
     /**
      * Class constructor.
      *
-     * @param name      name of class this loader is responsible for
+     * @param name
+     *         name of class this loader is responsible for
      */
-    private script_class_loader(String name)  throws ClassNotFoundException
+    private script_class_loader(String name) throws ClassNotFoundException
     {
-        if(DEBUG)
+        if (DEBUG)
         {
-            LOGGER.info("script_class_loader() constructor called for class "+name);
+            LOGGER.info("script_class_loader() constructor called for class " + name);
         }
 
         // initialize basic data
@@ -139,12 +145,10 @@ public class script_class_loader extends ClassLoader
             try
             {
                 myObject = myClass.getDeclaredConstructor().newInstance();
-            }
-            catch (InstantiationException | IllegalAccessException err)
+            } catch (InstantiationException | IllegalAccessException err)
             {
                 System.err.println("WARNING: Java Error creating class instance " + name + " : " + err);
-            }
-            catch (NoSuchMethodException | InvocationTargetException e)
+            } catch (NoSuchMethodException | InvocationTargetException e)
             {
                 e.printStackTrace();
             }
@@ -159,22 +163,23 @@ public class script_class_loader extends ClassLoader
      * Finds the class loader for a given class. If the class loader doesn't
      * exist, creates it.
      *
-     * @param name      name of class we want the loader for
+     * @param name
+     *         name of class we want the loader for
      */
     public static script_class_loader getClassLoader(String name) throws ClassNotFoundException
     {
-        if(DEBUG)
+        if (DEBUG)
         {
-            LOGGER.info("script_class_loader.getClassLoader() called for "+name);
+            LOGGER.info("script_class_loader.getClassLoader() called for " + name);
         }
-        if(LOADER_CACHE.containsKey(name))
+        if (LOADER_CACHE.containsKey(name))
         {
             script_class_loader test = LOADER_CACHE.get(name);
-            if(test != null)
+            if (test != null)
             {
-                if(DEBUG)
+                if (DEBUG)
                 {
-                    LOGGER.info("script_class_loader.getClassLoader() returned from LOADER_CACHE for "+name);
+                    LOGGER.info("script_class_loader.getClassLoader() returned from LOADER_CACHE for " + name);
                 }
                 return test;
             }
@@ -182,11 +187,11 @@ public class script_class_loader extends ClassLoader
 
         if (!name.startsWith("script."))
         {
-            ClassNotFoundException err =  new ClassNotFoundException("Class " + name + " does not start with 'script.'");
+            ClassNotFoundException err = new ClassNotFoundException("Class " + name + " does not start with 'script.'");
             err.printStackTrace();
-            if(DEBUG)
+            if (DEBUG)
             {
-                LOGGER.warning("script_class_loader.getClassLoader() failed to load "+name+" because it did not start with script.");
+                LOGGER.warning("script_class_loader.getClassLoader() failed to load " + name + " because it did not start with script.");
             }
             throw err;
         }
@@ -202,15 +207,15 @@ public class script_class_loader extends ClassLoader
     /**
      * Removes a loader for a given script, so the class can be loaded again
      *
-     * @param name      name of class whose loader we want to remove
-     *
+     * @param name
+     *         name of class whose loader we want to remove
      * @return true if the class was unloaded, false if the class doesn't exist
      */
     public static boolean unloadClass(String name)
     {
-        if(DEBUG)
+        if (DEBUG)
         {
-            LOGGER.info("script_class_loader.unloadClass() unloading class "+name);
+            LOGGER.info("script_class_loader.unloadClass() unloading class " + name);
         }
         boolean result = false;
         if (LOADER_CACHE.containsKey(name))
@@ -219,7 +224,7 @@ public class script_class_loader extends ClassLoader
             // unload all the classes that derive from this one
             if (loader.DERIVED_CLASSES.size() > 0)
             {
-                for(String derived_class : loader.DERIVED_CLASSES)
+                for (String derived_class : loader.DERIVED_CLASSES)
                 {
                     unloadClass(derived_class);
                 }
@@ -250,15 +255,123 @@ public class script_class_loader extends ClassLoader
     }
 
     /**
+     * Loads a .class file from a file.
+     *
+     * @param name
+     *         name of the class to load
+     * @return byte array containing the class data
+     */
+    private static byte[] loadClassData(String name)
+    {
+        byte[] data = null;
+        final String pathName = name.replace('.', java.io.File.separatorChar);
+        final String fullName = script_entry.getScriptPath() + pathName + ".class";
+        if (DEBUG)
+        {
+            LOGGER.info("loadClassData is trying to load class " + name + " which was resolved to pathName " + pathName + " and fullName " + fullName);
+        }
+        try
+        {
+            RandomAccessFile file = new RandomAccessFile(fullName, "r");
+            data = new byte[(int) file.length()];
+            file.readFully(data);
+            file.close();
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+            if (DEBUG)
+            {
+                final String message = String.format("loadClassData reached error when trying to load %s (pathName: %s) (fullName %s) -> %s :: %s",
+                        name, pathName, fullName, e.getMessage(), e.getCause());
+                LOGGER.warning(message);
+            }
+        }
+        return data;
+    }
+
+    /**
+     * @param name
+     *         the name of the class
+     * @return true if the first most class name matches a native class prefix
+     * @author Aconite
+     * @since SWG Source 3.1 - August 2021
+     */
+    private static boolean isNativeClass(String name)
+    {
+        return Arrays.stream(NATIVE_CLASS_PREFIXES).anyMatch(name::startsWith);
+    }
+
+    /**
+     * @return An immutable collection of the string names of any class
+     *         in the script package and any of their respective inner classes
+     *         and any inner classes/enumerations of script.library.*$*
+     *         or enumerations formatted for our custom class load process.
+     * @author Aconite
+     * @since SWG Source 3.1 - August 2021
+     */
+    private static Set<String> getDefaultLoad()
+    {
+        final Set<String> defaultLoad = new HashSet<>();
+        try
+        {
+            JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
+            StandardJavaFileManager fileManager = compiler.getStandardFileManager(null, null, null);
+            JavaFileManager.Location location = StandardLocation.CLASS_PATH;
+            Set<JavaFileObject.Kind> kinds = new HashSet<>();
+            kinds.add(JavaFileObject.Kind.CLASS);
+            Iterable<JavaFileObject> baseList = fileManager.list(location, "script", kinds, false);
+            Iterable<JavaFileObject> libList = fileManager.list(location, "script.library", kinds, false);
+            String script;
+            String value;
+            for (JavaFileObject o : baseList)
+            {
+                script = o.getName();
+                value = script.strip()
+                        .substring(script.indexOf(":") + 1)
+                        .substring(script.indexOf("game/") + 5)
+                        .replace("/", ".")
+                        .replace(".class", "");
+                if (DEBUG && LOGGER != null)
+                {
+                    LOGGER.info("script_class_loader static initialization is adding base " + value + " to the default load set.");
+                }
+                defaultLoad.add(value);
+            }
+            for (JavaFileObject o : libList)
+            {
+                script = o.getName();
+                if (script.contains("$"))
+                {
+                    value = script.strip()
+                            .substring(script.indexOf(":") + 1)
+                            .substring(script.indexOf("game/") + 5)
+                            .replace("/", ".")
+                            .replace(".class", "");
+                    if (DEBUG && LOGGER != null)
+                    {
+                        LOGGER.info("script_class_loader static initialization is adding library " + value + " to the default load set.");
+                    }
+                    defaultLoad.add(value);
+                }
+            }
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return Collections.unmodifiableSet(defaultLoad);
+    }
+
+    /**
      * Adds a derived class name to our derived classes list.
      *
-     * @param className		the derived class name
+     * @param className
+     *         the derived class name
      */
     public void addDerivedClass(String className)
     {
-        if(DEBUG)
+        if (DEBUG)
         {
-            LOGGER.info("script_class_loader.addDerivedClass() called to add derived class "+className+" of class "+this.myClassName);
+            LOGGER.info("script_class_loader.addDerivedClass() called to add derived class " + className + " of class " + this.myClassName);
         }
         DERIVED_CLASSES.add(className);
     }
@@ -281,7 +394,7 @@ public class script_class_loader extends ClassLoader
     public Object getMyObject()
     {
         return myObject;
-    }	// getMyObject()
+    }    // getMyObject()
 
     /**
      * Gets the cached methods for a class.
@@ -297,24 +410,25 @@ public class script_class_loader extends ClassLoader
      * Loads a class. If the class is the one this loader is responsible for,
      * loads it, else passes the request to another loader.
      *
-     * @param name      class name
-     * @param resolve   flag to resolve the class
-     *
+     * @param name
+     *         class name
+     * @param resolve
+     *         flag to resolve the class
      * @return the class
      */
     protected Class<?> loadClass(String name, boolean resolve) throws ClassNotFoundException
     {
-        if(DEBUG)
+        if (DEBUG)
         {
-            LOGGER.info("script_class_loader.loadClass() called for "+name+" and resolve value "+resolve);
+            LOGGER.info("script_class_loader.loadClass() called for " + name + " and resolve value " + resolve);
         }
 
         // Filter out classes that will be loaded by the default loader
         if (isNativeClass(name) || DEFAULT_LOAD.contains(name))
         {
-            if(DEBUG)
+            if (DEBUG)
             {
-                LOGGER.info("loadClass() for "+name+" was in the default load collection or a special flagged class.");
+                LOGGER.info("loadClass() for " + name + " was in the default load collection or a special flagged class.");
             }
             Class<?> cls = super.loadClass(name, resolve);
             if (myClass == null)
@@ -357,15 +471,15 @@ public class script_class_loader extends ClassLoader
     /**
      * Finds/creates a class.
      *
-     * @param name      class name
-     *
+     * @param name
+     *         class name
      * @return the class
      */
     protected Class<?> findClass(String name) throws ClassNotFoundException
     {
-        if(DEBUG)
+        if (DEBUG)
         {
-            LOGGER.info("script_class_loader.findClass() called for "+name);
+            LOGGER.info("script_class_loader.findClass() called for " + name);
         }
         if (myClass == null)
         {
@@ -383,122 +497,11 @@ public class script_class_loader extends ClassLoader
                         superLoader.addDerivedClass(name);
                     }
                 }
-            }
-            catch (ClassFormatError err)
+            } catch (ClassFormatError err)
             {
                 throw new ClassNotFoundException();
             }
         }
         return myClass;
-    }
-
-    /**
-     * Loads a .class file from a file.
-     *
-     * @param name      name of the class to load
-     *
-     * @return byte array containing the class data
-     */
-    private static byte[] loadClassData(String name)
-    {
-        byte[] data = null;
-        final String pathName = name.replace('.', java.io.File.separatorChar);
-        final String fullName = script_entry.getScriptPath() + pathName + ".class";
-        if(DEBUG)
-        {
-            LOGGER.info("loadClassData is trying to load class "+name+" which was resolved to pathName "+pathName+" and fullName "+fullName);
-        }
-        try
-        {
-            RandomAccessFile file = new RandomAccessFile(fullName, "r");
-            data = new byte[(int)file.length()];
-            file.readFully(data);
-            file.close();
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-            if(DEBUG)
-            {
-                final String message = String.format("loadClassData reached error when trying to load %s (pathName: %s) (fullName %s) -> %s :: %s",
-                        name, pathName, fullName, e.getMessage(), e.getCause());
-                LOGGER.warning(message);
-            }
-        }
-        return data;
-    }
-
-    /**
-     * @param name the name of the class
-     * @return true if the first most class name matches a native class prefix
-     *
-     * @since SWG Source 3.1 - August 2021
-     * @author Aconite
-     */
-    private static boolean isNativeClass(String name)
-    {
-        return Arrays.stream(NATIVE_CLASS_PREFIXES).anyMatch(name::startsWith);
-    }
-
-    /**
-     * @return An immutable collection of the string names of any class
-     * in the script package and any of their respective inner classes
-     * and any inner classes/enumerations of script.library.*$*
-     * or enumerations formatted for our custom class load process.
-     *
-     * @since SWG Source 3.1 - August 2021
-     * @author Aconite
-     */
-    private static Set<String> getDefaultLoad()
-    {
-        final Set<String> defaultLoad = new HashSet<>();
-        try
-        {
-            JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
-            StandardJavaFileManager fileManager = compiler.getStandardFileManager(null, null, null);
-            JavaFileManager.Location location = StandardLocation.CLASS_PATH;
-            Set<JavaFileObject.Kind> kinds = new HashSet<>();
-            kinds.add(JavaFileObject.Kind.CLASS);
-            Iterable<JavaFileObject> baseList = fileManager.list(location, "script", kinds, false);
-            Iterable<JavaFileObject> libList = fileManager.list(location, "script.library", kinds, false);
-            String script;
-            String value;
-            for (JavaFileObject o : baseList)
-            {
-                script = o.getName();
-                value = script.strip()
-                        .substring(script.indexOf(":")+1)
-                        .substring(script.indexOf("game/")+5)
-                        .replace("/", ".")
-                        .replace(".class", "");
-                if(DEBUG && LOGGER != null)
-                {
-                    LOGGER.info("script_class_loader static initialization is adding base "+value+" to the default load set.");
-                }
-                defaultLoad.add(value);
-            }
-            for (JavaFileObject o : libList)
-            {
-                script = o.getName();
-                if(script.contains("$"))
-                {
-                    value = script.strip()
-                            .substring(script.indexOf(":")+1)
-                            .substring(script.indexOf("game/")+5)
-                            .replace("/", ".")
-                            .replace(".class", "");
-                    if(DEBUG && LOGGER != null)
-                    {
-                        LOGGER.info("script_class_loader static initialization is adding library "+value+" to the default load set.");
-                    }
-                    defaultLoad.add(value);
-                }
-            }
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-        return Collections.unmodifiableSet(defaultLoad);
     }
 }

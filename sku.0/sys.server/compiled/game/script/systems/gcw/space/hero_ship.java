@@ -1,5 +1,11 @@
 package script.systems.gcw.space;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.prose;
 import script.library.space_utils;

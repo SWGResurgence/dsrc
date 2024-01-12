@@ -4,6 +4,12 @@ package script.systems.house_buff_package;/*
 @Purpose: Upon entry into a house cell, this script will check apply buffs based on the objvar.
 */
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.player_structure;
 import script.obj_id;
 import script.location;

@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.ai_lib;
 import script.library.chat;
@@ -8,30 +14,37 @@ import script.library.utils;
 
 public class computer_console_level_02 extends script.base_script
 {
+    public static String c_stringFile = "conversation/computer_console_level_02";
+
     public computer_console_level_02()
     {
     }
-    public static String c_stringFile = "conversation/computer_console_level_02";
+
     public boolean computer_console_level_02_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean computer_console_level_02_condition_hasKey(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "outbreak_quest_facility_02", "searchJinOffice");
     }
+
     public boolean computer_console_level_02_condition_hasAlreadyCompleted(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "outbreak_quest_facility_02");
     }
+
     public boolean computer_console_level_02_condition_hasKilledScientist(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "outbreak_quest_facility_02", "useScienceConsole") || computer_console_level_02_condition_hasAlreadyCompleted(player, npc);
     }
+
     public boolean computer_console_level_02_condition_hasDeletedQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.hasCompletedQuest(player, "outbreak_quest_facility_02") && !groundquests.isQuestActiveOrComplete(player, "outbreak_quest_facility_02_neutral") && !groundquests.isQuestActiveOrComplete(player, "outbreak_quest_facility_02_rebel") && !groundquests.isQuestActiveOrComplete(player, "outbreak_quest_facility_02_imperial"));
     }
+
     public void computer_console_level_02_action_completeQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         CustomerServiceLog("outbreak_themepark", "computer_console_level_02 conversation script.completeQuest() the player has found the unmutated virus.");
@@ -56,10 +69,12 @@ public class computer_console_level_02 extends script.base_script
             }
         }
     }
+
     public void computer_console_level_02_action_signalKillScientist(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "hasFoundComputerSystem");
     }
+
     public void computer_console_level_02_action_fixDeletedQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         CustomerServiceLog("outbreak_themepark", "computer_console_level_02 conversation script.completeQuest() the player has found never received and not completed the next factional mission. Giving quest to player: " + player);
@@ -75,7 +90,7 @@ public class computer_console_level_02 extends script.base_script
             CustomerServiceLog("outbreak_themepark", "computer_console_level_02 conversation script.completeQuest() the player is receiving the rebel faction quest: outbreak_quest_facility_02_rebel. Player: " + player);
             faction = "rebel";
         }
-        else 
+        else
         {
             CustomerServiceLog("outbreak_themepark", "computer_console_level_02 conversation script.completeQuest() the player is receiving the neutral faction quest: outbreak_quest_facility_02_neutral. Player: " + player);
             faction = "neutral";
@@ -92,6 +107,7 @@ public class computer_console_level_02 extends script.base_script
         params.put("player", player);
         messageTo(npc, "rewardPlayerFactionalQuest", params, 1, true);
     }
+
     public int computer_console_level_02_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_51"))
@@ -107,6 +123,7 @@ public class computer_console_level_02 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int computer_console_level_02_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_41"))
@@ -126,7 +143,7 @@ public class computer_console_level_02 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_105");
@@ -135,7 +152,7 @@ public class computer_console_level_02 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.computer_console_level_02.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -160,7 +177,7 @@ public class computer_console_level_02 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_103");
@@ -169,7 +186,7 @@ public class computer_console_level_02 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.computer_console_level_02.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -194,7 +211,7 @@ public class computer_console_level_02 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_101");
@@ -203,7 +220,7 @@ public class computer_console_level_02 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.computer_console_level_02.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -228,7 +245,7 @@ public class computer_console_level_02 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_99");
@@ -237,7 +254,7 @@ public class computer_console_level_02 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.computer_console_level_02.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -262,7 +279,7 @@ public class computer_console_level_02 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_97");
@@ -271,7 +288,7 @@ public class computer_console_level_02 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.computer_console_level_02.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -296,7 +313,7 @@ public class computer_console_level_02 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_95");
@@ -305,7 +322,7 @@ public class computer_console_level_02 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.computer_console_level_02.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -330,7 +347,7 @@ public class computer_console_level_02 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_93");
@@ -339,7 +356,7 @@ public class computer_console_level_02 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.computer_console_level_02.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -349,6 +366,7 @@ public class computer_console_level_02 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int computer_console_level_02_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_105"))
@@ -410,7 +428,7 @@ public class computer_console_level_02 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_41");
@@ -443,7 +461,7 @@ public class computer_console_level_02 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.computer_console_level_02.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -453,6 +471,7 @@ public class computer_console_level_02 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int computer_console_level_02_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_41"))
@@ -472,7 +491,7 @@ public class computer_console_level_02 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_105");
@@ -481,7 +500,7 @@ public class computer_console_level_02 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.computer_console_level_02.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -506,7 +525,7 @@ public class computer_console_level_02 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_103");
@@ -515,7 +534,7 @@ public class computer_console_level_02 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.computer_console_level_02.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -540,7 +559,7 @@ public class computer_console_level_02 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_101");
@@ -549,7 +568,7 @@ public class computer_console_level_02 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.computer_console_level_02.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -574,7 +593,7 @@ public class computer_console_level_02 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_99");
@@ -583,7 +602,7 @@ public class computer_console_level_02 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.computer_console_level_02.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -608,7 +627,7 @@ public class computer_console_level_02 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_97");
@@ -617,7 +636,7 @@ public class computer_console_level_02 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.computer_console_level_02.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -642,7 +661,7 @@ public class computer_console_level_02 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_95");
@@ -651,7 +670,7 @@ public class computer_console_level_02 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.computer_console_level_02.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -676,7 +695,7 @@ public class computer_console_level_02 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_93");
@@ -685,7 +704,7 @@ public class computer_console_level_02 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.computer_console_level_02.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -695,6 +714,7 @@ public class computer_console_level_02 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int computer_console_level_02_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_103"))
@@ -756,7 +776,7 @@ public class computer_console_level_02 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_41");
@@ -789,7 +809,7 @@ public class computer_console_level_02 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.computer_console_level_02.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -799,6 +819,7 @@ public class computer_console_level_02 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int computer_console_level_02_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_41"))
@@ -818,7 +839,7 @@ public class computer_console_level_02 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_105");
@@ -827,7 +848,7 @@ public class computer_console_level_02 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.computer_console_level_02.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -852,7 +873,7 @@ public class computer_console_level_02 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_103");
@@ -861,7 +882,7 @@ public class computer_console_level_02 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.computer_console_level_02.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -886,7 +907,7 @@ public class computer_console_level_02 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_101");
@@ -895,7 +916,7 @@ public class computer_console_level_02 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.computer_console_level_02.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -920,7 +941,7 @@ public class computer_console_level_02 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_99");
@@ -929,7 +950,7 @@ public class computer_console_level_02 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.computer_console_level_02.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -954,7 +975,7 @@ public class computer_console_level_02 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_97");
@@ -963,7 +984,7 @@ public class computer_console_level_02 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.computer_console_level_02.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -988,7 +1009,7 @@ public class computer_console_level_02 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_95");
@@ -997,7 +1018,7 @@ public class computer_console_level_02 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.computer_console_level_02.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1022,7 +1043,7 @@ public class computer_console_level_02 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_93");
@@ -1031,7 +1052,7 @@ public class computer_console_level_02 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.computer_console_level_02.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1041,6 +1062,7 @@ public class computer_console_level_02 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int computer_console_level_02_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_101"))
@@ -1102,7 +1124,7 @@ public class computer_console_level_02 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_41");
@@ -1135,7 +1157,7 @@ public class computer_console_level_02 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.computer_console_level_02.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1145,6 +1167,7 @@ public class computer_console_level_02 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int computer_console_level_02_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_41"))
@@ -1164,7 +1187,7 @@ public class computer_console_level_02 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_105");
@@ -1173,7 +1196,7 @@ public class computer_console_level_02 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.computer_console_level_02.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1198,7 +1221,7 @@ public class computer_console_level_02 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_103");
@@ -1207,7 +1230,7 @@ public class computer_console_level_02 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.computer_console_level_02.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1232,7 +1255,7 @@ public class computer_console_level_02 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_101");
@@ -1241,7 +1264,7 @@ public class computer_console_level_02 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.computer_console_level_02.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1266,7 +1289,7 @@ public class computer_console_level_02 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_99");
@@ -1275,7 +1298,7 @@ public class computer_console_level_02 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.computer_console_level_02.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1300,7 +1323,7 @@ public class computer_console_level_02 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_97");
@@ -1309,7 +1332,7 @@ public class computer_console_level_02 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.computer_console_level_02.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1334,7 +1357,7 @@ public class computer_console_level_02 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_95");
@@ -1343,7 +1366,7 @@ public class computer_console_level_02 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.computer_console_level_02.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1368,7 +1391,7 @@ public class computer_console_level_02 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_93");
@@ -1377,7 +1400,7 @@ public class computer_console_level_02 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.computer_console_level_02.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1387,6 +1410,7 @@ public class computer_console_level_02 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int computer_console_level_02_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_99"))
@@ -1448,7 +1472,7 @@ public class computer_console_level_02 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_41");
@@ -1481,7 +1505,7 @@ public class computer_console_level_02 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.computer_console_level_02.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1491,6 +1515,7 @@ public class computer_console_level_02 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int computer_console_level_02_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_41"))
@@ -1510,7 +1535,7 @@ public class computer_console_level_02 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_105");
@@ -1519,7 +1544,7 @@ public class computer_console_level_02 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.computer_console_level_02.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1544,7 +1569,7 @@ public class computer_console_level_02 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_103");
@@ -1553,7 +1578,7 @@ public class computer_console_level_02 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.computer_console_level_02.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1578,7 +1603,7 @@ public class computer_console_level_02 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_101");
@@ -1587,7 +1612,7 @@ public class computer_console_level_02 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.computer_console_level_02.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1612,7 +1637,7 @@ public class computer_console_level_02 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_99");
@@ -1621,7 +1646,7 @@ public class computer_console_level_02 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.computer_console_level_02.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1646,7 +1671,7 @@ public class computer_console_level_02 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_97");
@@ -1655,7 +1680,7 @@ public class computer_console_level_02 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.computer_console_level_02.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1680,7 +1705,7 @@ public class computer_console_level_02 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_95");
@@ -1689,7 +1714,7 @@ public class computer_console_level_02 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.computer_console_level_02.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1714,7 +1739,7 @@ public class computer_console_level_02 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_93");
@@ -1723,7 +1748,7 @@ public class computer_console_level_02 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.computer_console_level_02.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1733,6 +1758,7 @@ public class computer_console_level_02 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int computer_console_level_02_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_97"))
@@ -1794,7 +1820,7 @@ public class computer_console_level_02 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_41");
@@ -1827,7 +1853,7 @@ public class computer_console_level_02 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.computer_console_level_02.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1837,6 +1863,7 @@ public class computer_console_level_02 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int computer_console_level_02_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_41"))
@@ -1856,7 +1883,7 @@ public class computer_console_level_02 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_105");
@@ -1865,7 +1892,7 @@ public class computer_console_level_02 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.computer_console_level_02.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1890,7 +1917,7 @@ public class computer_console_level_02 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_103");
@@ -1899,7 +1926,7 @@ public class computer_console_level_02 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.computer_console_level_02.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1924,7 +1951,7 @@ public class computer_console_level_02 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_101");
@@ -1933,7 +1960,7 @@ public class computer_console_level_02 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.computer_console_level_02.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1958,7 +1985,7 @@ public class computer_console_level_02 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_99");
@@ -1967,7 +1994,7 @@ public class computer_console_level_02 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.computer_console_level_02.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1992,7 +2019,7 @@ public class computer_console_level_02 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_97");
@@ -2001,7 +2028,7 @@ public class computer_console_level_02 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.computer_console_level_02.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2026,7 +2053,7 @@ public class computer_console_level_02 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_95");
@@ -2035,7 +2062,7 @@ public class computer_console_level_02 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.computer_console_level_02.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2060,7 +2087,7 @@ public class computer_console_level_02 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_93");
@@ -2069,7 +2096,7 @@ public class computer_console_level_02 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.computer_console_level_02.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2079,6 +2106,7 @@ public class computer_console_level_02 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int computer_console_level_02_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_95"))
@@ -2140,7 +2168,7 @@ public class computer_console_level_02 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_41");
@@ -2173,7 +2201,7 @@ public class computer_console_level_02 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.computer_console_level_02.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2183,6 +2211,7 @@ public class computer_console_level_02 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int computer_console_level_02_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_41"))
@@ -2202,7 +2231,7 @@ public class computer_console_level_02 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_105");
@@ -2211,7 +2240,7 @@ public class computer_console_level_02 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.computer_console_level_02.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2236,7 +2265,7 @@ public class computer_console_level_02 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_103");
@@ -2245,7 +2274,7 @@ public class computer_console_level_02 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.computer_console_level_02.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2270,7 +2299,7 @@ public class computer_console_level_02 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_101");
@@ -2279,7 +2308,7 @@ public class computer_console_level_02 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.computer_console_level_02.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2304,7 +2333,7 @@ public class computer_console_level_02 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_99");
@@ -2313,7 +2342,7 @@ public class computer_console_level_02 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.computer_console_level_02.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2338,7 +2367,7 @@ public class computer_console_level_02 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_97");
@@ -2347,7 +2376,7 @@ public class computer_console_level_02 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.computer_console_level_02.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2372,7 +2401,7 @@ public class computer_console_level_02 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_95");
@@ -2381,7 +2410,7 @@ public class computer_console_level_02 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.computer_console_level_02.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2406,7 +2435,7 @@ public class computer_console_level_02 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_93");
@@ -2415,7 +2444,7 @@ public class computer_console_level_02 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.computer_console_level_02.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2425,6 +2454,7 @@ public class computer_console_level_02 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int computer_console_level_02_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_93"))
@@ -2487,7 +2517,7 @@ public class computer_console_level_02 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_41");
@@ -2520,7 +2550,7 @@ public class computer_console_level_02 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.computer_console_level_02.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2530,6 +2560,7 @@ public class computer_console_level_02 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int computer_console_level_02_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_41"))
@@ -2549,7 +2580,7 @@ public class computer_console_level_02 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_105");
@@ -2558,7 +2589,7 @@ public class computer_console_level_02 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.computer_console_level_02.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2583,7 +2614,7 @@ public class computer_console_level_02 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_103");
@@ -2592,7 +2623,7 @@ public class computer_console_level_02 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.computer_console_level_02.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2617,7 +2648,7 @@ public class computer_console_level_02 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_101");
@@ -2626,7 +2657,7 @@ public class computer_console_level_02 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.computer_console_level_02.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2651,7 +2682,7 @@ public class computer_console_level_02 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_99");
@@ -2660,7 +2691,7 @@ public class computer_console_level_02 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.computer_console_level_02.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2685,7 +2716,7 @@ public class computer_console_level_02 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_97");
@@ -2694,7 +2725,7 @@ public class computer_console_level_02 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.computer_console_level_02.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2719,7 +2750,7 @@ public class computer_console_level_02 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_95");
@@ -2728,7 +2759,7 @@ public class computer_console_level_02 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.computer_console_level_02.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2753,7 +2784,7 @@ public class computer_console_level_02 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_93");
@@ -2762,7 +2793,7 @@ public class computer_console_level_02 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.computer_console_level_02.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2772,6 +2803,7 @@ public class computer_console_level_02 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int computer_console_level_02_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_34"))
@@ -2786,6 +2818,7 @@ public class computer_console_level_02 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int computer_console_level_02_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_42"))
@@ -2800,6 +2833,7 @@ public class computer_console_level_02 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isTangible(self)) || (isPlayer(self)))
@@ -2809,11 +2843,13 @@ public class computer_console_level_02 extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -2822,12 +2858,14 @@ public class computer_console_level_02 extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.computer_console_level_02");
         return SCRIPT_CONTINUE;
     }
+
     public int rewardPlayerFactionalQuest(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))
@@ -2861,12 +2899,14 @@ public class computer_console_level_02 extends script.base_script
         CustomerServiceLog("outbreak_themepark", "computer_console_level_02 conversation script.rewardPlayerFactionalQuest() messageHandler requesting that player: " + player + " be granted quest: " + factionQuest);
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -2889,7 +2929,7 @@ public class computer_console_level_02 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_51");
@@ -2897,7 +2937,7 @@ public class computer_console_level_02 extends script.base_script
                 utils.setScriptVar(player, "conversation.computer_console_level_02.branchId", 1);
                 npcStartConversation(player, npc, "computer_console_level_02", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2960,7 +3000,7 @@ public class computer_console_level_02 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_41");
@@ -2992,7 +3032,7 @@ public class computer_console_level_02 extends script.base_script
                 utils.setScriptVar(player, "conversation.computer_console_level_02.branchId", 3);
                 npcStartConversation(player, npc, "computer_console_level_02", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -3014,7 +3054,7 @@ public class computer_console_level_02 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_34");
@@ -3022,7 +3062,7 @@ public class computer_console_level_02 extends script.base_script
                 utils.setScriptVar(player, "conversation.computer_console_level_02.branchId", 18);
                 npcStartConversation(player, npc, "computer_console_level_02", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -3044,7 +3084,7 @@ public class computer_console_level_02 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_42");
@@ -3052,7 +3092,7 @@ public class computer_console_level_02 extends script.base_script
                 utils.setScriptVar(player, "conversation.computer_console_level_02.branchId", 20);
                 npcStartConversation(player, npc, "computer_console_level_02", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -3061,6 +3101,7 @@ public class computer_console_level_02 extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("computer_console_level_02"))

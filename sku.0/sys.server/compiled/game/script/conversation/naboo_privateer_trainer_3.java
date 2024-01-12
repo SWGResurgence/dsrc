@@ -1,81 +1,92 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.*;
 
 public class naboo_privateer_trainer_3 extends script.base_script
 {
+    public static String c_stringFile = "conversation/naboo_privateer_trainer_3";
+
     public naboo_privateer_trainer_3()
     {
     }
-    public static String c_stringFile = "conversation/naboo_privateer_trainer_3";
+
     public boolean naboo_privateer_trainer_3_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean naboo_privateer_trainer_3_condition_remembersPlayer(obj_id player, obj_id npc) throws InterruptedException
     {
         return (utils.hasScriptVar(player, "metRsfTrainer"));
     }
+
     public boolean naboo_privateer_trainer_3_condition_hasNoviceSkillBox(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.hasSkill(player, "pilot_neutral_novice"));
     }
+
     public boolean naboo_privateer_trainer_3_condition_alreadyHasAQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.hasQuest(player));
     }
+
     public boolean naboo_privateer_trainer_3_condition_isImperialPilot(obj_id player, obj_id npc) throws InterruptedException
     {
         return (hasSkill(player, "pilot_imperial_navy_novice"));
     }
+
     public boolean naboo_privateer_trainer_3_condition_isRebelPilot(obj_id player, obj_id npc) throws InterruptedException
     {
         return (hasSkill(player, "pilot_rebel_navy_novice"));
     }
+
     public boolean naboo_privateer_trainer_3_condition_isPilotButNotRsfMember(obj_id player, obj_id npc) throws InterruptedException
     {
         return (hasSkill(player, "pilot_neutral_novice") && (!hasObjVar(player, "rsfMember")));
     }
+
     public boolean naboo_privateer_trainer_3_condition_hasCompletedQuestOne(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.hasCompletedQuest(player, "destroy_surpriseattack", "naboo_privateer_1"));
     }
+
     public boolean naboo_privateer_trainer_3_condition_hasCompletedQuestTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.hasCompletedQuest(player, "destroy", "naboo_privateer_2"));
     }
+
     public boolean naboo_privateer_trainer_3_condition_hasCompletedQuestThree(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.hasCompletedQuest(player, "patrol", "naboo_privateer_3"));
     }
+
     public boolean naboo_privateer_trainer_3_condition_hasCompletedQuestFour(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.hasCompletedQuest(player, "destroy", "naboo_privateer_4"));
     }
+
     public boolean naboo_privateer_trainer_3_condition_missionOneFailed(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_quest.hasFailedQuest(player, "destroy_surpriseattack", "naboo_privateer_1") || space_quest.hasAbortedQuest(player, "destroy_surpriseattack", "naboo_privateer_1"))
-        {
-            return true;
-        }
-        return false;
+        return space_quest.hasFailedQuest(player, "destroy_surpriseattack", "naboo_privateer_1") || space_quest.hasAbortedQuest(player, "destroy_surpriseattack", "naboo_privateer_1");
     }
+
     public boolean naboo_privateer_trainer_3_condition_isReadyForFirstTraining(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (hasSkill(player, "pilot_neutral_starships_01") || hasSkill(player, "pilot_neutral_procedures_01") || hasSkill(player, "pilot_neutral_weapons_01") || hasSkill(player, "pilot_neutral_droid_01"))
-        {
-            return false;
-        }
-        else 
-        {
-            return true;
-        }
+        return !hasSkill(player, "pilot_neutral_starships_01") && !hasSkill(player, "pilot_neutral_procedures_01") && !hasSkill(player, "pilot_neutral_weapons_01") && !hasSkill(player, "pilot_neutral_droid_01");
     }
+
     public boolean naboo_privateer_trainer_3_condition_isReadyForMoreTraining(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.isPlayerQualifiedForSkill(player, "pilot_neutral_starships_01"));
     }
+
     public boolean naboo_privateer_trainer_3_condition_hasAllTierOneSkills(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!hasSkill(player, "pilot_neutral_starships_01"))
@@ -90,23 +101,14 @@ public class naboo_privateer_trainer_3 extends script.base_script
         {
             return false;
         }
-        else if (!hasSkill(player, "pilot_neutral_droid_01"))
-        {
-            return false;
-        }
-        else 
-        {
-            return true;
-        }
+        else return hasSkill(player, "pilot_neutral_droid_01");
     }
+
     public boolean naboo_privateer_trainer_3_condition_missionTwoFailed(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_quest.hasFailedQuest(player, "destroy", "naboo_privateer_2") || space_quest.hasAbortedQuest(player, "destroy", "naboo_privateer_2"))
-        {
-            return true;
-        }
-        return false;
+        return space_quest.hasFailedQuest(player, "destroy", "naboo_privateer_2") || space_quest.hasAbortedQuest(player, "destroy", "naboo_privateer_2");
     }
+
     public boolean naboo_privateer_trainer_3_condition_beenRewardedForQuestOne(obj_id player, obj_id npc) throws InterruptedException
     {
         if (space_quest.hasCompletedQuest(player, "destroy_surpriseattack", "naboo_privateer_1"))
@@ -115,6 +117,7 @@ public class naboo_privateer_trainer_3 extends script.base_script
         }
         return ((space_quest.hasCompletedQuest(player, "destroy_surpriseattack", "naboo_privateer_1")) && (!space_quest.hasReceivedReward(player, "patrol", "naboo_privateer_1")));
     }
+
     public boolean naboo_privateer_trainer_3_condition_beenRewardedForQuestTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!space_quest.hasCompletedQuest(player, "destroy", "naboo_privateer_1"))
@@ -123,6 +126,7 @@ public class naboo_privateer_trainer_3 extends script.base_script
         }
         return ((space_quest.hasCompletedQuest(player, "destroy", "naboo_privateer_1")) && (space_quest.hasReceivedReward(player, "destroy", "naboo_privateer_1")));
     }
+
     public boolean naboo_privateer_trainer_3_condition_beenRewardedForQuestThree(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!space_quest.hasCompletedQuest(player, "patrol", "naboo_privateer_3"))
@@ -131,6 +135,7 @@ public class naboo_privateer_trainer_3 extends script.base_script
         }
         return ((space_quest.hasCompletedQuest(player, "patrol", "naboo_privateer_3")) && (space_quest.hasReceivedReward(player, "patrol", "naboo_privateer_3")));
     }
+
     public boolean naboo_privateer_trainer_3_condition_beenRewardedForQuestFour(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!space_quest.hasCompletedQuest(player, "destroy", "naboo_privateer_4"))
@@ -139,194 +144,219 @@ public class naboo_privateer_trainer_3 extends script.base_script
         }
         return ((space_quest.hasCompletedQuest(player, "destroy", "naboo_privateer_4")) && (space_quest.hasReceivedReward(player, "destroy", "naboo_privateer_4")));
     }
+
     public boolean naboo_privateer_trainer_3_condition_missionThreeFailed(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_quest.hasFailedQuest(player, "patrol", "naboo_privateer_3") || space_quest.hasAbortedQuest(player, "patrol", "naboo_privateer_3"))
-        {
-            return true;
-        }
-        return false;
+        return space_quest.hasFailedQuest(player, "patrol", "naboo_privateer_3") || space_quest.hasAbortedQuest(player, "patrol", "naboo_privateer_3");
     }
+
     public boolean naboo_privateer_trainer_3_condition_missionFourFailed(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_quest.hasFailedQuest(player, "destroy", "naboo_privateer_4") || space_quest.hasAbortedQuest(player, "destroy", "naboo_privateer_4"))
-        {
-            return true;
-        }
-        return false;
+        return space_quest.hasFailedQuest(player, "destroy", "naboo_privateer_4") || space_quest.hasAbortedQuest(player, "destroy", "naboo_privateer_4");
     }
+
     public boolean naboo_privateer_trainer_3_condition_hasStarshipSkill1(obj_id player, obj_id npc) throws InterruptedException
     {
         return (hasSkill(player, "pilot_neutral_starships_01"));
     }
+
     public boolean naboo_privateer_trainer_3_condition_hasDroidSkill1(obj_id player, obj_id npc) throws InterruptedException
     {
         return (hasSkill(player, "pilot_neutral_droid_01"));
     }
+
     public boolean naboo_privateer_trainer_3_condition_hasProceduresSkill1(obj_id player, obj_id npc) throws InterruptedException
     {
         return (hasSkill(player, "pilot_neutral_procedures_01"));
     }
+
     public boolean naboo_privateer_trainer_3_condition_hasWeaponsSkill1(obj_id player, obj_id npc) throws InterruptedException
     {
         return (hasSkill(player, "pilot_neutral_weapons_01"));
     }
+
     public boolean naboo_privateer_trainer_3_condition_has_goMeetLordUnset(obj_id player, obj_id npc) throws InterruptedException
     {
         return ((utils.hasScriptVar(player, "goMeetLordUnset")) && !(space_quest.hasQuest(player)));
     }
+
     public boolean naboo_privateer_trainer_3_condition_FAILED_mission_1(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_quest.hasFailedQuest(player, "inspect", "privateer_inspection_1") || space_quest.hasAbortedQuest(player, "inspect", "privateer_inspection_1"))
-        {
-            return true;
-        }
-        return false;
+        return space_quest.hasFailedQuest(player, "inspect", "privateer_inspection_1") || space_quest.hasAbortedQuest(player, "inspect", "privateer_inspection_1");
     }
+
     public boolean naboo_privateer_trainer_3_condition_WON_mission_1(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.hasCompletedQuest(player, "inspect", "privateer_inspection_1"));
     }
+
     public boolean naboo_privateer_trainer_3_condition_isGenderMale(obj_id player, obj_id npc) throws InterruptedException
     {
         return (getGender(player) == Gender.MALE);
     }
+
     public boolean naboo_privateer_trainer_3_condition_has_goBackToKyatt(obj_id player, obj_id npc) throws InterruptedException
     {
         return ((utils.hasScriptVar(player, "goBackToKyatt")) && !(space_quest.hasQuest(player)));
     }
+
     public boolean naboo_privateer_trainer_3_condition_WON_mission_2(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.hasCompletedQuest(player, "patrol", "naboo_privateer_8"));
     }
+
     public boolean naboo_privateer_trainer_3_condition_FAILED_mission_2(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_quest.hasFailedQuest(player, "patrol", "naboo_privateer_8") || space_quest.hasAbortedQuest(player, "patrol", "naboo_privateer_8"))
-        {
-            return true;
-        }
-        return false;
+        return space_quest.hasFailedQuest(player, "patrol", "naboo_privateer_8") || space_quest.hasAbortedQuest(player, "patrol", "naboo_privateer_8");
     }
+
     public void naboo_privateer_trainer_3_action_rememberPlayer(obj_id player, obj_id npc) throws InterruptedException
     {
         utils.setScriptVar(player, "metRsfTrainer", true);
     }
+
     public void naboo_privateer_trainer_3_action_grantNoviceSkillBox(obj_id player, obj_id npc) throws InterruptedException
     {
         grantSkill(player, "pilot_neutral_novice");
         playMusic(player, "sound/music_themequest_acc_general.snd");
         setObjVar(player, "rsfMember", true);
     }
+
     public void naboo_privateer_trainer_3_action_signUpForRsf(obj_id player, obj_id npc) throws InterruptedException
     {
         playMusic(player, "sound/music_themequest_acc_general.snd");
         setObjVar(player, "rsfMember", true);
     }
+
     public void naboo_privateer_trainer_3_action_grantMissionOne(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "patrol", "naboo_privateer_1");
     }
+
     public void naboo_privateer_trainer_3_action_grantMissionTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "destroy", "naboo_privateer_2");
     }
+
     public void naboo_privateer_trainer_3_action_grantMissionThree(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "patrol", "naboo_privateer_3");
     }
+
     public void naboo_privateer_trainer_3_action_grantMissionFour(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "destroy", "naboo_privateer_4");
     }
+
     public void naboo_privateer_trainer_3_action_rewardForQuestOne(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.giveReward(player, "patrol", "naboo_privateer_1", 500);
     }
+
     public void naboo_privateer_trainer_3_action_rewardForQuestTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.giveReward(player, "destroy", "naboo_privateer_2", 800);
     }
+
     public void naboo_privateer_trainer_3_action_rewardForQuestThree(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.giveReward(player, "patrol", "naboo_privateer_3", 1000);
     }
+
     public void naboo_privateer_trainer_3_action_rewardForQuestFour(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.giveReward(player, "destroy", "naboo_privateer_4", 2000);
     }
+
     public void naboo_privateer_trainer_3_action_grantDroidSkill(obj_id player, obj_id npc) throws InterruptedException
     {
         grantSkill(player, "pilot_neutral_droid_01");
         playMusic(player, "sound/music_themequest_acc_general.snd");
     }
+
     public void naboo_privateer_trainer_3_action_grantStarshipSkill(obj_id player, obj_id npc) throws InterruptedException
     {
         grantSkill(player, "pilot_neutral_starships_01");
         playMusic(player, "sound/music_themequest_acc_general.snd");
     }
+
     public void naboo_privateer_trainer_3_action_grantProceduresSkill(obj_id player, obj_id npc) throws InterruptedException
     {
         grantSkill(player, "pilot_neutral_procedures_01");
         playMusic(player, "sound/music_themequest_acc_general.snd");
     }
+
     public void naboo_privateer_trainer_3_action_grantWeaponsSkill(obj_id player, obj_id npc) throws InterruptedException
     {
         grantSkill(player, "pilot_neutral_weapons_01");
         playMusic(player, "sound/music_themequest_acc_general.snd");
     }
+
     public void naboo_privateer_trainer_3_action_buyWeaponsSkill1(obj_id player, obj_id npc) throws InterruptedException
     {
         skill.purchaseSkill(player, "pilot_neutral_weapons_01");
         playMusic(player, "sound/music_themequest_acc_general.snd");
     }
+
     public void naboo_privateer_trainer_3_action_buyDroidSkill1(obj_id player, obj_id npc) throws InterruptedException
     {
         skill.purchaseSkill(player, "pilot_neutral_droid_01");
         playMusic(player, "sound/music_themequest_acc_general.snd");
     }
+
     public void naboo_privateer_trainer_3_action_buyProcedureSkill1(obj_id player, obj_id npc) throws InterruptedException
     {
         skill.purchaseSkill(player, "pilot_neutral_procedures_01");
         playMusic(player, "sound/music_themequest_acc_general.snd");
     }
+
     public void naboo_privateer_trainer_3_action_buyStarshipSkill1(obj_id player, obj_id npc) throws InterruptedException
     {
         skill.purchaseSkill(player, "pilot_neutral_starships_01");
         playMusic(player, "sound/music_themequest_acc_general.snd");
     }
+
     public void naboo_privateer_trainer_3_action_grantPatrolDutyMission(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "patrol_duty", "naboo_privateer_5");
     }
+
     public void naboo_privateer_trainer_3_action_grantDestroyDutyMission(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "destroy_duty", "naboo_privateer_6");
     }
+
     public void naboo_privateer_trainer_3_action_grantEscortDutyMission(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "escort_duty", "naboo_privateer_7");
     }
+
     public void naboo_privateer_trainer_3_action_grantQuestEight(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "destroy", "naboo_privateer_8");
     }
+
     public void naboo_privateer_trainer_3_action_set_goMeetLordUnset(obj_id player, obj_id npc) throws InterruptedException
     {
         playMusic(player, "sound/music_themequest_acc_general.snd");
         utils.setScriptVar(player, "goMeetLordUnset", true);
     }
+
     public void naboo_privateer_trainer_3_action_give_Mission_1(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "inspect", "privateer_inspection_1");
     }
+
     public void naboo_privateer_trainer_3_action_set_goBackToKyatt(obj_id player, obj_id npc) throws InterruptedException
     {
         utils.setScriptVar(player, "goBackToKyatt", true);
     }
+
     public void naboo_privateer_trainer_3_action_give_Mission_3(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "escort_duty", "naboo_privateer_9");
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -337,11 +367,13 @@ public class naboo_privateer_trainer_3 extends script.base_script
         setInvulnerable(self, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -351,18 +383,21 @@ public class naboo_privateer_trainer_3 extends script.base_script
         setInvulnerable(self, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "npc.conversation.naboo_privateer_trainer_3");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         if (ai_lib.isInCombat(self) || ai_lib.isInCombat(player))
@@ -391,7 +426,7 @@ public class naboo_privateer_trainer_3 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_31dd2d63");
@@ -403,7 +438,7 @@ public class naboo_privateer_trainer_3 extends script.base_script
                 pp.target.set(self);
                 npcStartConversation(player, self, "naboo_privateer_trainer_3", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -435,7 +470,7 @@ public class naboo_privateer_trainer_3 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_a927c891");
@@ -447,7 +482,7 @@ public class naboo_privateer_trainer_3 extends script.base_script
                 pp.target.set(self);
                 npcStartConversation(player, self, "naboo_privateer_trainer_3", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -480,7 +515,7 @@ public class naboo_privateer_trainer_3 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_36a4e374");
@@ -488,7 +523,7 @@ public class naboo_privateer_trainer_3 extends script.base_script
                 setObjVar(player, "conversation.naboo_privateer_trainer_3.branchId", 14);
                 npcStartConversation(player, self, "naboo_privateer_trainer_3", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(self, message);
             }
@@ -511,6 +546,7 @@ public class naboo_privateer_trainer_3 extends script.base_script
         chat.chat(self, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("naboo_privateer_trainer_3"))
@@ -536,7 +572,7 @@ public class naboo_privateer_trainer_3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_36a4e374");
@@ -545,7 +581,7 @@ public class naboo_privateer_trainer_3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_privateer_trainer_3.branchId");
                     npcSpeak(player, message);
@@ -574,7 +610,7 @@ public class naboo_privateer_trainer_3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_7c9c0437");
@@ -583,7 +619,7 @@ public class naboo_privateer_trainer_3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_privateer_trainer_3.branchId");
                     npcSpeak(player, message);
@@ -613,7 +649,7 @@ public class naboo_privateer_trainer_3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d70dba34");
@@ -622,7 +658,7 @@ public class naboo_privateer_trainer_3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_privateer_trainer_3.branchId");
                     npcSpeak(player, message);
@@ -671,7 +707,7 @@ public class naboo_privateer_trainer_3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_c699352d");
@@ -684,7 +720,7 @@ public class naboo_privateer_trainer_3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_privateer_trainer_3.branchId");
                     npcSpeak(player, message);
@@ -751,7 +787,7 @@ public class naboo_privateer_trainer_3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_2a4b4d30");
@@ -760,7 +796,7 @@ public class naboo_privateer_trainer_3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_privateer_trainer_3.branchId");
                     npcSpeak(player, message);
@@ -789,7 +825,7 @@ public class naboo_privateer_trainer_3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_574c145e");
@@ -798,7 +834,7 @@ public class naboo_privateer_trainer_3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_privateer_trainer_3.branchId");
                     npcSpeak(player, message);
@@ -828,7 +864,7 @@ public class naboo_privateer_trainer_3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_96b39c0d");
@@ -837,7 +873,7 @@ public class naboo_privateer_trainer_3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_privateer_trainer_3.branchId");
                     npcSpeak(player, message);
@@ -866,7 +902,7 @@ public class naboo_privateer_trainer_3 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f2e1c3e5");
@@ -875,7 +911,7 @@ public class naboo_privateer_trainer_3 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.naboo_privateer_trainer_3.branchId");
                     npcSpeak(player, message);

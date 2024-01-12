@@ -1,5 +1,11 @@
 package script.gambling.base;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.gambling;
 import script.library.prose;
@@ -7,13 +13,14 @@ import script.library.utils;
 
 public class default_interface extends script.terminal.base.base_terminal
 {
-    public default_interface()
-    {
-    }
     private static final float BET_RANGE = 15.0f;
     private static final string_id MNU_JOIN = new string_id(gambling.STF_INTERFACE, "mnu_join");
     private static final string_id MNU_LEAVE = new string_id(gambling.STF_INTERFACE, "mnu_leave");
     private static final string_id STOP_GAMBLING = new string_id(gambling.STF_INTERFACE, "stop_gambling");
+    public default_interface()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!hasObjVar(self, gambling.VAR_GAMBLE_BASE))
@@ -30,7 +37,7 @@ public class default_interface extends script.terminal.base.base_terminal
                 return SCRIPT_CONTINUE;
             }
         }
-        else 
+        else
         {
             if (utils.getElementPositionInArray(players, player) > -1)
             {
@@ -52,6 +59,7 @@ public class default_interface extends script.terminal.base.base_terminal
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (!hasObjVar(self, gambling.VAR_GAMBLE_BASE))
@@ -64,7 +72,7 @@ public class default_interface extends script.terminal.base.base_terminal
             {
                 item = menu_info_types.SERVER_MENU1;
             }
-            else 
+            else
             {
                 item = menu_info_types.SERVER_MENU2;
             }
@@ -84,6 +92,7 @@ public class default_interface extends script.terminal.base.base_terminal
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cmdJoinGame(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!isIdValid(target))
@@ -93,6 +102,7 @@ public class default_interface extends script.terminal.base.base_terminal
         gambling.addTablePlayer(self, target, params);
         return SCRIPT_CONTINUE;
     }
+
     public int cmdLeaveGame(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!isIdValid(target))
@@ -112,7 +122,7 @@ public class default_interface extends script.terminal.base.base_terminal
                         return SCRIPT_CONTINUE;
                     }
                 }
-                else 
+                else
                 {
                     gambling.removeTablePlayer(self, target, params);
                     return SCRIPT_CONTINUE;
@@ -124,6 +134,7 @@ public class default_interface extends script.terminal.base.base_terminal
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cmdPlaceBet(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!isIdValid(target))
@@ -138,6 +149,7 @@ public class default_interface extends script.terminal.base.base_terminal
         gambling.placeBet(self, target, params);
         return SCRIPT_CONTINUE;
     }
+
     public int cmdBetFailed(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!isIdValid(target))

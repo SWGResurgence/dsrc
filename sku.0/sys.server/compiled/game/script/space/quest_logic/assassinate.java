@@ -1,5 +1,11 @@
 package script.space.quest_logic;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.prose;
 import script.library.ship_ai;
@@ -8,12 +14,13 @@ import script.library.space_quest;
 
 public class assassinate extends script.space.quest_logic.recovery
 {
-    public assassinate()
-    {
-    }
     public static final String SOUND_SPAWN_ENEMY = "clienteffect/ui_quest_spawn_enemy.cef";
     public static final String SOUND_DESTROYED_ALL = "clienteffect/ui_quest_destroyed_all.cef";
     public static final string_id WARPOUT_FAILURE = new string_id("space/quest", "warpout_failure");
+    public assassinate()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         String questName = getStringObjVar(self, space_quest.QUEST_NAME);
@@ -63,6 +70,7 @@ public class assassinate extends script.space.quest_logic.recovery
         }
         return SCRIPT_OVERRIDE;
     }
+
     public int warpInTarget(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = getObjIdObjVar(self, space_quest.QUEST_OWNER);
@@ -81,14 +89,14 @@ public class assassinate extends script.space.quest_logic.recovery
         switch (targetAttackMode)
         {
             case 0:
-            ship_ai.unitSetAttackOrders(ship, ship_ai.ATTACK_ORDERS_RETURN_FIRE);
-            break;
+                ship_ai.unitSetAttackOrders(ship, ship_ai.ATTACK_ORDERS_RETURN_FIRE);
+                break;
             case 1:
-            ship_ai.unitSetAttackOrders(ship, ship_ai.ATTACK_ORDERS_ATTACK_FREELY);
-            break;
+                ship_ai.unitSetAttackOrders(ship, ship_ai.ATTACK_ORDERS_ATTACK_FREELY);
+                break;
             case 2:
-            ship_ai.unitSetAttackOrders(ship, ship_ai.ATTACK_ORDERS_HOLD_FIRE);
-            break;
+                ship_ai.unitSetAttackOrders(ship, ship_ai.ATTACK_ORDERS_HOLD_FIRE);
+                break;
         }
         space_quest._addMissionCriticalShip(player, self, ship);
         playClientEffectObj(player, SOUND_SPAWN_ENEMY, player, "");
@@ -129,14 +137,14 @@ public class assassinate extends script.space.quest_logic.recovery
                 switch (targetAttackMode)
                 {
                     case 0:
-                    ship_ai.squadSetAttackOrders(escortSquad, ship_ai.ATTACK_ORDERS_RETURN_FIRE);
-                    break;
+                        ship_ai.squadSetAttackOrders(escortSquad, ship_ai.ATTACK_ORDERS_RETURN_FIRE);
+                        break;
                     case 1:
-                    ship_ai.squadSetAttackOrders(escortSquad, ship_ai.ATTACK_ORDERS_ATTACK_FREELY);
-                    break;
+                        ship_ai.squadSetAttackOrders(escortSquad, ship_ai.ATTACK_ORDERS_ATTACK_FREELY);
+                        break;
                     case 2:
-                    ship_ai.squadSetAttackOrders(escortSquad, ship_ai.ATTACK_ORDERS_HOLD_FIRE);
-                    break;
+                        ship_ai.squadSetAttackOrders(escortSquad, ship_ai.ATTACK_ORDERS_HOLD_FIRE);
+                        break;
                 }
             }
         }
@@ -146,6 +154,7 @@ public class assassinate extends script.space.quest_logic.recovery
         questUpdate(self, status_update);
         return SCRIPT_OVERRIDE;
     }
+
     public int assassinateSuccess(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -181,6 +190,7 @@ public class assassinate extends script.space.quest_logic.recovery
         }
         return SCRIPT_CONTINUE;
     }
+
     public int targetEscaped(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -197,6 +207,7 @@ public class assassinate extends script.space.quest_logic.recovery
         questFailed(self);
         return SCRIPT_CONTINUE;
     }
+
     public int handleShipDestroyed(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -245,14 +256,14 @@ public class assassinate extends script.space.quest_logic.recovery
                         }
                         messageTo(self, "completeQuestMsg", null, 2.0f, false);
                     }
-                    else 
+                    else
                     {
                         string_id update = new string_id("spacequest/" + questType + "/" + questName, "escort_wiped_out");
                         space_quest.sendQuestMessage(player, update);
                         setObjVar(self, "escortDestroyed", 1);
                     }
                 }
-                else 
+                else
                 {
                     string_id update = new string_id("spacequest/" + questType + "/" + questName, "escort_remaining");
                     prose_package pp = prose.getPackage(update, remaining);
@@ -268,6 +279,7 @@ public class assassinate extends script.space.quest_logic.recovery
         setObjVar(self, "dead_escorts", dead_escorts);
         return SCRIPT_OVERRIDE;
     }
+
     public int warpoutFailure(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "handling_warpout_failure"))

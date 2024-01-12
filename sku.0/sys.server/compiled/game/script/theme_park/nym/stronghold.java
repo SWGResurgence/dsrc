@@ -1,5 +1,11 @@
 package script.theme_park.nym;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.create;
@@ -11,11 +17,13 @@ public class stronghold extends script.base_script
     public stronghold()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         spawnEveryone(self);
         return SCRIPT_CONTINUE;
     }
+
     public void spawnEveryone(obj_id self) throws InterruptedException
     {
         spawnCelebs(self);
@@ -23,8 +31,8 @@ public class stronghold extends script.base_script
         messageTo(self, "spawnPirates", null, 10, true);
         messageTo(self, "spawnParty", null, 15, true);
         messageTo(self, "spawnElevatorHandler", null, 5, true);
-        return;
     }
+
     public void spawnCelebs(obj_id self) throws InterruptedException
     {
         obj_id nym = spawnNym(self);
@@ -39,6 +47,7 @@ public class stronghold extends script.base_script
         spawnRek(self, nym);
         spawnSharphorn(self, nym);
     }
+
     public obj_id spawnNym(obj_id self) throws InterruptedException
     {
         obj_id lobby = getCellId(self, "lobby");
@@ -50,6 +59,7 @@ public class stronghold extends script.base_script
         setObjVar(nym, "Stronghold", self);
         return nym;
     }
+
     public void spawnKole(obj_id self, obj_id nym) throws InterruptedException
     {
         obj_id lobby = getCellId(self, "lobby");
@@ -58,8 +68,8 @@ public class stronghold extends script.base_script
         setObjVar(self, "StrongholdInhabitants.kole", kole);
         setObjVar(kole, "Stronghold", self);
         faceTo(kole, nym);
-        return;
     }
+
     public void spawnJinkins(obj_id self, obj_id nym) throws InterruptedException
     {
         obj_id lobby = getCellId(self, "lobby");
@@ -68,8 +78,8 @@ public class stronghold extends script.base_script
         setObjVar(self, "StrongholdInhabitants.jinkins", jinkins);
         setObjVar(jinkins, "Stronghold", self);
         faceTo(jinkins, nym);
-        return;
     }
+
     public void spawnVanaSage(obj_id self, obj_id nym) throws InterruptedException
     {
         obj_id lobby = getCellId(self, "lobby");
@@ -78,8 +88,8 @@ public class stronghold extends script.base_script
         setObjVar(self, "StrongholdInhabitants.vana", vana);
         setObjVar(vana, "Stronghold", self);
         faceTo(vana, nym);
-        return;
     }
+
     public void spawnMakoGhast(obj_id self, obj_id nym) throws InterruptedException
     {
         obj_id lobby = getCellId(self, "lobby");
@@ -88,8 +98,8 @@ public class stronghold extends script.base_script
         setObjVar(self, "StrongholdInhabitants.ghast", ghast);
         setObjVar(ghast, "Stronghold", self);
         faceTo(ghast, nym);
-        return;
     }
+
     public void spawnGrenzZittoun(obj_id self, obj_id nym) throws InterruptedException
     {
         obj_id lobby = getCellId(self, "lobby");
@@ -98,8 +108,8 @@ public class stronghold extends script.base_script
         setObjVar(self, "StrongholdInhabitants.grenz", grenz);
         setObjVar(grenz, "Stronghold", self);
         faceTo(grenz, nym);
-        return;
     }
+
     public void spawnStuvanyInglen(obj_id self, obj_id nym) throws InterruptedException
     {
         obj_id lobby = getCellId(self, "lobby");
@@ -108,8 +118,8 @@ public class stronghold extends script.base_script
         setObjVar(self, "StrongholdInhabitants.inglen", inglen);
         setObjVar(inglen, "Stronghold", self);
         faceTo(inglen, nym);
-        return;
     }
+
     public void spawnRek(obj_id self, obj_id nym) throws InterruptedException
     {
         obj_id lobby = getCellId(self, "lobby");
@@ -118,8 +128,8 @@ public class stronghold extends script.base_script
         setObjVar(self, "StrongholdInhabitants.rek", rek);
         setObjVar(rek, "Stronghold", self);
         faceTo(rek, nym);
-        return;
     }
+
     public void spawnSharphorn(obj_id self, obj_id nym) throws InterruptedException
     {
         obj_id lobby = getCellId(self, "lobby");
@@ -128,8 +138,8 @@ public class stronghold extends script.base_script
         setObjVar(self, "StrongholdInhabitants.sharphorn", sharphorn);
         setObjVar(sharphorn, "Stronghold", self);
         faceTo(sharphorn, nym);
-        return;
     }
+
     public void spawnElite1(obj_id self) throws InterruptedException
     {
         obj_id lobby = getCellId(self, "lobby");
@@ -139,8 +149,8 @@ public class stronghold extends script.base_script
         setObjVar(guard1, "Stronghold", self);
         aiEquipPrimaryWeapon(guard1);
         setYaw(guard1, -1);
-        return;
     }
+
     public void spawnElite2(obj_id self) throws InterruptedException
     {
         obj_id lobby = getCellId(self, "lobby");
@@ -150,8 +160,8 @@ public class stronghold extends script.base_script
         setObjVar(guard2, "Stronghold", self);
         aiEquipPrimaryWeapon(guard2);
         setYaw(guard2, -1);
-        return;
     }
+
     public void spawnElite3(obj_id self) throws InterruptedException
     {
         obj_id lobby = getCellId(self, "lobby");
@@ -161,8 +171,8 @@ public class stronghold extends script.base_script
         setObjVar(guard3, "Stronghold", self);
         aiEquipPrimaryWeapon(guard3);
         setYaw(guard3, 0.0f);
-        return;
     }
+
     public void spawnElite4(obj_id self) throws InterruptedException
     {
         obj_id lobby = getCellId(self, "lobby");
@@ -172,8 +182,8 @@ public class stronghold extends script.base_script
         setObjVar(guard4, "Stronghold", self);
         aiEquipPrimaryWeapon(guard4);
         setYaw(guard4, 0.0f);
-        return;
     }
+
     public void spawnElite5(obj_id self) throws InterruptedException
     {
         obj_id lobby = getCellId(self, "lobby");
@@ -183,8 +193,8 @@ public class stronghold extends script.base_script
         setObjVar(guard5, "Stronghold", self);
         aiEquipPrimaryWeapon(guard5);
         setYaw(guard5, 178.0f);
-        return;
     }
+
     public void spawnElite6(obj_id self) throws InterruptedException
     {
         obj_id lobby = getCellId(self, "lobby");
@@ -194,8 +204,8 @@ public class stronghold extends script.base_script
         setObjVar(guard6, "Stronghold", self);
         aiEquipPrimaryWeapon(guard6);
         setYaw(guard6, -179.0f);
-        return;
     }
+
     public void spawnElite7(obj_id self) throws InterruptedException
     {
         obj_id lobby = getCellId(self, "lobby");
@@ -205,8 +215,8 @@ public class stronghold extends script.base_script
         setObjVar(guard7, "Stronghold", self);
         aiEquipPrimaryWeapon(guard7);
         setYaw(guard7, 3.0f);
-        return;
     }
+
     public void spawnElite8(obj_id self) throws InterruptedException
     {
         obj_id meeting2 = getCellId(self, "meeting2");
@@ -216,8 +226,8 @@ public class stronghold extends script.base_script
         setObjVar(guard8, "Stronghold", self);
         aiEquipPrimaryWeapon(guard8);
         attachScript(guard8, "theme_park.nym.guard_path");
-        return;
     }
+
     public void spawnPirate1(obj_id self) throws InterruptedException
     {
         obj_id meeting5 = getCellId(self, "meeting5");
@@ -227,8 +237,8 @@ public class stronghold extends script.base_script
         setObjVar(pirate1, "Stronghold", self);
         ai_lib.setDefaultCalmMood(pirate1, "npc_accusing");
         setYaw(pirate1, 88);
-        return;
     }
+
     public void spawnPirate2(obj_id self) throws InterruptedException
     {
         obj_id meeting5 = getCellId(self, "meeting5");
@@ -238,8 +248,8 @@ public class stronghold extends script.base_script
         setObjVar(pirate2, "Stronghold", self);
         ai_lib.setDefaultCalmMood(pirate2, "npc_angry");
         setYaw(pirate2, 88);
-        return;
     }
+
     public void spawnBoard(obj_id self) throws InterruptedException
     {
         obj_id meeting5 = getCellId(self, "meeting5");
@@ -248,8 +258,8 @@ public class stronghold extends script.base_script
         setObjVar(self, "StrongholdInhabitants.board", board);
         setObjVar(board, "Stronghold", self);
         setYaw(board, 88);
-        return;
     }
+
     public obj_id spawnPartygoer1(obj_id self) throws InterruptedException
     {
         obj_id lobby = getCellId(self, "lobby");
@@ -261,6 +271,7 @@ public class stronghold extends script.base_script
         setObjVar(partygoer1, "Stronghold", self);
         return partygoer1;
     }
+
     public obj_id spawnPartygoer2(obj_id self) throws InterruptedException
     {
         obj_id lobby = getCellId(self, "lobby");
@@ -272,6 +283,7 @@ public class stronghold extends script.base_script
         setObjVar(partygoer2, "Stronghold", self);
         return partygoer2;
     }
+
     public obj_id spawnPartygoer3(obj_id self) throws InterruptedException
     {
         obj_id lobby = getCellId(self, "lobby");
@@ -283,6 +295,7 @@ public class stronghold extends script.base_script
         setObjVar(partygoer3, "Stronghold", self);
         return partygoer3;
     }
+
     public obj_id spawnPartygoer4(obj_id self) throws InterruptedException
     {
         obj_id lobby = getCellId(self, "lobby");
@@ -294,6 +307,7 @@ public class stronghold extends script.base_script
         setObjVar(partygoer4, "Stronghold", self);
         return partygoer4;
     }
+
     public obj_id spawnPartygoer5(obj_id self) throws InterruptedException
     {
         obj_id lobby = getCellId(self, "lobby");
@@ -305,6 +319,7 @@ public class stronghold extends script.base_script
         setObjVar(partygoer5, "Stronghold", self);
         return partygoer5;
     }
+
     public obj_id spawnPartygoer6(obj_id self) throws InterruptedException
     {
         obj_id lobby = getCellId(self, "lobby");
@@ -316,6 +331,7 @@ public class stronghold extends script.base_script
         setObjVar(partygoer6, "Stronghold", self);
         return partygoer6;
     }
+
     public obj_id spawnPartygoer7(obj_id self) throws InterruptedException
     {
         obj_id lobby = getCellId(self, "lobby");
@@ -327,6 +343,7 @@ public class stronghold extends script.base_script
         setObjVar(partygoer7, "Stronghold", self);
         return partygoer7;
     }
+
     public obj_id spawnDog1(obj_id self) throws InterruptedException
     {
         obj_id lobby = getCellId(self, "lobby");
@@ -343,6 +360,7 @@ public class stronghold extends script.base_script
         setInvulnerable(dog1, true);
         return dog1;
     }
+
     public obj_id spawnDog2(obj_id self) throws InterruptedException
     {
         obj_id lobby = getCellId(self, "lobby");
@@ -360,6 +378,7 @@ public class stronghold extends script.base_script
         setInvulnerable(dog2, true);
         return dog2;
     }
+
     public boolean spawnElevator(obj_id self) throws InterruptedException
     {
         obj_id lobby = getCellId(self, "lobby");
@@ -390,6 +409,7 @@ public class stronghold extends script.base_script
         setYaw(elevatorTwo, 180.0f);
         return true;
     }
+
     public int OnHearSpeech(obj_id self, obj_id speaker, String text) throws InterruptedException
     {
         if (!hasObjVar(speaker, "gm"))
@@ -434,13 +454,14 @@ public class stronghold extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void killAll(obj_id self) throws InterruptedException
     {
         killCelebs(self);
         killGuards(self);
         killPirates(self);
-        return;
     }
+
     public void killCelebs(obj_id self) throws InterruptedException
     {
         destroyObject(getObjIdObjVar(self, "StrongholdInhabitants.nym"));
@@ -453,8 +474,8 @@ public class stronghold extends script.base_script
         removeObjVar(self, "StrongholdInhabitants.dog1");
         destroyObject(getObjIdObjVar(self, "StrongholdInhabitants.dog2"));
         removeObjVar(self, "StrongholdInhabitants.dog2");
-        return;
     }
+
     public void killGuards(obj_id self) throws InterruptedException
     {
         destroyObject(getObjIdObjVar(self, "StrongholdInhabitants.guard1"));
@@ -473,8 +494,8 @@ public class stronghold extends script.base_script
         removeObjVar(self, "StrongholdInhabitants.guard7");
         destroyObject(getObjIdObjVar(self, "StrongholdInhabitants.guard8"));
         removeObjVar(self, "StrongholdInhabitants.guard8");
-        return;
     }
+
     public void killPirates(obj_id self) throws InterruptedException
     {
         destroyObject(getObjIdObjVar(self, "StrongholdInhabitants.pirate1"));
@@ -492,6 +513,7 @@ public class stronghold extends script.base_script
         destroyObject(getObjIdObjVar(self, "StrongholdInhabitants.futon"));
         removeObjVar(self, "StrongholdInhabitants.futon");
     }
+
     public void killParty(obj_id self) throws InterruptedException
     {
         destroyObject(getObjIdObjVar(self, "StrongholdInhabitants.partygoer1"));
@@ -509,6 +531,7 @@ public class stronghold extends script.base_script
         destroyObject(getObjIdObjVar(self, "StrongholdInhabitants.partygoer7"));
         removeObjVar(self, "StrongholdInhabitants.partygoer7");
     }
+
     public int spawnGuards(obj_id self, dictionary params) throws InterruptedException
     {
         spawnElite1(self);
@@ -521,6 +544,7 @@ public class stronghold extends script.base_script
         spawnElite8(self);
         return SCRIPT_CONTINUE;
     }
+
     public int spawnPirates(obj_id self, dictionary params) throws InterruptedException
     {
         spawnPirate1(self);
@@ -528,6 +552,7 @@ public class stronghold extends script.base_script
         spawnBoard(self);
         return SCRIPT_CONTINUE;
     }
+
     public int spawnParty(obj_id self, dictionary params) throws InterruptedException
     {
         spawnPartygoer1(self);
@@ -539,12 +564,14 @@ public class stronghold extends script.base_script
         spawnPartygoer7(self);
         return SCRIPT_CONTINUE;
     }
+
     public int makeDogSit(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id dog1 = params.getObjId("dog");
         ai_lib.aiSetPosture(dog1, POSTURE_SITTING);
         return SCRIPT_CONTINUE;
     }
+
     public int spawnElevatorHandler(obj_id self, dictionary params) throws InterruptedException
     {
         spawnElevator(self);

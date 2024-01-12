@@ -1,5 +1,11 @@
 package script.developer.soe.beta;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.create;
@@ -8,10 +14,12 @@ import script.*;
 
 public class droid_vendor extends script.base_script
 {
+    public static final String DROID_VENDOR_CONVO = "beta/droid_vendor";
+
     public droid_vendor()
     {
     }
-    public static final String DROID_VENDOR_CONVO = "beta/droid_vendor";
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setInvulnerable(self, true);
@@ -20,6 +28,7 @@ public class droid_vendor extends script.base_script
         setName(self, "Travelling Droid Merchant (beta)");
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         int mnu = mi.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -27,17 +36,19 @@ public class droid_vendor extends script.base_script
         mdata.setServerNotify(false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id speaker) throws InterruptedException
     {
         chat.setGoodMood(self);
         faceToBehavior(self, speaker);
         string_id greeting = new string_id(DROID_VENDOR_CONVO, "start");
-        string_id response[] = new string_id[2];
+        string_id[] response = new string_id[2];
         response[0] = new string_id(DROID_VENDOR_CONVO, "yes");
         response[1] = new string_id(DROID_VENDOR_CONVO, "no");
         npcStartConversation(speaker, self, DROID_VENDOR_CONVO, greeting, response);
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String convo, obj_id player, string_id response) throws InterruptedException
     {
         if (!convo.equals(DROID_VENDOR_CONVO))
@@ -87,35 +98,35 @@ public class droid_vendor extends script.base_script
             switch (rand(1, 3))
             {
                 case 1:
-                droidType = "protocol_droid_3po";
-                break;
+                    droidType = "protocol_droid_3po";
+                    break;
                 case 2:
-                droidType = "protocol_droid_3po_red";
-                break;
+                    droidType = "protocol_droid_3po_red";
+                    break;
                 case 3:
-                droidType = "protocol_droid_3po_silver";
-                break;
+                    droidType = "protocol_droid_3po_silver";
+                    break;
             }
             switch (rand(1, 6))
             {
                 case 1:
-                diction = "droid_geek";
-                break;
+                    diction = "droid_geek";
+                    break;
                 case 2:
-                diction = "droid_prissy";
-                break;
+                    diction = "droid_prissy";
+                    break;
                 case 3:
-                diction = "droid_sarcastic";
-                break;
+                    diction = "droid_sarcastic";
+                    break;
                 case 4:
-                diction = "droid_slang";
-                break;
+                    diction = "droid_slang";
+                    break;
                 case 5:
-                diction = "droid_stupid";
-                break;
+                    diction = "droid_stupid";
+                    break;
                 case 6:
-                diction = "droid_worshipful";
-                break;
+                    diction = "droid_worshipful";
+                    break;
             }
         }
         location spawnLoc = getLocation(self);

@@ -1,5 +1,11 @@
 package script.npc.pet_deed;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.pet_lib;
 import script.library.utils;
 import script.menu_info;
@@ -9,10 +15,12 @@ import script.string_id;
 
 public class reward_pet_deed extends script.base_script
 {
+    public static final String MENU_FILE = "pet/pet_menu";
+
     public reward_pet_deed()
     {
     }
-    public static final String MENU_FILE = "pet/pet_menu";
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (canManipulate(player, self, true, true, 15, true))
@@ -26,14 +34,16 @@ public class reward_pet_deed extends script.base_script
             {
                 mi.addRootMenu(menu_info_types.SERVER_MENU1, new string_id(MENU_FILE, "familiar_unpack"));
             }
-            else 
+            else
             {
                 mi.addRootMenu(menu_info_types.SERVER_MENU1, new string_id(MENU_FILE, "ep3_unpack"));
             }
         }
         return SCRIPT_CONTINUE;
     }
-    public obj_id generatePet(obj_id deed, obj_id player, String controlTemplate, String creatureType, String datapadItemName, boolean noTrade, boolean noStuff) throws InterruptedException{
+
+    public obj_id generatePet(obj_id deed, obj_id player, String controlTemplate, String creatureType, String datapadItemName, boolean noTrade, boolean noStuff) throws InterruptedException
+    {
         obj_id datapad = utils.getPlayerDatapad(player);
         obj_id petControlDevice = createObject(controlTemplate, datapad, "");
         setObjVar(petControlDevice, "pet.creatureName", creatureType);
@@ -42,11 +52,12 @@ public class reward_pet_deed extends script.base_script
         int petType = pet_lib.PET_TYPE_MOUNT;
         setObjVar(petControlDevice, "ai.pet.type", petType);
         setObjVar(petControlDevice, "ai.pet.trainedMount", 1);
-        if(noTrade) setObjVar(petControlDevice, "noTrade", 1);
-        if(noStuff) setObjVar(petControlDevice, "noStuff", 1);
+        if (noTrade) setObjVar(petControlDevice, "noTrade", 1);
+        if (noStuff) setObjVar(petControlDevice, "noStuff", 1);
         destroyObject(deed);
         return petControlDevice;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.SERVER_MENU1 && hasObjVar(self, "creatureName"))
@@ -65,9 +76,11 @@ public class reward_pet_deed extends script.base_script
                     destroyObject(self);
                 }
             }
-            else {
+            else
+            {
                 obj_id petControlDevice;
-                switch (creatureType) {
+                switch (creatureType)
+                {
                     case "ep3_mount_varactyl":
                         petControlDevice = generatePet(self, player, "object/intangible/pet/varactyl.iff", creatureType, "(varactyl)", false, false);
                         setObjVar(petControlDevice, "storageUnlimited", 1);

@@ -1,5 +1,11 @@
 package script.developer.bubbajoe;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.obj_id;
 
 public class wear extends script.base_script
@@ -29,7 +35,7 @@ public class wear extends script.base_script
         {
             return SCRIPT_OVERRIDE;
         }
-        System.out.print("Trying to  attach  clothing to : " + getEncodedName(self) + " with item : " + getEncodedName(item));
+        LOG("bubbajoe", "Trying to  attach  clothing to : " + getEncodedName(self) + " with item : " + getEncodedName(item));
         return SCRIPT_CONTINUE;
     }
 }

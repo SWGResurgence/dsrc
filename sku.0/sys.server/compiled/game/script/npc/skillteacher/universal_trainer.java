@@ -1,5 +1,11 @@
 package script.npc.skillteacher;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.skill;
 import script.library.utils;
 import script.obj_id;
@@ -8,10 +14,12 @@ import java.util.Vector;
 
 public class universal_trainer extends script.base_script
 {
+    public static final String skill_table = "datatables/npc_customization/skill_table.iff";
+
     public universal_trainer()
     {
     }
-    public static final String skill_table = "datatables/npc_customization/skill_table.iff";
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         obj_id pants = createObject("object/tangible/wearables/pants/pants_s01.iff", self, "");

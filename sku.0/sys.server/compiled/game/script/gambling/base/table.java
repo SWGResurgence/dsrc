@@ -1,5 +1,11 @@
 package script.gambling.base;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.obj_id;
@@ -10,17 +16,19 @@ import java.util.Vector;
 
 public class table extends script.gambling.base.default_interface
 {
+    protected static final String SCRIPT_VAR_GAME_ACTIVE = "gambling.game.active";
+    private static final int TIMER_BETTING = 60;
     public table()
     {
     }
-    private static final int TIMER_BETTING = 60;
-    protected static final String SCRIPT_VAR_GAME_ACTIVE = "gambling.game.active";
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         removeObjVar(self, gambling.VAR_TABLE_PLAYERS);
         removeObjVar(self, gambling.VAR_GAME_BASE);
         return SCRIPT_CONTINUE;
     }
+
     public int handlePlayerAdded(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -38,8 +46,10 @@ public class table extends script.gambling.base.default_interface
             if (players != null && players.length > 0)
             {
                 prose_package ppJoinOther = prose.getPackage(gambling.PROSE_PLAYER_JOIN_OTHER, player);
-                for (obj_id player1 : players) {
-                    if (player1 != player) {
+                for (obj_id player1 : players)
+                {
+                    if (player1 != player)
+                    {
                         sendSystemMessageProse(player1, ppJoinOther);
                     }
                 }
@@ -70,26 +80,27 @@ public class table extends script.gambling.base.default_interface
                 prose_package ppBetTime = prose.getPackage(gambling.PROSE_STARTING_IN, timeLeft);
                 sendSystemMessageProse(player, ppBetTime);
             }
-            else 
+            else
             {
                 int players_needed = getIntObjVar(self, gambling.VAR_TABLE_PLAYER_LIMIT_MIN) - players.length;
                 if (players_needed == 1)
                 {
                     broadcast(player, "The game needs 1 more player before it can begin.");
                 }
-                else 
+                else
                 {
                     broadcast(player, "The game needs " + players_needed + " more players before it can begin.");
                 }
             }
         }
-        else 
+        else
         {
             broadcast(player, "A game is currently in progress. You must wait until it has ended.");
         }
         showBetUi(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int handlePlayerRemoved(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -118,13 +129,14 @@ public class table extends script.gambling.base.default_interface
         {
             stopTableGame(self);
         }
-        else 
+        else
         {
             obj_id[] players = getObjIdArrayObjVar(self, gambling.VAR_TABLE_PLAYERS);
             if (players != null && players.length > 0)
             {
                 prose_package ppLeftOther = prose.getPackage(gambling.PROSE_PLAYER_LEAVE_OTHER, player);
-                for (obj_id player1 : players) {
+                for (obj_id player1 : players)
+                {
                     sendSystemMessageProse(player1, ppLeftOther);
                 }
             }
@@ -138,7 +150,7 @@ public class table extends script.gambling.base.default_interface
                     {
                         broadcast(player, "The game needs 1 more player before it can begin.");
                     }
-                    else 
+                    else
                     {
                         broadcast(player, "The game needs " + players_needed + " more players before it can begin.");
                     }
@@ -147,6 +159,7 @@ public class table extends script.gambling.base.default_interface
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleBetFailed(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -161,6 +174,7 @@ public class table extends script.gambling.base.default_interface
         sendSystemMessage(player, gambling.SID_BET_FAILED);
         return SCRIPT_CONTINUE;
     }
+
     public int handleRequestUpdatedUI(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -181,6 +195,7 @@ public class table extends script.gambling.base.default_interface
         showBetUi(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int handleBetUi(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -201,6 +216,7 @@ public class table extends script.gambling.base.default_interface
         showBetUi(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int handleBetTimer(obj_id self, dictionary params) throws InterruptedException
     {
         if (!utils.hasScriptVar(self, gambling.VAR_TABLE_BET_ACCEPT))
@@ -223,7 +239,8 @@ public class table extends script.gambling.base.default_interface
         if (diff > 0)
         {
             prose_package ppTimeLeft = prose.getPackage(gambling.PROSE_STARTING_IN, diff);
-            for (obj_id player : players) {
+            for (obj_id player : players)
+            {
                 sendSystemMessageProse(player, ppTimeLeft);
             }
         }
@@ -235,15 +252,17 @@ public class table extends script.gambling.base.default_interface
         {
             messageTo(self, "handleBetTimer", params, 5, false);
         }
-        else 
+        else
         {
             startTableGame(self);
         }
         return SCRIPT_CONTINUE;
     }
+
     public void showBetUi(obj_id self, obj_id player) throws InterruptedException
     {
     }
+
     protected void startTableBetting(obj_id self) throws InterruptedException
     {
         obj_id[] players = getObjIdArrayObjVar(self, gambling.VAR_TABLE_PLAYERS);
@@ -254,7 +273,8 @@ public class table extends script.gambling.base.default_interface
         setObjVar(self, gambling.VAR_GAME_PLAYERS_IDS, players);
         int stampTime = getGameTime() + TIMER_BETTING;
         utils.setScriptVar(self, gambling.VAR_TABLE_BET_ACCEPT, stampTime);
-        for (obj_id player : players) {
+        for (obj_id player : players)
+        {
             sendSystemMessage(player, gambling.SID_PLACE_BETS);
             showBetUi(self, player);
         }
@@ -262,14 +282,17 @@ public class table extends script.gambling.base.default_interface
         d.put("stamp", stampTime);
         messageTo(self, "handleBetTimer", d, 30.0f, false);
     }
+
     public void startTableGame(obj_id self) throws InterruptedException
     {
     }
+
     protected void stopTableGame(obj_id self) throws InterruptedException
     {
         utils.removeScriptVar(self, gambling.VAR_TABLE_BET_ACCEPT);
         removeObjVar(self, gambling.VAR_GAME_BASE);
     }
+
     protected boolean updateBetSUI(obj_id table, obj_id player) throws InterruptedException
     {
         if (!isIdValid(table) || !isIdValid(player))
@@ -288,6 +311,7 @@ public class table extends script.gambling.base.default_interface
         messageTo(table, "handleRequestUpdatedUI", d, 0.0f, false);
         return true;
     }
+
     public boolean closeBetSUI(obj_id table, obj_id player) throws InterruptedException
     {
         if (!isIdValid(table) || !isIdValid(player))
@@ -303,6 +327,7 @@ public class table extends script.gambling.base.default_interface
         }
         return true;
     }
+
     protected boolean sendTableMessage(obj_id table, prose_package pp, obj_id ommit_player) throws InterruptedException
     {
         if (!isIdValid(table))
@@ -316,26 +341,31 @@ public class table extends script.gambling.base.default_interface
         obj_id[] players = getObjIdArrayObjVar(table, gambling.VAR_TABLE_PLAYERS);
         if (players != null)
         {
-            for (obj_id player : players) {
-                if (player != ommit_player) {
+            for (obj_id player : players)
+            {
+                if (player != ommit_player)
+                {
                     sendSystemMessageProse(player, pp);
                 }
             }
         }
-        else 
+        else
         {
             return false;
         }
         return true;
     }
+
     protected boolean sendTableMessage(obj_id table, prose_package pp) throws InterruptedException
     {
         return sendTableMessage(table, pp, null);
     }
+
     public boolean sendTableMessage(obj_id table, string_id message, obj_id ommit_player) throws InterruptedException
     {
         return sendTableMessage(table, prose.getPackage(message, table), ommit_player);
     }
+
     protected boolean sendTableMessage(obj_id table, string_id message) throws InterruptedException
     {
         return sendTableMessage(table, prose.getPackage(message, table), null);

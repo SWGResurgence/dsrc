@@ -1,5 +1,11 @@
 package script.developer.soe.test;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.obj_id;
 
 import java.util.StringTokenizer;
@@ -9,6 +15,7 @@ public class lec_particleplayer extends script.base_script
     public lec_particleplayer()
     {
     }
+
     public int OnHearSpeech(obj_id self, obj_id speaker, String text) throws InterruptedException
     {
         if (speaker != self)
@@ -48,7 +55,7 @@ public class lec_particleplayer extends script.base_script
                 sendSystemMessage(self, "Invalid target.", null);
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 playClientEffectObj(self, "appearance/" + particleName, myTarget, "root");
             }

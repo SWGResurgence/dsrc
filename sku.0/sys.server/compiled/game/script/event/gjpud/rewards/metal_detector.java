@@ -4,6 +4,12 @@ package script.event.gjpud.rewards;/*
 @Purpose: Detects invisible metal caches on planets. (Think treasure chests, but beefed up and less stupid)
 */
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.city;
 import script.library.loot;
@@ -14,6 +20,7 @@ public class metal_detector extends script.base_script
 {
     public String GJPUD_LOOT_DRUM = "object/tangible/container/drum/treasure_drum.iff";
     public String GJPUD_LOOT_TABLE = "gjpud/drum";
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         mi.addRootMenu(menu_info_types.ITEM_USE, new string_id("Scan Area"));
@@ -28,6 +35,7 @@ public class metal_detector extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self)
     {
         setName(self, "Master Abubb's Metal Detector");
@@ -40,6 +48,7 @@ public class metal_detector extends script.base_script
         setName(self, "Master Abubb's Metal Detector");
         return SCRIPT_CONTINUE;
     }
+
     public int getPlanetBonus(obj_id self, obj_id player)
     {
         String scene = getCurrentSceneName();
@@ -70,6 +79,7 @@ public class metal_detector extends script.base_script
 
         }
     }
+
     public int getScanResult(obj_id self, obj_id player) throws InterruptedException
     {
         int bonus = getPlanetBonus(self, player);
@@ -86,6 +96,7 @@ public class metal_detector extends script.base_script
         spawnChest(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int spawnChest(obj_id self, obj_id player) throws InterruptedException
     {
         String table = GJPUD_LOOT_TABLE;
@@ -96,7 +107,7 @@ public class metal_detector extends script.base_script
             broadcast(player, "Your device is unable to retrieve location data at this time.");
         }
         obj_id treasureChest = createObject(GJPUD_LOOT_DRUM, treasureLoc);
-        attachScript (treasureChest, "item.container.loot_crate_opened");
+        attachScript(treasureChest, "item.container.loot_crate_opened");
         setName(treasureChest, "an item cache");
         loot.makeLootInContainer(treasureChest, table, amt, 300);
         obj_id[] contents = getContents(treasureChest);

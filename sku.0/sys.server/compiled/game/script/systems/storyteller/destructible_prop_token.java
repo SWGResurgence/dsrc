@@ -1,5 +1,11 @@
 package script.systems.storyteller;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.prose;
 import script.library.storyteller;
 import script.library.utils;
@@ -9,6 +15,7 @@ public class destructible_prop_token extends script.base_script
 {
     public static final int MIN_HEALTH = 180000;
     public static final int MAX_HEALTH = 250000;
+
     public destructible_prop_token()
     {
     }

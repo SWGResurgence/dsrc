@@ -1,90 +1,93 @@
 package script.test;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.obj_id;
 
 public class qa_pilot_roadmap_tatooine_rebel extends script.base_script
 {
-    public qa_pilot_roadmap_tatooine_rebel()
-    {
-    }
     public static final String TOOL_TITLE = "Tatooine Rebel Pilot";
     public static final String TOOL_PROMPT = "Tatooine Rebel Pilot\nSelect the pilot roadmap quest or function to complete.";
     public static final String SCRIPTVAR = "pilotrebtat";
-    public static final String[][] MAIN_TOOL_MENU = 
-    {
-        
-        {
-            "Get Novice Tatooine Rebel Pilot and ship",
-            "Complete First Mission Set (spacequest/patrol/tatooine_rebel_1)",
-            "Complete Second Mission (spacequest/destroy/tatooine_rebel_3)",
-            "Complete Third Mission Set (spacequest/patrol/tatooine_rebel_2)",
-            "Complete Fourth Mission (spacequest/assassinate/tatooine_rebel_4)",
-            "Get First Tier Pilot Skills",
-            "Get Starships Tier 2",
-            "Complete Fifth Mission (spacequest/escort/yavin_rebel_13)",
-            "Get Pilot Weapons Tier 2",
-            "Complete Sixth Mission (spacequest/inspect/yavin_rebel_14)",
-            "Train Pilot Procedures Tier 2",
-            "Complete Seventh Mission Set (spacequest/inspect/yavin_rebel_15)",
-            "Train Droid Tier 2",
-            "Complete Eighth Mission (spacequest/escort/yavin_rebel_16)",
-            "Complete Tier 3_1 missions",
-            "Train Pilot Tier 3",
-            "Complete Tier 3_2 missions",
-            "Train Naval Weapons Tier 3",
-            "Complete Tier 3_3 missions",
-            "Train Naval Procedures Tier 3",
-            "Complete Tier 3_4 missions",
-            "Train Droid Tier 3",
-            "Train Pilot Tier 4",
-            "Complete Tier 4_1 missions",
-            "Get Pilot Weapons Tier 4",
-            "Complete Tier 4_2 missions",
-            "Train Pilot Procedures Tier 4",
-            "Complete Tier 4_3 missions",
-            "Train Droid Tier 4",
-            "Complete Tier 4_4 missions",
-            "Complete Master Mission 1 (spacequest/destroy/master_rebel_1)",
-            "Complete Master Mission 1 (spacequest/destroy/master_rebel_2)"
-        },
-        
-        {
-            "pilot_rebel_navy_novice",
-            "spacequest/patrol/tatooine_rebel_1;spacequest/destroy_surpriseattack/tatooine_rebel_1",
-            "spacequest/destroy/tatooine_rebel_3",
-            "spacequest/patrol/tatooine_rebel_2;spacequest/escort/tatooine_rebel_2",
-            "spacequest/assassinate/tatooine_rebel_4",
-            "pilot_rebel_navy_starships_01;pilot_rebel_navy_weapons_01;pilot_rebel_navy_procedures_01;pilot_rebel_navy_droid_01",
-            "pilot_rebel_navy_starships_02",
-            "spacequest/escort/yavin_rebel_13",
-            "pilot_rebel_navy_weapons_02",
-            "spacequest/inspect/yavin_rebel_14",
-            "pilot_rebel_navy_procedures_02",
-            "spacequest/inspect/yavin_rebel_15;spacequest/destroy_surpriseattack/yavin_rebel_15",
-            "pilot_rebel_navy_droid_02",
-            "spacequest/escort/yavin_rebel_16",
-            "spacequest/recovery/tatooine_rebel_tier3_1;spacequest/delivery/tatooine_rebel_tier3_1_a;spacequest/survival/tatooine_rebel_tier3_1_b;spacequest/escort/tatooine_rebel_tier3_1_c",
-            "pilot_rebel_navy_starships_03",
-            "spacequest/inspect/tatooine_rebel_tier3_2;spacequest/destroy_surpriseattack/tatooine_rebel_tier3_2_a;spacequest/assassinate/tatooine_rebel_tier3_2_b;spacequest/space_battle/tatooine_rebel_tier3_2_c",
-            "pilot_rebel_navy_weapons_03",
-            "spacequest/delivery/tatooine_rebel_tier3_3;spacequest/space_battle/tatooine_rebel_tier3_3_a;spacequest/escort/tatooine_rebel_tier3_3_b;spacequest/survival/tatooine_rebel_tier3_3_c",
-            "pilot_rebel_navy_procedures_03",
-            "spacequest/assassinate/tatooine_rebel_tier3_4;spacequest/patrol/tatooine_rebel_tier3_4_a;spacequest/destroy_surpriseattack/tatooine_rebel_tier3_4_b;spacequest/delivery_no_pickup/tatooine_rebel_tier3_4_c;spacequest/space_battle/tatooine_rebel_tier3_4_d",
-            "pilot_rebel_navy_droid_03",
-            "pilot_rebel_navy_starships_04",
-            "spacequest/space_battle/tatooine_rebel_tier4_1;spacequest/assassinate/tatooine_rebel_tier4_1_a;spacequest/patrol/tatooine_rebel_tier4_1_b;spacequest/destroy_surpriseattack/tatooine_rebel_tier4_1_c",
-            "pilot_rebel_navy_weapons_04",
-            "spacequest/recovery/tatooine_rebel_tier4_2;spacequest/delivery/tatooine_rebel_tier4_2_a;spacequest/survival/tatooine_rebel_tier4_2_b",
-            "pilot_rebel_navy_procedures_04",
-            "spacequest/space_battle/tatooine_rebel_tier4_3;spacequest/assassinate/tatooine_rebel_tier4_3_a;spacequest/assassinate/tatooine_rebel_tier4_3_b",
-            "pilot_rebel_navy_droid_04",
-            "spacequest/assassinate/tatooine_rebel_tier4_4;spacequest/survival/tatooine_rebel_tier4_4_a;spacequest/space_battle/tatooine_rebel_tier4_4_b",
-            "spacequest/destroy/master_rebel_1",
-            "spacequest/destroy/master_rebel_2"
-        }
-    };
+    public static final String[][] MAIN_TOOL_MENU =
+            {
+
+                    {
+                            "Get Novice Tatooine Rebel Pilot and ship",
+                            "Complete First Mission Set (spacequest/patrol/tatooine_rebel_1)",
+                            "Complete Second Mission (spacequest/destroy/tatooine_rebel_3)",
+                            "Complete Third Mission Set (spacequest/patrol/tatooine_rebel_2)",
+                            "Complete Fourth Mission (spacequest/assassinate/tatooine_rebel_4)",
+                            "Get First Tier Pilot Skills",
+                            "Get Starships Tier 2",
+                            "Complete Fifth Mission (spacequest/escort/yavin_rebel_13)",
+                            "Get Pilot Weapons Tier 2",
+                            "Complete Sixth Mission (spacequest/inspect/yavin_rebel_14)",
+                            "Train Pilot Procedures Tier 2",
+                            "Complete Seventh Mission Set (spacequest/inspect/yavin_rebel_15)",
+                            "Train Droid Tier 2",
+                            "Complete Eighth Mission (spacequest/escort/yavin_rebel_16)",
+                            "Complete Tier 3_1 missions",
+                            "Train Pilot Tier 3",
+                            "Complete Tier 3_2 missions",
+                            "Train Naval Weapons Tier 3",
+                            "Complete Tier 3_3 missions",
+                            "Train Naval Procedures Tier 3",
+                            "Complete Tier 3_4 missions",
+                            "Train Droid Tier 3",
+                            "Train Pilot Tier 4",
+                            "Complete Tier 4_1 missions",
+                            "Get Pilot Weapons Tier 4",
+                            "Complete Tier 4_2 missions",
+                            "Train Pilot Procedures Tier 4",
+                            "Complete Tier 4_3 missions",
+                            "Train Droid Tier 4",
+                            "Complete Tier 4_4 missions",
+                            "Complete Master Mission 1 (spacequest/destroy/master_rebel_1)",
+                            "Complete Master Mission 1 (spacequest/destroy/master_rebel_2)"
+                    },
+
+                    {
+                            "pilot_rebel_navy_novice",
+                            "spacequest/patrol/tatooine_rebel_1;spacequest/destroy_surpriseattack/tatooine_rebel_1",
+                            "spacequest/destroy/tatooine_rebel_3",
+                            "spacequest/patrol/tatooine_rebel_2;spacequest/escort/tatooine_rebel_2",
+                            "spacequest/assassinate/tatooine_rebel_4",
+                            "pilot_rebel_navy_starships_01;pilot_rebel_navy_weapons_01;pilot_rebel_navy_procedures_01;pilot_rebel_navy_droid_01",
+                            "pilot_rebel_navy_starships_02",
+                            "spacequest/escort/yavin_rebel_13",
+                            "pilot_rebel_navy_weapons_02",
+                            "spacequest/inspect/yavin_rebel_14",
+                            "pilot_rebel_navy_procedures_02",
+                            "spacequest/inspect/yavin_rebel_15;spacequest/destroy_surpriseattack/yavin_rebel_15",
+                            "pilot_rebel_navy_droid_02",
+                            "spacequest/escort/yavin_rebel_16",
+                            "spacequest/recovery/tatooine_rebel_tier3_1;spacequest/delivery/tatooine_rebel_tier3_1_a;spacequest/survival/tatooine_rebel_tier3_1_b;spacequest/escort/tatooine_rebel_tier3_1_c",
+                            "pilot_rebel_navy_starships_03",
+                            "spacequest/inspect/tatooine_rebel_tier3_2;spacequest/destroy_surpriseattack/tatooine_rebel_tier3_2_a;spacequest/assassinate/tatooine_rebel_tier3_2_b;spacequest/space_battle/tatooine_rebel_tier3_2_c",
+                            "pilot_rebel_navy_weapons_03",
+                            "spacequest/delivery/tatooine_rebel_tier3_3;spacequest/space_battle/tatooine_rebel_tier3_3_a;spacequest/escort/tatooine_rebel_tier3_3_b;spacequest/survival/tatooine_rebel_tier3_3_c",
+                            "pilot_rebel_navy_procedures_03",
+                            "spacequest/assassinate/tatooine_rebel_tier3_4;spacequest/patrol/tatooine_rebel_tier3_4_a;spacequest/destroy_surpriseattack/tatooine_rebel_tier3_4_b;spacequest/delivery_no_pickup/tatooine_rebel_tier3_4_c;spacequest/space_battle/tatooine_rebel_tier3_4_d",
+                            "pilot_rebel_navy_droid_03",
+                            "pilot_rebel_navy_starships_04",
+                            "spacequest/space_battle/tatooine_rebel_tier4_1;spacequest/assassinate/tatooine_rebel_tier4_1_a;spacequest/patrol/tatooine_rebel_tier4_1_b;spacequest/destroy_surpriseattack/tatooine_rebel_tier4_1_c",
+                            "pilot_rebel_navy_weapons_04",
+                            "spacequest/recovery/tatooine_rebel_tier4_2;spacequest/delivery/tatooine_rebel_tier4_2_a;spacequest/survival/tatooine_rebel_tier4_2_b",
+                            "pilot_rebel_navy_procedures_04",
+                            "spacequest/space_battle/tatooine_rebel_tier4_3;spacequest/assassinate/tatooine_rebel_tier4_3_a;spacequest/assassinate/tatooine_rebel_tier4_3_b",
+                            "pilot_rebel_navy_droid_04",
+                            "spacequest/assassinate/tatooine_rebel_tier4_4;spacequest/survival/tatooine_rebel_tier4_4_a;spacequest/space_battle/tatooine_rebel_tier4_4_b",
+                            "spacequest/destroy/master_rebel_1",
+                            "spacequest/destroy/master_rebel_2"
+                    }
+            };
     public static final int GET_NOVICE_PILOT_AND_SHIP = 0;
     public static final int COMPLETE_FIRST_MISSION = 1;
     public static final int COMPLETE_SECOND_MISSION = 2;
@@ -117,6 +120,10 @@ public class qa_pilot_roadmap_tatooine_rebel extends script.base_script
     public static final int COMPLETE_TIER_4_4 = 29;
     public static final int COMPLETE_MASTER_1 = 30;
     public static final int COMPLETE_MASTER_2 = 31;
+    public qa_pilot_roadmap_tatooine_rebel()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (isGod(self))
@@ -133,6 +140,7 @@ public class qa_pilot_roadmap_tatooine_rebel extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnSpeaking(obj_id self, String text) throws InterruptedException
     {
         if (isGod(self))
@@ -145,6 +153,7 @@ public class qa_pilot_roadmap_tatooine_rebel extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnQuestActivated(obj_id self, int questId) throws InterruptedException
     {
         if (utils.hasScriptVar(self, SCRIPTVAR + ".useTrigger") && isGod(self))
@@ -168,7 +177,7 @@ public class qa_pilot_roadmap_tatooine_rebel extends script.base_script
                     space_quest.giveReward(self, "recovery", "tatooine_rebel_tier3_1", 25000, "object/tangible/ship/components/armor/arm_mission_reward_rebel_corellian_triplate.iff");
                     factions.addFactionStanding(self, factions.FACTION_REBEL, 100.0f);
                 }
-                else 
+                else
                 {
                 }
             }
@@ -297,6 +306,7 @@ public class qa_pilot_roadmap_tatooine_rebel extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleRebelPilotMainMenuOptions(obj_id self, dictionary params) throws InterruptedException
     {
         if (isGod(self))
@@ -318,7 +328,7 @@ public class qa_pilot_roadmap_tatooine_rebel extends script.base_script
                     qa.refreshMenu(self, "Choose the tool you want to use", "QA Tools", tool_options, "toolMainMenu", true, "qatool.pid");
                     return SCRIPT_CONTINUE;
                 }
-                else 
+                else
                 {
                     if (hasSkill(self, "pilot_imperial_navy_novice") || hasSkill(self, "pilot_rebel_navy_novice") || hasSkill(self, "pilot_neutral_novice"))
                     {
@@ -332,6 +342,7 @@ public class qa_pilot_roadmap_tatooine_rebel extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean stepThroughPilot(obj_id self, int step) throws InterruptedException
     {
         if (step >= 0)
@@ -532,13 +543,13 @@ public class qa_pilot_roadmap_tatooine_rebel extends script.base_script
                             obj_id medal = createObjectInInventoryAllowOverload("object/tangible/wearables/necklace/necklace_ace_pilot_rebel_wke_m.iff", self);
                             setBioLink(medal, self);
                         }
-                        else 
+                        else
                         {
                             obj_id medal = createObjectInInventoryAllowOverload("object/tangible/wearables/necklace/necklace_ace_pilot_rebel_m.iff", self);
                             setBioLink(medal, self);
                         }
                     }
-                    else 
+                    else
                     {
                         if (getSpecies(self) == SPECIES_ITHORIAN)
                         {
@@ -550,7 +561,7 @@ public class qa_pilot_roadmap_tatooine_rebel extends script.base_script
                             obj_id medal = createObjectInInventoryAllowOverload("object/tangible/wearables/necklace/necklace_trando_ace_pilot_rebel_f.iff", self);
                             setBioLink(medal, self);
                         }
-                        else 
+                        else
                         {
                             obj_id medal = createObjectInInventoryAllowOverload("object/tangible/wearables/necklace/necklace_trando_ace_pilot_rebel_f.iff", self);
                             setBioLink(medal, self);
@@ -564,17 +575,20 @@ public class qa_pilot_roadmap_tatooine_rebel extends script.base_script
         }
         return false;
     }
+
     public void showToolMainMenu(obj_id self) throws InterruptedException
     {
         utils.setScriptVar(self, SCRIPTVAR + ".useTrigger", true);
         qa.refreshMenu(self, TOOL_PROMPT, TOOL_TITLE, MAIN_TOOL_MENU, "handleRebelPilotMainMenuOptions", true, SCRIPTVAR + ".pid", SCRIPTVAR + ".mainMenu");
     }
+
     public void cleanAllScriptVars(obj_id self) throws InterruptedException
     {
         qa.removeScriptVars(self, SCRIPTVAR);
         utils.removeScriptVarTree(self, SCRIPTVAR);
         detachScript(self, "test.qa_pilot_roadmap_tatooine_imperial");
     }
+
     public void detachAndcleanAllScriptVars(obj_id self) throws InterruptedException
     {
         utils.removeScriptVarTree(self, SCRIPTVAR);

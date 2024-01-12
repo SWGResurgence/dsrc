@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.factions;
@@ -8,21 +14,26 @@ import script.*;
 
 public class corvette_neutral_prisoner extends script.base_script
 {
+    public static String c_stringFile = "conversation/corvette_neutral_prisoner";
+
     public corvette_neutral_prisoner()
     {
     }
-    public static String c_stringFile = "conversation/corvette_neutral_prisoner";
+
     public boolean corvette_neutral_prisoner_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean corvette_neutral_prisoner_condition_rescued(obj_id player, obj_id npc) throws InterruptedException
     {
         return hasObjVar(npc, "corl_corvette.alreadyRescued");
     }
+
     public void corvette_neutral_prisoner_action__defaultAction(obj_id player, obj_id npc) throws InterruptedException
     {
     }
+
     public void corvette_neutral_prisoner_action_factionReward(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
@@ -36,22 +47,25 @@ public class corvette_neutral_prisoner extends script.base_script
                 obj_id groupObj = getGroupObject(player);
                 obj_id[] groupMembers = getGroupMemberIds(groupObj);
                 int numGroupMembers = groupMembers.length;
-                for (obj_id groupie : groupMembers) {
-                    if (isIdValid(groupie)) {
-                        if (groupie != player) {
+                for (obj_id groupie : groupMembers)
+                {
+                    if (isIdValid(groupie))
+                    {
+                        if (groupie != player)
+                        {
                             factions.addFactionStanding(groupie, "jabba", 7);
                         }
                     }
                 }
             }
         }
-        return;
     }
+
     public void corvette_neutral_prisoner_action_facePlayer(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
-        return;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -62,12 +76,14 @@ public class corvette_neutral_prisoner extends script.base_script
         setInvulnerable(self, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         setInvulnerable(self, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -76,12 +92,14 @@ public class corvette_neutral_prisoner extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "npc.conversation.corvette_neutral_prisoner");
         return SCRIPT_CONTINUE;
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         if (ai_lib.isInCombat(self) || ai_lib.isInCombat(player))
@@ -104,6 +122,7 @@ public class corvette_neutral_prisoner extends script.base_script
         chat.chat(self, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("corvette_neutral_prisoner"))

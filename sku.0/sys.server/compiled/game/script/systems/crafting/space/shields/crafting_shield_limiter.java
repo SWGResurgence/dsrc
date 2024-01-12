@@ -1,5 +1,11 @@
 package script.systems.crafting.space.shields;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.craftinglib;
 import script.resource_weight;
 
@@ -54,6 +60,7 @@ public class crafting_shield_limiter extends script.systems.crafting.space.shiel
                                     new resource_weight.weight(craftinglib.RESOURCE_QUALITY, 1)
                             })
             };
+
     public crafting_shield_limiter()
     {
     }

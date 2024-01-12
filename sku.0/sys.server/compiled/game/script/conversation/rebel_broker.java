@@ -1,18 +1,27 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.*;
 
 public class rebel_broker extends script.base_script
 {
+    public static String c_stringFile = "conversation/rebel_broker";
+
     public rebel_broker()
     {
     }
-    public static String c_stringFile = "conversation/rebel_broker";
+
     public boolean rebel_broker_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean rebel_broker_condition_isImperialFaction(obj_id player, obj_id npc) throws InterruptedException
     {
         String factionName = factions.getFaction(player);
@@ -20,47 +29,57 @@ public class rebel_broker extends script.base_script
         {
             return false;
         }
-        else 
+        else
         {
             return (factionName.equals(factions.FACTION_IMPERIAL));
         }
     }
+
     public boolean rebel_broker_condition_wasBrushedOff(obj_id player, obj_id npc) throws InterruptedException
     {
         return utils.hasScriptVar(player, "rebelBroker.brushoff");
     }
+
     public boolean rebel_broker_condition_isRebelPilot(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_skill.hasRebelSkill(player);
     }
+
     public boolean rebel_broker_condition_isPilot(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_skill.hasSpaceSkills(player);
     }
+
     public boolean rebel_broker_condition_hasSpaceExp(obj_id player, obj_id npc) throws InterruptedException
     {
         return features.isSpaceEdition(player);
     }
+
     public void rebel_broker_action_brushedOffImp(obj_id player, obj_id npc) throws InterruptedException
     {
         utils.setScriptVar(player, "rebelBroker.brushoff", true);
     }
+
     public void rebel_broker_action_addNabooWaypoint(obj_id player, obj_id npc) throws InterruptedException
     {
         trainerlocs.getTrainerLocationWaypoint(player, "rebel", "naboo");
     }
+
     public void rebel_broker_action_addCorellianWaypoint(obj_id player, obj_id npc) throws InterruptedException
     {
         trainerlocs.getTrainerLocationWaypoint(player, "rebel", "corellia");
     }
+
     public void rebel_broker_action_addTatooineWaypoint(obj_id player, obj_id npc) throws InterruptedException
     {
         trainerlocs.getTrainerLocationWaypoint(player, "rebel", "tatooine");
     }
+
     public void rebel_broker_action_retireSkill(obj_id player, obj_id npc) throws InterruptedException
     {
         space_skill.retire(player, space_skill.REBEL);
     }
+
     public int rebel_broker_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_fc2710b9"))
@@ -88,7 +107,7 @@ public class rebel_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_658b5a75");
@@ -101,7 +120,7 @@ public class rebel_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.rebel_broker.branchId");
                     chat.chat(npc, player, message);
@@ -123,6 +142,7 @@ public class rebel_broker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rebel_broker_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_658b5a75"))
@@ -150,7 +170,7 @@ public class rebel_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f72f24be");
@@ -163,7 +183,7 @@ public class rebel_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.rebel_broker.branchId");
                     chat.chat(npc, player, message);
@@ -185,6 +205,7 @@ public class rebel_broker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rebel_broker_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_f72f24be"))
@@ -213,6 +234,7 @@ public class rebel_broker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rebel_broker_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_d70dba34"))
@@ -240,7 +262,7 @@ public class rebel_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_c2a4c0b1");
@@ -253,7 +275,7 @@ public class rebel_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.rebel_broker.branchId");
                     chat.chat(npc, player, message);
@@ -276,6 +298,7 @@ public class rebel_broker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rebel_broker_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_c2a4c0b1"))
@@ -303,7 +326,7 @@ public class rebel_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_895d093");
@@ -316,7 +339,7 @@ public class rebel_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.rebel_broker.branchId");
                     chat.chat(npc, player, message);
@@ -339,6 +362,7 @@ public class rebel_broker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rebel_broker_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_895d093"))
@@ -378,7 +402,7 @@ public class rebel_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_50f22f35");
@@ -391,7 +415,7 @@ public class rebel_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.rebel_broker.branchId");
                     chat.chat(npc, player, message);
@@ -402,6 +426,7 @@ public class rebel_broker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rebel_broker_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_50f22f35"))
@@ -430,6 +455,7 @@ public class rebel_broker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rebel_broker_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_ca776e30"))
@@ -457,7 +483,7 @@ public class rebel_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_e81a1436");
@@ -470,7 +496,7 @@ public class rebel_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.rebel_broker.branchId");
                     chat.chat(npc, player, message);
@@ -481,6 +507,7 @@ public class rebel_broker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rebel_broker_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_e81a1436"))
@@ -501,7 +528,7 @@ public class rebel_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_c0dd7feb");
@@ -510,7 +537,7 @@ public class rebel_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.rebel_broker.branchId");
                     chat.chat(npc, player, message);
@@ -533,6 +560,7 @@ public class rebel_broker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rebel_broker_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_c0dd7feb"))
@@ -567,7 +595,7 @@ public class rebel_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_63cd6ccb");
@@ -584,7 +612,7 @@ public class rebel_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.rebel_broker.branchId");
                     chat.chat(npc, player, message);
@@ -595,6 +623,7 @@ public class rebel_broker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rebel_broker_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_63cd6ccb"))
@@ -622,7 +651,7 @@ public class rebel_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_159911f5");
@@ -635,7 +664,7 @@ public class rebel_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.rebel_broker.branchId");
                     chat.chat(npc, player, message);
@@ -669,7 +698,7 @@ public class rebel_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_159911f5");
@@ -682,7 +711,7 @@ public class rebel_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.rebel_broker.branchId");
                     chat.chat(npc, player, message);
@@ -716,7 +745,7 @@ public class rebel_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_159911f5");
@@ -729,7 +758,7 @@ public class rebel_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.rebel_broker.branchId");
                     chat.chat(npc, player, message);
@@ -740,6 +769,7 @@ public class rebel_broker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rebel_broker_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_159911f5"))
@@ -787,7 +817,7 @@ public class rebel_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_63cd6ccb");
@@ -804,7 +834,7 @@ public class rebel_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.rebel_broker.branchId");
                     chat.chat(npc, player, message);
@@ -815,6 +845,7 @@ public class rebel_broker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rebel_broker_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_63cd6ccb"))
@@ -842,7 +873,7 @@ public class rebel_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_159911f5");
@@ -855,7 +886,7 @@ public class rebel_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.rebel_broker.branchId");
                     chat.chat(npc, player, message);
@@ -889,7 +920,7 @@ public class rebel_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_159911f5");
@@ -902,7 +933,7 @@ public class rebel_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.rebel_broker.branchId");
                     chat.chat(npc, player, message);
@@ -936,7 +967,7 @@ public class rebel_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_159911f5");
@@ -949,7 +980,7 @@ public class rebel_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.rebel_broker.branchId");
                     chat.chat(npc, player, message);
@@ -960,6 +991,7 @@ public class rebel_broker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rebel_broker_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_159911f5"))
@@ -1007,7 +1039,7 @@ public class rebel_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_63cd6ccb");
@@ -1024,7 +1056,7 @@ public class rebel_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.rebel_broker.branchId");
                     chat.chat(npc, player, message);
@@ -1035,6 +1067,7 @@ public class rebel_broker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rebel_broker_handleBranch26(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_63cd6ccb"))
@@ -1062,7 +1095,7 @@ public class rebel_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_159911f5");
@@ -1075,7 +1108,7 @@ public class rebel_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.rebel_broker.branchId");
                     chat.chat(npc, player, message);
@@ -1109,7 +1142,7 @@ public class rebel_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_159911f5");
@@ -1122,7 +1155,7 @@ public class rebel_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.rebel_broker.branchId");
                     chat.chat(npc, player, message);
@@ -1156,7 +1189,7 @@ public class rebel_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_159911f5");
@@ -1169,7 +1202,7 @@ public class rebel_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.rebel_broker.branchId");
                     chat.chat(npc, player, message);
@@ -1180,6 +1213,7 @@ public class rebel_broker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rebel_broker_handleBranch27(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_159911f5"))
@@ -1227,7 +1261,7 @@ public class rebel_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_63cd6ccb");
@@ -1244,7 +1278,7 @@ public class rebel_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.rebel_broker.branchId");
                     chat.chat(npc, player, message);
@@ -1255,6 +1289,7 @@ public class rebel_broker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rebel_broker_handleBranch29(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_63cd6ccb"))
@@ -1282,7 +1317,7 @@ public class rebel_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_159911f5");
@@ -1295,7 +1330,7 @@ public class rebel_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.rebel_broker.branchId");
                     chat.chat(npc, player, message);
@@ -1329,7 +1364,7 @@ public class rebel_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_159911f5");
@@ -1342,7 +1377,7 @@ public class rebel_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.rebel_broker.branchId");
                     chat.chat(npc, player, message);
@@ -1376,7 +1411,7 @@ public class rebel_broker extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_159911f5");
@@ -1389,7 +1424,7 @@ public class rebel_broker extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.rebel_broker.branchId");
                     chat.chat(npc, player, message);
@@ -1400,6 +1435,7 @@ public class rebel_broker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -1412,6 +1448,7 @@ public class rebel_broker extends script.base_script
         factions.setFaction(self, factions.FACTION_REBEL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
@@ -1420,6 +1457,7 @@ public class rebel_broker extends script.base_script
         factions.setFaction(self, factions.FACTION_REBEL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -1428,18 +1466,21 @@ public class rebel_broker extends script.base_script
         faceTo(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.rebel_broker");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -1477,7 +1518,7 @@ public class rebel_broker extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_fc2710b9");
@@ -1489,7 +1530,7 @@ public class rebel_broker extends script.base_script
                 setObjVar(player, "conversation.rebel_broker.branchId", 2);
                 npcStartConversation(player, npc, "rebel_broker", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1525,7 +1566,7 @@ public class rebel_broker extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_d70dba34");
@@ -1537,7 +1578,7 @@ public class rebel_broker extends script.base_script
                 setObjVar(player, "conversation.rebel_broker.branchId", 10);
                 npcStartConversation(player, npc, "rebel_broker", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1564,7 +1605,7 @@ public class rebel_broker extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_ca776e30");
@@ -1572,7 +1613,7 @@ public class rebel_broker extends script.base_script
                 setObjVar(player, "conversation.rebel_broker.branchId", 17);
                 npcStartConversation(player, npc, "rebel_broker", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1581,6 +1622,7 @@ public class rebel_broker extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("rebel_broker"))

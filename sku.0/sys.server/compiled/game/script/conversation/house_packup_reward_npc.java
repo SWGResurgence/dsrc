@@ -1,18 +1,27 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.*;
 
 public class house_packup_reward_npc extends script.base_script
 {
+    public static String c_stringFile = "conversation/house_packup_reward_npc";
+
     public house_packup_reward_npc()
     {
     }
-    public static String c_stringFile = "conversation/house_packup_reward_npc";
+
     public boolean house_packup_reward_npc_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean house_packup_reward_npc_condition_hasPoints(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(player, "housePackup"))
@@ -20,26 +29,27 @@ public class house_packup_reward_npc extends script.base_script
             int[] packupObjVar = getIntArrayObjVar(player, "housePackup");
             if (packupObjVar != null && packupObjVar.length > 0)
             {
-                if (packupObjVar[0] > 0)
-                {
-                    return true;
-                }
+                return packupObjVar[0] > 0;
             }
         }
         return false;
     }
+
     public boolean house_packup_reward_npc_condition_badgeMasterRecipient(obj_id player, obj_id npc) throws InterruptedException
     {
         return (badge.hasBadge(player, "house_packup_badge_master"));
     }
+
     public boolean house_packup_reward_npc_condition_badgeMogulRecipient(obj_id player, obj_id npc) throws InterruptedException
     {
         return (badge.hasBadge(player, "house_packup_badge_mogul"));
     }
+
     public boolean house_packup_reward_npc_condition_badgePackupRecipient(obj_id player, obj_id npc) throws InterruptedException
     {
         return (badge.hasBadge(player, "house_packup_badge"));
     }
+
     public boolean house_packup_reward_npc_condition_isInventoryFull(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id inv = utils.getInventoryContainer(player);
@@ -47,12 +57,9 @@ public class house_packup_reward_npc extends script.base_script
         {
             return true;
         }
-        if (getVolumeFree(inv) < 1)
-        {
-            return true;
-        }
-        return false;
+        return getVolumeFree(inv) < 1;
     }
+
     public void house_packup_reward_npc_action_rewardCouch(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id pInv = utils.getInventoryContainer(player);
@@ -60,6 +67,7 @@ public class house_packup_reward_npc extends script.base_script
         static_item.createNewItemFunction("item_housepack_xeno_couch_01_01", pInv);
         CustomerServiceLog("HOUSE_PACKUP_REWARDS", player + "purchased a item_housepack_xeno_couch_01_01");
     }
+
     public void house_packup_reward_npc_action_rewardDesk(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id pInv = utils.getInventoryContainer(player);
@@ -67,6 +75,7 @@ public class house_packup_reward_npc extends script.base_script
         static_item.createNewItemFunction("item_housepack_xeno_desk_01_01", pInv);
         CustomerServiceLog("HOUSE_PACKUP_REWARDS", player + "purchased a item_housepack_xeno_desk_01_01");
     }
+
     public void house_packup_reward_npc_action_rewardTable(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id pInv = utils.getInventoryContainer(player);
@@ -74,6 +83,7 @@ public class house_packup_reward_npc extends script.base_script
         static_item.createNewItemFunction("item_housepack_xeno_table_01_01", pInv);
         CustomerServiceLog("HOUSE_PACKUP_REWARDS", player + "purchased a item_housepack_xeno_table_01_01");
     }
+
     public void house_packup_reward_npc_action_rewardDeskLamp(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id pInv = utils.getInventoryContainer(player);
@@ -81,6 +91,7 @@ public class house_packup_reward_npc extends script.base_script
         static_item.createNewItemFunction("item_housepack_xeno_desk_lamp_01_01", pInv);
         CustomerServiceLog("HOUSE_PACKUP_REWARDS", player + "purchased a item_housepack_xeno_desk_lamp_01_01");
     }
+
     public void house_packup_reward_npc_action_rewardRug(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id pInv = utils.getInventoryContainer(player);
@@ -88,6 +99,7 @@ public class house_packup_reward_npc extends script.base_script
         static_item.createNewItemFunction("item_housepack_xeno_rug_01_01", pInv);
         CustomerServiceLog("HOUSE_PACKUP_REWARDS", player + "purchased a item_housepack_xeno_rug_01_01");
     }
+
     public void house_packup_reward_npc_action_rewardRecliner(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id pInv = utils.getInventoryContainer(player);
@@ -95,6 +107,7 @@ public class house_packup_reward_npc extends script.base_script
         static_item.createNewItemFunction("item_housepack_xeno_recliner_01_01", pInv);
         CustomerServiceLog("HOUSE_PACKUP_REWARDS", player + "purchased a item_housepack_xeno_recliner_01_01");
     }
+
     public void house_packup_reward_npc_action_rewardRebPainting(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id pInv = utils.getInventoryContainer(player);
@@ -102,6 +115,7 @@ public class house_packup_reward_npc extends script.base_script
         static_item.createNewItemFunction("item_housepack_painting_rebel_01_01", pInv);
         CustomerServiceLog("HOUSE_PACKUP_REWARDS", player + "purchased a item_housepack_painting_rebel_01_01");
     }
+
     public void house_packup_reward_npc_action_rewardImpPainting(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id pInv = utils.getInventoryContainer(player);
@@ -109,6 +123,7 @@ public class house_packup_reward_npc extends script.base_script
         static_item.createNewItemFunction("item_housepack_painting_imperial_01_01", pInv);
         CustomerServiceLog("HOUSE_PACKUP_REWARDS", player + "purchased a item_housepack_painting_imperial_01_01");
     }
+
     public void house_packup_reward_npc_action_rewardCle004(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id pInv = utils.getInventoryContainer(player);
@@ -116,6 +131,7 @@ public class house_packup_reward_npc extends script.base_script
         static_item.createNewItemFunction("item_holopet_cle004_data_cube_01_01", pInv);
         CustomerServiceLog("HOUSE_PACKUP_REWARDS", player + "purchased a item_holopet_cle004_data_cube_01_01");
     }
+
     public void house_packup_reward_npc_action_rewardIns444(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id pInv = utils.getInventoryContainer(player);
@@ -123,6 +139,7 @@ public class house_packup_reward_npc extends script.base_script
         static_item.createNewItemFunction("item_holopet_ins444_data_cube_01_01", pInv);
         CustomerServiceLog("HOUSE_PACKUP_REWARDS", player + "purchased a item_holopet_ins444_data_cube_01_01");
     }
+
     public void house_packup_reward_npc_action_rewardEmperorDesk(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id pInv = utils.getInventoryContainer(player);
@@ -130,6 +147,7 @@ public class house_packup_reward_npc extends script.base_script
         static_item.createNewItemFunction("item_housepack_emperor_desk_01_01", pInv);
         CustomerServiceLog("HOUSE_PACKUP_REWARDS", player + "purchased a item_housepack_emperor_desk_01_01");
     }
+
     public void house_packup_reward_npc_action_rewardEmperorChair(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id pInv = utils.getInventoryContainer(player);
@@ -137,6 +155,7 @@ public class house_packup_reward_npc extends script.base_script
         static_item.createNewItemFunction("item_housepack_emperor_chair_01_01", pInv);
         CustomerServiceLog("HOUSE_PACKUP_REWARDS", player + "purchased a item_housepack_emperor_chair_01_01");
     }
+
     public void house_packup_reward_npc_action_rewardEmperorLamp(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id pInv = utils.getInventoryContainer(player);
@@ -144,10 +163,12 @@ public class house_packup_reward_npc extends script.base_script
         static_item.createNewItemFunction("item_housepack_emperor_desk_lamp_01_01", pInv);
         CustomerServiceLog("HOUSE_PACKUP_REWARDS", player + "purchased a item_housepack_emperor_desk_lamp_01_01");
     }
+
     public int house_packup_reward_npc_tokenDI_availMeritPts(obj_id player, obj_id npc) throws InterruptedException
     {
         return player_structure.getPlayerPackUpMeritPoints(player);
     }
+
     public int house_packup_reward_npc_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_13"))
@@ -258,7 +279,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_153");
@@ -315,7 +336,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -340,7 +361,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_249");
@@ -354,7 +375,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -384,7 +405,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_272");
@@ -393,7 +414,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -419,6 +440,7 @@ public class house_packup_reward_npc extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int house_packup_reward_npc_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_13"))
@@ -529,7 +551,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_153");
@@ -586,7 +608,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -611,7 +633,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_249");
@@ -625,7 +647,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -655,7 +677,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_272");
@@ -664,7 +686,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -690,6 +712,7 @@ public class house_packup_reward_npc extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int house_packup_reward_npc_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_13"))
@@ -800,7 +823,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_153");
@@ -857,7 +880,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -882,7 +905,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_249");
@@ -896,7 +919,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -926,7 +949,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_272");
@@ -935,7 +958,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -961,6 +984,7 @@ public class house_packup_reward_npc extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int house_packup_reward_npc_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_13"))
@@ -1071,7 +1095,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_153");
@@ -1128,7 +1152,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1153,7 +1177,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_249");
@@ -1167,7 +1191,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -1197,7 +1221,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_272");
@@ -1206,7 +1230,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1232,6 +1256,7 @@ public class house_packup_reward_npc extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int house_packup_reward_npc_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_153"))
@@ -1265,7 +1290,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_160");
@@ -1282,7 +1307,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -1325,7 +1350,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_162");
@@ -1342,7 +1367,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -1385,7 +1410,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_164");
@@ -1402,7 +1427,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -1445,7 +1470,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_46");
@@ -1462,7 +1487,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -1505,7 +1530,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_61");
@@ -1522,7 +1547,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -1565,7 +1590,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_76");
@@ -1582,7 +1607,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -1625,7 +1650,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_91");
@@ -1642,7 +1667,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -1685,7 +1710,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_106");
@@ -1702,7 +1727,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -1745,7 +1770,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_121");
@@ -1762,7 +1787,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -1805,7 +1830,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_136");
@@ -1822,7 +1847,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -1865,7 +1890,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_151");
@@ -1882,7 +1907,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -1925,7 +1950,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_209");
@@ -1942,7 +1967,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -1985,7 +2010,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_226");
@@ -2002,7 +2027,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -2016,6 +2041,7 @@ public class house_packup_reward_npc extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int house_packup_reward_npc_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_160"))
@@ -2036,7 +2062,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_175");
@@ -2049,7 +2075,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -2162,7 +2188,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_153");
@@ -2219,7 +2245,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2229,6 +2255,7 @@ public class house_packup_reward_npc extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int house_packup_reward_npc_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_175"))
@@ -2332,7 +2359,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_153");
@@ -2389,7 +2416,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2399,6 +2426,7 @@ public class house_packup_reward_npc extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int house_packup_reward_npc_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_153"))
@@ -2432,7 +2460,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_160");
@@ -2449,7 +2477,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -2492,7 +2520,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_162");
@@ -2509,7 +2537,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -2552,7 +2580,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_164");
@@ -2569,7 +2597,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -2612,7 +2640,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_46");
@@ -2629,7 +2657,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -2672,7 +2700,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_61");
@@ -2689,7 +2717,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -2732,7 +2760,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_76");
@@ -2749,7 +2777,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -2792,7 +2820,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_91");
@@ -2809,7 +2837,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -2852,7 +2880,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_106");
@@ -2869,7 +2897,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -2912,7 +2940,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_121");
@@ -2929,7 +2957,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -2972,7 +3000,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_136");
@@ -2989,7 +3017,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -3032,7 +3060,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_151");
@@ -3049,7 +3077,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -3092,7 +3120,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_209");
@@ -3109,7 +3137,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -3152,7 +3180,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_226");
@@ -3169,7 +3197,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -3183,6 +3211,7 @@ public class house_packup_reward_npc extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int house_packup_reward_npc_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_153"))
@@ -3216,7 +3245,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_160");
@@ -3233,7 +3262,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -3276,7 +3305,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_162");
@@ -3293,7 +3322,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -3336,7 +3365,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_164");
@@ -3353,7 +3382,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -3396,7 +3425,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_46");
@@ -3413,7 +3442,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -3456,7 +3485,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_61");
@@ -3473,7 +3502,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -3516,7 +3545,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_76");
@@ -3533,7 +3562,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -3576,7 +3605,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_91");
@@ -3593,7 +3622,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -3636,7 +3665,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_106");
@@ -3653,7 +3682,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -3696,7 +3725,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_121");
@@ -3713,7 +3742,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -3756,7 +3785,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_136");
@@ -3773,7 +3802,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -3816,7 +3845,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_151");
@@ -3833,7 +3862,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -3876,7 +3905,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_209");
@@ -3893,7 +3922,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -3936,7 +3965,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_226");
@@ -3953,7 +3982,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -3967,6 +3996,7 @@ public class house_packup_reward_npc extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int house_packup_reward_npc_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_162"))
@@ -3987,7 +4017,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_177");
@@ -4000,7 +4030,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -4113,7 +4143,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_153");
@@ -4170,7 +4200,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4180,6 +4210,7 @@ public class house_packup_reward_npc extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int house_packup_reward_npc_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_177"))
@@ -4283,7 +4314,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_153");
@@ -4340,7 +4371,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4350,6 +4381,7 @@ public class house_packup_reward_npc extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int house_packup_reward_npc_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_153"))
@@ -4383,7 +4415,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_160");
@@ -4400,7 +4432,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -4443,7 +4475,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_162");
@@ -4460,7 +4492,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -4503,7 +4535,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_164");
@@ -4520,7 +4552,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -4563,7 +4595,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_46");
@@ -4580,7 +4612,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -4623,7 +4655,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_61");
@@ -4640,7 +4672,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -4683,7 +4715,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_76");
@@ -4700,7 +4732,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -4743,7 +4775,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_91");
@@ -4760,7 +4792,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -4803,7 +4835,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_106");
@@ -4820,7 +4852,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -4863,7 +4895,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_121");
@@ -4880,7 +4912,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -4923,7 +4955,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_136");
@@ -4940,7 +4972,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -4983,7 +5015,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_151");
@@ -5000,7 +5032,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -5043,7 +5075,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_209");
@@ -5060,7 +5092,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -5103,7 +5135,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_226");
@@ -5120,7 +5152,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -5134,6 +5166,7 @@ public class house_packup_reward_npc extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int house_packup_reward_npc_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_153"))
@@ -5167,7 +5200,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_160");
@@ -5184,7 +5217,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -5227,7 +5260,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_162");
@@ -5244,7 +5277,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -5287,7 +5320,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_164");
@@ -5304,7 +5337,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -5347,7 +5380,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_46");
@@ -5364,7 +5397,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -5407,7 +5440,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_61");
@@ -5424,7 +5457,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -5467,7 +5500,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_76");
@@ -5484,7 +5517,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -5527,7 +5560,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_91");
@@ -5544,7 +5577,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -5587,7 +5620,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_106");
@@ -5604,7 +5637,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -5647,7 +5680,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_121");
@@ -5664,7 +5697,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -5707,7 +5740,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_136");
@@ -5724,7 +5757,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -5767,7 +5800,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_151");
@@ -5784,7 +5817,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -5827,7 +5860,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_209");
@@ -5844,7 +5877,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -5887,7 +5920,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_226");
@@ -5904,7 +5937,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -5918,6 +5951,7 @@ public class house_packup_reward_npc extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int house_packup_reward_npc_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_164"))
@@ -5938,7 +5972,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_179");
@@ -5951,7 +5985,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -6064,7 +6098,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_153");
@@ -6121,7 +6155,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6131,6 +6165,7 @@ public class house_packup_reward_npc extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int house_packup_reward_npc_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_179"))
@@ -6234,7 +6269,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_153");
@@ -6291,7 +6326,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6301,6 +6336,7 @@ public class house_packup_reward_npc extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int house_packup_reward_npc_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_153"))
@@ -6334,7 +6370,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_160");
@@ -6351,7 +6387,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -6394,7 +6430,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_162");
@@ -6411,7 +6447,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -6454,7 +6490,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_164");
@@ -6471,7 +6507,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -6514,7 +6550,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_46");
@@ -6531,7 +6567,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -6574,7 +6610,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_61");
@@ -6591,7 +6627,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -6634,7 +6670,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_76");
@@ -6651,7 +6687,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -6694,7 +6730,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_91");
@@ -6711,7 +6747,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -6754,7 +6790,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_106");
@@ -6771,7 +6807,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -6814,7 +6850,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_121");
@@ -6831,7 +6867,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -6874,7 +6910,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_136");
@@ -6891,7 +6927,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -6934,7 +6970,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_151");
@@ -6951,7 +6987,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -6994,7 +7030,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_209");
@@ -7011,7 +7047,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -7054,7 +7090,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_226");
@@ -7071,7 +7107,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -7085,6 +7121,7 @@ public class house_packup_reward_npc extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int house_packup_reward_npc_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_153"))
@@ -7118,7 +7155,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_160");
@@ -7135,7 +7172,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -7178,7 +7215,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_162");
@@ -7195,7 +7232,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -7238,7 +7275,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_164");
@@ -7255,7 +7292,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -7298,7 +7335,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_46");
@@ -7315,7 +7352,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -7358,7 +7395,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_61");
@@ -7375,7 +7412,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -7418,7 +7455,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_76");
@@ -7435,7 +7472,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -7478,7 +7515,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_91");
@@ -7495,7 +7532,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -7538,7 +7575,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_106");
@@ -7555,7 +7592,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -7598,7 +7635,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_121");
@@ -7615,7 +7652,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -7658,7 +7695,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_136");
@@ -7675,7 +7712,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -7718,7 +7755,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_151");
@@ -7735,7 +7772,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -7778,7 +7815,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_209");
@@ -7795,7 +7832,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -7838,7 +7875,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_226");
@@ -7855,7 +7892,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -7869,6 +7906,7 @@ public class house_packup_reward_npc extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int house_packup_reward_npc_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_46"))
@@ -7890,7 +7928,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_181");
@@ -7903,7 +7941,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -8017,7 +8055,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_153");
@@ -8074,7 +8112,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -8084,6 +8122,7 @@ public class house_packup_reward_npc extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int house_packup_reward_npc_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_181"))
@@ -8187,7 +8226,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_153");
@@ -8244,7 +8283,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -8254,6 +8293,7 @@ public class house_packup_reward_npc extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int house_packup_reward_npc_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_153"))
@@ -8287,7 +8327,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_160");
@@ -8304,7 +8344,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -8347,7 +8387,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_162");
@@ -8364,7 +8404,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -8407,7 +8447,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_164");
@@ -8424,7 +8464,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -8467,7 +8507,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_46");
@@ -8484,7 +8524,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -8527,7 +8567,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_61");
@@ -8544,7 +8584,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -8587,7 +8627,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_76");
@@ -8604,7 +8644,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -8647,7 +8687,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_91");
@@ -8664,7 +8704,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -8707,7 +8747,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_106");
@@ -8724,7 +8764,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -8767,7 +8807,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_121");
@@ -8784,7 +8824,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -8827,7 +8867,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_136");
@@ -8844,7 +8884,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -8887,7 +8927,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_151");
@@ -8904,7 +8944,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -8947,7 +8987,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_209");
@@ -8964,7 +9004,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -9007,7 +9047,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_226");
@@ -9024,7 +9064,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -9038,6 +9078,7 @@ public class house_packup_reward_npc extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int house_packup_reward_npc_handleBranch26(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_153"))
@@ -9071,7 +9112,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_160");
@@ -9088,7 +9129,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -9131,7 +9172,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_162");
@@ -9148,7 +9189,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -9191,7 +9232,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_164");
@@ -9208,7 +9249,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -9251,7 +9292,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_46");
@@ -9268,7 +9309,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -9311,7 +9352,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_61");
@@ -9328,7 +9369,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -9371,7 +9412,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_76");
@@ -9388,7 +9429,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -9431,7 +9472,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_91");
@@ -9448,7 +9489,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -9491,7 +9532,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_106");
@@ -9508,7 +9549,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -9551,7 +9592,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_121");
@@ -9568,7 +9609,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -9611,7 +9652,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_136");
@@ -9628,7 +9669,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -9671,7 +9712,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_151");
@@ -9688,7 +9729,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -9731,7 +9772,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_209");
@@ -9748,7 +9789,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -9791,7 +9832,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_226");
@@ -9808,7 +9849,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -9822,6 +9863,7 @@ public class house_packup_reward_npc extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int house_packup_reward_npc_handleBranch28(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_61"))
@@ -9843,7 +9885,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_183");
@@ -9856,7 +9898,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -9970,7 +10012,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_153");
@@ -10027,7 +10069,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -10037,6 +10079,7 @@ public class house_packup_reward_npc extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int house_packup_reward_npc_handleBranch29(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_183"))
@@ -10140,7 +10183,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_153");
@@ -10197,7 +10240,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -10207,6 +10250,7 @@ public class house_packup_reward_npc extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int house_packup_reward_npc_handleBranch30(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_153"))
@@ -10240,7 +10284,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_160");
@@ -10257,7 +10301,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -10300,7 +10344,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_162");
@@ -10317,7 +10361,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -10360,7 +10404,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_164");
@@ -10377,7 +10421,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -10420,7 +10464,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_46");
@@ -10437,7 +10481,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -10480,7 +10524,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_61");
@@ -10497,7 +10541,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -10540,7 +10584,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_76");
@@ -10557,7 +10601,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -10600,7 +10644,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_91");
@@ -10617,7 +10661,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -10660,7 +10704,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_106");
@@ -10677,7 +10721,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -10720,7 +10764,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_121");
@@ -10737,7 +10781,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -10780,7 +10824,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_136");
@@ -10797,7 +10841,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -10840,7 +10884,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_151");
@@ -10857,7 +10901,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -10900,7 +10944,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_209");
@@ -10917,7 +10961,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -10960,7 +11004,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_226");
@@ -10977,7 +11021,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -10991,6 +11035,7 @@ public class house_packup_reward_npc extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int house_packup_reward_npc_handleBranch31(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_153"))
@@ -11024,7 +11069,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_160");
@@ -11041,7 +11086,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -11084,7 +11129,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_162");
@@ -11101,7 +11146,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -11144,7 +11189,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_164");
@@ -11161,7 +11206,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -11204,7 +11249,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_46");
@@ -11221,7 +11266,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -11264,7 +11309,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_61");
@@ -11281,7 +11326,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -11324,7 +11369,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_76");
@@ -11341,7 +11386,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -11384,7 +11429,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_91");
@@ -11401,7 +11446,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -11444,7 +11489,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_106");
@@ -11461,7 +11506,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -11504,7 +11549,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_121");
@@ -11521,7 +11566,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -11564,7 +11609,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_136");
@@ -11581,7 +11626,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -11624,7 +11669,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_151");
@@ -11641,7 +11686,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -11684,7 +11729,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_209");
@@ -11701,7 +11746,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -11744,7 +11789,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_226");
@@ -11761,7 +11806,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -11775,6 +11820,7 @@ public class house_packup_reward_npc extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int house_packup_reward_npc_handleBranch33(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_76"))
@@ -11796,7 +11842,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_185");
@@ -11809,7 +11855,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -11923,7 +11969,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_153");
@@ -11980,7 +12026,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -11990,6 +12036,7 @@ public class house_packup_reward_npc extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int house_packup_reward_npc_handleBranch34(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_185"))
@@ -12093,7 +12140,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_153");
@@ -12150,7 +12197,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -12160,6 +12207,7 @@ public class house_packup_reward_npc extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int house_packup_reward_npc_handleBranch35(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_153"))
@@ -12193,7 +12241,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_160");
@@ -12210,7 +12258,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -12253,7 +12301,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_162");
@@ -12270,7 +12318,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -12313,7 +12361,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_164");
@@ -12330,7 +12378,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -12373,7 +12421,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_46");
@@ -12390,7 +12438,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -12433,7 +12481,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_61");
@@ -12450,7 +12498,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -12493,7 +12541,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_76");
@@ -12510,7 +12558,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -12553,7 +12601,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_91");
@@ -12570,7 +12618,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -12613,7 +12661,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_106");
@@ -12630,7 +12678,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -12673,7 +12721,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_121");
@@ -12690,7 +12738,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -12733,7 +12781,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_136");
@@ -12750,7 +12798,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -12793,7 +12841,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_151");
@@ -12810,7 +12858,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -12853,7 +12901,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_209");
@@ -12870,7 +12918,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -12913,7 +12961,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_226");
@@ -12930,7 +12978,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -12944,6 +12992,7 @@ public class house_packup_reward_npc extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int house_packup_reward_npc_handleBranch36(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_153"))
@@ -12977,7 +13026,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_160");
@@ -12994,7 +13043,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -13037,7 +13086,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_162");
@@ -13054,7 +13103,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -13097,7 +13146,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_164");
@@ -13114,7 +13163,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -13157,7 +13206,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_46");
@@ -13174,7 +13223,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -13217,7 +13266,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_61");
@@ -13234,7 +13283,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -13277,7 +13326,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_76");
@@ -13294,7 +13343,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -13337,7 +13386,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_91");
@@ -13354,7 +13403,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -13397,7 +13446,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_106");
@@ -13414,7 +13463,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -13457,7 +13506,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_121");
@@ -13474,7 +13523,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -13517,7 +13566,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_136");
@@ -13534,7 +13583,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -13577,7 +13626,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_151");
@@ -13594,7 +13643,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -13637,7 +13686,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_209");
@@ -13654,7 +13703,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -13697,7 +13746,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_226");
@@ -13714,7 +13763,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -13728,6 +13777,7 @@ public class house_packup_reward_npc extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int house_packup_reward_npc_handleBranch38(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_91"))
@@ -13749,7 +13799,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_187");
@@ -13762,7 +13812,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -13876,7 +13926,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_153");
@@ -13933,7 +13983,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -13943,6 +13993,7 @@ public class house_packup_reward_npc extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int house_packup_reward_npc_handleBranch39(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_187"))
@@ -14046,7 +14097,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_153");
@@ -14103,7 +14154,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -14113,6 +14164,7 @@ public class house_packup_reward_npc extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int house_packup_reward_npc_handleBranch40(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_153"))
@@ -14146,7 +14198,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_160");
@@ -14163,7 +14215,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -14206,7 +14258,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_162");
@@ -14223,7 +14275,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -14266,7 +14318,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_164");
@@ -14283,7 +14335,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -14326,7 +14378,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_46");
@@ -14343,7 +14395,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -14386,7 +14438,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_61");
@@ -14403,7 +14455,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -14446,7 +14498,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_76");
@@ -14463,7 +14515,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -14506,7 +14558,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_91");
@@ -14523,7 +14575,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -14566,7 +14618,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_106");
@@ -14583,7 +14635,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -14626,7 +14678,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_121");
@@ -14643,7 +14695,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -14686,7 +14738,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_136");
@@ -14703,7 +14755,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -14746,7 +14798,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_151");
@@ -14763,7 +14815,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -14806,7 +14858,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_209");
@@ -14823,7 +14875,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -14866,7 +14918,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_226");
@@ -14883,7 +14935,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -14897,6 +14949,7 @@ public class house_packup_reward_npc extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int house_packup_reward_npc_handleBranch41(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_153"))
@@ -14930,7 +14983,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_160");
@@ -14947,7 +15000,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -14990,7 +15043,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_162");
@@ -15007,7 +15060,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -15050,7 +15103,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_164");
@@ -15067,7 +15120,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -15110,7 +15163,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_46");
@@ -15127,7 +15180,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -15170,7 +15223,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_61");
@@ -15187,7 +15240,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -15230,7 +15283,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_76");
@@ -15247,7 +15300,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -15290,7 +15343,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_91");
@@ -15307,7 +15360,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -15350,7 +15403,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_106");
@@ -15367,7 +15420,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -15410,7 +15463,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_121");
@@ -15427,7 +15480,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -15470,7 +15523,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_136");
@@ -15487,7 +15540,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -15530,7 +15583,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_151");
@@ -15547,7 +15600,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -15590,7 +15643,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_209");
@@ -15607,7 +15660,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -15650,7 +15703,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_226");
@@ -15667,7 +15720,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -15681,6 +15734,7 @@ public class house_packup_reward_npc extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int house_packup_reward_npc_handleBranch43(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_106"))
@@ -15702,7 +15756,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_189");
@@ -15715,7 +15769,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -15829,7 +15883,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_153");
@@ -15886,7 +15940,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -15896,6 +15950,7 @@ public class house_packup_reward_npc extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int house_packup_reward_npc_handleBranch44(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_189"))
@@ -15999,7 +16054,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_153");
@@ -16056,7 +16111,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -16066,6 +16121,7 @@ public class house_packup_reward_npc extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int house_packup_reward_npc_handleBranch45(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_153"))
@@ -16099,7 +16155,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_160");
@@ -16116,7 +16172,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -16159,7 +16215,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_162");
@@ -16176,7 +16232,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -16219,7 +16275,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_164");
@@ -16236,7 +16292,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -16279,7 +16335,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_46");
@@ -16296,7 +16352,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -16339,7 +16395,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_61");
@@ -16356,7 +16412,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -16399,7 +16455,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_76");
@@ -16416,7 +16472,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -16459,7 +16515,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_91");
@@ -16476,7 +16532,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -16519,7 +16575,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_106");
@@ -16536,7 +16592,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -16579,7 +16635,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_121");
@@ -16596,7 +16652,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -16639,7 +16695,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_136");
@@ -16656,7 +16712,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -16699,7 +16755,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_151");
@@ -16716,7 +16772,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -16759,7 +16815,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_209");
@@ -16776,7 +16832,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -16819,7 +16875,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_226");
@@ -16836,7 +16892,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -16850,6 +16906,7 @@ public class house_packup_reward_npc extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int house_packup_reward_npc_handleBranch46(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_153"))
@@ -16883,7 +16940,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_160");
@@ -16900,7 +16957,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -16943,7 +17000,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_162");
@@ -16960,7 +17017,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -17003,7 +17060,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_164");
@@ -17020,7 +17077,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -17063,7 +17120,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_46");
@@ -17080,7 +17137,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -17123,7 +17180,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_61");
@@ -17140,7 +17197,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -17183,7 +17240,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_76");
@@ -17200,7 +17257,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -17243,7 +17300,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_91");
@@ -17260,7 +17317,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -17303,7 +17360,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_106");
@@ -17320,7 +17377,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -17363,7 +17420,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_121");
@@ -17380,7 +17437,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -17423,7 +17480,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_136");
@@ -17440,7 +17497,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -17483,7 +17540,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_151");
@@ -17500,7 +17557,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -17543,7 +17600,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_209");
@@ -17560,7 +17617,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -17603,7 +17660,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_226");
@@ -17620,7 +17677,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -17634,6 +17691,7 @@ public class house_packup_reward_npc extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int house_packup_reward_npc_handleBranch48(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_121"))
@@ -17655,7 +17713,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_191");
@@ -17668,7 +17726,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -17782,7 +17840,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_153");
@@ -17839,7 +17897,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -17849,6 +17907,7 @@ public class house_packup_reward_npc extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int house_packup_reward_npc_handleBranch49(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_191"))
@@ -17952,7 +18011,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_153");
@@ -18009,7 +18068,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -18019,6 +18078,7 @@ public class house_packup_reward_npc extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int house_packup_reward_npc_handleBranch50(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_153"))
@@ -18052,7 +18112,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_160");
@@ -18069,7 +18129,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -18112,7 +18172,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_162");
@@ -18129,7 +18189,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -18172,7 +18232,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_164");
@@ -18189,7 +18249,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -18232,7 +18292,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_46");
@@ -18249,7 +18309,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -18292,7 +18352,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_61");
@@ -18309,7 +18369,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -18352,7 +18412,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_76");
@@ -18369,7 +18429,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -18412,7 +18472,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_91");
@@ -18429,7 +18489,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -18472,7 +18532,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_106");
@@ -18489,7 +18549,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -18532,7 +18592,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_121");
@@ -18549,7 +18609,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -18592,7 +18652,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_136");
@@ -18609,7 +18669,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -18652,7 +18712,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_151");
@@ -18669,7 +18729,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -18712,7 +18772,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_209");
@@ -18729,7 +18789,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -18772,7 +18832,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_226");
@@ -18789,7 +18849,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -18803,6 +18863,7 @@ public class house_packup_reward_npc extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int house_packup_reward_npc_handleBranch51(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_153"))
@@ -18836,7 +18897,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_160");
@@ -18853,7 +18914,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -18896,7 +18957,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_162");
@@ -18913,7 +18974,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -18956,7 +19017,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_164");
@@ -18973,7 +19034,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -19016,7 +19077,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_46");
@@ -19033,7 +19094,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -19076,7 +19137,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_61");
@@ -19093,7 +19154,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -19136,7 +19197,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_76");
@@ -19153,7 +19214,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -19196,7 +19257,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_91");
@@ -19213,7 +19274,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -19256,7 +19317,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_106");
@@ -19273,7 +19334,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -19316,7 +19377,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_121");
@@ -19333,7 +19394,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -19376,7 +19437,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_136");
@@ -19393,7 +19454,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -19436,7 +19497,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_151");
@@ -19453,7 +19514,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -19496,7 +19557,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_209");
@@ -19513,7 +19574,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -19556,7 +19617,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_226");
@@ -19573,7 +19634,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -19587,6 +19648,7 @@ public class house_packup_reward_npc extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int house_packup_reward_npc_handleBranch53(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_136"))
@@ -19608,7 +19670,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_193");
@@ -19621,7 +19683,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -19735,7 +19797,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_153");
@@ -19792,7 +19854,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -19802,6 +19864,7 @@ public class house_packup_reward_npc extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int house_packup_reward_npc_handleBranch54(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_193"))
@@ -19905,7 +19968,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_153");
@@ -19962,7 +20025,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -19972,6 +20035,7 @@ public class house_packup_reward_npc extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int house_packup_reward_npc_handleBranch55(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_153"))
@@ -20005,7 +20069,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_160");
@@ -20022,7 +20086,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -20065,7 +20129,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_162");
@@ -20082,7 +20146,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -20125,7 +20189,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_164");
@@ -20142,7 +20206,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -20185,7 +20249,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_46");
@@ -20202,7 +20266,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -20245,7 +20309,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_61");
@@ -20262,7 +20326,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -20305,7 +20369,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_76");
@@ -20322,7 +20386,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -20365,7 +20429,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_91");
@@ -20382,7 +20446,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -20425,7 +20489,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_106");
@@ -20442,7 +20506,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -20485,7 +20549,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_121");
@@ -20502,7 +20566,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -20545,7 +20609,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_136");
@@ -20562,7 +20626,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -20605,7 +20669,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_151");
@@ -20622,7 +20686,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -20665,7 +20729,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_209");
@@ -20682,7 +20746,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -20725,7 +20789,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_226");
@@ -20742,7 +20806,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -20756,6 +20820,7 @@ public class house_packup_reward_npc extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int house_packup_reward_npc_handleBranch56(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_153"))
@@ -20789,7 +20854,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_160");
@@ -20806,7 +20871,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -20849,7 +20914,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_162");
@@ -20866,7 +20931,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -20909,7 +20974,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_164");
@@ -20926,7 +20991,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -20969,7 +21034,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_46");
@@ -20986,7 +21051,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -21029,7 +21094,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_61");
@@ -21046,7 +21111,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -21089,7 +21154,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_76");
@@ -21106,7 +21171,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -21149,7 +21214,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_91");
@@ -21166,7 +21231,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -21209,7 +21274,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_106");
@@ -21226,7 +21291,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -21269,7 +21334,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_121");
@@ -21286,7 +21351,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -21329,7 +21394,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_136");
@@ -21346,7 +21411,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -21389,7 +21454,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_151");
@@ -21406,7 +21471,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -21449,7 +21514,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_209");
@@ -21466,7 +21531,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -21509,7 +21574,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_226");
@@ -21526,7 +21591,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -21540,6 +21605,7 @@ public class house_packup_reward_npc extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int house_packup_reward_npc_handleBranch58(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_151"))
@@ -21561,7 +21627,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_196");
@@ -21574,7 +21640,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -21688,7 +21754,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_153");
@@ -21745,7 +21811,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -21755,6 +21821,7 @@ public class house_packup_reward_npc extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int house_packup_reward_npc_handleBranch59(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_196"))
@@ -21858,7 +21925,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_153");
@@ -21915,7 +21982,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -21925,6 +21992,7 @@ public class house_packup_reward_npc extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int house_packup_reward_npc_handleBranch60(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_153"))
@@ -21958,7 +22026,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_160");
@@ -21975,7 +22043,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -22018,7 +22086,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_162");
@@ -22035,7 +22103,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -22078,7 +22146,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_164");
@@ -22095,7 +22163,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -22138,7 +22206,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_46");
@@ -22155,7 +22223,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -22198,7 +22266,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_61");
@@ -22215,7 +22283,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -22258,7 +22326,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_76");
@@ -22275,7 +22343,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -22318,7 +22386,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_91");
@@ -22335,7 +22403,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -22378,7 +22446,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_106");
@@ -22395,7 +22463,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -22438,7 +22506,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_121");
@@ -22455,7 +22523,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -22498,7 +22566,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_136");
@@ -22515,7 +22583,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -22558,7 +22626,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_151");
@@ -22575,7 +22643,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -22618,7 +22686,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_209");
@@ -22635,7 +22703,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -22678,7 +22746,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_226");
@@ -22695,7 +22763,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -22709,6 +22777,7 @@ public class house_packup_reward_npc extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int house_packup_reward_npc_handleBranch61(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_153"))
@@ -22742,7 +22811,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_160");
@@ -22759,7 +22828,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -22802,7 +22871,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_162");
@@ -22819,7 +22888,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -22862,7 +22931,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_164");
@@ -22879,7 +22948,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -22922,7 +22991,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_46");
@@ -22939,7 +23008,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -22982,7 +23051,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_61");
@@ -22999,7 +23068,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -23042,7 +23111,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_76");
@@ -23059,7 +23128,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -23102,7 +23171,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_91");
@@ -23119,7 +23188,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -23162,7 +23231,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_106");
@@ -23179,7 +23248,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -23222,7 +23291,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_121");
@@ -23239,7 +23308,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -23282,7 +23351,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_136");
@@ -23299,7 +23368,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -23342,7 +23411,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_151");
@@ -23359,7 +23428,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -23402,7 +23471,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_209");
@@ -23419,7 +23488,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -23462,7 +23531,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_226");
@@ -23479,7 +23548,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -23493,6 +23562,7 @@ public class house_packup_reward_npc extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int house_packup_reward_npc_handleBranch63(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_209"))
@@ -23514,7 +23584,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_213");
@@ -23527,7 +23597,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -23641,7 +23711,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_153");
@@ -23698,7 +23768,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -23708,6 +23778,7 @@ public class house_packup_reward_npc extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int house_packup_reward_npc_handleBranch64(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_213"))
@@ -23811,7 +23882,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_153");
@@ -23868,7 +23939,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -23878,6 +23949,7 @@ public class house_packup_reward_npc extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int house_packup_reward_npc_handleBranch65(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_153"))
@@ -23911,7 +23983,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_160");
@@ -23928,7 +24000,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -23971,7 +24043,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_162");
@@ -23988,7 +24060,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -24031,7 +24103,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_164");
@@ -24048,7 +24120,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -24091,7 +24163,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_46");
@@ -24108,7 +24180,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -24151,7 +24223,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_61");
@@ -24168,7 +24240,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -24211,7 +24283,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_76");
@@ -24228,7 +24300,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -24271,7 +24343,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_91");
@@ -24288,7 +24360,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -24331,7 +24403,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_106");
@@ -24348,7 +24420,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -24391,7 +24463,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_121");
@@ -24408,7 +24480,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -24451,7 +24523,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_136");
@@ -24468,7 +24540,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -24511,7 +24583,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_151");
@@ -24528,7 +24600,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -24571,7 +24643,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_209");
@@ -24588,7 +24660,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -24631,7 +24703,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_226");
@@ -24648,7 +24720,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -24662,6 +24734,7 @@ public class house_packup_reward_npc extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int house_packup_reward_npc_handleBranch66(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_153"))
@@ -24695,7 +24768,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_160");
@@ -24712,7 +24785,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -24755,7 +24828,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_162");
@@ -24772,7 +24845,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -24815,7 +24888,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_164");
@@ -24832,7 +24905,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -24875,7 +24948,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_46");
@@ -24892,7 +24965,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -24935,7 +25008,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_61");
@@ -24952,7 +25025,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -24995,7 +25068,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_76");
@@ -25012,7 +25085,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -25055,7 +25128,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_91");
@@ -25072,7 +25145,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -25115,7 +25188,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_106");
@@ -25132,7 +25205,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -25175,7 +25248,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_121");
@@ -25192,7 +25265,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -25235,7 +25308,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_136");
@@ -25252,7 +25325,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -25295,7 +25368,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_151");
@@ -25312,7 +25385,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -25355,7 +25428,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_209");
@@ -25372,7 +25445,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -25415,7 +25488,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_226");
@@ -25432,7 +25505,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -25446,6 +25519,7 @@ public class house_packup_reward_npc extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int house_packup_reward_npc_handleBranch68(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_226"))
@@ -25467,7 +25541,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_230");
@@ -25480,7 +25554,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -25594,7 +25668,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_153");
@@ -25651,7 +25725,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -25661,6 +25735,7 @@ public class house_packup_reward_npc extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int house_packup_reward_npc_handleBranch69(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_230"))
@@ -25764,7 +25839,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_153");
@@ -25821,7 +25896,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -25831,6 +25906,7 @@ public class house_packup_reward_npc extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int house_packup_reward_npc_handleBranch70(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_153"))
@@ -25864,7 +25940,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_160");
@@ -25881,7 +25957,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -25924,7 +26000,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_162");
@@ -25941,7 +26017,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -25984,7 +26060,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_164");
@@ -26001,7 +26077,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -26044,7 +26120,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_46");
@@ -26061,7 +26137,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -26104,7 +26180,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_61");
@@ -26121,7 +26197,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -26164,7 +26240,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_76");
@@ -26181,7 +26257,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -26224,7 +26300,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_91");
@@ -26241,7 +26317,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -26284,7 +26360,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_106");
@@ -26301,7 +26377,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -26344,7 +26420,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_121");
@@ -26361,7 +26437,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -26404,7 +26480,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_136");
@@ -26421,7 +26497,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -26464,7 +26540,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_151");
@@ -26481,7 +26557,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -26524,7 +26600,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_209");
@@ -26541,7 +26617,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -26584,7 +26660,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_226");
@@ -26601,7 +26677,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -26615,6 +26691,7 @@ public class house_packup_reward_npc extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int house_packup_reward_npc_handleBranch71(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_153"))
@@ -26648,7 +26725,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_160");
@@ -26665,7 +26742,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -26708,7 +26785,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_162");
@@ -26725,7 +26802,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -26768,7 +26845,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_164");
@@ -26785,7 +26862,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -26828,7 +26905,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_46");
@@ -26845,7 +26922,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -26888,7 +26965,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_61");
@@ -26905,7 +26982,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -26948,7 +27025,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_76");
@@ -26965,7 +27042,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -27008,7 +27085,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_91");
@@ -27025,7 +27102,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -27068,7 +27145,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_106");
@@ -27085,7 +27162,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -27128,7 +27205,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_121");
@@ -27145,7 +27222,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -27188,7 +27265,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_136");
@@ -27205,7 +27282,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -27248,7 +27325,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_151");
@@ -27265,7 +27342,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -27308,7 +27385,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_209");
@@ -27325,7 +27402,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -27368,7 +27445,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_226");
@@ -27385,7 +27462,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -27399,6 +27476,7 @@ public class house_packup_reward_npc extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int house_packup_reward_npc_handleBranch72(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_249"))
@@ -27502,7 +27580,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_153");
@@ -27559,7 +27637,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -27569,6 +27647,7 @@ public class house_packup_reward_npc extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int house_packup_reward_npc_handleBranch73(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_153"))
@@ -27602,7 +27681,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_160");
@@ -27619,7 +27698,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -27662,7 +27741,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_162");
@@ -27679,7 +27758,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -27722,7 +27801,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_164");
@@ -27739,7 +27818,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -27782,7 +27861,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_46");
@@ -27799,7 +27878,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -27842,7 +27921,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_61");
@@ -27859,7 +27938,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -27902,7 +27981,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_76");
@@ -27919,7 +27998,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -27962,7 +28041,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_91");
@@ -27979,7 +28058,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -28022,7 +28101,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_106");
@@ -28039,7 +28118,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -28082,7 +28161,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_121");
@@ -28099,7 +28178,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -28142,7 +28221,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_136");
@@ -28159,7 +28238,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -28202,7 +28281,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_151");
@@ -28219,7 +28298,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -28262,7 +28341,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_209");
@@ -28279,7 +28358,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -28322,7 +28401,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_226");
@@ -28339,7 +28418,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     prose_package pp = new prose_package();
@@ -28353,6 +28432,7 @@ public class house_packup_reward_npc extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int house_packup_reward_npc_handleBranch75(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_254"))
@@ -28372,7 +28452,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_272");
@@ -28381,7 +28461,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -28403,6 +28483,7 @@ public class house_packup_reward_npc extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int house_packup_reward_npc_handleBranch76(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_272"))
@@ -28422,7 +28503,7 @@ public class house_packup_reward_npc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_276");
@@ -28431,7 +28512,7 @@ public class house_packup_reward_npc extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.house_packup_reward_npc.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -28441,6 +28522,7 @@ public class house_packup_reward_npc extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int house_packup_reward_npc_handleBranch77(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_276"))
@@ -28457,6 +28539,7 @@ public class house_packup_reward_npc extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isTangible(self)) || (isPlayer(self)))
@@ -28466,11 +28549,13 @@ public class house_packup_reward_npc extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -28479,18 +28564,21 @@ public class house_packup_reward_npc extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.house_packup_reward_npc");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -28536,7 +28624,7 @@ public class house_packup_reward_npc extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_13");
@@ -28560,7 +28648,7 @@ public class house_packup_reward_npc extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "house_packup_reward_npc", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -28608,7 +28696,7 @@ public class house_packup_reward_npc extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_13");
@@ -28632,7 +28720,7 @@ public class house_packup_reward_npc extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "house_packup_reward_npc", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -28680,7 +28768,7 @@ public class house_packup_reward_npc extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_13");
@@ -28704,7 +28792,7 @@ public class house_packup_reward_npc extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "house_packup_reward_npc", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -28752,7 +28840,7 @@ public class house_packup_reward_npc extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_13");
@@ -28776,7 +28864,7 @@ public class house_packup_reward_npc extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "house_packup_reward_npc", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -28810,7 +28898,7 @@ public class house_packup_reward_npc extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_254");
@@ -28822,7 +28910,7 @@ public class house_packup_reward_npc extends script.base_script
                 utils.setScriptVar(player, "conversation.house_packup_reward_npc.branchId", 75);
                 npcStartConversation(player, npc, "house_packup_reward_npc", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -28831,6 +28919,7 @@ public class house_packup_reward_npc extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("house_packup_reward_npc"))

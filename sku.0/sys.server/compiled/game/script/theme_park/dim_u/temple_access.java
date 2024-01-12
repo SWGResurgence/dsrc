@@ -1,13 +1,22 @@
 package script.theme_park.dim_u;
 
-import script.*;
-/**
+/*
+ * Copyright © SWG:Resurgence 2023.
  *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
+import script.*;
+
+/**
  * @author BubbaJoe
  */
-public class temple_access extends script.base_script {
-    public temple_access() {
+public class temple_access extends script.base_script
+{
+    public temple_access()
+    {
     }
+
     public int OnAboutToReceiveItem(obj_id self, obj_id destinationCell, obj_id transferrer, obj_id item) throws InterruptedException
     {
         if (!isPlayer(item))
@@ -20,7 +29,7 @@ public class temple_access extends script.base_script {
             broadcast(item, "You are not a follower of the Dim-U");
             return SCRIPT_OVERRIDE;
         }
-        else 
+        else
         {
             return SCRIPT_CONTINUE;
         }

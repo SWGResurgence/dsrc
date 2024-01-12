@@ -1,222 +1,259 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.*;
 
 public class rebel_remembrance_day_captain_derlin extends script.base_script
 {
+    public static String c_stringFile = "conversation/rebel_remembrance_day_captain_derlin";
+
     public rebel_remembrance_day_captain_derlin()
     {
     }
-    public static String c_stringFile = "conversation/rebel_remembrance_day_captain_derlin";
+
     public boolean rebel_remembrance_day_captain_derlin_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean rebel_remembrance_day_captain_derlin_condition_alreadyDoingResistance(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return buff.hasBuff(player, holiday.BUFF_REB_EMPIREDAY_RESISTANCE_COMBATANT) || buff.hasBuff(player, holiday.BUFF_REB_EMPIREDAY_RESISTANCE_SF);
     }
+
     public boolean rebel_remembrance_day_captain_derlin_condition_hasCompletedOneOrMoreCollections(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return (rebel_remembrance_day_captain_derlin_condition_hasCompletedVandalCollection(player, npc) || rebel_remembrance_day_captain_derlin_condition_hasCompletedResistanceCollection(player, npc));
     }
+
     public boolean rebel_remembrance_day_captain_derlin_condition_isSpecialForcesRebel(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return (factions.isDeclared(player) && factions.isRebel(player));
     }
+
     public boolean rebel_remembrance_day_captain_derlin_condition_hasResistanceCollectionPrerequisite(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return hasCompletedCollectionSlotPrereq(player, holiday.REBEL_RESISTANCE_COUNTER_SLOT);
     }
+
     public boolean rebel_remembrance_day_captain_derlin_condition_alreadyDoingVandal(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return buff.hasBuff(player, holiday.BUFF_REB_EMPIREDAY_VANDAL_COMBATANT) || buff.hasBuff(player, holiday.BUFF_REB_EMPIREDAY_VANDAL_SF);
     }
+
     public boolean rebel_remembrance_day_captain_derlin_condition_alreadyKnowsDerlin(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return (rebel_remembrance_day_captain_derlin_condition_hasResistanceCollectionPrerequisite(player, npc) || rebel_remembrance_day_captain_derlin_condition_hasVandalCollectionPrerequisite(player, npc));
     }
+
     public boolean rebel_remembrance_day_captain_derlin_condition_hasVandalCollectionPrerequisite(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return hasCompletedCollectionSlotPrereq(player, holiday.REBEL_VANDAL_COUNTER_SLOT);
     }
+
     public boolean rebel_remembrance_day_captain_derlin_condition_hasRemembranceDayBadge(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return hasCompletedCollectionSlot(player, holiday.REMEMBRANCE_DAY_CHAMPION_BADGE);
     }
+
     public boolean rebel_remembrance_day_captain_derlin_condition_isQualifiedResistanceSpecialForces(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return (rebel_remembrance_day_captain_derlin_condition_isSpecialForcesRebel(player, npc) && !rebel_remembrance_day_captain_derlin_condition_alreadyDoingResistance(player, npc));
     }
+
     public boolean rebel_remembrance_day_captain_derlin_condition_isQualifiedVandalSpecialForces(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return (rebel_remembrance_day_captain_derlin_condition_isSpecialForcesRebel(player, npc) && !rebel_remembrance_day_captain_derlin_condition_alreadyDoingVandal(player, npc));
     }
+
     public boolean rebel_remembrance_day_captain_derlin_condition_isImperialPlayer(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return (factions.isImperial(player));
     }
+
     public boolean rebel_remembrance_day_captain_derlin_condition_isNeutralPlayer(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return (!factions.isImperial(player) && !factions.isRebel(player));
     }
+
     public boolean rebel_remembrance_day_captain_derlin_condition_isQualifiedResistanceCombatant(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return (!rebel_remembrance_day_captain_derlin_condition_isSpecialForcesRebel(player, npc) && !rebel_remembrance_day_captain_derlin_condition_alreadyDoingResistance(player, npc));
     }
+
     public boolean rebel_remembrance_day_captain_derlin_condition_isQualifiedVandalCombatant(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return (!rebel_remembrance_day_captain_derlin_condition_isSpecialForcesRebel(player, npc) && !rebel_remembrance_day_captain_derlin_condition_alreadyDoingVandal(player, npc));
     }
+
     public boolean rebel_remembrance_day_captain_derlin_condition_hasCompletedResistanceCollection(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return hasCompletedCollection(player, holiday.REBEL_RESISTANCE_COLLECTION);
     }
+
     public boolean rebel_remembrance_day_captain_derlin_condition_hasCompletedVandalCollection(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return hasCompletedCollection(player, holiday.REBEL_VANDAL_COLLECTION);
     }
+
     public boolean rebel_remembrance_day_captain_derlin_condition_isLockedOutOfEvents(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return (rebel_remembrance_day_captain_derlin_condition_isLockedOutOfResistance(player, npc) && rebel_remembrance_day_captain_derlin_condition_isLockedOutOfVandal(player, npc));
     }
+
     public boolean rebel_remembrance_day_captain_derlin_condition_hasNotCompletedBothCollections(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return (!rebel_remembrance_day_captain_derlin_condition_hasCompletedVandalCollection(player, npc) && !rebel_remembrance_day_captain_derlin_condition_hasCompletedResistanceCollection(player, npc));
     }
+
     public boolean rebel_remembrance_day_captain_derlin_condition_alreadyDoingBothVandalResistance(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return (rebel_remembrance_day_captain_derlin_condition_alreadyDoingResistance(player, npc) && rebel_remembrance_day_captain_derlin_condition_alreadyDoingVandal(player, npc));
     }
+
     public boolean rebel_remembrance_day_captain_derlin_condition_isChampionDoesntKnowDerlin(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return (rebel_remembrance_day_captain_derlin_condition_hasRemembranceDayBadge(player, npc) && !rebel_remembrance_day_captain_derlin_condition_alreadyKnowsDerlin(player, npc));
     }
+
     public boolean rebel_remembrance_day_captain_derlin_condition_isChampionKnowsDerlin(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return (rebel_remembrance_day_captain_derlin_condition_hasRemembranceDayBadge(player, npc) && rebel_remembrance_day_captain_derlin_condition_alreadyKnowsDerlin(player, npc));
     }
+
     public boolean rebel_remembrance_day_captain_derlin_condition_hasCollectionsButNotCompleted(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         if (rebel_remembrance_day_captain_derlin_condition_hasVandalCollectionPrerequisite(player, npc) && rebel_remembrance_day_captain_derlin_condition_hasResistanceCollectionPrerequisite(player, npc) && rebel_remembrance_day_captain_derlin_condition_hasNotCompletedBothCollections(player, npc))
         {
-            if (!rebel_remembrance_day_captain_derlin_condition_alreadyDoingVandal(player, npc) || !rebel_remembrance_day_captain_derlin_condition_alreadyDoingResistance(player, npc))
-            {
-                return false;
-            }
+            return rebel_remembrance_day_captain_derlin_condition_alreadyDoingVandal(player, npc) && rebel_remembrance_day_captain_derlin_condition_alreadyDoingResistance(player, npc);
         }
         return true;
     }
+
     public boolean rebel_remembrance_day_captain_derlin_condition_isLockedOutOfVandal(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return hasObjVar(player, holiday.EMPIRE_DAY_VANDAL_LOCKED_OUT);
     }
+
     public boolean rebel_remembrance_day_captain_derlin_condition_isLockedOutOfResistance(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return hasObjVar(player, holiday.EMPIRE_DAY_RESISTANCE_LOCKED_OUT);
     }
+
     public boolean rebel_remembrance_day_captain_derlin_condition_canDoVandalEvent(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return (!rebel_remembrance_day_captain_derlin_condition_alreadyDoingVandal(player, npc) && !rebel_remembrance_day_captain_derlin_condition_isLockedOutOfVandal(player, npc));
     }
+
     public boolean rebel_remembrance_day_captain_derlin_condition_canDoResistanceEvent(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return (!rebel_remembrance_day_captain_derlin_condition_alreadyDoingResistance(player, npc) && !rebel_remembrance_day_captain_derlin_condition_isLockedOutOfResistance(player, npc));
     }
+
     public boolean rebel_remembrance_day_captain_derlin_condition_canDoAtLeastOneEvent(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return (rebel_remembrance_day_captain_derlin_condition_canDoResistanceEvent(player, npc) || rebel_remembrance_day_captain_derlin_condition_canDoVandalEvent(player, npc));
     }
+
     public boolean rebel_remembrance_day_captain_derlin_condition_isTrader(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return utils.isProfession(player, utils.TRADER);
     }
+
     public boolean rebel_remembrance_day_captain_derlin_condition_isEntertainer(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return utils.isProfession(player, utils.ENTERTAINER);
     }
+
     public boolean rebel_remembrance_day_captain_derlin_condition_isTraderOrEntertainer(obj_id player, obj_id npc) throws InterruptedException
     {
         return rebel_remembrance_day_captain_derlin_condition_isTrader(player, npc) || rebel_remembrance_day_captain_derlin_condition_isEntertainer(player, npc);
     }
+
     public boolean rebel_remembrance_day_captain_derlin_condition_hasCompletedBothCollections(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return (rebel_remembrance_day_captain_derlin_condition_hasCompletedVandalCollection(player, npc) && rebel_remembrance_day_captain_derlin_condition_hasCompletedResistanceCollection(player, npc));
     }
+
     public boolean rebel_remembrance_day_captain_derlin_condition_hasScore(obj_id player, obj_id npc) throws InterruptedException
     {
         return hasObjVar(player, holiday.PLAYER_EMPIRE_DAY_SCORE);
     }
+
     public boolean rebel_remembrance_day_captain_derlin_condition_isNeutralImperial(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return ((getCollectionSlotValue(player, holiday.IMPERIAL_RECRUITING_COUNTER_SLOT) > 0) && !hasCompletedCollection(player, holiday.IMPERIAL_RECRUITING_COLLECTION) || (getCollectionSlotValue(player, holiday.IMPERIAL_ANTIPROP_COUNTER_SLOT) > 0) && !hasCompletedCollection(player, holiday.IMPERIAL_ANTIPROP_COLLECTION));
     }
+
     public boolean rebel_remembrance_day_captain_derlin_condition_isNewNeutralPlayer(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return ((getCollectionSlotValue(player, holiday.REBEL_RESISTANCE_START_SLOT) <= 0) && (getCollectionSlotValue(player, holiday.REBEL_VANDAL_START_SLOT) <= 0));
     }
+
     public boolean rebel_remembrance_day_captain_derlin_condition_isNeutralImperialButRebel(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
-        if (hasObjVar(player, holiday.PLAYER_EMPIRE_DAY_NEUTRAL + holiday.PLANET_VAR_PLAYER_FACTION_IMP) && factions.isRebel(player))
-        {
-            return true;
-        }
-        return false;
+        return hasObjVar(player, holiday.PLAYER_EMPIRE_DAY_NEUTRAL + holiday.PLANET_VAR_PLAYER_FACTION_IMP) && factions.isRebel(player);
     }
+
     public boolean rebel_remembrance_day_captain_derlin_condition_isNeutralAlignedIncompleteCollections(obj_id player, obj_id npc) throws InterruptedException
     {
         return ((getCollectionSlotValue(player, holiday.REBEL_VANDAL_START_SLOT) > 0) && !hasCompletedCollection(player, holiday.REBEL_VANDAL_COLLECTION) || (getCollectionSlotValue(player, holiday.REBEL_RESISTANCE_START_SLOT) > 0) && !hasCompletedCollection(player, holiday.REBEL_RESISTANCE_COLLECTION));
     }
+
     public boolean rebel_remembrance_day_captain_derlin_condition_hasBothImpAndRebKioskCollections(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         if ((getCollectionSlotValue(player, holiday.IMPERIAL_RECRUITING_COUNTER_SLOT) > 0) && !hasCompletedCollection(player, holiday.IMPERIAL_RECRUITING_COLLECTION) || (getCollectionSlotValue(player, holiday.IMPERIAL_ANTIPROP_COUNTER_SLOT) > 0) && !hasCompletedCollection(player, holiday.IMPERIAL_ANTIPROP_COLLECTION))
         {
-            if ((getCollectionSlotValue(player, holiday.REBEL_RESISTANCE_COUNTER_SLOT) > 0) && !hasCompletedCollection(player, holiday.REBEL_RESISTANCE_COLLECTION) || (getCollectionSlotValue(player, holiday.REBEL_VANDAL_COUNTER_SLOT) > 0) && !hasCompletedCollection(player, holiday.REBEL_VANDAL_COLLECTION))
-            {
-                return true;
-            }
+            return (getCollectionSlotValue(player, holiday.REBEL_RESISTANCE_COUNTER_SLOT) > 0) && !hasCompletedCollection(player, holiday.REBEL_RESISTANCE_COLLECTION) || (getCollectionSlotValue(player, holiday.REBEL_VANDAL_COUNTER_SLOT) > 0) && !hasCompletedCollection(player, holiday.REBEL_VANDAL_COLLECTION);
         }
         return false;
     }
+
     public boolean rebel_remembrance_day_captain_derlin_condition_isNotTraderEntertainerNeutral(obj_id player, obj_id npc) throws InterruptedException
     {
         return (!rebel_remembrance_day_captain_derlin_condition_isTraderOrEntertainer(player, npc) && !rebel_remembrance_day_captain_derlin_condition_isNeutralPlayer(player, npc));
     }
+
     public void rebel_remembrance_day_captain_derlin_action_setSFResistanceEventOnPlayer(obj_id player, obj_id npc) throws InterruptedException
     {
         if (getCollectionSlotValue(player, holiday.REBEL_RESISTANCE_START_SLOT) <= 0)
@@ -225,17 +262,20 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
         }
         buff.applyBuff(player, holiday.BUFF_REB_EMPIREDAY_RESISTANCE_SF);
     }
+
     public void rebel_remembrance_day_captain_derlin_action_resetBothCollections(obj_id player, obj_id npc) throws InterruptedException
     {
         if (rebel_remembrance_day_captain_derlin_condition_hasCompletedResistanceCollection(player, npc) && rebel_remembrance_day_captain_derlin_condition_hasCompletedVandalCollection(player, npc))
         {
             String[] resistanceSlotsInCollection = getAllCollectionSlotsInCollection(holiday.REBEL_RESISTANCE_COLLECTION);
-            for (String s1 : resistanceSlotsInCollection) {
+            for (String s1 : resistanceSlotsInCollection)
+            {
                 long collectionSlotValue = getCollectionSlotValue(player, s1) * -1;
                 modifyCollectionSlotValue(player, s1, collectionSlotValue);
             }
             String[] slotsInCollection = getAllCollectionSlotsInCollection(holiday.REBEL_VANDAL_COLLECTION);
-            for (String s : slotsInCollection) {
+            for (String s : slotsInCollection)
+            {
                 long collectionSlotValue = getCollectionSlotValue(player, s) * -1;
                 modifyCollectionSlotValue(player, s, collectionSlotValue);
             }
@@ -243,27 +283,28 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
             rebel_remembrance_day_captain_derlin_action_setVandalCollectionStarterSlot(player, npc);
         }
     }
+
     public void rebel_remembrance_day_captain_derlin_action_getLeaderBoardSui(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id tatooine = getPlanetByName("tatooine");
         if (!isIdValid(tatooine) || !exists(tatooine))
         {
-            //CustomerServiceLog("holidayEvent", "derlin_conversation.getLeaderBoardSui: Could not find Tatooine OID.");
+            CustomerServiceLog("holidayEvent", "derlin_conversation.getLeaderBoardSui: Could not find Tatooine OID.");
             return;
         }
         String data = holiday.getEventHighScores(tatooine, holiday.PLANET_VAR_EVENT_PREFIX + holiday.PLANET_VAR_EMPIRE_DAY + holiday.PLANET_VAR_SCORE, true);
         if (data == null || data.length() <= 0)
         {
-            //CustomerServiceLog("holidayEvent", "derlin_conversation.getLeaderBoardSui: High Score Data Invalid.");
+            CustomerServiceLog("holidayEvent", "derlin_conversation.getLeaderBoardSui: High Score Data Invalid.");
             return;
         }
         if (!holiday.createEventLeaderBoardUI(player, holiday.LEADER_BOARD_TITLE, data))
         {
-            //CustomerServiceLog("holidayEvent", "derlin_conversation.getLeaderBoardSui: createEventLeaderBoardUI failed.");
-            return;
+            CustomerServiceLog("holidayEvent", "derlin_conversation.getLeaderBoardSui: createEventLeaderBoardUI failed.");
         }
-        //CustomerServiceLog("holidayEvent", "derlin_conversation.getLeaderBoardSui: High Score Data received by player: " + player + ".");
+        CustomerServiceLog("holidayEvent", "derlin_conversation.getLeaderBoardSui: High Score Data received by player: " + player + ".");
     }
+
     public void rebel_remembrance_day_captain_derlin_action_setSFVandalEventOnPlayer(obj_id player, obj_id npc) throws InterruptedException
     {
         if (getCollectionSlotValue(player, holiday.REBEL_VANDAL_START_SLOT) <= 0)
@@ -272,6 +313,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
         }
         buff.applyBuff(player, holiday.BUFF_REB_EMPIREDAY_VANDAL_SF);
     }
+
     public void rebel_remembrance_day_captain_derlin_action_giveWedgeAntillesWaypoint(obj_id player, obj_id npc) throws InterruptedException
     {
         location loc = new location(-243, 28, -4150, "corellia");
@@ -279,6 +321,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
         setWaypointName(wedgeWpt, "Squadron Representative");
         setWaypointActive(wedgeWpt, true);
     }
+
     public void rebel_remembrance_day_captain_derlin_action_spawnTroopers(obj_id player, obj_id npc) throws InterruptedException
     {
         for (int i = 0; i < 3; i++)
@@ -290,6 +333,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
             startCombat(guard, player);
         }
     }
+
     public void rebel_remembrance_day_captain_derlin_action_setLeaderBoardScore(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!hasObjVar(player, holiday.PLAYER_EMPIRE_DAY_SCORE))
@@ -315,17 +359,19 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
         if (!holiday.setEmpireDayLeaderScores(tatooine, player, holiday.PLANET_VAR_EVENT_PREFIX + holiday.PLANET_VAR_EMPIRE_DAY + holiday.PLANET_VAR_SCORE, playerScore, playerName, holiday.REBEL_PLAYER))
         {
             //CustomerServiceLog("holidayEvent", "derlin_conversation.getLeaderBoardSui: Player: (" + player + ") " + playerName + " was unable to attain leader board data. Their score was: " + playerScore);
-            return;
         }
     }
+
     public void rebel_remembrance_day_captain_derlin_action_setResistanceCollectionStarterSlot(obj_id player, obj_id npc) throws InterruptedException
     {
         modifyCollectionSlotValue(player, holiday.REBEL_RESISTANCE_START_SLOT, 1);
     }
+
     public void rebel_remembrance_day_captain_derlin_action_setVandalCollectionStarterSlot(obj_id player, obj_id npc) throws InterruptedException
     {
         modifyCollectionSlotValue(player, holiday.REBEL_VANDAL_START_SLOT, 1);
     }
+
     public void rebel_remembrance_day_captain_derlin_action_setCombatantResistanceEventOnPlayer(obj_id player, obj_id npc) throws InterruptedException
     {
         if (getCollectionSlotValue(player, holiday.REBEL_RESISTANCE_START_SLOT) <= 0)
@@ -334,6 +380,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
         }
         buff.applyBuff(player, holiday.BUFF_REB_EMPIREDAY_RESISTANCE_COMBATANT);
     }
+
     public void rebel_remembrance_day_captain_derlin_action_setCombatantVandalEventOnPlayer(obj_id player, obj_id npc) throws InterruptedException
     {
         if (getCollectionSlotValue(player, holiday.REBEL_VANDAL_START_SLOT) <= 0)
@@ -342,20 +389,24 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
         }
         buff.applyBuff(player, holiday.BUFF_REB_EMPIREDAY_VANDAL_COMBATANT);
     }
+
     public void rebel_remembrance_day_captain_derlin_action_makeNeutralRebel(obj_id player, obj_id npc) throws InterruptedException
     {
         play2dNonLoopingSound(player, space_quest.MUSIC_QUEST_EVENT);
         setObjVar(player, holiday.PLAYER_EMPIRE_DAY_NEUTRAL + holiday.PLANET_VAR_PLAYER_FACTION_REB, true);
     }
+
     public void rebel_remembrance_day_captain_derlin_action_checkHolidayTimeStampOnPlayer(obj_id player, obj_id npc) throws InterruptedException
     {
         holiday.checkEventLockOutRemoval(player, holiday.EMPIRE_DAY_RESISTANCE_TIMESTAMP, holiday.EMPIRE_DAY_RESISTANCE_LOCKED_OUT);
         holiday.checkEventLockOutRemoval(player, holiday.EMPIRE_DAY_VANDAL_TIMESTAMP, holiday.EMPIRE_DAY_VANDAL_LOCKED_OUT);
     }
+
     public void rebel_remembrance_day_captain_derlin_action_removeNeutralImperial(obj_id player, obj_id npc) throws InterruptedException
     {
         removeObjVar(player, holiday.PLAYER_EMPIRE_DAY_NEUTRAL + holiday.PLANET_VAR_PLAYER_FACTION_IMP);
     }
+
     public void rebel_remembrance_day_captain_derlin_action_removeImpCollections(obj_id player, obj_id npc) throws InterruptedException
     {
         String playerName = getPlayerFullName(player);
@@ -363,7 +414,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
         {
             //CustomerServiceLog("holidayEvent", "derlin_conversation.removeImpCollections: ERROR. Player: (" + player + ") " + playerName + " was UNABLE to remove their Imperial collection " + holiday.IMPERIAL_RECRUITING_COLLECTION + " and fix themselves to continue doing Kiosk events.");
         }
-        else 
+        else
         {
             //CustomerServiceLog("holidayEvent", "derlin_conversation.removeImpCollections: Player: (" + player + ") " + playerName + " was able to remove their Imperial collection " + holiday.IMPERIAL_RECRUITING_COLLECTION + " and fix themselves to continue doing Kiosk events.");
         }
@@ -371,11 +422,12 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
         {
             //CustomerServiceLog("holidayEvent", "derlin_conversation.removeImpCollections: ERROR. Player: (" + player + ") " + playerName + " was UNABLE to remove their Imperial collection " + holiday.IMPERIAL_ANTIPROP_COLLECTION + " and fix themselves to continue doing Kiosk events.");
         }
-        else 
+        else
         {
             //CustomerServiceLog("holidayEvent", "derlin_conversation.removeImpCollections: Player: (" + player + ") " + playerName + " was able to remove their Imperial collection " + holiday.IMPERIAL_ANTIPROP_COLLECTION + " and fix themselves to continue doing Kiosk events.");
         }
     }
+
     public String rebel_remembrance_day_captain_derlin_tokenTO_timeLeftVandal(obj_id player, obj_id npc) throws InterruptedException
     {
         String returnString = holiday.getTimeRemainingBeforeLockoutRemoved(player, holiday.EMPIRE_DAY_VANDAL_TIMESTAMP);
@@ -385,6 +437,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
         }
         return returnString;
     }
+
     public String rebel_remembrance_day_captain_derlin_tokenTO_timeLeftResistance(obj_id player, obj_id npc) throws InterruptedException
     {
         String returnString = holiday.getTimeRemainingBeforeLockoutRemoved(player, holiday.EMPIRE_DAY_RESISTANCE_TIMESTAMP);
@@ -394,6 +447,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
         }
         return returnString;
     }
+
     public String rebel_remembrance_day_captain_derlin_tokenTO_currentScore(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!hasObjVar(player, holiday.PLAYER_EMPIRE_DAY_SCORE))
@@ -407,10 +461,12 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
         }
         return playerScore + " points so far.";
     }
+
     public int rebel_remembrance_day_captain_derlin_tokenDI_notUsed(obj_id player, obj_id npc) throws InterruptedException
     {
         return 0;
     }
+
     public int rebel_remembrance_day_captain_derlin_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_170"))
@@ -430,7 +486,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_172");
@@ -439,7 +495,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rebel_remembrance_day_captain_derlin.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -449,6 +505,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rebel_remembrance_day_captain_derlin_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_172"))
@@ -464,6 +521,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rebel_remembrance_day_captain_derlin_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_173"))
@@ -483,7 +541,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_179");
@@ -496,7 +554,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rebel_remembrance_day_captain_derlin.branchId");
                     prose_package pp = new prose_package();
@@ -529,7 +587,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_64");
@@ -542,7 +600,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rebel_remembrance_day_captain_derlin.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -606,7 +664,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_97");
@@ -635,7 +693,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rebel_remembrance_day_captain_derlin.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -698,6 +756,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rebel_remembrance_day_captain_derlin_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_173"))
@@ -717,7 +776,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_179");
@@ -730,7 +789,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rebel_remembrance_day_captain_derlin.branchId");
                     prose_package pp = new prose_package();
@@ -763,7 +822,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_64");
@@ -776,7 +835,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rebel_remembrance_day_captain_derlin.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -840,7 +899,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_97");
@@ -869,7 +928,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rebel_remembrance_day_captain_derlin.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -932,6 +991,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rebel_remembrance_day_captain_derlin_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_179"))
@@ -951,7 +1011,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_181");
@@ -960,7 +1020,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rebel_remembrance_day_captain_derlin.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -970,6 +1030,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rebel_remembrance_day_captain_derlin_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_181"))
@@ -989,7 +1050,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_185");
@@ -998,7 +1059,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rebel_remembrance_day_captain_derlin.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1008,6 +1069,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rebel_remembrance_day_captain_derlin_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_185"))
@@ -1063,7 +1125,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_97");
@@ -1092,7 +1154,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rebel_remembrance_day_captain_derlin.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1102,6 +1164,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rebel_remembrance_day_captain_derlin_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_97"))
@@ -1121,7 +1184,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_106");
@@ -1130,7 +1193,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rebel_remembrance_day_captain_derlin.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1155,7 +1218,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_184");
@@ -1164,7 +1227,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rebel_remembrance_day_captain_derlin.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1215,6 +1278,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rebel_remembrance_day_captain_derlin_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_64"))
@@ -1241,7 +1305,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_91");
@@ -1254,7 +1318,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rebel_remembrance_day_captain_derlin.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1286,7 +1350,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_122");
@@ -1295,7 +1359,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rebel_remembrance_day_captain_derlin.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1312,6 +1376,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rebel_remembrance_day_captain_derlin_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_91"))
@@ -1346,6 +1411,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rebel_remembrance_day_captain_derlin_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_122"))
@@ -1361,6 +1427,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rebel_remembrance_day_captain_derlin_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_97"))
@@ -1380,7 +1447,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_106");
@@ -1389,7 +1456,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rebel_remembrance_day_captain_derlin.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1414,7 +1481,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_184");
@@ -1423,7 +1490,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rebel_remembrance_day_captain_derlin.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1474,6 +1541,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rebel_remembrance_day_captain_derlin_handleBranch27(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_70"))
@@ -1493,7 +1561,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_76");
@@ -1502,7 +1570,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rebel_remembrance_day_captain_derlin.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1512,6 +1580,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rebel_remembrance_day_captain_derlin_handleBranch28(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_119"))
@@ -1531,7 +1600,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_133");
@@ -1540,7 +1609,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rebel_remembrance_day_captain_derlin.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1565,7 +1634,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_101");
@@ -1574,7 +1643,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rebel_remembrance_day_captain_derlin.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1634,7 +1703,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_97");
@@ -1667,7 +1736,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rebel_remembrance_day_captain_derlin.branchId");
                     prose_package pp = new prose_package();
@@ -1691,6 +1760,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rebel_remembrance_day_captain_derlin_handleBranch29(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_133"))
@@ -1705,6 +1775,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rebel_remembrance_day_captain_derlin_handleBranch31(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_101"))
@@ -1724,7 +1795,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_103");
@@ -1733,7 +1804,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rebel_remembrance_day_captain_derlin.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1743,6 +1814,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rebel_remembrance_day_captain_derlin_handleBranch32(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_103"))
@@ -1764,7 +1836,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_76");
@@ -1773,7 +1845,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rebel_remembrance_day_captain_derlin.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1783,6 +1855,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rebel_remembrance_day_captain_derlin_handleBranch33(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_97"))
@@ -1802,7 +1875,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_106");
@@ -1811,7 +1884,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rebel_remembrance_day_captain_derlin.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1836,7 +1909,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_184");
@@ -1845,7 +1918,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rebel_remembrance_day_captain_derlin.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1896,6 +1969,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rebel_remembrance_day_captain_derlin_handleBranch35(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_70"))
@@ -1915,7 +1989,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_76");
@@ -1924,7 +1998,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rebel_remembrance_day_captain_derlin.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1934,6 +2008,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rebel_remembrance_day_captain_derlin_handleBranch36(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_76"))
@@ -1989,7 +2064,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_97");
@@ -2022,7 +2097,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rebel_remembrance_day_captain_derlin.branchId");
                     prose_package pp = new prose_package();
@@ -2036,6 +2111,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rebel_remembrance_day_captain_derlin_handleBranch37(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_97"))
@@ -2055,7 +2131,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_106");
@@ -2064,7 +2140,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rebel_remembrance_day_captain_derlin.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2089,7 +2165,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_184");
@@ -2098,7 +2174,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rebel_remembrance_day_captain_derlin.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2149,6 +2225,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rebel_remembrance_day_captain_derlin_handleBranch38(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_106"))
@@ -2168,7 +2245,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_137");
@@ -2177,7 +2254,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rebel_remembrance_day_captain_derlin.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2199,7 +2276,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_114");
@@ -2208,7 +2285,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rebel_remembrance_day_captain_derlin.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2218,6 +2295,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rebel_remembrance_day_captain_derlin_handleBranch39(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_137"))
@@ -2273,7 +2351,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_97");
@@ -2302,7 +2380,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rebel_remembrance_day_captain_derlin.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2320,6 +2398,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rebel_remembrance_day_captain_derlin_handleBranch40(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_97"))
@@ -2339,7 +2418,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_106");
@@ -2348,7 +2427,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rebel_remembrance_day_captain_derlin.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2373,7 +2452,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_184");
@@ -2382,7 +2461,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rebel_remembrance_day_captain_derlin.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2433,6 +2512,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rebel_remembrance_day_captain_derlin_handleBranch42(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_114"))
@@ -2452,7 +2532,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_142");
@@ -2461,7 +2541,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rebel_remembrance_day_captain_derlin.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2483,7 +2563,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_156");
@@ -2492,7 +2572,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rebel_remembrance_day_captain_derlin.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2502,6 +2582,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rebel_remembrance_day_captain_derlin_handleBranch43(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_142"))
@@ -2557,7 +2638,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_97");
@@ -2586,7 +2667,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rebel_remembrance_day_captain_derlin.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2604,6 +2685,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rebel_remembrance_day_captain_derlin_handleBranch44(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_97"))
@@ -2623,7 +2705,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_106");
@@ -2632,7 +2714,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rebel_remembrance_day_captain_derlin.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2657,7 +2739,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_184");
@@ -2666,7 +2748,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rebel_remembrance_day_captain_derlin.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2717,6 +2799,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rebel_remembrance_day_captain_derlin_handleBranch46(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_156"))
@@ -2772,7 +2855,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_97");
@@ -2801,7 +2884,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rebel_remembrance_day_captain_derlin.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2819,6 +2902,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rebel_remembrance_day_captain_derlin_handleBranch47(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_97"))
@@ -2838,7 +2922,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_106");
@@ -2847,7 +2931,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rebel_remembrance_day_captain_derlin.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2872,7 +2956,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_184");
@@ -2881,7 +2965,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rebel_remembrance_day_captain_derlin.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2932,6 +3016,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rebel_remembrance_day_captain_derlin_handleBranch49(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_184"))
@@ -2951,7 +3036,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_145");
@@ -2960,7 +3045,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rebel_remembrance_day_captain_derlin.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2982,7 +3067,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_190");
@@ -2991,7 +3076,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rebel_remembrance_day_captain_derlin.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3001,6 +3086,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rebel_remembrance_day_captain_derlin_handleBranch50(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_145"))
@@ -3024,6 +3110,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rebel_remembrance_day_captain_derlin_handleBranch53(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_190"))
@@ -3043,7 +3130,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_194");
@@ -3052,7 +3139,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rebel_remembrance_day_captain_derlin.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3074,7 +3161,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_202");
@@ -3083,7 +3170,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rebel_remembrance_day_captain_derlin.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3093,6 +3180,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rebel_remembrance_day_captain_derlin_handleBranch54(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_194"))
@@ -3148,7 +3236,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_97");
@@ -3177,7 +3265,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rebel_remembrance_day_captain_derlin.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3195,6 +3283,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rebel_remembrance_day_captain_derlin_handleBranch55(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_97"))
@@ -3214,7 +3303,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_106");
@@ -3223,7 +3312,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rebel_remembrance_day_captain_derlin.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3248,7 +3337,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_184");
@@ -3257,7 +3346,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rebel_remembrance_day_captain_derlin.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3308,6 +3397,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rebel_remembrance_day_captain_derlin_handleBranch57(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_202"))
@@ -3363,7 +3453,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_97");
@@ -3392,7 +3482,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rebel_remembrance_day_captain_derlin.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3410,6 +3500,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int rebel_remembrance_day_captain_derlin_handleBranch58(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_97"))
@@ -3429,7 +3520,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_106");
@@ -3438,7 +3529,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rebel_remembrance_day_captain_derlin.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3463,7 +3554,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_184");
@@ -3472,7 +3563,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.rebel_remembrance_day_captain_derlin.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3523,6 +3614,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isTangible(self)) || (isPlayer(self)))
@@ -3533,12 +3625,14 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
         setCondition(self, CONDITION_INTERESTING);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         setCondition(self, CONDITION_INTERESTING);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -3547,23 +3641,27 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.rebel_remembrance_day_captain_derlin");
         return SCRIPT_CONTINUE;
     }
+
     public int OnDetach(obj_id self) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -3593,7 +3691,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_170");
@@ -3601,7 +3699,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                 utils.setScriptVar(player, "conversation.rebel_remembrance_day_captain_derlin.branchId", 2);
                 npcStartConversation(player, npc, "rebel_remembrance_day_captain_derlin", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -3657,7 +3755,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_173");
@@ -3685,7 +3783,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "rebel_remembrance_day_captain_derlin", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -3739,7 +3837,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_173");
@@ -3767,7 +3865,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "rebel_remembrance_day_captain_derlin", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -3794,7 +3892,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_70");
@@ -3806,7 +3904,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "rebel_remembrance_day_captain_derlin", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -3852,7 +3950,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_119");
@@ -3872,7 +3970,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                 utils.setScriptVar(player, "conversation.rebel_remembrance_day_captain_derlin.branchId", 28);
                 npcStartConversation(player, npc, "rebel_remembrance_day_captain_derlin", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -3895,7 +3993,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_70");
@@ -3907,7 +4005,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "rebel_remembrance_day_captain_derlin", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -3920,6 +4018,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("rebel_remembrance_day_captain_derlin"))

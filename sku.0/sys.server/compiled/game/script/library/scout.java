@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 
 public class scout extends script.base_script
@@ -19,6 +25,7 @@ public class scout extends script.base_script
     public static final string_id SID_SYS_CONCEAL_APPLY = new string_id("skl_use", "sys_conceal_apply");
     public static final string_id SID_SYS_CONCEAL_DELAY = new string_id("skl_use", "sys_conceal_delay");
     public static final int MASK_BREAK_DELAY = 60;
+
     public scout()
     {
     }

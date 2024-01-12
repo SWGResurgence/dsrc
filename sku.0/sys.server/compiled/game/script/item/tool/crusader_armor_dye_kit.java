@@ -1,5 +1,11 @@
 package script.item.tool;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -29,6 +35,7 @@ public class crusader_armor_dye_kit extends script.base_script
                     "helmet",
                     "leggings"
             };
+
     public crusader_armor_dye_kit()
     {
     }
@@ -71,7 +78,7 @@ public class crusader_armor_dye_kit extends script.base_script
         Vector wornItems = new Vector();
         Vector items = new Vector();
         obj_id[] equippedItems = metrics.getWornItems(player);
-        if (equippedItems != null && equippedItems.length > 0)
+        if (equippedItems != null)
         {
             for (obj_id equippedItem : equippedItems)
             {
@@ -87,7 +94,7 @@ public class crusader_armor_dye_kit extends script.base_script
             }
         }
         obj_id[] invItems = utils.getContents(utils.getInventoryContainer(player), true);
-        if (invItems != null && invItems.length > 0)
+        if (invItems != null)
         {
             for (obj_id invItem : invItems)
             {
@@ -252,7 +259,7 @@ public class crusader_armor_dye_kit extends script.base_script
         utils.removeScriptVar(self, "cadk_armor");
         utils.removeScriptVar(self, "cadk_piece");
         obj_id[] equippedItems = metrics.getWornItems(player);
-        if (equippedItems != null && equippedItems.length > 0)
+        if (equippedItems != null)
         {
             for (obj_id equippedItem : equippedItems)
             {

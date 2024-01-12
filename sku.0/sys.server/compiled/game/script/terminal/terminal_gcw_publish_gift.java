@@ -1,5 +1,11 @@
 package script.terminal;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 
 import java.util.Arrays;
@@ -15,9 +21,6 @@ import script.library.trial;
 
 public class terminal_gcw_publish_gift extends script.terminal.base.base_terminal
 {
-    public terminal_gcw_publish_gift()
-    {
-    }
     public static final String VAR_TERMINAL_STATUS = "gcw.static_base.terminal_status";
     public static final String VAR_BASE_STATUS = "gcw.static_base.base_status";
     public static final String BASE_BEING_CAPTURED = " TERMINAL STATUS: BEING CAPTURED\n";
@@ -37,37 +40,41 @@ public class terminal_gcw_publish_gift extends script.terminal.base.base_termina
     public static final string_id SID_MENU_GCW_FACTIONAL_PRESENCE = new string_id("gcw", "gcw_factional_presence_war_terminal_menu");
     public static final string_id SID_MENU_GCW_PERSONAL_CONTRIBUTION = new string_id("gcw", "gcw_personal_contribution_war_terminal_menu");
     public static final string_id SID_MENU_GCW_REGION_DEFENDER = new string_id("gcw", "gcw_region_defender_war_terminal_menu");
-    public static final String[] STAIC_BASE_PLANETS = 
+    public static final String[] STAIC_BASE_PLANETS =
+            {
+                    "corellia",
+                    "naboo",
+                    "talus"
+            };
+    public static final String[][] PLANETS_DATA =
+            {
+
+                    {
+                            "corellia",
+                            "dantooine",
+                            "lok",
+                            "naboo",
+                            "rori",
+                            "talus",
+                            "tatooine",
+                            "dxun"
+                    },
+
+                    {
+                            "CORELLIA",
+                            "DANTOOINE",
+                            "LOK",
+                            "NABOO",
+                            "RORI",
+                            "TALUS",
+                            "TATOOINE",
+                            "DXUN"
+                    }
+            };
+    public terminal_gcw_publish_gift()
     {
-        "corellia",
-        "naboo",
-        "talus"
-    };
-    public static final String[][] PLANETS_DATA = 
-    {
-        
-        {
-            "corellia",
-            "dantooine",
-            "lok",
-            "naboo",
-            "rori",
-            "talus",
-            "tatooine",
-            "dxun"
-        },
-        
-        {
-            "CORELLIA",
-            "DANTOOINE",
-            "LOK",
-            "NABOO",
-            "RORI",
-            "TALUS",
-            "TATOOINE",
-            "DXUN"
-        }
-    };
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         menu_info_data data = mi.getMenuItemByType(menu_info_types.ITEM_USE);
@@ -93,6 +100,7 @@ public class terminal_gcw_publish_gift extends script.terminal.base.base_termina
         updateGCWInfo(self);
         return super.OnObjectMenuRequest(self, player, mi);
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         final boolean isIntelPad = (getTemplateName(self)).equals(WAR_INTELPAD_TEMPLATE);
@@ -187,7 +195,7 @@ public class terminal_gcw_publish_gift extends script.terminal.base.base_termina
             {
                 utils.setScriptVar(player, "gcw.factionalPresenceTablePid", newPid);
             }
-            else 
+            else
             {
                 sendSystemMessage(player, "There is currently no factional presence activity in any GCW region.", "");
             }
@@ -230,14 +238,14 @@ public class terminal_gcw_publish_gift extends script.terminal.base.base_termina
                             }
                         }
                     }
-                    else 
+                    else
                     {
                         columnHeader = null;
                         columnHeaderType = null;
                         columnData = null;
                     }
                 }
-                else 
+                else
                 {
                     columnHeader = null;
                     columnHeaderType = null;
@@ -272,14 +280,14 @@ public class terminal_gcw_publish_gift extends script.terminal.base.base_termina
                                 }
                             }
                         }
-                        else 
+                        else
                         {
                             columnHeader = null;
                             columnHeaderType = null;
                             columnData = null;
                         }
                     }
-                    else 
+                    else
                     {
                         columnHeader = null;
                         columnHeaderType = null;
@@ -300,13 +308,13 @@ public class terminal_gcw_publish_gift extends script.terminal.base.base_termina
                         utils.setLocalVar(playerObject, "gcwContributionTrackingColumn" + i, columnData[i]);
                     }
                 }
-                newPid = sui.tableColumnMajor(player, player, sui.OK_ONLY, "@" + SID_MENU_GCW_PERSONAL_CONTRIBUTION.toString(), "onGcwPersonalContributionTableDictionaryResponse", "@gcw:gcw_personal_contribution_sui_table_header", columnHeader, columnHeaderType, columnData, true);
+                newPid = sui.tableColumnMajor(player, player, sui.OK_ONLY, "@" + SID_MENU_GCW_PERSONAL_CONTRIBUTION, "onGcwPersonalContributionTableDictionaryResponse", "@gcw:gcw_personal_contribution_sui_table_header", columnHeader, columnHeaderType, columnData, true);
             }
             if (newPid > 0)
             {
                 utils.setScriptVar(player, "gcw.gcwPersonalContributionTablePid", newPid);
             }
-            else 
+            else
             {
                 sendSystemMessage(player, "You have not contributed to the GCW score for any GCW region/category over the past 30 days.", "");
             }
@@ -336,29 +344,29 @@ public class terminal_gcw_publish_gift extends script.terminal.base.base_termina
             final String[] gcwDefenderRegionsGuildsRebel = getGcwDefenderRegionsGuildsRebel();
             if ((gcwDefenderRegions != null) && (gcwDefenderRegions.length > 0) && (gcwDefenderRegionsCitiesImperial != null) && (gcwDefenderRegionsCitiesImperial.length == gcwDefenderRegions.length) && (gcwDefenderRegionsCitiesRebel != null) && (gcwDefenderRegionsCitiesRebel.length == gcwDefenderRegions.length) && (gcwDefenderRegionsGuildsImperial != null) && (gcwDefenderRegionsGuildsImperial.length == gcwDefenderRegions.length) && (gcwDefenderRegionsGuildsRebel != null) && (gcwDefenderRegionsGuildsRebel.length == gcwDefenderRegions.length))
             {
-                final String[] columnHeader = 
-                {
-                    "GCW Region",
-                    "Rebel Cities",
-                    "Rebel Guilds",
-                    "Imperial Cities",
-                    "Imperial Guilds"
-                };
-                final String[] columnHeaderType = 
-                {
-                    "text",
-                    "text",
-                    "text",
-                    "text",
-                    "text"
-                };
+                final String[] columnHeader =
+                        {
+                                "GCW Region",
+                                "Rebel Cities",
+                                "Rebel Guilds",
+                                "Imperial Cities",
+                                "Imperial Guilds"
+                        };
+                final String[] columnHeaderType =
+                        {
+                                "text",
+                                "text",
+                                "text",
+                                "text",
+                                "text"
+                        };
                 final String[][] columnData = new String[5][0];
                 columnData[0] = gcwDefenderRegions;
                 columnData[1] = gcwDefenderRegionsCitiesRebel;
                 columnData[2] = gcwDefenderRegionsGuildsRebel;
                 columnData[3] = gcwDefenderRegionsCitiesImperial;
                 columnData[4] = gcwDefenderRegionsGuildsImperial;
-                final int newPid = sui.tableColumnMajor(player, player, sui.OK_CANCEL, "@" + SID_MENU_GCW_REGION_DEFENDER.toString(), "onGcwRegionDefenderTableDictionaryResponse", "@gcw:gcw_region_defender_sui_table_header", columnHeader, columnHeaderType, columnData, true);
+                final int newPid = sui.tableColumnMajor(player, player, sui.OK_CANCEL, "@" + SID_MENU_GCW_REGION_DEFENDER, "onGcwRegionDefenderTableDictionaryResponse", "@gcw:gcw_region_defender_sui_table_header", columnHeader, columnHeaderType, columnData, true);
                 if (newPid > 0)
                 {
                     utils.setScriptVar(player, "gcw.gcwRegionDefenderTablePid", newPid);
@@ -367,6 +375,7 @@ public class terminal_gcw_publish_gift extends script.terminal.base.base_termina
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnClusterWideDataResponse(obj_id self, String strCategory, String strSubCategory, int intRequestId, String[] strElementNames, dictionary[] dctData, int intLockKey) throws InterruptedException
     {
         blog("OnClusterWideDataResponse: " + strSubCategory);
@@ -375,6 +384,7 @@ public class terminal_gcw_publish_gift extends script.terminal.base.base_termina
         utils.setScriptVar(self, "Rebel." + strSubCategory + ".controlScore", (100 - imperialPlanetaryScore));
         return SCRIPT_CONTINUE;
     }
+
     public int refreshSuiGcwData(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -406,6 +416,7 @@ public class terminal_gcw_publish_gift extends script.terminal.base.base_termina
         messageTo(self, "refreshSuiGcwData", params, 10, false);
         return SCRIPT_CONTINUE;
     }
+
     public int closeSui(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -416,6 +427,7 @@ public class terminal_gcw_publish_gift extends script.terminal.base.base_termina
         sui.removePid(player, PID_NAME);
         return SCRIPT_CONTINUE;
     }
+
     public boolean updateGCWInfo(obj_id self) throws InterruptedException
     {
         blog("in updateGCWInfo");
@@ -423,7 +435,7 @@ public class terminal_gcw_publish_gift extends script.terminal.base.base_termina
         {
             utils.setScriptVar(self, "lastUpdate", getGameTime());
         }
-        else 
+        else
         {
             int lastUpdateTime = utils.getIntScriptVar(self, "lastUpdate");
             int timePassed = getGameTime() - lastUpdateTime;
@@ -441,6 +453,7 @@ public class terminal_gcw_publish_gift extends script.terminal.base.base_termina
         }
         return true;
     }
+
     public void openSui(obj_id player) throws InterruptedException
     {
         obj_id self = getSelf();
@@ -450,6 +463,7 @@ public class terminal_gcw_publish_gift extends script.terminal.base.base_termina
             createCustomUI(self, player, gcwData);
         }
     }
+
     public String getGcwData(obj_id self, obj_id player) throws InterruptedException
     {
         if (!isValidId(player))
@@ -495,6 +509,7 @@ public class terminal_gcw_publish_gift extends script.terminal.base.base_termina
         gcwData += "Last Updated: " + strCalTime;
         return gcwData;
     }
+
     public String getPlayerBaseData(obj_id player, obj_id planetId, int maxBasesOnPlanet) throws InterruptedException
     {
         if (!isValidId(planetId))
@@ -518,7 +533,7 @@ public class terminal_gcw_publish_gift extends script.terminal.base.base_termina
             {
                 continue;
             }
-            else 
+            else
             {
                 if (isGod(player))
                 {
@@ -528,24 +543,25 @@ public class terminal_gcw_publish_gift extends script.terminal.base.base_termina
                 switch (faction)
                 {
                     case gcw.FACTION_REBEL:
-                    factionName = "REBEL";
-                    break;
+                        factionName = "REBEL";
+                        break;
                     case gcw.FACTION_IMPERIAL:
-                    factionName = "IMPERIAL";
-                    break;
+                        factionName = "IMPERIAL";
+                        break;
                     default:
-                    factionName = "ERROR";
-                    break;
+                        factionName = "ERROR";
+                        break;
                 }
                 loc = baseDic.getLocation("location");
-                int x = (int)loc.x;
-                int y = (int)loc.y;
-                int z = (int)loc.z;
+                int x = (int) loc.x;
+                int y = (int) loc.y;
+                int z = (int) loc.z;
                 allBaseData += " " + factionName + " Player Base reports alarm at: " + x + " " + y + " " + z + sui.newLine();
             }
         }
         return allBaseData;
     }
+
     public String getTerminalData(int[] terminalArray) throws InterruptedException
     {
         if (terminalArray == null || terminalArray.length == 0)
@@ -562,6 +578,7 @@ public class terminal_gcw_publish_gift extends script.terminal.base.base_termina
         }
         return BASE_SECURED;
     }
+
     public String getStaticBaseData(int status) throws InterruptedException
     {
         if (status < 0)
@@ -572,15 +589,16 @@ public class terminal_gcw_publish_gift extends script.terminal.base.base_termina
         switch (status)
         {
             case FACTION_NEUTRAL:
-            return prefix + "NEUTRAL\n";
+                return prefix + "NEUTRAL\n";
             case FACTION_REBEL:
-            return prefix + "REBEL\n";
+                return prefix + "REBEL\n";
             case FACTION_IMPERIAL:
-            return prefix + "IMPERIAL\n";
+                return prefix + "IMPERIAL\n";
             default:
-            return null;
+                return null;
         }
     }
+
     public void createCustomUI(obj_id self, obj_id player, String combinedString) throws InterruptedException
     {
         if (!isValidId(self) || !isValidId(player))
@@ -610,6 +628,7 @@ public class terminal_gcw_publish_gift extends script.terminal.base.base_termina
         flushSUIPage(pid);
         messageTo(self, "refreshSuiGcwData", params, 10, false);
     }
+
     public void closeOldWindow(obj_id player) throws InterruptedException
     {
         int pid = sui.getPid(player, PID_NAME);
@@ -619,6 +638,7 @@ public class terminal_gcw_publish_gift extends script.terminal.base.base_termina
             sui.removePid(player, PID_NAME);
         }
     }
+
     public int checkScene(obj_id self, obj_id player) throws InterruptedException
     {
         if (!isValidId(self) || !isValidId(player))
@@ -636,6 +656,7 @@ public class terminal_gcw_publish_gift extends script.terminal.base.base_termina
         }
         return gcwPlanetIndex;
     }
+
     public String getSpecificPlanetData(obj_id self, obj_id player, obj_id planetId, String gcwData, String planet, String planetName) throws InterruptedException
     {
         if (!isValidId(self) || !exists(self) || !isValidId(player) || !exists(player) || !isValidId(planetId) || !exists(planetId))
@@ -652,11 +673,11 @@ public class terminal_gcw_publish_gift extends script.terminal.base.base_termina
         String planetScoreImp = "Unknown";
         if (utils.hasScriptVar(self, "Rebel." + planet + ".controlScore"))
         {
-            planetScoreReb = "" + utils.getIntScriptVar(self, "Rebel." + planet + ".controlScore");
+            planetScoreReb = String.valueOf(utils.getIntScriptVar(self, "Rebel." + planet + ".controlScore"));
         }
         if (utils.hasScriptVar(self, "Imperial." + planet + ".controlScore"))
         {
-            planetScoreImp = "" + utils.getIntScriptVar(self, "Imperial." + planet + ".controlScore");
+            planetScoreImp = String.valueOf(utils.getIntScriptVar(self, "Imperial." + planet + ".controlScore"));
         }
         gcwData += sui.colorGreen() + " Planetary Score Rebel: " + sui.colorWhite() + planetScoreReb + sui.newLine();
         gcwData += sui.colorGreen() + " Planetary Score Imperial: " + sui.colorWhite() + planetScoreImp + sui.newLine();
@@ -684,6 +705,7 @@ public class terminal_gcw_publish_gift extends script.terminal.base.base_termina
         gcwData += sui.newLine();
         return gcwData;
     }
+
     public boolean blog(String msg) throws InterruptedException
     {
         return true;

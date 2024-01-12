@@ -1,5 +1,11 @@
 package script.poi.twoliars;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.obj_id;
@@ -10,33 +16,36 @@ import java.util.Vector;
 
 public class mediator extends script.poi.base.scenario_actor
 {
-    public mediator()
-    {
-    }
     public static final String SCRIPT_CONVERSE = "npc.converse.npc_converse_menu";
     public static final String LOG_NAME = "poiTwoLiars Mediator";
     public static final int CONV_GREET = 0;
     public static final int CONV_LOOKING = 1;
     public static final int CONV_LOSS = 2;
     public static final int CONV_WIN = 3;
-    public static final String agitateEmotes[] = 
+    public static final String[] agitateEmotes =
+            {
+                    "scratch",
+                    "yawn",
+                    "fidget",
+                    "cough"
+            };
+    public mediator()
     {
-        "scratch",
-        "yawn",
-        "fidget",
-        "cough"
-    };
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         attachScript(self, SCRIPT_CONVERSE);
         messageTo(self, "doAgitation", null, rand(40, 60), true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         attachScript(self, SCRIPT_CONVERSE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id speaker) throws InterruptedException
     {
         if (ai_lib.isInCombat(self))
@@ -59,21 +68,22 @@ public class mediator extends script.poi.base.scenario_actor
         {
             case CONV_GREET:
             case CONV_LOSS:
-            poi.quickSay(self, "m_chatter_" + s_index);
-            npcEndConversation(speaker);
-            break;
+                poi.quickSay(self, "m_chatter_" + s_index);
+                npcEndConversation(speaker);
+                break;
             case CONV_WIN:
-            poi.quickSay(self, "m_chatter_v_" + rand(0, 2));
-            npcEndConversation(speaker);
-            break;
+                poi.quickSay(self, "m_chatter_v_" + rand(0, 2));
+                npcEndConversation(speaker);
+                break;
             case CONV_LOOKING:
-            msg = new string_id(convo, "m_chatter_" + s_index);
-            responses = utils.addElement(responses, new string_id(convo, "r_m_chatter_knowabouttheft"));
-            npcStartConversation(speaker, self, convo, msg, responses);
-            break;
+                msg = new string_id(convo, "m_chatter_" + s_index);
+                responses = utils.addElement(responses, new string_id(convo, "r_m_chatter_knowabouttheft"));
+                npcStartConversation(speaker, self, convo, msg, responses);
+                break;
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String convoName, obj_id speaker, string_id response) throws InterruptedException
     {
         if (ai_lib.isInCombat(self))
@@ -102,32 +112,33 @@ public class mediator extends script.poi.base.scenario_actor
             switch (m_index)
             {
                 case 0:
-                npcSpeak(speaker, lineId);
-                break;
+                    npcSpeak(speaker, lineId);
+                    break;
                 case 1:
-                pp = prose.getPackage(lineId, getLiarName(5));
-                npcSpeak(speaker, pp);
-                break;
+                    pp = prose.getPackage(lineId, getLiarName(5));
+                    npcSpeak(speaker, pp);
+                    break;
                 case 2:
-                pp = prose.getPackage(lineId, getLiarName(1), getLiarName(3));
-                npcSpeak(speaker, pp);
-                break;
+                    pp = prose.getPackage(lineId, getLiarName(1), getLiarName(3));
+                    npcSpeak(speaker, pp);
+                    break;
                 case 3:
-                pp = prose.getPackage(lineId, getLiarName(1), getLiarName(2));
-                npcSpeak(speaker, pp);
-                break;
+                    pp = prose.getPackage(lineId, getLiarName(1), getLiarName(2));
+                    npcSpeak(speaker, pp);
+                    break;
                 case 4:
-                pp = prose.getPackage(lineId, getLiarName(3), getLiarName(1), getLiarName(2));
-                npcSpeak(speaker, pp);
-                break;
+                    pp = prose.getPackage(lineId, getLiarName(3), getLiarName(1), getLiarName(2));
+                    npcSpeak(speaker, pp);
+                    break;
                 case 5:
-                pp = prose.getPackage(lineId, getLiarName(4));
-                npcSpeak(speaker, pp);
-                break;
+                    pp = prose.getPackage(lineId, getLiarName(4));
+                    npcSpeak(speaker, pp);
+                    break;
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public String getLiarName(int liarIndex) throws InterruptedException
     {
         obj_id self = getSelf();
@@ -138,6 +149,7 @@ public class mediator extends script.poi.base.scenario_actor
         }
         return getStringObjVar(poiMaster, "m_" + liarIndex);
     }
+
     public int doAgitation(obj_id self, dictionary params) throws InterruptedException
     {
         if (rand(1, 5) == 3)

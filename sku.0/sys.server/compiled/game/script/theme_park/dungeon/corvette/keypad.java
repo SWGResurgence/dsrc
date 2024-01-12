@@ -1,13 +1,21 @@
 package script.theme_park.dungeon.corvette;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 
 public class keypad extends script.base_script
 {
+    public static final String MSGS = "dungeon/corvette";
+
     public keypad()
     {
     }
-    public static final String MSGS = "dungeon/corvette";
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         menu_info_data mid = mi.getMenuItemByType(menu_info_types.ITEM_USE);
@@ -18,6 +26,7 @@ public class keypad extends script.base_script
         mid.setServerNotify(true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         obj_id top = getTopMostContainer(self);
@@ -33,7 +42,7 @@ public class keypad extends script.base_script
                     string_id open = new string_id(MSGS, "open");
                     sendSystemMessage(player, open);
                 }
-                else 
+                else
                 {
                     String whichRoom = getStringObjVar(self, "room");
                     if (whichRoom.equals("elevator57"))
@@ -48,13 +57,14 @@ public class keypad extends script.base_script
                     }
                 }
             }
-            else 
+            else
             {
                 keypad(player);
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public void keypad(obj_id player) throws InterruptedException
     {
         obj_id self = getSelf();
@@ -66,8 +76,8 @@ public class keypad extends script.base_script
         setSUIProperty(pid, "buttonKeycard", "enabled", "false");
         setSUIProperty(pid, "buttonKeycard", "visible", "false");
         showSUIPage(pid);
-        return;
     }
+
     public int KeypadCallback(obj_id self, dictionary params) throws InterruptedException
     {
         String result = params.getString("result.numberBox" + "." + "localtext");
@@ -106,7 +116,7 @@ public class keypad extends script.base_script
                 string_id open = new string_id(MSGS, "open");
                 sendSystemMessage(player, open);
             }
-            else 
+            else
             {
                 string_id lock = new string_id(MSGS, "lock");
                 sendSystemMessage(player, lock);
@@ -114,6 +124,7 @@ public class keypad extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public String getGroupObjVars(obj_id player, String roomName) throws InterruptedException
     {
         String totalName = "corl_corvette." + roomName;
@@ -132,8 +143,10 @@ public class keypad extends script.base_script
         {
             return code;
         }
-        for (obj_id thisMember : members) {
-            if (hasObjVar(thisMember, totalName)) {
+        for (obj_id thisMember : members)
+        {
+            if (hasObjVar(thisMember, totalName))
+            {
                 return totalName;
             }
         }

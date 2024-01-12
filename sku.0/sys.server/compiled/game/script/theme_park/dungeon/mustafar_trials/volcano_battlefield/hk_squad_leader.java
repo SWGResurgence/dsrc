@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.mustafar_trials.volcano_battlefield;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.create;
@@ -10,22 +16,25 @@ import script.obj_id;
 
 public class hk_squad_leader extends script.base_script
 {
+    public static final String GUARD = "som_volcano_final_squadmember";
+    public static final boolean LOGGING = false;
     public hk_squad_leader()
     {
     }
-    public static final String GUARD = "som_volcano_final_squadmember";
-    public static final boolean LOGGING = false;
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         messageTo(self, "destroySelf", null, 5, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         generateSquad(self);
         trial.setHp(self, trial.HP_VOLCANO_HK_SQUAD_LEADER);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         obj_id parent = trial.getParent(self);
@@ -41,28 +50,31 @@ public class hk_squad_leader extends script.base_script
             return SCRIPT_CONTINUE;
         }
         obj_id[] guards = getObjIdArrayObjVar(self, "guardList");
-        for (obj_id guard : guards) {
+        for (obj_id guard : guards)
+        {
             messageTo(guard, "leaderDied", null, 0, false);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int destroySelf(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public void generateSquad(obj_id self) throws InterruptedException
     {
         obj_id eventController = trial.getParent(self);
-        String[] offSet = 
-        {
-            "-3:0",
-            "-5:0",
-            "-7:0",
-            "-3:3",
-            "-5:3",
-            "-7:3"
-        };
+        String[] offSet =
+                {
+                        "-3:0",
+                        "-5:0",
+                        "-7:0",
+                        "-3:3",
+                        "-5:3",
+                        "-7:3"
+                };
         location here = getLocation(self);
         obj_id[] guardList = new obj_id[6];
         for (int i = 0; i < offSet.length; i++)
@@ -90,6 +102,7 @@ public class hk_squad_leader extends script.base_script
         }
         setObjVar(self, "guardList", guardList);
     }
+
     public void doLogging(String section, String message) throws InterruptedException
     {
         if (LOGGING || trial.VOLCANO_LOGGING)

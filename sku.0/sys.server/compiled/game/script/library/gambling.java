@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.obj_id;
 import script.prose_package;
@@ -56,6 +62,7 @@ public class gambling extends script.base_script
     public static final string_id PROSE_STARTING_IN = new string_id(STF_INTERFACE, "prose_starting_in");
     public static final string_id FLY_WINNER = new string_id(STF_INTERFACE, "fly_winner");
     public static final String STF_GAME_N = "gambling/game_n";
+
     public gambling()
     {
     }

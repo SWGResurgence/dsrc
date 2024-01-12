@@ -1,5 +1,11 @@
 package script.theme_park.poi.general;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.colors;
@@ -11,16 +17,19 @@ public class animal_cage extends script.theme_park.poi.base
     public animal_cage()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "runAnimalCage", null, 3, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "runAnimalCage", null, 3, true);
         return SCRIPT_CONTINUE;
     }
+
     public int runAnimalCage(obj_id self, dictionary params) throws InterruptedException
     {
         String objective = poiGetObjective(self);

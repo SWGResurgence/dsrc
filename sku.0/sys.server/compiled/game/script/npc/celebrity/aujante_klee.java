@@ -1,5 +1,11 @@
 package script.npc.celebrity;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.hue;
 import script.obj_id;
@@ -9,6 +15,7 @@ public class aujante_klee extends script.base_script
     public aujante_klee()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         obj_id pants = createObject("object/tangible/wearables/pants/nightsister_pants_s01.iff", self, "");

@@ -1,5 +1,11 @@
 package script.systems.tcg;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -21,6 +27,7 @@ public class target_creature extends script.base_script
     public static final int OPTIONS_EXTRAS_RANDOM = menu_info_types.SERVER_MENU12;
     public static final int OPTIONS_EXTRAS_TRICK = menu_info_types.SERVER_MENU13;
     public static final int OPTIONS_ANIMATIONS = menu_info_types.SERVER_MENU14;
+
     public target_creature()
     {
     }

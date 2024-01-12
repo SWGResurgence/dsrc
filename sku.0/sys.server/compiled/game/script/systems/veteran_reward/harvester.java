@@ -1,5 +1,11 @@
 package script.systems.veteran_reward;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.player_structure;
 import script.library.prose;
@@ -19,6 +25,7 @@ public class harvester extends script.base_script
     public static final string_id SID_HARVESTER_ALREADY_SELFPOWERED = new string_id(veteran_deprecated.VETERAN_STRING_TABLE, "harvester_already_selfpowered");
     public static final string_id SID_CANT_SELF_POWER_ELITE = new string_id(veteran_deprecated.VETERAN_STRING_TABLE, "harvester_cant_self_power_elite");
     public static final string_id SID_CANT_SELF_POWER = new string_id(veteran_deprecated.VETERAN_STRING_TABLE, "harvester_cant_self_power_normal");
+
     public harvester()
     {
     }

@@ -1,5 +1,11 @@
 package script.npe;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.obj_id;
@@ -7,10 +13,12 @@ import script.string_id;
 
 public class npc_vendor extends script.base_script
 {
+    public static final String STF = "npe";
+
     public npc_vendor()
     {
     }
-    public static final String STF = "npe";
+
     public int npeHandleBuy(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -33,47 +41,48 @@ public class npc_vendor extends script.base_script
         switch (idx)
         {
             case 0:
-            obj_id stimpack = static_item.createNewItemFunction("item_stimpack_a_02_01", player);
-            if (isIdValid(stimpack))
-            {
-                d.put("player", player);
-                d.put("item", stimpack);
-                d.put("npc", self);
-                money.requestPayment(player, "Tyrral", price, "handleTransaction", d, true);
-                break;
-            }
-            else 
-            {
-                CustomerServiceLog("NPE_VENDOR: ", "tried to create a item_stimpack_a_02_01 that had an invalid id.");
-                break;
-            }
-            case 1:
-            boolean playerHasItem = utils.playerHasStaticItemInBankOrInventory(player, "item_npe_tatooine_bug_juice_01_01");
-            if (!playerHasItem)
-            {
-                obj_id bugJuice = static_item.createNewItemFunction("item_npe_tatooine_bug_juice_01_01", player);
-                if (isIdValid(bugJuice))
+                obj_id stimpack = static_item.createNewItemFunction("item_stimpack_a_02_01", player);
+                if (isIdValid(stimpack))
                 {
                     d.put("player", player);
-                    d.put("item", bugJuice);
+                    d.put("item", stimpack);
                     d.put("npc", self);
                     money.requestPayment(player, "Tyrral", price, "handleTransaction", d, true);
                     break;
                 }
-                else 
+                else
                 {
-                    CustomerServiceLog("NPE_VENDOR: ", "tried to create a item_npe_tatooine_bug_juice_01_01 that had an invalid id.");
+                    CustomerServiceLog("NPE_VENDOR: ", "tried to create a item_stimpack_a_02_01 that had an invalid id.");
                     break;
                 }
-            }
-            string_id msgHasItem = new string_id(STF, "has_item");
-            chat.publicChat(self, player, msgHasItem);
-            break;
+            case 1:
+                boolean playerHasItem = utils.playerHasStaticItemInBankOrInventory(player, "item_npe_tatooine_bug_juice_01_01");
+                if (!playerHasItem)
+                {
+                    obj_id bugJuice = static_item.createNewItemFunction("item_npe_tatooine_bug_juice_01_01", player);
+                    if (isIdValid(bugJuice))
+                    {
+                        d.put("player", player);
+                        d.put("item", bugJuice);
+                        d.put("npc", self);
+                        money.requestPayment(player, "Tyrral", price, "handleTransaction", d, true);
+                        break;
+                    }
+                    else
+                    {
+                        CustomerServiceLog("NPE_VENDOR: ", "tried to create a item_npe_tatooine_bug_juice_01_01 that had an invalid id.");
+                        break;
+                    }
+                }
+                string_id msgHasItem = new string_id(STF, "has_item");
+                chat.publicChat(self, player, msgHasItem);
+                break;
             default:
-            break;
+                break;
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleTransaction(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())

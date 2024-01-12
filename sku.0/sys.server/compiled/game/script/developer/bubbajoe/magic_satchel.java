@@ -4,12 +4,19 @@ package script.developer.bubbajoe;/*
 @Purpose: Clones an object 1:1 wet (with scripts/scriptvars/objvars) and places it in a satchel inside your inventory.
 */
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.create;
 import script.library.utils;
 import script.*;
 
 import java.util.Objects;
 import java.util.stream.IntStream;
+
 @SuppressWarnings("unused")
 public class magic_satchel extends script.base_script
 {
@@ -50,7 +57,7 @@ public class magic_satchel extends script.base_script
                 }
                 obj_var_list dupeVars = getObjVarList(converted, "");
                 IntStream.range(0, dupeVars.getNumItems()).mapToObj(dupeVars::getObjVar).filter(Objects::nonNull).forEach(dupeVar -> setObjVar(dupe, dupeVar.getName(), dupeVar.getData()));
-                broadcast(player,  converted + " has been cloned to " + dupe + "! ");
+                broadcast(player, converted + " has been cloned to " + dupe + "! ");
             }
         }
         if (item == menu_info_types.SERVER_MENU1)

@@ -1,11 +1,19 @@
 package script.theme_park.wod;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.base_class.*;
 import script.combat_engine.*;
+
 import java.util.Arrays;
 import java.util.Hashtable;
 import java.util.Vector;
+
 import script.base_script;
 
 import script.library.ai_lib;
@@ -22,9 +30,6 @@ import script.library.utils;
 
 public class wod_mutant_rancor_combat extends script.base_script
 {
-    public wod_mutant_rancor_combat()
-    {
-    }
     public static final String NS_BICEP_SCHEMATIC = "item_wod_bossloot_ns_bracer";
     public static final String SMC_BICEP_SCHEMATIC = "item_wod_bossloot_smc_bicep_";
     public static final String SMC_BRACER_SCHEMATIC = "item_wod_bossloot_smc_bracer_";
@@ -33,12 +38,17 @@ public class wod_mutant_rancor_combat extends script.base_script
     public static final int OFFSET_TIME = 15;
     public static final int HP_WOD_RANCOR = 618125;
     public static int buffStartTime = 0;
+    public wod_mutant_rancor_combat()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         trial.setHp(self, HP_WOD_RANCOR);
         applySkillStatisticModifier(self, "expertise_glancing_blow_reduction", 100);
         return SCRIPT_CONTINUE;
     }
+
     public int OnEnteredCombat(obj_id self) throws InterruptedException
     {
         buff.applyBuff(self, "open_balance_buff", -1.0f);
@@ -58,6 +68,7 @@ public class wod_mutant_rancor_combat extends script.base_script
         messageTo(self, "checkCombatStatus", null, REPEAT_TIME + ((rand(0, OFFSET_TIME) + OFFSET_TIME) - OFFSET_TIME), false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnCreatureDamaged(obj_id self, obj_id attacker, obj_id wpn, int[] damage) throws InterruptedException
     {
         if (hasObjVar(self, "buffStartTime"))
@@ -66,13 +77,13 @@ public class wod_mutant_rancor_combat extends script.base_script
         }
         int buffTime = getGameTime() - buffStartTime;
         int randomTime = REPEAT_TIME + ((rand(0, OFFSET_TIME) + OFFSET_TIME) - OFFSET_TIME);
-        float healthPercent = (float)getAttrib(self, HEALTH) / (float)getMaxAttrib(self, HEALTH);
+        float healthPercent = (float) getAttrib(self, HEALTH) / (float) getMaxAttrib(self, HEALTH);
         if (healthPercent <= 0.67f && healthPercent > 0.20f)
         {
             int randBuff = rand(1, 4);
             if (!hasObjVar(self, "scaleOne"))
             {
-                float mutationScaleOne = (float)(getScale(self) * 1.4);
+                float mutationScaleOne = (float) (getScale(self) * 1.4);
                 setScale(self, mutationScaleOne);
                 setYaw(self, rand(0.0f, 360.0f));
                 setObjVar(self, "scaleOne", true);
@@ -119,7 +130,7 @@ public class wod_mutant_rancor_combat extends script.base_script
             }
             if (!hasObjVar(self, "scaleTwo"))
             {
-                float mutationScaleTwo = (float)(getScale(self) * 1.9);
+                float mutationScaleTwo = (float) (getScale(self) * 1.9);
                 setScale(self, mutationScaleTwo);
                 setYaw(self, rand(0.0f, 360.0f));
                 setObjVar(self, "scaleTwo", true);
@@ -127,6 +138,7 @@ public class wod_mutant_rancor_combat extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int checkCombatStatus(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isValidId(self) || !exists(self))
@@ -155,6 +167,7 @@ public class wod_mutant_rancor_combat extends script.base_script
         messageTo(self, "checkCombatStatus", null, REPEAT_TIME + (rand(0, OFFSET_TIME + OFFSET_TIME) - OFFSET_TIME), false);
         return SCRIPT_CONTINUE;
     }
+
     public boolean getRandomCombatTarget(obj_id self, obj_id parent) throws InterruptedException
     {
         if (!isIdValid(self) || !exists(self))
@@ -196,6 +209,7 @@ public class wod_mutant_rancor_combat extends script.base_script
         messageTo(parent, "defaultEventReset", webster, 2, false);
         return false;
     }
+
     public int aiCorpsePrepared(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id inv = utils.getInventoryContainer(self);

@@ -1,5 +1,11 @@
 package script.terminal;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -7,9 +13,6 @@ import java.util.Vector;
 
 public class terminal_guild extends script.terminal.base.base_terminal
 {
-    public terminal_guild()
-    {
-    }
     public static final string_id SID_GUILDS_LIST = new string_id("guild", "menu_list_of_guilds");
     public static final string_id SID_GUILD_WAR_LIST = new string_id("guild", "menu_list_of_guild_wars");
     public static final string_id SID_GUILD_WAR_LIST_ACTIVE = new string_id("guild", "menu_list_of_guild_wars_active");
@@ -84,6 +87,10 @@ public class terminal_guild extends script.terminal.base.base_terminal
     public static final string_id SID_ALIGN_NEUTRAL = new string_id("guild", "align_neutral");
     public static final string_id SID_BEGIN_GCW_REGION_DEFENDER = new string_id("guild", "begin_gcw_region_defender");
     public static final string_id SID_END_GCW_REGION_DEFENDER = new string_id("guild", "end_gcw_region_defender");
+    public terminal_guild()
+    {
+    }
+
     public int getStructureGuildId(obj_id self) throws InterruptedException
     {
         int guildId = 0;
@@ -108,6 +115,7 @@ public class terminal_guild extends script.terminal.base.base_terminal
         }
         return guildId;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         String myTemplate = getTemplateName(self);
@@ -136,6 +144,7 @@ public class terminal_guild extends script.terminal.base.base_terminal
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         obj_id datapad = getContainedBy(self);
@@ -154,6 +163,7 @@ public class terminal_guild extends script.terminal.base.base_terminal
         }
         return super.OnInitialize(self);
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);
@@ -209,7 +219,7 @@ public class terminal_guild extends script.terminal.base.base_terminal
             attribs[idx] = utils.localizeSIDString(SID_VOTING_ENABLED) + " until " + getCalendarTimeStringLocal(guild.getVotingTime(guildId));
             idx++;
         }
-        else 
+        else
         {
             if (guild.isVotingGracePeriod(guildId))
             {
@@ -220,6 +230,7 @@ public class terminal_guild extends script.terminal.base.base_terminal
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         int guildsListMenu = mi.addRootMenu(menu_info_types.SERVER_MENU3, SID_GUILDS_LIST);
@@ -259,7 +270,7 @@ public class terminal_guild extends script.terminal.base.base_terminal
                 {
                     mi.addSubMenu(guildManagementMenu, menu_info_types.SERVER_MENU19, SID_ALIGN_NEUTRAL);
                 }
-                else 
+                else
                 {
                     mi.addSubMenu(guildManagementMenu, menu_info_types.SERVER_MENU20, SID_ALIGN_IMPERIAL);
                     mi.addSubMenu(guildManagementMenu, menu_info_types.SERVER_MENU21, SID_ALIGN_REBEL);
@@ -269,7 +280,7 @@ public class terminal_guild extends script.terminal.base.base_terminal
                 {
                     mi.addSubMenu(guildManagementMenu, menu_info_types.SERVER_MENU22, SID_END_GCW_REGION_DEFENDER);
                 }
-                else 
+                else
                 {
                     mi.addSubMenu(guildManagementMenu, menu_info_types.SERVER_MENU23, SID_BEGIN_GCW_REGION_DEFENDER);
                 }
@@ -299,7 +310,7 @@ public class terminal_guild extends script.terminal.base.base_terminal
                     {
                         mi.addSubMenu(menu, menu_info_types.SERVER_MENU6, SID_LEADER_REGISTER);
                     }
-                    else 
+                    else
                     {
                         if (player != guildLeader)
                         {
@@ -307,7 +318,7 @@ public class terminal_guild extends script.terminal.base.base_terminal
                         }
                     }
                 }
-                else 
+                else
                 {
                     if (!guild.isVotingGracePeriod(guildId))
                     {
@@ -316,7 +327,7 @@ public class terminal_guild extends script.terminal.base.base_terminal
                     }
                 }
             }
-            else 
+            else
             {
                 guild.stopElection(player);
             }
@@ -332,7 +343,7 @@ public class terminal_guild extends script.terminal.base.base_terminal
                     mi.addSubMenu(menu, menu_info_types.SERVER_MENU11, SID_QA_END_ELECTION);
                     mi.addSubMenu(menu, menu_info_types.SERVER_MENU14, SID_QA_EXPIRE_VOTING);
                 }
-                else 
+                else
                 {
                     mi.addSubMenu(menu, menu_info_types.SERVER_MENU10, SID_QA_START_ELECTION);
                     if (guild.isVotingGracePeriod(guildId))
@@ -344,6 +355,7 @@ public class terminal_guild extends script.terminal.base.base_terminal
         }
         return super.OnObjectMenuRequest(self, player, mi);
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         sendDirtyObjectMenuNotification(self);
@@ -438,7 +450,7 @@ public class terminal_guild extends script.terminal.base.base_terminal
             {
                 screenTemplate = getStringObjVar(self, guild.GUILD_SCREEN_TYPE);
             }
-            else 
+            else
             {
                 screenTemplate = guild.GUILD_SCREEN_TEMPLATE;
             }
@@ -511,7 +523,7 @@ public class terminal_guild extends script.terminal.base.base_terminal
                     {
                         sendSystemMessage(player, "You cannot change the guild's factional alignment to Neutral while it is a GCW region defender.", "");
                     }
-                    else 
+                    else
                     {
                         sendSystemMessage(player, "Setting the guild's factional alignment to Neutral. This may take a few seconds. You will receive mail confirmation once the change has been completed.", "");
                         guildSetFaction(guildId, 0);
@@ -534,29 +546,29 @@ public class terminal_guild extends script.terminal.base.base_terminal
                         int cooldown = (timeLeftPreviousFaction + (isGod(player) ? 10 : 86400)) - getCalendarTime();
                         if (cooldown > 0)
                         {
-                            String cooldownStr = "" + cooldown + "s";
+                            String cooldownStr = cooldown + "s";
                             int[] convertedTime = player_structure.convertSecondsTime(cooldown);
                             if ((convertedTime != null) && (convertedTime.length == 4))
                             {
                                 if (convertedTime[0] > 0)
                                 {
-                                    cooldownStr = "" + convertedTime[0] + "d:" + convertedTime[1] + "h:" + convertedTime[2] + "m:" + convertedTime[3] + "s";
+                                    cooldownStr = convertedTime[0] + "d:" + convertedTime[1] + "h:" + convertedTime[2] + "m:" + convertedTime[3] + "s";
                                 }
                                 else if (convertedTime[1] > 0)
                                 {
-                                    cooldownStr = "" + convertedTime[1] + "h:" + convertedTime[2] + "m:" + convertedTime[3] + "s";
+                                    cooldownStr = convertedTime[1] + "h:" + convertedTime[2] + "m:" + convertedTime[3] + "s";
                                 }
                                 else if (convertedTime[2] > 0)
                                 {
-                                    cooldownStr = "" + convertedTime[2] + "m:" + convertedTime[3] + "s";
+                                    cooldownStr = convertedTime[2] + "m:" + convertedTime[3] + "s";
                                 }
                                 else if (convertedTime[3] > 0)
                                 {
-                                    cooldownStr = "" + convertedTime[3] + "s";
+                                    cooldownStr = convertedTime[3] + "s";
                                 }
-                                else 
+                                else
                                 {
-                                    cooldownStr = "" + cooldown + "s";
+                                    cooldownStr = cooldown + "s";
                                 }
                             }
                             sendSystemMessage(player, "You must wait " + cooldownStr + " before you can change the guild's factional alignment to Imperial.", "");
@@ -586,29 +598,29 @@ public class terminal_guild extends script.terminal.base.base_terminal
                         int cooldown = (timeLeftPreviousFaction + (isGod(player) ? 10 : 86400)) - getCalendarTime();
                         if (cooldown > 0)
                         {
-                            String cooldownStr = "" + cooldown + "s";
+                            String cooldownStr = cooldown + "s";
                             int[] convertedTime = player_structure.convertSecondsTime(cooldown);
                             if ((convertedTime != null) && (convertedTime.length == 4))
                             {
                                 if (convertedTime[0] > 0)
                                 {
-                                    cooldownStr = "" + convertedTime[0] + "d:" + convertedTime[1] + "h:" + convertedTime[2] + "m:" + convertedTime[3] + "s";
+                                    cooldownStr = convertedTime[0] + "d:" + convertedTime[1] + "h:" + convertedTime[2] + "m:" + convertedTime[3] + "s";
                                 }
                                 else if (convertedTime[1] > 0)
                                 {
-                                    cooldownStr = "" + convertedTime[1] + "h:" + convertedTime[2] + "m:" + convertedTime[3] + "s";
+                                    cooldownStr = convertedTime[1] + "h:" + convertedTime[2] + "m:" + convertedTime[3] + "s";
                                 }
                                 else if (convertedTime[2] > 0)
                                 {
-                                    cooldownStr = "" + convertedTime[2] + "m:" + convertedTime[3] + "s";
+                                    cooldownStr = convertedTime[2] + "m:" + convertedTime[3] + "s";
                                 }
                                 else if (convertedTime[3] > 0)
                                 {
-                                    cooldownStr = "" + convertedTime[3] + "s";
+                                    cooldownStr = convertedTime[3] + "s";
                                 }
-                                else 
+                                else
                                 {
-                                    cooldownStr = "" + cooldown + "s";
+                                    cooldownStr = cooldown + "s";
                                 }
                             }
                             sendSystemMessage(player, "You must wait " + cooldownStr + " before you can change the guild's factional alignment to Rebel.", "");
@@ -650,7 +662,7 @@ public class terminal_guild extends script.terminal.base.base_terminal
                         {
                             sendSystemMessage(player, "The guild cannot become a GCW region defender until it has at least " + requiredMemberCountNumber + " members.", "");
                         }
-                        else 
+                        else
                         {
                             String announcement = "Select a GCW region for your guild to defend.";
                             final String gcwPreviousDefenderRegion = guildGetPreviousGcwDefenderRegion(guildId);
@@ -660,29 +672,29 @@ public class terminal_guild extends script.terminal.base.base_terminal
                                 final int cooldown = timeLeftPreviousGcwDefenderRegion + (isGod(player) ? 10 : 86400) - getCalendarTime();
                                 if (cooldown > 0)
                                 {
-                                    String cooldownStr = "" + cooldown + "s";
+                                    String cooldownStr = cooldown + "s";
                                     int[] convertedTime = player_structure.convertSecondsTime(cooldown);
                                     if ((convertedTime != null) && (convertedTime.length == 4))
                                     {
                                         if (convertedTime[0] > 0)
                                         {
-                                            cooldownStr = "" + convertedTime[0] + "d:" + convertedTime[1] + "h:" + convertedTime[2] + "m:" + convertedTime[3] + "s";
+                                            cooldownStr = convertedTime[0] + "d:" + convertedTime[1] + "h:" + convertedTime[2] + "m:" + convertedTime[3] + "s";
                                         }
                                         else if (convertedTime[1] > 0)
                                         {
-                                            cooldownStr = "" + convertedTime[1] + "h:" + convertedTime[2] + "m:" + convertedTime[3] + "s";
+                                            cooldownStr = convertedTime[1] + "h:" + convertedTime[2] + "m:" + convertedTime[3] + "s";
                                         }
                                         else if (convertedTime[2] > 0)
                                         {
-                                            cooldownStr = "" + convertedTime[2] + "m:" + convertedTime[3] + "s";
+                                            cooldownStr = convertedTime[2] + "m:" + convertedTime[3] + "s";
                                         }
                                         else if (convertedTime[3] > 0)
                                         {
-                                            cooldownStr = "" + convertedTime[3] + "s";
+                                            cooldownStr = convertedTime[3] + "s";
                                         }
-                                        else 
+                                        else
                                         {
-                                            cooldownStr = "" + cooldown + "s";
+                                            cooldownStr = cooldown + "s";
                                         }
                                     }
                                     announcement += "\n";
@@ -693,21 +705,21 @@ public class terminal_guild extends script.terminal.base.base_terminal
                             String[] gcwDefenderRegions = getGcwDefenderRegions();
                             if ((gcwDefenderRegions != null) && (gcwDefenderRegions.length > 0))
                             {
-                                final String[] columnHeader = 
-                                {
-                                    "GCW Region"
-                                };
-                                final String[] columnHeaderType = 
-                                {
-                                    "text"
-                                };
+                                final String[] columnHeader =
+                                        {
+                                                "GCW Region"
+                                        };
+                                final String[] columnHeaderType =
+                                        {
+                                                "text"
+                                        };
                                 final String[][] columnData = new String[1][0];
                                 columnData[0] = gcwDefenderRegions;
                                 sui.tableColumnMajor(player, player, sui.OK_CANCEL, "@gcw:gcw_region_defender_war_terminal_menu", "handleGuildGcwRegionDefenderChoice", announcement, columnHeader, columnHeaderType, columnData, false);
                             }
                         }
                     }
-                    else 
+                    else
                     {
                         sendSystemMessage(player, "The guild cannot become a GCW region defender until it is aligned with a faction.", "");
                     }
@@ -716,16 +728,19 @@ public class terminal_guild extends script.terminal.base.base_terminal
         }
         return SCRIPT_CONTINUE;
     }
+
     public obj_id getMenuContextObjId(obj_id self, obj_id player, String varName) throws InterruptedException
     {
         deltadictionary dd = self.getScriptVars();
         return dd.getObjId("guildMenu." + player + "." + varName);
     }
+
     public void setMenuContextObjId(obj_id self, obj_id player, String varName, obj_id value) throws InterruptedException
     {
         deltadictionary dd = self.getScriptVars();
         dd.put("guildMenu." + player + "." + varName, value);
     }
+
     public int handleMakeLeader(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -741,21 +756,26 @@ public class terminal_guild extends script.terminal.base.base_terminal
         String input_name = sui.getInputBoxText(params);
         int guildId = getGuildId(player);
         obj_id[] members = guild.getMemberIds(guildId, false, true);
-        for (obj_id member : members) {
+        for (obj_id member : members)
+        {
             String name = guildGetMemberName(guildId, member);
-            if (name.equals(input_name)) {
-                if (member == player && !isGod(player)) {
+            if (name.equals(input_name))
+            {
+                if (member == player && !isGod(player))
+                {
                     sendSystemMessage(player, SID_ALREADY_LEADER);
                     return SCRIPT_CONTINUE;
                 }
                 location oldLeader = getLocation(player);
                 location newLeader = getLocation(member);
-                if (!oldLeader.area.equals(newLeader.area)) {
+                if (!oldLeader.area.equals(newLeader.area))
+                {
                     sendSystemMessage(player, SID_ML_NOT_LOADED);
                     return SCRIPT_CONTINUE;
                 }
                 float dist = getDistance(player, member);
-                if (dist < 0 || dist > 20) {
+                if (dist < 0 || dist > 20)
+                {
                     sendSystemMessage(player, SID_ML_NOT_LOADED);
                     return SCRIPT_CONTINUE;
                 }
@@ -768,6 +788,7 @@ public class terminal_guild extends script.terminal.base.base_terminal
         sendSystemMessage(player, SID_ML_FAIL);
         return SCRIPT_CONTINUE;
     }
+
     public int handleAcceptLeadership(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -782,8 +803,10 @@ public class terminal_guild extends script.terminal.base.base_terminal
         {
             obj_id[] members = guild.getMemberIds(guildId, false, true);
             boolean done = false;
-            for (obj_id member : members) {
-                if (member == newLeader) {
+            for (obj_id member : members)
+            {
+                if (member == newLeader)
+                {
                     guild.changeLeader(guildId, newLeader);
                     sendSystemMessage(oldLeader, SID_ML_SUCCESS);
                     sendSystemMessage(newLeader, SID_ML_YOU_ARE_LEADER);
@@ -796,7 +819,7 @@ public class terminal_guild extends script.terminal.base.base_terminal
                 sendSystemMessage(oldLeader, SID_ML_FAIL);
             }
         }
-        else 
+        else
         {
             sendSystemMessage(oldLeader, SID_ML_REJECTED);
         }
@@ -804,6 +827,7 @@ public class terminal_guild extends script.terminal.base.base_terminal
         utils.removeScriptVar(self, "temp_new_leader");
         return SCRIPT_CONTINUE;
     }
+
     public void resetElection(obj_id self, obj_id player) throws InterruptedException
     {
         int guildId = getGuildId(player);
@@ -814,6 +838,7 @@ public class terminal_guild extends script.terminal.base.base_terminal
         guildSetElectionEndTime(guildId, 0, 0);
         guild.resetCandidates(guildId, null);
     }
+
     public void startElection(obj_id self, obj_id player) throws InterruptedException
     {
         int guildId = getGuildId(player);
@@ -827,11 +852,16 @@ public class terminal_guild extends script.terminal.base.base_terminal
         obj_id[] members = guild.getMemberIds(guildId, false, true);
         int lastLoginTime = getPlayerLastLoginTime(guildLeader);
         int timeDifference = getCalendarTime() - lastLoginTime;
-        for (obj_id member : members) {
-            if (isIdValid(member) && member != guildLeader && member != player && timeDifference < LEADER_ABSENT_TIME) {
+        for (obj_id member : members)
+        {
+            if (isIdValid(member) && member != guildLeader && member != player && timeDifference < LEADER_ABSENT_TIME)
+            {
                 guildSetMemberAllegiance(guildId, member, guildLeader);
-            } else {
-                if (isIdValid(member) && member != guildLeader && member != player) {
+            }
+            else
+            {
+                if (isIdValid(member) && member != guildLeader && member != player)
+                {
                     guildSetMemberAllegiance(guildId, member, null);
                 }
             }
@@ -840,6 +870,7 @@ public class terminal_guild extends script.terminal.base.base_terminal
             utils.sendMail(OPEN_ELECTIONS_EMAIL_SUBJECT, bodypp, cname, "Guild Management");
         }
     }
+
     public void registerToRun(obj_id self, obj_id player) throws InterruptedException
     {
         int guildId = getGuildId(player);
@@ -860,6 +891,7 @@ public class terminal_guild extends script.terminal.base.base_terminal
         guild.makeCandidate(guildId, player);
         sendSystemMessage(player, SID_REGISTER_CONGRATS);
     }
+
     public void unregisterFromRace(obj_id self, obj_id player) throws InterruptedException
     {
         int guildId = getGuildId(player);
@@ -876,10 +908,12 @@ public class terminal_guild extends script.terminal.base.base_terminal
         guild.removeCandidate(guildId, player);
         sendSystemMessage(player, SID_UNREGISTERED);
     }
+
     public void acceptPAHall(obj_id self, obj_id player) throws InterruptedException
     {
         sui.msgbox(self, player, "@guild:accept_pa_hall_p", sui.YES_NO, "@guild:accept_pa_hall_t", sui.MSG_NORMAL, "handleAcceptPAHall");
     }
+
     public int handleAcceptPAHall(obj_id self, dictionary params) throws InterruptedException
     {
         if (sui.getIntButtonPressed(params) == sui.BP_OK)
@@ -900,6 +934,7 @@ public class terminal_guild extends script.terminal.base.base_terminal
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handlerGuildScreenDestroyed(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -917,6 +952,7 @@ public class terminal_guild extends script.terminal.base.base_terminal
         }
         return SCRIPT_CONTINUE;
     }
+
     public int showGuildsList(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -928,18 +964,18 @@ public class terminal_guild extends script.terminal.base.base_terminal
         {
             return SCRIPT_CONTINUE;
         }
-        String[] table_titles = 
-        {
-            "@guild:table_title_name",
-            "@guild:table_guildlist_abbreviation",
-            "@guild:table_guildlist_members"
-        };
-        String[] table_types = 
-        {
-            "text",
-            "text",
-            "integer"
-        };
+        String[] table_titles =
+                {
+                        "@guild:table_title_name",
+                        "@guild:table_guildlist_abbreviation",
+                        "@guild:table_guildlist_members"
+                };
+        String[] table_types =
+                {
+                        "text",
+                        "text",
+                        "integer"
+                };
         int[] guildIds = getAllGuildIds();
         if (guildIds == null || guildIds.length < 1)
         {
@@ -947,8 +983,10 @@ public class terminal_guild extends script.terminal.base.base_terminal
         }
         Vector validatedIds = new Vector();
         validatedIds.setSize(0);
-        for (int guildId : guildIds) {
-            if (guildGetCountMembersOnly(guildId) > 4) {
+        for (int guildId : guildIds)
+        {
+            if (guildGetCountMembersOnly(guildId) > 4)
+            {
                 utils.addElement(validatedIds, guildId);
             }
         }
@@ -961,7 +999,7 @@ public class terminal_guild extends script.terminal.base.base_terminal
         {
             guildsData[i][0] = guildGetName((Integer) validatedIds.get(i));
             guildsData[i][1] = guildGetAbbrev((Integer) validatedIds.get(i));
-            guildsData[i][2] = "" + guildGetCountMembersOnly((Integer) validatedIds.get(i));
+            guildsData[i][2] = String.valueOf(guildGetCountMembersOnly((Integer) validatedIds.get(i)));
         }
         int pid = sui.tableRowMajor(self, player, sui.OK_CANCEL, "List of Guilds", "onGuildsListResponse", null, table_titles, table_types, guildsData);
         guild.setWindowPid(self, pid);

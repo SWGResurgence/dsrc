@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.location;
 import script.obj_id;
 import script.string_id;
@@ -14,6 +20,7 @@ public class geiger extends script.base_script
     public static final String SCRIPTVAR_GEIGER_LAST = "geiger.last";
     public static final String GEIGER_TEMPLATE = "object/intangible/data_item/data_geiger_counter.iff";
     public static final String GEIGER_SCRIPT = "item.geiger.base";
+
     public geiger()
     {
     }

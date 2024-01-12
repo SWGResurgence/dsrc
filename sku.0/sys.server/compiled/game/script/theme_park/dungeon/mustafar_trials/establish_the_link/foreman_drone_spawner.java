@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.mustafar_trials.establish_the_link;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.create;
 import script.library.trial;
@@ -9,18 +15,20 @@ import script.obj_id;
 
 public class foreman_drone_spawner extends script.base_script
 {
-    public foreman_drone_spawner()
-    {
-    }
     public static final String BUG_COUNT = "spawning.bugCount";
     public static final int BUG_MAX = 2;
     public static final String DRONE = "som_link_lava_beetle_drone";
     public static final boolean LOGGING = false;
+    public foreman_drone_spawner()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "spawnNewBug", null, 5, false);
         return SCRIPT_CONTINUE;
     }
+
     public int spawnNewBug(obj_id self, dictionary params) throws InterruptedException
     {
         location spawnLoc = getLocation(self);
@@ -34,6 +42,7 @@ public class foreman_drone_spawner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int incrementBugCount(obj_id self) throws InterruptedException
     {
         int count = 0;
@@ -45,6 +54,7 @@ public class foreman_drone_spawner extends script.base_script
         utils.setScriptVar(self, BUG_COUNT, count);
         return count;
     }
+
     public int decrementBugCount(obj_id self) throws InterruptedException
     {
         int count = 0;
@@ -60,6 +70,7 @@ public class foreman_drone_spawner extends script.base_script
         utils.setScriptVar(self, BUG_COUNT, count);
         return count;
     }
+
     public boolean canSpawnMoreBugs(obj_id self) throws InterruptedException
     {
         if (!utils.hasScriptVar(self, BUG_COUNT))
@@ -75,6 +86,7 @@ public class foreman_drone_spawner extends script.base_script
         doLogging("canSpawnMoreBugs", "Bug max exceeded, stop spawning bugs");
         return false;
     }
+
     public int droneDied(obj_id self, dictionary params) throws InterruptedException
     {
         decrementBugCount(self);
@@ -83,12 +95,13 @@ public class foreman_drone_spawner extends script.base_script
             messageTo(self, "spawnNewBug", null, 0, false);
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             doLogging("droneDied", "Cannot spawn more bugs because limit has been reached");
             return SCRIPT_CONTINUE;
         }
     }
+
     public void doLogging(String section, String message) throws InterruptedException
     {
         if (LOGGING || trial.UPLINK_LOGGING)

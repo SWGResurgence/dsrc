@@ -1,119 +1,144 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.*;
 
 public class npe_profession_trader extends script.base_script
 {
+    public static String c_stringFile = "conversation/npe_profession_trader";
+
     public npe_profession_trader()
     {
     }
-    public static String c_stringFile = "conversation/npe_profession_trader";
+
     public boolean npe_profession_trader_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean npe_profession_trader_condition_onTrainingQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isQuestActive(player, "npe_pointer_artisan") || groundquests.isQuestActive(player, "npe_new_artisan_quest") || groundquests.isQuestActive(player, "npe_prof_artisan1"));
     }
+
     public boolean npe_profession_trader_condition_onArtisan1task(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "npe_prof_artisan1", "talktotrader");
     }
+
     public boolean npe_profession_trader_condition_isTrader(obj_id player, obj_id npc) throws InterruptedException
     {
         String pTemplate = getSkillTemplate(player);
-        if (pTemplate.contains("trader"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return pTemplate.contains("trader");
     }
+
     public boolean npe_profession_trader_condition_onEntertainer1quest(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "npe_prof_entertainer1");
     }
+
     public boolean npe_profession_trader_condition_finishedArtisan1Quest(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "npe_prof_artisan1");
     }
+
     public boolean npe_profession_trader_condition_onEntertainer1Task(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "npe_prof_entertainer1", "returntomira");
     }
+
     public boolean npe_profession_trader_condition_onSideCrafting1Return(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "npe_side_crafting1", "getreward");
     }
+
     public boolean npe_profession_trader_condition_onSideCrafting1quest(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "npe_side_crafting1");
     }
+
     public boolean npe_profession_trader_condition_finishedSideCrafting1Quest(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "npe_side_crafting1");
     }
+
     public boolean npe_profession_trader_condition_deletedGossipQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.hasCompletedQuest(player, "npe_new_artisan_quest") && !groundquests.isQuestActive(player, "npe_prof_artisan1"));
     }
+
     public boolean npe_profession_trader_condition_onSideCrafting2quest(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "npe_side_crafting2");
     }
+
     public boolean npe_profession_trader_condition_onSideCrafting3quest(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "npe_side_crafting3");
     }
+
     public boolean npe_profession_trader_condition_onSideCrafting4quest(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "npe_side_crafting4");
     }
+
     public boolean npe_profession_trader_condition_onSideCrafting2Return(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "npe_side_crafting2", "getreward");
     }
+
     public boolean npe_profession_trader_condition_onSideCrafting3Return(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "npe_side_crafting3", "getreward");
     }
+
     public boolean npe_profession_trader_condition_onSideCrafting4Return(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "npe_side_crafting4", "getreward");
     }
+
     public boolean npe_profession_trader_condition_finishedSideCrafting2Quest(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "npe_side_crafting2");
     }
+
     public boolean npe_profession_trader_condition_finishedSideCrafting3Quest(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "npe_side_crafting3");
     }
+
     public boolean npe_profession_trader_condition_finishedSideCrafting4Quest(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "npe_side_crafting4");
     }
+
     public void npe_profession_trader_action_facePlayer(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
     }
+
     public void npe_profession_trader_action_signalSideCrafting2Quest(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "npe_side_crafting2_reward");
     }
+
     public void npe_profession_trader_action_givePointerBartender(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "npe_pointer_artisan");
         groundquests.sendSignal(player, "found_trader");
     }
+
     public void npe_profession_trader_action_signalTrader1Quest(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "npe_prof_artisan1_reward");
     }
+
     public void npe_profession_trader_action_giveSideCrafting1QUest(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.requestGrantQuest(player, "npe_side_crafting1");
@@ -127,18 +152,22 @@ public class npe_profession_trader extends script.base_script
             utils.setObjVar(player, "npe.side_crafting1.resources", 1);
         }
     }
+
     public void npe_profession_trader_action_giveHanPointer(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "npe_job_pointer_han");
     }
+
     public void npe_profession_trader_action_signalSideCrafting1Quest(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "npe_side_crafting1_reward");
     }
+
     public void npe_profession_trader_action_giveArtisan1Quest(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "npe_prof_artisan1");
     }
+
     public void npe_profession_trader_action_giveSideCrafting2QUest(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.requestGrantQuest(player, "npe_side_crafting2");
@@ -152,6 +181,7 @@ public class npe_profession_trader extends script.base_script
             utils.setObjVar(player, "npe.side_crafting2.resources", 1);
         }
     }
+
     public void npe_profession_trader_action_giveSideCrafting3QUest(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.requestGrantQuest(player, "npe_side_crafting3");
@@ -164,6 +194,7 @@ public class npe_profession_trader extends script.base_script
             utils.setObjVar(player, "npe.side_crafting3.resources", 1);
         }
     }
+
     public void npe_profession_trader_action_giveSideCrafting4QUest(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.requestGrantQuest(player, "npe_side_crafting4");
@@ -176,10 +207,12 @@ public class npe_profession_trader extends script.base_script
             utils.setObjVar(player, "npe.side_crafting4.resources", 1);
         }
     }
+
     public void npe_profession_trader_action_signalSideCrafting3Quest(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "npe_side_crafting3_reward");
     }
+
     public void npe_profession_trader_action_signalSideCrafting4Quest(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "npe_side_crafting4_reward");
@@ -188,6 +221,7 @@ public class npe_profession_trader extends script.base_script
         myResources[0] = npe.grantNpeResourceStack(player, "energy_renewable_unlimited_wind_weak", 200);
         showLootBox(player, myResources);
     }
+
     public int npe_profession_trader_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_142"))
@@ -208,7 +242,7 @@ public class npe_profession_trader extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_146");
@@ -217,7 +251,7 @@ public class npe_profession_trader extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_profession_trader.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -227,6 +261,7 @@ public class npe_profession_trader extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_profession_trader_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_146"))
@@ -247,7 +282,7 @@ public class npe_profession_trader extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_139");
@@ -256,7 +291,7 @@ public class npe_profession_trader extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_profession_trader.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -266,6 +301,7 @@ public class npe_profession_trader extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_profession_trader_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_139"))
@@ -286,6 +322,7 @@ public class npe_profession_trader extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_profession_trader_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_115"))
@@ -300,6 +337,7 @@ public class npe_profession_trader extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_profession_trader_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_130"))
@@ -315,6 +353,7 @@ public class npe_profession_trader extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_profession_trader_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_116"))
@@ -335,7 +374,7 @@ public class npe_profession_trader extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_120");
@@ -344,7 +383,7 @@ public class npe_profession_trader extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_profession_trader.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -354,6 +393,7 @@ public class npe_profession_trader extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_profession_trader_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_120"))
@@ -373,7 +413,7 @@ public class npe_profession_trader extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_124");
@@ -382,7 +422,7 @@ public class npe_profession_trader extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_profession_trader.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -392,6 +432,7 @@ public class npe_profession_trader extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_profession_trader_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_124"))
@@ -413,7 +454,7 @@ public class npe_profession_trader extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_110");
@@ -422,7 +463,7 @@ public class npe_profession_trader extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_profession_trader.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -432,6 +473,7 @@ public class npe_profession_trader extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_profession_trader_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_110"))
@@ -447,6 +489,7 @@ public class npe_profession_trader extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_profession_trader_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_115"))
@@ -461,6 +504,7 @@ public class npe_profession_trader extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_profession_trader_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_101"))
@@ -480,7 +524,7 @@ public class npe_profession_trader extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_105");
@@ -489,7 +533,7 @@ public class npe_profession_trader extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_profession_trader.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -499,6 +543,7 @@ public class npe_profession_trader extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_profession_trader_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_105"))
@@ -514,6 +559,7 @@ public class npe_profession_trader extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_profession_trader_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_77"))
@@ -534,7 +580,7 @@ public class npe_profession_trader extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_85");
@@ -543,7 +589,7 @@ public class npe_profession_trader extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_profession_trader.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -553,6 +599,7 @@ public class npe_profession_trader extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_profession_trader_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_85"))
@@ -572,7 +619,7 @@ public class npe_profession_trader extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_93");
@@ -581,7 +628,7 @@ public class npe_profession_trader extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_profession_trader.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -591,6 +638,7 @@ public class npe_profession_trader extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_profession_trader_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_93"))
@@ -612,7 +660,7 @@ public class npe_profession_trader extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_108");
@@ -621,7 +669,7 @@ public class npe_profession_trader extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_profession_trader.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -631,6 +679,7 @@ public class npe_profession_trader extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_profession_trader_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_108"))
@@ -650,7 +699,7 @@ public class npe_profession_trader extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_105");
@@ -659,7 +708,7 @@ public class npe_profession_trader extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_profession_trader.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -669,6 +718,7 @@ public class npe_profession_trader extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_profession_trader_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_115"))
@@ -683,6 +733,7 @@ public class npe_profession_trader extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_profession_trader_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_64"))
@@ -702,7 +753,7 @@ public class npe_profession_trader extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_66");
@@ -711,7 +762,7 @@ public class npe_profession_trader extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_profession_trader.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -721,6 +772,7 @@ public class npe_profession_trader extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_profession_trader_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_66"))
@@ -736,6 +788,7 @@ public class npe_profession_trader extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_profession_trader_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_55"))
@@ -756,7 +809,7 @@ public class npe_profession_trader extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_57");
@@ -765,7 +818,7 @@ public class npe_profession_trader extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_profession_trader.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -775,6 +828,7 @@ public class npe_profession_trader extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_profession_trader_handleBranch26(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_57"))
@@ -794,7 +848,7 @@ public class npe_profession_trader extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_59");
@@ -807,7 +861,7 @@ public class npe_profession_trader extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_profession_trader.branchId");
                     prose_package pp = new prose_package();
@@ -821,6 +875,7 @@ public class npe_profession_trader extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_profession_trader_handleBranch27(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_59"))
@@ -842,7 +897,7 @@ public class npe_profession_trader extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_106");
@@ -851,7 +906,7 @@ public class npe_profession_trader extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_profession_trader.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -861,6 +916,7 @@ public class npe_profession_trader extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_profession_trader_handleBranch28(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_106"))
@@ -880,7 +936,7 @@ public class npe_profession_trader extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_66");
@@ -889,7 +945,7 @@ public class npe_profession_trader extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_profession_trader.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -899,6 +955,7 @@ public class npe_profession_trader extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_profession_trader_handleBranch29(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_115"))
@@ -913,6 +970,7 @@ public class npe_profession_trader extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_profession_trader_handleBranch30(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_68"))
@@ -932,7 +990,7 @@ public class npe_profession_trader extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_74");
@@ -941,7 +999,7 @@ public class npe_profession_trader extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_profession_trader.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -951,6 +1009,7 @@ public class npe_profession_trader extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_profession_trader_handleBranch31(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_74"))
@@ -970,7 +1029,7 @@ public class npe_profession_trader extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_79");
@@ -979,7 +1038,7 @@ public class npe_profession_trader extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_profession_trader.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -989,6 +1048,7 @@ public class npe_profession_trader extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_profession_trader_handleBranch32(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_79"))
@@ -1004,6 +1064,7 @@ public class npe_profession_trader extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_profession_trader_handleBranch34(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_91"))
@@ -1024,7 +1085,7 @@ public class npe_profession_trader extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_96");
@@ -1033,7 +1094,7 @@ public class npe_profession_trader extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_profession_trader.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1043,6 +1104,7 @@ public class npe_profession_trader extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_profession_trader_handleBranch35(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_96"))
@@ -1062,7 +1124,7 @@ public class npe_profession_trader extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_74");
@@ -1071,7 +1133,7 @@ public class npe_profession_trader extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_profession_trader.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1081,6 +1143,7 @@ public class npe_profession_trader extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_profession_trader_handleBranch36(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_125"))
@@ -1097,6 +1160,7 @@ public class npe_profession_trader extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_profession_trader_handleBranch38(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_115"))
@@ -1111,6 +1175,7 @@ public class npe_profession_trader extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_profession_trader_handleBranch40(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_137"))
@@ -1130,7 +1195,7 @@ public class npe_profession_trader extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_145");
@@ -1139,7 +1204,7 @@ public class npe_profession_trader extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_profession_trader.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1149,6 +1214,7 @@ public class npe_profession_trader extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_profession_trader_handleBranch41(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_145"))
@@ -1164,6 +1230,7 @@ public class npe_profession_trader extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -1176,6 +1243,7 @@ public class npe_profession_trader extends script.base_script
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
@@ -1184,6 +1252,7 @@ public class npe_profession_trader extends script.base_script
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -1192,18 +1261,21 @@ public class npe_profession_trader extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.npe_profession_trader");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -1234,7 +1306,7 @@ public class npe_profession_trader extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_142");
@@ -1242,7 +1314,7 @@ public class npe_profession_trader extends script.base_script
                 utils.setScriptVar(player, "conversation.npe_profession_trader.branchId", 2);
                 npcStartConversation(player, npc, "npe_profession_trader", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1264,7 +1336,7 @@ public class npe_profession_trader extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_115");
@@ -1272,7 +1344,7 @@ public class npe_profession_trader extends script.base_script
                 utils.setScriptVar(player, "conversation.npe_profession_trader.branchId", 38);
                 npcStartConversation(player, npc, "npe_profession_trader", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1294,7 +1366,7 @@ public class npe_profession_trader extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_130");
@@ -1302,7 +1374,7 @@ public class npe_profession_trader extends script.base_script
                 utils.setScriptVar(player, "conversation.npe_profession_trader.branchId", 7);
                 npcStartConversation(player, npc, "npe_profession_trader", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1324,7 +1396,7 @@ public class npe_profession_trader extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_116");
@@ -1332,7 +1404,7 @@ public class npe_profession_trader extends script.base_script
                 utils.setScriptVar(player, "conversation.npe_profession_trader.branchId", 9);
                 npcStartConversation(player, npc, "npe_profession_trader", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1354,7 +1426,7 @@ public class npe_profession_trader extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_115");
@@ -1362,7 +1434,7 @@ public class npe_profession_trader extends script.base_script
                 utils.setScriptVar(player, "conversation.npe_profession_trader.branchId", 38);
                 npcStartConversation(player, npc, "npe_profession_trader", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1384,7 +1456,7 @@ public class npe_profession_trader extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_101");
@@ -1392,7 +1464,7 @@ public class npe_profession_trader extends script.base_script
                 utils.setScriptVar(player, "conversation.npe_profession_trader.branchId", 14);
                 npcStartConversation(player, npc, "npe_profession_trader", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1414,7 +1486,7 @@ public class npe_profession_trader extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_77");
@@ -1422,7 +1494,7 @@ public class npe_profession_trader extends script.base_script
                 utils.setScriptVar(player, "conversation.npe_profession_trader.branchId", 17);
                 npcStartConversation(player, npc, "npe_profession_trader", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1444,7 +1516,7 @@ public class npe_profession_trader extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_115");
@@ -1452,7 +1524,7 @@ public class npe_profession_trader extends script.base_script
                 utils.setScriptVar(player, "conversation.npe_profession_trader.branchId", 38);
                 npcStartConversation(player, npc, "npe_profession_trader", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1474,7 +1546,7 @@ public class npe_profession_trader extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_64");
@@ -1486,7 +1558,7 @@ public class npe_profession_trader extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "npe_profession_trader", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -1512,7 +1584,7 @@ public class npe_profession_trader extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_55");
@@ -1520,7 +1592,7 @@ public class npe_profession_trader extends script.base_script
                 utils.setScriptVar(player, "conversation.npe_profession_trader.branchId", 25);
                 npcStartConversation(player, npc, "npe_profession_trader", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1542,7 +1614,7 @@ public class npe_profession_trader extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_115");
@@ -1550,7 +1622,7 @@ public class npe_profession_trader extends script.base_script
                 utils.setScriptVar(player, "conversation.npe_profession_trader.branchId", 38);
                 npcStartConversation(player, npc, "npe_profession_trader", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1572,7 +1644,7 @@ public class npe_profession_trader extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_68");
@@ -1584,7 +1656,7 @@ public class npe_profession_trader extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "npe_profession_trader", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -1610,7 +1682,7 @@ public class npe_profession_trader extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_91");
@@ -1618,7 +1690,7 @@ public class npe_profession_trader extends script.base_script
                 utils.setScriptVar(player, "conversation.npe_profession_trader.branchId", 34);
                 npcStartConversation(player, npc, "npe_profession_trader", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1640,7 +1712,7 @@ public class npe_profession_trader extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_125");
@@ -1648,7 +1720,7 @@ public class npe_profession_trader extends script.base_script
                 utils.setScriptVar(player, "conversation.npe_profession_trader.branchId", 36);
                 npcStartConversation(player, npc, "npe_profession_trader", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1670,7 +1742,7 @@ public class npe_profession_trader extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_115");
@@ -1678,7 +1750,7 @@ public class npe_profession_trader extends script.base_script
                 utils.setScriptVar(player, "conversation.npe_profession_trader.branchId", 38);
                 npcStartConversation(player, npc, "npe_profession_trader", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1700,7 +1772,7 @@ public class npe_profession_trader extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_137");
@@ -1712,7 +1784,7 @@ public class npe_profession_trader extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "npe_profession_trader", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -1732,6 +1804,7 @@ public class npe_profession_trader extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("npe_profession_trader"))

@@ -1,5 +1,11 @@
 package script.systems.veteran_reward;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.sui;
 import script.library.utils;
@@ -10,6 +16,7 @@ public class respec_voucher_deed extends script.base_script
     public static final string_id RESPEC_VOUCHER = new string_id(STF_FILE, "respec_voucher");
     public static final string_id SID_RESPEC_VOUCHER_TITLE = new string_id(STF_FILE, "sui_respec_title");
     public static final string_id SID_RESPEC_VOUCHER_PROMPT = new string_id(STF_FILE, "sui_respec_prompt");
+
     public respec_voucher_deed()
     {
     }

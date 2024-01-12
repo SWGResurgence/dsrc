@@ -1,26 +1,35 @@
 package script.theme_park.poi.general;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.obj_id;
 
 public class rebel_formation extends script.theme_park.poi.base
 {
+    public static final int FORMATION_COLUMN = 0;
+    public static final int FORMATION_WEDGE = 1;
     public rebel_formation()
     {
     }
-    public static final int FORMATION_COLUMN = 0;
-    public static final int FORMATION_WEDGE = 1;
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         launchSetup(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         launchSetup(self);
         return SCRIPT_CONTINUE;
     }
+
     public void launchSetup(obj_id poiBaseObject) throws InterruptedException
     {
         obj_id leader = poiCreateNpc("rebel", 0, 0);
@@ -32,6 +41,7 @@ public class rebel_formation extends script.theme_park.poi.base
             messageTo(poiBaseObject, "makeAnother", parms, (5 + (i * 2)), true);
         }
     }
+
     public int makeAnother(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id leader = params.getObjId("leader");

@@ -1,5 +1,11 @@
 package script.theme_park.nym;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.groundquests;
 import script.library.pet_lib;
@@ -8,9 +14,6 @@ import script.library.sui;
 
 public class water_filtration_chemical_deposit extends script.base_script
 {
-    public water_filtration_chemical_deposit()
-    {
-    }
     public static final String THEMEPARK = "theme_park_nym/messages";
     public static final string_id SID_NOT_WHILE_MOUNTED = new string_id(THEMEPARK, "deposit_not_while_mounted");
     public static final string_id SID_ZIP_BAR = new string_id(THEMEPARK, "deposit_zip_bar");
@@ -18,6 +21,10 @@ public class water_filtration_chemical_deposit extends script.base_script
     public static final string_id SID_NOT_SURE_HOW_DESTROY = new string_id(THEMEPARK, "deposit_not_sure_what_to_do");
     public static final string_id SID_ALRDY_COMPLETED_QUEST = new string_id(THEMEPARK, "deposit_already_completed_quest");
     public static final int COUNTDOWN_TIMER = 3;
+    public water_filtration_chemical_deposit()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (isDead(player) || isIncapacitated(player))
@@ -27,6 +34,7 @@ public class water_filtration_chemical_deposit extends script.base_script
         int mnu2 = mi.addRootMenu(menu_info_types.ITEM_USE, SID_MNU_USE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item != menu_info_types.ITEM_USE)
@@ -76,6 +84,7 @@ public class water_filtration_chemical_deposit extends script.base_script
         CustomerServiceLog("nyms_themepark", "water_filtration_chemical_deposit.OnObjectMenuSelect() Player: " + player + " is destroying blackwing canister: " + self);
         return SCRIPT_CONTINUE;
     }
+
     public int handleObjectSwapTimer(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.equals(""))
@@ -147,6 +156,7 @@ public class water_filtration_chemical_deposit extends script.base_script
         messageTo(self, "destroySelf", null, 0, false);
         return SCRIPT_CONTINUE;
     }
+
     public int destroySelf(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(self);

@@ -1,5 +1,11 @@
 package script.theme_park.nym;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.groundquests;
 import script.obj_id;
@@ -9,12 +15,14 @@ public class droid_cave_prisoner extends script.base_script
     public droid_cave_prisoner()
     {
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         failRescueQuest(self);
         tellMomIDied(self);
         return SCRIPT_CONTINUE;
     }
+
     public int handleUpdatePrisonerRescueQuest(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = getObjIdObjVar(self, "player");
@@ -33,12 +41,14 @@ public class droid_cave_prisoner extends script.base_script
         messageTo(self, "handleDestroySelf", null, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleDestroySelf(obj_id self, dictionary params) throws InterruptedException
     {
         tellMomIDied(self);
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public boolean tellMomIDied(obj_id self) throws InterruptedException
     {
         if (!isValidId(self))
@@ -63,6 +73,7 @@ public class droid_cave_prisoner extends script.base_script
         messageTo(mom, "tellingMomIDied", info, 120, false);
         return true;
     }
+
     public boolean failRescueQuest(obj_id self) throws InterruptedException
     {
         obj_id player = getObjIdObjVar(self, "player");

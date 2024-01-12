@@ -1,5 +1,11 @@
 package script.systems.tcg;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -32,6 +38,7 @@ public class hangar_lite_device extends script.base_script
     public static final string_id SID_SHIP_WAS_RESTORED = new string_id("player_structure", "ship_was_restored");
     public static final string_id SID_TRANSFER_FAILED_GENERIC = new string_id("player_structure", "transfer_failed_generic");
     public static final string_id SID_MAX_SHIPS_STORED = new string_id("player_structure", "max_ships_stored_hangar_lite");
+
     public hangar_lite_device()
     {
     }
@@ -131,7 +138,7 @@ public class hangar_lite_device extends script.base_script
             if (isIdValid(playerHangar) && hasObjVar(player, player_structure.OBJVAR_HANGAR_CREATED))
             {
                 obj_id[] shipControlDevices = space_transition.findShipControlDevicesInHangarSlot(player);
-                if (shipControlDevices != null && shipControlDevices.length > 0)
+                if (shipControlDevices != null)
                 {
                     for (obj_id storedShip : shipControlDevices)
                     {

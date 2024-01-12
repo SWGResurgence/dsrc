@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.borvos_vault;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.permissions;
 import script.library.static_item;
@@ -10,10 +16,12 @@ import script.obj_id;
 
 public class loot_chest extends script.base_script
 {
+    public static final String DATATABLE_LOOT = "datatables/loot/dungeon/borvo_vault.iff";
+
     public loot_chest()
     {
     }
-    public static final String DATATABLE_LOOT = "datatables/loot/dungeon/borvo_vault.iff";
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         detachScript(self, "item.container.loot_crate");
@@ -24,10 +32,12 @@ public class loot_chest extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_OPEN)
@@ -37,24 +47,26 @@ public class loot_chest extends script.base_script
                 switch (getContainerType(self))
                 {
                     case 0:
-                    detachScript(self, "item.container.base.base_container");
-                    break;
+                        detachScript(self, "item.container.base.base_container");
+                        break;
                     case 1:
-                    utils.requestContainerOpen(player, self);
-                    break;
+                        utils.requestContainerOpen(player, self);
+                        break;
                     default:
-                    break;
+                        break;
                 }
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToLoseItem(obj_id self, obj_id destContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         removeObjVar(self, "spawnedLoot");
         messageTo(self, "makeMoreLoot", null, 1200, true);
         return SCRIPT_CONTINUE;
     }
+
     public int makeMoreLoot(obj_id self, dictionary params) throws InterruptedException
     {
         if (!hasObjVar(self, "spawnedLoot"))
@@ -63,6 +75,7 @@ public class loot_chest extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public obj_id spawnLoot(obj_id self) throws InterruptedException
     {
         String[] lootArray = dataTableGetStringColumn(DATATABLE_LOOT, "chest");

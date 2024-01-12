@@ -1,49 +1,60 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.*;
 
 public class station_endor extends script.base_script
 {
+    public static String c_stringFile = "conversation/station_endor";
+
     public station_endor()
     {
     }
-    public static String c_stringFile = "conversation/station_endor";
+
     public boolean station_endor_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean station_endor_condition_canAfford50(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_crafting.canAffordShipRepairs(player, npc, 0.50f);
     }
+
     public boolean station_endor_condition_canAfford25(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_crafting.canAffordShipRepairs(player, npc, 0.25f) && space_crafting.isDamaged(player));
     }
+
     public boolean station_endor_condition_canAfford75(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_crafting.canAffordShipRepairs(player, npc, 0.75f);
     }
+
     public boolean station_endor_condition_canAfford100(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_crafting.canAffordShipRepairs(player, npc, 1.0f);
     }
+
     public boolean station_endor_condition_needRepairs(obj_id player, obj_id npc) throws InterruptedException
     {
         float fltDamage = space_crafting.getDamageTotal(player, getPilotedShip(player));
-        if (fltDamage > 0)
-        {
-            return true;
-        }
-        return false;
+        return fltDamage > 0;
     }
+
     public boolean station_endor_condition_isTooFar(obj_id player, obj_id npc) throws InterruptedException
     {
         space_combat.playCombatTauntSound(player);
         obj_id containingShip = space_transition.getContainingShip(player);
         return (getDistance(npc, containingShip) > space_transition.STATION_COMM_MAX_DISTANCE);
     }
+
     public boolean station_endor_condition_hasCompletedHalfTier3(obj_id player, obj_id npc) throws InterruptedException
     {
         int skillCount = 0;
@@ -81,6 +92,7 @@ public class station_endor extends script.base_script
         }
         return (skillCount > 1);
     }
+
     public boolean station_endor_condition_readyForStoryOne(obj_id player, obj_id npc) throws InterruptedException
     {
         if (space_flags.isSpaceTrack(player, space_flags.PRIVATEER_TATOOINE))
@@ -97,17 +109,12 @@ public class station_endor extends script.base_script
         }
         return (station_endor_condition_hasCompletedHalfTier3(player, npc) && !station_endor_condition_hasCompletedFirstSeries(player, npc));
     }
+
     public boolean station_endor_condition_hasCompletedFirstSeries(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_quest.hasCompletedQuest(player, "rescue", "stn_endor_irs_imp_tier3_1a"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return space_quest.hasCompletedQuest(player, "rescue", "stn_endor_irs_imp_tier3_1a");
     }
+
     public boolean station_endor_condition_readyForStoryTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         if (station_endor_condition_readyForStoryOne(player, npc))
@@ -128,17 +135,12 @@ public class station_endor extends script.base_script
         }
         return (station_endor_condition_hasCompletedHalfTier3(player, npc) && !station_endor_condition_hasCompletedSecondSeries(player, npc));
     }
+
     public boolean station_endor_condition_hasCompletedSecondSeries(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_quest.hasCompletedQuest(player, "escort", "stn_endor_irs_imp_tier3_2a"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return space_quest.hasCompletedQuest(player, "escort", "stn_endor_irs_imp_tier3_2a");
     }
+
     public boolean station_endor_condition_readyForStoryThree(obj_id player, obj_id npc) throws InterruptedException
     {
         if (station_endor_condition_readyForStoryOne(player, npc))
@@ -163,17 +165,12 @@ public class station_endor extends script.base_script
         }
         return (station_endor_condition_hasCompletedHalfTier3(player, npc) && !station_endor_condition_hasCompletedThirdSeries(player, npc));
     }
+
     public boolean station_endor_condition_hasCompletedThirdSeries(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_quest.hasCompletedQuest(player, "patrol", "stn_endor_irs_imp_tier3_3a"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return space_quest.hasCompletedQuest(player, "patrol", "stn_endor_irs_imp_tier3_3a");
     }
+
     public boolean station_endor_condition_isReadyForDutyMissions(obj_id player, obj_id npc) throws InterruptedException
     {
         if (space_quest.hasQuest(player))
@@ -182,135 +179,153 @@ public class station_endor extends script.base_script
         }
         return (station_endor_condition_hasCompletedThirdSeries(player, npc) && space_flags.hasCompletedTierThree(player));
     }
+
     public boolean station_endor_condition_canTakeQuest(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_quest.hasQuest(player))
-        {
-            return false;
-        }
-        return true;
+        return !space_quest.hasQuest(player);
     }
+
     public boolean station_endor_condition_canAttackImperial(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_flags.isRebelPilot(player) || space_flags.isRebelHelperPilot(player))
-        {
-            return true;
-        }
-        return false;
+        return space_flags.isRebelPilot(player) || space_flags.isRebelHelperPilot(player);
     }
+
     public boolean station_endor_condition_canAttackRebel(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_flags.isImperialPilot(player) || space_flags.isImperialHelperPilot(player))
-        {
-            return true;
-        }
-        return false;
+        return space_flags.isImperialPilot(player) || space_flags.isImperialHelperPilot(player);
     }
+
     public boolean station_endor_condition_canHandleTier4(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_flags.hasCompletedTierThree(player);
     }
+
     public void station_endor_action_landStation3(obj_id player, obj_id npc) throws InterruptedException
     {
         space_content.landPlayer(player, npc, "Mos Espa Starport");
     }
+
     public void station_endor_action_fix25(obj_id player, obj_id npc) throws InterruptedException
     {
         space_crafting.doStationToShipRepairs(player, npc, 0.25f);
     }
+
     public void station_endor_action_fix50(obj_id player, obj_id npc) throws InterruptedException
     {
         space_crafting.doStationToShipRepairs(player, npc, 0.50f);
     }
+
     public void station_endor_action_fix75(obj_id player, obj_id npc) throws InterruptedException
     {
         space_crafting.doStationToShipRepairs(player, npc, 0.75f);
     }
+
     public void station_endor_action_fix100(obj_id player, obj_id npc) throws InterruptedException
     {
         space_crafting.doStationToShipRepairs(player, npc, 1.0f);
     }
+
     public void station_endor_action_landStation1(obj_id player, obj_id npc) throws InterruptedException
     {
         space_content.landPlayer(player, npc, "Research Outpost");
     }
+
     public void station_endor_action_landStation2(obj_id player, obj_id npc) throws InterruptedException
     {
         space_content.landPlayer(player, npc, "Smuggler Outpost");
     }
+
     public void station_endor_action_grantMissionOne(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "rescue", "stn_endor_irs_imp_tier3_1a");
         space_quest.grantQuest(player, "destroy_surpriseattack", "stn_endor_irs_imp_tier3_1a_sa");
     }
+
     public void station_endor_action_grantMissionTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "escort", "stn_endor_irs_imp_tier3_2a");
     }
+
     public void station_endor_action_grantMissionThree(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "patrol", "stn_endor_irs_imp_tier3_3a");
     }
+
     public void station_endor_action_grantDestroyDutyMission(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "destroy_duty", "stn_endor_irs_imp_tier4_1");
     }
+
     public void station_endor_action_grantEscortDutyMission(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "escort_duty", "stn_endor_irs_imp_tier4_1");
     }
+
     public void station_endor_action_grantImperialDuty4(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "destroy_duty", "endor_imperial_tier4");
     }
+
     public void station_endor_action_grantImperialDuty5(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "destroy_duty", "kessel_imperial_tier5");
     }
+
     public void station_endor_action_grantRebelDuty4(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "destroy_duty", "endor_rebel_tier4");
     }
+
     public void station_endor_action_grantRebelDuty5(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "destroy_duty", "kessel_rebel_tier5");
     }
+
     public void station_endor_action_grantBlackSunDuty4(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "destroy_duty", "endor_blacksun_tier4");
     }
+
     public void station_endor_action_grantBlackSunDuty5(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "destroy_duty", "endor_blacksun_tier5");
     }
+
     public void station_endor_action_grantImperialDuty5_2(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "destroy_duty", "endor_imperial_tier5");
     }
+
     public void station_endor_action_grantRebelDuty5_2(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "destroy_duty", "endor_rebel_tier5");
     }
+
     public String station_endor_tokenTO_tokenTO0001(obj_id player, obj_id npc) throws InterruptedException
     {
-        return new String();
+        return "";
     }
+
     public int station_endor_tokenDI_getStationRepairCost25(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_crafting.getStationRepairCost(player, npc, 0.25f);
     }
+
     public int station_endor_tokenDI_getStationRepairCost50(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_crafting.getStationRepairCost(player, npc, 0.50f);
     }
+
     public int station_endor_tokenDI_getStationRepairCost75(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_crafting.getStationRepairCost(player, npc, 0.75f);
     }
+
     public int station_endor_tokenDI_getStationRepairCost100(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_crafting.getStationRepairCost(player, npc, 1.0f);
     }
+
     public int station_endor_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_25759913"))
@@ -330,7 +345,7 @@ public class station_endor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_4a43e175");
@@ -339,7 +354,7 @@ public class station_endor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_endor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -371,7 +386,7 @@ public class station_endor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_fc27931b");
@@ -384,7 +399,7 @@ public class station_endor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_endor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -437,7 +452,7 @@ public class station_endor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_8ae30058");
@@ -462,7 +477,7 @@ public class station_endor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_endor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -494,7 +509,7 @@ public class station_endor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_90fc8440");
@@ -511,7 +526,7 @@ public class station_endor extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_endor.branchId");
                     prose_package pp = new prose_package();
@@ -547,7 +562,7 @@ public class station_endor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_203953bd");
@@ -564,7 +579,7 @@ public class station_endor extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_endor.branchId");
                     prose_package pp = new prose_package();
@@ -600,7 +615,7 @@ public class station_endor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_143e876a");
@@ -617,7 +632,7 @@ public class station_endor extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_endor.branchId");
                     prose_package pp = new prose_package();
@@ -653,7 +668,7 @@ public class station_endor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d9c39726");
@@ -670,7 +685,7 @@ public class station_endor extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_endor.branchId");
                     prose_package pp = new prose_package();
@@ -755,7 +770,7 @@ public class station_endor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_84");
@@ -796,7 +811,7 @@ public class station_endor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_endor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -813,6 +828,7 @@ public class station_endor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_endor_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_4a43e175"))
@@ -839,7 +855,7 @@ public class station_endor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_c6f610d3");
@@ -852,7 +868,7 @@ public class station_endor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_endor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -862,6 +878,7 @@ public class station_endor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_endor_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_c6f610d3"))
@@ -888,6 +905,7 @@ public class station_endor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_endor_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_fc27931b"))
@@ -913,6 +931,7 @@ public class station_endor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_endor_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_8ae30058"))
@@ -939,7 +958,7 @@ public class station_endor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d70dba34");
@@ -957,7 +976,7 @@ public class station_endor extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_endor.branchId");
                     prose_package pp = new prose_package();
@@ -994,7 +1013,7 @@ public class station_endor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_895d093");
@@ -1012,7 +1031,7 @@ public class station_endor extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_endor.branchId");
                     prose_package pp = new prose_package();
@@ -1049,7 +1068,7 @@ public class station_endor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_ebe2e111");
@@ -1067,7 +1086,7 @@ public class station_endor extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_endor.branchId");
                     prose_package pp = new prose_package();
@@ -1104,7 +1123,7 @@ public class station_endor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_43");
@@ -1122,7 +1141,7 @@ public class station_endor extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_endor.branchId");
                     prose_package pp = new prose_package();
@@ -1147,6 +1166,7 @@ public class station_endor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_endor_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_d70dba34"))
@@ -1172,6 +1192,7 @@ public class station_endor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_endor_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_895d093"))
@@ -1197,6 +1218,7 @@ public class station_endor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_endor_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_ebe2e111"))
@@ -1222,6 +1244,7 @@ public class station_endor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_endor_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_43"))
@@ -1247,6 +1270,7 @@ public class station_endor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_endor_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_90fc8440"))
@@ -1330,7 +1354,7 @@ public class station_endor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_25759913");
@@ -1371,7 +1395,7 @@ public class station_endor extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_endor.branchId");
                     prose_package pp = new prose_package();
@@ -1385,6 +1409,7 @@ public class station_endor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_endor_handleBranch26(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_25759913"))
@@ -1404,7 +1429,7 @@ public class station_endor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_4a43e175");
@@ -1413,7 +1438,7 @@ public class station_endor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_endor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1445,7 +1470,7 @@ public class station_endor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_fc27931b");
@@ -1458,7 +1483,7 @@ public class station_endor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_endor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1511,7 +1536,7 @@ public class station_endor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_8ae30058");
@@ -1536,7 +1561,7 @@ public class station_endor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_endor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1568,7 +1593,7 @@ public class station_endor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_90fc8440");
@@ -1585,7 +1610,7 @@ public class station_endor extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_endor.branchId");
                     prose_package pp = new prose_package();
@@ -1621,7 +1646,7 @@ public class station_endor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_203953bd");
@@ -1638,7 +1663,7 @@ public class station_endor extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_endor.branchId");
                     prose_package pp = new prose_package();
@@ -1674,7 +1699,7 @@ public class station_endor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_143e876a");
@@ -1691,7 +1716,7 @@ public class station_endor extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_endor.branchId");
                     prose_package pp = new prose_package();
@@ -1727,7 +1752,7 @@ public class station_endor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d9c39726");
@@ -1744,7 +1769,7 @@ public class station_endor extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_endor.branchId");
                     prose_package pp = new prose_package();
@@ -1829,7 +1854,7 @@ public class station_endor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_84");
@@ -1870,7 +1895,7 @@ public class station_endor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_endor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1887,6 +1912,7 @@ public class station_endor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_endor_handleBranch27(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_203953bd"))
@@ -1970,7 +1996,7 @@ public class station_endor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_25759913");
@@ -2011,7 +2037,7 @@ public class station_endor extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_endor.branchId");
                     prose_package pp = new prose_package();
@@ -2025,6 +2051,7 @@ public class station_endor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_endor_handleBranch29(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_25759913"))
@@ -2044,7 +2071,7 @@ public class station_endor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_4a43e175");
@@ -2053,7 +2080,7 @@ public class station_endor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_endor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2085,7 +2112,7 @@ public class station_endor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_fc27931b");
@@ -2098,7 +2125,7 @@ public class station_endor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_endor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2151,7 +2178,7 @@ public class station_endor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_8ae30058");
@@ -2176,7 +2203,7 @@ public class station_endor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_endor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2208,7 +2235,7 @@ public class station_endor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_90fc8440");
@@ -2225,7 +2252,7 @@ public class station_endor extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_endor.branchId");
                     prose_package pp = new prose_package();
@@ -2261,7 +2288,7 @@ public class station_endor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_203953bd");
@@ -2278,7 +2305,7 @@ public class station_endor extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_endor.branchId");
                     prose_package pp = new prose_package();
@@ -2314,7 +2341,7 @@ public class station_endor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_143e876a");
@@ -2331,7 +2358,7 @@ public class station_endor extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_endor.branchId");
                     prose_package pp = new prose_package();
@@ -2367,7 +2394,7 @@ public class station_endor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d9c39726");
@@ -2384,7 +2411,7 @@ public class station_endor extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_endor.branchId");
                     prose_package pp = new prose_package();
@@ -2469,7 +2496,7 @@ public class station_endor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_84");
@@ -2510,7 +2537,7 @@ public class station_endor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_endor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2527,6 +2554,7 @@ public class station_endor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_endor_handleBranch30(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_143e876a"))
@@ -2610,7 +2638,7 @@ public class station_endor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_25759913");
@@ -2651,7 +2679,7 @@ public class station_endor extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_endor.branchId");
                     prose_package pp = new prose_package();
@@ -2665,6 +2693,7 @@ public class station_endor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_endor_handleBranch32(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_25759913"))
@@ -2684,7 +2713,7 @@ public class station_endor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_4a43e175");
@@ -2693,7 +2722,7 @@ public class station_endor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_endor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2725,7 +2754,7 @@ public class station_endor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_fc27931b");
@@ -2738,7 +2767,7 @@ public class station_endor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_endor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2791,7 +2820,7 @@ public class station_endor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_8ae30058");
@@ -2816,7 +2845,7 @@ public class station_endor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_endor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2848,7 +2877,7 @@ public class station_endor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_90fc8440");
@@ -2865,7 +2894,7 @@ public class station_endor extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_endor.branchId");
                     prose_package pp = new prose_package();
@@ -2901,7 +2930,7 @@ public class station_endor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_203953bd");
@@ -2918,7 +2947,7 @@ public class station_endor extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_endor.branchId");
                     prose_package pp = new prose_package();
@@ -2954,7 +2983,7 @@ public class station_endor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_143e876a");
@@ -2971,7 +3000,7 @@ public class station_endor extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_endor.branchId");
                     prose_package pp = new prose_package();
@@ -3007,7 +3036,7 @@ public class station_endor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d9c39726");
@@ -3024,7 +3053,7 @@ public class station_endor extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_endor.branchId");
                     prose_package pp = new prose_package();
@@ -3109,7 +3138,7 @@ public class station_endor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_84");
@@ -3150,7 +3179,7 @@ public class station_endor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_endor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3167,6 +3196,7 @@ public class station_endor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_endor_handleBranch33(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_d9c39726"))
@@ -3209,7 +3239,7 @@ public class station_endor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_96ff1c97");
@@ -3226,7 +3256,7 @@ public class station_endor extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.station_endor.branchId");
                     prose_package pp = new prose_package();
@@ -3240,6 +3270,7 @@ public class station_endor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_endor_handleBranch35(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_96ff1c97"))
@@ -3268,6 +3299,7 @@ public class station_endor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int station_endor_handleBranch38(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_84"))
@@ -3370,18 +3402,21 @@ public class station_endor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         setObjVar(self, "convo.appearance", "object/mobile/space_comm_station_endor.iff");
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         setObjVar(self, "convo.appearance", "object/mobile/space_comm_station_endor.iff");
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -3390,18 +3425,21 @@ public class station_endor extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.station_endor");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -3479,7 +3517,7 @@ public class station_endor extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_25759913");
@@ -3515,7 +3553,7 @@ public class station_endor extends script.base_script
                 utils.setScriptVar(player, "conversation.station_endor.branchId", 2);
                 npcStartConversation(player, npc, "station_endor", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -3524,6 +3562,7 @@ public class station_endor extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("station_endor"))

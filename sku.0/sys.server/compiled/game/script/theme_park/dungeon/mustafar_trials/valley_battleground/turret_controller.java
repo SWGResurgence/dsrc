@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.mustafar_trials.valley_battleground;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.sui;
 import script.library.utils;
@@ -8,27 +14,24 @@ import java.util.Vector;
 
 public class turret_controller extends script.base_script
 {
-    public turret_controller()
-    {
-    }
     public static final String STF = "mustafar/valley_battlefield";
     public static final string_id fire = new string_id(STF, "fire");
     public static final string_id assemble = new string_id(STF, "assemble_turret");
     public static final string_id pickup = new string_id(STF, "pick_up_control_device");
-    public static final String[] turretList = 
-    {
-        "object/tangible/dungeon/mustafar/valley_battlefield/turret_plasma.iff",
-        "object/tangible/dungeon/mustafar/valley_battlefield/turret_concussion.iff",
-        "object/tangible/dungeon/mustafar/valley_battlefield/turret_energy_burst.iff",
-        "object/tangible/dungeon/mustafar/valley_battlefield/turret_null_energy.iff"
-    };
-    public static final string_id[] turretOptions = 
-    {
-        new string_id(STF, "plasma_turret"),
-        new string_id(STF, "concussion_turret"),
-        new string_id(STF, "energy_burst"),
-        new string_id(STF, "null_energy")
-    };
+    public static final String[] turretList =
+            {
+                    "object/tangible/dungeon/mustafar/valley_battlefield/turret_plasma.iff",
+                    "object/tangible/dungeon/mustafar/valley_battlefield/turret_concussion.iff",
+                    "object/tangible/dungeon/mustafar/valley_battlefield/turret_energy_burst.iff",
+                    "object/tangible/dungeon/mustafar/valley_battlefield/turret_null_energy.iff"
+            };
+    public static final string_id[] turretOptions =
+            {
+                    new string_id(STF, "plasma_turret"),
+                    new string_id(STF, "concussion_turret"),
+                    new string_id(STF, "energy_burst"),
+                    new string_id(STF, "null_energy")
+            };
     public static final string_id setSUIInterest_d = new string_id(STF, "set_interest_d");
     public static final string_id setSUIInterest_t = new string_id(STF, "set_interest_t");
     public static final string_id showTargetSUI_d = new string_id(STF, "show_targets_d");
@@ -41,12 +44,17 @@ public class turret_controller extends script.base_script
     public static final String turretID = "activeTurret";
     public static final String constructorID = "constructionDroid";
     public static final boolean doLogging = false;
+    public turret_controller()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         int root_menu = mi.addRootMenu(menu_info_types.ITEM_USE, new string_id(STF, "start"));
         int menu = mi.addRootMenu(menu_info_types.ITEM_USE_SELF, new string_id(STF, "reset"));
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)
@@ -65,14 +73,12 @@ public class turret_controller extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean hasBeenPickedUp(obj_id self) throws InterruptedException
     {
-        if (hasObjVar(self, "inWorld"))
-        {
-            return false;
-        }
-        return true;
+        return !hasObjVar(self, "inWorld");
     }
+
     public boolean isTurretActive(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, turretID))
@@ -80,12 +86,9 @@ public class turret_controller extends script.base_script
             return false;
         }
         obj_id activeTurret = getObjIdObjVar(self, turretID);
-        if (isIdValid(activeTurret))
-        {
-            return true;
-        }
-        return false;
+        return isIdValid(activeTurret);
     }
+
     public obj_id getTurret(obj_id player, obj_id controller) throws InterruptedException
     {
         if (!isTurretActive(controller))
@@ -103,19 +106,18 @@ public class turret_controller extends script.base_script
         }
         return activeTurret;
     }
+
     public boolean isTurretDisabled(obj_id controller) throws InterruptedException
     {
-        if (hasObjVar(controller, "turretDisabled"))
-        {
-            return true;
-        }
-        return false;
+        return hasObjVar(controller, "turretDisabled");
     }
+
     public int turretDisabled(obj_id self, dictionary params) throws InterruptedException
     {
         setObjVar(self, "turretDisabled", true);
         return SCRIPT_CONTINUE;
     }
+
     public int builtTurret(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id turret = params.getObjId("turretId");
@@ -126,14 +128,17 @@ public class turret_controller extends script.base_script
         setObjVar(self, turretID, turret);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public void regenerateInPlayerInventory(obj_id player, obj_id self) throws InterruptedException
     {
         obj_id turretController = createObjectInInventoryAllowOverload(controllerObject, player);
@@ -147,6 +152,7 @@ public class turret_controller extends script.base_script
         copyObjVar(self, turretController, constructorID);
         destroyObject(self);
     }
+
     public void fireTurret(obj_id player, obj_id controller) throws InterruptedException
     {
         obj_id target = getTarget(player);
@@ -178,6 +184,7 @@ public class turret_controller extends script.base_script
         doLogging("fireTurret", "Sending command to direct fire to turret(" + turret + "): Player(" + getName(player) + ") from controller(" + controller + ") at target(" + getName(target) + ")");
         messageTo(turret, "doFireAction", dict, 0, false);
     }
+
     public void presentAssembleSUI(obj_id player, obj_id self) throws InterruptedException
     {
         String[] turretTypes = new String[4];
@@ -187,6 +194,7 @@ public class turret_controller extends script.base_script
         turretTypes[3] = "@" + turretOptions[3];
         sui.listbox(self, player, "@" + setSUIInterest_d, sui.OK_CANCEL, "@" + setSUIInterest_t, turretTypes, "handleAssembleTurret", true);
     }
+
     public int handleAssembleTurret(obj_id self, dictionary params) throws InterruptedException
     {
         int idx = sui.getListboxSelectedRow(params);
@@ -240,6 +248,7 @@ public class turret_controller extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public obj_id getConstructionDroid(obj_id controller) throws InterruptedException
     {
         if (!hasObjVar(controller, constructorID))
@@ -255,6 +264,7 @@ public class turret_controller extends script.base_script
         }
         return constructor;
     }
+
     public void presentTargetingSUI(obj_id player, obj_id controller) throws InterruptedException
     {
         obj_id turret = getTurret(player, controller);
@@ -271,10 +281,14 @@ public class turret_controller extends script.base_script
         obj_id[] targets = getCreaturesInRange(turret, 40);
         Vector validTargets = new Vector();
         validTargets.setSize(0);
-        for (obj_id target : targets) {
-            if (!isPlayer(target)) {
-                if (!isDead(target)) {
-                    if (canSee(turret, target)) {
+        for (obj_id target : targets)
+        {
+            if (!isPlayer(target))
+            {
+                if (!isDead(target))
+                {
+                    if (canSee(turret, target))
+                    {
                         utils.addElement(validTargets, target);
                     }
                 }
@@ -304,6 +318,7 @@ public class turret_controller extends script.base_script
         }
         sui.listbox(controller, player, "@" + showTargetSUI_d, sui.OK_CANCEL, "@" + showTargetSUI_t, targetNames, "handleChooseTarget", true);
     }
+
     public int handleChooseTarget(obj_id self, dictionary params) throws InterruptedException
     {
         int idx = sui.getListboxSelectedRow(params);
@@ -344,6 +359,7 @@ public class turret_controller extends script.base_script
         messageTo(turret, "doFireAction", dict, 0, false);
         return SCRIPT_CONTINUE;
     }
+
     public void doLogging(String section, String message) throws InterruptedException
     {
         if (doLogging)

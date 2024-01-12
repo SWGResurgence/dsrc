@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.combat_engine;
 import script.combat_engine.buff_data;
 import script.deltadictionary;
@@ -361,11 +367,13 @@ public class buff extends script.base_script
         {
             stack = 1;
         }
+        resurgence.logEtherealAction(target, "Buff is being applied to " + target + " by " + owner + " with stack " + stack + " and duration " + duration + "");
         return _addBuff(target, owner, nameCrc, duration, customValue, stack);
     }
 
     public static boolean removeBuff(obj_id target, String name) throws InterruptedException
     {
+        resurgence.logEtherealAction(target, "Buff is being removed from " + target + " with name " + name + "");
         return removeBuff(target, getStringCrc(name.toLowerCase()));
     }
 
@@ -379,6 +387,7 @@ public class buff extends script.base_script
                 success = false;
             }
         }
+        resurgence.logEtherealAction(target, "Buffs are being removed from " + target + " with names " + names + "");
         return success;
     }
 
@@ -392,6 +401,7 @@ public class buff extends script.base_script
                 success = false;
             }
         }
+        resurgence.logEtherealAction(target, "Buffs are being removed from " + target + " with names " + names + "");
         return success;
     }
 
@@ -410,6 +420,7 @@ public class buff extends script.base_script
             return false;
         }
         utils.removeScriptVar(target, "buffOwner." + nameCrc);
+        resurgence.logEtherealAction(target, "Buff is being removed from " + target + " with nameCrc " + nameCrc + "");
         return _removeBuff(target, nameCrc);
     }
 
@@ -470,7 +481,9 @@ public class buff extends script.base_script
                 }
             }
             _removeBuff(target, b);
+            resurgence.logEtherealAction(target, "Buff is being removed from " + target + " with buff " + b + "");
         }
+        resurgence.logEtherealAction(target, "All buffs are being removed from " + target + "");
         return true;
     }
 

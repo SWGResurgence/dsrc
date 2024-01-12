@@ -1,5 +1,11 @@
 package script.systems.missions.dynamic;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.obj_id;
 import script.string_id;
@@ -22,7 +28,7 @@ public class mission_survey extends script.systems.missions.base.mission_dynamic
         attribs[i] = "@" + new string_id(SID_SURVEY_RESOURCE_NAMES_TABLE, resource);
         ++i;
         names[i] = "@" + new string_id("ui_mission", "attribs_efficiency");
-        attribs[i] = "" + getIntObjVar(self, OBJVAR_SURVEY_MISSION_EFFECIENCY);
+        attribs[i] = String.valueOf(getIntObjVar(self, OBJVAR_SURVEY_MISSION_EFFECIENCY));
         ++i;
         return SCRIPT_CONTINUE;
     }

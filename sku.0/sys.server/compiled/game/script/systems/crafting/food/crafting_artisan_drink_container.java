@@ -1,5 +1,11 @@
 package script.systems.crafting.food;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.draft_schematic;
 import script.library.craftinglib;
@@ -20,6 +26,7 @@ public class crafting_artisan_drink_container extends script.systems.crafting.cr
             {
                     "general_experimentation"
             };
+
     public crafting_artisan_drink_container()
     {
     }

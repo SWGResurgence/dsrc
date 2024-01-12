@@ -1,5 +1,11 @@
 package script.theme_park.restuss_event;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.chat;
 import script.obj_id;
@@ -7,9 +13,6 @@ import script.string_id;
 
 public class restuss_herald_crier extends script.base_script
 {
-    public restuss_herald_crier()
-    {
-    }
     public static final String STF = "restuss_event/stage_one_herald";
     public static final string_id ST_ONE = new string_id(STF, "stormtrooper_01");
     public static final string_id ST_TWO = new string_id(STF, "stormtrooper_02");
@@ -20,16 +23,22 @@ public class restuss_herald_crier extends script.base_script
     public static final string_id GUY_ONE = new string_id(STF, "guy_01");
     public static final string_id GUY_TWO = new string_id(STF, "guy_02");
     public static final string_id GUY_THREE = new string_id(STF, "guy_03");
+    public restuss_herald_crier()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "startCheck", null, 5, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "startCheck", null, 5, false);
         return SCRIPT_CONTINUE;
     }
+
     public int startCheck(obj_id self, dictionary params) throws InterruptedException
     {
         int npcType = getIntObjVar(self, "restussHerald");
@@ -50,6 +59,7 @@ public class restuss_herald_crier extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleHeraldST(obj_id self, dictionary params) throws InterruptedException
     {
         int chatChoice = rand(1, 3);
@@ -68,6 +78,7 @@ public class restuss_herald_crier extends script.base_script
         messageTo(self, "handleHeraldST", null, 60, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleHeraldReb(obj_id self, dictionary params) throws InterruptedException
     {
         int chatChoice = rand(1, 3);
@@ -86,6 +97,7 @@ public class restuss_herald_crier extends script.base_script
         messageTo(self, "handleHeraldReb", null, 60, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleHeraldGuy(obj_id self, dictionary params) throws InterruptedException
     {
         int chatChoice = rand(1, 3);

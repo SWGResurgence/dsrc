@@ -1,5 +1,11 @@
 package script.systems.crafting.droid;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.callable;
 import script.library.pet_lib;
 import script.library.utils;
@@ -23,7 +29,7 @@ public class droid_battery extends script.base_script
         if (getCount(self) > 1)
         {
             names[idx] = "charges";
-            attribs[idx] = "" + count;
+            attribs[idx] = String.valueOf(count);
             idx++;
             if (idx >= names.length)
             {

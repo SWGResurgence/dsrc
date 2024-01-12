@@ -1,14 +1,22 @@
 package script.quest.township;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.instance;
 import script.*;
 
 public class ig88_instance_exit extends script.base_script
 {
+    public static final String INSTANCE_NAME = "heroic_ig88";
+
     public ig88_instance_exit()
     {
     }
-    public static final String INSTANCE_NAME = "heroic_ig88";
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (isDead(player) || isIncapacitated(player))
@@ -20,12 +28,13 @@ public class ig88_instance_exit extends script.base_script
         {
             mid.setServerNotify(true);
         }
-        else 
+        else
         {
             mi.addRootMenu(menu_info_types.ITEM_USE, new string_id("ui_radial", "item_use"));
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (isDead(player) || isIncapacitated(player))

@@ -1,5 +1,11 @@
 package script.systems.instance;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.location;
@@ -46,7 +52,7 @@ public class instance_manager extends script.base_script
             dict.put("position_z", loc.z);
             name = instance.getInstanceName(self) + "_" + self;
             obj_id planetObject = getPlanetByName(getLocation(self).area);
-            utils.setScriptVar(planetObject, "" + locations.getBuildoutAreaName(self) + "_" + locations.getBuildoutAreaRow(self), self);
+            utils.setScriptVar(planetObject, locations.getBuildoutAreaName(self) + "_" + locations.getBuildoutAreaRow(self), self);
             replaceClusterWideData(manage_name, name, dict, true, lock_key);
         }
         releaseClusterWideDataLock(manage_name, lock_key);
@@ -216,7 +222,7 @@ public class instance_manager extends script.base_script
         if (numPlayers < minPlayers)
         {
             boolean godPresent = false;
-            if (players != null && players.length > 0)
+            if (players != null)
             {
                 for (obj_id player : players)
                 {

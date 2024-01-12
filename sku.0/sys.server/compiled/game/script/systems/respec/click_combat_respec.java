@@ -1,5 +1,11 @@
 package script.systems.respec;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.obj_id;
 
 public class click_combat_respec extends script.base_script

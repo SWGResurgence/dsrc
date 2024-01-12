@@ -9,4 +9,4 @@
 objectName = "static_item_n" "item_gcw_imperial_stormtrooper_belt"
 detailedDescription = "static_item_d" "item_gcw_imperial_stormtrooper_belt"
 appearanceFilename = "appearance/armor_stormtrooper_utility_belt_gcw_f.sat"
-gameObjectType = GOT_armor_misc
+

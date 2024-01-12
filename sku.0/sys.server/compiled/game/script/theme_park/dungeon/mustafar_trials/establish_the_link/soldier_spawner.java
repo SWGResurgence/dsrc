@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.mustafar_trials.establish_the_link;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.create;
 import script.library.trial;
@@ -11,22 +17,24 @@ import java.util.Vector;
 
 public class soldier_spawner extends script.base_script
 {
-    public soldier_spawner()
-    {
-    }
     public static final String BUG_COUNT = "spawning.bugCount";
     public static final int BUG_MAX = 3;
     public static final String SOLDIER = "som_link_lava_beetle_soldier";
     public static final boolean LOGGING = false;
+    public soldier_spawner()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "spawnNewBug", null, 5, false);
         locatePatrolPoints(self);
         return SCRIPT_CONTINUE;
     }
+
     public void locatePatrolPoints(obj_id self) throws InterruptedException
     {
-        obj_id contents[] = utils.getSharedContainerObjects(self);
+        obj_id[] contents = utils.getSharedContainerObjects(self);
         if (contents == null || contents.length == 0)
         {
             doLogging("findWayPoints", "Contents list was empty, exiting");
@@ -34,8 +42,10 @@ public class soldier_spawner extends script.base_script
         }
         Vector waypoints = new Vector();
         waypoints.setSize(0);
-        for (obj_id content : contents) {
-            if (utils.hasScriptVar(content, trial.WP_NAME)) {
+        for (obj_id content : contents)
+        {
+            if (utils.hasScriptVar(content, trial.WP_NAME))
+            {
                 utils.addElement(waypoints, getLocation(content));
             }
         }
@@ -57,6 +67,7 @@ public class soldier_spawner extends script.base_script
         }
         utils.setScriptVar(self, "patrolPoints", patrolPoints);
     }
+
     public int spawnNewBug(obj_id self, dictionary params) throws InterruptedException
     {
         int randX = rand(-6, 6);
@@ -75,6 +86,7 @@ public class soldier_spawner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int incrementBugCount(obj_id self) throws InterruptedException
     {
         int count = 0;
@@ -86,6 +98,7 @@ public class soldier_spawner extends script.base_script
         utils.setScriptVar(self, BUG_COUNT, count);
         return count;
     }
+
     public int decrementBugCount(obj_id self) throws InterruptedException
     {
         int count = 0;
@@ -101,6 +114,7 @@ public class soldier_spawner extends script.base_script
         utils.setScriptVar(self, BUG_COUNT, count);
         return count;
     }
+
     public boolean canSpawnMoreBugs(obj_id self) throws InterruptedException
     {
         if (!utils.hasScriptVar(self, BUG_COUNT))
@@ -115,6 +129,7 @@ public class soldier_spawner extends script.base_script
         doLogging("canSpawnMoreBugs", "Bug max exceeded, stop spawning bugs");
         return false;
     }
+
     public int soldierDied(obj_id self, dictionary params) throws InterruptedException
     {
         decrementBugCount(self);
@@ -123,12 +138,13 @@ public class soldier_spawner extends script.base_script
             messageTo(self, "spawnNewBug", null, 0, false);
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             doLogging("soldierDied", "Cannot spawn more bugs because limit has been reached");
             return SCRIPT_CONTINUE;
         }
     }
+
     public void doLogging(String section, String message) throws InterruptedException
     {
         if (LOGGING || trial.UPLINK_LOGGING)

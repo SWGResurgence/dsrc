@@ -1,5 +1,11 @@
 package script.theme_park.dungeon;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.obj_id;
 
 public class monster_maker_tracker extends script.base_script
@@ -7,6 +13,7 @@ public class monster_maker_tracker extends script.base_script
     public monster_maker_tracker()
     {
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "parent"))

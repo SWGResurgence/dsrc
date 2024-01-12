@@ -1,5 +1,11 @@
 package script.theme_park.rebel;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.location;
 import script.obj_id;
@@ -9,6 +15,7 @@ public class rtp_han_solo_banners extends script.base_script
     public rtp_han_solo_banners()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "imperialBannerSpawned"))
@@ -25,6 +32,7 @@ public class rtp_han_solo_banners extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "imperialBannerSpawned"))
@@ -41,6 +49,7 @@ public class rtp_han_solo_banners extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int doImperialBannerEvent(obj_id self, dictionary params) throws InterruptedException
     {
         if (!hasObjVar(self, "imperialBannerSpawned"))
@@ -55,6 +64,7 @@ public class rtp_han_solo_banners extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int doRebelBannerEvent(obj_id self, dictionary params) throws InterruptedException
     {
         if (!hasObjVar(self, "rebelBannerSpawned"))
@@ -69,6 +79,7 @@ public class rtp_han_solo_banners extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int spawnDestroyed(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "rebelBannerSpawned"))
@@ -83,6 +94,7 @@ public class rtp_han_solo_banners extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean canSpawnByConfigSetting() throws InterruptedException
     {
         String disableSpawners = getConfigSetting("GameServer", "disableAreaSpawners");
@@ -90,10 +102,6 @@ public class rtp_han_solo_banners extends script.base_script
         {
             return true;
         }
-        if (disableSpawners.equals("true") || disableSpawners.equals("1"))
-        {
-            return false;
-        }
-        return true;
+        return !disableSpawners.equals("true") && !disableSpawners.equals("1");
     }
 }

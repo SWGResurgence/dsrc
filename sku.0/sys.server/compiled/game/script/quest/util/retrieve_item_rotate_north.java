@@ -1,5 +1,11 @@
 package script.quest.util;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.groundquests;
 import script.library.utils;
@@ -12,16 +18,19 @@ public class retrieve_item_rotate_north extends script.base_script
     public retrieve_item_rotate_north()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "handleRecordOriginalRotation", null, 3, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "handleRecordOriginalRotation", null, 3, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleRecordOriginalRotation(obj_id self, dictionary params) throws InterruptedException
     {
         if (!hasObjVar(self, "orignalYaw"))
@@ -31,6 +40,7 @@ public class retrieve_item_rotate_north extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         location here = getLocation(player);
@@ -73,6 +83,7 @@ public class retrieve_item_rotate_north extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleRestoreOriginalRotation(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "orignalYaw"))

@@ -1,5 +1,11 @@
 package script.ai;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -8,26 +14,31 @@ public class ai_combat extends script.base_script
     public ai_combat()
     {
     }
+
     public static void doAttack(obj_id ai, obj_id target) throws InterruptedException
     {
         LOGC(aiLoggingEnabled(ai), "debug_ai", "ai_combat::doAttack() ai(" + ai + ")");
         startCombat(ai, target);
     }
+
     public static void attackBestTarget(obj_id ai, obj_id target) throws InterruptedException
     {
         LOGC(aiLoggingEnabled(ai), "debug_ai", "ai_combat::attackBestTarget() ai(" + ai + ")");
         startCombat(ai, target);
     }
+
     public static void equipRangedWeapon(obj_id ai) throws InterruptedException
     {
         LOGC(aiLoggingEnabled(ai), "debug_ai", "ai_combat::equipRangedWeapon() ai(" + ai + ")");
         aiEquipPrimaryWeapon(ai);
     }
+
     public static void equipMeleeWeapon(obj_id ai) throws InterruptedException
     {
         LOGC(aiLoggingEnabled(ai), "debug_ai", "ai_combat::equipMeleeWeapon() ai(" + ai + ")");
         aiEquipPrimaryWeapon(ai);
     }
+
     public static boolean goodFaction(obj_id npc, obj_id target) throws InterruptedException
     {
         PROFILER_START("goodFaction");
@@ -41,7 +52,7 @@ public class ai_combat extends script.base_script
             PROFILER_STOP("goodFaction");
             return false;
         }
-        else 
+        else
         {
             String npcFaction = factions.getFaction(npc);
             String targetFaction = factions.getFaction(target);
@@ -62,6 +73,7 @@ public class ai_combat extends script.base_script
         PROFILER_STOP("goodFaction");
         return false;
     }
+
     public static boolean isGoodTarget(obj_id npc, obj_id target) throws InterruptedException
     {
         if (!isIdValid(target))
@@ -113,6 +125,7 @@ public class ai_combat extends script.base_script
         }
         return true;
     }
+
     public static void moveRandom(obj_id npc, obj_id target) throws InterruptedException
     {
         if (isIndoors(npc))
@@ -148,7 +161,7 @@ public class ai_combat extends script.base_script
         {
             npcLoc.x -= rand(5, 15);
         }
-        else 
+        else
         {
             npcLoc.x += rand(5, 15);
         }
@@ -156,7 +169,7 @@ public class ai_combat extends script.base_script
         {
             npcLoc.z -= rand(5, 15);
         }
-        else 
+        else
         {
             npcLoc.z += rand(5, 15);
         }
@@ -167,14 +180,17 @@ public class ai_combat extends script.base_script
         PROFILER_STOP("pathTo");
         PROFILER_STOP("moveRandom");
     }
+
     public static void setCombatLocation(obj_id npc) throws InterruptedException
     {
         setObjVar(npc, "ai.combat.combatStartLoc", getLocation(npc));
     }
+
     public static location getCombatLocation(obj_id npc) throws InterruptedException
     {
         return getLocationObjVar(npc, "ai.combat.combatStartLoc");
     }
+
     public static boolean attackInCircleFormation(obj_id npc, obj_id target) throws InterruptedException
     {
         if (!hasObjVar(npc, "ai.inFormation") && (!hasObjVar(npc, "ai.combat.tempFormationCombat")))
@@ -205,6 +221,7 @@ public class ai_combat extends script.base_script
         setObjVar(npc, "ai.combat.moveMode", ai_combat_movement.MOVEMODE_FOLLOW_FORMATION);
         return true;
     }
+
     public static boolean hasRangedWeapon(obj_id npc) throws InterruptedException
     {
         obj_id weapon = getCurrentWeapon(npc);
@@ -212,6 +229,7 @@ public class ai_combat extends script.base_script
         int weaponCat = combat.getWeaponCategory(weaponType);
         return (weaponCat == combat.RANGED_WEAPON);
     }
+
     public static void aiCombatFlee(obj_id npc, obj_id target, float minRange, float maxRange) throws InterruptedException
     {
         if (!isIdValid(npc) || !exists(npc))
@@ -241,7 +259,7 @@ public class ai_combat extends script.base_script
         {
             destLoc.x += rand(minRange, maxRange);
         }
-        else 
+        else
         {
             destLoc.x -= rand(minRange, maxRange);
         }
@@ -249,12 +267,13 @@ public class ai_combat extends script.base_script
         {
             destLoc.z += rand(minRange, maxRange);
         }
-        else 
+        else
         {
             destLoc.z -= rand(minRange, maxRange);
         }
         pathTo(npc, destLoc);
     }
+
     public static boolean switchToFormationCombat(obj_id npc, obj_id target) throws InterruptedException
     {
         if (hasObjVar(npc, "ai.combat.tempFormationCombat"))
@@ -295,6 +314,7 @@ public class ai_combat extends script.base_script
         }
         return true;
     }
+
     public static boolean doHealing(obj_id npc, obj_id target) throws InterruptedException
     {
         utils.setScriptVar(npc, "ai.nextHeal", (getGameTime() + 20));
@@ -321,25 +341,32 @@ public class ai_combat extends script.base_script
         }
         return true;
     }
+
     public static obj_id getHealTarget(obj_id npc, obj_id[] myFriends) throws InterruptedException
     {
-        for (obj_id myFriend : myFriends) {
-            if (getDistance(npc, myFriend) < 60.0f) {
+        for (obj_id myFriend : myFriends)
+        {
+            if (getDistance(npc, myFriend) < 60.0f)
+            {
                 int healthDamage = getAttribDamage(myFriend, HEALTH);
-                if (healthDamage < (getMaxAttrib(myFriend, HEALTH) / 2)) {
+                if (healthDamage < (getMaxAttrib(myFriend, HEALTH) / 2))
+                {
                     healthDamage = 0;
                 }
                 int actionDamage = getAttribDamage(myFriend, ACTION);
-                if (actionDamage < (getMaxAttrib(myFriend, ACTION) / 2)) {
+                if (actionDamage < (getMaxAttrib(myFriend, ACTION) / 2))
+                {
                     actionDamage = 0;
                 }
-                if (healthDamage != 0 || actionDamage != 0) {
+                if (healthDamage != 0 || actionDamage != 0)
+                {
                     return myFriend;
                 }
             }
         }
         return null;
     }
+
     public static void executeHealingMove(obj_id npc, obj_id target) throws InterruptedException
     {
         if (!isIdValid(npc) || ai_lib.aiIsDead(npc))
@@ -378,7 +405,7 @@ public class ai_combat extends script.base_script
         {
             doAnimationAction(npc, "heal_self");
         }
-        else 
+        else
         {
             doAnimationAction(npc, "heal_other");
         }
@@ -386,7 +413,8 @@ public class ai_combat extends script.base_script
         obj_id[] players = getAllPlayers(loc, 45.0f);
         if (players != null)
         {
-            for (obj_id player : players) {
+            for (obj_id player : players)
+            {
                 playClientEffectLoc(player, "clienteffect/healing_healdamage.cef", loc, 0);
             }
         }
@@ -397,7 +425,7 @@ public class ai_combat extends script.base_script
         {
             addToAttrib(target, HEALTH, healAmt);
         }
-        else 
+        else
         {
             setAttrib(target, HEALTH, getMaxAttrib(target, HEALTH));
         }
@@ -405,12 +433,13 @@ public class ai_combat extends script.base_script
         {
             addToAttrib(target, ACTION, healAmt);
         }
-        else 
+        else
         {
             setAttrib(target, ACTION, getMaxAttrib(target, ACTION));
         }
         utils.setScriptVar(npc, "ai.combat.movePause", 2);
     }
+
     public static boolean fleeFromHouse(obj_id npc, obj_id target) throws InterruptedException
     {
         if (!isIdValid(npc) || !isIdValid(target))
@@ -433,7 +462,7 @@ public class ai_combat extends script.base_script
         }
         obj_id myCell = myLoc.cell;
         obj_id yourCell = yourLoc.cell;
-        if (isIdValid(myCell) == false && isIdValid(yourCell))
+        if (!isIdValid(myCell) && isIdValid(yourCell))
         {
             int niche = ai_lib.aiGetNiche(npc);
             if (niche == NICHE_NPC || niche == NICHE_DROID || niche == NICHE_ANDROID)
@@ -451,7 +480,7 @@ public class ai_combat extends script.base_script
             {
                 if (getHateTarget(target) == npc)
                 {
-                    
+
                 }
                 queueCommand(target, (1098448234), npc, "", COMMAND_PRIORITY_IMMEDIATE);
             }
@@ -459,6 +488,7 @@ public class ai_combat extends script.base_script
         }
         return false;
     }
+
     public static boolean doInteriorPathFinding(obj_id npc, obj_id target) throws InterruptedException
     {
         location npcLoc = getLocation(npc);
@@ -468,11 +498,13 @@ public class ai_combat extends script.base_script
         }
         return (getDistance(npc, target) > 6.0f);
     }
+
     public static boolean isIndoors(obj_id npc) throws InterruptedException
     {
         location npcLoc = getLocation(npc);
         return (isIdValid(npcLoc.cell));
     }
+
     public static boolean isInCombat(obj_id ai) throws InterruptedException
     {
         boolean result = (getState(ai, STATE_COMBAT) == 1);

@@ -1,5 +1,11 @@
 package script.theme_park.restuss_event;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.factions;
 import script.library.groundquests;
@@ -10,22 +16,25 @@ import script.string_id;
 
 public class destroy_boss_imperial extends script.base_script
 {
-    public destroy_boss_imperial()
-    {
-    }
     public static final String VOLUME_NAME = "quest_area";
     public static final string_id AREA_FOUND = new string_id("restuss_event/object", "right_area");
     public static final string_id AREA_FOUND_NO_SPAWN = new string_id("restuss_event/object", "right_area_wrong_time");
+    public destroy_boss_imperial()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         createTriggerVolume(VOLUME_NAME, 10.0f, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         createTriggerVolume(VOLUME_NAME, 10.0f, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id breacher) throws InterruptedException
     {
         location spawnerLocation = getLocation(self);
@@ -49,6 +58,7 @@ public class destroy_boss_imperial extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int test(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id waveSpawner = createObject("object/tangible/theme_park/invisible_object.iff", getLocation(self));
@@ -58,6 +68,7 @@ public class destroy_boss_imperial extends script.base_script
         messageTo(self, "readyToSpawn", null, 300.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int readyToSpawn(obj_id self, dictionary params) throws InterruptedException
     {
         utils.removeScriptVar(self, "spawnedAlready");

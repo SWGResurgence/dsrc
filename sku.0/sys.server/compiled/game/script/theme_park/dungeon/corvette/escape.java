@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.corvette;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.player_structure;
 import script.library.space_dungeon;
@@ -9,16 +15,19 @@ import script.string_id;
 
 public class escape extends script.terminal.base.base_terminal
 {
+    public static final String MSGS = "dungeon/corvette";
+
     public escape()
     {
     }
-    public static final String MSGS = "dungeon/corvette";
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setName(self, "Escape Pod Controls");
         createTriggerVolume("escape_pod", 3, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)
@@ -29,7 +38,7 @@ public class escape extends script.terminal.base.base_terminal
                 messageTo(player, "rewardTime", null, 3, false);
                 setObjVar(player, "corl_corvette.got_reward", 1);
             }
-            else 
+            else
             {
                 CustomerServiceLog("DUNGEON_CorellianCorvette", "*Corvette Escaped: %TU has left the Corvette via the escape pod.", player);
                 space_dungeon.ejectPlayerFromDungeon(player);
@@ -41,6 +50,7 @@ public class escape extends script.terminal.base.base_terminal
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cleanOutDungeon(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id top = getTopMostContainer(self);
@@ -88,6 +98,7 @@ public class escape extends script.terminal.base.base_terminal
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String volume, obj_id player) throws InterruptedException
     {
         if (volume.equals("escape_pod"))
@@ -97,6 +108,7 @@ public class escape extends script.terminal.base.base_terminal
         }
         return SCRIPT_CONTINUE;
     }
+
     public int playersLeavingDungeon(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id dungeon = getTopMostContainer(self);

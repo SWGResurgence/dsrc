@@ -1,19 +1,26 @@
 package script.quest.som;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.groundquests;
 
 public class bleach_vat extends script.base_script
 {
-    public bleach_vat()
-    {
-    }
     public static final String STF = "som/som_quest";
     public static final string_id BLEACH_SKULL = new string_id(STF, "jundak_skull_bleach");
     public static final string_id GET_SKULL = new string_id(STF, "jundak_skull_retrieve");
     public static final string_id BLEACH_DONE = new string_id(STF, "jundak_skull_bleach_done");
     public static final string_id SKULL_VAT = new string_id(STF, "jundak_skull_vat");
     public static final string_id REMOVE_SKULL = new string_id(STF, "jundak_skull_remove");
+    public bleach_vat()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (groundquests.isTaskActive(player, "som_jundak_skull", "jundak_skull_two"))
@@ -38,6 +45,7 @@ public class bleach_vat extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)
@@ -60,6 +68,7 @@ public class bleach_vat extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleBleachSkull(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("target");

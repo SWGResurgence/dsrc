@@ -1,5 +1,11 @@
 package script.systems.fs_quest;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.chat;
@@ -12,6 +18,7 @@ public class fs_commander_rescue_ai extends script.base_script
     public static final float MIN_SPOUT_OFF = 20;
     public static final float MAX_SPOUT_OFF = 60;
     public static final int PERCENT_SPOUT_OFF = 5;
+
     public fs_commander_rescue_ai()
     {
     }

@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.combat_engine.hit_result;
 import script.combat_engine.weapon_data;
@@ -99,6 +105,7 @@ public class force_rank extends script.base_script
     public static final String VAR_NOTIFY_ENCLAVE_OF_DEATH = "force_rank.notifyEnclaveOfDeath";
     public static final String VAR_MY_ENCLAVE_ID = "force_rank.myEnclaveId";
     public static final float MIN_KILL_CONTRIB_FOR_ACTION_DEATH = 0.51f;
+
     public force_rank()
     {
     }

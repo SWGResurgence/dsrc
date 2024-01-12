@@ -1,5 +1,11 @@
 package script.systems.tcg;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.target_dummy;
 import script.library.utils;

@@ -1,30 +1,39 @@
 package script.npc.bartender;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.obj_id;
 
 public class listen extends script.base_script
 {
-    public listen()
-    {
-    }
     public static final String SCRIPT_LISTEN = "npc.bartender.list";
     public static final String VAR_LISTEN_BASE = "bartender.listen";
     public static final String VAR_LISTEN_VALUE = "bartender.listen.value";
     public static final String VAR_LISTEN_SPEAKER = "bartender.listen.speaker";
     public static final String VAR_LISTEN_TEXT = "bartender.listen.text";
     public static final String TBL_KEYWORDS = "datatables/npc/bartender/keyword.iff";
+    public listen()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "handleListenStop", null, rand(60, 180), false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDetach(obj_id self) throws InterruptedException
     {
         removeObjVar(self, VAR_LISTEN_BASE);
         messageTo(self, "handleListen", null, rand(600, 1200), false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnHearSpeech(obj_id self, obj_id speaker, String text) throws InterruptedException
     {
         if (isPlayer(speaker))
@@ -54,6 +63,7 @@ public class listen extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleListenStop(obj_id self, dictionary params) throws InterruptedException
     {
         String speaker = getStringObjVar(self, VAR_LISTEN_SPEAKER);

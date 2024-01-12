@@ -1,5 +1,11 @@
 package script.theme_park.warren;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.obj_id;
@@ -7,14 +13,15 @@ import script.string_id;
 
 public class cell_guard extends script.base_script
 {
-    public cell_guard()
-    {
-    }
     public static final String CONVO_FILE = "theme_park/warren/warren";
     public static final String ALERT_VOLUME_NAME = "alertVolume";
     public static final String AGGRO_VOLUME_NAME = "aggroVolume";
     public static final String ACTION_ALERT = "alert";
     public static final String ACTION_THREATEN = "threaten";
+    public cell_guard()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, "ai.diction"))
@@ -35,6 +42,7 @@ public class cell_guard extends script.base_script
         setName(self, new string_id("theme_park/warren/warren_system_messages", "name_jerrd"));
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (getConfigSetting("GameServer", "disableAITriggerVolumes") == null)
@@ -44,6 +52,7 @@ public class cell_guard extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id breacher) throws InterruptedException
     {
         if (hasObjVar(breacher, "gm"))

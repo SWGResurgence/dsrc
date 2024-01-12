@@ -1,5 +1,11 @@
 package script.item.trap;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -12,6 +18,7 @@ public class trap_base extends script.base_script
     public static final string_id SID_SYS_NO_PETS = new string_id("trap/trap", "sys_no_pets");
     public static final string_id SID_ADD_TRAP_TO_DROID = new string_id("pet/droid_modules", "add_trap_to_droid");
     public static final string_id SID_NO_TRAP_IN_SPACE = new string_id("space/space_interaction", "no_trap_in_space");
+
     public trap_base()
     {
     }
@@ -131,7 +138,6 @@ public class trap_base extends script.base_script
         {
             setCount(self, intUses);
         }
-        return;
     }
 
     public int trapDone(obj_id self, dictionary params) throws InterruptedException
@@ -178,7 +184,6 @@ public class trap_base extends script.base_script
             }
             pseudoDamage *= (int) trapMod;
             xp.updateCombatXpList(target, player, xp.SCOUT, pseudoDamage);
-            return;
         }
         else
         {
@@ -190,7 +195,6 @@ public class trap_base extends script.base_script
             }
             pseudoDamage *= (int) trapMod;
             xp.updateCombatXpList(target, player, xp.SCOUT, pseudoDamage);
-            return;
         }
     }
 
@@ -214,6 +218,5 @@ public class trap_base extends script.base_script
             setObjVar(self, "droid_trap.trap_num.charges", intUses);
             setObjVar(controlDevice, "droid_trap.trap_num.charges", intUses);
         }
-        return;
     }
 }

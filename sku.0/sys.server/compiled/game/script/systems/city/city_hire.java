@@ -4,6 +4,12 @@ package script.systems.city;/*
 @Purpose: Dragging this item onto a mobile will allow you to hire them.
 */
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.city;
 import script.library.colors_hex;
 import script.library.create;
@@ -74,7 +80,7 @@ public class city_hire extends script.base_script
                         setObjVar(actor, "city_id", city_id);
                         city.addDecoration(city_id, player, self);
                         persistObject(actor);
-                        broadcast(player, "You have placed " + utils.getStringName(actor)+ " in this city.");
+                        broadcast(player, "You have placed " + utils.getStringName(actor) + " in this city.");
                         destroyObject(self);
                     }
                 }

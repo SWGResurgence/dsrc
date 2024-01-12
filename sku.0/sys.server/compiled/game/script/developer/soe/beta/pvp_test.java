@@ -1,5 +1,11 @@
 package script.developer.soe.beta;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.factions;
 import script.library.utils;
 import script.obj_id;
@@ -11,11 +17,13 @@ public class pvp_test extends script.base_script
     public pvp_test()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         broadcast(self, "PvP debug script attached.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnSpeaking(obj_id self, String text) throws InterruptedException
     {
         if (text.startsWith("pvp "))
@@ -33,13 +41,15 @@ public class pvp_test extends script.base_script
                 do
                 {
                     arg = st.nextToken();
-                    switch (arg) {
+                    switch (arg)
+                    {
                         case "status":
                             int type = pvpGetType(target);
                             int faction = pvpGetAlignedFaction(target);
                             String sType = "neutral";
                             String sFaction = "mercenary";
-                            switch (type) {
+                            switch (type)
+                            {
                                 case PVPTYPE_NEUTRAL:
                                     break;
                                 case PVPTYPE_COVERT:
@@ -52,7 +62,8 @@ public class pvp_test extends script.base_script
                                     sType = "type_other";
                                     break;
                             }
-                            switch (faction) {
+                            switch (faction)
+                            {
                                 case 0:
                                     sFaction = "mercenary";
                                     break;
@@ -116,6 +127,7 @@ public class pvp_test extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean displayEnemyFlags(obj_id player, obj_id target) throws InterruptedException
     {
         if (!isIdValid(target))
@@ -125,32 +137,52 @@ public class pvp_test extends script.base_script
         String[] enemies = pvpGetEnemyFlags(target);
         if (enemies != null)
         {
-            for (String enemy : enemies) {
+            for (String enemy : enemies)
+            {
                 StringTokenizer st = new StringTokenizer(enemy);
                 String sTarget = st.nextToken();
                 String sTargetName = getPlayerName(utils.stringToObjId(sTarget));
                 String sTefFac = st.nextToken();
                 int iTefFac = utils.stringToInt(sTefFac);
                 String sTefFacName = "<unknown>";
-                if (iTefFac == (-526735576)) {
+                if (iTefFac == (-526735576))
+                {
                     sTefFacName = "battlefield";
-                } else if (iTefFac == (1183528962)) {
+                }
+                else if (iTefFac == (1183528962))
+                {
                     sTefFacName = "duel";
-                } else if (iTefFac == (-429740311)) {
+                }
+                else if (iTefFac == (-429740311))
+                {
                     sTefFacName = "bountyduel";
-                } else if (iTefFac == (221551254)) {
+                }
+                else if (iTefFac == (221551254))
+                {
                     sTefFacName = "nonaggressive";
-                } else if (iTefFac == (-160237431)) {
+                }
+                else if (iTefFac == (-160237431))
+                {
                     sTefFacName = "unattackable";
-                } else if (iTefFac == (84709322)) {
+                }
+                else if (iTefFac == (84709322))
+                {
                     sTefFacName = "bountytarget";
-                } else if (iTefFac == (-1526926610)) {
+                }
+                else if (iTefFac == (-1526926610))
+                {
                     sTefFacName = "guildwarcooldownperiod";
-                } else if (iTefFac == (-615855020)) {
+                }
+                else if (iTefFac == (-615855020))
+                {
                     sTefFacName = "imperial";
-                } else if (iTefFac == (370444368)) {
+                }
+                else if (iTefFac == (370444368))
+                {
                     sTefFacName = "rebel";
-                } else if (iTefFac == (-377582139)) {
+                }
+                else if (iTefFac == (-377582139))
+                {
                     sTefFacName = "bubblecombat";
                 }
                 String sExpiration = st.nextToken();

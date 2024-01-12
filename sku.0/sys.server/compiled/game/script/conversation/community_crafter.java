@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -7,26 +13,37 @@ import java.util.Vector;
 
 public class community_crafter extends script.base_script
 {
+    public static final java.text.NumberFormat qualityFormat = new java.text.DecimalFormat("####.00");
+    public static final String OBJVAR_CRAFTING_TRACKER = community_crafting.OBJVAR_COMMUNITY_CRAFTING_TRACKER;
+    public static final String SCRIPTVAR_TRACKING_QUALITY = "community_crafting.quality";
+    public static final String SCRIPTVAR_TRACKING_QUANTITY = "community_crafting.quantity";
+    public static final String SCRIPTVAR_TRACKING_SLOTS = "community_crafting.slots";
+    public static final String SCRIPTVAR_TRACKING_NUM_SLOTS = "community_crafting.numSlots";
+    public static final string_id SID_RANKINGS_TITLE = new string_id("crafting", "player_rankings");
+    public static final string_id SID_ATTRIBUTES_TITLE = new string_id("crafting", "project_attributes");
+    public static final string_id SID_NO_PLAYERS = new string_id("crafting", "no_players");
+    public static final String SCRIPT_INVENTORY = "systems.crafting.community_crafting.npc_inventory";
+    public static String c_stringFile = "conversation/community_crafter";
+
     public community_crafter()
     {
     }
-    public static String c_stringFile = "conversation/community_crafter";
+
     public boolean community_crafter_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean community_crafter_condition_isPlayerCommunityCrafting(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id craftingTracker = getObjIdObjVar(npc, OBJVAR_CRAFTING_TRACKER);
         if (isIdValid(craftingTracker))
         {
-            if (community_crafting.isSessionActive(craftingTracker) && community_crafting.isPlayerCrafting(craftingTracker, player))
-            {
-                return true;
-            }
+            return community_crafting.isSessionActive(craftingTracker) && community_crafting.isPlayerCrafting(craftingTracker, player);
         }
         return false;
     }
+
     public boolean community_crafter_condition_isCommunityCraftingEnabled(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id craftingTracker = getObjIdObjVar(npc, OBJVAR_CRAFTING_TRACKER);
@@ -36,70 +53,82 @@ public class community_crafter extends script.base_script
         }
         return false;
     }
+
     public boolean community_crafter_condition_canAddPlayer(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id craftingTracker = getObjIdObjVar(npc, OBJVAR_CRAFTING_TRACKER);
         if (isIdValid(craftingTracker))
         {
-            if (community_crafting.isSessionActive(craftingTracker) && community_crafting.getNumPlayersCrafting(craftingTracker) < community_crafting.MAX_PLAYERS_PER_PROJECT && !community_crafting.isPlayerCrafting(player))
-            {
-                return true;
-            }
+            return community_crafting.isSessionActive(craftingTracker) && community_crafting.getNumPlayersCrafting(craftingTracker) < community_crafting.MAX_PLAYERS_PER_PROJECT && !community_crafting.isPlayerCrafting(player);
         }
         return false;
     }
+
     public boolean community_crafter_condition_isTrackingQuality(obj_id player, obj_id npc) throws InterruptedException
     {
         return utils.getBooleanScriptVar(npc, SCRIPTVAR_TRACKING_QUALITY);
     }
+
     public boolean community_crafter_condition_isTrackingQuantity(obj_id player, obj_id npc) throws InterruptedException
     {
         return utils.getBooleanScriptVar(npc, SCRIPTVAR_TRACKING_QUANTITY);
     }
+
     public boolean community_crafter_condition_isTrackingSlots(obj_id player, obj_id npc) throws InterruptedException
     {
         return utils.getBooleanScriptVar(npc, SCRIPTVAR_TRACKING_SLOTS);
     }
+
     public boolean community_crafter_condition_hasSlot1(obj_id player, obj_id npc) throws InterruptedException
     {
         return getNumSlots(npc) >= 1;
     }
+
     public boolean community_crafter_condition_hasSlot2(obj_id player, obj_id npc) throws InterruptedException
     {
         return getNumSlots(npc) >= 2;
     }
+
     public boolean community_crafter_condition_hasSlot3(obj_id player, obj_id npc) throws InterruptedException
     {
         return getNumSlots(npc) >= 3;
     }
+
     public boolean community_crafter_condition_hasSlot4(obj_id player, obj_id npc) throws InterruptedException
     {
         return getNumSlots(npc) >= 4;
     }
+
     public boolean community_crafter_condition_hasSlot5(obj_id player, obj_id npc) throws InterruptedException
     {
         return getNumSlots(npc) >= 5;
     }
+
     public boolean community_crafter_condition_hasSlot6(obj_id player, obj_id npc) throws InterruptedException
     {
         return getNumSlots(npc) >= 6;
     }
+
     public boolean community_crafter_condition_hasSlot7(obj_id player, obj_id npc) throws InterruptedException
     {
         return getNumSlots(npc) >= 7;
     }
+
     public boolean community_crafter_condition_hasSlot8(obj_id player, obj_id npc) throws InterruptedException
     {
         return getNumSlots(npc) >= 8;
     }
+
     public boolean community_crafter_condition_hasSlot9(obj_id player, obj_id npc) throws InterruptedException
     {
         return getNumSlots(npc) >= 9;
     }
+
     public boolean community_crafter_condition_hasSlot10(obj_id player, obj_id npc) throws InterruptedException
     {
         return getNumSlots(npc) >= 10;
     }
+
     public void community_crafter_action_addPlayerToProject(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id craftingTracker = getObjIdObjVar(npc, OBJVAR_CRAFTING_TRACKER);
@@ -108,6 +137,7 @@ public class community_crafter extends script.base_script
             boolean result = community_crafting.grantSchematicToPlayer(craftingTracker, player);
         }
     }
+
     public void community_crafter_action_openMyInventoryToPlayer(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id inventory = utils.getInventoryContainer(npc);
@@ -121,108 +151,122 @@ public class community_crafter extends script.base_script
             }
         }
     }
+
     public void community_crafter_action_showPlayerSlot1Quality(obj_id player, obj_id npc) throws InterruptedException
     {
         showPlayerProjectStats(npc, player, 1, true);
     }
+
     public void community_crafter_action_showPlayerProjectAttributes(obj_id player, obj_id npc) throws InterruptedException
     {
         showPlayerProjectAttribs(npc, player);
     }
+
     public void community_crafter_action_showPlayerSlot2Quality(obj_id player, obj_id npc) throws InterruptedException
     {
         showPlayerProjectStats(npc, player, 2, true);
     }
+
     public void community_crafter_action_showPlayerSlot4Quality(obj_id player, obj_id npc) throws InterruptedException
     {
         showPlayerProjectStats(npc, player, 4, true);
     }
+
     public void community_crafter_action_showPlayerSlot5Quality(obj_id player, obj_id npc) throws InterruptedException
     {
         showPlayerProjectStats(npc, player, 5, true);
     }
+
     public void community_crafter_action_showPlayerSlot6Quality(obj_id player, obj_id npc) throws InterruptedException
     {
         showPlayerProjectStats(npc, player, 6, true);
     }
+
     public void community_crafter_action_showPlayerSlot7Quality(obj_id player, obj_id npc) throws InterruptedException
     {
         showPlayerProjectStats(npc, player, 7, true);
     }
+
     public void community_crafter_action_showPlayerSlot8Quality(obj_id player, obj_id npc) throws InterruptedException
     {
         showPlayerProjectStats(npc, player, 8, true);
     }
+
     public void community_crafter_action_showPlayerSlot9Quality(obj_id player, obj_id npc) throws InterruptedException
     {
         showPlayerProjectStats(npc, player, 9, true);
     }
+
     public void community_crafter_action_showPlayerSlot10Quality(obj_id player, obj_id npc) throws InterruptedException
     {
         showPlayerProjectStats(npc, player, 10, true);
     }
+
     public void community_crafter_action_showPlayerProjectQuality(obj_id player, obj_id npc) throws InterruptedException
     {
         showPlayerProjectStats(npc, player, 0, true);
     }
+
     public void community_crafter_action_showPlayerSlot3Quality(obj_id player, obj_id npc) throws InterruptedException
     {
         showPlayerProjectStats(npc, player, 3, true);
     }
+
     public void community_crafter_action_showPlayerSlot1Quantity(obj_id player, obj_id npc) throws InterruptedException
     {
         showPlayerProjectStats(npc, player, 1, false);
     }
+
     public void community_crafter_action_showPlayerSlot2Quantity(obj_id player, obj_id npc) throws InterruptedException
     {
         showPlayerProjectStats(npc, player, 2, false);
     }
+
     public void community_crafter_action_showPlayerSlot4Quantity(obj_id player, obj_id npc) throws InterruptedException
     {
         showPlayerProjectStats(npc, player, 4, false);
     }
+
     public void community_crafter_action_showPlayerSlot5Quantity(obj_id player, obj_id npc) throws InterruptedException
     {
         showPlayerProjectStats(npc, player, 5, false);
     }
+
     public void community_crafter_action_showPlayerSlot6Quantity(obj_id player, obj_id npc) throws InterruptedException
     {
         showPlayerProjectStats(npc, player, 6, false);
     }
+
     public void community_crafter_action_showPlayerSlot7Quantity(obj_id player, obj_id npc) throws InterruptedException
     {
         showPlayerProjectStats(npc, player, 7, false);
     }
+
     public void community_crafter_action_showPlayerSlot8Quantity(obj_id player, obj_id npc) throws InterruptedException
     {
         showPlayerProjectStats(npc, player, 8, false);
     }
+
     public void community_crafter_action_showPlayerSlot9Quantity(obj_id player, obj_id npc) throws InterruptedException
     {
         showPlayerProjectStats(npc, player, 9, false);
     }
+
     public void community_crafter_action_showPlayerSlot10Quantity(obj_id player, obj_id npc) throws InterruptedException
     {
         showPlayerProjectStats(npc, player, 10, false);
     }
+
     public void community_crafter_action_showPlayerProjectQuantity(obj_id player, obj_id npc) throws InterruptedException
     {
         showPlayerProjectStats(npc, player, 0, false);
     }
+
     public void community_crafter_action_showPlayerSlot3Quantity(obj_id player, obj_id npc) throws InterruptedException
     {
         showPlayerProjectStats(npc, player, 3, false);
     }
-    public static final java.text.NumberFormat qualityFormat = new java.text.DecimalFormat("####.00");
-    public static final String OBJVAR_CRAFTING_TRACKER = community_crafting.OBJVAR_COMMUNITY_CRAFTING_TRACKER;
-    public static final String SCRIPTVAR_TRACKING_QUALITY = "community_crafting.quality";
-    public static final String SCRIPTVAR_TRACKING_QUANTITY = "community_crafting.quantity";
-    public static final String SCRIPTVAR_TRACKING_SLOTS = "community_crafting.slots";
-    public static final String SCRIPTVAR_TRACKING_NUM_SLOTS = "community_crafting.numSlots";
-    public static final string_id SID_RANKINGS_TITLE = new string_id("crafting", "player_rankings");
-    public static final string_id SID_ATTRIBUTES_TITLE = new string_id("crafting", "project_attributes");
-    public static final string_id SID_NO_PLAYERS = new string_id("crafting", "no_players");
-    public static final String SCRIPT_INVENTORY = "systems.crafting.community_crafting.npc_inventory";
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -233,12 +277,14 @@ public class community_crafter extends script.base_script
         initializeMe(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         initializeMe(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -247,12 +293,14 @@ public class community_crafter extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.community_crafter");
         return SCRIPT_CONTINUE;
     }
+
     public void initializeMe(obj_id self) throws InterruptedException
     {
         obj_id inventory = utils.getInventoryContainer(self);
@@ -266,6 +314,7 @@ public class community_crafter extends script.base_script
         }
         cacheProjectData(self);
     }
+
     public void cacheProjectData(obj_id self) throws InterruptedException
     {
         if (community_crafter_condition_isCommunityCraftingEnabled(obj_id.NULL_ID, self))
@@ -281,10 +330,12 @@ public class community_crafter extends script.base_script
             utils.setScriptVar(self, SCRIPTVAR_TRACKING_NUM_SLOTS, community_crafting.getNumSlots(craftingTracker));
         }
     }
+
     public int getNumSlots(obj_id self) throws InterruptedException
     {
         return utils.getIntScriptVar(self, SCRIPTVAR_TRACKING_NUM_SLOTS);
     }
+
     public void showPlayerProjectAttribs(obj_id self, obj_id player) throws InterruptedException
     {
         if (community_crafter_condition_isCommunityCraftingEnabled(obj_id.NULL_ID, self))
@@ -308,6 +359,7 @@ public class community_crafter extends script.base_script
             int pid = sui.listbox(player, "", "@" + SID_ATTRIBUTES_TITLE, sui.OK_ONLY, attributes);
         }
     }
+
     public void showPlayerProjectStats(obj_id self, obj_id player, int slot, boolean quality) throws InterruptedException
     {
         if (community_crafter_condition_isCommunityCraftingEnabled(obj_id.NULL_ID, self))
@@ -328,22 +380,22 @@ public class community_crafter extends script.base_script
             {
                 for (int i = 0; i < values.size(); ++i)
                 {
-                    double f = (((Float)(values.get(i)))).doubleValue();
+                    double f = (((Float) (values.get(i)))).doubleValue();
                     values.set(i, qualityFormat.format(f));
                 }
             }
             Vector rankings = new Vector();
             for (int i = 0; i < playerIds.size(); ++i)
             {
-                if (isIdValid((obj_id)(playerIds.get(i))))
+                if (isIdValid((obj_id) (playerIds.get(i))))
                 {
                     if (playerIds.get(i) == player)
                     {
-                        rankings.add("\\#pcontrast1 " + getPlayerName((obj_id)(playerIds.get(i))) + "\\>200" + values.get(i) + "\\#.");
+                        rankings.add("\\#pcontrast1 " + getPlayerName((obj_id) (playerIds.get(i))) + "\\>200" + values.get(i) + "\\#.");
                     }
-                    else 
+                    else
                     {
-                        rankings.add(getPlayerName((obj_id)(playerIds.get(i))) + "\\>200" + values.get(i));
+                        rankings.add(getPlayerName((obj_id) (playerIds.get(i))) + "\\>200" + values.get(i));
                     }
                 }
             }
@@ -354,12 +406,14 @@ public class community_crafter extends script.base_script
             int pid = sui.listbox(player, "", "@" + SID_RANKINGS_TITLE, sui.OK_ONLY, rankings);
         }
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         if (ai_lib.isInCombat(self) || ai_lib.isInCombat(player))
@@ -395,7 +449,7 @@ public class community_crafter extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_19fc7d2c");
@@ -411,7 +465,7 @@ public class community_crafter extends script.base_script
                 setObjVar(player, "conversation.community_crafter.branchId", 1);
                 npcStartConversation(player, self, "community_crafter", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(self, message);
             }
@@ -426,6 +480,7 @@ public class community_crafter extends script.base_script
         chat.chat(self, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("community_crafter"))
@@ -500,7 +555,7 @@ public class community_crafter extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_ff02a401");
@@ -517,7 +572,7 @@ public class community_crafter extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.community_crafter.branchId");
                     npcSpeak(player, message);
@@ -560,7 +615,7 @@ public class community_crafter extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_ff02a401");
@@ -577,7 +632,7 @@ public class community_crafter extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.community_crafter.branchId");
                     npcSpeak(player, message);
@@ -675,7 +730,7 @@ public class community_crafter extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_939f367c");
@@ -724,7 +779,7 @@ public class community_crafter extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.community_crafter.branchId");
                     npcSpeak(player, message);
@@ -822,7 +877,7 @@ public class community_crafter extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_939f367c");
@@ -871,7 +926,7 @@ public class community_crafter extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.community_crafter.branchId");
                     npcSpeak(player, message);
@@ -914,7 +969,7 @@ public class community_crafter extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_ff02a401");
@@ -931,7 +986,7 @@ public class community_crafter extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.community_crafter.branchId");
                     npcSpeak(player, message);
@@ -974,7 +1029,7 @@ public class community_crafter extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_ff02a401");
@@ -991,7 +1046,7 @@ public class community_crafter extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.community_crafter.branchId");
                     npcSpeak(player, message);
@@ -1034,7 +1089,7 @@ public class community_crafter extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_ff02a401");
@@ -1051,7 +1106,7 @@ public class community_crafter extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.community_crafter.branchId");
                     npcSpeak(player, message);
@@ -1094,7 +1149,7 @@ public class community_crafter extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_ff02a401");
@@ -1111,7 +1166,7 @@ public class community_crafter extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.community_crafter.branchId");
                     npcSpeak(player, message);
@@ -1154,7 +1209,7 @@ public class community_crafter extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_ff02a401");
@@ -1171,7 +1226,7 @@ public class community_crafter extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.community_crafter.branchId");
                     npcSpeak(player, message);
@@ -1214,7 +1269,7 @@ public class community_crafter extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_ff02a401");
@@ -1231,7 +1286,7 @@ public class community_crafter extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.community_crafter.branchId");
                     npcSpeak(player, message);
@@ -1274,7 +1329,7 @@ public class community_crafter extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_ff02a401");
@@ -1291,7 +1346,7 @@ public class community_crafter extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.community_crafter.branchId");
                     npcSpeak(player, message);
@@ -1334,7 +1389,7 @@ public class community_crafter extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_ff02a401");
@@ -1351,7 +1406,7 @@ public class community_crafter extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.community_crafter.branchId");
                     npcSpeak(player, message);
@@ -1394,7 +1449,7 @@ public class community_crafter extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_ff02a401");
@@ -1411,7 +1466,7 @@ public class community_crafter extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.community_crafter.branchId");
                     npcSpeak(player, message);
@@ -1454,7 +1509,7 @@ public class community_crafter extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_ff02a401");
@@ -1471,7 +1526,7 @@ public class community_crafter extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.community_crafter.branchId");
                     npcSpeak(player, message);
@@ -1514,7 +1569,7 @@ public class community_crafter extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_ff02a401");
@@ -1531,7 +1586,7 @@ public class community_crafter extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.community_crafter.branchId");
                     npcSpeak(player, message);
@@ -1574,7 +1629,7 @@ public class community_crafter extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_ff02a401");
@@ -1591,7 +1646,7 @@ public class community_crafter extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.community_crafter.branchId");
                     npcSpeak(player, message);
@@ -1634,7 +1689,7 @@ public class community_crafter extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_ff02a401");
@@ -1651,7 +1706,7 @@ public class community_crafter extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.community_crafter.branchId");
                     npcSpeak(player, message);
@@ -1694,7 +1749,7 @@ public class community_crafter extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_ff02a401");
@@ -1711,7 +1766,7 @@ public class community_crafter extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.community_crafter.branchId");
                     npcSpeak(player, message);
@@ -1754,7 +1809,7 @@ public class community_crafter extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_ff02a401");
@@ -1771,7 +1826,7 @@ public class community_crafter extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.community_crafter.branchId");
                     npcSpeak(player, message);
@@ -1814,7 +1869,7 @@ public class community_crafter extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_ff02a401");
@@ -1831,7 +1886,7 @@ public class community_crafter extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.community_crafter.branchId");
                     npcSpeak(player, message);
@@ -1874,7 +1929,7 @@ public class community_crafter extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_ff02a401");
@@ -1891,7 +1946,7 @@ public class community_crafter extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.community_crafter.branchId");
                     npcSpeak(player, message);
@@ -1934,7 +1989,7 @@ public class community_crafter extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_ff02a401");
@@ -1951,7 +2006,7 @@ public class community_crafter extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.community_crafter.branchId");
                     npcSpeak(player, message);
@@ -1994,7 +2049,7 @@ public class community_crafter extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_ff02a401");
@@ -2011,7 +2066,7 @@ public class community_crafter extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.community_crafter.branchId");
                     npcSpeak(player, message);
@@ -2054,7 +2109,7 @@ public class community_crafter extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_ff02a401");
@@ -2071,7 +2126,7 @@ public class community_crafter extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.community_crafter.branchId");
                     npcSpeak(player, message);
@@ -2114,7 +2169,7 @@ public class community_crafter extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_ff02a401");
@@ -2131,7 +2186,7 @@ public class community_crafter extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.community_crafter.branchId");
                     npcSpeak(player, message);
@@ -2174,7 +2229,7 @@ public class community_crafter extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_ff02a401");
@@ -2191,7 +2246,7 @@ public class community_crafter extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.community_crafter.branchId");
                     npcSpeak(player, message);

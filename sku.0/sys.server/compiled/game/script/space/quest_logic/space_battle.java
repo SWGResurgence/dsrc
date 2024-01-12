@@ -1,17 +1,24 @@
 package script.space.quest_logic;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
 public class space_battle extends script.base_script
 {
-    public space_battle()
-    {
-    }
     public static final string_id SID_ABANDONED_BATTLE = new string_id("space/quest", "battle_abandoned");
     public static final string_id WARPOUT_FAILURE = new string_id("space/quest", "warpout_failure");
     public static final String SOUND_SPAWN_ALLIES = "clienteffect/ui_quest_spawn_friendly.cef";
     public static final String SOUND_SPAWN_ENEMIES = "clienteffect/ui_quest_spawn_enemy.cef";
+    public space_battle()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         String questName = getStringObjVar(self, space_quest.QUEST_NAME);
@@ -63,6 +70,7 @@ public class space_battle extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int initializedQuestPlayer(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -119,6 +127,7 @@ public class space_battle extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void findBattleLoc(obj_id self, obj_id player, String destNav) throws InterruptedException
     {
         obj_id navPoint = space_quest.findQuestLocation(self, player, destNav, "nav");
@@ -144,9 +153,9 @@ public class space_battle extends script.base_script
             space_quest._setQuestInProgress(self);
             int enemyDist = getIntObjVar(self, "enemyOriginDist");
             int enemyArriveDist = getIntObjVar(self, "enemyArrivalDist");
-            transform enemyOrigin = (wptrans.move_l(new vector(0, 0, enemyDist))).yaw_l((float)Math.PI);
+            transform enemyOrigin = (wptrans.move_l(new vector(0, 0, enemyDist))).yaw_l((float) Math.PI);
             setObjVar(self, "enemyOrigin", enemyOrigin);
-            transform enemyArrive = (wptrans.move_l(new vector(0, 0, enemyArriveDist))).yaw_l((float)Math.PI);
+            transform enemyArrive = (wptrans.move_l(new vector(0, 0, enemyArriveDist))).yaw_l((float) Math.PI);
             setObjVar(self, "enemyArrive", enemyArrive);
             int allyDist = getIntObjVar(self, "allyOriginDist");
             int allyArriveDist = getIntObjVar(self, "allyArrivalDist");
@@ -167,6 +176,7 @@ public class space_battle extends script.base_script
         }
         setObjVar(self, "initialized", 1);
     }
+
     public int armyArrives(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -191,7 +201,7 @@ public class space_battle extends script.base_script
             questUpdate(self, noto);
             playClientEffectObj(player, SOUND_SPAWN_ENEMIES, player, "");
         }
-        else 
+        else
         {
             name = "allies";
             army = getStringArrayObjVar(self, "allyShips");
@@ -232,6 +242,7 @@ public class space_battle extends script.base_script
         ship_ai.squadMoveTo(squad, translist);
         return SCRIPT_CONTINUE;
     }
+
     public int shipArrived(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -251,17 +262,18 @@ public class space_battle extends script.base_script
                 outp.put("line", 0);
                 convo(self, outp);
             }
-            else 
+            else
             {
                 startBattle(self, null);
             }
         }
-        else 
+        else
         {
             setObjVar(self, "arrived", name);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int startBattle(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = getObjIdObjVar(self, space_quest.QUEST_OWNER);
@@ -290,6 +302,7 @@ public class space_battle extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int convo(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -322,7 +335,7 @@ public class space_battle extends script.base_script
         {
             space_quest.groupTaunt(ally, player, pp);
         }
-        else 
+        else
         {
             space_quest.groupTaunt(enemy, player, pp);
         }
@@ -330,6 +343,7 @@ public class space_battle extends script.base_script
         messageTo(self, "convo", params, delay, false);
         return SCRIPT_CONTINUE;
     }
+
     public void clearMissionWaypoint(obj_id self) throws InterruptedException
     {
         obj_id player = getObjIdObjVar(self, space_quest.QUEST_OWNER);
@@ -339,6 +353,7 @@ public class space_battle extends script.base_script
             destroyWaypointInDatapad(waypoint, player);
         }
     }
+
     public int targetDestroyed(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -350,27 +365,33 @@ public class space_battle extends script.base_script
         String questType = getStringObjVar(self, space_quest.QUEST_TYPE);
         obj_id deadship = params.getObjId("ship");
         String name = getStringObjVar(deadship, "name");
-        obj_id targets[] = null;
+        obj_id[] targets = null;
         if (name.equals("enemies"))
         {
             targets = getObjIdArrayObjVar(self, "enemies");
         }
-        else 
+        else
         {
             targets = getObjIdArrayObjVar(self, "allies");
         }
         int deadships = getIntObjVar(self, "dead_" + name);
-        for (obj_id target : targets) {
-            if (deadship == target) {
+        for (obj_id target : targets)
+        {
+            if (deadship == target)
+            {
                 deadships++;
                 setObjVar(self, "dead_" + name, deadships);
                 space_quest._removeMissionCriticalShip(player, self, deadship);
-                if (deadships == targets.length) {
-                    if (name.equals("enemies")) {
+                if (deadships == targets.length)
+                {
+                    if (name.equals("enemies"))
+                    {
                         string_id noto = new string_id("spacequest/" + questType + "/" + questName, "allies_win");
                         questUpdate(self, noto);
                         messageTo(self, "winMission", null, 2.0f, false);
-                    } else {
+                    }
+                    else
+                    {
                         string_id noto = new string_id("spacequest/" + questType + "/" + questName, "enemies_win");
                         questUpdate(self, noto);
                         messageTo(self, "loseMission", null, 2.0f, false);
@@ -386,6 +407,7 @@ public class space_battle extends script.base_script
         space_quest.sendQuestMessage(player, pp);
         return SCRIPT_OVERRIDE;
     }
+
     public int winMission(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = getObjIdObjVar(self, space_quest.QUEST_OWNER);
@@ -402,11 +424,13 @@ public class space_battle extends script.base_script
         questCompleted(self);
         return SCRIPT_OVERRIDE;
     }
+
     public int loseMission(obj_id self, dictionary params) throws InterruptedException
     {
         questFailed(self);
         return SCRIPT_OVERRIDE;
     }
+
     public void questCompleted(obj_id self) throws InterruptedException
     {
         clearMissionWaypoint(self);
@@ -414,6 +438,7 @@ public class space_battle extends script.base_script
         obj_id player = getObjIdObjVar(self, space_quest.QUEST_OWNER);
         space_quest.setQuestWon(player, self);
     }
+
     public void questFailed(obj_id self) throws InterruptedException
     {
         clearMissionWaypoint(self);
@@ -421,6 +446,7 @@ public class space_battle extends script.base_script
         obj_id player = getObjIdObjVar(self, space_quest.QUEST_OWNER);
         space_quest.setQuestFailed(player, self);
     }
+
     public void questAborted(obj_id self) throws InterruptedException
     {
         clearMissionWaypoint(self);
@@ -428,6 +454,7 @@ public class space_battle extends script.base_script
         obj_id player = getObjIdObjVar(self, space_quest.QUEST_OWNER);
         space_quest.setQuestAborted(player, self);
     }
+
     public int removeQuest(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = getObjIdObjVar(self, space_quest.QUEST_OWNER);
@@ -441,6 +468,7 @@ public class space_battle extends script.base_script
         space_quest._removeQuest(player, self);
         return SCRIPT_CONTINUE;
     }
+
     public int abortMission(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "noAbort"))
@@ -450,13 +478,16 @@ public class space_battle extends script.base_script
         questAborted(self);
         return SCRIPT_CONTINUE;
     }
+
     public void warpOutShips(obj_id self) throws InterruptedException
     {
         obj_id[] allies = getObjIdArrayObjVar(self, "allies");
         if (allies != null)
         {
-            for (obj_id ally : allies) {
-                if (isIdValid(ally) && exists(ally)) {
+            for (obj_id ally : allies)
+            {
+                if (isIdValid(ally) && exists(ally))
+                {
                     messageTo(ally, "warpOut", null, 60.0f, false);
                 }
             }
@@ -464,13 +495,16 @@ public class space_battle extends script.base_script
         obj_id[] enemies = getObjIdArrayObjVar(self, "enemies");
         if (enemies != null)
         {
-            for (obj_id enemy : enemies) {
-                if (isIdValid(enemy) && exists(enemy)) {
+            for (obj_id enemy : enemies)
+            {
+                if (isIdValid(enemy) && exists(enemy))
+                {
                     messageTo(enemy, "warpOut", null, 60.0f, false);
                 }
             }
         }
     }
+
     public void questUpdate(obj_id self, string_id update_id) throws InterruptedException
     {
         obj_id player = getObjIdObjVar(self, space_quest.QUEST_OWNER);
@@ -480,6 +514,7 @@ public class space_battle extends script.base_script
         prose_package pp = prose.getPackage(update_prefix, update_id);
         space_quest.sendQuestMessage(player, pp);
     }
+
     public int playerShipDestroyed(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -493,6 +528,7 @@ public class space_battle extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int warpoutFailure(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "handling_warpout_failure"))

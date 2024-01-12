@@ -1,18 +1,27 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
 public class village_whip extends script.base_script
 {
+    public static String c_stringFile = "conversation/village_whip";
+
     public village_whip()
     {
     }
-    public static String c_stringFile = "conversation/village_whip";
+
     public boolean village_whip_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean village_whip_condition_phase1_inprogress(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id master = getObjIdObjVar(npc, "village_master");
@@ -36,11 +45,14 @@ public class village_whip extends script.base_script
                 obj_id waypoint = getObjIdObjVar(player, "quest.fs_reflex_rescue_quest_01.waypoint");
                 obj_id[] wps = getWaypointsInDatapad(player);
                 boolean match = false;
-                if (wps != null && wps.length > 0)
+                if (wps != null)
                 {
-                    for (obj_id wp : wps) {
-                        if (waypoint == wp) {
+                    for (obj_id wp : wps)
+                    {
+                        if (waypoint == wp)
+                        {
                             match = true;
+                            break;
                         }
                     }
                 }
@@ -70,7 +82,7 @@ public class village_whip extends script.base_script
                         {
                             setWaypointName(wp, summary);
                         }
-                        else 
+                        else
                         {
                             setWaypointName(wp, "missing task summary for " + questName);
                         }
@@ -85,6 +97,7 @@ public class village_whip extends script.base_script
         }
         return false;
     }
+
     public boolean village_whip_condition_phase1_givequest(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id master = getObjIdObjVar(npc, "village_master");
@@ -101,12 +114,9 @@ public class village_whip extends script.base_script
             return false;
         }
         int phase = fs_dyn_village.getCurrentPhaseAuth(master);
-        if (phase != 1)
-        {
-            return false;
-        }
-        return true;
+        return phase == 1;
     }
+
     public boolean village_whip_condition_phase1_continue(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id master = getObjIdObjVar(npc, "village_master");
@@ -119,12 +129,9 @@ public class village_whip extends script.base_script
         {
             return false;
         }
-        if (hasObjVar(player, "quest.fs_reflex1.continue"))
-        {
-            return true;
-        }
-        return false;
+        return hasObjVar(player, "quest.fs_reflex1.continue");
     }
+
     public boolean village_whip_condition_phase1_failed(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id master = getObjIdObjVar(npc, "village_master");
@@ -137,12 +144,9 @@ public class village_whip extends script.base_script
         {
             return false;
         }
-        if (hasObjVar(player, "quest.fs_reflex1.failed"))
-        {
-            return true;
-        }
-        return false;
+        return hasObjVar(player, "quest.fs_reflex1.failed");
     }
+
     public boolean village_whip_condition_phase1_complete(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id master = getObjIdObjVar(npc, "village_master");
@@ -155,12 +159,9 @@ public class village_whip extends script.base_script
         {
             return false;
         }
-        if (quests.isComplete("fs_reflex_rescue_quest_05", player))
-        {
-            return true;
-        }
-        return false;
+        return quests.isComplete("fs_reflex_rescue_quest_05", player);
     }
+
     public boolean village_whip_condition_phase2_complete(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id master = getObjIdObjVar(npc, "village_master");
@@ -173,12 +174,9 @@ public class village_whip extends script.base_script
         {
             return false;
         }
-        if (quests.isComplete("fs_reflex_fetch_quest_04", player))
-        {
-            return true;
-        }
-        return false;
+        return quests.isComplete("fs_reflex_fetch_quest_04", player);
     }
+
     public boolean village_whip_condition_phase2_continue(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id master = getObjIdObjVar(npc, "village_master");
@@ -191,12 +189,9 @@ public class village_whip extends script.base_script
         {
             return false;
         }
-        if (hasObjVar(player, "quest.fs_reflex2.continue"))
-        {
-            return true;
-        }
-        return false;
+        return hasObjVar(player, "quest.fs_reflex2.continue");
     }
+
     public boolean village_whip_condition_phase2_failed(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id master = getObjIdObjVar(npc, "village_master");
@@ -209,12 +204,9 @@ public class village_whip extends script.base_script
         {
             return false;
         }
-        if (hasObjVar(player, "quest.fs_reflex2.failed"))
-        {
-            return true;
-        }
-        return false;
+        return hasObjVar(player, "quest.fs_reflex2.failed");
     }
+
     public boolean village_whip_condition_phase2_givequest(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id master = getObjIdObjVar(npc, "village_master");
@@ -231,12 +223,9 @@ public class village_whip extends script.base_script
             return false;
         }
         int phase = fs_dyn_village.getCurrentPhaseAuth(master);
-        if (phase != 2)
-        {
-            return false;
-        }
-        return true;
+        return phase == 2;
     }
+
     public boolean village_whip_condition_phase2_inprogress(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id master = getObjIdObjVar(npc, "village_master");
@@ -249,12 +238,9 @@ public class village_whip extends script.base_script
         {
             return false;
         }
-        if (hasObjVar(player, "quest.fs_reflex2.in_progress"))
-        {
-            return true;
-        }
-        return false;
+        return hasObjVar(player, "quest.fs_reflex2.in_progress");
     }
+
     public boolean village_whip_condition_phase2_aborted(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id master = getObjIdObjVar(npc, "village_master");
@@ -267,20 +253,14 @@ public class village_whip extends script.base_script
         {
             return false;
         }
-        if (hasObjVar(player, "quest.fs_reflex2.aborted"))
-        {
-            return true;
-        }
-        return false;
+        return hasObjVar(player, "quest.fs_reflex2.aborted");
     }
+
     public boolean village_whip_condition_not_eligible(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (!fs_quests.isVillageEligible(player))
-        {
-            return true;
-        }
-        return false;
+        return !fs_quests.isVillageEligible(player);
     }
+
     public boolean village_whip_condition_phase3(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id master = getObjIdObjVar(npc, "village_master");
@@ -289,12 +269,9 @@ public class village_whip extends script.base_script
             return false;
         }
         int phase = fs_dyn_village.getCurrentPhaseAuth(master);
-        if (phase == 3)
-        {
-            return true;
-        }
-        return false;
+        return phase == 3;
     }
+
     public boolean village_whip_condition_phase1_aborted(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id master = getObjIdObjVar(npc, "village_master");
@@ -307,28 +284,19 @@ public class village_whip extends script.base_script
         {
             return false;
         }
-        if (hasObjVar(player, "quest.fs_reflex1.aborted"))
-        {
-            return true;
-        }
-        return false;
+        return hasObjVar(player, "quest.fs_reflex1.aborted");
     }
+
     public boolean village_whip_condition_quest_accepted(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (fs_quests.hasQuestAccepted(player))
-        {
-            return true;
-        }
-        return false;
+        return fs_quests.hasQuestAccepted(player);
     }
+
     public boolean village_whip_condition_quest_completed(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (fs_quests.hasQuestCompleted(player))
-        {
-            return true;
-        }
-        return false;
+        return fs_quests.hasQuestCompleted(player);
     }
+
     public boolean village_whip_condition_phase4(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id master = getObjIdObjVar(npc, "village_master");
@@ -337,12 +305,9 @@ public class village_whip extends script.base_script
             return false;
         }
         int phase = fs_dyn_village.getCurrentPhaseAuth(master);
-        if (phase == 4)
-        {
-            return true;
-        }
-        return false;
+        return phase == 4;
     }
+
     public void village_whip_action_phase1_activate_quest(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id master = getObjIdObjVar(npc, "village_master");
@@ -354,6 +319,7 @@ public class village_whip extends script.base_script
         quests.activate("fs_reflex_rescue_quest_00", player, null);
         fs_quests.setQuestAccepted(player);
     }
+
     public void village_whip_action_phase1_continue_quest(obj_id player, obj_id npc) throws InterruptedException
     {
         removeObjVar(player, "quest.fs_reflex1.continue");
@@ -361,6 +327,7 @@ public class village_whip extends script.base_script
         removeObjVar(player, "quest.fs_reflex1.aborted");
         quests.activate("fs_reflex_rescue_quest_00", player, null);
     }
+
     public void village_whip_action_phase2_activate_quest(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id master = getObjIdObjVar(npc, "village_master");
@@ -373,6 +340,7 @@ public class village_whip extends script.base_script
         quests.activate("fs_reflex_fetch_quest_00", player, null);
         fs_quests.setQuestAccepted(player);
     }
+
     public void village_whip_action_phase2_continue_quest(obj_id player, obj_id npc) throws InterruptedException
     {
         removeObjVar(player, "quest.fs_reflex2.continue");
@@ -389,6 +357,7 @@ public class village_whip extends script.base_script
         }
         quests.activate("fs_reflex_fetch_quest_00", player, null);
     }
+
     public void village_whip_action_phase2_abort_in_convo(obj_id player, obj_id npc) throws InterruptedException
     {
         removeObjVar(player, "quest.fs_reflex2.in_progress");
@@ -420,6 +389,7 @@ public class village_whip extends script.base_script
             destroyObject(theater);
         }
     }
+
     public int village_whip_tokenDI_villagers_left(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!hasObjVar(player, "quest.fs_reflex1.rescued"))
@@ -429,6 +399,7 @@ public class village_whip extends script.base_script
         int rescued = getIntObjVar(player, "quest.fs_reflex1.rescued");
         return (5 - rescued);
     }
+
     public int village_whip_tokenDI_supplies_left(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!hasObjVar(player, "quest.fs_reflex2.rescued"))
@@ -438,6 +409,7 @@ public class village_whip extends script.base_script
         int rescued = getIntObjVar(player, "quest.fs_reflex2.rescued");
         return (6 - rescued);
     }
+
     public int village_whip_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_dcf4498e"))
@@ -464,6 +436,7 @@ public class village_whip extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int village_whip_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_77e48d5b"))
@@ -483,7 +456,7 @@ public class village_whip extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_dc446bf8");
@@ -492,7 +465,7 @@ public class village_whip extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.village_whip.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -502,6 +475,7 @@ public class village_whip extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int village_whip_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_dc446bf8"))
@@ -521,7 +495,7 @@ public class village_whip extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a767cb3c");
@@ -530,7 +504,7 @@ public class village_whip extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.village_whip.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -540,6 +514,7 @@ public class village_whip extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int village_whip_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_a767cb3c"))
@@ -566,7 +541,7 @@ public class village_whip extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_22d4c864");
@@ -579,7 +554,7 @@ public class village_whip extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.village_whip.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -589,6 +564,7 @@ public class village_whip extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int village_whip_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_22d4c864"))
@@ -615,7 +591,7 @@ public class village_whip extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d9ea288b");
@@ -628,7 +604,7 @@ public class village_whip extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.village_whip.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -648,6 +624,7 @@ public class village_whip extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int village_whip_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_d9ea288b"))
@@ -674,7 +651,7 @@ public class village_whip extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_34ea67b6");
@@ -687,7 +664,7 @@ public class village_whip extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.village_whip.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -707,6 +684,7 @@ public class village_whip extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int village_whip_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_34ea67b6"))
@@ -732,6 +710,7 @@ public class village_whip extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int village_whip_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_22a5c907"))
@@ -758,7 +737,7 @@ public class village_whip extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_7b35cfbc");
@@ -771,7 +750,7 @@ public class village_whip extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.village_whip.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -803,7 +782,7 @@ public class village_whip extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_edb238bc");
@@ -816,7 +795,7 @@ public class village_whip extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.village_whip.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -836,6 +815,7 @@ public class village_whip extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int village_whip_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_7b35cfbc"))
@@ -862,7 +842,7 @@ public class village_whip extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_edb238bc");
@@ -875,7 +855,7 @@ public class village_whip extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.village_whip.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -895,6 +875,7 @@ public class village_whip extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int village_whip_handleBranch26(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_edb238bc"))
@@ -921,7 +902,7 @@ public class village_whip extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_46");
@@ -934,7 +915,7 @@ public class village_whip extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.village_whip.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -954,6 +935,7 @@ public class village_whip extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int village_whip_handleBranch27(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_46"))
@@ -987,7 +969,7 @@ public class village_whip extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_49");
@@ -1004,7 +986,7 @@ public class village_whip extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.village_whip.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1024,6 +1006,7 @@ public class village_whip extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int village_whip_handleBranch28(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_49"))
@@ -1057,7 +1040,7 @@ public class village_whip extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d18b8c00");
@@ -1074,7 +1057,7 @@ public class village_whip extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.village_whip.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1106,7 +1089,7 @@ public class village_whip extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_76");
@@ -1119,7 +1102,7 @@ public class village_whip extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.village_whip.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1139,6 +1122,7 @@ public class village_whip extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int village_whip_handleBranch29(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_d18b8c00"))
@@ -1165,7 +1149,7 @@ public class village_whip extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d38b8e62");
@@ -1178,7 +1162,7 @@ public class village_whip extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.village_whip.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1210,7 +1194,7 @@ public class village_whip extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_91bf5d37");
@@ -1223,7 +1207,7 @@ public class village_whip extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.village_whip.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1243,6 +1227,7 @@ public class village_whip extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int village_whip_handleBranch30(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_d38b8e62"))
@@ -1269,7 +1254,7 @@ public class village_whip extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_57");
@@ -1282,7 +1267,7 @@ public class village_whip extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.village_whip.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1302,6 +1287,7 @@ public class village_whip extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int village_whip_handleBranch31(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_57"))
@@ -1327,6 +1313,7 @@ public class village_whip extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int village_whip_handleBranch35(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_91bf5d37"))
@@ -1353,7 +1340,7 @@ public class village_whip extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d38b8e62");
@@ -1366,7 +1353,7 @@ public class village_whip extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.village_whip.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1386,6 +1373,7 @@ public class village_whip extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int village_whip_handleBranch38(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_76"))
@@ -1419,7 +1407,7 @@ public class village_whip extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d18b8c00");
@@ -1436,7 +1424,7 @@ public class village_whip extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.village_whip.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1456,6 +1444,7 @@ public class village_whip extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -1470,6 +1459,7 @@ public class village_whip extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
@@ -1480,6 +1470,7 @@ public class village_whip extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -1488,12 +1479,14 @@ public class village_whip extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.village_whip");
         return SCRIPT_CONTINUE;
     }
+
     public int handleMasterIdResponse(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id master = params.getObjId(fs_dyn_village.CLUSTER_OBJID_KEY_MASTER);
@@ -1501,12 +1494,13 @@ public class village_whip extends script.base_script
         {
             setObjVar(self, "village_master", master);
         }
-        else 
+        else
         {
             messageTo(self, "handleMasterIdRequestRetry", null, 120.0f, false);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleMasterIdRequestRetry(obj_id self, dictionary params) throws InterruptedException
     {
         if (!fs_dyn_village.getRegisteredObjIdFromClusterWideData(fs_dyn_village.CLUSTER_OBJID_KEY_MASTER, "handleMasterIdResponse", self))
@@ -1515,12 +1509,14 @@ public class village_whip extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -1588,7 +1584,7 @@ public class village_whip extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_dcf4498e");
@@ -1600,7 +1596,7 @@ public class village_whip extends script.base_script
                 utils.setScriptVar(player, "conversation.village_whip.branchId", 6);
                 npcStartConversation(player, npc, "village_whip", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1621,7 +1617,7 @@ public class village_whip extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_77e48d5b");
@@ -1629,7 +1625,7 @@ public class village_whip extends script.base_script
                 utils.setScriptVar(player, "conversation.village_whip.branchId", 9);
                 npcStartConversation(player, npc, "village_whip", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1702,7 +1698,7 @@ public class village_whip extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_22a5c907");
@@ -1718,7 +1714,7 @@ public class village_whip extends script.base_script
                 utils.setScriptVar(player, "conversation.village_whip.branchId", 24);
                 npcStartConversation(player, npc, "village_whip", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1757,6 +1753,7 @@ public class village_whip extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("village_whip"))

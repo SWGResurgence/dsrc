@@ -1,5 +1,11 @@
 package script.theme_park.meatlump.hideout;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.groundquests;
 import script.library.instance;
 import script.library.utils;
@@ -13,6 +19,7 @@ public class mtp_instance_exit extends script.base_script
     public mtp_instance_exit()
     {
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info item) throws InterruptedException
     {
         if (getDistance(player, self) > 6.0f)
@@ -22,6 +29,7 @@ public class mtp_instance_exit extends script.base_script
         item.addRootMenu(menu_info_types.ITEM_USE, new string_id("building_name", "mtp_hideout_instance_exit"));
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)
@@ -53,7 +61,7 @@ public class mtp_instance_exit extends script.base_script
             {
                 warpPlayer(player, "corellia", -473.0f, -70.0f, -4292.0f, targetCell, 43.7f, -60.0f, 156.9f, "nullCallback", false);
             }
-            else 
+            else
             {
                 instance.requestExitPlayer("mtp_hideout_instance", player);
             }

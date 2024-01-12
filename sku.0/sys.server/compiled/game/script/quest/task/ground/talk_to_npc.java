@@ -1,5 +1,11 @@
 package script.quest.task.ground;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.groundquests;
 import script.library.utils;
 import script.obj_id;
@@ -8,13 +14,14 @@ import script.obj_var_list;
 
 public class talk_to_npc extends script.quest.task.ground.base_task
 {
-    public talk_to_npc()
-    {
-    }
     public static final String dataTableColumnExperienceType = "NPC_NAME";
     public static final String taskType = "talk_to_npc";
     public static final String dot = ".";
     public static final String objvarNPCName = "npcName";
+    public talk_to_npc()
+    {
+    }
+
     public int OnTaskActivated(obj_id self, int questCrc, int taskId) throws InterruptedException
     {
         groundquests.questOutputDebugInfo(self, questCrc, taskId, taskType, "OnTaskActivated", taskType + "task activated.");
@@ -24,6 +31,7 @@ public class talk_to_npc extends script.quest.task.ground.base_task
         groundquests.questOutputDebugInfo(self, taskType, "OnStartConversation", "Player must talk to " + npcName + ".");
         return super.OnTaskActivated(self, questCrc, taskId);
     }
+
     public int OnStartConversation(obj_id self, obj_id conversant) throws InterruptedException
     {
         groundquests.questOutputDebugInfo(self, taskType, "OnStartConversation", "Checking for talk_to_npc quest task completion.");
@@ -61,7 +69,7 @@ public class talk_to_npc extends script.quest.task.ground.base_task
                                         groundquests.questOutputDebugInfo(self, questCrc, taskId, taskType, "OnStartConversation", "Target NPC " + npcName + " found.");
                                         questCompleteTask(questGetQuestId(questName), utils.stringToInt(taskName), self);
                                     }
-                                    else 
+                                    else
                                     {
                                         groundquests.questOutputDebugInfo(self, questCrc, taskId, taskType, "OnStartConversation", "NPC spoken to (" + name + ") does not match target (" + npcName + ").");
                                     }
@@ -74,28 +82,33 @@ public class talk_to_npc extends script.quest.task.ground.base_task
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnTaskCompleted(obj_id self, int questCrc, int taskId) throws InterruptedException
     {
         cleanup(self, questCrc, taskId);
         groundquests.questOutputDebugInfo(self, questCrc, taskId, taskType, "OnTaskCompleted", taskType + "task completed.");
         return super.OnTaskCompleted(self, questCrc, taskId);
     }
+
     public int OnTaskFailed(obj_id self, int questCrc, int taskId) throws InterruptedException
     {
         cleanup(self, questCrc, taskId);
         groundquests.questOutputDebugInfo(self, questCrc, taskId, taskType, "OnTaskFailed", taskType + "task failed.");
         return super.OnTaskFailed(self, questCrc, taskId);
     }
+
     public int OnTaskCleared(obj_id self, int questCrc, int taskId) throws InterruptedException
     {
         cleanup(self, questCrc, taskId);
         groundquests.questOutputDebugInfo(self, questCrc, taskId, taskType, "OnTaskCleared", taskType + " task cleared.");
         return super.OnTaskCleared(self, questCrc, taskId);
     }
+
     public void cleanup(obj_id player, int questCrc, int taskId) throws InterruptedException
     {
         groundquests.clearBaseObjVar(player, taskType, questGetQuestName(questCrc), taskId);
     }
+
     public int OnDetach(obj_id self) throws InterruptedException
     {
         removeObjVar(self, groundquests.getTaskTypeObjVar(self, taskType));

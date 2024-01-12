@@ -1,5 +1,11 @@
 package script.systems.tcg;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.static_item;
 import script.library.utils;
 import script.menu_info;
@@ -16,6 +22,7 @@ public class tcg_combine_tcg_items extends script.base_script
     public static final String TEMPLATE_PATTERN = "object/tangible/tcg/series3/combine_object_";
     public static final String COMBINE = "combine";
     public static final String JET_PACK_DEED = "item_tcg_merr_sonn_jt12_jetpack_deed";
+
     public tcg_combine_tcg_items()
     {
     }

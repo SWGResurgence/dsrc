@@ -1,63 +1,84 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.*;
 
 public class corvette_yondalla_neutral_rescue extends script.base_script
 {
+    public static String c_stringFile = "conversation/corvette_yondalla_neutral_rescue";
+
     public corvette_yondalla_neutral_rescue()
     {
     }
-    public static String c_stringFile = "conversation/corvette_yondalla_neutral_rescue";
+
     public boolean corvette_yondalla_neutral_rescue_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean corvette_yondalla_neutral_rescue_condition_knowsLocation3(obj_id player, obj_id npc) throws InterruptedException
     {
         return utils.hasScriptVar(player, "corl_corvette.heardLocation3");
     }
+
     public boolean corvette_yondalla_neutral_rescue_condition_knowsLocation2(obj_id player, obj_id npc) throws InterruptedException
     {
         return utils.hasScriptVar(player, "corl_corvette.heardLocation2");
     }
+
     public boolean corvette_yondalla_neutral_rescue_condition_knowsLocation1(obj_id player, obj_id npc) throws InterruptedException
     {
         return utils.hasScriptVar(player, "corl_corvette.heardLocation1");
     }
+
     public boolean corvette_yondalla_neutral_rescue_condition_knowsAllLocations(obj_id player, obj_id npc) throws InterruptedException
     {
         return ((utils.hasScriptVar(player, "corl_corvette.heardLocation1")) && (utils.hasScriptVar(player, "corl_corvette.heardLocation2")) && (utils.hasScriptVar(player, "corl_corvette.heardLocation3")));
     }
+
     public boolean corvette_yondalla_neutral_rescue_condition_hasStuff(obj_id player, obj_id npc) throws InterruptedException
     {
         return ((utils.playerHasItemByTemplate(player, "object/tangible/loot/dungeon/corellian_corvette/neutral_rescue_intel.iff")) || (utils.playerHasItemByTemplate(player, "object/tangible/loot/dungeon/corellian_corvette/neutral_rescue_filler01.iff")) || (utils.playerHasItemByTemplate(player, "object/tangible/loot/dungeon/corellian_corvette/neutral_rescue_filler02.iff")));
     }
+
     public boolean corvette_yondalla_neutral_rescue_condition_hasObject01(obj_id player, obj_id npc) throws InterruptedException
     {
         return utils.playerHasItemByTemplate(player, "object/tangible/loot/dungeon/corellian_corvette/neutral_rescue_intel.iff");
     }
+
     public boolean corvette_yondalla_neutral_rescue_condition_hasObject02(obj_id player, obj_id npc) throws InterruptedException
     {
         return utils.playerHasItemByTemplate(player, "object/tangible/loot/dungeon/corellian_corvette/neutral_rescue_filler01.iff");
     }
+
     public boolean corvette_yondalla_neutral_rescue_condition_hasObject03(obj_id player, obj_id npc) throws InterruptedException
     {
         return utils.playerHasItemByTemplate(player, "object/tangible/loot/dungeon/corellian_corvette/neutral_rescue_filler02.iff");
     }
+
     public boolean corvette_yondalla_neutral_rescue_condition_isGm(obj_id player, obj_id npc) throws InterruptedException
     {
         return hasObjVar(player, "gm");
     }
+
     public boolean corvette_yondalla_neutral_rescue_condition_hasTravelTicket(obj_id player, obj_id npc) throws InterruptedException
     {
         String ticketTemplate = "object/tangible/travel/travel_ticket/dungeon_ticket.iff";
         obj_id[] spaceTickets = utils.getAllItemsPlayerHasByTemplateInBankAndInventory(player, ticketTemplate);
-        if (spaceTickets != null && spaceTickets.length > 0)
+        if (spaceTickets != null)
         {
-            for (obj_id ticket : spaceTickets) {
-                if (isIdValid(ticket)) {
-                    if ((getStringObjVar(ticket, "space_dungeon.ticket.dungeon")).equals("corvette_neutral")) {
+            for (obj_id ticket : spaceTickets)
+            {
+                if (isIdValid(ticket))
+                {
+                    if ((getStringObjVar(ticket, "space_dungeon.ticket.dungeon")).equals("corvette_neutral"))
+                    {
                         return true;
                     }
                 }
@@ -65,73 +86,70 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
         }
         return false;
     }
+
     public boolean corvette_yondalla_neutral_rescue_condition_hasNoObjectsAndNoTicket(obj_id player, obj_id npc) throws InterruptedException
     {
         return ((!corvette_yondalla_neutral_rescue_condition_hasTravelTicket(player, npc)) && (!corvette_yondalla_neutral_rescue_condition_hasStuff(player, npc)));
     }
+
     public boolean corvette_yondalla_neutral_rescue_condition_isOnQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return hasObjVar(player, "corl_corvette.neutral_rescue");
     }
+
     public boolean corvette_yondalla_neutral_rescue_condition_dungeonInactive(obj_id player, obj_id npc) throws InterruptedException
     {
         String isDungeonActive = getConfigSetting("Dungeon", "Corellian_Corvette_Neutral");
-        if (isDungeonActive == null || isDungeonActive.equals("false") || isDungeonActive.equals("0"))
-        {
-            return true;
-        }
-        return false;
+        return isDungeonActive == null || isDungeonActive.equals("false") || isDungeonActive.equals("0");
     }
+
     public boolean corvette_yondalla_neutral_rescue_condition_onDifferentCorvetteQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(player, "corl_corvette"))
         {
-            if (!hasObjVar(player, "corl_corvette.neutral_rescue"))
-            {
-                return true;
-            }
+            return !hasObjVar(player, "corl_corvette.neutral_rescue");
         }
         return false;
     }
+
     public boolean corvette_yondalla_neutral_rescue_condition_earnedCorvetteReward(obj_id player, obj_id npc) throws InterruptedException
     {
         return hasObjVar(player, "corvette.neutral_rescue.finished");
     }
+
     public boolean corvette_yondalla_neutral_rescue_condition_hasInventorySpace(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id playerInv = utils.getInventoryContainer(player);
         if (isIdValid(playerInv))
         {
             int free_space = getVolumeFree(playerInv);
-            if (free_space > 0)
-            {
-                return true;
-            }
+            return free_space > 0;
         }
         return false;
     }
+
     public void corvette_yondalla_neutral_rescue_action_heardLocation1(obj_id player, obj_id npc) throws InterruptedException
     {
         utils.setScriptVar(player, "corl_corvette.heardLocation1", 1);
-        return;
     }
+
     public void corvette_yondalla_neutral_rescue_action_heardLocation2(obj_id player, obj_id npc) throws InterruptedException
     {
         utils.setScriptVar(player, "corl_corvette.heardLocation2", 1);
-        return;
     }
+
     public void corvette_yondalla_neutral_rescue_action_heardLocation3(obj_id player, obj_id npc) throws InterruptedException
     {
         utils.setScriptVar(player, "corl_corvette.heardLocation3", 1);
-        return;
     }
+
     public void corvette_yondalla_neutral_rescue_action_acceptsQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         setObjVar(player, "corl_corvette.neutral_rescue", 1);
         String custLogMsg = "*Corvette Ground Quest: Player %TU has started the neutral rescue quest.";
         CustomerServiceLog("DUNGEON_CorellianCorvette", custLogMsg, player);
-        return;
     }
+
     public void corvette_yondalla_neutral_rescue_action_clearLocations(obj_id player, obj_id npc) throws InterruptedException
     {
         if (utils.hasScriptVar(player, "corl_corvette.heardLocation1"))
@@ -146,8 +164,8 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
         {
             utils.removeScriptVar(player, "corl_corvette.heardLocation3");
         }
-        return;
     }
+
     public void corvette_yondalla_neutral_rescue_action_giveTicket(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id document = utils.getItemPlayerHasByTemplate(player, "object/tangible/loot/dungeon/corellian_corvette/neutral_rescue_intel.iff");
@@ -163,18 +181,19 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
             String custLogMsg = "*Corvette Ground Quest: Player %TU finished the neutral rescue quest and received a neutral corvette ticket.";
             CustomerServiceLog("DUNGEON_CorellianCorvette", custLogMsg, player);
         }
-        return;
     }
+
     public void corvette_yondalla_neutral_rescue_action_giveDocuments(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id playerInv = utils.getInventoryContainer(player);
-        
+
         {
             createObject("object/tangible/loot/dungeon/corellian_corvette/neutral_rescue_intel.iff", playerInv, "");
             createObject("object/tangible/loot/dungeon/corellian_corvette/neutral_rescue_filler01.iff", playerInv, "");
             createObject("object/tangible/loot/dungeon/corellian_corvette/neutral_rescue_filler02.iff", playerInv, "");
         }
     }
+
     public void corvette_yondalla_neutral_rescue_action_quitCorvetteQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(player, "corl_corvette"))
@@ -186,49 +205,58 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
         obj_id document = null;
         String intelTemplate = "object/tangible/loot/dungeon/corellian_corvette/neutral_rescue_intel.iff";
         obj_id[] intelDocuments = utils.getAllItemsPlayerHasByTemplateInBankAndInventory(player, intelTemplate);
-        if (intelDocuments != null && intelDocuments.length > 0)
+        if (intelDocuments != null)
         {
-            for (obj_id intelDocument : intelDocuments) {
+            for (obj_id intelDocument : intelDocuments)
+            {
                 document = intelDocument;
-                if (isIdValid(document)) {
+                if (isIdValid(document))
+                {
                     destroyObject(document);
                 }
             }
         }
         String filler01Template = "object/tangible/loot/dungeon/corellian_corvette/neutral_rescue_filler01.iff";
         obj_id[] filler01Documents = utils.getAllItemsPlayerHasByTemplateInBankAndInventory(player, filler01Template);
-        if (filler01Documents != null && filler01Documents.length > 0)
+        if (filler01Documents != null)
         {
-            for (obj_id filler01Document : filler01Documents) {
+            for (obj_id filler01Document : filler01Documents)
+            {
                 document = filler01Document;
-                if (isIdValid(document)) {
+                if (isIdValid(document))
+                {
                     destroyObject(document);
                 }
             }
         }
         String filler02Template = "object/tangible/loot/dungeon/corellian_corvette/neutral_rescue_filler02.iff";
         obj_id[] filler02Documents = utils.getAllItemsPlayerHasByTemplateInBankAndInventory(player, filler02Template);
-        if (filler02Documents != null && filler02Documents.length > 0)
+        if (filler02Documents != null)
         {
-            for (obj_id filler02Document : filler02Documents) {
+            for (obj_id filler02Document : filler02Documents)
+            {
                 document = filler02Document;
-                if (isIdValid(document)) {
+                if (isIdValid(document))
+                {
                     destroyObject(document);
                 }
             }
         }
-        return;
     }
+
     public void corvette_yondalla_neutral_rescue_action_removeTicket(obj_id player, obj_id npc) throws InterruptedException
     {
         corvette_yondalla_neutral_rescue_action_quitCorvetteQuest(player, npc);
         String ticketTemplate = "object/tangible/travel/travel_ticket/dungeon_ticket.iff";
         obj_id[] spaceTickets = utils.getAllItemsPlayerHasByTemplateInBankAndInventory(player, ticketTemplate);
-        if (spaceTickets != null && spaceTickets.length > 0)
+        if (spaceTickets != null)
         {
-            for (obj_id ticket : spaceTickets) {
-                if (isIdValid(ticket)) {
-                    if ((getStringObjVar(ticket, "space_dungeon.ticket.dungeon")).equals("corvette_neutral")) {
+            for (obj_id ticket : spaceTickets)
+            {
+                if (isIdValid(ticket))
+                {
+                    if ((getStringObjVar(ticket, "space_dungeon.ticket.dungeon")).equals("corvette_neutral"))
+                    {
                         destroyObject(ticket);
                         String custLogMsg = "*Corvette Ground Quest: Player %TU aborted the neutral rescue quest and the neutal corvette ticket was revoked.";
                         CustomerServiceLog("DUNGEON_CorellianCorvette", custLogMsg, player);
@@ -236,8 +264,8 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
                 }
             }
         }
-        return;
     }
+
     public void corvette_yondalla_neutral_rescue_action_takeDoc2(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id document = utils.getItemPlayerHasByTemplate(player, "object/tangible/loot/dungeon/corellian_corvette/neutral_rescue_filler02.iff");
@@ -251,8 +279,8 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
                 sendSystemMessage(player, credits + " credits have been deposited in your bank account.", null);
             }
         }
-        return;
     }
+
     public void corvette_yondalla_neutral_rescue_action_takeDoc1(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id document = utils.getItemPlayerHasByTemplate(player, "object/tangible/loot/dungeon/corellian_corvette/neutral_rescue_filler01.iff");
@@ -266,13 +294,13 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
                 sendSystemMessage(player, credits + " credits have been deposited in your bank account.", null);
             }
         }
-        return;
     }
+
     public void corvette_yondalla_neutral_rescue_action_facePlayer(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
-        return;
     }
+
     public void corvette_yondalla_neutral_rescue_action_giveCorvetteReward(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id playerInv = getObjectInSlot(player, "inventory");
@@ -282,8 +310,8 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
             removeObjVar(player, "corvette.neutral_rescue.finished");
             CustomerServiceLog("DUNGEON_CorellianCorvette", "*Corvette Reward: Player %TU has been given an AV-21 schematic.", player);
         }
-        return;
     }
+
     public int corvette_yondalla_neutral_rescue_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_9fb0ad73"))
@@ -316,6 +344,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int corvette_yondalla_neutral_rescue_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_2972f7c"))
@@ -352,7 +381,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_998ee768");
@@ -365,7 +394,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.corvette_yondalla_neutral_rescue.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -418,7 +447,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a9be41f8");
@@ -443,7 +472,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.corvette_yondalla_neutral_rescue.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -453,6 +482,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int corvette_yondalla_neutral_rescue_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_998ee768"))
@@ -478,6 +508,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int corvette_yondalla_neutral_rescue_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_a9be41f8"))
@@ -526,7 +557,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a9be41f8");
@@ -551,7 +582,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.corvette_yondalla_neutral_rescue.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -605,7 +636,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a9be41f8");
@@ -630,7 +661,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.corvette_yondalla_neutral_rescue.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -684,7 +715,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a9be41f8");
@@ -709,7 +740,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.corvette_yondalla_neutral_rescue.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -739,6 +770,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int corvette_yondalla_neutral_rescue_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_aa693144"))
@@ -786,7 +818,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a9be41f8");
@@ -811,7 +843,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.corvette_yondalla_neutral_rescue.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -865,7 +897,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f9acd930");
@@ -890,7 +922,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.corvette_yondalla_neutral_rescue.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -911,6 +943,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int corvette_yondalla_neutral_rescue_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_a9be41f8"))
@@ -959,7 +992,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a9be41f8");
@@ -984,7 +1017,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.corvette_yondalla_neutral_rescue.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1038,7 +1071,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a9be41f8");
@@ -1063,7 +1096,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.corvette_yondalla_neutral_rescue.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1117,7 +1150,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a9be41f8");
@@ -1142,7 +1175,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.corvette_yondalla_neutral_rescue.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1172,6 +1205,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int corvette_yondalla_neutral_rescue_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_a9be41f8"))
@@ -1220,7 +1254,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a9be41f8");
@@ -1245,7 +1279,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.corvette_yondalla_neutral_rescue.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1299,7 +1333,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a9be41f8");
@@ -1324,7 +1358,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.corvette_yondalla_neutral_rescue.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1378,7 +1412,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a9be41f8");
@@ -1403,7 +1437,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.corvette_yondalla_neutral_rescue.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1433,6 +1467,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int corvette_yondalla_neutral_rescue_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_a9be41f8"))
@@ -1481,7 +1516,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a9be41f8");
@@ -1506,7 +1541,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.corvette_yondalla_neutral_rescue.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1560,7 +1595,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a9be41f8");
@@ -1585,7 +1620,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.corvette_yondalla_neutral_rescue.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1639,7 +1674,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a9be41f8");
@@ -1664,7 +1699,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.corvette_yondalla_neutral_rescue.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1694,6 +1729,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int corvette_yondalla_neutral_rescue_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_a9be41f8"))
@@ -1742,7 +1778,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a9be41f8");
@@ -1767,7 +1803,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.corvette_yondalla_neutral_rescue.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1821,7 +1857,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a9be41f8");
@@ -1846,7 +1882,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.corvette_yondalla_neutral_rescue.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1900,7 +1936,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a9be41f8");
@@ -1925,7 +1961,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.corvette_yondalla_neutral_rescue.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1955,6 +1991,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int corvette_yondalla_neutral_rescue_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_f9acd930"))
@@ -2003,7 +2040,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f9acd930");
@@ -2028,7 +2065,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.corvette_yondalla_neutral_rescue.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2082,7 +2119,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f9acd930");
@@ -2107,7 +2144,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.corvette_yondalla_neutral_rescue.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2161,7 +2198,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f9acd930");
@@ -2186,7 +2223,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.corvette_yondalla_neutral_rescue.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2218,6 +2255,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int corvette_yondalla_neutral_rescue_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_dfb8d44e"))
@@ -2266,7 +2304,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f9acd930");
@@ -2291,7 +2329,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.corvette_yondalla_neutral_rescue.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2311,6 +2349,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int corvette_yondalla_neutral_rescue_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_f9acd930"))
@@ -2359,7 +2398,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f9acd930");
@@ -2384,7 +2423,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.corvette_yondalla_neutral_rescue.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2438,7 +2477,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f9acd930");
@@ -2463,7 +2502,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.corvette_yondalla_neutral_rescue.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2517,7 +2556,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f9acd930");
@@ -2542,7 +2581,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.corvette_yondalla_neutral_rescue.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2574,6 +2613,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int corvette_yondalla_neutral_rescue_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_f9acd930"))
@@ -2622,7 +2662,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f9acd930");
@@ -2647,7 +2687,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.corvette_yondalla_neutral_rescue.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2701,7 +2741,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f9acd930");
@@ -2726,7 +2766,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.corvette_yondalla_neutral_rescue.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2780,7 +2820,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f9acd930");
@@ -2805,7 +2845,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.corvette_yondalla_neutral_rescue.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2837,6 +2877,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int corvette_yondalla_neutral_rescue_handleBranch26(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_f9acd930"))
@@ -2885,7 +2926,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f9acd930");
@@ -2910,7 +2951,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.corvette_yondalla_neutral_rescue.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2964,7 +3005,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f9acd930");
@@ -2989,7 +3030,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.corvette_yondalla_neutral_rescue.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3043,7 +3084,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f9acd930");
@@ -3068,7 +3109,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.corvette_yondalla_neutral_rescue.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3100,6 +3141,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int corvette_yondalla_neutral_rescue_handleBranch27(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_f9acd930"))
@@ -3148,7 +3190,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f9acd930");
@@ -3173,7 +3215,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.corvette_yondalla_neutral_rescue.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3227,7 +3269,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f9acd930");
@@ -3252,7 +3294,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.corvette_yondalla_neutral_rescue.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3306,7 +3348,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f9acd930");
@@ -3331,7 +3373,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.corvette_yondalla_neutral_rescue.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3363,6 +3405,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -3374,6 +3417,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
         setCondition(self, CONDITION_INTERESTING);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
@@ -3382,6 +3426,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
         setInvulnerable(self, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -3390,18 +3435,21 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.corvette_yondalla_neutral_rescue");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -3438,7 +3486,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_9fb0ad73");
@@ -3450,7 +3498,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
                 utils.setScriptVar(player, "conversation.corvette_yondalla_neutral_rescue.branchId", 2);
                 npcStartConversation(player, npc, "corvette_yondalla_neutral_rescue", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -3493,7 +3541,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_2972f7c");
@@ -3509,7 +3557,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
                 utils.setScriptVar(player, "conversation.corvette_yondalla_neutral_rescue.branchId", 7);
                 npcStartConversation(player, npc, "corvette_yondalla_neutral_rescue", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -3545,7 +3593,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_aa693144");
@@ -3561,7 +3609,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
                 utils.setScriptVar(player, "conversation.corvette_yondalla_neutral_rescue.branchId", 13);
                 npcStartConversation(player, npc, "corvette_yondalla_neutral_rescue", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -3590,7 +3638,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_dfb8d44e");
@@ -3602,7 +3650,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
                 utils.setScriptVar(player, "conversation.corvette_yondalla_neutral_rescue.branchId", 23);
                 npcStartConversation(player, npc, "corvette_yondalla_neutral_rescue", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -3611,6 +3659,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("corvette_yondalla_neutral_rescue"))

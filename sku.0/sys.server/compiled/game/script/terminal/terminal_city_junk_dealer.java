@@ -1,5 +1,11 @@
 package script.terminal;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -9,16 +15,19 @@ public class terminal_city_junk_dealer extends script.base_script
     public static final string_id SID_MT_REMOVED = new string_id("city/city", "mt_removed");
     public static final boolean LOGGING_ON = true;
     public static final String LOGNAME = "junk_log";
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         city.validateSpecialStructure(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         city.removeMissionTerminal(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         int city_id = city.checkMayorCity(player, false);
@@ -34,6 +43,7 @@ public class terminal_city_junk_dealer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)
@@ -61,6 +71,7 @@ public class terminal_city_junk_dealer extends script.base_script
         sendDirtyObjectMenuNotification(self);
         return SCRIPT_CONTINUE;
     }
+
     public int startDealing(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -71,6 +82,7 @@ public class terminal_city_junk_dealer extends script.base_script
         smuggler.showSellJunkSui(player, self, false, false);
         return SCRIPT_CONTINUE;
     }
+
     public int startBuyBack(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -81,6 +93,7 @@ public class terminal_city_junk_dealer extends script.base_script
         smuggler.showBuyBackSui(player, self);
         return SCRIPT_CONTINUE;
     }
+
     public int handleSellJunkSui(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -94,12 +107,14 @@ public class terminal_city_junk_dealer extends script.base_script
         }
         utils.setScriptVar(player, "fence", false);
         utils.setScriptVar(player, "junk_dealer_transaction", self);
-        if(!smuggler.hasBuyBackContainer(player)) {
+        if (!smuggler.hasBuyBackContainer(player))
+        {
             smuggler.createBuyBackControlDeviceOnPlayer(player);
         }
         messageTo(player, "handleSellJunkSui", params, 0.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleSoldJunk(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -120,6 +135,7 @@ public class terminal_city_junk_dealer extends script.base_script
         messageTo(player, "handleSoldJunk", params, 0.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleBuyBackSui(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -135,6 +151,7 @@ public class terminal_city_junk_dealer extends script.base_script
         messageTo(player, "handleBuyBackSui", params, 0.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleTheBuyBack(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -157,6 +174,7 @@ public class terminal_city_junk_dealer extends script.base_script
         messageTo(player, "handleTheBuyBack", params, 0.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int startFlaggingItemsNoSale(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -167,6 +185,7 @@ public class terminal_city_junk_dealer extends script.base_script
         smuggler.flagJunkSaleSui(player, self);
         return SCRIPT_CONTINUE;
     }
+
     public int handleFlagJunkSui(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -183,6 +202,7 @@ public class terminal_city_junk_dealer extends script.base_script
         messageTo(player, "handleFlagJunkSui", params, 0.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public boolean blog(String txt) throws InterruptedException
     {
         if (LOGGING_ON)

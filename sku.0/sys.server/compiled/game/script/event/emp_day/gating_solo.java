@@ -1,5 +1,11 @@
 package script.event.emp_day;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.factions;
 import script.library.groundquests;
 import script.obj_id;
@@ -10,6 +16,7 @@ public class gating_solo extends script.base_script
     public gating_solo()
     {
     }
+
     public int OnAboutToReceiveItem(obj_id self, obj_id destinationCell, obj_id transferrer, obj_id item) throws InterruptedException
     {
         if (!isPlayer(item))
@@ -19,8 +26,8 @@ public class gating_solo extends script.base_script
         int questId = questGetQuestId("quest/emp_day_rebel");
         String whichFaction = factions.getFactionNameByHashCode(factions.pvpGetAlignedFaction(item));
         if (questIsTaskActive(questId, groundquests.getTaskId(questId, "empDayComplete"), item) ||
-            questIsTaskActive(questId, groundquests.getTaskId(questId, "toSolo"), item) ||
-            questIsQuestComplete(questId, item))
+                questIsTaskActive(questId, groundquests.getTaskId(questId, "toSolo"), item) ||
+                questIsQuestComplete(questId, item))
         {
             return SCRIPT_CONTINUE;
         }

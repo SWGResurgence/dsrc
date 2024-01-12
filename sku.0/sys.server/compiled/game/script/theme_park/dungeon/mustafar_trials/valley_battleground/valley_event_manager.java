@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.mustafar_trials.valley_battleground;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.location;
@@ -7,11 +13,12 @@ import script.obj_id;
 
 public class valley_event_manager extends script.base_script
 {
+    public static final String STAGE = "currentStage";
+    public static final boolean LOGGING = false;
     public valley_event_manager()
     {
     }
-    public static final String STAGE = "currentStage";
-    public static final boolean LOGGING = false;
+
     public int beginSpawn(obj_id self, dictionary params) throws InterruptedException
     {
         clearEventArea(self);
@@ -20,16 +27,19 @@ public class valley_event_manager extends script.base_script
         messageTo(self, "spawnNextStage", dict, 0, false);
         return SCRIPT_CONTINUE;
     }
+
     public int cleanupSpawn(obj_id self, dictionary params) throws InterruptedException
     {
         messageTo(self, "dungeonCleanup", null, 0.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int dungeonCleanup(obj_id self, dictionary params) throws InterruptedException
     {
         clearEventArea(self);
         return SCRIPT_CONTINUE;
     }
+
     public void clearEventArea(obj_id self) throws InterruptedException
     {
         trial.setIsDroidArmyDefeated(self, false);
@@ -38,24 +48,32 @@ public class valley_event_manager extends script.base_script
         utils.setScriptVar(self, STAGE, 0);
         trial.bumpSession(self, "da_control");
         obj_id[] objects = getObjectsInRange(self, 400);
-        if (objects == null || objects.length == 0)
+        if (objects == null)
         {
             return;
         }
-        for (obj_id object : objects) {
-            if (isIdValid(object) && object != self) {
-                if (!isPlayer(object)) {
-                    if (!isMob(object)) {
-                        if (trial.isTempObject(object)) {
+        for (obj_id object : objects)
+        {
+            if (isIdValid(object) && object != self)
+            {
+                if (!isPlayer(object))
+                {
+                    if (!isMob(object))
+                    {
+                        if (trial.isTempObject(object))
+                        {
                             trial.cleanupNpc(object);
                         }
-                    } else {
+                    }
+                    else
+                    {
                         trial.cleanupNpc(object);
                     }
                 }
             }
         }
     }
+
     public int spawnNextStage(obj_id self, dictionary params) throws InterruptedException
     {
         int nextStage = params.getInt("stage");
@@ -71,8 +89,10 @@ public class valley_event_manager extends script.base_script
             return SCRIPT_CONTINUE;
         }
         boolean moreStages = false;
-        for (int stage : stages) {
-            if (stage > nextStage) {
+        for (int stage : stages)
+        {
+            if (stage > nextStage)
+            {
                 nextStage = stage;
                 moreStages = true;
                 break;
@@ -85,11 +105,12 @@ public class valley_event_manager extends script.base_script
             messageTo(self, "spawnNextStage", dict, trial.BATTLEFIELD_WAVE_DELAY, false);
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             return SCRIPT_CONTINUE;
         }
     }
+
     public void spawnActors(obj_id dungeon, int stage) throws InterruptedException
     {
         int rows = dataTableGetNumRows(trial.VALLEY_DATA);
@@ -145,7 +166,7 @@ public class valley_event_manager extends script.base_script
                         setSpawnScriptVar(item, spawnScriptVar);
                     }
                 }
-                else 
+                else
                 {
                     obj_id creature = create.object(object, spawnLoc);
                     if (!isIdValid(creature))
@@ -166,13 +187,16 @@ public class valley_event_manager extends script.base_script
             }
         }
     }
+
     public void attachSpawnScripts(obj_id subject, String spawnScripts) throws InterruptedException
     {
         String[] scripts = split(spawnScripts, ':');
-        for (String script : scripts) {
+        for (String script : scripts)
+        {
             attachScript(subject, script);
         }
     }
+
     public void setSpawnScriptVar(obj_id subject, String spawnScriptVar) throws InterruptedException
     {
         if (spawnScriptVar == null || spawnScriptVar.equals(""))
@@ -180,13 +204,15 @@ public class valley_event_manager extends script.base_script
             return;
         }
         String[] pairs = split(spawnScriptVar, ',');
-        for (String pair : pairs) {
+        for (String pair : pairs)
+        {
             String[] scriptVarToSet = split(pair, '=');
             String scriptVarValue = scriptVarToSet[1];
             String[] scriptVarNameAndType = split(scriptVarToSet[0], ':');
             String scriptVarType = scriptVarNameAndType[0];
             String scriptVarName = scriptVarNameAndType[1];
-            switch (scriptVarType) {
+            switch (scriptVarType)
+            {
                 case "string":
                     utils.setScriptVar(subject, scriptVarName, scriptVarValue);
                     break;
@@ -203,22 +229,30 @@ public class valley_event_manager extends script.base_script
             }
         }
     }
+
     public void debuffDroidArmy(obj_id self) throws InterruptedException
     {
         obj_id[] objects = getObjectsInRange(self, 400);
-        if (objects == null || objects.length == 0)
+        if (objects == null)
         {
             return;
         }
-        for (obj_id object : objects) {
-            if (object != self) {
-                if (utils.hasScriptVar(object, trial.BATTLEFIELD_DROID_ARMY)) {
-                    if (buff.hasBuff(object, "high_morale")) {
+        for (obj_id object : objects)
+        {
+            if (object != self)
+            {
+                if (utils.hasScriptVar(object, trial.BATTLEFIELD_DROID_ARMY))
+                {
+                    if (buff.hasBuff(object, "high_morale"))
+                    {
                         buff.removeBuff(object, "high_morale");
                     }
                     buff.applyBuff(object, "low_morale");
-                } else if (isPlayer(object) || utils.hasScriptVar(object, trial.BATTLEFIELD_MINER)) {
-                    if (buff.hasBuff(object, "low_morale")) {
+                }
+                else if (isPlayer(object) || utils.hasScriptVar(object, trial.BATTLEFIELD_MINER))
+                {
+                    if (buff.hasBuff(object, "low_morale"))
+                    {
                         buff.removeBuff(object, "low_morale");
                     }
                     buff.applyBuff(object, "high_morale");
@@ -226,31 +260,43 @@ public class valley_event_manager extends script.base_script
             }
         }
     }
+
     public void debufMiners(obj_id self) throws InterruptedException
     {
         obj_id[] objects = getObjectsInRange(self, 400);
-        if (objects == null || objects.length == 0)
+        if (objects == null)
         {
             return;
         }
-        for (obj_id object : objects) {
-            if (object != self) {
-                if (utils.hasScriptVar(object, trial.BATTLEFIELD_DROID_ARMY)) {
-                    if (!buff.hasBuff(object, "low_morale")) {
+        for (obj_id object : objects)
+        {
+            if (object != self)
+            {
+                if (utils.hasScriptVar(object, trial.BATTLEFIELD_DROID_ARMY))
+                {
+                    if (!buff.hasBuff(object, "low_morale"))
+                    {
                         buff.applyBuff(object, "high_morale");
                     }
-                } else if (isPlayer(object)) {
-                    if (!buff.hasBuff(object, "high_morale")) {
+                }
+                else if (isPlayer(object))
+                {
+                    if (!buff.hasBuff(object, "high_morale"))
+                    {
                         buff.applyBuff(object, "low_morale");
                     }
-                } else if (utils.hasScriptVar(object, trial.BATTLEFIELD_MINER)) {
-                    if (buff.hasBuff(object, "high_morale")) {
+                }
+                else if (utils.hasScriptVar(object, trial.BATTLEFIELD_MINER))
+                {
+                    if (buff.hasBuff(object, "high_morale"))
+                    {
                         buff.removeBuff(object, "high_morale");
                     }
                 }
             }
         }
     }
+
     public int generatorDestroyed(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id[] players = instance.getPlayersInInstanceArea(self);
@@ -262,11 +308,13 @@ public class valley_event_manager extends script.base_script
         spawnActors(self, -1);
         return SCRIPT_CONTINUE;
     }
+
     public int handleDebufMiners(obj_id self, dictionary params) throws InterruptedException
     {
         debufMiners(self);
         return SCRIPT_CONTINUE;
     }
+
     public void redirectArmy(obj_id self) throws InterruptedException
     {
         obj_id[] objects = getAllObjectsWithObjVar(getLocation(self), 400.0f, trial.WP_NAME);
@@ -276,20 +324,24 @@ public class valley_event_manager extends script.base_script
         }
         location finalPoint = null;
         location playerExit = null;
-        for (obj_id object : objects) {
-            if ((getStringObjVar(object, trial.WP_NAME)).equals("end_point")) {
+        for (obj_id object : objects)
+        {
+            if ((getStringObjVar(object, trial.WP_NAME)).equals("end_point"))
+            {
                 finalPoint = getLocation(object);
             }
-            if ((getStringObjVar(object, trial.WP_NAME)).equals("player_exit")) {
+            if ((getStringObjVar(object, trial.WP_NAME)).equals("player_exit"))
+            {
                 playerExit = getLocation(object);
             }
         }
         obj_id[] army = trial.getObjectsInRangeWithScriptVar(self, trial.BATTLEFIELD_DROID_ARMY, 400.0f);
-        if (army == null || army.length == 0)
+        if (army == null)
         {
             return;
         }
-        for (obj_id obj_id : army) {
+        for (obj_id obj_id : army)
+        {
             stop(obj_id);
             location[] newPath = new location[3];
             newPath[0] = getLocation(obj_id);
@@ -298,6 +350,7 @@ public class valley_event_manager extends script.base_script
             ai_lib.setPatrolOncePath(obj_id, newPath);
         }
     }
+
     public int commanderDied(obj_id self, dictionary params) throws InterruptedException
     {
         debuffDroidArmy(self);
@@ -306,24 +359,28 @@ public class valley_event_manager extends script.base_script
         utils.sendSystemMessage(players, trial.BATTLEFIELD_COMMANDER_DIED);
         return SCRIPT_CONTINUE;
     }
-    public int winTrial(obj_id self, dictionary params) throws InterruptedException {
-		trial.setIsDroidArmyDefeated(self, true);
+
+    public int winTrial(obj_id self, dictionary params) throws InterruptedException
+    {
+        trial.setIsDroidArmyDefeated(self, true);
         trial.setDungeonCleanOutTimer(self);
         trial.sendCompletionSignal(self, trial.ARMY_WIN_SIGNAL);
         obj_id[] players = instance.getPlayersInInstanceArea(self);
-        if (players == null || players.length == 0) {
-			return SCRIPT_CONTINUE;
-		}
-		utils.sendSystemMessage(players, trial.BATTLEFIELD_WIN_MESSAGE);
+        if (players == null || players.length == 0)
+        {
+            return SCRIPT_CONTINUE;
+        }
+        utils.sendSystemMessage(players, trial.BATTLEFIELD_WIN_MESSAGE);
         instance.playMusicInInstance(self, trial.MUS_MUST_QUEST_WIN);
         badge.grantBadge(players, "bdg_must_victory_army");
-        for (obj_id player : players) {
+        for (obj_id player : players)
+        {
             buff.applyBuff(player, "high_morale", 3600);
         }
-		
-    // HEROIC SYSTEM BEGIN \\
-    
-    dictionary dict = new dictionary();
+
+        // HEROIC SYSTEM BEGIN \\
+
+        dictionary dict = new dictionary();
         dict.put("tokenIndex", 7);
         dict.put("tokenCount", 6);
         utils.messageTo(players, "handleAwardtoken", dict, 0, false);
@@ -332,20 +389,23 @@ public class valley_event_manager extends script.base_script
         String realTime = getCalendarTimeStringLocal(calendarTime);
         CustomerServiceLog("instance-mustafar_trials_droid_army", "Forward Commander Defeated in instance (" + self + ") by group_id (" + group + ") at " + realTime);
         CustomerServiceLog("instance-mustafar_trials_droid_army", "Group (" + group + ") consists of: ");
-        for (int i = 0; i < players.length; ++i) {
+        for (int i = 0; i < players.length; ++i)
+        {
             String strProfession = skill.getProfessionName(getSkillTemplate(players[i]));
             CustomerServiceLog("instance-mustafar_trials_droid_army", "Group (" + group + ") member " + i + " " + getFirstName(players[i]) + "'s(" + players[i] + ") profession is " + strProfession + ".");
         }
-        
-    // HEROIC SYSTEM END \\
-        
+
+        // HEROIC SYSTEM END \\
+
         return SCRIPT_CONTINUE;
     }
+
     public int loseTrial(obj_id self, dictionary params) throws InterruptedException
     {
         instance.closeInstance(self);
         return SCRIPT_CONTINUE;
     }
+
     public int validateDungeon(obj_id self, dictionary params) throws InterruptedException
     {
         if (!trial.verifySession(self, params, "da_control"))
@@ -363,11 +423,15 @@ public class valley_event_manager extends script.base_script
                 return SCRIPT_CONTINUE;
             }
             int test = 0;
-            for (obj_id obj_id : army) {
-                if (!isDead(obj_id)) {
+            for (obj_id obj_id : army)
+            {
+                if (!isDead(obj_id))
+                {
                     test += 1;
                     livingDroid = true;
-                } else {
+                }
+                else
+                {
                     destroyObject(obj_id);
                 }
             }
@@ -380,6 +444,7 @@ public class valley_event_manager extends script.base_script
         messageTo(self, "validateDungeon", trial.getSessionDict(self, "da_control"), 60, false);
         return SCRIPT_CONTINUE;
     }
+
     public void doLogging(String section, String message) throws InterruptedException
     {
         if (LOGGING || trial.VALLEY_LOGGING)

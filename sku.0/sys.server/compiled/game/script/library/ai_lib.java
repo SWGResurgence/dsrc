@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.location;
 import script.obj_id;
@@ -49,6 +55,7 @@ public class ai_lib extends script.base_script
     public static final int DIFFICULTY_ELITE = 1;
     public static final int DIFFICULTY_BOSS = 2;
     public static final String SHARED_HEALTH_LIST = "shared_health_list";
+
     public ai_lib()
     {
     }

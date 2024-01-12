@@ -1,16 +1,23 @@
 package script.quest.task.ground;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
 public class destroy_multi_and_loot extends script.quest.task.ground.base_task
 {
-    public destroy_multi_and_loot()
-    {
-    }
     public static final String taskType = "destroy_multiple_and_loot";
     public static final String dot = ".";
     public static final String objvarCount = "lootedItems";
+    public destroy_multi_and_loot()
+    {
+    }
+
     public int OnTaskActivated(obj_id self, int questCrc, int taskId) throws InterruptedException
     {
         groundquests.questOutputDebugInfo(self, questCrc, taskId, taskType, "OnTaskActivated", taskType + " task activated.");
@@ -21,6 +28,7 @@ public class destroy_multi_and_loot extends script.quest.task.ground.base_task
         questSetQuestTaskCounter(self, questGetQuestName(questCrc), taskId, "quest/groundquests:destroy_and_loot_counter", 0, count);
         return super.OnTaskActivated(self, questCrc, taskId);
     }
+
     public int receiveCreditForKill(obj_id self, dictionary params) throws InterruptedException
     {
         String killedCreatureType = params.getString("creatureName");
@@ -58,13 +66,9 @@ public class destroy_multi_and_loot extends script.quest.task.ground.base_task
                                 String requiredRegion = groundquests.getTaskStringDataEntry(questCrc, taskId, "REQUIRED_REGION");
                                 boolean regionAcceptable = groundquests.isInNamedRegion(self, requiredRegion);
                                 String creatureType = groundquests.getTaskStringDataEntry(questCrc, taskId, "TARGET_SERVER_TEMPLATE");
-                                boolean creatureAcceptable = false;
-                                if (creatureType != null && killedCreatureType != null && creatureType.equals(killedCreatureType))
-                                {
-                                    creatureAcceptable = true;
-                                }
+                                boolean creatureAcceptable = creatureType != null && creatureType.equals(killedCreatureType);
                                 String creatureSocialGroup = groundquests.getTaskStringDataEntry(questCrc, taskId, "SOCIAL_GROUP");
-                                if (creatureSocialGroup != null && killedCreatureSocialGroup != null && creatureSocialGroup.equals(killedCreatureSocialGroup))
+                                if (creatureSocialGroup != null && creatureSocialGroup.equals(killedCreatureSocialGroup))
                                 {
                                     creatureAcceptable = true;
                                 }
@@ -98,7 +102,7 @@ public class destroy_multi_and_loot extends script.quest.task.ground.base_task
                                                 {
                                                     questCompleteTask(questCrc, taskId, self);
                                                 }
-                                                else 
+                                                else
                                                 {
                                                     setObjVar(self, objvarNameCount, lootedCount);
                                                     questSetQuestTaskCounter(self, questGetQuestName(questCrc), taskId, "quest/groundquests:destroy_and_loot_counter", lootedCount, itemsTotal);
@@ -109,7 +113,7 @@ public class destroy_multi_and_loot extends script.quest.task.ground.base_task
                                                 }
                                             }
                                         }
-                                        else 
+                                        else
                                         {
                                             string_id message = new string_id("quest/groundquests", "destroy_multiple_and_loot_fail");
                                             prose_package pp = prose.getPackage(message, self, self, 0);
@@ -117,7 +121,7 @@ public class destroy_multi_and_loot extends script.quest.task.ground.base_task
                                             sendSystemMessageProse(self, pp);
                                         }
                                     }
-                                    else 
+                                    else
                                     {
                                         groundquests.questOutputDebugInfo(self, questCrc, taskId, taskType, "receiveCreditForKill", "Killed a " + killedCreatureType + ", of social group " + killedCreatureSocialGroup + ", but not in required region " + requiredRegion + ".");
                                     }
@@ -130,6 +134,7 @@ public class destroy_multi_and_loot extends script.quest.task.ground.base_task
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnTaskCompleted(obj_id self, int questCrc, int taskId) throws InterruptedException
     {
         cleanup(self, questCrc, taskId);
@@ -141,22 +146,26 @@ public class destroy_multi_and_loot extends script.quest.task.ground.base_task
         }
         return super.OnTaskCompleted(self, questCrc, taskId);
     }
+
     public int OnTaskFailed(obj_id self, int questCrc, int taskId) throws InterruptedException
     {
         cleanup(self, questCrc, taskId);
         groundquests.questOutputDebugInfo(self, questCrc, taskId, taskType, "OnTaskFailed", taskType + " task failed.");
         return super.OnTaskFailed(self, questCrc, taskId);
     }
+
     public int OnTaskCleared(obj_id self, int questCrc, int taskId) throws InterruptedException
     {
         cleanup(self, questCrc, taskId);
         groundquests.questOutputDebugInfo(self, questCrc, taskId, taskType, "OnTaskCleared", taskType + " task cleared.");
         return super.OnTaskCleared(self, questCrc, taskId);
     }
+
     public void cleanup(obj_id player, int questCrc, int taskId) throws InterruptedException
     {
         groundquests.clearBaseObjVar(player, taskType, questGetQuestName(questCrc), taskId);
     }
+
     public int handleClientLogin(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         dictionary tasks = groundquests.getActiveTasksForTaskType(self, taskType);
@@ -165,13 +174,15 @@ public class destroy_multi_and_loot extends script.quest.task.ground.base_task
             java.util.Enumeration keys = tasks.keys();
             while (keys.hasMoreElements())
             {
-                String questCrcString = (String)keys.nextElement();
+                String questCrcString = (String) keys.nextElement();
                 int questCrc = utils.stringToInt(questCrcString);
                 int[] tasksForCurrentQuest = tasks.getIntArray(questCrcString);
-                for (int taskId : tasksForCurrentQuest) {
+                for (int taskId : tasksForCurrentQuest)
+                {
                     String baseObjVar = groundquests.getBaseObjVar(self, taskType, questGetQuestName(questCrc), taskId);
                     String objvarNameCount = baseObjVar + dot + objvarCount;
-                    if (hasObjVar(self, objvarNameCount)) {
+                    if (hasObjVar(self, objvarNameCount))
+                    {
                         int lootedCount = getIntObjVar(self, objvarNameCount);
                         int itemsTotal = groundquests.getTaskIntDataEntry(questCrc, taskId, "LOOT_ITEMS_REQUIRED");
                         questSetQuestTaskCounter(self, questGetQuestName(questCrc), taskId, "quest/groundquests:destroy_and_loot_counter", lootedCount, itemsTotal);

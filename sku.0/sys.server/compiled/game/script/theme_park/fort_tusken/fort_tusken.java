@@ -1,5 +1,11 @@
 package script.theme_park.fort_tusken;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.create;
 import script.location;
@@ -10,11 +16,13 @@ public class fort_tusken extends script.base_script
     public fort_tusken()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         spawnEveryone(self);
         return SCRIPT_CONTINUE;
     }
+
     public void spawnEveryone(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, "maxPop"))
@@ -33,14 +41,15 @@ public class fort_tusken extends script.base_script
             create.addDestroyMessage(sandperson, "tuskenDead", 300.0f, self);
             intX = intX + 1;
         }
-        return;
     }
+
     public String pickRandomRoom() throws InterruptedException
     {
         int randRoom = rand(1, 23);
         String roomToSpawnIn = "r" + randRoom;
         return roomToSpawnIn;
     }
+
     public String pickRandomTusken() throws InterruptedException
     {
         int randRaider = rand(1, 12);
@@ -48,44 +57,45 @@ public class fort_tusken extends script.base_script
         switch (randRaider)
         {
             case 1:
-            tuskenToSpawn = "tusken_commoner";
-            break;
+                tuskenToSpawn = "tusken_commoner";
+                break;
             case 2:
-            tuskenToSpawn = "tusken_raider";
-            break;
+                tuskenToSpawn = "tusken_raider";
+                break;
             case 3:
-            tuskenToSpawn = "tusken_captain";
-            break;
+                tuskenToSpawn = "tusken_captain";
+                break;
             case 4:
-            tuskenToSpawn = "tusken_commoner";
-            break;
+                tuskenToSpawn = "tusken_commoner";
+                break;
             case 5:
-            tuskenToSpawn = "tusken_raider";
-            break;
+                tuskenToSpawn = "tusken_raider";
+                break;
             case 6:
-            tuskenToSpawn = "tusken_chief";
-            break;
+                tuskenToSpawn = "tusken_chief";
+                break;
             case 7:
-            tuskenToSpawn = "tusken_commoner";
-            break;
+                tuskenToSpawn = "tusken_commoner";
+                break;
             case 8:
-            tuskenToSpawn = "tusken_raider";
-            break;
+                tuskenToSpawn = "tusken_raider";
+                break;
             case 9:
-            tuskenToSpawn = "tusken_sniper";
-            break;
+                tuskenToSpawn = "tusken_sniper";
+                break;
             case 10:
-            tuskenToSpawn = "tusken_commoner";
-            break;
+                tuskenToSpawn = "tusken_commoner";
+                break;
             case 11:
-            tuskenToSpawn = "tusken_raider";
-            break;
+                tuskenToSpawn = "tusken_raider";
+                break;
             case 12:
-            tuskenToSpawn = "tusken_warlord";
-            break;
+                tuskenToSpawn = "tusken_warlord";
+                break;
         }
         return tuskenToSpawn;
     }
+
     public int tuskenDead(obj_id self, dictionary params) throws InterruptedException
     {
         debugSpeakMsg(self, "Creating a replacement");

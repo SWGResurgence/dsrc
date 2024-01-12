@@ -1,5 +1,11 @@
 package script.systems.storyteller;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -15,6 +21,7 @@ public class npc_controller extends script.base_script
     public static final int REMOVE_EFFECT_MENU = menu_info_types.SERVER_MENU6;
     public static final int NPC_OPTIONS_ROOT_MENU = menu_info_types.SERVER_MENU7;
     public static final int EQUIP_UNEQUIP_WEAPON_MENU = menu_info_types.SERVER_MENU8;
+
     public npc_controller()
     {
     }
@@ -249,7 +256,6 @@ public class npc_controller extends script.base_script
             aiEquipSecondaryWeapon(self);
         }
         clearNpcInventoryOwnership(self);
-        return;
     }
 
     public void clearNpcInventoryOwnership(obj_id self) throws InterruptedException
@@ -268,7 +274,6 @@ public class npc_controller extends script.base_script
                 }
             }
         }
-        return;
     }
 
     public boolean equipWeapon(obj_id self) throws InterruptedException
@@ -288,7 +293,6 @@ public class npc_controller extends script.base_script
     {
         int cleanup_time = getStandardCleanupTime(self);
         messageTo(self, "prepCleanupProp", null, cleanup_time, false);
-        return;
     }
 
     public int getStandardCleanupTime(obj_id prop_controller) throws InterruptedException

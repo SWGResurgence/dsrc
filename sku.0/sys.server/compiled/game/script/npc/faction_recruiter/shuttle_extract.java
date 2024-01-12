@@ -1,14 +1,17 @@
 package script.npc.faction_recruiter;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.factions;
 import script.library.prose;
 import script.*;
 
 public class shuttle_extract extends script.base_script
 {
-    public shuttle_extract()
-    {
-    }
     public static final String SCRIPT_PLAYER_SHUTTLE_EXTRACT = "npc.faction_recruiter.player_shuttle_extract";
     public static final String VAR_FACTION = "faction_recruiter.faction";
     public static final String VAR_EXTRACTION_LOCATION = "faction_recruiter.extraction_location";
@@ -19,11 +22,16 @@ public class shuttle_extract extends script.base_script
     public static final string_id SID_EXTRACTION_POINT = new string_id("faction_recruiter", "shuttle_extraction_point");
     public static final string_id SID_ALREADY_REQUEST_SHUTTLE = new string_id("faction_recruiter", "already_request_shuttle");
     public static final int ARRIVAL_TIME = 60;
+    public shuttle_extract()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         mi.addRootMenu(menu_info_types.ITEM_USE, SID_SHUTTLE_EXTRACT);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)
@@ -71,8 +79,10 @@ public class shuttle_extract extends script.base_script
                                 LOG("LOG_CHANNEL", "shuttle_extract::OnObjectMenuSelect(Use) -- group_members is null for group " + group);
                                 return SCRIPT_CONTINUE;
                             }
-                            for (obj_id group_member : group_members) {
-                                if (group_member != player) {
+                            for (obj_id group_member : group_members)
+                            {
+                                if (group_member != player)
+                                {
                                     createExtractionWaypoint(group_member, loc);
                                     pp = prose.getPackage(SID_SHUTTLE_INITIATED_GROUP, player, null, ARRIVAL_TIME);
                                     sendSystemMessageProse(group_member, pp);
@@ -82,7 +92,7 @@ public class shuttle_extract extends script.base_script
                     }
                     messageTo(player, "msgExtractionShuttleArrival", null, ARRIVAL_TIME, false);
                 }
-                else 
+                else
                 {
                     sendSystemMessage(player, SID_NOT_OUTSIDE);
                 }
@@ -90,6 +100,7 @@ public class shuttle_extract extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean createExtractionWaypoint(obj_id player, location loc) throws InterruptedException
     {
         obj_id waypoint = createWaypointInDatapad(player, loc);

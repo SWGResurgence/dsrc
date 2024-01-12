@@ -1,13 +1,16 @@
 package script.theme_park.outbreak_prolog;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
 public class dead_npc_script extends script.base_script
 {
-    public dead_npc_script()
-    {
-    }
     public static final String MENU_STRING_FILE = "theme_park/outbreak/outbreak";
     public static final String MENU_OBJ_VAR = "menu_string";
     public static final String NO_MENU_OBJ_VAR = "none";
@@ -25,16 +28,22 @@ public class dead_npc_script extends script.base_script
     public static final string_id SID_YOU_FIND_NOTHING = new string_id(MENU_STRING_FILE, "you_find_nothing");
     public static final string_id SID_THIS_NOT_FOR_YOU = new string_id(MENU_STRING_FILE, "this_isnt_for_you");
     public static final String CREATURE_TABLE = "datatables/mob/creatures.iff";
+    public dead_npc_script()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "knockDown", null, 10, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "knockDown", null, 10, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (isDead(player) || isIncapacitated(player))
@@ -58,6 +67,7 @@ public class dead_npc_script extends script.base_script
         mi.addRootMenu(menu_info_types.SERVER_MENU2, new string_id(MENU_STRING_FILE, menuObjVar));
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (isDead(player) || isIncapacitated(player))
@@ -78,9 +88,11 @@ public class dead_npc_script extends script.base_script
             return SCRIPT_CONTINUE;
         }
         CustomerServiceLog("outbreak_themepark", "dead_npc_script.OnObjectMenuSelect() menuObjVar: " + menuObjVar);
-        switch (menuObjVar) {
+        switch (menuObjVar)
+        {
             case "content_biologist_01":
-                if (!groundquests.isTaskActive(player, "quest_03_investigate_biolab", "getDataDisk")) {
+                if (!groundquests.isTaskActive(player, "quest_03_investigate_biolab", "getDataDisk"))
+                {
                     sendSystemMessage(player, SID_THIS_NOT_FOR_YOU);
                     return SCRIPT_CONTINUE;
                 }
@@ -89,11 +101,14 @@ public class dead_npc_script extends script.base_script
             case OUTBREAK_KEY_SEARCH:
                 CustomerServiceLog("outbreak_themepark", "dead_npc_script.OnObjectMenuSelect() Key menu selected by Player: " + player);
                 int questNumber = getIntObjVar(self, KEY_QUEST_INT_OBJVAR);
-                if (questNumber < 1) {
+                if (questNumber < 1)
+                {
                     CustomerServiceLog("outbreak_themepark", "dead_npc_script.OnObjectMenuSelect() Quest Integer not found. Designer error for player: " + player);
                     sendSystemMessage(player, SID_YOU_FIND_NOTHING);
                     return SCRIPT_CONTINUE;
-                } else if (!groundquests.isQuestActive(player, IMPERIAL_KEY_QUEST + questNumber) && !groundquests.isQuestActive(player, REBEL_KEY_QUEST + questNumber) && !groundquests.isQuestActive(player, NEUTRAL_KEY_QUEST + questNumber)) {
+                }
+                else if (!groundquests.isQuestActive(player, IMPERIAL_KEY_QUEST + questNumber) && !groundquests.isQuestActive(player, REBEL_KEY_QUEST + questNumber) && !groundquests.isQuestActive(player, NEUTRAL_KEY_QUEST + questNumber))
+                {
                     CustomerServiceLog("outbreak_themepark", "dead_npc_script.OnObjectMenuSelect() Quest Integer found: " + questNumber + ". Player: " + player + " didn't have proper quest.");
                     sendSystemMessage(player, SID_YOU_FIND_NOTHING);
                     return SCRIPT_CONTINUE;
@@ -105,11 +120,14 @@ public class dead_npc_script extends script.base_script
             case OUTBREAK_VIRUS_SEARCH:
                 CustomerServiceLog("outbreak_themepark", "dead_npc_script.OnObjectMenuSelect() virus menu selected by Player: " + player);
                 int signalNumber = getIntObjVar(self, SIGNAL_INT_OBJVAR);
-                if (signalNumber < 1) {
+                if (signalNumber < 1)
+                {
                     CustomerServiceLog("outbreak_themepark", "dead_npc_script.OnObjectMenuSelect() Signal Integer not found. Designer error for player: " + player);
                     sendSystemMessage(player, SID_YOU_FIND_NOTHING);
                     return SCRIPT_CONTINUE;
-                } else if (!groundquests.isTaskActive(player, NEUTRAL_SEARCH_QUEST, "waitForTasks") && !groundquests.isTaskActive(player, IMPERIAL_SEARCH_QUEST, "waitForTasks") && !groundquests.isTaskActive(player, REBEL_SEARCH_QUEST, "waitForTasks")) {
+                }
+                else if (!groundquests.isTaskActive(player, NEUTRAL_SEARCH_QUEST, "waitForTasks") && !groundquests.isTaskActive(player, IMPERIAL_SEARCH_QUEST, "waitForTasks") && !groundquests.isTaskActive(player, REBEL_SEARCH_QUEST, "waitForTasks"))
+                {
                     CustomerServiceLog("outbreak_themepark", "dead_npc_script.OnObjectMenuSelect() Quest not found for Player: " + player);
                     sendSystemMessage(player, SID_YOU_FIND_NOTHING);
                     return SCRIPT_CONTINUE;
@@ -121,11 +139,13 @@ public class dead_npc_script extends script.base_script
         sendSystemMessage(player, SID_YOU_FIND_NOTHING);
         return SCRIPT_CONTINUE;
     }
+
     public int knockDown(obj_id self, dictionary params) throws InterruptedException
     {
         ai_lib.aiSetPosture(self, POSTURE_KNOCKED_DOWN);
         return SCRIPT_CONTINUE;
     }
+
     public boolean spawnEnemy(obj_id self, obj_id player, location spawnLoc) throws InterruptedException
     {
         CustomerServiceLog("outbreak_themepark", "dead_npc_script.spawnEnemy() Initialized!");

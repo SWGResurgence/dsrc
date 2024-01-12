@@ -1,5 +1,11 @@
 package script.holocron;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.menu_info_types;
 import script.obj_id;
@@ -9,6 +15,7 @@ public class heal_medicine extends script.base_script
     public heal_medicine()
     {
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)
@@ -28,7 +35,7 @@ public class heal_medicine extends script.base_script
                 LOG("newbie_handoff_heal", "Target NPC has been healed.");
                 messageTo(player, "missionHealComplete", params, 1, true);
             }
-            else 
+            else
             {
                 LOG("newbie_handoff_heal", "Incorrect heal target.");
                 sendSystemMessage(self, newbie_handoff.SID_NEWBIE_MISSION_HEAL_WRONG_TARGET);

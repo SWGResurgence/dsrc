@@ -1,5 +1,11 @@
 package script.gambling.base;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.obj_id;
@@ -11,6 +17,7 @@ public class slot extends script.gambling.base.default_interface
     public slot()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         int slotBalance = getBankBalance(self);
@@ -27,6 +34,7 @@ public class slot extends script.gambling.base.default_interface
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handlePlayerAdded(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -42,6 +50,7 @@ public class slot extends script.gambling.base.default_interface
         startSlotGame(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int handlePlayerRemoved(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -62,6 +71,7 @@ public class slot extends script.gambling.base.default_interface
         removeObjVar(self, gambling.VAR_GAME_BASE);
         return SCRIPT_CONTINUE;
     }
+
     public int handleBetPlaced(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -105,12 +115,13 @@ public class slot extends script.gambling.base.default_interface
         {
             showSlotUi(self, player);
         }
-        else 
+        else
         {
             spinReels(self, player, amt);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleBetFailed(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -125,6 +136,7 @@ public class slot extends script.gambling.base.default_interface
         sendSystemMessage(player, gambling.SID_BET_FAILED);
         return SCRIPT_CONTINUE;
     }
+
     public int handleBetTimer(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -156,7 +168,7 @@ public class slot extends script.gambling.base.default_interface
         {
             spinReels(self, player, balance);
         }
-        else 
+        else
         {
             String svpath = gambling.VAR_GAME_PLAYERS + "." + player + ".pid";
             int oldpid = utils.getIntScriptVar(self, svpath);
@@ -166,6 +178,7 @@ public class slot extends script.gambling.base.default_interface
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleSlotUi(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -208,6 +221,7 @@ public class slot extends script.gambling.base.default_interface
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleReelsSpinning(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -248,21 +262,21 @@ public class slot extends script.gambling.base.default_interface
                     break;
             }
         }
-        else 
+        else
         {
             Vector reelOdds = utils.getResizeableIntBatchScriptVar(self, gambling.VAR_REEL_ODDS);
             if (reelOdds == null || reelOdds.size() == 0)
             {
                 results[idx] = 0;
             }
-            else 
+            else
             {
                 if (idx == 0)
                 {
                     int tmpIdx = rand(0, reelOdds.size() - 1);
                     results[0] = (Integer) (reelOdds.elementAt(tmpIdx));
                 }
-                else 
+                else
                 {
                     results[idx] = results[0];
                 }
@@ -287,12 +301,13 @@ public class slot extends script.gambling.base.default_interface
         {
             messageTo(self, "handleParseResults", params, 1.0f, false);
         }
-        else 
+        else
         {
             messageTo(self, "handleReelsSpinning", params, 3.0f, false);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleParseResults(obj_id self, dictionary params) throws InterruptedException
     {
         int slotBalance = getBankBalance(self);
@@ -331,7 +346,7 @@ public class slot extends script.gambling.base.default_interface
             d.put("payout", payout);
             transferBankCreditsFromNamedAccount(money.ACCT_SLOT_STANDARD, player, payout, "handleGamblingPayout", "noHandler", d);
         }
-        else 
+        else
         {
             CustomerServiceLog("gambling", getGameTime() + ": (" + player + ") " + getName(player) + " lost");
             broadcast(player, "Sorry, you did not win this round. Please try again.");
@@ -339,6 +354,7 @@ public class slot extends script.gambling.base.default_interface
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleGamblingPayout(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -357,6 +373,7 @@ public class slot extends script.gambling.base.default_interface
         messageTo(self, "handleDelayedRestart", params, 3.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleDelayedRestart(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -375,6 +392,7 @@ public class slot extends script.gambling.base.default_interface
         }
         return SCRIPT_CONTINUE;
     }
+
     private void startSlotGame(obj_id self, obj_id player) throws InterruptedException
     {
         if (!isIdValid(self) || !isIdValid(player))
@@ -389,6 +407,7 @@ public class slot extends script.gambling.base.default_interface
         }
         showSlotUi(self, player);
     }
+
     private void showSlotUi(obj_id self, obj_id player) throws InterruptedException
     {
         if (!isIdValid(self) || !isIdValid(player))
@@ -415,7 +434,7 @@ public class slot extends script.gambling.base.default_interface
         {
             entries = utils.addElement(entries, "Max Bet:      " + playerTotal);
         }
-        else 
+        else
         {
             entries = utils.addElement(entries, "Max Bet:      " + max);
         }
@@ -427,7 +446,7 @@ public class slot extends script.gambling.base.default_interface
         {
             pid = sui.listbox(self, player, prompt, sui.BET_MAX_BET_ONE_SPIN, title, entries, "handleSlotUi");
         }
-        else 
+        else
         {
             pid = sui.listbox(self, player, prompt, sui.BET_MAX_BET_ONE_QUIT, title, entries, "handleSlotUi");
         }
@@ -445,6 +464,7 @@ public class slot extends script.gambling.base.default_interface
         d.put("stamp", now);
         messageTo(self, "handleBetTimer", d, 60.0f, false);
     }
+
     private void spinReels(obj_id self, obj_id player, int amt) throws InterruptedException
     {
         if (!isIdValid(self) || !isIdValid(player) || amt < 1)
@@ -473,6 +493,7 @@ public class slot extends script.gambling.base.default_interface
         broadcast(player, "You activate the machine and the reels start spinning...");
         messageTo(self, "handleReelsSpinning", d, 5.0f, false);
     }
+
     private void showPayoutSchedule(obj_id self, obj_id player) throws InterruptedException
     {
         String gameType = getStringObjVar(self, gambling.VAR_TABLE_TYPE);

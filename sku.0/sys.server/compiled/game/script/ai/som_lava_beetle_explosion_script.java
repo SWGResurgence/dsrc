@@ -1,5 +1,11 @@
 package script.ai;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.trial;
 import script.obj_id;
@@ -9,6 +15,7 @@ public class som_lava_beetle_explosion_script extends script.base_script
     public som_lava_beetle_explosion_script()
     {
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         int explodeRoll = rand(1, 100);
@@ -19,16 +26,18 @@ public class som_lava_beetle_explosion_script extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int nukeSelf(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id[] targets = trial.getValidPlayersInRadius(self, 7);
         playClientEffectLoc(self, trial.PRT_KUBAZA_EXPLODE, getLocation(self), 0.4f);
         destroyObject(self);
-        if (targets == null || targets.length == 0)
+        if (targets == null)
         {
             return SCRIPT_CONTINUE;
         }
-        for (obj_id target : targets) {
+        for (obj_id target : targets)
+        {
             damage(target, DAMAGE_ELEMENTAL_HEAT, HIT_LOCATION_BODY, 500);
         }
         return SCRIPT_CONTINUE;

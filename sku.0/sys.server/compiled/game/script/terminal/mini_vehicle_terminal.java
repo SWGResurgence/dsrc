@@ -1,14 +1,17 @@
 package script.terminal;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.player_structure;
 import script.library.utils;
 
 public class mini_vehicle_terminal extends script.base_script
 {
-    public mini_vehicle_terminal()
-    {
-    }
     public static final String MENU_FILE = "pet/pet_menu";
     public static final string_id VEHICLE_NAME = new string_id(MENU_FILE, "mini_vehicle_custom_name");
     public static final string_id VEHICLE_BIOLINK_NEEDED = new string_id(MENU_FILE, "mini_vehicle_biolink_needed");
@@ -23,6 +26,10 @@ public class mini_vehicle_terminal extends script.base_script
     public static final String VEHICLE_ID = "vehicle.id";
     public static final String VEHICLE_NAMED = "vehicle.named";
     public static final String PLAYER = "vehicle.user";
+    public mini_vehicle_terminal()
+    {
+    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         obj_id terminal = self;
@@ -41,6 +48,7 @@ public class mini_vehicle_terminal extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         obj_id terminal = self;
@@ -52,6 +60,7 @@ public class mini_vehicle_terminal extends script.base_script
         destroyObject(vehicle);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToBeTransferred(obj_id self, obj_id destContainer, obj_id transferer) throws InterruptedException
     {
         obj_id terminal = self;
@@ -77,6 +86,7 @@ public class mini_vehicle_terminal extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         obj_id terminal = self;
@@ -101,12 +111,13 @@ public class mini_vehicle_terminal extends script.base_script
         {
             mi.addRootMenu(menu_info_types.ITEM_USE, DESTROY);
         }
-        else 
+        else
         {
             mi.addRootMenu(menu_info_types.ITEM_USE, SUMMON);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         obj_id terminal = self;
@@ -153,12 +164,13 @@ public class mini_vehicle_terminal extends script.base_script
                 removeObjVar(terminal, VEHICLE_ID);
             }
         }
-        else 
+        else
         {
             messageTo(terminal, "destroyVehicle", null, 1, false);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int destroyVehicle(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id terminal = self;
@@ -190,6 +202,7 @@ public class mini_vehicle_terminal extends script.base_script
         sendConsoleMessage(player, "vehicle retired.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnPack(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id vehicle = getObjIdObjVar(self, VEHICLE_ID);
@@ -200,6 +213,7 @@ public class mini_vehicle_terminal extends script.base_script
         destroyObject(vehicle);
         return SCRIPT_CONTINUE;
     }
+
     public boolean setVehicleVars(obj_id terminal, obj_id vehicle) throws InterruptedException
     {
         if (!isValidId(terminal) || !exists(terminal))
@@ -217,6 +231,7 @@ public class mini_vehicle_terminal extends script.base_script
         setObjVar(vehicle, PLAYER, user);
         return true;
     }
+
     public boolean createVehicle(obj_id terminal, obj_id player) throws InterruptedException
     {
         if (!isValidId(terminal) || !exists(terminal))
@@ -251,12 +266,12 @@ public class mini_vehicle_terminal extends script.base_script
             {
                 startLocation = getLocation(terminal);
             }
-            else 
+            else
             {
                 startLocation = getLocation(player);
             }
         }
-        else 
+        else
         {
             boolean validList = validLocationList(terminal, patrolLoc);
             if (!validList)
@@ -283,6 +298,7 @@ public class mini_vehicle_terminal extends script.base_script
         }
         return true;
     }
+
     public boolean recreateVehicle(obj_id terminal) throws InterruptedException
     {
         obj_id anotherVehicle = getObjIdObjVar(terminal, VEHICLE_ID);
@@ -330,14 +346,17 @@ public class mini_vehicle_terminal extends script.base_script
         }
         return true;
     }
+
     public boolean validLocationList(obj_id terminal, location[] patrolLocations) throws InterruptedException
     {
         if (patrolLocations == null)
         {
             return false;
         }
-        for (location patrolLocation : patrolLocations) {
-            if (!isValidId(patrolLocation.cell)) {
+        for (location patrolLocation : patrolLocations)
+        {
+            if (!isValidId(patrolLocation.cell))
+            {
                 removeObjVar(terminal, OBJVAR_VEHICLE_PATROL_POINTS);
                 return false;
             }

@@ -4,6 +4,12 @@ package script.bot;/*
 @Purpose: Entertainer bot.
 */
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.ai.ai;
 import script.library.*;

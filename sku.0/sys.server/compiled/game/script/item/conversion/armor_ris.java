@@ -1,5 +1,11 @@
 package script.item.conversion;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.sui;
 import script.library.utils;
@@ -60,7 +66,6 @@ public class armor_ris extends script.base_script
         if (getVolumeFree(pInv) <= 1)
         {
             sendSystemMessage(player, new string_id("quest_armorsmith", "inventory_full"));
-            return;
         }
         else
         {

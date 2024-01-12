@@ -1,5 +1,11 @@
 package script.theme_park.poi.tatooine.city;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.deltadictionary;
 import script.dictionary;
 import script.library.ai_lib;
@@ -12,6 +18,7 @@ public class npc_mission_01_convo extends script.systems.missions.base.mission_d
     public npc_mission_01_convo()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         setObjVar(self, "mission.intPersistent", 1);
@@ -19,6 +26,7 @@ public class npc_mission_01_convo extends script.systems.missions.base.mission_d
         messageTo(self, "cleanUpScripts", null, 3, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "cleanUpScripts", null, 3, true);
@@ -35,6 +43,7 @@ public class npc_mission_01_convo extends script.systems.missions.base.mission_d
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id speaker) throws InterruptedException
     {
         if (ai_lib.isInCombat(self) || ai_lib.isInCombat(speaker))
@@ -50,14 +59,14 @@ public class npc_mission_01_convo extends script.systems.missions.base.mission_d
                 chat.chat(self, strResponse);
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 string_id greeting = new string_id("npc_mission/npc_mission_01", "npc_msn_01_greeting_onmission");
                 chat.chat(self, greeting);
                 return SCRIPT_CONTINUE;
             }
         }
-        else 
+        else
         {
             obj_id[] objMissionArray = getMissionObjects(speaker);
             if (objMissionArray != null)
@@ -71,11 +80,12 @@ public class npc_mission_01_convo extends script.systems.missions.base.mission_d
             }
         }
         string_id greeting = new string_id("npc_mission/npc_mission_01", "npc_msn_01_greeting_01");
-        string_id response[] = new string_id[1];
+        string_id[] response = new string_id[1];
         response[0] = new string_id("npc_mission/npc_mission_01", "npc_msn_01_presp_greeting_01");
         npcStartConversation(speaker, self, "recruiting/imperial_recruit", greeting, response);
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String convo, obj_id player, string_id response) throws InterruptedException
     {
         if ((response.getAsciiId()).equals("npc_msn_01_presp_greeting_01"))
@@ -169,6 +179,7 @@ public class npc_mission_01_convo extends script.systems.missions.base.mission_d
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cleanUpScripts(obj_id self, dictionary params) throws InterruptedException
     {
         if (!hasScript(self, "theme_park.poi.tatooine.city.npc_mission_convo"))

@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.mustafar_trials.working_droid_factory;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.create;
@@ -12,19 +18,21 @@ import java.util.Vector;
 
 public class mde_repair_droid extends script.base_script
 {
-    public mde_repair_droid()
-    {
-    }
     public static final String ASSASSIN_TEMPLATE = "ig_assassin_droid.iff";
     public static final String ASSASSIN_RESPAWN = "som_working_assassin_droid";
     public static final String COMBAT_TEMPLATE = "blastromech.iff";
     public static final String COMBAT_RESPAWN = "som_working_blastromech";
     public static final String FIXER_ONE = "som_working_super_repair_droid";
     public static final boolean LOGGING = false;
+    public mde_repair_droid()
+    {
+    }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setInvulnerable(self, true);
@@ -32,6 +40,7 @@ public class mde_repair_droid extends script.base_script
         messageTo(self, "path", trial.getSessionDict(self), 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int path(obj_id self, dictionary params) throws InterruptedException
     {
         if (!trial.verifySession(self, params))
@@ -52,6 +61,7 @@ public class mde_repair_droid extends script.base_script
         setMovementRun(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnMovePathComplete(obj_id self) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "swarming"))
@@ -70,7 +80,7 @@ public class mde_repair_droid extends script.base_script
             doAnimationAction(self, "search");
             messageTo(self, "findCorpse", trial.getSessionDict(self), 3, false);
         }
-        else 
+        else
         {
             obj_id corpse = utils.getObjIdScriptVar(self, "rezzing");
             faceTo(self, corpse);
@@ -78,6 +88,7 @@ public class mde_repair_droid extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int findCorpse(obj_id self, dictionary params) throws InterruptedException
     {
         if (!trial.verifySession(self, params))
@@ -87,11 +98,15 @@ public class mde_repair_droid extends script.base_script
         obj_id[] objects = trial.getAllObjectsInDungeon(self);
         Vector corpses = new Vector();
         corpses.setSize(0);
-        for (obj_id object : objects) {
+        for (obj_id object : objects)
+        {
             String template = getTemplateName(object);
-            if (template.contains(ASSASSIN_TEMPLATE) || template.contains(COMBAT_TEMPLATE)) {
-                if (!utils.hasScriptVar(object, "taken") && !utils.hasScriptVar(object, trial.WORKING_MDE_REVIVED)) {
-                    if (isDead(object)) {
+            if (template.contains(ASSASSIN_TEMPLATE) || template.contains(COMBAT_TEMPLATE))
+            {
+                if (!utils.hasScriptVar(object, "taken") && !utils.hasScriptVar(object, trial.WORKING_MDE_REVIVED))
+                {
+                    if (isDead(object))
+                    {
                         utils.addElement(corpses, object);
                     }
                 }
@@ -101,7 +116,7 @@ public class mde_repair_droid extends script.base_script
         {
             messageTo(self, "path", trial.getSessionDict(self), 0, false);
         }
-        obj_id random = ((obj_id)corpses.get(rand(0, corpses.size() - 1)));
+        obj_id random = ((obj_id) corpses.get(rand(0, corpses.size() - 1)));
         utils.setScriptVar(random, "taken", true);
         utils.setScriptVar(self, "rezzing", random);
         location corpseLoc = getLocation(random);
@@ -110,6 +125,7 @@ public class mde_repair_droid extends script.base_script
         ai_lib.aiPathTo(self, corpseLoc);
         return SCRIPT_CONTINUE;
     }
+
     public int performRez(obj_id self, dictionary params) throws InterruptedException
     {
         if (!trial.verifySession(self, params))
@@ -140,18 +156,19 @@ public class mde_repair_droid extends script.base_script
         messageTo(self, "path", trial.getSessionDict(self), 2, false);
         return SCRIPT_CONTINUE;
     }
+
     public int formFixerOne(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id mde = params.getObjId("mde");
         utils.setScriptVar(self, "swarming", mde);
         location mdeLoc = getLocation(mde);
-        String[] offSet = 
-        {
-            "-1:-1:",
-            "1:1",
-            "-1:1",
-            "1:-1"
-        };
+        String[] offSet =
+                {
+                        "-1:-1:",
+                        "1:1",
+                        "-1:1",
+                        "1:-1"
+                };
         String myOffset = offSet[getNum(self)];
         String[] parse = split(myOffset, ':');
         mdeLoc.x += utils.stringToFloat(parse[0]);
@@ -160,10 +177,12 @@ public class mde_repair_droid extends script.base_script
         messageTo(self, "continueForm", null, 13, false);
         return SCRIPT_CONTINUE;
     }
+
     public int getNum(obj_id self) throws InterruptedException
     {
         return utils.getIntScriptVar(self, "fixerNum");
     }
+
     public int continueForm(obj_id self, dictionary params) throws InterruptedException
     {
         int num = getNum(self);
@@ -178,6 +197,7 @@ public class mde_repair_droid extends script.base_script
         messageTo(self, "anim1", null, 3, false);
         return SCRIPT_CONTINUE;
     }
+
     public int anim1(obj_id self, dictionary params) throws InterruptedException
     {
         int num = getNum(self);
@@ -192,6 +212,7 @@ public class mde_repair_droid extends script.base_script
         messageTo(self, "anim2", null, 3, false);
         return SCRIPT_CONTINUE;
     }
+
     public int anim2(obj_id self, dictionary params) throws InterruptedException
     {
         int num = getNum(self);
@@ -202,6 +223,7 @@ public class mde_repair_droid extends script.base_script
         messageTo(self, "anim3", null, 3, false);
         return SCRIPT_CONTINUE;
     }
+
     public int anim3(obj_id self, dictionary params) throws InterruptedException
     {
         int num = getNum(self);
@@ -209,13 +231,14 @@ public class mde_repair_droid extends script.base_script
         {
             doAnimationAction(self, "yes");
         }
-        else 
+        else
         {
             doAnimationAction(self, "conversation_1");
         }
         messageTo(self, "anim4", null, 3, false);
         return SCRIPT_CONTINUE;
     }
+
     public int anim4(obj_id self, dictionary params) throws InterruptedException
     {
         int num = getNum(self);
@@ -238,6 +261,7 @@ public class mde_repair_droid extends script.base_script
         messageTo(self, "formOfFixer", null, 3, false);
         return SCRIPT_CONTINUE;
     }
+
     public int formOfFixer(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id mde = utils.getObjIdScriptVar(self, "swarming");
@@ -248,6 +272,7 @@ public class mde_repair_droid extends script.base_script
         messageTo(self, "completeTranx", null, 2, false);
         return SCRIPT_CONTINUE;
     }
+
     public int completeTranx(obj_id self, dictionary params) throws InterruptedException
     {
         playClientEffectLoc(self, trial.PRT_WORKING_REPAIR_COMPILE, getLocation(self), 0.4f);
@@ -261,6 +286,7 @@ public class mde_repair_droid extends script.base_script
         trial.cleanupNpc(self);
         return SCRIPT_CONTINUE;
     }
+
     public void doLogging(String section, String message) throws InterruptedException
     {
         if (LOGGING || trial.WORKING_LOGGING)

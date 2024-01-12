@@ -4,6 +4,12 @@ package script.developer.bubbajoe;/*
 @Purpose: Commando grenade droid. Battlefield 2.0 reward.
 */
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.ai.ai;
 import script.*;
 import script.library.*;

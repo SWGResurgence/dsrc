@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.avatar_platform;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.obj_id;
 
 public class avatar_door_lock extends script.base_script
@@ -7,16 +13,19 @@ public class avatar_door_lock extends script.base_script
     public avatar_door_lock()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setAvatarDoorLocks(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         setAvatarDoorLocks(self);
         return SCRIPT_CONTINUE;
     }
+
     public void setAvatarDoorLocks(obj_id self) throws InterruptedException
     {
         obj_id techhall06 = getCellId(self, "techhall06");

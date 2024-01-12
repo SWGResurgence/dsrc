@@ -1,5 +1,11 @@
 package script.quest.task.ground;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.groundquests;
 import script.library.sui;
@@ -8,9 +14,6 @@ import script.obj_id;
 
 public class show_message_box extends script.quest.task.ground.base_task
 {
-    public show_message_box()
-    {
-    }
     public static final String dataTableColumnMessageBoxTitle = "MESSAGE_BOX_TITLE";
     public static final String dataTableColumnMessageBoxText = "MESSAGE_BOX_TEXT";
     public static final String dataTableColumnMessageBoxSound = "MESSAGE_BOX_SOUND";
@@ -23,14 +26,20 @@ public class show_message_box extends script.quest.task.ground.base_task
     public static final int defaultMessageBoxSizeHeight = 256;
     public static final int defaultMessageBoxLocationX = 320;
     public static final int defaultMessageBoxLocationY = 256;
+    public show_message_box()
+    {
+    }
+
     public String getQuestCrcVarName(int pageId) throws InterruptedException
     {
         return taskType + ".questCrc." + pageId;
     }
+
     public String getTaskIdVarName(int pageId) throws InterruptedException
     {
         return taskType + ".taskId." + pageId;
     }
+
     public void displayMessageBox(obj_id player, int questCrc, int taskId) throws InterruptedException
     {
         String messageBoxTitle = groundquests.getTaskStringDataEntry(questCrc, taskId, dataTableColumnMessageBoxTitle);
@@ -46,7 +55,7 @@ public class show_message_box extends script.quest.task.ground.base_task
         {
             sui.setSizeProperty(pageId, messageBoxSizeWidth, messageBoxSizeHeight);
         }
-        else 
+        else
         {
             sui.setSizeProperty(pageId, defaultMessageBoxSizeWidth, defaultMessageBoxSizeHeight);
         }
@@ -54,7 +63,7 @@ public class show_message_box extends script.quest.task.ground.base_task
         {
             sui.setLocationProperty(pageId, messageBoxLocationX, messageBoxLocationY);
         }
-        else 
+        else
         {
             sui.setLocationProperty(pageId, defaultMessageBoxLocationX, defaultMessageBoxLocationY);
         }
@@ -70,6 +79,7 @@ public class show_message_box extends script.quest.task.ground.base_task
         utils.setScriptVar(player, getTaskIdVarName(pageId), taskId);
         groundquests.questOutputDebugLog(taskType, "displayMessageBox", "pageId = " + pageId);
     }
+
     public int OnTaskActivated(obj_id self, int questCrc, int taskId) throws InterruptedException
     {
         groundquests.questOutputDebugInfo(self, questCrc, taskId, taskType, "OnTaskActivated", taskType + "task activated.");
@@ -77,6 +87,7 @@ public class show_message_box extends script.quest.task.ground.base_task
         groundquests.setBaseObjVar(self, taskType, questGetQuestName(questCrc), taskId);
         return super.OnTaskActivated(self, questCrc, taskId);
     }
+
     public int QuestShowMessageBoxCompleted(obj_id self, dictionary params) throws InterruptedException
     {
         int pageId = params.getInt("pageId");
@@ -94,33 +105,39 @@ public class show_message_box extends script.quest.task.ground.base_task
         utils.removeScriptVar(self, getTaskIdVarName(pageId));
         return SCRIPT_CONTINUE;
     }
+
     public int OnTaskCompleted(obj_id self, int questCrc, int taskId) throws InterruptedException
     {
         cleanup(self, questCrc, taskId);
         groundquests.questOutputDebugInfo(self, questCrc, taskId, taskType, "OnTaskCompleted", taskType + "task completed.");
         return super.OnTaskCompleted(self, questCrc, taskId);
     }
+
     public int OnTaskFailed(obj_id self, int questCrc, int taskId) throws InterruptedException
     {
         cleanup(self, questCrc, taskId);
         groundquests.questOutputDebugInfo(self, questCrc, taskId, taskType, "OnTaskFailed", taskType + "task failed.");
         return super.OnTaskFailed(self, questCrc, taskId);
     }
+
     public int OnTaskCleared(obj_id self, int questCrc, int taskId) throws InterruptedException
     {
         cleanup(self, questCrc, taskId);
         groundquests.questOutputDebugInfo(self, questCrc, taskId, taskType, "OnTaskCleared", taskType + "task cleared.");
         return super.OnTaskCleared(self, questCrc, taskId);
     }
+
     public int OnDetach(obj_id self) throws InterruptedException
     {
         removeObjVar(self, groundquests.getTaskTypeObjVar(self, taskType));
         return SCRIPT_CONTINUE;
     }
+
     public void cleanup(obj_id player, int questCrc, int taskId) throws InterruptedException
     {
         groundquests.clearBaseObjVar(player, taskType, questGetQuestName(questCrc), taskId);
     }
+
     public int handleClientLogin(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         groundquests.questOutputDebugLog(taskType, "handleClientLogin", "start");
@@ -131,10 +148,11 @@ public class show_message_box extends script.quest.task.ground.base_task
             groundquests.questOutputDebugLog(taskType, "handleClientLogin", "task count = " + tasks.size());
             while (keys.hasMoreElements())
             {
-                String questCrcString = (String)keys.nextElement();
+                String questCrcString = (String) keys.nextElement();
                 int questCrc = utils.stringToInt(questCrcString);
                 int[] tasksForCurrentQuest = tasks.getIntArray(questCrcString);
-                for (int taskId : tasksForCurrentQuest) {
+                for (int taskId : tasksForCurrentQuest)
+                {
                     displayMessageBox(self, questCrc, taskId);
                 }
             }

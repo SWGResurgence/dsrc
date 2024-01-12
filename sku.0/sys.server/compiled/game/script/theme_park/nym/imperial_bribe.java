@@ -1,5 +1,11 @@
 package script.theme_park.nym;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.money;
@@ -8,10 +14,12 @@ import script.string_id;
 
 public class imperial_bribe extends script.base_script
 {
+    public static final String CONVO = "celebrity/imperial_bribe";
+
     public imperial_bribe()
     {
     }
-    public static final String CONVO = "celebrity/imperial_bribe";
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setName(self, "Sergeant Moore (Retired)");
@@ -20,12 +28,13 @@ public class imperial_bribe extends script.base_script
         setInvulnerable(self, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id speaker) throws InterruptedException
     {
         if (hasObjVar(speaker, "nym.bribe.hundred"))
         {
             string_id greeting = new string_id(CONVO, "already_paid");
-            string_id response[] = new string_id[2];
+            string_id[] response = new string_id[2];
             response[0] = new string_id(CONVO, "tell_me_base");
             response[1] = new string_id(CONVO, "tell_me_droideka");
             npcStartConversation(speaker, self, "celebConvo", greeting, response);
@@ -33,7 +42,7 @@ public class imperial_bribe extends script.base_script
         if (hasObjVar(speaker, "nym.bribe.fifty"))
         {
             string_id greeting = new string_id(CONVO, "already_paid");
-            string_id response[] = new string_id[2];
+            string_id[] response = new string_id[2];
             response[0] = new string_id(CONVO, "short_base_info");
             response[1] = new string_id(CONVO, "short_droideka_info");
             npcStartConversation(speaker, self, "celebConvo", greeting, response);
@@ -41,20 +50,21 @@ public class imperial_bribe extends script.base_script
         if (hasObjVar(speaker, "nym.bribe.who"))
         {
             string_id greeting = new string_id(CONVO, "leave_me_alone");
-            string_id response[] = new string_id[1];
+            string_id[] response = new string_id[1];
             response[0] = new string_id(CONVO, "perhaps_bribe");
             npcStartConversation(speaker, self, "celebConvo", greeting, response);
         }
-        else 
+        else
         {
             string_id greeting = new string_id(CONVO, "leave_me_alone");
-            string_id response[] = new string_id[2];
+            string_id[] response = new string_id[2];
             response[0] = new string_id(CONVO, "who_are_you");
             response[1] = new string_id(CONVO, "perhaps_bribe");
             npcStartConversation(speaker, self, "celebConvo", greeting, response);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String convo, obj_id speaker, string_id response) throws InterruptedException
     {
         if ((response.getAsciiId()).equals("who_are_you"))
@@ -76,7 +86,7 @@ public class imperial_bribe extends script.base_script
                 message = new string_id(CONVO, "the_good_stuff");
                 setObjVar(speaker, "nym.bribe.hundred", 1);
             }
-            else 
+            else
             {
                 message = new string_id(CONVO, "you_got_nothing");
                 npcSpeak(speaker, message);
@@ -101,7 +111,7 @@ public class imperial_bribe extends script.base_script
                 message = new string_id(CONVO, "medium_info");
                 setObjVar(speaker, "nym.bribe.fifty", 1);
             }
-            else 
+            else
             {
                 message = new string_id(CONVO, "you_got_nothing");
                 npcSpeak(speaker, message);
@@ -170,17 +180,17 @@ public class imperial_bribe extends script.base_script
                         message = new string_id(CONVO, "end_droideka_info");
                         npcAddConversationResponse(speaker, new string_id(CONVO, "anymore_droideka"));
                     }
-                    else 
+                    else
                     {
                         npcAddConversationResponse(speaker, new string_id(CONVO, "add_100_bribe"));
                     }
                 }
-                else 
+                else
                 {
                     npcAddConversationResponse(speaker, new string_id(CONVO, "add_100_bribe"));
                 }
             }
-            else 
+            else
             {
                 npcAddConversationResponse(speaker, new string_id(CONVO, "add_100_bribe"));
             }
@@ -201,17 +211,17 @@ public class imperial_bribe extends script.base_script
                         message = new string_id(CONVO, "end_base_info");
                         npcAddConversationResponse(speaker, new string_id(CONVO, "anymore_base"));
                     }
-                    else 
+                    else
                     {
                         npcAddConversationResponse(speaker, new string_id(CONVO, "add_100_bribe"));
                     }
                 }
-                else 
+                else
                 {
                     npcAddConversationResponse(speaker, new string_id(CONVO, "add_100_bribe"));
                 }
             }
-            else 
+            else
             {
                 npcAddConversationResponse(speaker, new string_id(CONVO, "add_100_bribe"));
             }
@@ -229,7 +239,7 @@ public class imperial_bribe extends script.base_script
                 message = new string_id(CONVO, "end_base_info");
                 setObjVar(speaker, "nym.bribe.hundred", 1);
             }
-            else 
+            else
             {
                 message = new string_id(CONVO, "you_got_nothing");
                 npcSpeak(speaker, message);

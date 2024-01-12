@@ -1,5 +1,11 @@
 package script.space.ship;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -10,12 +16,14 @@ public class ship_interior extends script.base_script
     public ship_interior()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         dictionary dctParams = new dictionary();
         space_utils.notifyObject(self, "doInteriorBuildout", dctParams);
         return SCRIPT_CONTINUE;
     }
+
     public int doInteriorBuildout(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "strBuildout"))
@@ -27,7 +35,7 @@ public class ship_interior extends script.base_script
         {
             strChassisType = getStringObjVar(self, "strInteriorChassisType");
         }
-        else 
+        else
         {
             strChassisType = getShipChassisType(self);
         }
@@ -75,7 +83,7 @@ public class ship_interior extends script.base_script
                             utils.setScriptVar(self, strLocationList[intI], tranTestList);
                             utils.setScriptVar(self, strLocationList[intI] + "Cells", objTestCells);
                         }
-                        else 
+                        else
                         {
                             objCells = utils.addElement(objCells, objCell);
                             tranList = utils.addElement(tranList, tr);
@@ -93,12 +101,15 @@ public class ship_interior extends script.base_script
                         if (!strScripts[intI].equals(""))
                         {
                             String[] strScriptArray = split(strScripts[intI], ',');
-                            for (String s : strScriptArray) {
+                            for (String s : strScriptArray)
+                            {
                                 String script = s;
-                                if (script.contains("script.")) {
+                                if (script.contains("script."))
+                                {
                                     script = script.substring(7);
                                 }
-                                if (!hasScript(objTest, script)) {
+                                if (!hasScript(objTest, script))
+                                {
                                     attachScript(objTest, script);
                                 }
                             }
@@ -106,7 +117,7 @@ public class ship_interior extends script.base_script
                         attachScript(objTest, "space.ship.ship_interior_autocleanup");
                     }
                 }
-                else 
+                else
                 {
                     obj_id objTest = createObject(strTemplates[intI], tr, objCell);
                     if (!strObjVars[intI].equals(""))
@@ -116,12 +127,15 @@ public class ship_interior extends script.base_script
                     if (!strScripts[intI].equals(""))
                     {
                         String[] strScriptArray = split(strScripts[intI], ',');
-                        for (String s : strScriptArray) {
+                        for (String s : strScriptArray)
+                        {
                             String script = s;
-                            if (script.contains("script.")) {
+                            if (script.contains("script."))
+                            {
                                 script = script.substring(7);
                             }
-                            if (!hasScript(objTest, script)) {
+                            if (!hasScript(objTest, script))
+                            {
                                 attachScript(objTest, script);
                             }
                         }
@@ -129,12 +143,13 @@ public class ship_interior extends script.base_script
                 }
             }
         }
-        else 
+        else
         {
         }
         utils.setScriptVar(self, "objSparkers", objSparkers);
         return SCRIPT_CONTINUE;
     }
+
     public int componentDisabledByDamage(obj_id self, dictionary params) throws InterruptedException
     {
         int intSlot = params.getInt("intSlot");
@@ -145,6 +160,7 @@ public class ship_interior extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int checkAmmoStatus(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id objShip = self;
@@ -182,7 +198,7 @@ public class ship_interior extends script.base_script
                     prose_package pp = prose.getPackage(strSpam, objItem);
                     return SCRIPT_CONTINUE;
                 }
-                else 
+                else
                 {
                     space_crafting.reloadWeaponSlot(self, objItem, intSlot, null, false);
                 }
@@ -190,6 +206,7 @@ public class ship_interior extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int componentEfficiencyChanged(obj_id self, dictionary params) throws InterruptedException
     {
         int intSlot = params.getInt("intSlot");
@@ -206,7 +223,7 @@ public class ship_interior extends script.base_script
             float fltPercentage = fltCurrentHitpoints / fltMaximumHitpoints;
             LOG("space", "Max is " + fltMaximumHitpoints + " current is " + fltCurrentHitpoints + " percentage is " + fltPercentage);
             float fltValue = 1000 * fltPercentage;
-            int intHitpoints = (int)fltValue;
+            int intHitpoints = (int) fltValue;
             if (intHitpoints == 0)
             {
                 intHitpoints = 1;
@@ -216,6 +233,7 @@ public class ship_interior extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int interiorDamageNotification(obj_id self, dictionary params) throws InterruptedException
     {
         transform[] trSparkers = utils.getTransformArrayScriptVar(self, "locSparkers");
@@ -241,33 +259,33 @@ public class ship_interior extends script.base_script
         {
             if (intDamageIntensity == space_combat.LIGHT)
             {
-                playClientEffectLoc(((obj_id)objPlayers.get(0)), "clienteffect/int_camshake_light.cef", locTest, 0);
-                String[] strEffects = 
-                {
-                    "clienteffect/lair_damage_light.cef"
-                };
-                int[] intDamageEffects = 
-                {
-                    0
-                };
-                playRandomInteriorClientEffects(((obj_id)objPlayers.get(0)), trSparkers, objCells, strEffects, intDamageEffects, 5, 50);
+                playClientEffectLoc(((obj_id) objPlayers.get(0)), "clienteffect/int_camshake_light.cef", locTest, 0);
+                String[] strEffects =
+                        {
+                                "clienteffect/lair_damage_light.cef"
+                        };
+                int[] intDamageEffects =
+                        {
+                                0
+                        };
+                playRandomInteriorClientEffects(((obj_id) objPlayers.get(0)), trSparkers, objCells, strEffects, intDamageEffects, 5, 50);
             }
             else if (intDamageIntensity == space_combat.HEAVY)
             {
-                playClientEffectLoc(((obj_id)objPlayers.get(0)), "clienteffect/int_camshake_light.cef", locTest, 0);
-                String[] strEffects = 
-                {
-                    "clienteffect/lair_damage_light.cef",
-                    "clienteffect/lair_damage_light.cef",
-                    "clienteffect/lair_damage_medium.cef"
-                };
-                int[] intDamageEffects = 
-                {
-                    0,
-                    0,
-                    1
-                };
-                playRandomInteriorClientEffects(((obj_id)objPlayers.get(0)), trSparkers, objCells, strEffects, intDamageEffects, 7, 50);
+                playClientEffectLoc(((obj_id) objPlayers.get(0)), "clienteffect/int_camshake_light.cef", locTest, 0);
+                String[] strEffects =
+                        {
+                                "clienteffect/lair_damage_light.cef",
+                                "clienteffect/lair_damage_light.cef",
+                                "clienteffect/lair_damage_medium.cef"
+                        };
+                int[] intDamageEffects =
+                        {
+                                0,
+                                0,
+                                1
+                        };
+                playRandomInteriorClientEffects(((obj_id) objPlayers.get(0)), trSparkers, objCells, strEffects, intDamageEffects, 7, 50);
             }
         }
         else if (intDamageType == space_combat.ARMOR)
@@ -275,45 +293,45 @@ public class ship_interior extends script.base_script
             LOG("space", "ARMOR121@");
             if (intDamageIntensity == space_combat.LIGHT)
             {
-                playClientEffectLoc(((obj_id)objPlayers.get(0)), "clienteffect/int_camshake_light.cef", locTest, 0);
-                String[] strEffects = 
-                {
-                    "clienteffect/lair_damage_light.cef",
-                    "clienteffect/lair_med_damage_smoke.cef",
-                    "clienteffect/lair_damage_medium.cef"
-                };
-                int[] intDamageEffects = 
-                {
-                    0,
-                    0,
-                    1
-                };
-                playRandomInteriorClientEffects(((obj_id)objPlayers.get(0)), trSparkers, objCells, strEffects, intDamageEffects, 5, 50);
+                playClientEffectLoc(((obj_id) objPlayers.get(0)), "clienteffect/int_camshake_light.cef", locTest, 0);
+                String[] strEffects =
+                        {
+                                "clienteffect/lair_damage_light.cef",
+                                "clienteffect/lair_med_damage_smoke.cef",
+                                "clienteffect/lair_damage_medium.cef"
+                        };
+                int[] intDamageEffects =
+                        {
+                                0,
+                                0,
+                                1
+                        };
+                playRandomInteriorClientEffects(((obj_id) objPlayers.get(0)), trSparkers, objCells, strEffects, intDamageEffects, 5, 50);
                 checkForAdditionalDamage(self, 2, space_crafting.NON_COMPONENT_DAMAGEABLES_LIGHT);
             }
             else if (intDamageIntensity == space_combat.HEAVY)
             {
-                playClientEffectLoc(((obj_id)objPlayers.get(0)), "clienteffect/int_camshake_medium.cef", locTest, 0);
-                String[] strEffects = 
-                {
-                    "clienteffect/lair_damage_light.cef",
-                    "clienteffect/lair_damage_medium.cef",
-                    "clienteffect/lair_damage_light.cef",
-                    "clienteffect/lair_damage_medium.cef",
-                    "clienteffect/lair_damage_medium.cef",
-                    "clienteffect/lair_damage_medium.cef"
-                };
-                int[] intDamageEffects = 
-                {
-                    0,
-                    1,
-                    0,
-                    1,
-                    1,
-                    1
-                };
+                playClientEffectLoc(((obj_id) objPlayers.get(0)), "clienteffect/int_camshake_medium.cef", locTest, 0);
+                String[] strEffects =
+                        {
+                                "clienteffect/lair_damage_light.cef",
+                                "clienteffect/lair_damage_medium.cef",
+                                "clienteffect/lair_damage_light.cef",
+                                "clienteffect/lair_damage_medium.cef",
+                                "clienteffect/lair_damage_medium.cef",
+                                "clienteffect/lair_damage_medium.cef"
+                        };
+                int[] intDamageEffects =
+                        {
+                                0,
+                                1,
+                                0,
+                                1,
+                                1,
+                                1
+                        };
                 checkForAdditionalDamage(self, 5, space_crafting.NON_COMPONENT_DAMAGEABLES_LIGHT);
-                playRandomInteriorClientEffects(((obj_id)objPlayers.get(0)), trSparkers, objCells, strEffects, intDamageEffects, 15, 50);
+                playRandomInteriorClientEffects(((obj_id) objPlayers.get(0)), trSparkers, objCells, strEffects, intDamageEffects, 15, 50);
                 LOG("space", "checking for additional");
             }
         }
@@ -321,42 +339,42 @@ public class ship_interior extends script.base_script
         {
             if (intDamageIntensity == space_combat.LIGHT)
             {
-                playClientEffectLoc(((obj_id)objPlayers.get(0)), "clienteffect/int_camshake_light.cef", locTest, 0);
-                String[] strEffects = 
-                {
-                    "clienteffect/lair_damage_light.cef",
-                    "clienteffect/lair_med_damage_smoke.cef",
-                    "clienteffect/lair_damage_medium.cef",
-                    "clienteffect/combat_ship_hit_shield.cef"
-                };
-                int[] intDamageEffects = 
-                {
-                    0,
-                    0,
-                    1,
-                    2
-                };
-                playRandomInteriorClientEffects(((obj_id)objPlayers.get(0)), trSparkers, objCells, strEffects, intDamageEffects, 10, 50);
+                playClientEffectLoc(((obj_id) objPlayers.get(0)), "clienteffect/int_camshake_light.cef", locTest, 0);
+                String[] strEffects =
+                        {
+                                "clienteffect/lair_damage_light.cef",
+                                "clienteffect/lair_med_damage_smoke.cef",
+                                "clienteffect/lair_damage_medium.cef",
+                                "clienteffect/combat_ship_hit_shield.cef"
+                        };
+                int[] intDamageEffects =
+                        {
+                                0,
+                                0,
+                                1,
+                                2
+                        };
+                playRandomInteriorClientEffects(((obj_id) objPlayers.get(0)), trSparkers, objCells, strEffects, intDamageEffects, 10, 50);
                 checkForAdditionalDamage(self, 10, space_crafting.NON_COMPONENT_DAMAGEABLES_LIGHT);
             }
             else if (intDamageIntensity == space_combat.HEAVY)
             {
-                playClientEffectLoc(((obj_id)objPlayers.get(0)), "clienteffect/int_camshake_heavy.cef", locTest, 0);
-                String[] strEffects = 
-                {
-                    "clienteffect/lair_damage_light.cef",
-                    "clienteffect/lair_med_damage_smoke.cef",
-                    "clienteffect/lair_damage_medium.cef",
-                    "clienteffect/combat_ship_hit_component.cef"
-                };
-                int[] intDamageEffects = 
-                {
-                    0,
-                    0,
-                    1,
-                    3
-                };
-                playRandomInteriorClientEffects(((obj_id)objPlayers.get(0)), trSparkers, objCells, strEffects, intDamageEffects, 20, 50);
+                playClientEffectLoc(((obj_id) objPlayers.get(0)), "clienteffect/int_camshake_heavy.cef", locTest, 0);
+                String[] strEffects =
+                        {
+                                "clienteffect/lair_damage_light.cef",
+                                "clienteffect/lair_med_damage_smoke.cef",
+                                "clienteffect/lair_damage_medium.cef",
+                                "clienteffect/combat_ship_hit_component.cef"
+                        };
+                int[] intDamageEffects =
+                        {
+                                0,
+                                0,
+                                1,
+                                3
+                        };
+                playRandomInteriorClientEffects(((obj_id) objPlayers.get(0)), trSparkers, objCells, strEffects, intDamageEffects, 20, 50);
                 checkForAdditionalDamage(self, 20, space_crafting.NON_COMPONENT_DAMAGEABLES_MEDIUM);
             }
         }
@@ -364,63 +382,64 @@ public class ship_interior extends script.base_script
         {
             if (intDamageIntensity == space_combat.LIGHT)
             {
-                playClientEffectLoc(((obj_id)objPlayers.get(0)), "clienteffect/int_camshake_heavy.cef", locTest, 0);
-                String[] strEffects = 
-                {
-                    "clienteffect/lair_damage_light.cef",
-                    "clienteffect/lair_med_damage_smoke.cef",
-                    "clienteffect/lair_damage_medium.cef",
-                    "clienteffect/combat_ship_hit_component.cef"
-                };
-                int[] intDamageEffects = 
-                {
-                    0,
-                    0,
-                    1,
-                    3
-                };
-                playRandomInteriorClientEffects(((obj_id)objPlayers.get(0)), trSparkers, objCells, strEffects, intDamageEffects, 5, 50);
+                playClientEffectLoc(((obj_id) objPlayers.get(0)), "clienteffect/int_camshake_heavy.cef", locTest, 0);
+                String[] strEffects =
+                        {
+                                "clienteffect/lair_damage_light.cef",
+                                "clienteffect/lair_med_damage_smoke.cef",
+                                "clienteffect/lair_damage_medium.cef",
+                                "clienteffect/combat_ship_hit_component.cef"
+                        };
+                int[] intDamageEffects =
+                        {
+                                0,
+                                0,
+                                1,
+                                3
+                        };
+                playRandomInteriorClientEffects(((obj_id) objPlayers.get(0)), trSparkers, objCells, strEffects, intDamageEffects, 5, 50);
                 checkForAdditionalDamage(self, 30, space_crafting.NON_COMPONENT_DAMAGEABLES_MEDIUM);
             }
             else if (intDamageIntensity == space_combat.HEAVY)
             {
-                playClientEffectLoc(((obj_id)objPlayers.get(0)), "clienteffect/int_camshake_heavy.cef", locTest, 0);
-                String[] strEffects = 
-                {
-                    "clienteffect/lair_damage_light.cef",
-                    "clienteffect/lair_med_damage_smoke.cef",
-                    "clienteffect/lair_damage_medium.cef",
-                    "clienteffect/combat_ship_hit_death.cef"
-                };
-                int[] intDamageEffects = 
-                {
-                    0,
-                    0,
-                    1,
-                    3
-                };
-                playRandomInteriorClientEffects(((obj_id)objPlayers.get(0)), trSparkers, objCells, strEffects, intDamageEffects, 10, 50);
+                playClientEffectLoc(((obj_id) objPlayers.get(0)), "clienteffect/int_camshake_heavy.cef", locTest, 0);
+                String[] strEffects =
+                        {
+                                "clienteffect/lair_damage_light.cef",
+                                "clienteffect/lair_med_damage_smoke.cef",
+                                "clienteffect/lair_damage_medium.cef",
+                                "clienteffect/combat_ship_hit_death.cef"
+                        };
+                int[] intDamageEffects =
+                        {
+                                0,
+                                0,
+                                1,
+                                3
+                        };
+                playRandomInteriorClientEffects(((obj_id) objPlayers.get(0)), trSparkers, objCells, strEffects, intDamageEffects, 10, 50);
                 checkForAdditionalDamage(self, 50, space_crafting.NON_COMPONENT_DAMAGEABLES_HEAVY);
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public void playRandomInteriorClientEffects(obj_id objPlayer, transform[] trSparkers, obj_id[] objCells, String[] strEffects, int[] intDamageEffects, int intRolls, int intChance) throws InterruptedException
     {
-        final int[] DAMAGE_VALUES = 
-        {
-            0,
-            15,
-            30,
-            75
-        };
-        final float[] DAMAGE_RANGES = 
-        {
-            0,
-            2.0f,
-            4.0f,
-            8.0f
-        };
+        final int[] DAMAGE_VALUES =
+                {
+                        0,
+                        15,
+                        30,
+                        75
+                };
+        final float[] DAMAGE_RANGES =
+                {
+                        0,
+                        2.0f,
+                        4.0f,
+                        8.0f
+                };
         for (int intI = 0; intI < intRolls; intI++)
         {
             int intRoll = rand(1, 100);
@@ -437,13 +456,15 @@ public class ship_interior extends script.base_script
                 if (intDamageEffect > 0)
                 {
                     obj_id[] objPlayers = getAllPlayers(locTest, DAMAGE_RANGES[intDamageEffect]);
-                    for (obj_id objPlayer1 : objPlayers) {
+                    for (obj_id objPlayer1 : objPlayers)
+                    {
                         damage(objPlayer1, DAMAGE_BLAST, rand(0, 5), rand(0, DAMAGE_VALUES[intDamageEffect]));
                     }
                 }
             }
         }
     }
+
     public void checkForAdditionalDamage(obj_id objShip, int intChance, int[] intSlots) throws InterruptedException
     {
         LOG("space", "checkign for additional damage");
@@ -462,7 +483,7 @@ public class ship_interior extends script.base_script
                     LOG("space", "sending to " + objPlasmaConduits[intRoll]);
                     space_crafting.breakPlasmaConduit(objPlasmaConduits[intRoll], objShip, getLocation(objPlasmaConduits[intRoll]), true);
                 }
-                else 
+                else
                 {
                     LOG("space", "No conduits");
                 }
@@ -480,6 +501,7 @@ public class ship_interior extends script.base_script
             }
         }
     }
+
     public int doHullBreach(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "intHullBreached"))
@@ -488,7 +510,8 @@ public class ship_interior extends script.base_script
             Vector objPlayers = space_transition.getContainedPlayers(self, null);
             if (objPlayers != null)
             {
-                for (Object objPlayer : objPlayers) {
+                for (Object objPlayer : objPlayers)
+                {
                     string_id strSpam = new string_id("space/space_interaction", "hull_breach_damage");
                     damage(((obj_id) objPlayer), DAMAGE_BLAST, rand(0, 5), (int) intDamage);
                     sendSystemMessage(((obj_id) objPlayer), strSpam);

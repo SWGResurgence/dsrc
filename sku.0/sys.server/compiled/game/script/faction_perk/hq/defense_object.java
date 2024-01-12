@@ -1,5 +1,11 @@
 package script.faction_perk.hq;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.hq;
 import script.library.utils;
@@ -10,6 +16,7 @@ public class defense_object extends script.base_script
     public defense_object()
     {
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         obj_id parent = getObjIdObjVar(self, hq.VAR_DEFENSE_PARENT);

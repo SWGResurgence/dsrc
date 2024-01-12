@@ -1,5 +1,11 @@
 package script.theme_park.heroic.axkva_min;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.trial;
@@ -10,12 +16,14 @@ public class nandina extends script.base_script
     public nandina()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "setGorvoAsPet", null, 1.0f, false);
         trial.setHp(self, trial.HP_AKXVA_NANDINA);
         return SCRIPT_CONTINUE;
     }
+
     public int setGorvoAsPet(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id[] spawn_id = trial.getObjectsInDungeonWithObjVar(trial.getTop(self), "spawn_id");
@@ -25,8 +33,10 @@ public class nandina extends script.base_script
             return SCRIPT_CONTINUE;
         }
         obj_id gorvo = null;
-        for (obj_id obj_id : spawn_id) {
-            if ((getStringObjVar(obj_id, "spawn_id")).equals("gorvo")) {
+        for (obj_id obj_id : spawn_id)
+        {
+            if ((getStringObjVar(obj_id, "spawn_id")).equals("gorvo"))
+            {
                 gorvo = obj_id;
             }
         }
@@ -37,14 +47,16 @@ public class nandina extends script.base_script
         ai_lib.establishAgroLink(self, allies);
         return SCRIPT_CONTINUE;
     }
+
     public int OnEnteredCombat(obj_id self) throws InterruptedException
     {
         obj_id[] players = trial.getPlayersInDungeon(trial.getTop(self));
-        if (players == null || players.length == 0)
+        if (players == null)
         {
             return SCRIPT_CONTINUE;
         }
-        for (obj_id player : players) {
+        for (obj_id player : players)
+        {
             addHate(self, player, 1);
         }
         return SCRIPT_CONTINUE;

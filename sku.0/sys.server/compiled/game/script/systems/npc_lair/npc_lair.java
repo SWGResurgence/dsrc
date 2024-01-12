@@ -1,5 +1,11 @@
 package script.systems.npc_lair;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -511,10 +517,7 @@ public class npc_lair extends script.theme_park.poi.base
             return null;
         }
         int[] spawnLimitList = new int[creatureList.length];
-        for (int i = 0; i < creatureList.length; i++)
-        {
-            spawnLimitList[i] = entireSpawnLimit[i];
-        }
+        System.arraycopy(entireSpawnLimit, 0, spawnLimitList, 0, creatureList.length);
         return spawnLimitList;
     }
 
@@ -687,7 +690,6 @@ public class npc_lair extends script.theme_park.poi.base
         dctParams.put("mobileNumber", 0);
         dctParams.put("mobSpawnLoopNumber", mobSpawnLoopNumber);
         messageTo(poiBaseObject, "spawnCreatures", dctParams, 4, false);
-        return;
     }
 
     public int handleSpawnWaveOfDefenders(obj_id self, dictionary params) throws InterruptedException
@@ -1088,7 +1090,6 @@ public class npc_lair extends script.theme_park.poi.base
         params.put("jobAssignments", jobAssignment);
         params.put("baseObj", poiBaseObject);
         broadcastMessage("handleNpcLairCustomAi", params);
-        return;
     }
 
     public void doNPCLairAiManagement(obj_id poiBaseObject) throws InterruptedException
@@ -1144,7 +1145,6 @@ public class npc_lair extends script.theme_park.poi.base
         params.put("jobAssignments", jobAssignment);
         params.put("baseObj", poiBaseObject);
         broadcastMessage("handleNpcLairCustomAi", params);
-        return;
     }
 
     public void setHpAndXpValues(obj_id poiBaseObject, obj_id target) throws InterruptedException

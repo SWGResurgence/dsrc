@@ -1,5 +1,11 @@
 package script.event.ewok_festival;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.holiday;
 import script.library.utils;
@@ -12,32 +18,38 @@ public class loveday_cupid_spawner_manager extends script.base_script
     public loveday_cupid_spawner_manager()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "initializeCupidSpawnerManager", null, 9, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "initializeCupidSpawnerManager", null, 9, false);
         return SCRIPT_CONTINUE;
     }
+
     public int initializeCupidSpawnerManager(obj_id self, dictionary params) throws InterruptedException
     {
         timedMessageToDaily(self, "triggerHourlyCupidNPCs", null, LocalTime.of(1, 0));
         return SCRIPT_CONTINUE;
     }
+
     public int triggerHourlyCupidNPCs(obj_id self, dictionary params) throws InterruptedException
     {
         getLovedayCupidSpawnerIds(self);
         timedMessageToDaily(self, "triggerHourlyCupidNPCs", null, LocalTime.of(1, 0));
         return SCRIPT_CONTINUE;
     }
+
     public void getLovedayCupidSpawnerIds(obj_id self) throws InterruptedException
     {
         utils.setScriptVar(self, holiday.GETTING_CUPID_SPAWNER_IDS, true);
         getClusterWideData(holiday.LOVEDAY_CUPID_MANAGER_NAME, holiday.LOVEDAY_CUPID_ELEMENT_NAME + "*", true, self);
     }
+
     public int OnClusterWideDataResponse(obj_id self, String manage_name, String name, int request_id, String[] element_name_list, dictionary[] data, int lock_key) throws InterruptedException
     {
         if (manage_name.equals(holiday.LOVEDAY_CUPID_MANAGER_NAME))
@@ -61,11 +73,7 @@ public class loveday_cupid_spawner_manager extends script.base_script
                                 spawner_id = data[i].getObjId(holiday.LOVEDAY_CUPID_ELEMENT_NAME + lovedayLoc);
                                 if (isIdValid(spawner_id))
                                 {
-                                    boolean cityChosen = false;
-                                    if (choice == i)
-                                    {
-                                        cityChosen = true;
-                                    }
+                                    boolean cityChosen = choice == i;
                                     webster.put("chosen_" + lovedayLoc, cityChosen);
                                     messageTo(spawner_id, "spawnHourlyCupidNPCs", webster, 1, false);
                                 }
@@ -78,6 +86,7 @@ public class loveday_cupid_spawner_manager extends script.base_script
         releaseClusterWideDataLock(manage_name, lock_key);
         return SCRIPT_CONTINUE;
     }
+
     public int OnHearSpeech(obj_id self, obj_id speaker, String text) throws InterruptedException
     {
         if (!isGod(speaker) || !hasObjVar(speaker, "cupidTestingAuthorized"))

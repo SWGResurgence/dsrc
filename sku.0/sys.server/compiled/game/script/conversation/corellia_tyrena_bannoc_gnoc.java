@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.groundquests;
@@ -8,38 +14,47 @@ import script.*;
 
 public class corellia_tyrena_bannoc_gnoc extends script.base_script
 {
+    public static String c_stringFile = "conversation/corellia_tyrena_bannoc_gnoc";
+
     public corellia_tyrena_bannoc_gnoc()
     {
     }
-    public static String c_stringFile = "conversation/corellia_tyrena_bannoc_gnoc";
+
     public boolean corellia_tyrena_bannoc_gnoc_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean corellia_tyrena_bannoc_gnoc_condition_onLostReturn(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "corellia_tyrena_lost_love", "lost_return_bannoc");
     }
+
     public boolean corellia_tyrena_bannoc_gnoc_condition_completeMissing(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "corellia_tyrena_missing_persons");
     }
+
     public boolean corellia_tyrena_bannoc_gnoc_condition_completeLost(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "corellia_tyrena_lost_love");
     }
+
     public boolean corellia_tyrena_bannoc_gnoc_condition_onLost(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isTaskActive(player, "corellia_tyrena_lost_love", "lost_helpful_guard") || groundquests.isTaskActive(player, "corellia_tyrena_lost_love", "lost_security_term") || groundquests.isTaskActive(player, "corellia_tyrena_lost_love", "lost_kill_detention_guards") || groundquests.isTaskActive(player, "corellia_tyrena_lost_love", "lost_read_datapad") || groundquests.isTaskActive(player, "corellia_tyrena_lost_love", "lost_narlissa_journal"));
     }
+
     public void corellia_tyrena_bannoc_gnoc_action_signalLostReturn(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "lost_return_bannoc");
     }
+
     public void corellia_tyrena_bannoc_gnoc_action_grantLost(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "corellia_tyrena_lost_love");
     }
+
     public int corellia_tyrena_bannoc_gnoc_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_16"))
@@ -61,7 +76,7 @@ public class corellia_tyrena_bannoc_gnoc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_18");
@@ -70,7 +85,7 @@ public class corellia_tyrena_bannoc_gnoc extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.corellia_tyrena_bannoc_gnoc.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -80,6 +95,7 @@ public class corellia_tyrena_bannoc_gnoc extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int corellia_tyrena_bannoc_gnoc_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_18"))
@@ -107,7 +123,7 @@ public class corellia_tyrena_bannoc_gnoc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_61");
@@ -120,7 +136,7 @@ public class corellia_tyrena_bannoc_gnoc extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.corellia_tyrena_bannoc_gnoc.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -130,6 +146,7 @@ public class corellia_tyrena_bannoc_gnoc extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int corellia_tyrena_bannoc_gnoc_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_61"))
@@ -150,7 +167,7 @@ public class corellia_tyrena_bannoc_gnoc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_63");
@@ -159,7 +176,7 @@ public class corellia_tyrena_bannoc_gnoc extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.corellia_tyrena_bannoc_gnoc.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -186,7 +203,7 @@ public class corellia_tyrena_bannoc_gnoc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_23");
@@ -195,7 +212,7 @@ public class corellia_tyrena_bannoc_gnoc extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.corellia_tyrena_bannoc_gnoc.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -205,6 +222,7 @@ public class corellia_tyrena_bannoc_gnoc extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int corellia_tyrena_bannoc_gnoc_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_63"))
@@ -220,6 +238,7 @@ public class corellia_tyrena_bannoc_gnoc extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int corellia_tyrena_bannoc_gnoc_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_23"))
@@ -239,7 +258,7 @@ public class corellia_tyrena_bannoc_gnoc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_27");
@@ -248,7 +267,7 @@ public class corellia_tyrena_bannoc_gnoc extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.corellia_tyrena_bannoc_gnoc.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -258,6 +277,7 @@ public class corellia_tyrena_bannoc_gnoc extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int corellia_tyrena_bannoc_gnoc_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_27"))
@@ -278,7 +298,7 @@ public class corellia_tyrena_bannoc_gnoc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_31");
@@ -287,7 +307,7 @@ public class corellia_tyrena_bannoc_gnoc extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.corellia_tyrena_bannoc_gnoc.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -297,6 +317,7 @@ public class corellia_tyrena_bannoc_gnoc extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int corellia_tyrena_bannoc_gnoc_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_31"))
@@ -318,7 +339,7 @@ public class corellia_tyrena_bannoc_gnoc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_35");
@@ -327,7 +348,7 @@ public class corellia_tyrena_bannoc_gnoc extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.corellia_tyrena_bannoc_gnoc.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -337,6 +358,7 @@ public class corellia_tyrena_bannoc_gnoc extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int corellia_tyrena_bannoc_gnoc_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_35"))
@@ -354,6 +376,7 @@ public class corellia_tyrena_bannoc_gnoc extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int corellia_tyrena_bannoc_gnoc_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_41"))
@@ -370,6 +393,7 @@ public class corellia_tyrena_bannoc_gnoc extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int corellia_tyrena_bannoc_gnoc_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_47"))
@@ -390,7 +414,7 @@ public class corellia_tyrena_bannoc_gnoc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_51");
@@ -399,7 +423,7 @@ public class corellia_tyrena_bannoc_gnoc extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.corellia_tyrena_bannoc_gnoc.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -409,6 +433,7 @@ public class corellia_tyrena_bannoc_gnoc extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int corellia_tyrena_bannoc_gnoc_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_51"))
@@ -429,7 +454,7 @@ public class corellia_tyrena_bannoc_gnoc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_56");
@@ -438,7 +463,7 @@ public class corellia_tyrena_bannoc_gnoc extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.corellia_tyrena_bannoc_gnoc.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -448,6 +473,7 @@ public class corellia_tyrena_bannoc_gnoc extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int corellia_tyrena_bannoc_gnoc_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_56"))
@@ -467,7 +493,7 @@ public class corellia_tyrena_bannoc_gnoc extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_60");
@@ -476,7 +502,7 @@ public class corellia_tyrena_bannoc_gnoc extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.corellia_tyrena_bannoc_gnoc.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -486,6 +512,7 @@ public class corellia_tyrena_bannoc_gnoc extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int corellia_tyrena_bannoc_gnoc_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_60"))
@@ -503,6 +530,7 @@ public class corellia_tyrena_bannoc_gnoc extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isTangible(self)) || (isPlayer(self)))
@@ -514,6 +542,7 @@ public class corellia_tyrena_bannoc_gnoc extends script.base_script
         setInvulnerable(self, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
@@ -521,6 +550,7 @@ public class corellia_tyrena_bannoc_gnoc extends script.base_script
         setInvulnerable(self, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -530,18 +560,21 @@ public class corellia_tyrena_bannoc_gnoc extends script.base_script
         faceTo(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.corellia_tyrena_bannoc_gnoc");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -572,7 +605,7 @@ public class corellia_tyrena_bannoc_gnoc extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_16");
@@ -580,7 +613,7 @@ public class corellia_tyrena_bannoc_gnoc extends script.base_script
                 utils.setScriptVar(player, "conversation.corellia_tyrena_bannoc_gnoc.branchId", 2);
                 npcStartConversation(player, npc, "corellia_tyrena_bannoc_gnoc", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -602,7 +635,7 @@ public class corellia_tyrena_bannoc_gnoc extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_41");
@@ -610,7 +643,7 @@ public class corellia_tyrena_bannoc_gnoc extends script.base_script
                 utils.setScriptVar(player, "conversation.corellia_tyrena_bannoc_gnoc.branchId", 12);
                 npcStartConversation(player, npc, "corellia_tyrena_bannoc_gnoc", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -632,7 +665,7 @@ public class corellia_tyrena_bannoc_gnoc extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_47");
@@ -640,7 +673,7 @@ public class corellia_tyrena_bannoc_gnoc extends script.base_script
                 utils.setScriptVar(player, "conversation.corellia_tyrena_bannoc_gnoc.branchId", 14);
                 npcStartConversation(player, npc, "corellia_tyrena_bannoc_gnoc", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -656,6 +689,7 @@ public class corellia_tyrena_bannoc_gnoc extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("corellia_tyrena_bannoc_gnoc"))

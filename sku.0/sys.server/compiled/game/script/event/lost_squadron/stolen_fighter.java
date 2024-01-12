@@ -1,5 +1,11 @@
 package script.event.lost_squadron;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.ai.ai_combat;
 import script.*;
 import script.library.chat;
@@ -9,18 +15,19 @@ import script.library.utils;
 
 public class stolen_fighter extends script.base_script
 {
+    public static final float LIFESPAN = 60 * 60 * 3;
+    public static final float FIFTEEN_MINUTES = 60 * 15;
+    public static final String[] THUG =
+            {
+                    "borvos_thug",
+                    "jabba_thug",
+                    "valarian_thug"
+            };
+    public static final String STF_FILE = "event/lost_squadron";
     public stolen_fighter()
     {
     }
-    public static final float LIFESPAN = 60 * 60 * 3;
-    public static final float FIFTEEN_MINUTES = 60 * 15;
-    public static final String[] THUG = 
-    {
-        "borvos_thug",
-        "jabba_thug",
-        "valarian_thug"
-    };
-    public static final String STF_FILE = "event/lost_squadron";
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, "event.lost_squadron.core_removed"))
@@ -36,6 +43,7 @@ public class stolen_fighter extends script.base_script
         createTriggerVolume("fighterTriggerVolume", 30, true);
         return SCRIPT_CONTINUE;
     }
+
     public int setCoreTemplate(obj_id self, dictionary params) throws InterruptedException
     {
         if (!hasObjVar(self, "event.lost_squadron.type"))
@@ -87,6 +95,7 @@ public class stolen_fighter extends script.base_script
         setObjVar(self, "event.lost_squadron.core_template", coreTemplate);
         return SCRIPT_CONTINUE;
     }
+
     public int checkTimeLimit(obj_id self, dictionary params) throws InterruptedException
     {
         float timeStamp = getFloatObjVar(self, "event.lost_squadron.timeStamp");
@@ -102,13 +111,14 @@ public class stolen_fighter extends script.base_script
             CustomerServiceLog("EventPerk", "[Lost Squadron Event] Attempting to delete an expired fighter (" + style + "). Located at: " + type + ". Core removed status " + coreRemoved);
             messageTo(mom, "fighterRequestsDeletion", params, 1, false);
         }
-        else 
+        else
         {
             messageTo(mom, "fighterStillAlive", params, 1, false);
         }
         messageTo(self, "checkTimeLimit", null, FIFTEEN_MINUTES, false);
         return SCRIPT_CONTINUE;
     }
+
     public int goDie(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id mom = getObjIdObjVar(self, "event.lost_squadron.mom");
@@ -117,6 +127,7 @@ public class stolen_fighter extends script.base_script
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int resetAmbushTimerTrigger(obj_id self, dictionary params) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "recently_triggered"))
@@ -125,11 +136,13 @@ public class stolen_fighter extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         CustomerServiceLog("EventPerk", "[Lost Squadron Event] An expired fighter (" + self + ") has been deleted.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         int coreRemoved = utils.getIntScriptVar(self, "core_removed");
@@ -138,12 +151,13 @@ public class stolen_fighter extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             int menu1 = mi.addRootMenu(menu_info_types.SERVER_MENU1, new string_id("event/lost_squadron", "mnu_remove_core"));
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         int coreRemoved = utils.getIntScriptVar(self, "core_removed");
@@ -170,7 +184,7 @@ public class stolen_fighter extends script.base_script
                 playMusic(player, "sound/music_combat_bfield_vict.snd");
                 CustomerServiceLog("EventPerk", "[Lost Squadron Event] CORE REMOVED: (" + type + ") by player [" + playerName + "|" + player + " Located at: " + here);
             }
-            else 
+            else
             {
                 utils.removeScriptVar(self, "core_being_removed");
                 sendSystemMessage(player, new string_id("event/lost_squadron", "sys_msg_full_inv"));
@@ -183,7 +197,7 @@ public class stolen_fighter extends script.base_script
                 sendSystemMessage(player, new string_id("event/lost_squadron", "sys_msg_inspect_no"));
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 sendSystemMessage(player, new string_id("event/lost_squadron", "sys_msg_inspect_yes"));
                 return SCRIPT_CONTINUE;
@@ -191,6 +205,7 @@ public class stolen_fighter extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id whoTriggeredMe) throws InterruptedException
     {
         if (!isPlayer(whoTriggeredMe) || isGod(whoTriggeredMe))

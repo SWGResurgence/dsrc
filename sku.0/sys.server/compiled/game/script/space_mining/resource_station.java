@@ -1,5 +1,11 @@
 package script.space_mining;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.money;
 import script.library.space_utils;
 import script.obj_id;
@@ -7,10 +13,12 @@ import script.string_id;
 
 public class resource_station extends script.base_script
 {
+    public static final String SPACE_MINING = "space_mining";
+
     public resource_station()
     {
     }
-    public static final String SPACE_MINING = "space_mining";
+
     public int getPricePerUnit(obj_id station, String resourceClassName) throws InterruptedException
     {
         String priceList = getStringObjVar(station, "space_mining.priceList");
@@ -19,12 +27,13 @@ public class resource_station extends script.base_script
         {
             datatable = "datatables/space_mining/station_price_list/" + priceList + "_price_list.iff";
         }
-        else 
+        else
         {
             return 0;
         }
         return dataTableGetInt(datatable, resourceClassName, "price_per_unit");
     }
+
     public int OnSpaceMiningSellResource(obj_id self, obj_id player, obj_id ship, obj_id station, obj_id resourceId, int amount) throws InterruptedException
     {
         if (getOwner(ship) != player)
@@ -44,7 +53,7 @@ public class resource_station extends script.base_script
             }
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             return SCRIPT_CONTINUE;
         }

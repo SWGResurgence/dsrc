@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.avatar_platform;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.chat;
 import script.library.groundquests;
@@ -9,12 +15,13 @@ import script.string_id;
 
 public class avatar_opening_chat extends script.base_script
 {
-    public avatar_opening_chat()
-    {
-    }
     public static final String STF = "dungeon/avatar_platform";
     public static final string_id OPENING = new string_id(STF, "trando_chat_01");
     public static final string_id RESPONSE = new string_id(STF, "trando_chat_02");
+    public avatar_opening_chat()
+    {
+    }
+
     public int OnReceivedItem(obj_id self, obj_id destinationCell, obj_id transferrer, obj_id item) throws InterruptedException
     {
         if (!isPlayer(item))
@@ -38,6 +45,7 @@ public class avatar_opening_chat extends script.base_script
         setObjVar(structure, "avatar_platform.trando_chat", 1);
         return SCRIPT_CONTINUE;
     }
+
     public int handleStartChatting(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id structure = getTopMostContainer(self);
@@ -46,6 +54,7 @@ public class avatar_opening_chat extends script.base_script
         messageTo(self, "handleResponse", null, 5.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleResponse(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id structure = getTopMostContainer(self);
@@ -53,14 +62,17 @@ public class avatar_opening_chat extends script.base_script
         chat.chat(trando2, RESPONSE);
         return SCRIPT_CONTINUE;
     }
+
     public void startExplosionFinal(obj_id player, obj_id self) throws InterruptedException
     {
         obj_id structure = getTopMostContainer(self);
         obj_id[] items = getContents(self);
-        if (items != null && items.length > 0)
+        if (items != null)
         {
-            for (obj_id item : items) {
-                if (isPlayer(item)) {
+            for (obj_id item : items)
+            {
+                if (isPlayer(item))
+                {
                     startExplosionSequence(player, self);
                     setObjVar(structure, "avatar_platform.explosion_sequence", 1);
                     return;
@@ -71,8 +83,8 @@ public class avatar_opening_chat extends script.base_script
         {
             removeObjVar(structure, "avatar_platform.explosion_sequence");
         }
-        return;
     }
+
     public void startExplosionSequence(obj_id player, obj_id self) throws InterruptedException
     {
         obj_id structure = getTopMostContainer(self);
@@ -145,8 +157,8 @@ public class avatar_opening_chat extends script.base_script
             messageTo(self, "handleMoreExplosions", info, 3.0f, false);
             return;
         }
-        return;
     }
+
     public int handleMoreExplosions(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");

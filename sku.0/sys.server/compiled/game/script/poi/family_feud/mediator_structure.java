@@ -1,5 +1,11 @@
 package script.poi.family_feud;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.location;
@@ -10,10 +16,12 @@ public class mediator_structure extends script.theme_park.poi.base
     public mediator_structure()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         obj_id poiMaster = poi.getBaseObject(self);
@@ -27,6 +35,7 @@ public class mediator_structure extends script.theme_park.poi.base
         messageTo(poiMaster, scenario.HANDLER_ONLINE_STATUS_UPDATE, d, 0, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnUnloadedFromMemory(obj_id self) throws InterruptedException
     {
         obj_id poiMaster = poi.getBaseObject(self);
@@ -40,10 +49,12 @@ public class mediator_structure extends script.theme_park.poi.base
         messageTo(poiMaster, scenario.HANDLER_ONLINE_STATUS_UPDATE, d, 0, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectDisabled(obj_id self, obj_id killer) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int handleSpawnActors(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id poiMaster = poi.getBaseObject(self);
@@ -77,10 +88,10 @@ public class mediator_structure extends script.theme_park.poi.base
         if ((leader == null) || (leader == obj_id.NULL_ID))
         {
         }
-        else 
+        else
         {
             persistObject(leader);
-            factions.setFaction(leader, poiMaster.toString() + "_mediator", false);
+            factions.setFaction(leader, poiMaster + "_mediator", false);
             attachScript(leader, "poi." + scenario_name + ".mediator");
             setObjVar(leader, scenario.VAR_MY_NAME, myName);
             setObjVar(leader, scenario.VAR_RANK, scenario.SR_MEDIATOR);
@@ -101,11 +112,11 @@ public class mediator_structure extends script.theme_park.poi.base
                 if ((m == null) || (m == obj_id.NULL_ID))
                 {
                 }
-                else 
+                else
                 {
                     persistObject(m);
                     setYaw(m, rand(0, 359));
-                    factions.setFaction(m, poiMaster.toString() + "_mediator", false);
+                    factions.setFaction(m, poiMaster + "_mediator", false);
                     attachScript(m, "poi." + scenario_name + ".mediator");
                     setObjVar(m, scenario.VAR_MY_NAME, myName);
                     setObjVar(m, scenario.VAR_RANK, scenario.SR_MEDIATOR_MINION);

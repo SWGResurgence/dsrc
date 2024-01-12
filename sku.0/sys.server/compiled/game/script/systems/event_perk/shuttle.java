@@ -1,5 +1,11 @@
 package script.systems.event_perk;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.obj_id;
 import script.string_id;
@@ -99,7 +105,6 @@ public class shuttle extends script.base_script
         {
             destroyObject(self);
         }
-        return;
     }
 
     public int OnAddedToWorld(obj_id self) throws InterruptedException

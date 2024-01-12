@@ -1,5 +1,11 @@
 package script.npc.celebrity;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.chat;
@@ -9,11 +15,12 @@ import script.string_id;
 
 public class jinkins extends script.base_script
 {
+    public static final String CONVO = "celebrity/jinkins";
+    public static final String FACETO_VOLUME_NAME = "faceToTriggerVolume";
     public jinkins()
     {
     }
-    public static final String CONVO = "celebrity/jinkins";
-    public static final String FACETO_VOLUME_NAME = "faceToTriggerVolume";
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setName(self, "Jinkins");
@@ -25,6 +32,7 @@ public class jinkins extends script.base_script
         messageTo(self, "doISetup", null, 2, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         String questInfo = "tell_me_quest";
@@ -39,7 +47,7 @@ public class jinkins extends script.base_script
         if (hasObjVar(player, "nym.jinkins.finished") || hasObjVar(player, "nym.nym.finished"))
         {
             string_id greeting = new string_id(CONVO, "good_work");
-            string_id response[] = new string_id[2];
+            string_id[] response = new string_id[2];
             response[0] = new string_id(CONVO, "what_now");
             response[1] = new string_id(CONVO, "see_ya");
             setObjVar(player, "nym.jinkins.done", 1);
@@ -63,7 +71,7 @@ public class jinkins extends script.base_script
         if (hasObjVar(player, "nym.jinkins.droid"))
         {
             string_id greeting = new string_id(CONVO, "you_got_memory");
-            string_id response[] = new string_id[2];
+            string_id[] response = new string_id[2];
             response[0] = new string_id(CONVO, "yes");
             response[1] = new string_id(CONVO, "no");
             npcStartConversation(player, self, "celebConvo", greeting, response);
@@ -100,14 +108,14 @@ public class jinkins extends script.base_script
         if (hasObjVar(player, "nym.jinkins.everyone"))
         {
             string_id greeting = new string_id(CONVO, hello_line);
-            string_id response[] = new string_id[1];
+            string_id[] response = new string_id[1];
             response[0] = new string_id(CONVO, questInfo);
             npcStartConversation(player, self, "celebConvo", greeting, response);
         }
         if (hasObjVar(player, "nym.jinkins.jinkins") && hasObjVar(player, "nym.jinkins.kole") && hasObjVar(player, "nym.jinkins.nym"))
         {
             string_id greeting = new string_id(CONVO, hello_line);
-            string_id response[] = new string_id[1];
+            string_id[] response = new string_id[1];
             response[0] = new string_id(CONVO, questInfo);
             setObjVar(player, "nym.jinkins.everyone", 1);
             removeObjVar(player, "nym.jinkins.jinkins");
@@ -118,7 +126,7 @@ public class jinkins extends script.base_script
         if (hasObjVar(player, "nym.jinkins.jinkins") && hasObjVar(player, "nym.jinkins.kole"))
         {
             string_id greeting = new string_id(CONVO, hello_line);
-            string_id response[] = new string_id[2];
+            string_id[] response = new string_id[2];
             response[0] = new string_id(CONVO, "who_is_nym");
             response[1] = new string_id(CONVO, questInfo);
             npcStartConversation(player, self, "celebConvo", greeting, response);
@@ -126,7 +134,7 @@ public class jinkins extends script.base_script
         if (hasObjVar(player, "nym.jinkins.jinkins") && hasObjVar(player, "nym.jinkins.nym"))
         {
             string_id greeting = new string_id(CONVO, hello_line);
-            string_id response[] = new string_id[2];
+            string_id[] response = new string_id[2];
             response[0] = new string_id(CONVO, "who_is_kole");
             response[1] = new string_id(CONVO, questInfo);
             npcStartConversation(player, self, "celebConvo", greeting, response);
@@ -134,7 +142,7 @@ public class jinkins extends script.base_script
         if (hasObjVar(player, "nym.jinkins.jinkins"))
         {
             string_id greeting = new string_id(CONVO, hello_line);
-            string_id response[] = new string_id[3];
+            string_id[] response = new string_id[3];
             response[0] = new string_id(CONVO, "who_is_nym");
             response[1] = new string_id(CONVO, "who_is_kole");
             response[2] = new string_id(CONVO, questInfo);
@@ -143,21 +151,22 @@ public class jinkins extends script.base_script
         else if (hasObjVar(player, "nym.jinkins.talked"))
         {
             string_id greeting = new string_id(CONVO, hello_line);
-            string_id response[] = new string_id[2];
+            string_id[] response = new string_id[2];
             response[0] = new string_id(CONVO, "who_are_you");
             response[1] = new string_id(CONVO, questInfo);
             npcStartConversation(player, self, "celebConvo", greeting, response);
         }
-        else 
+        else
         {
             string_id greeting = new string_id(CONVO, hello_line);
-            string_id response[] = new string_id[2];
+            string_id[] response = new string_id[2];
             response[0] = new string_id(CONVO, "who_are_you");
             response[1] = new string_id(CONVO, questInfo);
             npcStartConversation(player, self, "celebConvo", greeting, response);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String convo, obj_id player, string_id response) throws InterruptedException
     {
         String questInfo = "tell_me_quest";
@@ -349,6 +358,7 @@ public class jinkins extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnGiveItem(obj_id self, obj_id item, obj_id player) throws InterruptedException
     {
         String gaveMe = getTemplateName(item);
@@ -359,13 +369,14 @@ public class jinkins extends script.base_script
             chat.chat(self, message);
             return SCRIPT_OVERRIDE;
         }
-        else 
+        else
         {
             string_id message = new string_id(CONVO, "whats_this");
             chat.chat(self, message);
             return SCRIPT_CONTINUE;
         }
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id breacher) throws InterruptedException
     {
         if (!isPlayer(breacher))
@@ -386,12 +397,14 @@ public class jinkins extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int doISetup(obj_id self, dictionary params) throws InterruptedException
     {
         setCondition(self, CONDITION_INTERESTING);
         messageTo(self, "unkillable", null, 2, false);
         return SCRIPT_CONTINUE;
     }
+
     public int unkillable(obj_id self, dictionary params) throws InterruptedException
     {
         setInvulnerable(self, true);

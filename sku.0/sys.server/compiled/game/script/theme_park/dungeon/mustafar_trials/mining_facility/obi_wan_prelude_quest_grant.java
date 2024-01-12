@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.mustafar_trials.mining_facility;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.badge;
 import script.library.groundquests;
 import script.obj_id;
@@ -9,6 +15,7 @@ public class obi_wan_prelude_quest_grant extends script.base_script
     public obi_wan_prelude_quest_grant()
     {
     }
+
     public int OnReceivedItem(obj_id self, obj_id destinationCell, obj_id transferrer, obj_id item) throws InterruptedException
     {
         if (!isPlayer(item))
@@ -23,7 +30,7 @@ public class obi_wan_prelude_quest_grant extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             if (!hasScript(item, "theme_park.dungeon.mustafar_trials.obiwan_finale.obiwan_quest_monitor"))
             {

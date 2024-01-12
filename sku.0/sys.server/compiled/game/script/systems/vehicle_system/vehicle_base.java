@@ -1,5 +1,11 @@
 package script.systems.vehicle_system;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -11,6 +17,7 @@ public class vehicle_base extends script.base_script
     public static final string_id SID_CITY_GARAGE_BANNED = new string_id("city/city", "garage_banned");
     public static final string_id SID_NO_GROUND_VEHICLE_IN_SPACE = new string_id("space/space_interaction", "no_ground_vehicle_in_space");
     public static final boolean debug = false;
+
     public vehicle_base()
     {
     }

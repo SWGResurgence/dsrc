@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.mustafar_trials.working_droid_factory;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.obj_id;
@@ -10,14 +16,17 @@ import java.util.Vector;
 
 public class aurek_besh extends script.base_script
 {
+    public static final boolean LOGGING = true;
+
     public aurek_besh()
     {
     }
-    public static final boolean LOGGING = true;
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         String name = utils.getStringScriptVar(self, "name");
@@ -34,16 +43,19 @@ public class aurek_besh extends script.base_script
         messageTo(self, "destroySelf", null, 5, false);
         return SCRIPT_CONTINUE;
     }
+
     public int destroySelf(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnEnteredCombat(obj_id self) throws InterruptedException
     {
         startEventActions(self);
         return SCRIPT_CONTINUE;
     }
+
     public void startEventActions(obj_id self) throws InterruptedException
     {
         doLogging("startEventActions", "Have entered combat and am beginning duality");
@@ -55,6 +67,7 @@ public class aurek_besh extends script.base_script
         }
         messageTo(self, "performHealthCheck", trial.getSessionDict(self, "imbalance"), 10.0f, false);
     }
+
     public int OnCreatureDamaged(obj_id self, obj_id attacker, obj_id weapon, int[] damage) throws InterruptedException
     {
         float max = getMaxHealth(self);
@@ -65,12 +78,13 @@ public class aurek_besh extends script.base_script
         {
             utils.setScriptVar(trial.getTop(self), trial.AUREK_HEALTH, ratio);
         }
-        else 
+        else
         {
             utils.setScriptVar(trial.getTop(self), trial.BESH_HEALTH, ratio);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         obj_id homeCell = getContainedBy(self);
@@ -81,12 +95,13 @@ public class aurek_besh extends script.base_script
         {
             utils.setScriptVar(trial.getTop(self), trial.AUREK_HEALTH, 1.0f);
         }
-        else 
+        else
         {
             utils.setScriptVar(trial.getTop(self), trial.BESH_HEALTH, 1.0f);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToBeTransferred(obj_id self, obj_id destContainer, obj_id transferer) throws InterruptedException
     {
         obj_id homeCell = utils.getObjIdScriptVar(self, "home");
@@ -98,11 +113,13 @@ public class aurek_besh extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int removeInvulnerable(obj_id self, dictionary params) throws InterruptedException
     {
         setInvulnerable(self, false);
         return SCRIPT_CONTINUE;
     }
+
     public void resetSelf(obj_id self) throws InterruptedException
     {
         int max = getMaxHealth(self);
@@ -118,11 +135,12 @@ public class aurek_besh extends script.base_script
         {
             utils.setScriptVar(trial.getTop(self), trial.AUREK_HEALTH, 1.0f);
         }
-        else 
+        else
         {
             utils.setScriptVar(trial.getTop(self), trial.BESH_HEALTH, 1.0f);
         }
     }
+
     public int aurek_diminish(obj_id self, dictionary params) throws InterruptedException
     {
         if (!utils.hasScriptVar(self, "name") || !(utils.getStringScriptVar(self, "name")).equals("aurek"))
@@ -137,8 +155,10 @@ public class aurek_besh extends script.base_script
         }
         Vector beshPlayers = new Vector();
         beshPlayers.setSize(0);
-        for (obj_id player : players) {
-            if (buff.hasBuff(player, "beshDuality")) {
+        for (obj_id player : players)
+        {
+            if (buff.hasBuff(player, "beshDuality"))
+            {
                 utils.addElement(beshPlayers, player);
             }
         }
@@ -147,20 +167,22 @@ public class aurek_besh extends script.base_script
             doLogging("aurek_diminish", "There were no besh players, detonating now");
             utils.messageTo(players, "dualityDetonation", null, 0.0f, false);
         }
-        else 
+        else
         {
             int damage = beshPlayers.size() * 500;
             prose_package pp = new prose_package();
             pp.stringId = new string_id("cbt_spam", "duality_detonate_twin");
             pp.target.set(self);
             pp.digitInteger = damage;
-            for (Object beshPlayer : beshPlayers) {
+            for (Object beshPlayer : beshPlayers)
+            {
                 combat.sendCombatSpamMessageProse(((obj_id) beshPlayer), self, pp, true, true, false, COMBAT_RESULT_HIT);
                 damage(self, DAMAGE_ELEMENTAL_HEAT, HIT_LOCATION_BODY, damage);
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int besh_diminish(obj_id self, dictionary params) throws InterruptedException
     {
         if (!utils.hasScriptVar(self, "name") || !(utils.getStringScriptVar(self, "name")).equals("besh"))
@@ -175,8 +197,10 @@ public class aurek_besh extends script.base_script
         }
         Vector aurekPlayers = new Vector();
         aurekPlayers.setSize(0);
-        for (obj_id player : players) {
-            if (buff.hasBuff(player, "aurekDuality")) {
+        for (obj_id player : players)
+        {
+            if (buff.hasBuff(player, "aurekDuality"))
+            {
                 utils.addElement(aurekPlayers, player);
             }
         }
@@ -185,20 +209,22 @@ public class aurek_besh extends script.base_script
             doLogging("besh_diminish", "There were no aurek players, detonating now");
             utils.messageTo(players, "dualityDetonation", null, 0.0f, false);
         }
-        else 
+        else
         {
             int damage = aurekPlayers.size() * 8000;
             prose_package pp = new prose_package();
             pp.stringId = new string_id("cbt_spam", "duality_detonate_twin");
             pp.target.set(self);
             pp.digitInteger = damage;
-            for (Object aurekPlayer : aurekPlayers) {
+            for (Object aurekPlayer : aurekPlayers)
+            {
                 combat.sendCombatSpamMessageProse(((obj_id) aurekPlayer), self, pp, true, true, false, COMBAT_RESULT_HIT);
                 damage(self, DAMAGE_ELEMENTAL_HEAT, DAMAGE_ELEMENTAL_ELECTRICAL, damage);
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int performHealthCheck(obj_id self, dictionary params) throws InterruptedException
     {
         if (!trial.verifySession(self, params, "imbalance"))
@@ -223,7 +249,7 @@ public class aurek_besh extends script.base_script
                 }
             }
         }
-        else 
+        else
         {
             if (buff.hasBuff(self, "aurek_besh_imbalance"))
             {
@@ -239,6 +265,7 @@ public class aurek_besh extends script.base_script
         messageTo(self, "performHealthCheck", trial.getSessionDict(self, "imbalance"), 10.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public void doLogging(String section, String message) throws InterruptedException
     {
         if (LOGGING || trial.WORKING_LOGGING)

@@ -1,5 +1,11 @@
 package script.test;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -7,9 +13,6 @@ import java.util.Vector;
 
 public class qa_ai_helper_attach extends script.base_script
 {
-    public qa_ai_helper_attach()
-    {
-    }
     public static final int ATTACK_OPTION = 0;
     public static final int PROGRAM_OPTION = 1;
     public static final int DIEINPLACE = 0;
@@ -153,252 +156,256 @@ public class qa_ai_helper_attach extends script.base_script
     public static final int YAWN = 93;
     public static final int BACK = 94;
     public static final int SCRIPTVAR_LENGTH_CAP = 3000;
-    public static final String[] AI_MAIN_MENU = 
+    public static final String[] AI_MAIN_MENU =
+            {
+                    "Attack Menu",
+                    "Program Menu"
+            };
+    public static final String[] AI_ATTACK_MENU =
+            {
+                    "Attack me",
+                    "Stop Combat & Remove Aggro",
+                    "Go to Program Menu"
+            };
+    public static final String[] AI_PROGRAM_MENU =
+            {
+                    "Die in place",
+                    "Heal All",
+                    "Stay/Freeze",
+                    "Follow",
+                    "NPC Animations",
+                    "Apply No Death script",
+                    "Remove No Death script",
+                    "Start Recording Damage",
+                    "Export Damage Report",
+                    "Move to Coordinates",
+                    "Go to Attack Menu"
+            };
+    public static final String[] NPC_ANIMATION_MENU =
+            {
+                    "Dancing",
+                    "Stop Dancing",
+                    "Flourish Menu",
+                    "Expressions",
+                    "Postures",
+                    "Go to Program Menu",
+                    "Go to Attack Menu"
+            };
+    public static final String[] NPC_POSTURE_MENU =
+            {
+                    "Meditating",
+                    "Play Dead",
+                    "Entertained",
+                    "Sitting in chair",
+                    "Crouching",
+                    "Prone",
+                    "Sneaking",
+                    "Sitting",
+                    "Go to Previous Menu"
+            };
+    public static final String[] AI_ANIMATIONS =
+            {
+                    "basic dance",
+                    "Heal All",
+                    "Stay/Freeze",
+                    "Follow",
+                    "Dance and Postures",
+                    "Apply No Death script",
+                    "Remove No Death script",
+                    "Start Recording Damage",
+                    "Export Damage Report",
+                    "Move to Coordinates",
+                    "Go to Attack Menu"
+            };
+    public static final String[] AI_FLOURISH_MENU =
+            {
+                    "Flourish 1",
+                    "Flourish 2",
+                    "Flourish 3",
+                    "Flourish 4",
+                    "Flourish 5",
+                    "Flourish 6",
+                    "Flourish 7",
+                    "Flourish 8",
+                    "Go to Previous Menu"
+            };
+    public static final String[] ENTERTAINER_SKILLS =
+            {
+                    "social_entertainer_novice",
+                    "social_entertainer_dance_01",
+                    "social_entertainer_music_01",
+                    "social_entertainer_healing_01",
+                    "social_entertainer_hairstyle_01",
+                    "social_entertainer_dance_02",
+                    "social_entertainer_music_02",
+                    "social_entertainer_healing_02",
+                    "social_entertainer_hairstyle_02",
+                    "social_entertainer_dance_03",
+                    "social_entertainer_music_03",
+                    "social_entertainer_healing_03",
+                    "social_entertainer_hairstyle_03",
+                    "social_entertainer_dance_04",
+                    "social_entertainer_music_04",
+                    "social_entertainer_healing_04",
+                    "social_entertainer_hairstyle_04",
+                    "social_entertainer_master",
+                    "social_dancer_novice",
+                    "social_musician_novice",
+                    "social_imagedesigner_novice",
+                    "social_dancer_ability_01",
+                    "social_dancer_wound_01",
+                    "social_dancer_knowledge_01",
+                    "social_dancer_shock_01",
+                    "social_musician_ability_01",
+                    "social_musician_wound_01",
+                    "social_musician_knowledge_01",
+                    "social_musician_shock_01",
+                    "social_imagedesigner_hairstyle_01",
+                    "social_imagedesigner_exotic_01",
+                    "social_imagedesigner_bodyform_01",
+                    "social_imagedesigner_markings_01",
+                    "social_dancer_ability_02",
+                    "social_dancer_wound_02",
+                    "social_dancer_knowledge_02",
+                    "social_dancer_shock_02",
+                    "social_musician_ability_02",
+                    "social_musician_wound_02",
+                    "social_musician_knowledge_02",
+                    "social_musician_shock_02",
+                    "social_imagedesigner_hairstyle_02",
+                    "social_imagedesigner_exotic_02",
+                    "social_imagedesigner_bodyform_02",
+                    "social_imagedesigner_markings_02",
+                    "social_dancer_ability_03",
+                    "social_dancer_wound_03",
+                    "social_dancer_knowledge_03",
+                    "social_dancer_shock_03",
+                    "social_musician_ability_03",
+                    "social_musician_wound_03",
+                    "social_musician_knowledge_03",
+                    "social_musician_shock_03",
+                    "social_imagedesigner_hairstyle_03",
+                    "social_imagedesigner_exotic_03",
+                    "social_imagedesigner_bodyform_03",
+                    "social_imagedesigner_markings_03",
+                    "social_dancer_ability_04",
+                    "social_dancer_wound_04",
+                    "social_dancer_knowledge_04",
+                    "social_dancer_shock_04",
+                    "social_musician_ability_04",
+                    "social_musician_wound_04",
+                    "social_musician_knowledge_04",
+                    "social_musician_shock_04",
+                    "social_imagedesigner_hairstyle_04",
+                    "social_imagedesigner_exotic_04",
+                    "social_imagedesigner_bodyform_04",
+                    "social_imagedesigner_markings_04",
+                    "social_imagedesigner_master",
+                    "social_musician_master",
+                    "social_dancer_master"
+            };
+    public static final String[] EXPRESSION_MENU =
+            {
+                    "celebrate",
+                    "celebrate1",
+                    "check wrist device",
+                    "clap rousing",
+                    "cough polite",
+                    "cover ears mocking",
+                    "cover mouth",
+                    "curtsey",
+                    "curtsey1",
+                    "door knock",
+                    "door pound",
+                    "embarrassed",
+                    "flex biceps",
+                    "force absorb",
+                    "force blast",
+                    "force channel",
+                    "force choke",
+                    "force dampen",
+                    "force destruction",
+                    "force illusion",
+                    "force lightning",
+                    "force persuasion",
+                    "force protection",
+                    "force pull",
+                    "force push",
+                    "force strength",
+                    "force throw",
+                    "gesticulate wildly",
+                    "hair flip",
+                    "hands above head",
+                    "hands behind head",
+                    "heavy cough vomit",
+                    "hold nose",
+                    "hug self",
+                    "implore",
+                    "kiss blow kiss",
+                    "laugh cackle",
+                    "laugh pointing",
+                    "laugh titter",
+                    "listen",
+                    "nod head multiple",
+                    "nod head once",
+                    "offer affection",
+                    "pat abdomen",
+                    "point accusingly",
+                    "point away",
+                    "point down",
+                    "point forward",
+                    "point left",
+                    "point right",
+                    "point to self",
+                    "point up",
+                    "pose proudly",
+                    "pound fist chest",
+                    "pound fist palm",
+                    "refuse offer affection",
+                    "refuse offer formal",
+                    "rub belly",
+                    "rub chin thoughtful",
+                    "salute1",
+                    "salute2",
+                    "scratch head",
+                    "search",
+                    "shake head disgust",
+                    "shake head no",
+                    "shiver",
+                    "shrug hands",
+                    "shrug shoulders",
+                    "shush",
+                    "sigh deeply",
+                    "slit throat",
+                    "slow down",
+                    "slump head",
+                    "smack self",
+                    "smell air",
+                    "smell armpit",
+                    "snap finger1",
+                    "snap finger2",
+                    "sneeze",
+                    "stamp feet",
+                    "stop",
+                    "tap head",
+                    "taunt1",
+                    "taunt2",
+                    "taunt3",
+                    "wave finger warning",
+                    "wave hail",
+                    "wave on directing",
+                    "wave on dismissing",
+                    "wave1",
+                    "wave2",
+                    "weeping",
+                    "whisper",
+                    "yawn",
+                    "Previous Menu"
+            };
+    public qa_ai_helper_attach()
     {
-        "Attack Menu",
-        "Program Menu"
-    };
-    public static final String[] AI_ATTACK_MENU = 
-    {
-        "Attack me",
-        "Stop Combat & Remove Aggro",
-        "Go to Program Menu"
-    };
-    public static final String[] AI_PROGRAM_MENU = 
-    {
-        "Die in place",
-        "Heal All",
-        "Stay/Freeze",
-        "Follow",
-        "NPC Animations",
-        "Apply No Death script",
-        "Remove No Death script",
-        "Start Recording Damage",
-        "Export Damage Report",
-        "Move to Coordinates",
-        "Go to Attack Menu"
-    };
-    public static final String[] NPC_ANIMATION_MENU = 
-    {
-        "Dancing",
-        "Stop Dancing",
-        "Flourish Menu",
-        "Expressions",
-        "Postures",
-        "Go to Program Menu",
-        "Go to Attack Menu"
-    };
-    public static final String[] NPC_POSTURE_MENU = 
-    {
-        "Meditating",
-        "Play Dead",
-        "Entertained",
-        "Sitting in chair",
-        "Crouching",
-        "Prone",
-        "Sneaking",
-        "Sitting",
-        "Go to Previous Menu"
-    };
-    public static final String[] AI_ANIMATIONS = 
-    {
-        "basic dance",
-        "Heal All",
-        "Stay/Freeze",
-        "Follow",
-        "Dance and Postures",
-        "Apply No Death script",
-        "Remove No Death script",
-        "Start Recording Damage",
-        "Export Damage Report",
-        "Move to Coordinates",
-        "Go to Attack Menu"
-    };
-    public static final String[] AI_FLOURISH_MENU = 
-    {
-        "Flourish 1",
-        "Flourish 2",
-        "Flourish 3",
-        "Flourish 4",
-        "Flourish 5",
-        "Flourish 6",
-        "Flourish 7",
-        "Flourish 8",
-        "Go to Previous Menu"
-    };
-    public static final String[] ENTERTAINER_SKILLS = 
-    {
-        "social_entertainer_novice",
-        "social_entertainer_dance_01",
-        "social_entertainer_music_01",
-        "social_entertainer_healing_01",
-        "social_entertainer_hairstyle_01",
-        "social_entertainer_dance_02",
-        "social_entertainer_music_02",
-        "social_entertainer_healing_02",
-        "social_entertainer_hairstyle_02",
-        "social_entertainer_dance_03",
-        "social_entertainer_music_03",
-        "social_entertainer_healing_03",
-        "social_entertainer_hairstyle_03",
-        "social_entertainer_dance_04",
-        "social_entertainer_music_04",
-        "social_entertainer_healing_04",
-        "social_entertainer_hairstyle_04",
-        "social_entertainer_master",
-        "social_dancer_novice",
-        "social_musician_novice",
-        "social_imagedesigner_novice",
-        "social_dancer_ability_01",
-        "social_dancer_wound_01",
-        "social_dancer_knowledge_01",
-        "social_dancer_shock_01",
-        "social_musician_ability_01",
-        "social_musician_wound_01",
-        "social_musician_knowledge_01",
-        "social_musician_shock_01",
-        "social_imagedesigner_hairstyle_01",
-        "social_imagedesigner_exotic_01",
-        "social_imagedesigner_bodyform_01",
-        "social_imagedesigner_markings_01",
-        "social_dancer_ability_02",
-        "social_dancer_wound_02",
-        "social_dancer_knowledge_02",
-        "social_dancer_shock_02",
-        "social_musician_ability_02",
-        "social_musician_wound_02",
-        "social_musician_knowledge_02",
-        "social_musician_shock_02",
-        "social_imagedesigner_hairstyle_02",
-        "social_imagedesigner_exotic_02",
-        "social_imagedesigner_bodyform_02",
-        "social_imagedesigner_markings_02",
-        "social_dancer_ability_03",
-        "social_dancer_wound_03",
-        "social_dancer_knowledge_03",
-        "social_dancer_shock_03",
-        "social_musician_ability_03",
-        "social_musician_wound_03",
-        "social_musician_knowledge_03",
-        "social_musician_shock_03",
-        "social_imagedesigner_hairstyle_03",
-        "social_imagedesigner_exotic_03",
-        "social_imagedesigner_bodyform_03",
-        "social_imagedesigner_markings_03",
-        "social_dancer_ability_04",
-        "social_dancer_wound_04",
-        "social_dancer_knowledge_04",
-        "social_dancer_shock_04",
-        "social_musician_ability_04",
-        "social_musician_wound_04",
-        "social_musician_knowledge_04",
-        "social_musician_shock_04",
-        "social_imagedesigner_hairstyle_04",
-        "social_imagedesigner_exotic_04",
-        "social_imagedesigner_bodyform_04",
-        "social_imagedesigner_markings_04",
-        "social_imagedesigner_master",
-        "social_musician_master",
-        "social_dancer_master"
-    };
-    public static final String[] EXPRESSION_MENU = 
-    {
-        "celebrate",
-        "celebrate1",
-        "check wrist device",
-        "clap rousing",
-        "cough polite",
-        "cover ears mocking",
-        "cover mouth",
-        "curtsey",
-        "curtsey1",
-        "door knock",
-        "door pound",
-        "embarrassed",
-        "flex biceps",
-        "force absorb",
-        "force blast",
-        "force channel",
-        "force choke",
-        "force dampen",
-        "force destruction",
-        "force illusion",
-        "force lightning",
-        "force persuasion",
-        "force protection",
-        "force pull",
-        "force push",
-        "force strength",
-        "force throw",
-        "gesticulate wildly",
-        "hair flip",
-        "hands above head",
-        "hands behind head",
-        "heavy cough vomit",
-        "hold nose",
-        "hug self",
-        "implore",
-        "kiss blow kiss",
-        "laugh cackle",
-        "laugh pointing",
-        "laugh titter",
-        "listen",
-        "nod head multiple",
-        "nod head once",
-        "offer affection",
-        "pat abdomen",
-        "point accusingly",
-        "point away",
-        "point down",
-        "point forward",
-        "point left",
-        "point right",
-        "point to self",
-        "point up",
-        "pose proudly",
-        "pound fist chest",
-        "pound fist palm",
-        "refuse offer affection",
-        "refuse offer formal",
-        "rub belly",
-        "rub chin thoughtful",
-        "salute1",
-        "salute2",
-        "scratch head",
-        "search",
-        "shake head disgust",
-        "shake head no",
-        "shiver",
-        "shrug hands",
-        "shrug shoulders",
-        "shush",
-        "sigh deeply",
-        "slit throat",
-        "slow down",
-        "slump head",
-        "smack self",
-        "smell air",
-        "smell armpit",
-        "snap finger1",
-        "snap finger2",
-        "sneeze",
-        "stamp feet",
-        "stop",
-        "tap head",
-        "taunt1",
-        "taunt2",
-        "taunt3",
-        "wave finger warning",
-        "wave hail",
-        "wave on directing",
-        "wave on dismissing",
-        "wave1",
-        "wave2",
-        "weeping",
-        "whisper",
-        "yawn",
-        "Previous Menu"
-    };
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         obj_id tester = utils.getObjIdScriptVar(self, "spawnedBy");
@@ -412,12 +419,13 @@ public class qa_ai_helper_attach extends script.base_script
                 doNotAggroTester(self, tester);
             }
         }
-        else 
+        else
         {
             broadcast(tester, "Tester must be in God Mode to use QA Helper.");
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id tester, menu_info mi) throws InterruptedException
     {
         int menu = mi.addRootMenu(menu_info_types.ITEM_USE, new string_id("", ""));
@@ -425,6 +433,7 @@ public class qa_ai_helper_attach extends script.base_script
         mi.addSubMenu(menu, menu_info_types.SERVER_MENU2, new string_id(PET_MENU_STRFILE, "menu_command_droid"));
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id tester, int menu) throws InterruptedException
     {
         if (isGod(tester))
@@ -448,12 +457,13 @@ public class qa_ai_helper_attach extends script.base_script
             }
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             broadcast(tester, "Tester must be in God Mode to use QA Helper.");
             return SCRIPT_CONTINUE;
         }
     }
+
     public int OnDeath(obj_id self, obj_id killer, obj_id corpseId) throws InterruptedException
     {
         obj_id tester = utils.getObjIdScriptVar(self, "spawnedBy");
@@ -464,13 +474,14 @@ public class qa_ai_helper_attach extends script.base_script
         exportDamageData(self, tester);
         return SCRIPT_CONTINUE;
     }
+
     public int OnCreatureDamaged(obj_id self, obj_id attacker, obj_id weapon, int[] damage) throws InterruptedException
     {
         if (hasScript(self, "developer.soe.e3demo.yavin_e3") && utils.getBooleanScriptVar(self, SCRIPTVAR_MOB + ".recordDamage") && utils.getObjIdScriptVar(attacker, "spawnedBy") == self)
         {
             broadcast(self, "Damage numbers will not be accurate due to developer.soe.e3demo.yavin_e3 script attached to your character");
         }
-        else 
+        else
         {
             if (utils.getObjIdScriptVar(self, "spawnedBy") == attacker)
             {
@@ -509,7 +520,7 @@ public class qa_ai_helper_attach extends script.base_script
                         {
                             weaponString = unlocalizedWeaponName;
                         }
-                        else 
+                        else
                         {
                             weaponString = "Error Retrieving Weapon Data";
                         }
@@ -519,7 +530,7 @@ public class qa_ai_helper_attach extends script.base_script
                         {
                             appendDamage = mobDamageDone + damageData;
                         }
-                        else 
+                        else
                         {
                             appendDamage = damageData;
                         }
@@ -528,7 +539,7 @@ public class qa_ai_helper_attach extends script.base_script
                         damageAmount = 0;
                         return SCRIPT_CONTINUE;
                     }
-                    else 
+                    else
                     {
                         dataStorageCapacityReached(self, attacker);
                         return SCRIPT_CONTINUE;
@@ -538,6 +549,7 @@ public class qa_ai_helper_attach extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAiCombatFrame(obj_id self) throws InterruptedException
     {
         obj_id tester = utils.getObjIdScriptVar(self, "spawnedBy");
@@ -555,6 +567,7 @@ public class qa_ai_helper_attach extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleMainMenuOptions(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id tester = utils.getObjIdScriptVar(self, "spawnedBy");
@@ -571,29 +584,30 @@ public class qa_ai_helper_attach extends script.base_script
                     removeScriptVarData(self, tester, "");
                     return SCRIPT_CONTINUE;
                 }
-                else 
+                else
                 {
                     String creaturePrompt = getCreaturePrompt(self, tester);
                     switch (idx)
                     {
                         case ATTACK_OPTION:
-                        callAttackSUI(self, tester);
-                        break;
+                            callAttackSUI(self, tester);
+                            break;
                         case PROGRAM_OPTION:
-                        callProgramOptions(self, tester);
-                        break;
+                            callProgramOptions(self, tester);
+                            break;
                         default:
-                        return SCRIPT_CONTINUE;
+                            return SCRIPT_CONTINUE;
                     }
                 }
             }
         }
-        else 
+        else
         {
             broadcast(tester, "Tester must be in God Mode to use QA Helper.");
         }
         return SCRIPT_CONTINUE;
     }
+
     public int attackMenuOptions(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id tester = utils.getObjIdScriptVar(self, "spawnedBy");
@@ -610,35 +624,36 @@ public class qa_ai_helper_attach extends script.base_script
                     removeScriptVarData(self, tester, "");
                     return SCRIPT_CONTINUE;
                 }
-                else 
+                else
                 {
                     switch (idx)
                     {
                         case ATTACKME:
-                        revertRunSpeed(self);
-                        attackTester(self, tester);
-                        callAttackSUI(self, tester);
-                        break;
+                            revertRunSpeed(self);
+                            attackTester(self, tester);
+                            callAttackSUI(self, tester);
+                            break;
                         case STOPATTACKING:
-                        qa.stopCreatureCombat(self, tester);
-                        callAttackSUI(self, tester);
-                        break;
+                            qa.stopCreatureCombat(self, tester);
+                            callAttackSUI(self, tester);
+                            break;
                         case ACCESS_PROGRAM_MENU:
-                        callProgramOptions(self, tester);
-                        break;
+                            callProgramOptions(self, tester);
+                            break;
                         default:
-                        removeScriptVarData(self, tester, "Default Option on Switch");
-                        return SCRIPT_CONTINUE;
+                            removeScriptVarData(self, tester, "Default Option on Switch");
+                            return SCRIPT_CONTINUE;
                     }
                 }
             }
         }
-        else 
+        else
         {
             broadcast(tester, "Tester must be in God Mode to use QA Helper.");
         }
         return SCRIPT_CONTINUE;
     }
+
     public int programMenuOptions(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id tester = utils.getObjIdScriptVar(self, "spawnedBy");
@@ -654,65 +669,66 @@ public class qa_ai_helper_attach extends script.base_script
                 {
                     return SCRIPT_CONTINUE;
                 }
-                else 
+                else
                 {
                     switch (idx)
                     {
                         case DIEINPLACE:
-                        killHelper(self, tester);
-                        break;
+                            killHelper(self, tester);
+                            break;
                         case HEAL_ALL:
-                        storeCurrentHealth(self, tester);
-                        callProgramOptions(self, tester);
-                        break;
+                            storeCurrentHealth(self, tester);
+                            callProgramOptions(self, tester);
+                            break;
                         case FREEZEMOB:
-                        freezeMob(self, tester);
-                        callProgramOptions(self, tester);
-                        break;
+                            freezeMob(self, tester);
+                            callProgramOptions(self, tester);
+                            break;
                         case FOLLOWTESTER:
-                        qa.followTester(self, tester);
-                        callProgramOptions(self, tester);
-                        break;
+                            qa.followTester(self, tester);
+                            callProgramOptions(self, tester);
+                            break;
                         case DANCE_POSTURE:
-                        createAnimationSUI(self, tester);
-                        break;
+                            createAnimationSUI(self, tester);
+                            break;
                         case NODEATH:
-                        attachNoDeathScript(self, tester);
-                        callProgramOptions(self, tester);
-                        break;
+                            attachNoDeathScript(self, tester);
+                            callProgramOptions(self, tester);
+                            break;
                         case REMOVENODEATH:
-                        removeNoDeathScript(self, tester);
-                        callProgramOptions(self, tester);
-                        break;
+                            removeNoDeathScript(self, tester);
+                            callProgramOptions(self, tester);
+                            break;
                         case STARTDATACOLLECTION:
-                        buff.removeAllBuffs(tester);
-                        broadcast(tester, "All buffs have been removed, please re-apply if needed.");
-                        storeCurrentHealth(self, tester);
-                        removeActionRegen(tester);
-                        recordDamage(self, tester);
-                        callProgramOptions(self, tester);
-                        break;
+                            buff.removeAllBuffs(tester);
+                            broadcast(tester, "All buffs have been removed, please re-apply if needed.");
+                            storeCurrentHealth(self, tester);
+                            removeActionRegen(tester);
+                            recordDamage(self, tester);
+                            callProgramOptions(self, tester);
+                            break;
                         case STOPSTOREDATA:
-                        exportDamageData(self, tester);
-                        break;
+                            exportDamageData(self, tester);
+                            break;
                         case MOVETOWAYPOINT:
-                        toolMovementMenu(self, tester);
-                        break;
+                            toolMovementMenu(self, tester);
+                            break;
                         case ACCESS_ATTACK_MENU:
-                        callAttackSUI(self, tester);
-                        break;
+                            callAttackSUI(self, tester);
+                            break;
                         default:
-                        return SCRIPT_CONTINUE;
+                            return SCRIPT_CONTINUE;
                     }
                 }
             }
         }
-        else 
+        else
         {
             broadcast(tester, "Tester must be in God Mode to use QA Helper.");
         }
         return SCRIPT_CONTINUE;
     }
+
     public int animationMenuOptions(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id tester = utils.getObjIdScriptVar(self, "spawnedBy");
@@ -728,44 +744,45 @@ public class qa_ai_helper_attach extends script.base_script
                 {
                     return SCRIPT_CONTINUE;
                 }
-                else 
+                else
                 {
                     switch (idx)
                     {
                         case DANCE:
-                        createDanceSUI(self, tester);
-                        break;
+                            createDanceSUI(self, tester);
+                            break;
                         case STOP_DANCE:
-                        performance.stopDance(self);
-                        createAnimationSUI(self, tester);
-                        break;
+                            performance.stopDance(self);
+                            createAnimationSUI(self, tester);
+                            break;
                         case FLOURISHES:
-                        createFlourishSUI(self, tester);
-                        break;
+                            createFlourishSUI(self, tester);
+                            break;
                         case EXPRESS:
-                        createExpressionSUI(self, tester);
-                        break;
+                            createExpressionSUI(self, tester);
+                            break;
                         case POSTURE:
-                        createPostureSUI(self, tester);
-                        break;
+                            createPostureSUI(self, tester);
+                            break;
                         case PROGRAM_MENU:
-                        callProgramOptions(self, tester);
-                        break;
+                            callProgramOptions(self, tester);
+                            break;
                         case ATTACK_MENU:
-                        callAttackSUI(self, tester);
-                        break;
+                            callAttackSUI(self, tester);
+                            break;
                         default:
-                        return SCRIPT_CONTINUE;
+                            return SCRIPT_CONTINUE;
                     }
                 }
             }
         }
-        else 
+        else
         {
             broadcast(tester, "Tester must be in God Mode to use QA Helper.");
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleMoveToOptions(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id tester = utils.getObjIdScriptVar(self, "spawnedBy");
@@ -777,25 +794,26 @@ public class qa_ai_helper_attach extends script.base_script
                 obj_id player = sui.getPlayerId(params);
                 int idx = sui.getListboxSelectedRow(params);
                 int btn = sui.getIntButtonPressed(params);
-                String prevMenuArray[] = utils.getStringArrayScriptVar(tester, SCRIPTVAR + ".moveToMenu");
+                String[] prevMenuArray = utils.getStringArrayScriptVar(tester, SCRIPTVAR + ".moveToMenu");
                 if (btn == sui.BP_CANCEL)
                 {
                     return SCRIPT_CONTINUE;
                 }
-                else 
+                else
                 {
-                    location waypointWarpLocationArray[] = utils.getLocationArrayScriptVar(tester, SCRIPTVAR + ".warpPoints");
+                    location[] waypointWarpLocationArray = utils.getLocationArrayScriptVar(tester, SCRIPTVAR + ".warpPoints");
                     location warpSelection = waypointWarpLocationArray[idx];
                     pathTo(self, warpSelection);
                 }
             }
         }
-        else 
+        else
         {
             broadcast(tester, "Tester must be in God Mode to use QA Helper.");
         }
         return SCRIPT_CONTINUE;
     }
+
     public int msgFlourishSelected(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id tester = utils.getObjIdScriptVar(self, "spawnedBy");
@@ -812,57 +830,58 @@ public class qa_ai_helper_attach extends script.base_script
                     createAnimationSUI(self, tester);
                     return SCRIPT_CONTINUE;
                 }
-                else 
+                else
                 {
                     switch (idx)
                     {
                         case FLO_ONE:
-                        performance.flourish(self, 1);
-                        createFlourishSUI(self, tester);
-                        break;
+                            performance.flourish(self, 1);
+                            createFlourishSUI(self, tester);
+                            break;
                         case FLO_TWO:
-                        performance.flourish(self, 2);
-                        createFlourishSUI(self, tester);
-                        break;
+                            performance.flourish(self, 2);
+                            createFlourishSUI(self, tester);
+                            break;
                         case FLO_THREE:
-                        performance.flourish(self, 3);
-                        createFlourishSUI(self, tester);
-                        break;
+                            performance.flourish(self, 3);
+                            createFlourishSUI(self, tester);
+                            break;
                         case FLO_FOUR:
-                        performance.flourish(self, 4);
-                        createFlourishSUI(self, tester);
-                        break;
+                            performance.flourish(self, 4);
+                            createFlourishSUI(self, tester);
+                            break;
                         case FLO_FIVE:
-                        performance.flourish(self, 5);
-                        createFlourishSUI(self, tester);
-                        break;
+                            performance.flourish(self, 5);
+                            createFlourishSUI(self, tester);
+                            break;
                         case FLO_SIX:
-                        performance.flourish(self, 6);
-                        createFlourishSUI(self, tester);
-                        break;
+                            performance.flourish(self, 6);
+                            createFlourishSUI(self, tester);
+                            break;
                         case FLO_SEVEN:
-                        performance.flourish(self, 7);
-                        createFlourishSUI(self, tester);
-                        break;
+                            performance.flourish(self, 7);
+                            createFlourishSUI(self, tester);
+                            break;
                         case FLO_EIGHT:
-                        performance.flourish(self, 8);
-                        createFlourishSUI(self, tester);
-                        break;
+                            performance.flourish(self, 8);
+                            createFlourishSUI(self, tester);
+                            break;
                         case PREVIOUS_MENU:
-                        createAnimationSUI(self, tester);
-                        break;
+                            createAnimationSUI(self, tester);
+                            break;
                         default:
-                        return SCRIPT_CONTINUE;
+                            return SCRIPT_CONTINUE;
                     }
                 }
             }
         }
-        else 
+        else
         {
             broadcast(tester, "Tester must be in God Mode to use QA Helper.");
         }
         return SCRIPT_CONTINUE;
     }
+
     public int msgPostureSelected(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id tester = utils.getObjIdScriptVar(self, "spawnedBy");
@@ -879,62 +898,63 @@ public class qa_ai_helper_attach extends script.base_script
                     createAnimationSUI(self, tester);
                     return SCRIPT_CONTINUE;
                 }
-                else 
+                else
                 {
                     switch (idx)
                     {
                         case MEDITATING:
-                        setPosture(self, POSTURE_SITTING);
-                        setAnimationMood(self, "meditating");
-                        createPostureSUI(self, tester);
-                        break;
+                            setPosture(self, POSTURE_SITTING);
+                            setAnimationMood(self, "meditating");
+                            createPostureSUI(self, tester);
+                            break;
                         case NPC_DEAD_03:
-                        setPosture(self, POSTURE_UPRIGHT);
-                        setAnimationMood(self, "npc_dead_03");
-                        createPostureSUI(self, tester);
-                        break;
+                            setPosture(self, POSTURE_UPRIGHT);
+                            setAnimationMood(self, "npc_dead_03");
+                            createPostureSUI(self, tester);
+                            break;
                         case ENTERTAINED:
-                        setPosture(self, POSTURE_UPRIGHT);
-                        setAnimationMood(self, "entertained");
-                        createPostureSUI(self, tester);
-                        break;
+                            setPosture(self, POSTURE_UPRIGHT);
+                            setAnimationMood(self, "entertained");
+                            createPostureSUI(self, tester);
+                            break;
                         case NPC_SITTING_CHAIR:
-                        setPosture(self, POSTURE_UPRIGHT);
-                        setAnimationMood(self, "npc_sitting_chair");
-                        createPostureSUI(self, tester);
-                        break;
+                            setPosture(self, POSTURE_UPRIGHT);
+                            setAnimationMood(self, "npc_sitting_chair");
+                            createPostureSUI(self, tester);
+                            break;
                         case CROUNCHING:
-                        setPosture(self, POSTURE_CROUCHED);
-                        createPostureSUI(self, tester);
-                        break;
+                            setPosture(self, POSTURE_CROUCHED);
+                            createPostureSUI(self, tester);
+                            break;
                         case PRONE:
-                        setPosture(self, POSTURE_PRONE);
-                        createPostureSUI(self, tester);
-                        break;
+                            setPosture(self, POSTURE_PRONE);
+                            createPostureSUI(self, tester);
+                            break;
                         case SNEAKING:
-                        setPosture(self, POSTURE_SNEAKING);
-                        createPostureSUI(self, tester);
-                        break;
+                            setPosture(self, POSTURE_SNEAKING);
+                            createPostureSUI(self, tester);
+                            break;
                         case SITTING:
-                        setPosture(self, POSTURE_SITTING);
-                        createPostureSUI(self, tester);
-                        break;
+                            setPosture(self, POSTURE_SITTING);
+                            createPostureSUI(self, tester);
+                            break;
                         case PREVIOUS_ANIMATION_MENU:
-                        setPosture(self, POSTURE_UPRIGHT);
-                        createAnimationSUI(self, tester);
-                        break;
+                            setPosture(self, POSTURE_UPRIGHT);
+                            createAnimationSUI(self, tester);
+                            break;
                         default:
-                        return SCRIPT_CONTINUE;
+                            return SCRIPT_CONTINUE;
                     }
                 }
             }
         }
-        else 
+        else
         {
             broadcast(tester, "Tester must be in God Mode to use QA Helper.");
         }
         return SCRIPT_CONTINUE;
     }
+
     public int msgExpressionSelected(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id tester = utils.getObjIdScriptVar(self, "spawnedBy");
@@ -951,401 +971,402 @@ public class qa_ai_helper_attach extends script.base_script
                     createAnimationSUI(self, tester);
                     return SCRIPT_CONTINUE;
                 }
-                else 
+                else
                 {
                     switch (idx)
                     {
                         case CELEBRATE:
-                        doAnimationAction(self, anims.PLAYER_CELEBRATE);
-                        createExpressionSUI(self, tester);
-                        break;
+                            doAnimationAction(self, anims.PLAYER_CELEBRATE);
+                            createExpressionSUI(self, tester);
+                            break;
                         case CELEBRATE1:
-                        doAnimationAction(self, anims.PLAYER_CELEBRATE1);
-                        createExpressionSUI(self, tester);
-                        break;
+                            doAnimationAction(self, anims.PLAYER_CELEBRATE1);
+                            createExpressionSUI(self, tester);
+                            break;
                         case CHECK_WRIST_DEVICE:
-                        doAnimationAction(self, anims.PLAYER_CHECK_WRIST_DEVICE);
-                        createExpressionSUI(self, tester);
-                        break;
+                            doAnimationAction(self, anims.PLAYER_CHECK_WRIST_DEVICE);
+                            createExpressionSUI(self, tester);
+                            break;
                         case CLAP_ROUSING:
-                        doAnimationAction(self, anims.PLAYER_CLAP_ROUSING);
-                        createExpressionSUI(self, tester);
-                        break;
+                            doAnimationAction(self, anims.PLAYER_CLAP_ROUSING);
+                            createExpressionSUI(self, tester);
+                            break;
                         case COUGH_POLITE:
-                        doAnimationAction(self, anims.PLAYER_COUGH_POLITE);
-                        createExpressionSUI(self, tester);
-                        break;
+                            doAnimationAction(self, anims.PLAYER_COUGH_POLITE);
+                            createExpressionSUI(self, tester);
+                            break;
                         case COVER_EARS_MOCKING:
-                        doAnimationAction(self, anims.PLAYER_COVER_EARS_MOCKING);
-                        createExpressionSUI(self, tester);
-                        break;
+                            doAnimationAction(self, anims.PLAYER_COVER_EARS_MOCKING);
+                            createExpressionSUI(self, tester);
+                            break;
                         case COVER_MOUTH:
-                        doAnimationAction(self, anims.PLAYER_COVER_MOUTH);
-                        createExpressionSUI(self, tester);
-                        break;
+                            doAnimationAction(self, anims.PLAYER_COVER_MOUTH);
+                            createExpressionSUI(self, tester);
+                            break;
                         case CURTSEY:
-                        doAnimationAction(self, anims.PLAYER_CURTSEY);
-                        createExpressionSUI(self, tester);
-                        break;
+                            doAnimationAction(self, anims.PLAYER_CURTSEY);
+                            createExpressionSUI(self, tester);
+                            break;
                         case CURTSEY1:
-                        doAnimationAction(self, anims.PLAYER_CURTSEY1);
-                        createExpressionSUI(self, tester);
-                        break;
+                            doAnimationAction(self, anims.PLAYER_CURTSEY1);
+                            createExpressionSUI(self, tester);
+                            break;
                         case DOOR_KNOCK:
-                        doAnimationAction(self, anims.PLAYER_DOOR_KNOCK);
-                        createExpressionSUI(self, tester);
-                        break;
+                            doAnimationAction(self, anims.PLAYER_DOOR_KNOCK);
+                            createExpressionSUI(self, tester);
+                            break;
                         case DOOR_POUND:
-                        doAnimationAction(self, anims.PLAYER_DOOR_POUND);
-                        createExpressionSUI(self, tester);
-                        break;
+                            doAnimationAction(self, anims.PLAYER_DOOR_POUND);
+                            createExpressionSUI(self, tester);
+                            break;
                         case EMBARRASSED:
-                        doAnimationAction(self, anims.PLAYER_EMBARRASSED);
-                        createExpressionSUI(self, tester);
-                        break;
+                            doAnimationAction(self, anims.PLAYER_EMBARRASSED);
+                            createExpressionSUI(self, tester);
+                            break;
                         case FLEX_BICEPS:
-                        doAnimationAction(self, anims.PLAYER_FLEX_BICEPS);
-                        createExpressionSUI(self, tester);
-                        break;
+                            doAnimationAction(self, anims.PLAYER_FLEX_BICEPS);
+                            createExpressionSUI(self, tester);
+                            break;
                         case FORCE_ABSORB:
-                        doAnimationAction(self, anims.PLAYER_FORCE_ABSORB);
-                        createExpressionSUI(self, tester);
-                        break;
+                            doAnimationAction(self, anims.PLAYER_FORCE_ABSORB);
+                            createExpressionSUI(self, tester);
+                            break;
                         case FORCE_BLAST:
-                        doAnimationAction(self, anims.PLAYER_FORCE_BLAST);
-                        createExpressionSUI(self, tester);
-                        break;
+                            doAnimationAction(self, anims.PLAYER_FORCE_BLAST);
+                            createExpressionSUI(self, tester);
+                            break;
                         case FORCE_CHANNEL:
-                        doAnimationAction(self, anims.PLAYER_FORCE_CHANNEL);
-                        createExpressionSUI(self, tester);
-                        break;
+                            doAnimationAction(self, anims.PLAYER_FORCE_CHANNEL);
+                            createExpressionSUI(self, tester);
+                            break;
                         case FORCE_CHOKE:
-                        doAnimationAction(self, anims.PLAYER_FORCE_CHOKE);
-                        createExpressionSUI(self, tester);
-                        break;
+                            doAnimationAction(self, anims.PLAYER_FORCE_CHOKE);
+                            createExpressionSUI(self, tester);
+                            break;
                         case FORCE_DAMPEN:
-                        doAnimationAction(self, anims.PLAYER_FORCE_DAMPEN);
-                        createExpressionSUI(self, tester);
-                        break;
+                            doAnimationAction(self, anims.PLAYER_FORCE_DAMPEN);
+                            createExpressionSUI(self, tester);
+                            break;
                         case FORCE_DESTRUCTION:
-                        doAnimationAction(self, anims.PLAYER_FORCE_DESTRUCTION);
-                        createExpressionSUI(self, tester);
-                        break;
+                            doAnimationAction(self, anims.PLAYER_FORCE_DESTRUCTION);
+                            createExpressionSUI(self, tester);
+                            break;
                         case FORCE_ILLUSION:
-                        doAnimationAction(self, anims.PLAYER_FORCE_ILLUSION);
-                        createExpressionSUI(self, tester);
-                        break;
+                            doAnimationAction(self, anims.PLAYER_FORCE_ILLUSION);
+                            createExpressionSUI(self, tester);
+                            break;
                         case FORCE_LIGHTNING:
-                        doAnimationAction(self, anims.PLAYER_FORCE_LIGHTNING);
-                        createExpressionSUI(self, tester);
-                        break;
+                            doAnimationAction(self, anims.PLAYER_FORCE_LIGHTNING);
+                            createExpressionSUI(self, tester);
+                            break;
                         case FORCE_PERSUASION:
-                        doAnimationAction(self, anims.PLAYER_FORCE_PERSUASION);
-                        createExpressionSUI(self, tester);
-                        break;
+                            doAnimationAction(self, anims.PLAYER_FORCE_PERSUASION);
+                            createExpressionSUI(self, tester);
+                            break;
                         case FORCE_PROTECTION:
-                        doAnimationAction(self, anims.PLAYER_FORCE_PROTECTION);
-                        createExpressionSUI(self, tester);
-                        break;
+                            doAnimationAction(self, anims.PLAYER_FORCE_PROTECTION);
+                            createExpressionSUI(self, tester);
+                            break;
                         case FORCE_PULL:
-                        doAnimationAction(self, anims.PLAYER_FORCE_PULL);
-                        createExpressionSUI(self, tester);
-                        break;
+                            doAnimationAction(self, anims.PLAYER_FORCE_PULL);
+                            createExpressionSUI(self, tester);
+                            break;
                         case FORCE_PUSH:
-                        doAnimationAction(self, anims.PLAYER_FORCE_PUSH);
-                        createExpressionSUI(self, tester);
-                        break;
+                            doAnimationAction(self, anims.PLAYER_FORCE_PUSH);
+                            createExpressionSUI(self, tester);
+                            break;
                         case FORCE_STRENGTH:
-                        doAnimationAction(self, anims.PLAYER_FORCE_STRENGTH);
-                        createExpressionSUI(self, tester);
-                        break;
+                            doAnimationAction(self, anims.PLAYER_FORCE_STRENGTH);
+                            createExpressionSUI(self, tester);
+                            break;
                         case FORCE_THROW:
-                        doAnimationAction(self, anims.PLAYER_FORCE_THROW);
-                        createExpressionSUI(self, tester);
-                        break;
+                            doAnimationAction(self, anims.PLAYER_FORCE_THROW);
+                            createExpressionSUI(self, tester);
+                            break;
                         case GESTICULATE_WILDLY:
-                        doAnimationAction(self, anims.PLAYER_GESTICULATE_WILDLY);
-                        createExpressionSUI(self, tester);
-                        break;
+                            doAnimationAction(self, anims.PLAYER_GESTICULATE_WILDLY);
+                            createExpressionSUI(self, tester);
+                            break;
                         case HAIR_FLIP:
-                        doAnimationAction(self, anims.PLAYER_HAIR_FLIP);
-                        createExpressionSUI(self, tester);
-                        break;
+                            doAnimationAction(self, anims.PLAYER_HAIR_FLIP);
+                            createExpressionSUI(self, tester);
+                            break;
                         case HANDS_ABOVE_HEAD:
-                        doAnimationAction(self, anims.PLAYER_HANDS_ABOVE_HEAD);
-                        createExpressionSUI(self, tester);
-                        break;
+                            doAnimationAction(self, anims.PLAYER_HANDS_ABOVE_HEAD);
+                            createExpressionSUI(self, tester);
+                            break;
                         case HANDS_BEHIND_HEAD:
-                        doAnimationAction(self, anims.PLAYER_HANDS_BEHIND_HEAD);
-                        createExpressionSUI(self, tester);
-                        break;
+                            doAnimationAction(self, anims.PLAYER_HANDS_BEHIND_HEAD);
+                            createExpressionSUI(self, tester);
+                            break;
                         case HEAVY_COUGH_VOMIT:
-                        doAnimationAction(self, anims.PLAYER_HEAVY_COUGH_VOMIT);
-                        createExpressionSUI(self, tester);
-                        break;
+                            doAnimationAction(self, anims.PLAYER_HEAVY_COUGH_VOMIT);
+                            createExpressionSUI(self, tester);
+                            break;
                         case HOLD_NOSE:
-                        doAnimationAction(self, anims.PLAYER_HOLD_NOSE);
-                        createExpressionSUI(self, tester);
-                        break;
+                            doAnimationAction(self, anims.PLAYER_HOLD_NOSE);
+                            createExpressionSUI(self, tester);
+                            break;
                         case HUG_SELF:
-                        doAnimationAction(self, anims.PLAYER_HUG_SELF);
-                        createExpressionSUI(self, tester);
-                        break;
+                            doAnimationAction(self, anims.PLAYER_HUG_SELF);
+                            createExpressionSUI(self, tester);
+                            break;
                         case IMPLORE:
-                        doAnimationAction(self, anims.PLAYER_IMPLORE);
-                        createExpressionSUI(self, tester);
-                        break;
+                            doAnimationAction(self, anims.PLAYER_IMPLORE);
+                            createExpressionSUI(self, tester);
+                            break;
                         case KISS_BLOW_KISS:
-                        doAnimationAction(self, anims.PLAYER_KISS_BLOW_KISS);
-                        createExpressionSUI(self, tester);
-                        break;
+                            doAnimationAction(self, anims.PLAYER_KISS_BLOW_KISS);
+                            createExpressionSUI(self, tester);
+                            break;
                         case LAUGH_CACKLE:
-                        doAnimationAction(self, anims.PLAYER_LAUGH_CACKLE);
-                        createExpressionSUI(self, tester);
-                        break;
+                            doAnimationAction(self, anims.PLAYER_LAUGH_CACKLE);
+                            createExpressionSUI(self, tester);
+                            break;
                         case LAUGH_POINTING:
-                        doAnimationAction(self, anims.PLAYER_LAUGH_POINTING);
-                        createExpressionSUI(self, tester);
-                        break;
+                            doAnimationAction(self, anims.PLAYER_LAUGH_POINTING);
+                            createExpressionSUI(self, tester);
+                            break;
                         case LAUGH_TITTER:
-                        doAnimationAction(self, anims.PLAYER_LAUGH_TITTER);
-                        createExpressionSUI(self, tester);
-                        break;
+                            doAnimationAction(self, anims.PLAYER_LAUGH_TITTER);
+                            createExpressionSUI(self, tester);
+                            break;
                         case LISTEN:
-                        doAnimationAction(self, anims.PLAYER_LISTEN);
-                        createExpressionSUI(self, tester);
-                        break;
+                            doAnimationAction(self, anims.PLAYER_LISTEN);
+                            createExpressionSUI(self, tester);
+                            break;
                         case NOD_HEAD_MULTIPLE:
-                        doAnimationAction(self, anims.PLAYER_NOD_HEAD_MULTIPLE);
-                        createExpressionSUI(self, tester);
-                        break;
+                            doAnimationAction(self, anims.PLAYER_NOD_HEAD_MULTIPLE);
+                            createExpressionSUI(self, tester);
+                            break;
                         case NOD_HEAD_ONCE:
-                        doAnimationAction(self, anims.PLAYER_NOD_HEAD_ONCE);
-                        createExpressionSUI(self, tester);
-                        break;
+                            doAnimationAction(self, anims.PLAYER_NOD_HEAD_ONCE);
+                            createExpressionSUI(self, tester);
+                            break;
                         case OFFER_AFFECTION:
-                        doAnimationAction(self, anims.PLAYER_OFFER_AFFECTION);
-                        createExpressionSUI(self, tester);
-                        break;
+                            doAnimationAction(self, anims.PLAYER_OFFER_AFFECTION);
+                            createExpressionSUI(self, tester);
+                            break;
                         case PAT_ABDOMEN:
-                        doAnimationAction(self, anims.PLAYER_PAT_ABDOMEN);
-                        createExpressionSUI(self, tester);
-                        break;
+                            doAnimationAction(self, anims.PLAYER_PAT_ABDOMEN);
+                            createExpressionSUI(self, tester);
+                            break;
                         case POINT_ACCUSINGLY:
-                        doAnimationAction(self, anims.PLAYER_POINT_ACCUSINGLY);
-                        createExpressionSUI(self, tester);
-                        break;
+                            doAnimationAction(self, anims.PLAYER_POINT_ACCUSINGLY);
+                            createExpressionSUI(self, tester);
+                            break;
                         case POINT_AWAY:
-                        doAnimationAction(self, anims.PLAYER_POINT_AWAY);
-                        createExpressionSUI(self, tester);
-                        break;
+                            doAnimationAction(self, anims.PLAYER_POINT_AWAY);
+                            createExpressionSUI(self, tester);
+                            break;
                         case POINT_DOWN:
-                        doAnimationAction(self, anims.PLAYER_POINT_DOWN);
-                        createExpressionSUI(self, tester);
-                        break;
+                            doAnimationAction(self, anims.PLAYER_POINT_DOWN);
+                            createExpressionSUI(self, tester);
+                            break;
                         case POINT_FORWARD:
-                        doAnimationAction(self, anims.PLAYER_POINT_FORWARD);
-                        createExpressionSUI(self, tester);
-                        break;
+                            doAnimationAction(self, anims.PLAYER_POINT_FORWARD);
+                            createExpressionSUI(self, tester);
+                            break;
                         case POINT_LEFT:
-                        doAnimationAction(self, anims.PLAYER_POINT_LEFT);
-                        createExpressionSUI(self, tester);
-                        break;
+                            doAnimationAction(self, anims.PLAYER_POINT_LEFT);
+                            createExpressionSUI(self, tester);
+                            break;
                         case POINT_RIGHT:
-                        doAnimationAction(self, anims.PLAYER_POINT_RIGHT);
-                        createExpressionSUI(self, tester);
-                        break;
+                            doAnimationAction(self, anims.PLAYER_POINT_RIGHT);
+                            createExpressionSUI(self, tester);
+                            break;
                         case POINT_TO_SELF:
-                        doAnimationAction(self, anims.PLAYER_POINT_TO_SELF);
-                        createExpressionSUI(self, tester);
-                        break;
+                            doAnimationAction(self, anims.PLAYER_POINT_TO_SELF);
+                            createExpressionSUI(self, tester);
+                            break;
                         case POINT_UP:
-                        doAnimationAction(self, anims.PLAYER_POINT_UP);
-                        createExpressionSUI(self, tester);
-                        break;
+                            doAnimationAction(self, anims.PLAYER_POINT_UP);
+                            createExpressionSUI(self, tester);
+                            break;
                         case POSE_PROUDLY:
-                        doAnimationAction(self, anims.PLAYER_POSE_PROUDLY);
-                        createExpressionSUI(self, tester);
-                        break;
+                            doAnimationAction(self, anims.PLAYER_POSE_PROUDLY);
+                            createExpressionSUI(self, tester);
+                            break;
                         case POUND_FIST_CHEST:
-                        doAnimationAction(self, anims.PLAYER_POUND_FIST_CHEST);
-                        createExpressionSUI(self, tester);
-                        break;
+                            doAnimationAction(self, anims.PLAYER_POUND_FIST_CHEST);
+                            createExpressionSUI(self, tester);
+                            break;
                         case POUND_FIST_PALM:
-                        doAnimationAction(self, anims.PLAYER_POUND_FIST_PALM);
-                        createExpressionSUI(self, tester);
-                        break;
+                            doAnimationAction(self, anims.PLAYER_POUND_FIST_PALM);
+                            createExpressionSUI(self, tester);
+                            break;
                         case REFUSE_OFFER_AFFECTION:
-                        doAnimationAction(self, anims.PLAYER_REFUSE_OFFER_AFFECTION);
-                        createExpressionSUI(self, tester);
-                        break;
+                            doAnimationAction(self, anims.PLAYER_REFUSE_OFFER_AFFECTION);
+                            createExpressionSUI(self, tester);
+                            break;
                         case REFUSE_OFFER_FORMAL:
-                        doAnimationAction(self, anims.PLAYER_REFUSE_OFFER_FORMAL);
-                        createExpressionSUI(self, tester);
-                        break;
+                            doAnimationAction(self, anims.PLAYER_REFUSE_OFFER_FORMAL);
+                            createExpressionSUI(self, tester);
+                            break;
                         case RUB_BELLY:
-                        doAnimationAction(self, anims.PLAYER_RUB_BELLY);
-                        createExpressionSUI(self, tester);
-                        break;
+                            doAnimationAction(self, anims.PLAYER_RUB_BELLY);
+                            createExpressionSUI(self, tester);
+                            break;
                         case RUB_CHIN_THOUGHTFUL:
-                        doAnimationAction(self, anims.PLAYER_RUB_CHIN_THOUGHTFUL);
-                        createExpressionSUI(self, tester);
-                        break;
+                            doAnimationAction(self, anims.PLAYER_RUB_CHIN_THOUGHTFUL);
+                            createExpressionSUI(self, tester);
+                            break;
                         case SALUTE1:
-                        doAnimationAction(self, anims.PLAYER_SALUTE1);
-                        createExpressionSUI(self, tester);
-                        break;
+                            doAnimationAction(self, anims.PLAYER_SALUTE1);
+                            createExpressionSUI(self, tester);
+                            break;
                         case SALUTE2:
-                        doAnimationAction(self, anims.PLAYER_SALUTE2);
-                        createExpressionSUI(self, tester);
-                        break;
+                            doAnimationAction(self, anims.PLAYER_SALUTE2);
+                            createExpressionSUI(self, tester);
+                            break;
                         case SCRATCH_HEAD:
-                        doAnimationAction(self, anims.PLAYER_SCRATCH_HEAD);
-                        createExpressionSUI(self, tester);
-                        break;
+                            doAnimationAction(self, anims.PLAYER_SCRATCH_HEAD);
+                            createExpressionSUI(self, tester);
+                            break;
                         case SEARCH:
-                        doAnimationAction(self, anims.PLAYER_SEARCH);
-                        createExpressionSUI(self, tester);
-                        break;
+                            doAnimationAction(self, anims.PLAYER_SEARCH);
+                            createExpressionSUI(self, tester);
+                            break;
                         case SHAKE_HEAD_DISGUST:
-                        doAnimationAction(self, anims.PLAYER_SHAKE_HEAD_DISGUST);
-                        createExpressionSUI(self, tester);
-                        break;
+                            doAnimationAction(self, anims.PLAYER_SHAKE_HEAD_DISGUST);
+                            createExpressionSUI(self, tester);
+                            break;
                         case SHAKE_HEAD_NO:
-                        doAnimationAction(self, anims.PLAYER_SHAKE_HEAD_NO);
-                        createExpressionSUI(self, tester);
-                        break;
+                            doAnimationAction(self, anims.PLAYER_SHAKE_HEAD_NO);
+                            createExpressionSUI(self, tester);
+                            break;
                         case SHIVER:
-                        doAnimationAction(self, anims.PLAYER_SHIVER);
-                        createExpressionSUI(self, tester);
-                        break;
+                            doAnimationAction(self, anims.PLAYER_SHIVER);
+                            createExpressionSUI(self, tester);
+                            break;
                         case SHRUG_HANDS:
-                        doAnimationAction(self, anims.PLAYER_SHRUG_HANDS);
-                        createExpressionSUI(self, tester);
-                        break;
+                            doAnimationAction(self, anims.PLAYER_SHRUG_HANDS);
+                            createExpressionSUI(self, tester);
+                            break;
                         case SHRUG_SHOULDERS:
-                        doAnimationAction(self, anims.PLAYER_SHRUG_SHOULDERS);
-                        createExpressionSUI(self, tester);
-                        break;
+                            doAnimationAction(self, anims.PLAYER_SHRUG_SHOULDERS);
+                            createExpressionSUI(self, tester);
+                            break;
                         case SHUSH:
-                        doAnimationAction(self, anims.PLAYER_SHUSH);
-                        createExpressionSUI(self, tester);
-                        break;
+                            doAnimationAction(self, anims.PLAYER_SHUSH);
+                            createExpressionSUI(self, tester);
+                            break;
                         case SIGH_DEEPLY:
-                        doAnimationAction(self, anims.PLAYER_SIGH_DEEPLY);
-                        createExpressionSUI(self, tester);
-                        break;
+                            doAnimationAction(self, anims.PLAYER_SIGH_DEEPLY);
+                            createExpressionSUI(self, tester);
+                            break;
                         case SLIT_THROAT:
-                        doAnimationAction(self, anims.PLAYER_SLIT_THROAT);
-                        createExpressionSUI(self, tester);
-                        break;
+                            doAnimationAction(self, anims.PLAYER_SLIT_THROAT);
+                            createExpressionSUI(self, tester);
+                            break;
                         case SLOW_DOWN:
-                        doAnimationAction(self, anims.PLAYER_SLOW_DOWN);
-                        createExpressionSUI(self, tester);
-                        break;
+                            doAnimationAction(self, anims.PLAYER_SLOW_DOWN);
+                            createExpressionSUI(self, tester);
+                            break;
                         case SLUMP_HEAD:
-                        doAnimationAction(self, anims.PLAYER_SLUMP_HEAD);
-                        createExpressionSUI(self, tester);
-                        break;
+                            doAnimationAction(self, anims.PLAYER_SLUMP_HEAD);
+                            createExpressionSUI(self, tester);
+                            break;
                         case SMACK_SELF:
-                        doAnimationAction(self, anims.PLAYER_SMACK_SELF);
-                        createExpressionSUI(self, tester);
-                        break;
+                            doAnimationAction(self, anims.PLAYER_SMACK_SELF);
+                            createExpressionSUI(self, tester);
+                            break;
                         case SMELL_AIR:
-                        doAnimationAction(self, anims.PLAYER_SMELL_AIR);
-                        createExpressionSUI(self, tester);
-                        break;
+                            doAnimationAction(self, anims.PLAYER_SMELL_AIR);
+                            createExpressionSUI(self, tester);
+                            break;
                         case SMELL_ARMPIT:
-                        doAnimationAction(self, anims.PLAYER_SMELL_ARMPIT);
-                        createExpressionSUI(self, tester);
-                        break;
+                            doAnimationAction(self, anims.PLAYER_SMELL_ARMPIT);
+                            createExpressionSUI(self, tester);
+                            break;
                         case SNAP_FINGER1:
-                        doAnimationAction(self, anims.PLAYER_SNAP_FINGER1);
-                        createExpressionSUI(self, tester);
-                        break;
+                            doAnimationAction(self, anims.PLAYER_SNAP_FINGER1);
+                            createExpressionSUI(self, tester);
+                            break;
                         case SNAP_FINGER2:
-                        doAnimationAction(self, anims.PLAYER_SNAP_FINGER2);
-                        createExpressionSUI(self, tester);
-                        break;
+                            doAnimationAction(self, anims.PLAYER_SNAP_FINGER2);
+                            createExpressionSUI(self, tester);
+                            break;
                         case SNEEZE:
-                        doAnimationAction(self, anims.PLAYER_SNEEZE);
-                        createExpressionSUI(self, tester);
-                        break;
+                            doAnimationAction(self, anims.PLAYER_SNEEZE);
+                            createExpressionSUI(self, tester);
+                            break;
                         case STAMP_FEET:
-                        doAnimationAction(self, anims.PLAYER_STAMP_FEET);
-                        createExpressionSUI(self, tester);
-                        break;
+                            doAnimationAction(self, anims.PLAYER_STAMP_FEET);
+                            createExpressionSUI(self, tester);
+                            break;
                         case STOP:
-                        doAnimationAction(self, anims.PLAYER_STOP);
-                        createExpressionSUI(self, tester);
-                        break;
+                            doAnimationAction(self, anims.PLAYER_STOP);
+                            createExpressionSUI(self, tester);
+                            break;
                         case TAP_HEAD:
-                        doAnimationAction(self, anims.PLAYER_TAP_HEAD);
-                        createExpressionSUI(self, tester);
-                        break;
+                            doAnimationAction(self, anims.PLAYER_TAP_HEAD);
+                            createExpressionSUI(self, tester);
+                            break;
                         case TAUNT1:
-                        doAnimationAction(self, anims.PLAYER_TAUNT1);
-                        createExpressionSUI(self, tester);
-                        break;
+                            doAnimationAction(self, anims.PLAYER_TAUNT1);
+                            createExpressionSUI(self, tester);
+                            break;
                         case TAUNT2:
-                        doAnimationAction(self, anims.PLAYER_TAUNT2);
-                        createExpressionSUI(self, tester);
-                        break;
+                            doAnimationAction(self, anims.PLAYER_TAUNT2);
+                            createExpressionSUI(self, tester);
+                            break;
                         case TAUNT3:
-                        doAnimationAction(self, anims.PLAYER_TAUNT3);
-                        createExpressionSUI(self, tester);
-                        break;
+                            doAnimationAction(self, anims.PLAYER_TAUNT3);
+                            createExpressionSUI(self, tester);
+                            break;
                         case WAVE_FINGER_WARNING:
-                        doAnimationAction(self, anims.PLAYER_WAVE_FINGER_WARNING);
-                        createExpressionSUI(self, tester);
-                        break;
+                            doAnimationAction(self, anims.PLAYER_WAVE_FINGER_WARNING);
+                            createExpressionSUI(self, tester);
+                            break;
                         case WAVE_HAIL:
-                        doAnimationAction(self, anims.PLAYER_WAVE_HAIL);
-                        createExpressionSUI(self, tester);
-                        break;
+                            doAnimationAction(self, anims.PLAYER_WAVE_HAIL);
+                            createExpressionSUI(self, tester);
+                            break;
                         case WAVE_ON_DIRECTING:
-                        doAnimationAction(self, anims.PLAYER_WAVE_ON_DIRECTING);
-                        createExpressionSUI(self, tester);
-                        break;
+                            doAnimationAction(self, anims.PLAYER_WAVE_ON_DIRECTING);
+                            createExpressionSUI(self, tester);
+                            break;
                         case WAVE_ON_DISMISSING:
-                        doAnimationAction(self, anims.PLAYER_WAVE_ON_DISMISSING);
-                        createExpressionSUI(self, tester);
-                        break;
+                            doAnimationAction(self, anims.PLAYER_WAVE_ON_DISMISSING);
+                            createExpressionSUI(self, tester);
+                            break;
                         case WAVE1:
-                        doAnimationAction(self, anims.PLAYER_WAVE1);
-                        createExpressionSUI(self, tester);
-                        break;
+                            doAnimationAction(self, anims.PLAYER_WAVE1);
+                            createExpressionSUI(self, tester);
+                            break;
                         case WAVE2:
-                        doAnimationAction(self, anims.PLAYER_WAVE2);
-                        createExpressionSUI(self, tester);
-                        break;
+                            doAnimationAction(self, anims.PLAYER_WAVE2);
+                            createExpressionSUI(self, tester);
+                            break;
                         case WEEPING:
-                        doAnimationAction(self, anims.PLAYER_WEEPING);
-                        createExpressionSUI(self, tester);
-                        break;
+                            doAnimationAction(self, anims.PLAYER_WEEPING);
+                            createExpressionSUI(self, tester);
+                            break;
                         case WHISPER:
-                        doAnimationAction(self, anims.PLAYER_WHISPER);
-                        createExpressionSUI(self, tester);
-                        break;
+                            doAnimationAction(self, anims.PLAYER_WHISPER);
+                            createExpressionSUI(self, tester);
+                            break;
                         case YAWN:
-                        doAnimationAction(self, anims.PLAYER_YAWN);
-                        createExpressionSUI(self, tester);
-                        break;
+                            doAnimationAction(self, anims.PLAYER_YAWN);
+                            createExpressionSUI(self, tester);
+                            break;
                         case BACK:
-                        createAnimationSUI(self, tester);
-                        break;
+                            createAnimationSUI(self, tester);
+                            break;
                         default:
-                        return SCRIPT_CONTINUE;
+                            return SCRIPT_CONTINUE;
                     }
                 }
             }
         }
-        else 
+        else
         {
             broadcast(tester, "Tester must be in God Mode to use QA Helper.");
         }
         return SCRIPT_CONTINUE;
     }
+
     public void removeScriptVarData(obj_id self, obj_id tester, String err) throws InterruptedException
     {
         qa.removeScriptVars(tester, SCRIPTVAR);
@@ -1354,6 +1375,7 @@ public class qa_ai_helper_attach extends script.base_script
         utils.removeScriptVarTree(self, SCRIPTVAR);
         broadcast(tester, err);
     }
+
     public void startLazyMenuFunction(obj_id tester, obj_id self) throws InterruptedException
     {
         if (isGod(tester))
@@ -1363,11 +1385,12 @@ public class qa_ai_helper_attach extends script.base_script
             utils.setScriptVar(tester, "qahelper_attached.pid", pid);
             sui.showSUIPage(pid);
         }
-        else 
+        else
         {
             broadcast(tester, "Tester must be in God Mode to use QA Helper.");
         }
     }
+
     public void stopFollowingTester(obj_id self, obj_id tester) throws InterruptedException
     {
         revertRunSpeed(self);
@@ -1375,11 +1398,13 @@ public class qa_ai_helper_attach extends script.base_script
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_LOITER);
         broadcast(tester, "Follow command revoked.  Mobile will now wander.");
     }
+
     public void revertRunSpeed(obj_id self) throws InterruptedException
     {
         float normalMobRunSpeed = utils.getFloatScriptVar(self, SCRIPTVAR + "oldRunSpeed");
         setBaseRunSpeed(self, normalMobRunSpeed);
     }
+
     public void doNotAggroTester(obj_id self, obj_id tester) throws InterruptedException
     {
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
@@ -1388,6 +1413,7 @@ public class qa_ai_helper_attach extends script.base_script
         detachScript(self, "ai.creature_combat");
         broadcast(tester, "Aggressive behaviour has been disabled.");
     }
+
     public void killHelper(obj_id self, obj_id tester) throws InterruptedException
     {
         if (!isIncapacitated(self))
@@ -1399,18 +1425,20 @@ public class qa_ai_helper_attach extends script.base_script
             setPosture(self, POSTURE_INCAPACITATED);
         }
     }
+
     public void attachNoDeathScript(obj_id self, obj_id tester) throws InterruptedException
     {
         if (hasScript(self, "developer.soe.e3demo.yavin_e3"))
         {
             broadcast(tester, "No death script already attached.");
         }
-        else 
+        else
         {
             attachScript(self, "developer.soe.e3demo.yavin_e3");
             broadcast(tester, "No death script attached.");
         }
     }
+
     public void removeNoDeathScript(obj_id self, obj_id tester) throws InterruptedException
     {
         if (hasScript(self, "developer.soe.e3demo.yavin_e3"))
@@ -1418,17 +1446,19 @@ public class qa_ai_helper_attach extends script.base_script
             detachScript(self, "developer.soe.e3demo.yavin_e3");
             broadcast(tester, "No Death Script Removed.");
         }
-        else 
+        else
         {
             broadcast(tester, "Mobile doesn't have the No Death script.");
         }
     }
+
     public void freezeMob(obj_id self, obj_id tester) throws InterruptedException
     {
         ai_lib.aiStopFollowing(self);
         setState(self, STATE_FROZEN, true);
         broadcast(tester, "Helper set to FROZEN. Helper will not move from current location.");
     }
+
     public String getCreaturePrompt(obj_id creature, obj_id tester) throws InterruptedException
     {
         dictionary creatureDictionary = utils.getDictionaryScriptVar(tester, "qahelper.creatureDictionary");
@@ -1456,7 +1486,7 @@ public class qa_ai_helper_attach extends script.base_script
             {
                 creatureInvul = "YES";
             }
-            else 
+            else
             {
                 creatureInvul = "NO";
             }
@@ -1465,7 +1495,7 @@ public class qa_ai_helper_attach extends script.base_script
             {
                 creatureRoot = "YES";
             }
-            else 
+            else
             {
                 creatureRoot = "NO";
             }
@@ -1474,7 +1504,7 @@ public class qa_ai_helper_attach extends script.base_script
             {
                 creatureSnare = "YES";
             }
-            else 
+            else
             {
                 creatureSnare = "NO";
             }
@@ -1483,7 +1513,7 @@ public class qa_ai_helper_attach extends script.base_script
             {
                 creatureSlow = "YES";
             }
-            else 
+            else
             {
                 creatureSlow = "NO";
             }
@@ -1492,7 +1522,7 @@ public class qa_ai_helper_attach extends script.base_script
             {
                 creatureMez = "YES";
             }
-            else 
+            else
             {
                 creatureMez = "NO";
             }
@@ -1501,7 +1531,7 @@ public class qa_ai_helper_attach extends script.base_script
             {
                 creatureArmBreak = "YES";
             }
-            else 
+            else
             {
                 creatureArmBreak = "NO";
             }
@@ -1516,31 +1546,31 @@ public class qa_ai_helper_attach extends script.base_script
             combinedData += "Creature Name: ";
             combinedData += creatureName + "\t\t";
             combinedData += "Creature Level: ";
-            combinedData += "" + creatureLevel + "\r\n";
+            combinedData += creatureLevel + "\r\n";
             combinedData += "Creature Invulnerable: ";
             combinedData += creatureInvul + "\r\n";
             combinedData += "Creature Aggressive Value: ";
-            combinedData += "" + creatureAggressive + "\r\n";
+            combinedData += creatureAggressive + "\r\n";
             combinedData += "Primary Weapon: ";
             combinedData += creaturePrimaryWeapon + "\r\n";
             combinedData += "Secondary Weapon: ";
             combinedData += creatureSecondaryWeapon + "\r\n";
             combinedData += "Kinetic Resist: ";
-            combinedData += "" + creatureArmorKinetic + "\r\n";
+            combinedData += creatureArmorKinetic + "\r\n";
             combinedData += "Energy Resist: ";
-            combinedData += "" + creatureArmorEnergy + "\r\n";
+            combinedData += creatureArmorEnergy + "\r\n";
             combinedData += "Blast Resist: ";
-            combinedData += "" + creatureArmorBlast + "\r\n";
+            combinedData += creatureArmorBlast + "\r\n";
             combinedData += "Heat Resist: ";
-            combinedData += "" + creatureArmorHeat + "\r\n";
+            combinedData += creatureArmorHeat + "\r\n";
             combinedData += "Cold Resist: ";
-            combinedData += "" + creatureArmorCold + "\r\n";
+            combinedData += creatureArmorCold + "\r\n";
             combinedData += "Electric Resist: ";
-            combinedData += "" + creatureArmorElectric + "\r\n";
+            combinedData += creatureArmorElectric + "\r\n";
             combinedData += "Acid Resist: ";
-            combinedData += "" + creatureArmorAcid + "\r\n";
+            combinedData += creatureArmorAcid + "\r\n";
             combinedData += "Stun Resist: ";
-            combinedData += "" + creatureArmorStun + "\r\n";
+            combinedData += creatureArmorStun + "\r\n";
             combinedData += "Resist Root: ";
             combinedData += creatureRoot + "\r\n";
             combinedData += "Resist Snare: ";
@@ -1552,7 +1582,7 @@ public class qa_ai_helper_attach extends script.base_script
             combinedData += "Resist Armor Break: ";
             combinedData += creatureArmBreak + "\r\n";
             combinedData += "Creature Assist Value: ";
-            combinedData += "" + creatureAssist + "\r\n";
+            combinedData += creatureAssist + "\r\n";
             combinedData += "Creature Skill Mods: ";
             combinedData += creatureSkillmods + "\r\n";
             combinedData += "Creature ObjVars: ";
@@ -1564,13 +1594,14 @@ public class qa_ai_helper_attach extends script.base_script
                 return combinedData;
             }
         }
-        else 
+        else
         {
             broadcast(tester, "The tool failed to retrieve the creature data needed.");
         }
         String errorStr = "There was an error retriving Creature Data";
         return errorStr;
     }
+
     public boolean checkFaction(obj_id self, obj_id tester) throws InterruptedException
     {
         int testerFaction = pvpGetAlignedFaction(tester);
@@ -1579,12 +1610,9 @@ public class qa_ai_helper_attach extends script.base_script
         {
             return false;
         }
-        else if (testerFaction == 0 && creatureFaction != 0)
-        {
-            return false;
-        }
-        return true;
+        else return testerFaction != 0 || creatureFaction == 0;
     }
+
     public void attackTester(obj_id self, obj_id tester) throws InterruptedException
     {
         if (checkFaction(self, tester) && !hasObjVar(tester, "gm"))
@@ -1603,21 +1631,22 @@ public class qa_ai_helper_attach extends script.base_script
                     setInvulnerable(self, false);
                     startCombat(self, tester);
                 }
-                else 
+                else
                 {
                     broadcast(tester, "This creature has no primary weapon.");
                 }
             }
-            else 
+            else
             {
                 broadcast(tester, "An error was encountered and no creature data was found.");
             }
         }
-        else 
+        else
         {
             broadcast(tester, "You must remove AI Ignore or be of the opposing faction before using this function.");
         }
     }
+
     public void toolMovementMenu(obj_id self, obj_id tester) throws InterruptedException
     {
         obj_id[] waypointArray = qa.getAllValidWaypoints(tester);
@@ -1631,11 +1660,12 @@ public class qa_ai_helper_attach extends script.base_script
             utils.setScriptVar(tester, "qahelper_attached.pid", pid);
             sui.showSUIPage(pid);
         }
-        else 
+        else
         {
             broadcast(tester, "You must have at least one waypoint to use this function.");
         }
     }
+
     public void recordDamage(obj_id self, obj_id tester) throws InterruptedException
     {
         utils.setScriptVar(tester, SCRIPTVAR_MOB + ".recordDamage", true);
@@ -1644,6 +1674,7 @@ public class qa_ai_helper_attach extends script.base_script
         utils.setScriptVar(self, SCRIPTVAR_MOB + ".damageDone", "No Data");
         broadcast(tester, "Damage Recording On.");
     }
+
     public void exportDamageData(obj_id self, obj_id tester) throws InterruptedException
     {
         if (utils.hasScriptVar(self, SCRIPTVAR_MOB + ".recordDamage") && utils.hasScriptVar(tester, SCRIPTVAR_MOB + ".recordDamage"))
@@ -1665,6 +1696,7 @@ public class qa_ai_helper_attach extends script.base_script
             broadcast(tester, "Damage Recording Off.");
         }
     }
+
     public void callAttackSUI(obj_id self, obj_id tester) throws InterruptedException
     {
         String creaturePrompt = getCreaturePrompt(self, tester);
@@ -1672,6 +1704,7 @@ public class qa_ai_helper_attach extends script.base_script
         utils.setScriptVar(tester, "qahelper_attached.pid", pidCase1);
         sui.showSUIPage(pidCase1);
     }
+
     public void callProgramOptions(obj_id self, obj_id tester) throws InterruptedException
     {
         String creaturePrompt = getCreaturePrompt(self, tester);
@@ -1679,6 +1712,7 @@ public class qa_ai_helper_attach extends script.base_script
         utils.setScriptVar(tester, "qahelper_attached.pid", pidCase2);
         sui.showSUIPage(pidCase2);
     }
+
     public void dataStorageCapacityReached(obj_id self, obj_id tester) throws InterruptedException
     {
         broadcast(tester, "Damage data storage capacity reached.  Combat stopped and data stored.");
@@ -1686,6 +1720,7 @@ public class qa_ai_helper_attach extends script.base_script
         qa.stopCreatureCombat(self, tester);
         qa.followTester(self, tester);
     }
+
     public void storeCurrentHealth(obj_id self, obj_id tester) throws InterruptedException
     {
         giveFullHealth(self);
@@ -1696,11 +1731,13 @@ public class qa_ai_helper_attach extends script.base_script
         utils.setScriptVar(tester, SCRIPTVAR_MOB + ".healthVar", testerHealthMax);
         broadcast(tester, "Health set to maximum.");
     }
+
     public void giveFullHealth(obj_id recipient) throws InterruptedException
     {
         healShockWound(recipient, getShockWound(recipient));
         setAttrib(recipient, HEALTH, getMaxAttrib(recipient, HEALTH));
     }
+
     public int calculateActionCost(obj_id tester, int testerMaxAction) throws InterruptedException
     {
         int currentAction = getAction(tester);
@@ -1708,10 +1745,12 @@ public class qa_ai_helper_attach extends script.base_script
         setAction(tester, testerMaxAction);
         return testerUsedAction;
     }
+
     public void setRegenRate(obj_id tester, float regenRate) throws InterruptedException
     {
         getActionRegenRate(tester, regenRate);
     }
+
     public void removeActionRegen(obj_id tester) throws InterruptedException
     {
         float QARegenRate = getActionRegenRate(tester);
@@ -1719,25 +1758,29 @@ public class qa_ai_helper_attach extends script.base_script
         {
             setObjVar(tester, QA_REGEN_OBJVAR, QARegenRate);
         }
-        else 
+        else
         {
             broadcast(tester, "Action Regen Rate has already been set to Zero.");
         }
         setRegenRate(tester, REGEN_RATE);
     }
+
     public void restoreActionRegenRate(obj_id tester) throws InterruptedException
     {
         float oldRegen = getFloatObjVar(tester, "QARegen");
         setRegenRate(tester, oldRegen);
         removeObjVar(tester, "QARegen");
     }
+
     public boolean getEntertainerSkills(obj_id self, obj_id tester) throws InterruptedException
     {
-        for (String entertainerSkill : ENTERTAINER_SKILLS) {
+        for (String entertainerSkill : ENTERTAINER_SKILLS)
+        {
             grantSkill(self, entertainerSkill);
         }
         return true;
     }
+
     public void startTheDancing(obj_id self, obj_id tester, String danceName) throws InterruptedException
     {
         int performanceIndex = performance.lookupPerformanceIndex((-1788534963), danceName, 0);
@@ -1760,6 +1803,7 @@ public class qa_ai_helper_attach extends script.base_script
         params.put("sequence", 0);
         messageTo(self, "OnPulse", params, performance.PERFORMANCE_HEARTBEAT_TIME, false);
     }
+
     public boolean displayAvailableDanceMenu(obj_id self, obj_id tester, boolean changeDance) throws InterruptedException
     {
         if (!isIdValid(self))
@@ -1803,11 +1847,13 @@ public class qa_ai_helper_attach extends script.base_script
         }
         return false;
     }
+
     public void createFlourishSUI(obj_id self, obj_id tester) throws InterruptedException
     {
         int pid = sui.listbox(self, tester, "Select a Flourish.  This menu will only work for a Helper when they are dancing. \nYou must wait for one flourish to stop before starting a new one.", sui.OK_CANCEL, "Flourish Menu", AI_FLOURISH_MENU, "msgFlourishSelected");
         utils.setScriptVar(tester, "qahelper_attached.pid", pid);
     }
+
     public void createDanceSUI(obj_id self, obj_id tester) throws InterruptedException
     {
         boolean skillsReceived = getEntertainerSkills(self, tester);
@@ -1821,18 +1867,21 @@ public class qa_ai_helper_attach extends script.base_script
             }
         }
     }
+
     public void createAnimationSUI(obj_id self, obj_id tester) throws InterruptedException
     {
         int pid = sui.listbox(self, tester, "Select an animation option.\n\nYou will need to select a dance animation before using the flourish menu.", sui.OK_CANCEL, "NPC Animation Menu", NPC_ANIMATION_MENU, "animationMenuOptions", false, false);
         sui.showSUIPage(pid);
         utils.setScriptVar(tester, "qahelper_attached.pid", pid);
     }
+
     public void createPostureSUI(obj_id self, obj_id tester) throws InterruptedException
     {
         int pid = sui.listbox(self, tester, "Select a posture for the NPC. Some postures will take a few seconds before being performed.", sui.OK_CANCEL, "NPC Posture Menu", NPC_POSTURE_MENU, "msgPostureSelected", false, false);
         sui.showSUIPage(pid);
         utils.setScriptVar(tester, "qahelper_attached.pid", pid);
     }
+
     public void createExpressionSUI(obj_id self, obj_id tester) throws InterruptedException
     {
         int pid = sui.listbox(self, tester, "Select an expression for the NPC.", sui.OK_CANCEL, "NPC Expression Menu", EXPRESSION_MENU, "msgExpressionSelected", false, false);

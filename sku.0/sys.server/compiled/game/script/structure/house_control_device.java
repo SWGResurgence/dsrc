@@ -1,5 +1,11 @@
 package script.structure;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.player_structure;
 import script.library.trace;
@@ -11,6 +17,7 @@ public class house_control_device extends script.base_script
     public static final string_id UNPACK_HOUSE = new string_id("sui", "unpack_house");
     public static final string_id SID_NO_PLACING_STRUCTURES_IN_SPACE = new string_id("space/space_interaction", "no_placing_structures_in_space");
     public static final String IN_USE_OBJVAR = "house_redeed.inUse";
+
     public house_control_device()
     {
     }

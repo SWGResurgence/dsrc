@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.avatar_platform;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.groundquests;
 import script.menu_info;
 import script.menu_info_types;
@@ -8,19 +14,21 @@ import script.string_id;
 
 public class terminal_boss_fight extends script.base_script
 {
-    public terminal_boss_fight()
-    {
-    }
     public static final String STF = "dungeon/avatar_platform";
     public static final string_id UNLOCK_DOOR = new string_id(STF, "unlock_door");
     public static final string_id CANNOT_UNLOCK = new string_id(STF, "cannot_unlock");
     public static final string_id OPEN_DOOR = new string_id(STF, "open_door");
     public static final string_id DOOR_UNLOCKED = new string_id(STF, "door_unlocked");
+    public terminal_boss_fight()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         int menu = mi.addRootMenu(menu_info_types.ITEM_USE, UNLOCK_DOOR);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)
@@ -38,7 +46,7 @@ public class terminal_boss_fight extends script.base_script
                 sendSystemMessage(player, OPEN_DOOR);
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 sendSystemMessage(player, DOOR_UNLOCKED);
             }

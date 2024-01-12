@@ -1,5 +1,11 @@
 package script.theme_park.heroic.exar_kun;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.trial;
 import script.obj_id;
@@ -9,6 +15,7 @@ public class exar_swordsman extends script.base_script
     public exar_swordsman()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCreatureCoverVisibility(self, false);
@@ -16,6 +23,7 @@ public class exar_swordsman extends script.base_script
         aiEquipPrimaryWeapon(self);
         return SCRIPT_CONTINUE;
     }
+
     public int kill_command(obj_id self, dictionary params) throws InterruptedException
     {
         trial.setHp(self, 415245);

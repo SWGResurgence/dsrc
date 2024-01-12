@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.corvette;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.badge;
 import script.library.space_dungeon;
@@ -10,10 +16,12 @@ import script.string_id;
 
 public class timer extends script.base_script
 {
+    public static final String MSGS = "dungeon/corvette";
+
     public timer()
     {
     }
-    public static final String MSGS = "dungeon/corvette";
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "setUpDungeon", null, 3, false);
@@ -33,12 +41,14 @@ public class timer extends script.base_script
         CustomerServiceLog("DUNGEON_CorellianCorvette", "*Entered_Corvette - %TU", self);
         return SCRIPT_CONTINUE;
     }
+
     public int fiveMinuteTimer(obj_id self, dictionary params) throws InterruptedException
     {
         int timeLeft = params.getInt("timeLeft");
         sendSystemMessage(self, "You have " + timeLeft + " minutes left to complete your assignment.", null);
         return SCRIPT_CONTINUE;
     }
+
     public int dungeonEnds(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id dungeon = space_dungeon.getDungeonIdForPlayer(self);
@@ -48,7 +58,7 @@ public class timer extends script.base_script
             podLanding = pickLandingLocation();
             setObjVar(self, "podLanding", podLanding);
         }
-        else 
+        else
         {
             podLanding = getLocationObjVar(self, "podLanding");
         }
@@ -57,12 +67,13 @@ public class timer extends script.base_script
             messageTo(self, "rewardTime", null, 3, false);
             setObjVar(self, "corl_corvette.got_reward", 1);
         }
-        else 
+        else
         {
             messageTo(self, "removeMe", null, 10, false);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int setUpDungeon(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id top = space_dungeon.getDungeonIdForPlayer(self);
@@ -70,13 +81,14 @@ public class timer extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             messageTo(top, "beginSpawn", null, 1, false);
             attachScript(top, "theme_park.dungeon.corvette.spawned");
         }
         return SCRIPT_CONTINUE;
     }
+
     public int youWin(obj_id self, dictionary params) throws InterruptedException
     {
         string_id escape = new string_id(MSGS, "escape_pods");
@@ -84,6 +96,7 @@ public class timer extends script.base_script
         groupSetObjVar(self, "corl_corvette.mission_complete");
         return SCRIPT_CONTINUE;
     }
+
     public void groupSetObjVar(obj_id player, String objVarName) throws InterruptedException
     {
         setObjVar(player, objVarName, 1);
@@ -97,11 +110,12 @@ public class timer extends script.base_script
         {
             return;
         }
-        for (obj_id thisMember : members) {
+        for (obj_id thisMember : members)
+        {
             setObjVar(thisMember, objVarName, 1);
         }
-        return;
     }
+
     public int rewardTime(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id inv = utils.getInventoryContainer(self);
@@ -113,16 +127,19 @@ public class timer extends script.base_script
         space_dungeon.ejectPlayerFromDungeon(self);
         return SCRIPT_CONTINUE;
     }
+
     public int removeMe(obj_id self, dictionary params) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         String fname = getName(self);
         CustomerServiceLog("DUNGEON_CorellianCorvette", "*Corvette Died: %TU died on the Corellian Corvette.", self);
         return SCRIPT_CONTINUE;
     }
+
     public void giveBadge(obj_id self) throws InterruptedException
     {
         String variable = "Corvette Badge";
@@ -198,8 +215,8 @@ public class timer extends script.base_script
             CustomerServiceLog("DUNGEON_CorellianCorvette", "*Corvette Badge: Gave badge to %TU for completing " + variable, self);
             return;
         }
-        return;
     }
+
     public location pickLandingLocation() throws InterruptedException
     {
         location landing = new location();
@@ -207,26 +224,27 @@ public class timer extends script.base_script
         switch (randomSpot)
         {
             case 1:
-            landing = new location(-3931, 35, -4320, "tatooine", null);
-            break;
+                landing = new location(-3931, 35, -4320, "tatooine", null);
+                break;
             case 2:
-            landing = new location(-1635, 0, -42, "corellia", null);
-            break;
+                landing = new location(-1635, 0, -42, "corellia", null);
+                break;
             case 3:
-            landing = new location(-3392, 100, -6152, "rori", null);
-            break;
+                landing = new location(-3392, 100, -6152, "rori", null);
+                break;
             case 4:
-            landing = new location(-2431, 0, -2471, "naboo", null);
-            break;
+                landing = new location(-2431, 0, -2471, "naboo", null);
+                break;
             case 5:
-            landing = new location(-5998, 27, 5935, "talus", null);
-            break;
+                landing = new location(-5998, 27, 5935, "talus", null);
+                break;
             default:
-            landing = new location(0, 0, 0, "dantooine", null);
-            break;
+                landing = new location(0, 0, 0, "dantooine", null);
+                break;
         }
         return landing;
     }
+
     public int OnLogin(obj_id self) throws InterruptedException
     {
         obj_id top = space_dungeon.getDungeonIdForPlayer(self);
@@ -246,6 +264,7 @@ public class timer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnDetach(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "corl_corvette.made_overt"))
@@ -259,6 +278,7 @@ public class timer extends script.base_script
         destroyExtras(self);
         return SCRIPT_CONTINUE;
     }
+
     public void destroyExtras(obj_id self) throws InterruptedException
     {
         if (utils.playerHasItemByTemplate(self, "object/tangible/dungeon/droid_maint_module.iff"))
@@ -277,8 +297,8 @@ public class timer extends script.base_script
                 destroyObject(clean2);
             }
         }
-        return;
     }
+
     public int recheckDungeonType(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id top = space_dungeon.getDungeonIdForPlayer(self);

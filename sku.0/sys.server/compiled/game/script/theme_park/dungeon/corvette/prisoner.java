@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.corvette;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.location;
@@ -10,6 +16,7 @@ public class prisoner extends script.base_script
     public prisoner()
     {
     }
+
     public int escapeNow(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id top = getTopMostContainer(self);
@@ -22,11 +29,13 @@ public class prisoner extends script.base_script
         messageTo(self, "handleBadLeaving", null, 60, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleBadLeaving(obj_id self, dictionary params) throws InterruptedException
     {
         messageTo(self, "leave", null, 7, false);
         return SCRIPT_CONTINUE;
     }
+
     public int leave(obj_id self, dictionary params) throws InterruptedException
     {
         if (ai_lib.isInCombat(self))
@@ -37,6 +46,7 @@ public class prisoner extends script.base_script
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnArrivedAtLocation(obj_id self, String name) throws InterruptedException
     {
         if (name.equals("done"))

@@ -1,5 +1,11 @@
 package script.theme_park.jabba;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.weapons;
 import script.location;
@@ -10,11 +16,13 @@ public class quest_warehouse extends script.base_script
     public quest_warehouse()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "bldgSetup", null, 3, true);
         return SCRIPT_CONTINUE;
     }
+
     public int bldgSetup(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id room3 = getCellId(self, "room3");

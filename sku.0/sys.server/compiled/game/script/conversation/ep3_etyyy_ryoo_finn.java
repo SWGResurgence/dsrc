@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.groundquests;
@@ -8,34 +14,42 @@ import script.*;
 
 public class ep3_etyyy_ryoo_finn extends script.base_script
 {
+    public static String c_stringFile = "conversation/ep3_etyyy_ryoo_finn";
+
     public ep3_etyyy_ryoo_finn()
     {
     }
-    public static String c_stringFile = "conversation/ep3_etyyy_ryoo_finn";
+
     public boolean ep3_etyyy_ryoo_finn_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean ep3_etyyy_ryoo_finn_condition_hasCompletedRyooQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "ep3_hunt_johnson_retrieve_ryoos_stash");
     }
+
     public boolean ep3_etyyy_ryoo_finn_condition_foundRyoosSalt(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "ep3_hunt_johnson_retrieve_ryoos_stash", "johnson_ryoosSalt");
     }
+
     public boolean ep3_etyyy_ryoo_finn_condition_isRetrievingRyoosSalt(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "ep3_hunt_johnson_retrieve_ryoos_stash", "johnson_findRyoosStash");
     }
+
     public boolean ep3_etyyy_ryoo_finn_condition_speakWithRyoo(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "ep3_hunt_johnson_retrieve_ryoos_stash", "johnson_talkToRyoo");
     }
+
     public void ep3_etyyy_ryoo_finn_action_retrieveRyoosStash(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "johnson_talkToRyoo");
     }
+
     public int ep3_etyyy_ryoo_finn_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1205"))
@@ -62,7 +76,7 @@ public class ep3_etyyy_ryoo_finn extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1214");
@@ -75,7 +89,7 @@ public class ep3_etyyy_ryoo_finn extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_etyyy_ryoo_finn.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -95,6 +109,7 @@ public class ep3_etyyy_ryoo_finn extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_etyyy_ryoo_finn_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1214"))
@@ -121,7 +136,7 @@ public class ep3_etyyy_ryoo_finn extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1218");
@@ -134,7 +149,7 @@ public class ep3_etyyy_ryoo_finn extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_etyyy_ryoo_finn.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -154,6 +169,7 @@ public class ep3_etyyy_ryoo_finn extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_etyyy_ryoo_finn_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1218"))
@@ -179,6 +195,7 @@ public class ep3_etyyy_ryoo_finn extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -189,12 +206,14 @@ public class ep3_etyyy_ryoo_finn extends script.base_script
         setInvulnerable(self, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         setInvulnerable(self, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -204,18 +223,21 @@ public class ep3_etyyy_ryoo_finn extends script.base_script
         faceTo(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.ep3_etyyy_ryoo_finn");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -264,7 +286,7 @@ public class ep3_etyyy_ryoo_finn extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_1205");
@@ -276,7 +298,7 @@ public class ep3_etyyy_ryoo_finn extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_etyyy_ryoo_finn.branchId", 4);
                 npcStartConversation(player, npc, "ep3_etyyy_ryoo_finn", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -291,6 +313,7 @@ public class ep3_etyyy_ryoo_finn extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("ep3_etyyy_ryoo_finn"))

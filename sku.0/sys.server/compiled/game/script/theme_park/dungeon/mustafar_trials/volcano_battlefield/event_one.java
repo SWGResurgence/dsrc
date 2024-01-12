@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.mustafar_trials.volcano_battlefield;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.create;
@@ -12,12 +18,13 @@ import java.util.Vector;
 
 public class event_one extends script.base_script
 {
-    public event_one()
-    {
-    }
     public static final String boss = "som_volcano_one_taskmaster";
     public static final String guard = "som_volcano_one_sustainer";
     public static final boolean doLogging = false;
+    public event_one()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         spawnBoss(self);
@@ -25,6 +32,7 @@ public class event_one extends script.base_script
         setTriggerVolume(self);
         return SCRIPT_CONTINUE;
     }
+
     public void setTriggerVolume(obj_id self) throws InterruptedException
     {
         if (!hasTriggerVolume(self, "activateVolume"))
@@ -32,6 +40,7 @@ public class event_one extends script.base_script
             createTriggerVolume("activateVolume", 45, true);
         }
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id breacher) throws InterruptedException
     {
         if (isPlayer(breacher))
@@ -43,6 +52,7 @@ public class event_one extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void activateEncounter(obj_id self) throws InterruptedException
     {
         obj_id eventBoss = utils.getObjIdScriptVar(self, "eventBoss");
@@ -50,6 +60,7 @@ public class event_one extends script.base_script
         obj_id[] guardList = utils.getObjIdArrayScriptVar(self, "currentGuardList");
         utils.messageTo(guardList, "activateShield", null, 0, false);
     }
+
     public void spawnBoss(obj_id self) throws InterruptedException
     {
         location here = getLocation(self);
@@ -65,6 +76,7 @@ public class event_one extends script.base_script
         trial.setParent(self, eventBoss, false);
         utils.setScriptVar(self, "eventBoss", eventBoss);
     }
+
     public int beginGuardCycle(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id[] guardList = utils.getObjIdArrayScriptVar(self, "currentGuardList");
@@ -72,21 +84,22 @@ public class event_one extends script.base_script
         messageTo(self, "doGuardAttack", null, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int spawnGuards(obj_id self, dictionary params) throws InterruptedException
     {
         location here = getLocation(self);
         obj_id event_boss = utils.getObjIdScriptVar(self, "eventBoss");
-        String[] offSet = 
-        {
-            "3:2",
-            "6:4",
-            "9:7",
-            "12:10",
-            "-3:2",
-            "-6:4",
-            "-9:7",
-            "-12:10"
-        };
+        String[] offSet =
+                {
+                        "3:2",
+                        "6:4",
+                        "9:7",
+                        "12:10",
+                        "-3:2",
+                        "-6:4",
+                        "-9:7",
+                        "-12:10"
+                };
         obj_id[] guards = new obj_id[8];
         for (int i = 0; i < offSet.length; i++)
         {
@@ -109,6 +122,7 @@ public class event_one extends script.base_script
         utils.setScriptVar(self, "currentAttacker", guards[0]);
         return SCRIPT_CONTINUE;
     }
+
     public int doGuardAttack(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id currentAttacker = getCurrentAttacker(self);
@@ -126,6 +140,7 @@ public class event_one extends script.base_script
         messageTo(self, "doGuardAttack", null, 10, false);
         return SCRIPT_CONTINUE;
     }
+
     public obj_id getCurrentAttacker(obj_id self) throws InterruptedException
     {
         if (!utils.hasScriptVar(self, "currentAttacker"))
@@ -134,6 +149,7 @@ public class event_one extends script.base_script
         }
         return utils.getObjIdScriptVar(self, "currentAttacker");
     }
+
     public obj_id chooseNewAttacker(obj_id self) throws InterruptedException
     {
         obj_id[] guards = utils.getObjIdArrayScriptVar(self, "currentGuardList");
@@ -149,8 +165,10 @@ public class event_one extends script.base_script
         }
         Vector activeGuards = new Vector();
         activeGuards.setSize(0);
-        for (obj_id guard1 : guards) {
-            if (exists(guard1)) {
+        for (obj_id guard1 : guards)
+        {
+            if (exists(guard1))
+            {
                 utils.addElement(activeGuards, guard1);
             }
         }
@@ -162,21 +180,23 @@ public class event_one extends script.base_script
         obj_id newAttacker = obj_id.NULL_ID;
         if (activeGuards.size() == 1)
         {
-            newAttacker = ((obj_id)activeGuards.get(0));
+            newAttacker = ((obj_id) activeGuards.get(0));
         }
-        else 
+        else
         {
             Vector nonAttackerGuards = new Vector();
             nonAttackerGuards.setSize(0);
             if (isIdValid(attacker))
             {
-                for (Object activeGuard : activeGuards) {
-                    if (((obj_id) activeGuard) != attacker) {
-                        utils.addElement(nonAttackerGuards, ((obj_id) activeGuard));
+                for (Object activeGuard : activeGuards)
+                {
+                    if (activeGuard != attacker)
+                    {
+                        utils.addElement(nonAttackerGuards, activeGuard);
                     }
                 }
             }
-            else 
+            else
             {
                 nonAttackerGuards = activeGuards;
             }
@@ -187,11 +207,11 @@ public class event_one extends script.base_script
             }
             if (nonAttackerGuards.size() == 1)
             {
-                newAttacker = ((obj_id)nonAttackerGuards.get(0));
+                newAttacker = ((obj_id) nonAttackerGuards.get(0));
             }
-            else 
+            else
             {
-                newAttacker = ((obj_id)nonAttackerGuards.get(rand(0, nonAttackerGuards.size() - 1)));
+                newAttacker = ((obj_id) nonAttackerGuards.get(rand(0, nonAttackerGuards.size() - 1)));
             }
         }
         obj_id[] newGuardList = new obj_id[0];
@@ -204,6 +224,7 @@ public class event_one extends script.base_script
         utils.setScriptVar(self, "currentAttacker", newAttacker);
         return newAttacker;
     }
+
     public int eventMobDied(obj_id self, dictionary params) throws InterruptedException
     {
         String type = params.getString("type");
@@ -213,6 +234,7 @@ public class event_one extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void winEvent(obj_id self) throws InterruptedException
     {
         obj_id top = getObjIdObjVar(self, "parent");
@@ -223,6 +245,7 @@ public class event_one extends script.base_script
         }
         messageTo(top, "eventDefeated", null, 0, false);
     }
+
     public void doLogging(String section, String message) throws InterruptedException
     {
         if (doLogging)

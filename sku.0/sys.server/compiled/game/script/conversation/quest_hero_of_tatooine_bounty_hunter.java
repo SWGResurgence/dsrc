@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.sui;
@@ -10,26 +16,26 @@ import java.util.Vector;
 
 public class quest_hero_of_tatooine_bounty_hunter extends script.base_script
 {
+    public static String c_stringFile = "conversation/quest_hero_of_tatooine_bounty_hunter";
+
     public quest_hero_of_tatooine_bounty_hunter()
     {
     }
-    public static String c_stringFile = "conversation/quest_hero_of_tatooine_bounty_hunter";
+
     public boolean quest_hero_of_tatooine_bounty_hunter_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean quest_hero_of_tatooine_bounty_hunter_condition_complete(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(player, "quest.hero_of_tatooine.intellect.complete"))
         {
             return true;
         }
-        if (hasObjVar(player, "quest.hero_of_tatooine.complete"))
-        {
-            return true;
-        }
-        return false;
+        return hasObjVar(player, "quest.hero_of_tatooine.complete");
     }
+
     public boolean quest_hero_of_tatooine_bounty_hunter_condition_failed(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(player, "quest.hero_of_tatooine.intellect.failed"))
@@ -39,33 +45,29 @@ public class quest_hero_of_tatooine_bounty_hunter extends script.base_script
             {
                 return true;
             }
-            else 
+            else
             {
                 removeObjVar(player, "quest.hero_of_tatooine.intellect.failed");
             }
         }
         return false;
     }
+
     public boolean quest_hero_of_tatooine_bounty_hunter_condition_in_progress(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (utils.hasScriptVar(player, "quest.hero_of_tatooine.intellect.in_progress"))
-        {
-            return true;
-        }
-        return false;
+        return utils.hasScriptVar(player, "quest.hero_of_tatooine.intellect.in_progress");
     }
+
     public boolean quest_hero_of_tatooine_bounty_hunter_condition_quest_done(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (hasObjVar(npc, "quest.hero_of_tatooine.intellect.spawner.complete"))
-        {
-            return true;
-        }
-        return false;
+        return hasObjVar(npc, "quest.hero_of_tatooine.intellect.spawner.complete");
     }
+
     public void quest_hero_of_tatooine_bounty_hunter_action_set_help(obj_id player, obj_id npc) throws InterruptedException
     {
         utils.setScriptVar(player, "quest.hero_of_tatooine.intellect.in_progress", 1);
     }
+
     public void quest_hero_of_tatooine_bounty_hunter_action_point_him_out(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id control = getObjIdObjVar(npc, "quest.hero_of_tatooine.intellect.spawner.controller");
@@ -91,12 +93,12 @@ public class quest_hero_of_tatooine_bounty_hunter extends script.base_script
         String[] names = new String[newLiars.size()];
         for (int i = 0; i < newLiars.size(); i++)
         {
-            int num = getIntObjVar(((obj_id)newLiars.get(i)), "quest.hero_of_tatooine.intellect.spawner.npc");
+            int num = getIntObjVar(((obj_id) newLiars.get(i)), "quest.hero_of_tatooine.intellect.spawner.npc");
             if (num == 3)
             {
                 utils.setScriptVar(player, "quest.hero_of_tatooine.intellect.liar", i);
             }
-            String name = getEncodedName(((obj_id)newLiars.get(i)));
+            String name = getEncodedName(((obj_id) newLiars.get(i)));
             names[i] = name;
         }
         String prompt = "@quest/hero_of_tatooine/intellect_liar:sui_prompt";
@@ -111,6 +113,7 @@ public class quest_hero_of_tatooine_bounty_hunter extends script.base_script
             showSUIPage(pid);
         }
     }
+
     public String quest_hero_of_tatooine_bounty_hunter_tokenTO_smuggler_leader(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id control = getObjIdObjVar(npc, "quest.hero_of_tatooine.intellect.spawner.controller");
@@ -123,6 +126,7 @@ public class quest_hero_of_tatooine_bounty_hunter extends script.base_script
         }
         return name;
     }
+
     public int quest_hero_of_tatooine_bounty_hunter_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1b0651f8"))
@@ -150,6 +154,7 @@ public class quest_hero_of_tatooine_bounty_hunter extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int quest_hero_of_tatooine_bounty_hunter_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_775eed34"))
@@ -183,7 +188,7 @@ public class quest_hero_of_tatooine_bounty_hunter extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_b8f4813d");
@@ -200,7 +205,7 @@ public class quest_hero_of_tatooine_bounty_hunter extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.quest_hero_of_tatooine_bounty_hunter.branchId");
                     chat.chat(npc, player, message);
@@ -240,7 +245,7 @@ public class quest_hero_of_tatooine_bounty_hunter extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_b8f4813d");
@@ -257,7 +262,7 @@ public class quest_hero_of_tatooine_bounty_hunter extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.quest_hero_of_tatooine_bounty_hunter.branchId");
                     chat.chat(npc, player, message);
@@ -279,6 +284,7 @@ public class quest_hero_of_tatooine_bounty_hunter extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int quest_hero_of_tatooine_bounty_hunter_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_b8f4813d"))
@@ -305,7 +311,7 @@ public class quest_hero_of_tatooine_bounty_hunter extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d3412303");
@@ -318,7 +324,7 @@ public class quest_hero_of_tatooine_bounty_hunter extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.quest_hero_of_tatooine_bounty_hunter.branchId");
                     chat.chat(npc, player, message);
@@ -358,7 +364,7 @@ public class quest_hero_of_tatooine_bounty_hunter extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_922dd166");
@@ -375,7 +381,7 @@ public class quest_hero_of_tatooine_bounty_hunter extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.quest_hero_of_tatooine_bounty_hunter.branchId");
                     chat.chat(npc, player, message);
@@ -397,6 +403,7 @@ public class quest_hero_of_tatooine_bounty_hunter extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int quest_hero_of_tatooine_bounty_hunter_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_d3412303"))
@@ -430,7 +437,7 @@ public class quest_hero_of_tatooine_bounty_hunter extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_922dd166");
@@ -447,7 +454,7 @@ public class quest_hero_of_tatooine_bounty_hunter extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.quest_hero_of_tatooine_bounty_hunter.branchId");
                     chat.chat(npc, player, message);
@@ -469,6 +476,7 @@ public class quest_hero_of_tatooine_bounty_hunter extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int quest_hero_of_tatooine_bounty_hunter_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_922dd166"))
@@ -502,7 +510,7 @@ public class quest_hero_of_tatooine_bounty_hunter extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_df981c5e");
@@ -519,7 +527,7 @@ public class quest_hero_of_tatooine_bounty_hunter extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.quest_hero_of_tatooine_bounty_hunter.branchId");
                     chat.chat(npc, player, message);
@@ -559,7 +567,7 @@ public class quest_hero_of_tatooine_bounty_hunter extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_df981c5e");
@@ -576,7 +584,7 @@ public class quest_hero_of_tatooine_bounty_hunter extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.quest_hero_of_tatooine_bounty_hunter.branchId");
                     chat.chat(npc, player, message);
@@ -598,6 +606,7 @@ public class quest_hero_of_tatooine_bounty_hunter extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int quest_hero_of_tatooine_bounty_hunter_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_df981c5e"))
@@ -624,7 +633,7 @@ public class quest_hero_of_tatooine_bounty_hunter extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1fa16fd3");
@@ -637,7 +646,7 @@ public class quest_hero_of_tatooine_bounty_hunter extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.quest_hero_of_tatooine_bounty_hunter.branchId");
                     chat.chat(npc, player, message);
@@ -670,7 +679,7 @@ public class quest_hero_of_tatooine_bounty_hunter extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_43");
@@ -683,7 +692,7 @@ public class quest_hero_of_tatooine_bounty_hunter extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.quest_hero_of_tatooine_bounty_hunter.branchId");
                     chat.chat(npc, player, message);
@@ -705,6 +714,7 @@ public class quest_hero_of_tatooine_bounty_hunter extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int quest_hero_of_tatooine_bounty_hunter_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1fa16fd3"))
@@ -731,7 +741,7 @@ public class quest_hero_of_tatooine_bounty_hunter extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_dce437b6");
@@ -744,7 +754,7 @@ public class quest_hero_of_tatooine_bounty_hunter extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.quest_hero_of_tatooine_bounty_hunter.branchId");
                     chat.chat(npc, player, message);
@@ -766,6 +776,7 @@ public class quest_hero_of_tatooine_bounty_hunter extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int quest_hero_of_tatooine_bounty_hunter_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_dce437b6"))
@@ -792,7 +803,7 @@ public class quest_hero_of_tatooine_bounty_hunter extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_47482ee2");
@@ -805,7 +816,7 @@ public class quest_hero_of_tatooine_bounty_hunter extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.quest_hero_of_tatooine_bounty_hunter.branchId");
                     chat.chat(npc, player, message);
@@ -827,6 +838,7 @@ public class quest_hero_of_tatooine_bounty_hunter extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int quest_hero_of_tatooine_bounty_hunter_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_47482ee2"))
@@ -853,7 +865,7 @@ public class quest_hero_of_tatooine_bounty_hunter extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_369a8bff");
@@ -866,7 +878,7 @@ public class quest_hero_of_tatooine_bounty_hunter extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.quest_hero_of_tatooine_bounty_hunter.branchId");
                     chat.chat(npc, player, message);
@@ -888,6 +900,7 @@ public class quest_hero_of_tatooine_bounty_hunter extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int quest_hero_of_tatooine_bounty_hunter_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_369a8bff"))
@@ -915,6 +928,7 @@ public class quest_hero_of_tatooine_bounty_hunter extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int quest_hero_of_tatooine_bounty_hunter_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_43"))
@@ -941,7 +955,7 @@ public class quest_hero_of_tatooine_bounty_hunter extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1fa16fd3");
@@ -954,7 +968,7 @@ public class quest_hero_of_tatooine_bounty_hunter extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.quest_hero_of_tatooine_bounty_hunter.branchId");
                     chat.chat(npc, player, message);
@@ -976,6 +990,7 @@ public class quest_hero_of_tatooine_bounty_hunter extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int quest_hero_of_tatooine_bounty_hunter_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_df981c5e"))
@@ -1002,7 +1017,7 @@ public class quest_hero_of_tatooine_bounty_hunter extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1fa16fd3");
@@ -1015,7 +1030,7 @@ public class quest_hero_of_tatooine_bounty_hunter extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.quest_hero_of_tatooine_bounty_hunter.branchId");
                     chat.chat(npc, player, message);
@@ -1048,7 +1063,7 @@ public class quest_hero_of_tatooine_bounty_hunter extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_43");
@@ -1061,7 +1076,7 @@ public class quest_hero_of_tatooine_bounty_hunter extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.quest_hero_of_tatooine_bounty_hunter.branchId");
                     chat.chat(npc, player, message);
@@ -1083,6 +1098,7 @@ public class quest_hero_of_tatooine_bounty_hunter extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int quest_hero_of_tatooine_bounty_hunter_handleBranch28(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_b8f4813d"))
@@ -1109,7 +1125,7 @@ public class quest_hero_of_tatooine_bounty_hunter extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d3412303");
@@ -1122,7 +1138,7 @@ public class quest_hero_of_tatooine_bounty_hunter extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.quest_hero_of_tatooine_bounty_hunter.branchId");
                     chat.chat(npc, player, message);
@@ -1162,7 +1178,7 @@ public class quest_hero_of_tatooine_bounty_hunter extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_922dd166");
@@ -1179,7 +1195,7 @@ public class quest_hero_of_tatooine_bounty_hunter extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.quest_hero_of_tatooine_bounty_hunter.branchId");
                     chat.chat(npc, player, message);
@@ -1201,6 +1217,7 @@ public class quest_hero_of_tatooine_bounty_hunter extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -1214,12 +1231,14 @@ public class quest_hero_of_tatooine_bounty_hunter extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         attachScript(self, "quest.hero_of_tatooine.intellect_bounty_hunter");
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -1228,18 +1247,21 @@ public class quest_hero_of_tatooine_bounty_hunter extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.quest_hero_of_tatooine_bounty_hunter");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -1287,7 +1309,7 @@ public class quest_hero_of_tatooine_bounty_hunter extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_1b0651f8");
@@ -1299,7 +1321,7 @@ public class quest_hero_of_tatooine_bounty_hunter extends script.base_script
                 utils.setScriptVar(player, "conversation.quest_hero_of_tatooine_bounty_hunter.branchId", 4);
                 npcStartConversation(player, npc, "quest_hero_of_tatooine_bounty_hunter", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1334,7 +1356,7 @@ public class quest_hero_of_tatooine_bounty_hunter extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_775eed34");
@@ -1350,7 +1372,7 @@ public class quest_hero_of_tatooine_bounty_hunter extends script.base_script
                 utils.setScriptVar(player, "conversation.quest_hero_of_tatooine_bounty_hunter.branchId", 7);
                 npcStartConversation(player, npc, "quest_hero_of_tatooine_bounty_hunter", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1359,6 +1381,7 @@ public class quest_hero_of_tatooine_bounty_hunter extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("quest_hero_of_tatooine_bounty_hunter"))

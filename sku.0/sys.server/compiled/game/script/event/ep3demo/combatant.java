@@ -1,5 +1,11 @@
 package script.event.ep3demo;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.utils;
@@ -11,11 +17,13 @@ public class combatant extends script.base_script
     public combatant()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "checkForNewTargets", null, 6, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         obj_id mom = getObjIdObjVar(self, "ep3demo.mom");
@@ -33,6 +41,7 @@ public class combatant extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnHearSpeech(obj_id self, obj_id objSpeaker, String strText) throws InterruptedException
     {
         if (!isGod(objSpeaker))
@@ -45,6 +54,7 @@ public class combatant extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int checkForNewTargets(obj_id self, dictionary params) throws InterruptedException
     {
         if (!ai_lib.isInCombat(self))
@@ -54,29 +64,35 @@ public class combatant extends script.base_script
         messageTo(self, "checkForNewTargets", null, 6, false);
         return SCRIPT_CONTINUE;
     }
+
     public int destroyYourself(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public void lookForSomeoneToKill(obj_id self) throws InterruptedException
     {
         location here = getLocation(self);
         obj_id[] objects = getObjectsInRange(here, 32);
-        for (obj_id object : objects) {
-            if (utils.hasScriptVar(self, "ep3demo.aggressor")) {
-                if (utils.hasScriptVar(object, "ep3demo.victim")) {
+        for (obj_id object : objects)
+        {
+            if (utils.hasScriptVar(self, "ep3demo.aggressor"))
+            {
+                if (utils.hasScriptVar(object, "ep3demo.victim"))
+                {
                     startCombat(self, object);
                     return;
                 }
             }
-            if (utils.hasScriptVar(self, "ep3demo.victim")) {
-                if (utils.hasScriptVar(object, "ep3demo.aggressor")) {
+            if (utils.hasScriptVar(self, "ep3demo.victim"))
+            {
+                if (utils.hasScriptVar(object, "ep3demo.aggressor"))
+                {
                     startCombat(self, object);
                     return;
                 }
             }
         }
-        return;
     }
 }

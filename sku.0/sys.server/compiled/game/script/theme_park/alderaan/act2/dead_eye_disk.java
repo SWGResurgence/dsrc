@@ -1,5 +1,11 @@
 package script.theme_park.alderaan.act2;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.sui;
 import script.library.utils;
 import script.menu_info;
@@ -9,9 +15,6 @@ import script.string_id;
 
 public class dead_eye_disk extends script.base_script
 {
-    public dead_eye_disk()
-    {
-    }
     public static final String REBEL_STF = "theme_park/alderaan/act2/rebel_missions";
     public static final String REBEL_SHARED_STF = "theme_park/alderaan/act2/shared_rebel_missions";
     public static final string_id DISK_NAME_DECODED = new string_id(REBEL_SHARED_STF, "disk_name_decoded");
@@ -21,18 +24,23 @@ public class dead_eye_disk extends script.base_script
     public static final string_id SID_USE = new string_id(REBEL_SHARED_STF, "use");
     public static final string_id SID_DECODE = new string_id(REBEL_SHARED_STF, "decode");
     public static final String SID_CLOSE = "@" + REBEL_SHARED_STF + ":close";
+    public dead_eye_disk()
+    {
+    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "diskDecoded"))
         {
             setName(self, DISK_NAME_DECODED);
         }
-        else 
+        else
         {
             setName(self, DISK_NAME_ENCODED);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         mi.addRootMenu(menu_info_types.SERVER_MENU1, SID_USE);
@@ -42,6 +50,7 @@ public class dead_eye_disk extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.SERVER_MENU1)
@@ -54,6 +63,7 @@ public class dead_eye_disk extends script.base_script
         }
         return SCRIPT_OVERRIDE;
     }
+
     public void displayDialog(obj_id self, obj_id player) throws InterruptedException
     {
         String title = null;
@@ -65,7 +75,7 @@ public class dead_eye_disk extends script.base_script
             string_id textID = new string_id(REBEL_STF, "disk_decoded_text");
             text = localize(textID);
         }
-        else 
+        else
         {
             string_id titleID = new string_id(REBEL_STF, "disk_encoded_title");
             title = localize(titleID);
@@ -74,6 +84,7 @@ public class dead_eye_disk extends script.base_script
         }
         createDialog(self, player, text, title);
     }
+
     public int createDialog(obj_id self, obj_id player, String text, String title) throws InterruptedException
     {
         if (player == null)
@@ -88,6 +99,7 @@ public class dead_eye_disk extends script.base_script
         sui.showSUIPage(pid);
         return pid;
     }
+
     public void decodeDisk(obj_id self, obj_id player) throws InterruptedException
     {
         if (utils.playerHasItemByTemplate(player, "object/tangible/encoded_disk/dead_eye_decoder.iff"))
@@ -97,7 +109,7 @@ public class dead_eye_disk extends script.base_script
             sendSystemMessage(player, DECODED_DATA_DISK);
             setName(self, DISK_NAME_DECODED);
         }
-        else 
+        else
         {
             sendSystemMessage(player, DECODE_FAILED);
         }

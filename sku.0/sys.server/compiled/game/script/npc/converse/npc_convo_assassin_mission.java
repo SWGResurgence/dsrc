@@ -1,5 +1,11 @@
 package script.npc.converse;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.menu_info;
 import script.obj_id;
@@ -7,21 +13,24 @@ import script.string_id;
 
 public class npc_convo_assassin_mission extends script.systems.missions.base.mission_dynamic_base
 {
-    public npc_convo_assassin_mission()
-    {
-    }
     public static final String BASE_CONVO = "missions/assassin_mission_npc_convo";
     public static final String ASSASSIN_MISSION_DEVICE = "object/tangible/mission/assassin_missions_device.iff";
     public static final int DEVICE_LOC_FEE = 119;
+    public npc_convo_assassin_mission()
+    {
+    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         removeTriggerVolume("alertTriggerVolume");
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info item) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         removeTriggerVolume("alertTriggerVolume");
@@ -30,6 +39,7 @@ public class npc_convo_assassin_mission extends script.systems.missions.base.mis
         attachScript(self, "systems.missions.base.mission_npc");
         return SCRIPT_CONTINUE;
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id speaker) throws InterruptedException
     {
         if (ai_lib.isInCombat(self) || ai_lib.isInCombat(speaker))
@@ -51,7 +61,7 @@ public class npc_convo_assassin_mission extends script.systems.missions.base.mis
         {
             greetingChoice = getIntObjVar(self, "greetingChoice");
         }
-        else 
+        else
         {
             setObjVar(self, "greetingChoice", greetingChoice);
         }
@@ -73,17 +83,18 @@ public class npc_convo_assassin_mission extends script.systems.missions.base.mis
             return SCRIPT_OVERRIDE;
         }
         string_id greeting = new string_id(BASE_CONVO, type + "_npc_greet_" + greetingChoice);
-        string_id responseChoices[] = new string_id[2];
+        string_id[] responseChoices = new string_id[2];
         responseChoices[0] = new string_id(BASE_CONVO, "player_job_request");
         responseChoices[1] = new string_id(BASE_CONVO, type + "_player__1_" + greetingChoice);
         npcStartConversation(speaker, self, "assassin_mission", greeting, responseChoices);
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String convo, obj_id player, string_id response) throws InterruptedException
     {
         String type = getMissionGiverType(self);
         int greetingChoice = getIntObjVar(self, "greetingChoice");
-        string_id responseChoices[] = new string_id[2];
+        string_id[] responseChoices = new string_id[2];
         if ((response.getAsciiId()).equals("player_job_request"))
         {
             if (utils.playerHasItemByTemplate(player, ASSASSIN_MISSION_DEVICE))
@@ -95,7 +106,7 @@ public class npc_convo_assassin_mission extends script.systems.missions.base.mis
                 npcSetConversationResponses(player, responseChoices);
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 string_id message = new string_id(BASE_CONVO, type + "_npc_no_device_response");
                 npcSpeak(player, message);
@@ -141,7 +152,7 @@ public class npc_convo_assassin_mission extends script.systems.missions.base.mis
                 npcSpeak(player, message);
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 string_id message = new string_id(BASE_CONVO, type + "_npc_end_convo_no_credits");
                 npcSpeak(player, message);
@@ -181,6 +192,7 @@ public class npc_convo_assassin_mission extends script.systems.missions.base.mis
         npcEndConversation(player);
         return SCRIPT_CONTINUE;
     }
+
     public String getMissionGiverType(obj_id self) throws InterruptedException
     {
         String type = "neutral";

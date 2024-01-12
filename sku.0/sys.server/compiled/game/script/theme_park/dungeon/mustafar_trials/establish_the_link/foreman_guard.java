@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.mustafar_trials.establish_the_link;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.trial;
 import script.library.utils;
@@ -7,10 +13,12 @@ import script.obj_id;
 
 public class foreman_guard extends script.base_script
 {
+    public static final boolean LOGGING = false;
+
     public foreman_guard()
     {
     }
-    public static final boolean LOGGING = false;
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         if (trial.isUplinkActive(self))
@@ -25,11 +33,13 @@ public class foreman_guard extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         messageTo(self, "destroySelf", null, 5, false);
         return SCRIPT_CONTINUE;
     }
+
     public int destroySelf(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id[] targets = trial.getValidTargetsInRadius(self, 7.0f);
@@ -40,22 +50,26 @@ public class foreman_guard extends script.base_script
             doLogging("nukeSelf", "No valid targets in blast radius");
             return SCRIPT_CONTINUE;
         }
-        for (obj_id target : targets) {
+        for (obj_id target : targets)
+        {
             damage(target, DAMAGE_ELEMENTAL_HEAT, HIT_LOCATION_BODY, 500);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setInvulnerable(self, true);
         messageTo(self, "removeInvulnerable", null, 4, false);
         return SCRIPT_CONTINUE;
     }
+
     public int removeInvulnerable(obj_id self, dictionary params) throws InterruptedException
     {
         setInvulnerable(self, false);
         return SCRIPT_CONTINUE;
     }
+
     public void doLogging(String section, String message) throws InterruptedException
     {
         if (LOGGING || trial.UPLINK_LOGGING)

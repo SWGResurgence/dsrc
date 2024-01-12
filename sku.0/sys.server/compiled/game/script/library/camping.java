@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 
 public class camping extends script.base_script
@@ -93,6 +99,7 @@ public class camping extends script.base_script
                     "object/building/poi/scout_camp_s5.iff"
             };
     public static final String CAMP_DATATABLE = "datatables/item/camp.iff";
+
     public camping()
     {
     }

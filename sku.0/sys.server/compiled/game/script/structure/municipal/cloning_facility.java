@@ -1,5 +1,11 @@
 package script.structure.municipal;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.create;
 import script.library.player_structure;
@@ -14,6 +20,7 @@ public class cloning_facility extends script.structure.municipal.cloning_base
 {
     public static final String SCRIPT_CLONING_FACILITY = "structure.municipal.cloning_facility";
     public static final String DATATABLE_TERMINAL_LIST = "datatables/structure/municipal/cloning_facility_terminal.iff";
+
     public cloning_facility()
     {
     }

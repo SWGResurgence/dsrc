@@ -1,21 +1,29 @@
 package script.theme_park.dungeon.death_watch_bunker;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.player_structure;
 import script.library.utils;
 
 public class water_pressure_terminal extends script.base_script
 {
+    public static final string_id ACCESS_DENIED = new string_id("dungeon/death_watch", "access_denied");
+    public static final string_id MNU_WATER_VALVE = new string_id("dungeon/death_watch", "mnu_water_valve");
     public water_pressure_terminal()
     {
     }
-    public static final string_id ACCESS_DENIED = new string_id("dungeon/death_watch", "access_denied");
-    public static final string_id MNU_WATER_VALVE = new string_id("dungeon/death_watch", "mnu_water_valve");
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "handleTerminalObjVar", null, 1.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (isDead(player) || isIncapacitated(player))
@@ -43,6 +51,7 @@ public class water_pressure_terminal extends script.base_script
         int mnuControl = mi.addRootMenu(menu_info_types.ITEM_USE, MNU_WATER_VALVE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -67,6 +76,7 @@ public class water_pressure_terminal extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleTerminalObjVar(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id structure = player_structure.getStructure(self);

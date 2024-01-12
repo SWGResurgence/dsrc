@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.utils;
@@ -7,66 +13,55 @@ import script.*;
 
 public class biogenic_securitytech extends script.base_script
 {
+    public static String c_stringFile = "conversation/biogenic_securitytech";
+
     public biogenic_securitytech()
     {
     }
-    public static String c_stringFile = "conversation/biogenic_securitytech";
+
     public boolean biogenic_securitytech_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean biogenic_securitytech_condition_get_tracker_1(obj_id player, obj_id npc) throws InterruptedException
     {
         int tracker = getIntObjVar(player, "biogenic.security_convo");
-        if (tracker == 1)
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return tracker == 1;
     }
+
     public boolean biogenic_securitytech_condition_get_tracker_2(obj_id player, obj_id npc) throws InterruptedException
     {
         int tracker = getIntObjVar(player, "biogenic.security_convo");
-        if (tracker == 2)
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return tracker == 2;
     }
+
     public boolean biogenic_securitytech_condition_get_tracker_3(obj_id player, obj_id npc) throws InterruptedException
     {
         int tracker = getIntObjVar(player, "biogenic.security_convo");
-        if (tracker == 3)
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return tracker == 3;
     }
+
     public void biogenic_securitytech_action_set_tracker_1(obj_id player, obj_id npc) throws InterruptedException
     {
         setObjVar(player, "biogenic.security_convo", 1);
     }
+
     public void biogenic_securitytech_action_set_tracker_3(obj_id player, obj_id npc) throws InterruptedException
     {
         setObjVar(player, "biogenic.security_convo", 3);
     }
+
     public void biogenic_securitytech_action_set_tracker_2(obj_id player, obj_id npc) throws InterruptedException
     {
         setObjVar(player, "biogenic.security_convo", 2);
     }
+
     public void biogenic_securitytech_action_face_to(obj_id player, obj_id npc) throws InterruptedException
     {
         faceToBehavior(npc, player);
     }
+
     public int biogenic_securitytech_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_4e67874f"))
@@ -93,7 +88,7 @@ public class biogenic_securitytech extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_4bf538ac");
@@ -106,7 +101,7 @@ public class biogenic_securitytech extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.biogenic_securitytech.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -138,7 +133,7 @@ public class biogenic_securitytech extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_18");
@@ -151,7 +146,7 @@ public class biogenic_securitytech extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.biogenic_securitytech.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -181,6 +176,7 @@ public class biogenic_securitytech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int biogenic_securitytech_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_4bf538ac"))
@@ -200,7 +196,7 @@ public class biogenic_securitytech extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_4a0eda9c");
@@ -209,7 +205,7 @@ public class biogenic_securitytech extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.biogenic_securitytech.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -229,6 +225,7 @@ public class biogenic_securitytech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int biogenic_securitytech_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_4a0eda9c"))
@@ -243,6 +240,7 @@ public class biogenic_securitytech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int biogenic_securitytech_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_18"))
@@ -262,7 +260,7 @@ public class biogenic_securitytech extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_22");
@@ -271,7 +269,7 @@ public class biogenic_securitytech extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.biogenic_securitytech.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -291,6 +289,7 @@ public class biogenic_securitytech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int biogenic_securitytech_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_22"))
@@ -305,6 +304,7 @@ public class biogenic_securitytech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int biogenic_securitytech_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_28594fa2"))
@@ -332,7 +332,7 @@ public class biogenic_securitytech extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_83dc19a");
@@ -345,7 +345,7 @@ public class biogenic_securitytech extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.biogenic_securitytech.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -365,6 +365,7 @@ public class biogenic_securitytech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int biogenic_securitytech_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_83dc19a"))
@@ -406,7 +407,7 @@ public class biogenic_securitytech extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1ea74b0a");
@@ -427,7 +428,7 @@ public class biogenic_securitytech extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.biogenic_securitytech.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -447,6 +448,7 @@ public class biogenic_securitytech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int biogenic_securitytech_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1ea74b0a"))
@@ -480,7 +482,7 @@ public class biogenic_securitytech extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_8cd04dbf");
@@ -497,7 +499,7 @@ public class biogenic_securitytech extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.biogenic_securitytech.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -536,7 +538,7 @@ public class biogenic_securitytech extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_77");
@@ -553,7 +555,7 @@ public class biogenic_securitytech extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.biogenic_securitytech.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -585,7 +587,7 @@ public class biogenic_securitytech extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_117");
@@ -598,7 +600,7 @@ public class biogenic_securitytech extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.biogenic_securitytech.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -618,6 +620,7 @@ public class biogenic_securitytech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int biogenic_securitytech_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_8cd04dbf"))
@@ -644,7 +647,7 @@ public class biogenic_securitytech extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_6e7f3aa6");
@@ -657,7 +660,7 @@ public class biogenic_securitytech extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.biogenic_securitytech.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -689,7 +692,7 @@ public class biogenic_securitytech extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_61");
@@ -702,7 +705,7 @@ public class biogenic_securitytech extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.biogenic_securitytech.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -722,6 +725,7 @@ public class biogenic_securitytech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int biogenic_securitytech_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_6e7f3aa6"))
@@ -748,7 +752,7 @@ public class biogenic_securitytech extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_e32d6faf");
@@ -761,7 +765,7 @@ public class biogenic_securitytech extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.biogenic_securitytech.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -781,6 +785,7 @@ public class biogenic_securitytech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int biogenic_securitytech_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_e32d6faf"))
@@ -805,6 +810,7 @@ public class biogenic_securitytech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int biogenic_securitytech_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_61"))
@@ -829,6 +835,7 @@ public class biogenic_securitytech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int biogenic_securitytech_handleBranch26(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_77"))
@@ -855,7 +862,7 @@ public class biogenic_securitytech extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_81");
@@ -868,7 +875,7 @@ public class biogenic_securitytech extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.biogenic_securitytech.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -900,7 +907,7 @@ public class biogenic_securitytech extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_101");
@@ -913,7 +920,7 @@ public class biogenic_securitytech extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.biogenic_securitytech.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -933,6 +940,7 @@ public class biogenic_securitytech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int biogenic_securitytech_handleBranch27(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_81"))
@@ -959,7 +967,7 @@ public class biogenic_securitytech extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_85");
@@ -972,7 +980,7 @@ public class biogenic_securitytech extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.biogenic_securitytech.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -992,6 +1000,7 @@ public class biogenic_securitytech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int biogenic_securitytech_handleBranch28(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_85"))
@@ -1016,6 +1025,7 @@ public class biogenic_securitytech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int biogenic_securitytech_handleBranch32(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_101"))
@@ -1040,6 +1050,7 @@ public class biogenic_securitytech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int biogenic_securitytech_handleBranch36(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_117"))
@@ -1064,6 +1075,7 @@ public class biogenic_securitytech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int biogenic_securitytech_handleBranch42(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_d7b11a2"))
@@ -1091,7 +1103,7 @@ public class biogenic_securitytech extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_2ba5e1a3");
@@ -1104,7 +1116,7 @@ public class biogenic_securitytech extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.biogenic_securitytech.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1137,7 +1149,7 @@ public class biogenic_securitytech extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_369");
@@ -1150,7 +1162,7 @@ public class biogenic_securitytech extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.biogenic_securitytech.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1190,7 +1202,7 @@ public class biogenic_securitytech extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_616");
@@ -1207,7 +1219,7 @@ public class biogenic_securitytech extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.biogenic_securitytech.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1227,6 +1239,7 @@ public class biogenic_securitytech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int biogenic_securitytech_handleBranch43(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_2ba5e1a3"))
@@ -1260,7 +1273,7 @@ public class biogenic_securitytech extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_c9c438be");
@@ -1277,7 +1290,7 @@ public class biogenic_securitytech extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.biogenic_securitytech.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1297,6 +1310,7 @@ public class biogenic_securitytech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int biogenic_securitytech_handleBranch44(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_c9c438be"))
@@ -1323,7 +1337,7 @@ public class biogenic_securitytech extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_77c97efc");
@@ -1336,7 +1350,7 @@ public class biogenic_securitytech extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.biogenic_securitytech.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1368,7 +1382,7 @@ public class biogenic_securitytech extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_250");
@@ -1381,7 +1395,7 @@ public class biogenic_securitytech extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.biogenic_securitytech.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1401,6 +1415,7 @@ public class biogenic_securitytech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int biogenic_securitytech_handleBranch45(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_77c97efc"))
@@ -1428,7 +1443,7 @@ public class biogenic_securitytech extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_142");
@@ -1441,7 +1456,7 @@ public class biogenic_securitytech extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.biogenic_securitytech.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1462,6 +1477,7 @@ public class biogenic_securitytech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int biogenic_securitytech_handleBranch46(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_142"))
@@ -1503,7 +1519,7 @@ public class biogenic_securitytech extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_146");
@@ -1524,7 +1540,7 @@ public class biogenic_securitytech extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.biogenic_securitytech.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1544,6 +1560,7 @@ public class biogenic_securitytech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int biogenic_securitytech_handleBranch47(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_146"))
@@ -1577,7 +1594,7 @@ public class biogenic_securitytech extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_150");
@@ -1594,7 +1611,7 @@ public class biogenic_securitytech extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.biogenic_securitytech.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1633,7 +1650,7 @@ public class biogenic_securitytech extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_190");
@@ -1650,7 +1667,7 @@ public class biogenic_securitytech extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.biogenic_securitytech.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1682,7 +1699,7 @@ public class biogenic_securitytech extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_230");
@@ -1695,7 +1712,7 @@ public class biogenic_securitytech extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.biogenic_securitytech.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1715,6 +1732,7 @@ public class biogenic_securitytech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int biogenic_securitytech_handleBranch48(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_150"))
@@ -1741,7 +1759,7 @@ public class biogenic_securitytech extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_154");
@@ -1754,7 +1772,7 @@ public class biogenic_securitytech extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.biogenic_securitytech.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1786,7 +1804,7 @@ public class biogenic_securitytech extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_174");
@@ -1799,7 +1817,7 @@ public class biogenic_securitytech extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.biogenic_securitytech.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1819,6 +1837,7 @@ public class biogenic_securitytech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int biogenic_securitytech_handleBranch49(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_154"))
@@ -1845,7 +1864,7 @@ public class biogenic_securitytech extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_158");
@@ -1858,7 +1877,7 @@ public class biogenic_securitytech extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.biogenic_securitytech.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1878,6 +1897,7 @@ public class biogenic_securitytech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int biogenic_securitytech_handleBranch50(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_158"))
@@ -1902,6 +1922,7 @@ public class biogenic_securitytech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int biogenic_securitytech_handleBranch54(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_174"))
@@ -1926,6 +1947,7 @@ public class biogenic_securitytech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int biogenic_securitytech_handleBranch58(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_190"))
@@ -1952,7 +1974,7 @@ public class biogenic_securitytech extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_194");
@@ -1965,7 +1987,7 @@ public class biogenic_securitytech extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.biogenic_securitytech.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1997,7 +2019,7 @@ public class biogenic_securitytech extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_214");
@@ -2010,7 +2032,7 @@ public class biogenic_securitytech extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.biogenic_securitytech.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2030,6 +2052,7 @@ public class biogenic_securitytech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int biogenic_securitytech_handleBranch59(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_194"))
@@ -2056,7 +2079,7 @@ public class biogenic_securitytech extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_198");
@@ -2069,7 +2092,7 @@ public class biogenic_securitytech extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.biogenic_securitytech.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2089,6 +2112,7 @@ public class biogenic_securitytech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int biogenic_securitytech_handleBranch60(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_198"))
@@ -2113,6 +2137,7 @@ public class biogenic_securitytech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int biogenic_securitytech_handleBranch64(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_214"))
@@ -2137,6 +2162,7 @@ public class biogenic_securitytech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int biogenic_securitytech_handleBranch68(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_230"))
@@ -2161,6 +2187,7 @@ public class biogenic_securitytech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int biogenic_securitytech_handleBranch74(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_250"))
@@ -2188,7 +2215,7 @@ public class biogenic_securitytech extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_254");
@@ -2201,7 +2228,7 @@ public class biogenic_securitytech extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.biogenic_securitytech.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2222,6 +2249,7 @@ public class biogenic_securitytech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int biogenic_securitytech_handleBranch75(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_254"))
@@ -2263,7 +2291,7 @@ public class biogenic_securitytech extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_258");
@@ -2284,7 +2312,7 @@ public class biogenic_securitytech extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.biogenic_securitytech.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2304,6 +2332,7 @@ public class biogenic_securitytech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int biogenic_securitytech_handleBranch76(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_258"))
@@ -2337,7 +2366,7 @@ public class biogenic_securitytech extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_262");
@@ -2354,7 +2383,7 @@ public class biogenic_securitytech extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.biogenic_securitytech.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2393,7 +2422,7 @@ public class biogenic_securitytech extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_302");
@@ -2410,7 +2439,7 @@ public class biogenic_securitytech extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.biogenic_securitytech.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2442,7 +2471,7 @@ public class biogenic_securitytech extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_342");
@@ -2455,7 +2484,7 @@ public class biogenic_securitytech extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.biogenic_securitytech.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2475,6 +2504,7 @@ public class biogenic_securitytech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int biogenic_securitytech_handleBranch77(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_262"))
@@ -2501,7 +2531,7 @@ public class biogenic_securitytech extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_266");
@@ -2514,7 +2544,7 @@ public class biogenic_securitytech extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.biogenic_securitytech.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2546,7 +2576,7 @@ public class biogenic_securitytech extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_286");
@@ -2559,7 +2589,7 @@ public class biogenic_securitytech extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.biogenic_securitytech.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2579,6 +2609,7 @@ public class biogenic_securitytech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int biogenic_securitytech_handleBranch78(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_266"))
@@ -2605,7 +2636,7 @@ public class biogenic_securitytech extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_270");
@@ -2618,7 +2649,7 @@ public class biogenic_securitytech extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.biogenic_securitytech.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2638,6 +2669,7 @@ public class biogenic_securitytech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int biogenic_securitytech_handleBranch79(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_270"))
@@ -2662,6 +2694,7 @@ public class biogenic_securitytech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int biogenic_securitytech_handleBranch83(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_286"))
@@ -2686,6 +2719,7 @@ public class biogenic_securitytech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int biogenic_securitytech_handleBranch87(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_302"))
@@ -2712,7 +2746,7 @@ public class biogenic_securitytech extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_306");
@@ -2725,7 +2759,7 @@ public class biogenic_securitytech extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.biogenic_securitytech.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2757,7 +2791,7 @@ public class biogenic_securitytech extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_326");
@@ -2770,7 +2804,7 @@ public class biogenic_securitytech extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.biogenic_securitytech.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2790,6 +2824,7 @@ public class biogenic_securitytech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int biogenic_securitytech_handleBranch88(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_306"))
@@ -2816,7 +2851,7 @@ public class biogenic_securitytech extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_310");
@@ -2829,7 +2864,7 @@ public class biogenic_securitytech extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.biogenic_securitytech.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2849,6 +2884,7 @@ public class biogenic_securitytech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int biogenic_securitytech_handleBranch89(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_310"))
@@ -2873,6 +2909,7 @@ public class biogenic_securitytech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int biogenic_securitytech_handleBranch93(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_326"))
@@ -2897,6 +2934,7 @@ public class biogenic_securitytech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int biogenic_securitytech_handleBranch97(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_342"))
@@ -2921,6 +2959,7 @@ public class biogenic_securitytech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int biogenic_securitytech_handleBranch105(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_369"))
@@ -2954,7 +2993,7 @@ public class biogenic_securitytech extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_373");
@@ -2971,7 +3010,7 @@ public class biogenic_securitytech extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.biogenic_securitytech.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2991,6 +3030,7 @@ public class biogenic_securitytech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int biogenic_securitytech_handleBranch106(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_373"))
@@ -3017,7 +3057,7 @@ public class biogenic_securitytech extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_377");
@@ -3030,7 +3070,7 @@ public class biogenic_securitytech extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.biogenic_securitytech.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3062,7 +3102,7 @@ public class biogenic_securitytech extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_493");
@@ -3075,7 +3115,7 @@ public class biogenic_securitytech extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.biogenic_securitytech.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3095,6 +3135,7 @@ public class biogenic_securitytech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int biogenic_securitytech_handleBranch107(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_377"))
@@ -3122,7 +3163,7 @@ public class biogenic_securitytech extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_381");
@@ -3135,7 +3176,7 @@ public class biogenic_securitytech extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.biogenic_securitytech.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3156,6 +3197,7 @@ public class biogenic_securitytech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int biogenic_securitytech_handleBranch108(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_381"))
@@ -3197,7 +3239,7 @@ public class biogenic_securitytech extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_385");
@@ -3218,7 +3260,7 @@ public class biogenic_securitytech extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.biogenic_securitytech.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3238,6 +3280,7 @@ public class biogenic_securitytech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int biogenic_securitytech_handleBranch109(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_385"))
@@ -3271,7 +3314,7 @@ public class biogenic_securitytech extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_389");
@@ -3288,7 +3331,7 @@ public class biogenic_securitytech extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.biogenic_securitytech.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3327,7 +3370,7 @@ public class biogenic_securitytech extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_429");
@@ -3344,7 +3387,7 @@ public class biogenic_securitytech extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.biogenic_securitytech.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3376,7 +3419,7 @@ public class biogenic_securitytech extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_469");
@@ -3389,7 +3432,7 @@ public class biogenic_securitytech extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.biogenic_securitytech.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3409,6 +3452,7 @@ public class biogenic_securitytech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int biogenic_securitytech_handleBranch110(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_389"))
@@ -3435,7 +3479,7 @@ public class biogenic_securitytech extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_393");
@@ -3448,7 +3492,7 @@ public class biogenic_securitytech extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.biogenic_securitytech.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3480,7 +3524,7 @@ public class biogenic_securitytech extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_413");
@@ -3493,7 +3537,7 @@ public class biogenic_securitytech extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.biogenic_securitytech.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3513,6 +3557,7 @@ public class biogenic_securitytech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int biogenic_securitytech_handleBranch111(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_393"))
@@ -3539,7 +3584,7 @@ public class biogenic_securitytech extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_397");
@@ -3552,7 +3597,7 @@ public class biogenic_securitytech extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.biogenic_securitytech.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3572,6 +3617,7 @@ public class biogenic_securitytech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int biogenic_securitytech_handleBranch112(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_397"))
@@ -3596,6 +3642,7 @@ public class biogenic_securitytech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int biogenic_securitytech_handleBranch116(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_413"))
@@ -3620,6 +3667,7 @@ public class biogenic_securitytech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int biogenic_securitytech_handleBranch120(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_429"))
@@ -3646,7 +3694,7 @@ public class biogenic_securitytech extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_433");
@@ -3659,7 +3707,7 @@ public class biogenic_securitytech extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.biogenic_securitytech.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3691,7 +3739,7 @@ public class biogenic_securitytech extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_453");
@@ -3704,7 +3752,7 @@ public class biogenic_securitytech extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.biogenic_securitytech.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3724,6 +3772,7 @@ public class biogenic_securitytech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int biogenic_securitytech_handleBranch121(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_433"))
@@ -3750,7 +3799,7 @@ public class biogenic_securitytech extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_437");
@@ -3763,7 +3812,7 @@ public class biogenic_securitytech extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.biogenic_securitytech.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3783,6 +3832,7 @@ public class biogenic_securitytech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int biogenic_securitytech_handleBranch122(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_437"))
@@ -3807,6 +3857,7 @@ public class biogenic_securitytech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int biogenic_securitytech_handleBranch126(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_453"))
@@ -3831,6 +3882,7 @@ public class biogenic_securitytech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int biogenic_securitytech_handleBranch130(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_469"))
@@ -3855,6 +3907,7 @@ public class biogenic_securitytech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int biogenic_securitytech_handleBranch136(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_493"))
@@ -3882,7 +3935,7 @@ public class biogenic_securitytech extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_497");
@@ -3895,7 +3948,7 @@ public class biogenic_securitytech extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.biogenic_securitytech.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3916,6 +3969,7 @@ public class biogenic_securitytech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int biogenic_securitytech_handleBranch137(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_497"))
@@ -3957,7 +4011,7 @@ public class biogenic_securitytech extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_501");
@@ -3978,7 +4032,7 @@ public class biogenic_securitytech extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.biogenic_securitytech.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3998,6 +4052,7 @@ public class biogenic_securitytech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int biogenic_securitytech_handleBranch138(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_501"))
@@ -4031,7 +4086,7 @@ public class biogenic_securitytech extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_505");
@@ -4048,7 +4103,7 @@ public class biogenic_securitytech extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.biogenic_securitytech.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4087,7 +4142,7 @@ public class biogenic_securitytech extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_545");
@@ -4104,7 +4159,7 @@ public class biogenic_securitytech extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.biogenic_securitytech.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4136,7 +4191,7 @@ public class biogenic_securitytech extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_585");
@@ -4149,7 +4204,7 @@ public class biogenic_securitytech extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.biogenic_securitytech.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4169,6 +4224,7 @@ public class biogenic_securitytech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int biogenic_securitytech_handleBranch139(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_505"))
@@ -4195,7 +4251,7 @@ public class biogenic_securitytech extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_509");
@@ -4208,7 +4264,7 @@ public class biogenic_securitytech extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.biogenic_securitytech.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4240,7 +4296,7 @@ public class biogenic_securitytech extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_529");
@@ -4253,7 +4309,7 @@ public class biogenic_securitytech extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.biogenic_securitytech.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4273,6 +4329,7 @@ public class biogenic_securitytech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int biogenic_securitytech_handleBranch140(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_509"))
@@ -4299,7 +4356,7 @@ public class biogenic_securitytech extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_513");
@@ -4312,7 +4369,7 @@ public class biogenic_securitytech extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.biogenic_securitytech.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4332,6 +4389,7 @@ public class biogenic_securitytech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int biogenic_securitytech_handleBranch141(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_513"))
@@ -4356,6 +4414,7 @@ public class biogenic_securitytech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int biogenic_securitytech_handleBranch145(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_529"))
@@ -4380,6 +4439,7 @@ public class biogenic_securitytech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int biogenic_securitytech_handleBranch149(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_545"))
@@ -4406,7 +4466,7 @@ public class biogenic_securitytech extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_549");
@@ -4419,7 +4479,7 @@ public class biogenic_securitytech extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.biogenic_securitytech.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4451,7 +4511,7 @@ public class biogenic_securitytech extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_569");
@@ -4464,7 +4524,7 @@ public class biogenic_securitytech extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.biogenic_securitytech.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4484,6 +4544,7 @@ public class biogenic_securitytech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int biogenic_securitytech_handleBranch150(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_549"))
@@ -4510,7 +4571,7 @@ public class biogenic_securitytech extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_553");
@@ -4523,7 +4584,7 @@ public class biogenic_securitytech extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.biogenic_securitytech.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4543,6 +4604,7 @@ public class biogenic_securitytech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int biogenic_securitytech_handleBranch151(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_553"))
@@ -4567,6 +4629,7 @@ public class biogenic_securitytech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int biogenic_securitytech_handleBranch155(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_569"))
@@ -4591,6 +4654,7 @@ public class biogenic_securitytech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int biogenic_securitytech_handleBranch159(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_585"))
@@ -4615,6 +4679,7 @@ public class biogenic_securitytech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int biogenic_securitytech_handleBranch167(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_616"))
@@ -4641,7 +4706,7 @@ public class biogenic_securitytech extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_620");
@@ -4654,7 +4719,7 @@ public class biogenic_securitytech extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.biogenic_securitytech.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4686,7 +4751,7 @@ public class biogenic_securitytech extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_736");
@@ -4699,7 +4764,7 @@ public class biogenic_securitytech extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.biogenic_securitytech.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4719,6 +4784,7 @@ public class biogenic_securitytech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int biogenic_securitytech_handleBranch168(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_620"))
@@ -4746,7 +4812,7 @@ public class biogenic_securitytech extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_624");
@@ -4759,7 +4825,7 @@ public class biogenic_securitytech extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.biogenic_securitytech.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4780,6 +4846,7 @@ public class biogenic_securitytech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int biogenic_securitytech_handleBranch169(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_624"))
@@ -4821,7 +4888,7 @@ public class biogenic_securitytech extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_628");
@@ -4842,7 +4909,7 @@ public class biogenic_securitytech extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.biogenic_securitytech.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4862,6 +4929,7 @@ public class biogenic_securitytech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int biogenic_securitytech_handleBranch170(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_628"))
@@ -4895,7 +4963,7 @@ public class biogenic_securitytech extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_632");
@@ -4912,7 +4980,7 @@ public class biogenic_securitytech extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.biogenic_securitytech.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4951,7 +5019,7 @@ public class biogenic_securitytech extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_672");
@@ -4968,7 +5036,7 @@ public class biogenic_securitytech extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.biogenic_securitytech.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5000,7 +5068,7 @@ public class biogenic_securitytech extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_712");
@@ -5013,7 +5081,7 @@ public class biogenic_securitytech extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.biogenic_securitytech.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5033,6 +5101,7 @@ public class biogenic_securitytech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int biogenic_securitytech_handleBranch171(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_632"))
@@ -5059,7 +5128,7 @@ public class biogenic_securitytech extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_636");
@@ -5072,7 +5141,7 @@ public class biogenic_securitytech extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.biogenic_securitytech.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5104,7 +5173,7 @@ public class biogenic_securitytech extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_656");
@@ -5117,7 +5186,7 @@ public class biogenic_securitytech extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.biogenic_securitytech.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5137,6 +5206,7 @@ public class biogenic_securitytech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int biogenic_securitytech_handleBranch172(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_636"))
@@ -5163,7 +5233,7 @@ public class biogenic_securitytech extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_640");
@@ -5176,7 +5246,7 @@ public class biogenic_securitytech extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.biogenic_securitytech.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5196,6 +5266,7 @@ public class biogenic_securitytech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int biogenic_securitytech_handleBranch173(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_640"))
@@ -5220,6 +5291,7 @@ public class biogenic_securitytech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int biogenic_securitytech_handleBranch177(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_656"))
@@ -5244,6 +5316,7 @@ public class biogenic_securitytech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int biogenic_securitytech_handleBranch181(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_672"))
@@ -5270,7 +5343,7 @@ public class biogenic_securitytech extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_676");
@@ -5283,7 +5356,7 @@ public class biogenic_securitytech extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.biogenic_securitytech.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5315,7 +5388,7 @@ public class biogenic_securitytech extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_696");
@@ -5328,7 +5401,7 @@ public class biogenic_securitytech extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.biogenic_securitytech.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5348,6 +5421,7 @@ public class biogenic_securitytech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int biogenic_securitytech_handleBranch182(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_676"))
@@ -5374,7 +5448,7 @@ public class biogenic_securitytech extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_680");
@@ -5387,7 +5461,7 @@ public class biogenic_securitytech extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.biogenic_securitytech.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5407,6 +5481,7 @@ public class biogenic_securitytech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int biogenic_securitytech_handleBranch183(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_680"))
@@ -5431,6 +5506,7 @@ public class biogenic_securitytech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int biogenic_securitytech_handleBranch187(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_696"))
@@ -5455,6 +5531,7 @@ public class biogenic_securitytech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int biogenic_securitytech_handleBranch191(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_712"))
@@ -5479,6 +5556,7 @@ public class biogenic_securitytech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int biogenic_securitytech_handleBranch197(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_736"))
@@ -5506,7 +5584,7 @@ public class biogenic_securitytech extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_740");
@@ -5519,7 +5597,7 @@ public class biogenic_securitytech extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.biogenic_securitytech.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5540,6 +5618,7 @@ public class biogenic_securitytech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int biogenic_securitytech_handleBranch198(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_740"))
@@ -5581,7 +5660,7 @@ public class biogenic_securitytech extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_744");
@@ -5602,7 +5681,7 @@ public class biogenic_securitytech extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.biogenic_securitytech.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5622,6 +5701,7 @@ public class biogenic_securitytech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int biogenic_securitytech_handleBranch199(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_744"))
@@ -5655,7 +5735,7 @@ public class biogenic_securitytech extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_748");
@@ -5672,7 +5752,7 @@ public class biogenic_securitytech extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.biogenic_securitytech.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5711,7 +5791,7 @@ public class biogenic_securitytech extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_788");
@@ -5728,7 +5808,7 @@ public class biogenic_securitytech extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.biogenic_securitytech.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5760,7 +5840,7 @@ public class biogenic_securitytech extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_828");
@@ -5773,7 +5853,7 @@ public class biogenic_securitytech extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.biogenic_securitytech.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5793,6 +5873,7 @@ public class biogenic_securitytech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int biogenic_securitytech_handleBranch200(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_748"))
@@ -5819,7 +5900,7 @@ public class biogenic_securitytech extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_752");
@@ -5832,7 +5913,7 @@ public class biogenic_securitytech extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.biogenic_securitytech.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5864,7 +5945,7 @@ public class biogenic_securitytech extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_772");
@@ -5877,7 +5958,7 @@ public class biogenic_securitytech extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.biogenic_securitytech.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5897,6 +5978,7 @@ public class biogenic_securitytech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int biogenic_securitytech_handleBranch201(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_752"))
@@ -5923,7 +6005,7 @@ public class biogenic_securitytech extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_756");
@@ -5936,7 +6018,7 @@ public class biogenic_securitytech extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.biogenic_securitytech.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5956,6 +6038,7 @@ public class biogenic_securitytech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int biogenic_securitytech_handleBranch202(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_756"))
@@ -5980,6 +6063,7 @@ public class biogenic_securitytech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int biogenic_securitytech_handleBranch206(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_772"))
@@ -6004,6 +6088,7 @@ public class biogenic_securitytech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int biogenic_securitytech_handleBranch210(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_788"))
@@ -6030,7 +6115,7 @@ public class biogenic_securitytech extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_792");
@@ -6043,7 +6128,7 @@ public class biogenic_securitytech extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.biogenic_securitytech.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6075,7 +6160,7 @@ public class biogenic_securitytech extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_812");
@@ -6088,7 +6173,7 @@ public class biogenic_securitytech extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.biogenic_securitytech.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6108,6 +6193,7 @@ public class biogenic_securitytech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int biogenic_securitytech_handleBranch211(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_792"))
@@ -6134,7 +6220,7 @@ public class biogenic_securitytech extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_796");
@@ -6147,7 +6233,7 @@ public class biogenic_securitytech extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.biogenic_securitytech.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -6167,6 +6253,7 @@ public class biogenic_securitytech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int biogenic_securitytech_handleBranch212(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_796"))
@@ -6191,6 +6278,7 @@ public class biogenic_securitytech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int biogenic_securitytech_handleBranch216(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_812"))
@@ -6215,6 +6303,7 @@ public class biogenic_securitytech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int biogenic_securitytech_handleBranch220(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_828"))
@@ -6239,6 +6328,7 @@ public class biogenic_securitytech extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -6249,12 +6339,14 @@ public class biogenic_securitytech extends script.base_script
         setInvulnerable(self, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         setInvulnerable(self, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -6263,18 +6355,21 @@ public class biogenic_securitytech extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.biogenic_securitytech");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -6319,7 +6414,7 @@ public class biogenic_securitytech extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_4e67874f");
@@ -6339,7 +6434,7 @@ public class biogenic_securitytech extends script.base_script
                 utils.setScriptVar(player, "conversation.biogenic_securitytech.branchId", 1);
                 npcStartConversation(player, npc, "biogenic_securitytech", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -6375,7 +6470,7 @@ public class biogenic_securitytech extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_28594fa2");
@@ -6387,7 +6482,7 @@ public class biogenic_securitytech extends script.base_script
                 utils.setScriptVar(player, "conversation.biogenic_securitytech.branchId", 13);
                 npcStartConversation(player, npc, "biogenic_securitytech", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -6430,7 +6525,7 @@ public class biogenic_securitytech extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_d7b11a2");
@@ -6450,7 +6545,7 @@ public class biogenic_securitytech extends script.base_script
                 utils.setScriptVar(player, "conversation.biogenic_securitytech.branchId", 42);
                 npcStartConversation(player, npc, "biogenic_securitytech", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -6459,6 +6554,7 @@ public class biogenic_securitytech extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("biogenic_securitytech"))

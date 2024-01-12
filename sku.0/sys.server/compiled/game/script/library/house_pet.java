@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.location;
 import script.obj_id;
 
@@ -191,6 +197,7 @@ public class house_pet extends script.base_script
     public static final String NUNA_HUNGRY_EMOTE = "appearance/pt_nuna_hungry_emote.prt";
     public static final String SCURRIER_HUNGRY_EMOTE = "appearance/pt_scurrier_hungry_emote.prt";
     public static final String MASSIFF_POO_STATIC_ITEM = "item_tcg_nuna_rotten_egg_02_01";
+
     public house_pet()
     {
     }

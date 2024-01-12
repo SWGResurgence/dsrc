@@ -1,18 +1,27 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.*;
 
 public class c_ddroid_amarent extends script.base_script
 {
+    public static String c_stringFile = "conversation/c_ddroid_amarent";
+
     public c_ddroid_amarent()
     {
     }
-    public static String c_stringFile = "conversation/c_ddroid_amarent";
+
     public boolean c_ddroid_amarent_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean c_ddroid_amarent_condition_isImperialOfc(obj_id player, obj_id npc) throws InterruptedException
     {
         String whichFaction = factions.getDeclaredFaction(player);
@@ -23,23 +32,23 @@ public class c_ddroid_amarent extends script.base_script
         if (whichFaction.equals("Imperial"))
         {
             int rank = pvpGetCurrentGcwRank(player);
-            if (rank > 1)
-            {
-                return true;
-            }
+            return rank > 1;
         }
         return false;
     }
+
     public boolean c_ddroid_amarent_condition_playeronquest(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId = questGetQuestId("quest/c_darndroid1");
         return questIsTaskActive(questId, 3, player) || questIsTaskActive(questId, 4, player);
     }
+
     public boolean c_ddroid_amarent_condition_playerlostwaypoint(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId = questGetQuestId("quest/c_darndroid1");
         return questIsTaskActive(questId, 4, player);
     }
+
     public boolean c_ddroid_amarent_condition_queststuck(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId = questGetQuestId("quest/c_darndroid1");
@@ -48,19 +57,23 @@ public class c_ddroid_amarent extends script.base_script
         int reward = groundquests.getTaskId(questId, "reward");
         return (questIsTaskActive(questId, canintimidate, player) || questIsTaskActive(questId, canbribe, player)) && questIsTaskComplete(questId, reward, player);
     }
+
     public boolean c_ddroid_amarent_condition_hasBribeFunds(obj_id player, obj_id npc) throws InterruptedException
     {
         return money.hasFunds(player, money.MT_TOTAL, 1000);
     }
+
     public void c_ddroid_amarent_action_intimidateAmarent(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "c_darndroid1_intimidate");
     }
+
     public void c_ddroid_amarent_action_bribeAmarent(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "c_darndroid1_bribe");
         money.requestPayment(player, npc, 1000, "pass_fail", null, true);
     }
+
     public void c_ddroid_amarent_action_amarentGivesInfo(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "c_darndroid1_amarent");
@@ -71,6 +84,7 @@ public class c_ddroid_amarent extends script.base_script
         }
         removeObjVar(player, "quest.general.quest/c_darndroid1.amarent");
     }
+
     public void c_ddroid_amarent_action_givewaypoint(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id waypoint1 = getObjIdObjVar(player, "quest.general.quest/c_darndroid1.taluscrash");
@@ -90,10 +104,12 @@ public class c_ddroid_amarent extends script.base_script
         setWaypointName(waypoint, "Talus Crash Site");
         setWaypointActive(waypoint, true);
     }
+
     public void c_ddroid_amarent_action_faceplayer(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
     }
+
     public void c_ddroid_amarent_action_completequestFix(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId = questGetQuestId("quest/c_darndroid1");
@@ -111,6 +127,7 @@ public class c_ddroid_amarent extends script.base_script
         }
         removeObjVar(player, "quest.general.quest/c_darndroid1.amarent");
     }
+
     public int c_ddroid_amarent_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_281"))
@@ -137,7 +154,7 @@ public class c_ddroid_amarent extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_285");
@@ -150,7 +167,7 @@ public class c_ddroid_amarent extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_ddroid_amarent.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -160,6 +177,7 @@ public class c_ddroid_amarent extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_ddroid_amarent_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_285"))
@@ -187,7 +205,7 @@ public class c_ddroid_amarent extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_289");
@@ -200,7 +218,7 @@ public class c_ddroid_amarent extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_ddroid_amarent.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -239,7 +257,7 @@ public class c_ddroid_amarent extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_305");
@@ -256,7 +274,7 @@ public class c_ddroid_amarent extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_ddroid_amarent.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -266,6 +284,7 @@ public class c_ddroid_amarent extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_ddroid_amarent_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_289"))
@@ -296,7 +315,7 @@ public class c_ddroid_amarent extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_297");
@@ -305,7 +324,7 @@ public class c_ddroid_amarent extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.c_ddroid_amarent.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -315,6 +334,7 @@ public class c_ddroid_amarent extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_ddroid_amarent_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_297"))
@@ -330,6 +350,7 @@ public class c_ddroid_amarent extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_ddroid_amarent_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_305"))
@@ -368,6 +389,7 @@ public class c_ddroid_amarent extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int c_ddroid_amarent_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_316"))
@@ -382,6 +404,7 @@ public class c_ddroid_amarent extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -393,6 +416,7 @@ public class c_ddroid_amarent extends script.base_script
         setName(self, "Amarent Loren");
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
@@ -401,6 +425,7 @@ public class c_ddroid_amarent extends script.base_script
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -409,18 +434,21 @@ public class c_ddroid_amarent extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.c_ddroid_amarent");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -444,7 +472,7 @@ public class c_ddroid_amarent extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_281");
@@ -452,7 +480,7 @@ public class c_ddroid_amarent extends script.base_script
                 utils.setScriptVar(player, "conversation.c_ddroid_amarent.branchId", 1);
                 npcStartConversation(player, npc, "c_ddroid_amarent", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -481,7 +509,7 @@ public class c_ddroid_amarent extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_316");
@@ -489,7 +517,7 @@ public class c_ddroid_amarent extends script.base_script
                 utils.setScriptVar(player, "conversation.c_ddroid_amarent.branchId", 12);
                 npcStartConversation(player, npc, "c_ddroid_amarent", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -504,6 +532,7 @@ public class c_ddroid_amarent extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("c_ddroid_amarent"))

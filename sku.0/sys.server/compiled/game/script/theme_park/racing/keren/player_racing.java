@@ -1,5 +1,11 @@
 package script.theme_park.racing.keren;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.colors;
 import script.library.utils;
@@ -9,32 +15,38 @@ import script.string_id;
 
 public class player_racing extends script.base_script
 {
+    public static final String RACING_STF = "theme_park/racing/racing";
+
     public player_racing()
     {
     }
-    public static final String RACING_STF = "theme_park/racing/racing";
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         startRace(self);
         setObjVar(self, "racing.keren.suppressMusic", 0);
         return SCRIPT_CONTINUE;
     }
+
     public int OnLogin(obj_id self) throws InterruptedException
     {
         messageTo(self, "handleCleanUp", null, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnEnteredCombat(obj_id self) throws InterruptedException
     {
         setObjVar(self, "racing.keren.suppressMusic", 1);
         playMusic(self, "sound/music_combat_bfield_def.snd");
         return SCRIPT_CONTINUE;
     }
+
     public int OnExitedCombat(obj_id self) throws InterruptedException
     {
         setObjVar(self, "racing.keren.suppressMusic", 0);
         return SCRIPT_CONTINUE;
     }
+
     public int OnArrivedAtLocation(obj_id self, String name) throws InterruptedException
     {
         float startTime = getFloatObjVar(self, "racing.keren.startTime");
@@ -175,6 +187,7 @@ public class player_racing extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int playRaceMusic(obj_id self, dictionary params) throws InterruptedException
     {
         int suppressMusic = getIntObjVar(self, "racing.keren.suppressMusic");
@@ -184,6 +197,7 @@ public class player_racing extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleCleanUp(obj_id self, dictionary params) throws InterruptedException
     {
         removeMissionWaypoint(self);
@@ -191,6 +205,7 @@ public class player_racing extends script.base_script
         detachScript(self, "theme_park.racing.keren.player_racing");
         return SCRIPT_CONTINUE;
     }
+
     public int handleBestTime(obj_id self, dictionary params) throws InterruptedException
     {
         string_id newRecord = new string_id(RACING_STF, "new_record");
@@ -204,6 +219,7 @@ public class player_racing extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleRestartMission(obj_id self, dictionary params) throws InterruptedException
     {
         setObjVar(self, "racing.keren.success", 1);
@@ -211,6 +227,7 @@ public class player_racing extends script.base_script
         startRace(self);
         return SCRIPT_CONTINUE;
     }
+
     public int createReturnMission(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "racing.keren.waypoint"))
@@ -228,6 +245,7 @@ public class player_racing extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void startRace(obj_id player) throws InterruptedException
     {
         int missionNum = getIntObjVar(player, "racing.keren.missionNum");
@@ -243,12 +261,13 @@ public class player_racing extends script.base_script
             setObjVar(player, "racing.keren.waypointDesc", waypointDesc);
             addLocationTarget("checkPointOne", checkPointOne, 100);
         }
-        else 
+        else
         {
             string_id error = new string_id(RACING_STF, "waypoint_failure");
             sendSystemMessage(player, error);
         }
     }
+
     public obj_id createMissionWaypoint(obj_id player, location loc, float radius, String waypointName, String volumeName) throws InterruptedException
     {
         addLocationTarget(volumeName, loc, radius);
@@ -262,6 +281,7 @@ public class player_racing extends script.base_script
         }
         return waypoint;
     }
+
     public void removeMissionWaypoint(obj_id player) throws InterruptedException
     {
         obj_id waypoint = getObjIdObjVar(player, "racing.keren.waypoint");
@@ -280,6 +300,7 @@ public class player_racing extends script.base_script
         destroyWaypointInDatapad(waypoint, player);
         removeObjVar(player, "racing.keren.waypoint");
     }
+
     public int OnWaypointGetAttributes(obj_id self, obj_id waypoint, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         obj_id wp = getObjIdObjVar(player, "racing.keren.waypoint");

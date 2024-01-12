@@ -1,5 +1,11 @@
 package script.quest.task.ground;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.ai_lib;
 import script.library.create;
@@ -8,15 +14,16 @@ import script.library.utils;
 
 public class assassinate extends script.quest.task.ground.base_task
 {
-    public assassinate()
-    {
-    }
     public static final String dataTableColumnServerTemplate = "SERVER_TEMPLATE";
     public static final String dataTableColumnDestinationNodeName = "DESTINATION_NODE_NAME";
     public static final String dataTableColumnMovementType = "MOVEMENT_TYPE";
     public static final String objvarAsassinateTarget = "target";
     public static final String taskType = "assassinate";
     public static final String dot = ".";
+    public assassinate()
+    {
+    }
+
     public int OnTaskActivated(obj_id self, int questCrc, int taskId) throws InterruptedException
     {
         groundquests.questOutputDebugInfo(self, questCrc, taskId, taskType, "OnTaskActivated", taskType + " task activated.");
@@ -28,6 +35,7 @@ public class assassinate extends script.quest.task.ground.base_task
         setObjVar(self, baseObjVar + dot + objvarAsassinateTarget, assassinateTarget);
         return super.OnTaskActivated(self, questCrc, taskId);
     }
+
     public int destroyNotification(obj_id self, dictionary params) throws InterruptedException
     {
         if (params != null)
@@ -75,24 +83,28 @@ public class assassinate extends script.quest.task.ground.base_task
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnTaskCompleted(obj_id self, int questCrc, int taskId) throws InterruptedException
     {
         cleanup(self, questCrc, taskId);
         groundquests.questOutputDebugInfo(self, questCrc, taskId, taskType, "OnTaskCompleted", taskType + " task completed.");
         return super.OnTaskCompleted(self, questCrc, taskId);
     }
+
     public int OnTaskFailed(obj_id self, int questCrc, int taskId) throws InterruptedException
     {
         cleanup(self, questCrc, taskId);
         groundquests.questOutputDebugInfo(self, questCrc, taskId, taskType, "OnTaskFailed", taskType + " task failed.");
         return super.OnTaskFailed(self, questCrc, taskId);
     }
+
     public int OnTaskCleared(obj_id self, int questCrc, int taskId) throws InterruptedException
     {
         cleanup(self, questCrc, taskId);
         groundquests.questOutputDebugInfo(self, questCrc, taskId, taskType, "OnTaskCleared", taskType + " task cleared.");
         return super.OnTaskCleared(self, questCrc, taskId);
     }
+
     public void cleanup(obj_id player, int questCrc, int taskId) throws InterruptedException
     {
         String baseObjVar = groundquests.getBaseObjVar(player, taskType, questGetQuestName(questCrc), taskId);
@@ -108,16 +120,19 @@ public class assassinate extends script.quest.task.ground.base_task
         }
         groundquests.clearBaseObjVar(player, taskType, questGetQuestName(questCrc), taskId);
     }
+
     public int OnLogout(obj_id self) throws InterruptedException
     {
         groundquests.failAllActiveTasksOfType(self, taskType);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         groundquests.failAllActiveTasksOfType(self, taskType);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDetach(obj_id self) throws InterruptedException
     {
         removeObjVar(self, groundquests.getTaskTypeObjVar(self, taskType));

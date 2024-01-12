@@ -1,5 +1,11 @@
 package script.theme_park.tatooine.bestine_pilots_club;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.hue;
 import script.obj_id;
 
@@ -8,17 +14,19 @@ public class pilot5 extends script.base_script
     public pilot5()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, "dressed"))
         {
-            
+
         }
-        
+
         {
             obj_id suit = createObject("object/tangible/wearables/bodysuit/bodysuit_tie_fighter.iff", self, "");
             //obj_id boots = createObject("object/tangible/wearables/boots/boots_s22.iff", self, "");
@@ -36,6 +44,7 @@ public class pilot5 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         obj_id club = getObjIdObjVar(self, "club");

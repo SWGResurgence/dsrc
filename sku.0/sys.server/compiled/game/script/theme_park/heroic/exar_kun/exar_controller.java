@@ -1,5 +1,11 @@
 package script.theme_park.heroic.exar_kun;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.instance;
 import script.library.skill;
@@ -12,6 +18,7 @@ public class exar_controller extends script.base_script
     public exar_controller()
     {
     }
+
     public int exarDied(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id[] players = trial.getPlayersInDungeon(self);

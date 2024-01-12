@@ -1,13 +1,16 @@
 package script.quest.task.pgc;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
 public class quest_holocron extends script.base_script
 {
-    public quest_holocron()
-    {
-    }
     public static final int MENU_ACTIVATE_QUEST = menu_info_types.SERVER_MENU1;
     public static final int MENU_RATE_QUEST = menu_info_types.SERVER_MENU2;
     public static final int MENU_CLAIM_REWARDS = menu_info_types.SERVER_MENU3;
@@ -15,11 +18,16 @@ public class quest_holocron extends script.base_script
     public static final int MENU_EDIT_RECIPE = menu_info_types.SERVER_MENU5;
     public static final int MENU_SHARE_QUEST = menu_info_types.SERVER_MENU6;
     public static final int MENU_BUILD_HOLOCRON = menu_info_types.SERVER_MENU7;
+    public quest_holocron()
+    {
+    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "handleCheckCompletedHolocron", null, 2, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleCheckCompletedHolocron(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, pgc_quests.PCG_QUEST_COMPLETE_OBJVAR))
@@ -27,6 +35,7 @@ public class quest_holocron extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int rootMenu = 0;
@@ -49,7 +58,7 @@ public class quest_holocron extends script.base_script
                         rootMenu = menuInfo.addRootMenu(MENU_BUILD_HOLOCRON, new string_id("saga_system", "holocron_menu_build_holocron"));
                     }
                 }
-                else 
+                else
                 {
                     rootMenu = menuInfo.addRootMenu(MENU_ACTIVATE_QUEST, new string_id("saga_system", "holocron_menu_activate"));
                     if (hasRewardItems(self) || (isIdValid(creatorId) && player == creatorId))
@@ -58,7 +67,7 @@ public class quest_holocron extends script.base_script
                     }
                 }
             }
-            else 
+            else
             {
                 obj_id questFinisher = getObjIdObjVar(self, pgc_quests.PCG_QUEST_COMPLETE_OBJVAR);
                 if (isIdValid(questFinisher) && questFinisher == player)
@@ -84,6 +93,7 @@ public class quest_holocron extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int menu_item) throws InterruptedException
     {
         obj_id playerInventory = utils.getInventoryContainer(player);
@@ -100,7 +110,7 @@ public class quest_holocron extends script.base_script
                         prose.setDI(pp, pgc_quests.PGC_QUEST_MAX_NUM_QUESTS);
                         sendSystemMessageProse(player, pp);
                     }
-                    else 
+                    else
                     {
                         if (pgc_quests.activateQuestHolocron(self, player))
                         {
@@ -171,7 +181,7 @@ public class quest_holocron extends script.base_script
                         {
                             messageTo(player, "handlePgcHolocronCreation", taskDictionary, 1, false);
                         }
-                        else 
+                        else
                         {
                             sendSystemMessage(player, new string_id("saga_system", "holocron_quest_failed"));
                         }
@@ -200,10 +210,12 @@ public class quest_holocron extends script.base_script
                     if (hasObjVar(self, pgc_quests.PCG_QUEST_HOLOCRON_SHARED_WITH_LIST))
                     {
                         obj_id[] sharedWithList = getObjIdArrayObjVar(self, pgc_quests.PCG_QUEST_HOLOCRON_SHARED_WITH_LIST);
-                        if (sharedWithList != null && sharedWithList.length > 0)
+                        if (sharedWithList != null)
                         {
-                            for (obj_id alreadySharedWith : sharedWithList) {
-                                if (target == alreadySharedWith) {
+                            for (obj_id alreadySharedWith : sharedWithList)
+                            {
+                                if (target == alreadySharedWith)
+                                {
                                     string_id message = new string_id("saga_system", "holocron_share_quest_already_shared");
                                     prose_package pp = prose.getPackage(message, player, player);
                                     prose.setTO(pp, getName(target));
@@ -216,7 +228,7 @@ public class quest_holocron extends script.base_script
                     if (target == player)
                     {
                     }
-                    else 
+                    else
                     {
                         boolean sameGroup = false;
                         boolean sameGuild = false;
@@ -260,19 +272,18 @@ public class quest_holocron extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean hasRewardItems(obj_id questHolocron) throws InterruptedException
     {
         obj_id[] rewardItems = getContents(questHolocron);
-        if ((rewardItems != null && rewardItems.length > 0))
-        {
-            return true;
-        }
-        return false;
+        return rewardItems != null && rewardItems.length > 0;
     }
+
     public boolean openQuestHolocron(obj_id questHolocron, obj_id player) throws InterruptedException
     {
         return queueCommand(player, (1880585606), questHolocron, "", COMMAND_PRIORITY_DEFAULT);
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         if (!exists(self))
@@ -318,14 +329,14 @@ public class quest_holocron extends script.base_script
                 {
                     float currentRating = pgc_quests.getCurrentPgcRating(ratingTotal, ratingCount);
                     names[idx] = "pgc_quest_chronicler_rating";
-                    attribs[idx] = "" + currentRating;
+                    attribs[idx] = String.valueOf(currentRating);
                     idx++;
                     if (idx >= names.length)
                     {
                         return SCRIPT_CONTINUE;
                     }
                     names[idx] = "pgc_quest_chronicler_rating_count";
-                    attribs[idx] = "" + ratingCount;
+                    attribs[idx] = String.valueOf(ratingCount);
                     idx++;
                     if (idx >= names.length)
                     {
@@ -339,7 +350,7 @@ public class quest_holocron extends script.base_script
                         return SCRIPT_CONTINUE;
                     }
                 }
-                else 
+                else
                 {
                     names[idx] = "pgc_quest_chronicler_rating";
                     attribs[idx] = "Not Yet Rated";
@@ -350,7 +361,7 @@ public class quest_holocron extends script.base_script
                     }
                 }
             }
-            else 
+            else
             {
                 names[idx] = "pgc_quest_chronicler_rating";
                 attribs[idx] = "Not Yet Rated";
@@ -376,7 +387,7 @@ public class quest_holocron extends script.base_script
             return SCRIPT_CONTINUE;
         }
         names[idx] = "pgc_quest_level";
-        attribs[idx] = "" + questLevel;
+        attribs[idx] = String.valueOf(questLevel);
         idx++;
         if (idx >= names.length)
         {
@@ -467,16 +478,19 @@ public class quest_holocron extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void areaDebugMessaging(obj_id self, String message) throws InterruptedException
     {
         obj_id[] players = getAllPlayers(getLocation(getTopMostContainer(self)), 35.0f);
-        if (players != null && players.length > 0)
+        if (players != null)
         {
-            for (obj_id player : players) {
+            for (obj_id player : players)
+            {
                 sendSystemMessage(player, message, "");
             }
         }
     }
+
     public int OnAboutToReceiveItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         if (hasObjVar(self, pgc_quests.PCG_QUEST_COMPLETE_OBJVAR))
@@ -504,7 +518,7 @@ public class quest_holocron extends script.base_script
                 sendSystemMessage(transferer, new string_id("saga_system", "holocron_rewards_cannot_place_item"));
                 return SCRIPT_OVERRIDE;
             }
-            else 
+            else
             {
                 obj_id[] holocronContents = getContents(self);
                 if (holocronContents != null)
@@ -512,9 +526,11 @@ public class quest_holocron extends script.base_script
                     if (holocronContents.length >= 0)
                     {
                         int rewardCount = 0;
-                        for (obj_id holocronContent : holocronContents) {
+                        for (obj_id holocronContent : holocronContents)
+                        {
                             String template = getTemplateName(holocronContent);
-                            if (!template.equals(pgc_quests.PGC_CASH_ITEM_TEMPLATE)) {
+                            if (!template.equals(pgc_quests.PGC_CASH_ITEM_TEMPLATE))
+                            {
                                 ++rewardCount;
                             }
                         }
@@ -542,6 +558,7 @@ public class quest_holocron extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToLoseItem(obj_id self, obj_id destContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "chronicles.allowRewardsReclaimed"))
@@ -570,7 +587,7 @@ public class quest_holocron extends script.base_script
                     sendSystemMessage(transferer, new string_id("saga_system", "holocron_rewards_cannot_take_item"));
                     return SCRIPT_OVERRIDE;
                 }
-                else 
+                else
                 {
                     pgc_quests.logReward(transferer, self, "Holocron was completed and the player who finished it is taking a player given reward: " + getNameStringId(item) + "(" + item + ")");
                 }
@@ -587,7 +604,7 @@ public class quest_holocron extends script.base_script
                     sendSystemMessage(transferer, new string_id("saga_system", "holocron_rewards_cannot_take_item"));
                     return SCRIPT_OVERRIDE;
                 }
-                else 
+                else
                 {
                     pgc_quests.logReward(transferer, self, "Holocron Creator is removing a reward they had added: " + getNameStringId(item) + "(" + item + ")");
                 }
@@ -595,17 +612,20 @@ public class quest_holocron extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleQuestHolocronActivated(obj_id self, dictionary params) throws InterruptedException
     {
         pgc_quests.handlePhaseActived(self, 0);
         return SCRIPT_CONTINUE;
     }
+
     public int handleQuestHolocronInitializeTaskStatus(obj_id self, dictionary params) throws InterruptedException
     {
         int numTasks = getIntObjVar(self, pgc_quests.PCG_QUEST_NUM_TASKS_OBJVAR);
         pgc_quests.initializeQuestTasksStatus(self, numTasks);
         return SCRIPT_CONTINUE;
     }
+
     public int handleQuestHolocronAbandoned(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -618,6 +638,7 @@ public class quest_holocron extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleHolocronSharedSuccess(obj_id self, dictionary params) throws InterruptedException
     {
         if (params != null && !params.isEmpty())
@@ -629,7 +650,7 @@ public class quest_holocron extends script.base_script
             {
                 sharedWithList = getObjIdArrayObjVar(self, pgc_quests.PCG_QUEST_HOLOCRON_SHARED_WITH_LIST);
             }
-            else 
+            else
             {
                 for (int i = 0; i < shareLimitMax; i++)
                 {
@@ -649,6 +670,7 @@ public class quest_holocron extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int receiveCreditForKill(obj_id self, dictionary params) throws InterruptedException
     {
         String phaseString = pgc_quests.getActivePhaseObjVarString(self);
@@ -666,6 +688,7 @@ public class quest_holocron extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int recivedGcwCreditForKill(obj_id self, dictionary params) throws InterruptedException
     {
         String phaseString = pgc_quests.getActivePhaseObjVarString(self);
@@ -680,6 +703,7 @@ public class quest_holocron extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleCommMessageTaskCompletion(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id questControlDevice = getContainedBy(self);
@@ -695,6 +719,7 @@ public class quest_holocron extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ChroniclesMessageBoxCompleted(obj_id self, dictionary params) throws InterruptedException
     {
         int pageId = params.getInt("pageId");
@@ -715,6 +740,7 @@ public class quest_holocron extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int startPerform(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = pgc_quests.getQuestPlayer(self);
@@ -746,7 +772,7 @@ public class quest_holocron extends script.base_script
                     location playerLocation = getLocation(player);
                     rightLocation = (getCellName(playerLocation.cell)).equals(cellname);
                 }
-                else 
+                else
                 {
                     obj_id building = pgc_quests.getObjIdRelicData("building_id", relicData);
                     rightLocation = performance.isInRightBuilding(player, building);
@@ -768,6 +794,7 @@ public class quest_holocron extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int stopPerform(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = pgc_quests.getQuestPlayer(self);
@@ -787,6 +814,7 @@ public class quest_holocron extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int CheckPerformanceComplete(obj_id self, dictionary params) throws InterruptedException
     {
         String phaseString = params.getString("phaseString");
@@ -809,38 +837,40 @@ public class quest_holocron extends script.base_script
                     {
                         pgc_quests.setTaskComplete(self, phaseString, taskString);
                     }
-                    else 
+                    else
                     {
                         sendCheckPerformanceComplete(self, phaseString, taskString, remainingTime);
                     }
                 }
             }
-            else 
+            else
             {
                 clearPerformScriptVars(self, phaseString, taskString);
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int performGetTime(obj_id player) throws InterruptedException
     {
         return getPlayerPlayedTime(player);
     }
+
     public void sendCheckPerformanceComplete(obj_id questHolocron, String phaseString, String taskString, int delay) throws InterruptedException
     {
         dictionary params = new dictionary();
         params.put("phaseString", phaseString);
         params.put("taskString", taskString);
         messageTo(questHolocron, "CheckPerformanceComplete", params, delay, false);
-        return;
     }
+
     public void clearPerformScriptVars(obj_id questHolocron, String phaseString, String taskString) throws InterruptedException
     {
         String baseObjVar = pgc_quests.getPgcBaseObjVar(phaseString, taskString);
         utils.removeScriptVar(questHolocron, baseObjVar + ".performEndTime");
         utils.removeScriptVar(questHolocron, baseObjVar + ".performCurrentlyPerforming");
-        return;
     }
+
     public int OnCraftedPrototype(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = pgc_quests.getQuestPlayer(self);
@@ -884,6 +914,7 @@ public class quest_holocron extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int pqOnArrivedAtLocation(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = pgc_quests.getQuestPlayer(self);

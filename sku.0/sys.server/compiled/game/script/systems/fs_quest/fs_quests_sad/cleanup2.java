@@ -1,5 +1,11 @@
 package script.systems.fs_quest.fs_quests_sad;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.fs_quests_sad;
 import script.library.quests;
@@ -89,6 +95,5 @@ public class cleanup2 extends script.base_script
             destroyWaypointInDatapad(point2, player);
             removeObjVar(player, waypointObjVar2);
         }
-        return;
     }
 }

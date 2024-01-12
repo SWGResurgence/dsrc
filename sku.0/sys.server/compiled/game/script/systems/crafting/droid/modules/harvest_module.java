@@ -1,5 +1,11 @@
 package script.systems.crafting.droid.modules;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -47,6 +53,7 @@ public class harvest_module extends script.base_script
     public static final string_id SID_SET_INTEREST_BONE = new string_id(STF, "set_interest_bone");
     public static final string_id SET_INTEREST_SUI_D = new string_id(STF, "set_interest_d");
     public static final string_id SET_INTEREST_SUI_T = new string_id(STF, "set_interest_t");
+
     public harvest_module()
     {
     }
@@ -526,7 +533,7 @@ public class harvest_module extends script.base_script
                     petsOnly = false;
                 }
             }
-            if (petsOnly == false)
+            if (!petsOnly)
             {
                 amt *= 1.2;
             }
@@ -554,7 +561,7 @@ public class harvest_module extends script.base_script
                 check = true;
             }
         }
-        if (check == true)
+        if (check)
         {
             type = resource.getResourceName(type);
             String msg = null;

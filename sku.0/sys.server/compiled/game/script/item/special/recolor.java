@@ -1,5 +1,11 @@
 package script.item.special;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.hue;
 import script.library.sui;
@@ -11,29 +17,26 @@ import script.library.utils;
  * the Armor Recolor Kit but is made to be dynamic to the type of
  * object that it is attached to insofar as there are colorable
  * components to the object (palette).
- *
+ * <p>
  * Implementation:
- *
+ * <p>
  * - Attach this script to an object that a player can re-color.
- *
+ * <p>
  * - The default assumption is re-coloring is consumable, meaning the
  * script will detach itself once it has been used 2 times to recolor
  * the object. The amount of re-colors remaining is displayed in the
  * item attributes window. Alternatively, you can enable "unlimited"
  * recoloring by attaching the ObjVar "recolor.unlimited" to the object.
- *
+ * <p>
  * No other steps are required.
- *
+ * <p>
  * SWG Source Addition - 2021
  * Authors: Aconite
  */
-public class recolor extends script.base_script {
+public class recolor extends script.base_script
+{
 
-    public recolor()
-    {
-    }
-
-    public static final string_id SID_RECOLOR_MENU_OPTION = new string_id ("spam", "recolor");
+    public static final string_id SID_RECOLOR_MENU_OPTION = new string_id("spam", "recolor");
     public static final string_id SID_MUST_BE_IN_INVENTORY = new string_id("spam", "recolor_in_inventory");
     public static final string_id SID_MUST_NOT_BE_EQUIPPED = new string_id("spam", "must_unequip");
     public static final String PLAYER_ID = "recolor_process.player_oid";
@@ -41,42 +44,45 @@ public class recolor extends script.base_script {
     public static final String VAR_RECOLOR_UNLIMITED = "recolor.unlimited";
     public static final String VAR_RECOLOR_USED_COUNT = "recolor.used_count";
     public static final int MAX_USAGE_COUNT = 2;
+    public recolor()
+    {
+    }
 
     /**
      * @return true if the item can be re-colored, based on:
-     * - must be valid item and player
-     * - must not be equipped or equipped appearance
-     * - must be in inventory
-     * - must not be fully consumed
-     * - must have color customization data
+     *         - must be valid item and player
+     *         - must not be equipped or equipped appearance
+     *         - must be in inventory
+     *         - must not be fully consumed
+     *         - must have color customization data
      */
     public static boolean canRecolor(obj_id self, obj_id player) throws InterruptedException
     {
-        if(!isIdValid(self) || !isIdValid(player))
+        if (!isIdValid(self) || !isIdValid(player))
         {
             return false;
         }
         final dictionary palData = hue.getPalcolorData(self);
-        if(palData == null || palData.size() < 1)
+        if (palData == null || palData.size() < 1)
         {
             WARNING(String.format("item.special.recolor was attached to template %s which has no Pal Color Data for customization.", getTemplateName(self)));
             return true;
         }
-        if(isGod(player))
+        if (isGod(player))
         {
             return true;
         }
-        if(utils.isEquipped(self) || isContainedByPlayerAppearanceInventory(player, self))
+        if (utils.isEquipped(self) || isContainedByPlayerAppearanceInventory(player, self))
         {
             sendSystemMessage(player, SID_MUST_NOT_BE_EQUIPPED);
             return false;
         }
-        if(getContainedBy(self) != utils.getInventoryContainer(player))
+        if (getContainedBy(self) != utils.getInventoryContainer(player))
         {
             sendSystemMessage(player, SID_MUST_BE_IN_INVENTORY);
             return false;
         }
-        if(!isRecolorUnlimited(self) && getUsedCount(self) >= MAX_USAGE_COUNT)
+        if (!isRecolorUnlimited(self) && getUsedCount(self) >= MAX_USAGE_COUNT)
         {
             detachScript(self, "item.special.recolor");
             return false;
@@ -86,7 +92,7 @@ public class recolor extends script.base_script {
 
     /**
      * @return true if this object has no limit on the
-     * number of times it can be recolored
+     *         number of times it can be recolored
      */
     public static boolean isRecolorUnlimited(obj_id self) throws InterruptedException
     {
@@ -120,15 +126,15 @@ public class recolor extends script.base_script {
      */
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
-        if(item != menu_info_types.SERVER_MENU37)
+        if (item != menu_info_types.SERVER_MENU37)
         {
             return SCRIPT_CONTINUE;
         }
-        if(!canRecolor(self, player))
+        if (!canRecolor(self, player))
         {
             return SCRIPT_CONTINUE;
         }
-        if(!isRecolorUnlimited(self))
+        if (!isRecolorUnlimited(self))
         {
             String prompt = String.format("Warning: The number of times you may recolor this item is limited. Do you wish to proceed?\n\n" +
                     "Number of Recolors Allowed: \\#ed8d16%d\\#.\n\n" +
@@ -223,15 +229,15 @@ public class recolor extends script.base_script {
      */
     public int decrementTool(obj_id self, dictionary params) throws InterruptedException
     {
-        if(!isRecolorUnlimited(self))
+        if (!isRecolorUnlimited(self))
         {
-            if(!hasObjVar(self, VAR_RECOLOR_USED_COUNT))
+            if (!hasObjVar(self, VAR_RECOLOR_USED_COUNT))
             {
                 setObjVar(self, VAR_RECOLOR_USED_COUNT, 1);
             }
             else
             {
-                setObjVar(self, VAR_RECOLOR_USED_COUNT, getUsedCount(self) +1);
+                setObjVar(self, VAR_RECOLOR_USED_COUNT, getUsedCount(self) + 1);
             }
         }
         utils.removeScriptVar(self, PLAYER_ID);
@@ -241,7 +247,7 @@ public class recolor extends script.base_script {
             utils.removeScriptVar(player, TOOL_ID);
         }
         sendDirtyAttributesNotification(self);
-        if(!isRecolorUnlimited(self) && getUsedCount(self) >= MAX_USAGE_COUNT)
+        if (!isRecolorUnlimited(self) && getUsedCount(self) >= MAX_USAGE_COUNT)
         {
             final String prompt = "You have reached the limit on the number of times this item can be recolored. " +
                     "The recolor option will no longer be available.";
@@ -249,7 +255,7 @@ public class recolor extends script.base_script {
             detachScript(self, "item.special.recolor");
         }
         sendDirtyObjectMenuNotification(self);
-        LOG("item", getPlayerName(player)+" ("+player+") used item.special.recolor to recolor "+self+". Recolor used count is now: "+getUsedCount(self));
+        LOG("item", getPlayerName(player) + " (" + player + ") used item.special.recolor to recolor " + self + ". Recolor used count is now: " + getUsedCount(self));
         return SCRIPT_CONTINUE;
     }
 

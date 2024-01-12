@@ -1,5 +1,11 @@
 package script.systems.gcw.static_base;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.obj_id;
 
 public class master extends script.base_script
@@ -14,6 +20,7 @@ public class master extends script.base_script
     public static final String VAR_BASE_LAST_CAPTURE = "gcw.static_base.last_capture";
     public static final String SCRIPT_VAR_VALIDATION = "gcw.static_base.validation";
     public static final String TABLE_TERMINAL_SPAWN = "datatables/gcw/static_base/terminal_spawn.iff";
+
     public master()
     {
     }

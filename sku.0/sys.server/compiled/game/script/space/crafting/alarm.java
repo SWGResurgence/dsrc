@@ -1,5 +1,11 @@
 package script.space.crafting;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.space_transition;
 import script.library.utils;
 import script.location;
@@ -12,6 +18,7 @@ public class alarm extends script.base_script
     public alarm()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         LOG("space", "ONATTACH GOING OFF ON INTERIOR COMPONETNES");

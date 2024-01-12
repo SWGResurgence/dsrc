@@ -1,5 +1,11 @@
 package script.systems.beast;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.incubator;
 import script.library.utils;
@@ -81,7 +87,7 @@ public class enzyme extends script.base_script
             int attrib = incubator.getEnzymeRandomStats(self);
             if (attrib != 0)
             {
-                attribs[idx] = "" + attrib;
+                attribs[idx] = String.valueOf(attrib);
                 idx++;
                 if (idx >= names.length)
                 {
@@ -95,7 +101,7 @@ public class enzyme extends script.base_script
             String attrib = incubator.getEnzymeFreeStat(self);
             if (!attrib.equals("") && attrib != null)
             {
-                attribs[idx] = "" + attrib;
+                attribs[idx] = attrib;
                 idx++;
                 if (idx >= names.length)
                 {
@@ -107,7 +113,7 @@ public class enzyme extends script.base_script
         {
             names[idx] = "bm_skill_points";
             float attrib = incubator.getEnzymeSkillPoints(self);
-            attribs[idx] = "" + attrib;
+            attribs[idx] = String.valueOf(attrib);
             idx++;
             if (idx >= names.length)
             {
@@ -119,7 +125,7 @@ public class enzyme extends script.base_script
             names[idx] = "quality";
             float attrib = incubator.getEnzymeQuality(self);
             attrib = utils.roundFloatByDecimal(attrib);
-            attribs[idx] = "" + attrib + "%";
+            attribs[idx] = attrib + "%";
             idx++;
             if (idx >= names.length)
             {
@@ -131,7 +137,7 @@ public class enzyme extends script.base_script
             names[idx] = "enzyme_color";
             int colorIndex = getIntObjVar(self, incubator.ENZYME_COLOR_OBJVAR);
             String attrib = incubator.ENZYME_COLORS[colorIndex];
-            attribs[idx] = "" + attrib;
+            attribs[idx] = attrib;
             idx++;
             if (idx >= names.length)
             {

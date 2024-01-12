@@ -1,5 +1,11 @@
 package script.npc.converse;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.obj_id;
@@ -7,16 +13,19 @@ import script.string_id;
 
 public class philosopher extends script.base_script
 {
+    public static final String CONVO = "static_npc/philosopher";
+
     public philosopher()
     {
     }
-    public static final String CONVO = "static_npc/philosopher";
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
         attachScript(self, "npc.converse.npc_converse_menu");
         return SCRIPT_CONTINUE;
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id speaker) throws InterruptedException
     {
         String lineToSay = "philosopher_1";
@@ -31,7 +40,7 @@ public class philosopher extends script.base_script
             numLines = rand(1, 5);
             lineToSay = "philosopher_" + numLines;
         }
-        else 
+        else
         {
             int total = numLines - 1;
             int pickLine = rand(0, total);

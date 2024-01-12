@@ -1,14 +1,17 @@
 package script.developer.soe.beta;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.sui;
 import script.library.utils;
 
 public class donham_terminal extends script.base_script
 {
-    public donham_terminal()
-    {
-    }
     public static final String DATATABLE_ITEMS_TO_TEST = "datatables/beta/items_to_test.iff";
     public static final string_id SID_ORDER_ITEM = new string_id("sui", "order_item");
     public static final String CATEGORY_PROMPT = "Select an item category.";
@@ -17,11 +20,16 @@ public class donham_terminal extends script.base_script
     public static final String HANDLER_ITEM_REQUEST = "handleItemRequest";
     public static final String VAR_ITEM_REQUEST_BASE = "item_request";
     public static final String VAR_ITEM_REQUEST_CATEGORY = VAR_ITEM_REQUEST_BASE + ".category";
+    public donham_terminal()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         int mnu = mi.addRootMenu(menu_info_types.SERVER_ITEM_OPTIONS, SID_ORDER_ITEM);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.SERVER_ITEM_OPTIONS)
@@ -34,7 +42,7 @@ public class donham_terminal extends script.base_script
                     broadcast(player, "Unable to load test item information. Exiting.");
                     return SCRIPT_CONTINUE;
                 }
-                else 
+                else
                 {
                     String[] entries = new String[colName.length];
                     for (int i = 0; i < colName.length; i++)
@@ -47,6 +55,7 @@ public class donham_terminal extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleCategoryResponse(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -58,14 +67,14 @@ public class donham_terminal extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             int selRow = sui.getListboxSelectedRow(params);
             if (selRow == -1)
             {
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 if (dataTableOpen(DATATABLE_ITEMS_TO_TEST))
                 {
@@ -75,7 +84,7 @@ public class donham_terminal extends script.base_script
                     {
                         return SCRIPT_CONTINUE;
                     }
-                    else 
+                    else
                     {
                         title = colName[selRow];
                     }
@@ -84,7 +93,7 @@ public class donham_terminal extends script.base_script
                     {
                         return SCRIPT_CONTINUE;
                     }
-                    else 
+                    else
                     {
                         if (!title.equals("unknown"))
                         {
@@ -97,6 +106,7 @@ public class donham_terminal extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleItemRequest(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -108,7 +118,7 @@ public class donham_terminal extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             String category = getStringObjVar(playerId, VAR_ITEM_REQUEST_CATEGORY);
             removeObjVar(playerId, VAR_ITEM_REQUEST_BASE);
@@ -117,7 +127,7 @@ public class donham_terminal extends script.base_script
             {
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 if (dataTableOpen(DATATABLE_ITEMS_TO_TEST))
                 {
@@ -125,21 +135,21 @@ public class donham_terminal extends script.base_script
                     if ((template == null) || (template.equals("")))
                     {
                     }
-                    else 
+                    else
                     {
                         obj_id pInv = utils.getInventoryContainer(playerId);
                         if ((pInv == null) || (pInv == obj_id.NULL_ID))
                         {
                             return SCRIPT_CONTINUE;
                         }
-                        else 
+                        else
                         {
                             obj_id itemId = createObject(template, pInv, "");
                             if ((itemId == null) || (itemId == obj_id.NULL_ID))
                             {
                                 return SCRIPT_CONTINUE;
                             }
-                            else 
+                            else
                             {
                             }
                         }

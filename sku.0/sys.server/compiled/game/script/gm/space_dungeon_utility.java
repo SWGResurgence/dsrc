@@ -1,5 +1,11 @@
 package script.gm;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.space_dungeon;
 import script.library.space_dungeon_data;
@@ -9,12 +15,13 @@ import script.obj_id;
 
 public class space_dungeon_utility extends script.base_script
 {
-    public space_dungeon_utility()
-    {
-    }
     public static final String SCRIPT_VAR_DATA_MODE = "space_dungeon.data_mode";
     public static final String SCRIPT_VAR_MOVE_DUNGEON = "space_dungeon.move_dungeon";
     public static final String SCRIPT_VAR_TARGET = "space_dungeon.target";
+    public space_dungeon_utility()
+    {
+    }
+
     public int OnSpeaking(obj_id self, String text) throws InterruptedException
     {
         if (getGodLevel(self) < 10)
@@ -43,7 +50,7 @@ public class space_dungeon_utility extends script.base_script
                 broadcast(self, "Format: dungeonTicket <planet> <point> <dungeon> {quest type}");
                 return SCRIPT_CONTINUE;
             }
-            if (false == space_dungeon_data.isValidDungeon(command_tokens[3]))
+            if (!space_dungeon_data.isValidDungeon(command_tokens[3]))
             {
                 broadcast(self, command_tokens[3] + " is not a valid dungeon name.");
                 return SCRIPT_CONTINUE;
@@ -57,7 +64,7 @@ public class space_dungeon_utility extends script.base_script
                 }
                 broadcast(self, "Dungeon ticket " + ticket + " created.");
             }
-            else 
+            else
             {
                 broadcast(self, "Dungeon ticket creation failed.");
             }
@@ -96,7 +103,7 @@ public class space_dungeon_utility extends script.base_script
             {
                 broadcast(self, "Dungeon session ended.");
             }
-            else 
+            else
             {
                 broadcast(self, "Failed to end dungeon session.");
             }
@@ -123,7 +130,7 @@ public class space_dungeon_utility extends script.base_script
             {
                 broadcast(self, getFirstName(target) + " has been ejected from the dungeon.");
             }
-            else 
+            else
             {
                 broadcast(self, "Dungeon ejection failed.");
             }
@@ -135,7 +142,7 @@ public class space_dungeon_utility extends script.base_script
                 broadcast(self, "Format: dungeonStatus <name>");
                 return SCRIPT_CONTINUE;
             }
-            if (false == space_dungeon_data.isValidDungeon(command_tokens[1]))
+            if (!space_dungeon_data.isValidDungeon(command_tokens[1]))
             {
                 broadcast(self, "The name you specified (" + command_tokens[1] + ") is not a recognized dungeon name.");
                 return SCRIPT_CONTINUE;
@@ -153,7 +160,7 @@ public class space_dungeon_utility extends script.base_script
             }
             String dungeon_name = command_tokens[1];
             boolean instance_change = false;
-            if (false == space_dungeon_data.isValidDungeon(dungeon_name))
+            if (!space_dungeon_data.isValidDungeon(dungeon_name))
             {
                 broadcast(self, "The name you specified (" + dungeon_name + ") is not a recognized dungeon name.");
                 return SCRIPT_CONTINUE;
@@ -166,7 +173,7 @@ public class space_dungeon_utility extends script.base_script
                     dungeon_name = dungeon_name + "-" + dungeon_id;
                     instance_change = true;
                 }
-                else 
+                else
                 {
                     broadcast(self, "You must specify a valid obj_id.");
                     return SCRIPT_CONTINUE;
@@ -178,7 +185,7 @@ public class space_dungeon_utility extends script.base_script
             {
                 request_id = getClusterWideData("dungeon", dungeon_name, false, self);
             }
-            else 
+            else
             {
                 request_id = getClusterWideData("dungeon", dungeon_name + "*", false, self);
             }
@@ -191,7 +198,7 @@ public class space_dungeon_utility extends script.base_script
                 broadcast(self, "Format: resetDungeon <name> <obj_id>");
                 return SCRIPT_CONTINUE;
             }
-            if (false == space_dungeon_data.isValidDungeon(command_tokens[1]))
+            if (!space_dungeon_data.isValidDungeon(command_tokens[1]))
             {
                 broadcast(self, "The name you specified (" + command_tokens[1] + ") is not a recognized dungeon name.");
                 return SCRIPT_CONTINUE;
@@ -203,7 +210,7 @@ public class space_dungeon_utility extends script.base_script
                 utils.setScriptVar(self, SCRIPT_VAR_DATA_MODE + "_" + request_id, 3);
                 utils.setScriptVar(self, SCRIPT_VAR_MOVE_DUNGEON, command_tokens[1]);
             }
-            else 
+            else
             {
                 broadcast(self, "You must specify a valid obj_id.");
                 return SCRIPT_CONTINUE;
@@ -228,6 +235,7 @@ public class space_dungeon_utility extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnClusterWideDataResponse(obj_id self, String manage_name, String dungeon_type, int request_id, String[] element_name_list, dictionary[] dungeon_data, int lock_key) throws InterruptedException
     {
         if (!manage_name.equals("dungeon"))
@@ -242,14 +250,15 @@ public class space_dungeon_utility extends script.base_script
             data_mode = utils.getIntScriptVar(self, script_var_name);
             utils.removeScriptVar(self, script_var_name);
         }
-        else 
+        else
         {
             broadcast(self, "Unable to determine data mode.");
             return SCRIPT_CONTINUE;
         }
         if (dungeon_data != null && dungeon_data.length > 0)
         {
-            for (dictionary dungeon : dungeon_data) {
+            for (dictionary dungeon : dungeon_data)
+            {
                 obj_id dungeon_id = dungeon.getObjId("dungeon_id");
                 int session_id = dungeon.getInt("session_id");
                 float[] dungeon_position =
@@ -258,7 +267,8 @@ public class space_dungeon_utility extends script.base_script
                                 dungeon.getFloat("position_y"),
                                 dungeon.getFloat("position_z")
                         };
-                switch (data_mode) {
+                switch (data_mode)
+                {
                     case 1:
                         broadcast(self, "Dungeon -> " + dungeon_id + " session_id ->" + session_id);
                         break;
@@ -268,24 +278,30 @@ public class space_dungeon_utility extends script.base_script
                         break;
                     case 3:
                         String dungeon_name;
-                        if (utils.hasScriptVar(self, SCRIPT_VAR_MOVE_DUNGEON)) {
+                        if (utils.hasScriptVar(self, SCRIPT_VAR_MOVE_DUNGEON))
+                        {
                             dungeon_name = utils.getStringScriptVar(self, SCRIPT_VAR_MOVE_DUNGEON);
                             utils.removeScriptVar(self, SCRIPT_VAR_MOVE_DUNGEON);
-                        } else {
+                        }
+                        else
+                        {
                             broadcast(self, "Unable to find dungeon name. Move failed.");
                             return SCRIPT_CONTINUE;
                         }
-                        if (dungeon_data.length > 1) {
+                        if (dungeon_data.length > 1)
+                        {
                             broadcast(self, "More than one dungeon was returned.  This should not have happened. Aborting movement.");
                             return SCRIPT_CONTINUE;
                         }
                         location start_loc = space_dungeon_data.getDungeonStartLocation(dungeon_name);
-                        if (start_loc == null) {
+                        if (start_loc == null)
+                        {
                             broadcast(self, "Unable to find a start location for " + dungeon_name + ". Movement failed.");
                             return SCRIPT_CONTINUE;
                         }
                         String start_cell = space_dungeon_data.getDungeonStartCellName(dungeon_name);
-                        if (start_cell == null) {
+                        if (start_cell == null)
+                        {
                             broadcast(self, "Unable to find a start cell for " + dungeon_name + ". Movement failed.");
                             return SCRIPT_CONTINUE;
                         }
@@ -297,7 +313,7 @@ public class space_dungeon_utility extends script.base_script
                 }
             }
         }
-        else 
+        else
         {
             broadcast(self, "No dungeon data received.  This could be the result of an error or that no dungeon data matched your search criteria.");
             if (utils.hasScriptVar(self, "space_dungeon"))
@@ -307,6 +323,7 @@ public class space_dungeon_utility extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean checkFormat(String[] command_tokens, int params) throws InterruptedException
     {
         if (command_tokens == null)

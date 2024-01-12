@@ -1,5 +1,11 @@
 package script.theme_park.recruitment;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.obj_id;
 import script.string_id;
@@ -8,17 +14,19 @@ import java.util.Vector;
 
 public class rebel_recruit extends script.theme_park.recruitment.base.base_recruiter
 {
+    public static final String CONVO = "recruiting/rebel_recruit";
+
     public rebel_recruit()
     {
     }
-    public static final String CONVO = "recruiting/rebel_recruit";
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, "dressed"))
         {
 
-	}
-	{
+        }
+        {
             obj_id suit = createObject("object/tangible/wearables/bodysuit/bodysuit_bwing.iff", self, "");
             obj_id boots = createObject("object/tangible/wearables/boots/boots_s03.iff", self, "");
             hue.setColor(suit, 1, colors.ORANGE);
@@ -38,6 +46,7 @@ public class rebel_recruit extends script.theme_park.recruitment.base.base_recru
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id speaker) throws InterruptedException
     {
         if (ai_lib.isInCombat(self) || ai_lib.isInCombat(speaker))
@@ -62,7 +71,7 @@ public class rebel_recruit extends script.theme_park.recruitment.base.base_recru
                 response = utils.addElement(response, new string_id(CONVO, "rr17"));
             }
         }
-        else 
+        else
         {
             greeting = new string_id(CONVO, "rr1");
             response = utils.addElement(response, new string_id(CONVO, "rr2"));
@@ -76,12 +85,13 @@ public class rebel_recruit extends script.theme_park.recruitment.base.base_recru
         {
             return SCRIPT_OVERRIDE;
         }
-        else 
+        else
         {
             npcStartConversation(speaker, self, CONVO, greeting, response);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String convo, obj_id player, string_id response) throws InterruptedException
     {
         if ((response.getTable()).equals(DATA_ITEM_CONVO))

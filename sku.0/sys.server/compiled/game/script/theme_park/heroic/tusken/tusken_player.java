@@ -1,5 +1,11 @@
 package script.theme_park.heroic.tusken;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.groundquests;
 import script.library.locations;
@@ -10,6 +16,7 @@ public class tusken_player extends script.base_script
     public tusken_player()
     {
     }
+
     public int OnLogin(obj_id self) throws InterruptedException
     {
         String area = locations.getBuildoutAreaName(self);
@@ -27,11 +34,13 @@ public class tusken_player extends script.base_script
         messageTo(self, "update_quest", null, 10.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDetach(obj_id self) throws InterruptedException
     {
         clearCurrentTuskenQuest(self);
         return SCRIPT_CONTINUE;
     }
+
     public int update_quest(obj_id self, dictionary params) throws InterruptedException
     {
         dictionary dict = new dictionary();
@@ -44,16 +53,18 @@ public class tusken_player extends script.base_script
         messageTo(quest_manager, "requestUpdatePlayer", dict, 0.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public void clearCurrentTuskenQuest(obj_id self) throws InterruptedException
     {
-        String[] questToClear = 
+        String[] questToClear =
+                {
+                        "heroic_tusken_tracking_01",
+                        "heroic_tusken_tracking_02",
+                        "heroic_tusken_tracking_02a",
+                        "heroic_tusken_tracking_03"
+                };
+        for (String s : questToClear)
         {
-            "heroic_tusken_tracking_01",
-            "heroic_tusken_tracking_02",
-            "heroic_tusken_tracking_02a",
-            "heroic_tusken_tracking_03"
-        };
-        for (String s : questToClear) {
             groundquests.clearQuest(self, s);
         }
     }

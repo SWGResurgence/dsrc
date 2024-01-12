@@ -1,5 +1,11 @@
 package script.city;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.utils;
@@ -8,21 +14,22 @@ import script.obj_id;
 
 public class droid_wander extends script.city.base.base_wander
 {
+    public static final int PATH_VERIFICATION_TIME = 30;
+    public static final int PATH_FAILURES_MAXIMUM = 5;
+    public final String[] patrolPoints =
+            {
+                    "droid1",
+                    "droid2",
+                    "droid3",
+                    "droid4",
+                    "droid5",
+                    "droid6"
+            };
     public droid_wander()
     {
         super.patrolPoints = patrolPoints;
     }
-    public final String[] patrolPoints =
-    {
-        "droid1",
-        "droid2",
-        "droid3",
-        "droid4",
-        "droid5",
-        "droid6"
-    };
-    public static final int PATH_VERIFICATION_TIME = 30;
-    public static final int PATH_FAILURES_MAXIMUM = 5;
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         LOGC(aiLoggingEnabled(self), "debug_ai", "droid_wander.OnAttach enter");
@@ -30,6 +37,7 @@ public class droid_wander extends script.city.base.base_wander
         utils.setScriptVar(self, "path.pathFailures", 0);
         return super.OnAttach(self);
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         LOGC(aiLoggingEnabled(self), "debug_ai", "droid_wander.OnInitialize enter name: " + getName(self));
@@ -37,11 +45,13 @@ public class droid_wander extends script.city.base.base_wander
         utils.setScriptVar(self, "path.pathFailures", 0);
         return super.OnAttach(self);
     }
+
     public int OnLoiterMoving(obj_id self) throws InterruptedException
     {
         LOGC(aiLoggingEnabled(self), "debug_ai", "droid_wander.OnLoiterMoving enter name: " + getName(self));
         return super.OnLoiterMoving(self);
     }
+
     public int pathRandom(obj_id self, dictionary params) throws InterruptedException
     {
         LOGC(aiLoggingEnabled(self), "debug_ai", "droid_wander.pathRandom enter name: " + getName(self));
@@ -52,13 +62,14 @@ public class droid_wander extends script.city.base.base_wander
         {
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             LOGC(aiLoggingEnabled(self), "debug_ai", "droid_wander.pathRandom setting patrol points");
             ai_lib.setPatrolRandomNamedPath(self, patrolPoints);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int pathVerify(obj_id self, dictionary params) throws InterruptedException
     {
         if (aiGetMovementState(self) != MOVEMENT_PATROL || hasCondition(self, CONDITION_HIBERNATING))
@@ -123,18 +134,21 @@ public class droid_wander extends script.city.base.base_wander
 
         return SCRIPT_CONTINUE;
     }
+
     public int OnMovePathComplete(obj_id self) throws InterruptedException
     {
         LOGC(aiLoggingEnabled(self), "debug_ai", "droid_wander.OnMovePathComplete enter name: " + getName(self));
         utils.setScriptVar(self, "path.timeCompleted", getGameTime());
         return super.OnMovePathComplete(self);
     }
+
     public int OnMovePathNotFound(obj_id self) throws InterruptedException
     {
         LOGC(aiLoggingEnabled(self), "debug_ai", "droid_wander.OnMovePathNotFound enter name: " + getName(self));
         messageTo(self, "pathRandom", null, rand(30, 60), false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnHibernateEnd(obj_id self) throws InterruptedException
     {
         dictionary params = new dictionary();

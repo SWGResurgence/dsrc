@@ -1,5 +1,11 @@
 package script.player;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.slicing;
 import script.library.sui;
@@ -10,6 +16,7 @@ public class player_slicing extends script.base_script
     public player_slicing()
     {
     }
+
     public int handleSlicingCategory(obj_id self, dictionary params) throws InterruptedException
     {
         int idx = sui.getListboxSelectedRow(params);
@@ -27,6 +34,7 @@ public class player_slicing extends script.base_script
         slicing.handleSlicingCategory(self, idx);
         return SCRIPT_CONTINUE;
     }
+
     public int handleSlicingSelect(obj_id self, dictionary params) throws InterruptedException
     {
         int idx = sui.getListboxSelectedRow(params);
@@ -44,6 +52,7 @@ public class player_slicing extends script.base_script
         slicing.handleSlicingSelect(self, idx);
         return SCRIPT_CONTINUE;
     }
+
     public int handleApplySlice(obj_id self, dictionary params) throws InterruptedException
     {
         int idx = sui.getListboxSelectedRow(params);

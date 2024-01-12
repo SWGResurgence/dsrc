@@ -1,5 +1,11 @@
 package script.systems.tcg;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -7,6 +13,7 @@ public class tcg_instant_travel extends script.base_script
 {
     public static final String PID_VAR = "tcg_instant_travel";
     public static final string_id SID_WHILE_DEAD = new string_id("spam", "while_dead");
+
     public tcg_instant_travel()
     {
     }
@@ -264,7 +271,6 @@ public class tcg_instant_travel extends script.base_script
         }
         int pid = sui.listbox(itv, player, "@tcg:stationary_travel_d", sui.OK_CANCEL, "@tcg:stationary_travel_t", main_options, "handleSendPlayerToLocation", true, true);
         sui.setPid(player, pid, PID_VAR);
-        return;
     }
 
     public int handleSendPlayerToLocation(obj_id self, dictionary params) throws InterruptedException
@@ -347,7 +353,6 @@ public class tcg_instant_travel extends script.base_script
         {
             sendSystemMessage(player, new string_id("tcg", "corrupt_itv_location_data"));
         }
-        return;
     }
 
     public boolean canMarkAtLocation(obj_id player) throws InterruptedException
@@ -399,7 +404,7 @@ public class tcg_instant_travel extends script.base_script
 
     public String getDisplayLocation(location loc) throws InterruptedException
     {
-        String returnString = "" + Math.round(loc.x) + ", " + Math.round(loc.y) + ", " + Math.round(loc.z);
+        String returnString = Math.round(loc.x) + ", " + Math.round(loc.y) + ", " + Math.round(loc.z);
         return returnString;
     }
 

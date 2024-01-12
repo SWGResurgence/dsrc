@@ -1,5 +1,11 @@
 package script.quest.task.fs_quest_sad;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.location;
@@ -7,12 +13,13 @@ import script.obj_id;
 
 public class basic_task extends script.base_script
 {
-    public basic_task()
-    {
-    }
     public static final String FS_QUEST_SAD_QUANTITY_KILLABLE = "fs_quest_sad.quantity_killable";
     public static final String FS_QUEST_SAD_THEATER_LOCATION = "fs_quest_sad.theater_location";
     public static final location FS_VILLAGE_LOCATION = new location(5238.26f, 78.5f, -4189.03f);
+    public basic_task()
+    {
+    }
+
     public void completeTask(obj_id self, String questName, boolean succeeded) throws InterruptedException
     {
         int killable = getIntObjVar(self, FS_QUEST_SAD_QUANTITY_KILLABLE);
@@ -40,6 +47,7 @@ public class basic_task extends script.base_script
         LOG("newquests", "fs_quest_sad.basic_task - completing");
         quests.complete(questName, self, succeeded);
     }
+
     public void setupTheater(obj_id self, int questRow) throws InterruptedException
     {
         if (quests.isMyQuest(questRow, "quest.task.fs_quest_sad.basic_task"))
@@ -63,7 +71,7 @@ public class basic_task extends script.base_script
             {
                 havePlanet = true;
             }
-            else 
+            else
             {
                 datatable = tokens[0];
             }
@@ -73,7 +81,7 @@ public class basic_task extends script.base_script
                 {
                     datatable = tokens[0];
                 }
-                else 
+                else
                 {
                     datatable = tokens[1];
                 }
@@ -87,7 +95,7 @@ public class basic_task extends script.base_script
             {
                 radius = utils.stringToFloat(parameterString);
             }
-            else 
+            else
             {
                 LOG("newquests", "row has no PARAMETER field");
                 radius = 1.0f;
@@ -107,7 +115,7 @@ public class basic_task extends script.base_script
                 unassignTheaterFromPlayer(self);
                 created = assignTheaterToPlayer(self, datatable, theaterLoc, "systems.fs_quest.fs_quests_sad.theater_controller", TLT_none);
             }
-            else 
+            else
             {
                 LOG("newquests", "getTheaterLocationTarget failed to return a location, marking the player as a big winner");
                 quests.complete(questName, self, true);
@@ -118,18 +126,19 @@ public class basic_task extends script.base_script
                 {
                     setupWaypoint(self, questRow, theaterLoc);
                 }
-                else 
+                else
                 {
                     setupGeiger(self, questRow, theaterLoc);
                 }
                 utils.setScriptVar(self, FS_QUEST_SAD_THEATER_LOCATION, theaterLoc);
             }
-            else 
+            else
             {
                 setupTheater(self, questRow);
             }
         }
     }
+
     public void setupGeiger(obj_id self, int questRow, location loc) throws InterruptedException
     {
         sendSystemMessage(self, "Target Moved -- Radiation Sensor Updated", null);
@@ -138,6 +147,7 @@ public class basic_task extends script.base_script
             geiger.setGeiger(self, loc);
         }
     }
+
     public void setupWaypoint(obj_id self, int questRow, location loc) throws InterruptedException
     {
         String questName = quests.getDataEntry(questRow, "NAME");
@@ -159,7 +169,7 @@ public class basic_task extends script.base_script
                 {
                     setWaypointName(wp, summary);
                 }
-                else 
+                else
                 {
                     setWaypointName(wp, "missing task summary for " + questName);
                 }
@@ -169,6 +179,7 @@ public class basic_task extends script.base_script
             }
         }
     }
+
     public int theaterFailed(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("newquests", "inside theaterFailed");
@@ -247,7 +258,7 @@ public class basic_task extends script.base_script
                             LOG("newquests", "updating geiger");
                             setupGeiger(self, iter, theaterLoc);
                         }
-                        else 
+                        else
                         {
                             LOG("newquests", "updating waypoint");
                             setupWaypoint(self, iter, theaterLoc);
@@ -257,7 +268,7 @@ public class basic_task extends script.base_script
                     {
                         LOG("newquests", "OnPlayerTheaterFail created the flattened theater at " + theaterLoc);
                     }
-                    else 
+                    else
                     {
                         LOG("newquests", "OnPlayerTheaterFail couldn't create the flatten theater");
                     }
@@ -266,6 +277,7 @@ public class basic_task extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnPlayerTheaterFail(obj_id self, String datatable, String name) throws InterruptedException
     {
         LOG("newquests", "fs_quest_sad.basic_task - OnPlayerTheaterFail");
@@ -275,6 +287,7 @@ public class basic_task extends script.base_script
         messageTo(self, "theaterFailed", params, 8.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnLogin(obj_id self) throws InterruptedException
     {
         LOG("newquests", "fs_quest_sad.basic_task - OnLogin");
@@ -305,6 +318,7 @@ public class basic_task extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnQuestActivated(obj_id self, int questRow) throws InterruptedException
     {
         LOG("newquests", "fs_quest_sad.basic_task - OnQuestActivated(+ " + questRow + ")");
@@ -318,6 +332,7 @@ public class basic_task extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnCreatedKillableObject(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("newquests", "fs_quest_sad.basic_task - OnCreatedKillableObject");
@@ -326,6 +341,7 @@ public class basic_task extends script.base_script
         utils.setObjVar(self, FS_QUEST_SAD_QUANTITY_KILLABLE, quantityKillable);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitatedKillableObject(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("newquests", "fs_quest_sad.basic_task - OnIncapacitatedKillableObject");
@@ -356,11 +372,12 @@ public class basic_task extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void checkForPhaseChange(obj_id self) throws InterruptedException
     {
         fs_dyn_village.getRegisteredIntegerFromClusterWideData(fs_dyn_village.CLUSTER_INT_KEY_PHASE_UID, "findCurrentPhase", self);
-        return;
     }
+
     public int findCurrentPhase(obj_id self, dictionary params) throws InterruptedException
     {
         if (!params.containsKey(fs_dyn_village.CLUSTER_INT_KEY_PHASE_UID))

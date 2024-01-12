@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.groundquests;
@@ -8,82 +14,100 @@ import script.*;
 
 public class naboo_deeja_peak_prof_hudmasse extends script.base_script
 {
+    public static String c_stringFile = "conversation/naboo_deeja_peak_prof_hudmasse";
+
     public naboo_deeja_peak_prof_hudmasse()
     {
     }
-    public static String c_stringFile = "conversation/naboo_deeja_peak_prof_hudmasse";
+
     public boolean naboo_deeja_peak_prof_hudmasse_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean naboo_deeja_peak_prof_hudmasse_condition_sentToProfHudmasse(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "legacy_naboo_droid_module_3") || groundquests.hasCompletedQuest(player, "legacy_naboo_droid_module_3");
     }
+
     public boolean naboo_deeja_peak_prof_hudmasse_condition_needsSequencerQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return !groundquests.isQuestActive(player, "naboo_deeja_peak_goto_tanoa") && !groundquests.isQuestActive(player, "naboo_deeja_peak_sequencer_parts") && !groundquests.hasCompletedQuest(player, "naboo_deeja_peak_sequencer_parts");
     }
+
     public boolean naboo_deeja_peak_prof_hudmasse_condition_completedBeaconAndSequencer(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "naboo_deeja_peak_beacon_mercs") && groundquests.hasCompletedQuest(player, "naboo_deeja_peak_sequencer_scanner");
     }
+
     public boolean naboo_deeja_peak_prof_hudmasse_condition_hasDeejaPeakQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "naboo_deeja_peak_goto_vance") || groundquests.isQuestActive(player, "naboo_deeja_peak_beacon_safety") || groundquests.hasCompletedQuest(player, "naboo_deeja_peak_beacon_safety") || groundquests.isQuestActive(player, "naboo_deeja_peak_goto_tanoa") || groundquests.isQuestActive(player, "naboo_deeja_peak_sequencer_parts") || groundquests.hasCompletedQuest(player, "naboo_deeja_peak_sequencer_parts");
     }
+
     public boolean naboo_deeja_peak_prof_hudmasse_condition_needsBeaconQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return !groundquests.isQuestActive(player, "naboo_deeja_peak_goto_vance") && !groundquests.isQuestActive(player, "naboo_deeja_peak_beacon_safety") && !groundquests.hasCompletedQuest(player, "naboo_deeja_peak_beacon_safety");
     }
+
     public boolean naboo_deeja_peak_prof_hudmasse_condition_hasSequencer(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "naboo_deeja_peak_sequencer_scanner");
     }
+
     public boolean naboo_deeja_peak_prof_hudmasse_condition_hasBeacon(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "naboo_deeja_peak_beacon_mercs");
     }
+
     public boolean naboo_deeja_peak_prof_hudmasse_condition_returningWithBeacon(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "naboo_deeja_peak_beacon_mercs", "deeja_peak_beacon_mercs_06");
     }
+
     public boolean naboo_deeja_peak_prof_hudmasse_condition_returningWithSequencer(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "naboo_deeja_peak_sequencer_scanner", "deeja_peak_sequencer_scanner_07");
     }
+
     public boolean naboo_deeja_peak_prof_hudmasse_condition_needsModulePt2(obj_id player, obj_id npc) throws InterruptedException
     {
         return !groundquests.isQuestActive(player, "legacy_naboo_droid_module_3_pt2") && !groundquests.hasCompletedQuest(player, "legacy_naboo_droid_module_3_pt2");
     }
+
     public void naboo_deeja_peak_prof_hudmasse_action_sendToTanoa(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.requestGrantQuest(player, "naboo_deeja_peak_goto_tanoa");
     }
+
     public void naboo_deeja_peak_prof_hudmasse_action_sendToVance(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.requestGrantQuest(player, "naboo_deeja_peak_goto_vance");
     }
+
     public void naboo_deeja_peak_prof_hudmasse_action_endGotoProfHudmasse(obj_id player, obj_id npc) throws InterruptedException
     {
         if (groundquests.isQuestActive(player, "legacy_naboo_droid_module_3"))
         {
             groundquests.sendSignal(player, "findDroidPart3_01");
         }
-        return;
     }
+
     public void naboo_deeja_peak_prof_hudmasse_action_endBeacon(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "deeja_peak_beacon_mercs_06");
     }
+
     public void naboo_deeja_peak_prof_hudmasse_action_endSequencer(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "deeja_peak_sequencer_scanner_07");
     }
+
     public void naboo_deeja_peak_prof_hudmasse_action_sendToStonewall(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.requestGrantQuest(player, "legacy_naboo_droid_module_3_pt2");
     }
+
     public int naboo_deeja_peak_prof_hudmasse_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_60"))
@@ -100,6 +124,7 @@ public class naboo_deeja_peak_prof_hudmasse extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_deeja_peak_prof_hudmasse_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_29"))
@@ -127,7 +152,7 @@ public class naboo_deeja_peak_prof_hudmasse extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_36");
@@ -140,7 +165,7 @@ public class naboo_deeja_peak_prof_hudmasse extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_deeja_peak_prof_hudmasse.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -173,7 +198,7 @@ public class naboo_deeja_peak_prof_hudmasse extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_37");
@@ -186,7 +211,7 @@ public class naboo_deeja_peak_prof_hudmasse extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_deeja_peak_prof_hudmasse.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -211,7 +236,7 @@ public class naboo_deeja_peak_prof_hudmasse extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_107");
@@ -220,7 +245,7 @@ public class naboo_deeja_peak_prof_hudmasse extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_deeja_peak_prof_hudmasse.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -245,7 +270,7 @@ public class naboo_deeja_peak_prof_hudmasse extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_115");
@@ -254,7 +279,7 @@ public class naboo_deeja_peak_prof_hudmasse extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_deeja_peak_prof_hudmasse.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -264,6 +289,7 @@ public class naboo_deeja_peak_prof_hudmasse extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_deeja_peak_prof_hudmasse_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_36"))
@@ -283,7 +309,7 @@ public class naboo_deeja_peak_prof_hudmasse extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_42");
@@ -292,7 +318,7 @@ public class naboo_deeja_peak_prof_hudmasse extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_deeja_peak_prof_hudmasse.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -317,7 +343,7 @@ public class naboo_deeja_peak_prof_hudmasse extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_54");
@@ -326,7 +352,7 @@ public class naboo_deeja_peak_prof_hudmasse extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_deeja_peak_prof_hudmasse.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -336,6 +362,7 @@ public class naboo_deeja_peak_prof_hudmasse extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_deeja_peak_prof_hudmasse_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_42"))
@@ -351,6 +378,7 @@ public class naboo_deeja_peak_prof_hudmasse extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_deeja_peak_prof_hudmasse_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_54"))
@@ -370,7 +398,7 @@ public class naboo_deeja_peak_prof_hudmasse extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_115");
@@ -379,7 +407,7 @@ public class naboo_deeja_peak_prof_hudmasse extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_deeja_peak_prof_hudmasse.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -389,6 +417,7 @@ public class naboo_deeja_peak_prof_hudmasse extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_deeja_peak_prof_hudmasse_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_37"))
@@ -408,7 +437,7 @@ public class naboo_deeja_peak_prof_hudmasse extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_55");
@@ -417,7 +446,7 @@ public class naboo_deeja_peak_prof_hudmasse extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_deeja_peak_prof_hudmasse.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -442,7 +471,7 @@ public class naboo_deeja_peak_prof_hudmasse extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_52");
@@ -451,7 +480,7 @@ public class naboo_deeja_peak_prof_hudmasse extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_deeja_peak_prof_hudmasse.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -461,6 +490,7 @@ public class naboo_deeja_peak_prof_hudmasse extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_deeja_peak_prof_hudmasse_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_55"))
@@ -476,6 +506,7 @@ public class naboo_deeja_peak_prof_hudmasse extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_deeja_peak_prof_hudmasse_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_52"))
@@ -495,7 +526,7 @@ public class naboo_deeja_peak_prof_hudmasse extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_107");
@@ -504,7 +535,7 @@ public class naboo_deeja_peak_prof_hudmasse extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_deeja_peak_prof_hudmasse.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -514,6 +545,7 @@ public class naboo_deeja_peak_prof_hudmasse extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_deeja_peak_prof_hudmasse_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_47"))
@@ -533,7 +565,7 @@ public class naboo_deeja_peak_prof_hudmasse extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_34");
@@ -542,7 +574,7 @@ public class naboo_deeja_peak_prof_hudmasse extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_deeja_peak_prof_hudmasse.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -552,6 +584,7 @@ public class naboo_deeja_peak_prof_hudmasse extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_deeja_peak_prof_hudmasse_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_34"))
@@ -571,7 +604,7 @@ public class naboo_deeja_peak_prof_hudmasse extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_78");
@@ -580,7 +613,7 @@ public class naboo_deeja_peak_prof_hudmasse extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_deeja_peak_prof_hudmasse.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -590,6 +623,7 @@ public class naboo_deeja_peak_prof_hudmasse extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_deeja_peak_prof_hudmasse_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_78"))
@@ -609,7 +643,7 @@ public class naboo_deeja_peak_prof_hudmasse extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_100");
@@ -618,7 +652,7 @@ public class naboo_deeja_peak_prof_hudmasse extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_deeja_peak_prof_hudmasse.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -628,6 +662,7 @@ public class naboo_deeja_peak_prof_hudmasse extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_deeja_peak_prof_hudmasse_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_100"))
@@ -661,7 +696,7 @@ public class naboo_deeja_peak_prof_hudmasse extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_103");
@@ -678,7 +713,7 @@ public class naboo_deeja_peak_prof_hudmasse extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_deeja_peak_prof_hudmasse.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -688,6 +723,7 @@ public class naboo_deeja_peak_prof_hudmasse extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_deeja_peak_prof_hudmasse_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_103"))
@@ -707,7 +743,7 @@ public class naboo_deeja_peak_prof_hudmasse extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_107");
@@ -716,7 +752,7 @@ public class naboo_deeja_peak_prof_hudmasse extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_deeja_peak_prof_hudmasse.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -741,7 +777,7 @@ public class naboo_deeja_peak_prof_hudmasse extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_115");
@@ -750,7 +786,7 @@ public class naboo_deeja_peak_prof_hudmasse extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_deeja_peak_prof_hudmasse.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -770,6 +806,7 @@ public class naboo_deeja_peak_prof_hudmasse extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_deeja_peak_prof_hudmasse_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_107"))
@@ -785,6 +822,7 @@ public class naboo_deeja_peak_prof_hudmasse extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_deeja_peak_prof_hudmasse_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_115"))
@@ -800,6 +838,7 @@ public class naboo_deeja_peak_prof_hudmasse extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -809,11 +848,13 @@ public class naboo_deeja_peak_prof_hudmasse extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -822,18 +863,21 @@ public class naboo_deeja_peak_prof_hudmasse extends script.base_script
         faceTo(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.naboo_deeja_peak_prof_hudmasse");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -856,7 +900,7 @@ public class naboo_deeja_peak_prof_hudmasse extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_60");
@@ -864,7 +908,7 @@ public class naboo_deeja_peak_prof_hudmasse extends script.base_script
                 utils.setScriptVar(player, "conversation.naboo_deeja_peak_prof_hudmasse.branchId", 1);
                 npcStartConversation(player, npc, "naboo_deeja_peak_prof_hudmasse", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -906,7 +950,7 @@ public class naboo_deeja_peak_prof_hudmasse extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_29");
@@ -926,7 +970,7 @@ public class naboo_deeja_peak_prof_hudmasse extends script.base_script
                 utils.setScriptVar(player, "conversation.naboo_deeja_peak_prof_hudmasse.branchId", 3);
                 npcStartConversation(player, npc, "naboo_deeja_peak_prof_hudmasse", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -948,7 +992,7 @@ public class naboo_deeja_peak_prof_hudmasse extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_47");
@@ -956,7 +1000,7 @@ public class naboo_deeja_peak_prof_hudmasse extends script.base_script
                 utils.setScriptVar(player, "conversation.naboo_deeja_peak_prof_hudmasse.branchId", 12);
                 npcStartConversation(player, npc, "naboo_deeja_peak_prof_hudmasse", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -971,6 +1015,7 @@ public class naboo_deeja_peak_prof_hudmasse extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("naboo_deeja_peak_prof_hudmasse"))

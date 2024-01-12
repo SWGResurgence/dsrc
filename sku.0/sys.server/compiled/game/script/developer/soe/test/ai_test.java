@@ -1,5 +1,11 @@
 package script.developer.soe.test;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.create;
 import script.library.healing;
 import script.library.utils;
@@ -11,6 +17,7 @@ public class ai_test extends script.base_script
     public ai_test()
     {
     }
+
     public void end(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "testPet"))
@@ -20,6 +27,7 @@ public class ai_test extends script.base_script
             removeObjVar(self, "testPet");
         }
     }
+
     public void start(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "testPet"))
@@ -46,6 +54,7 @@ public class ai_test extends script.base_script
         stop(newmob);
         stopFloating(newmob);
     }
+
     public void gimme_skills(obj_id speaker) throws InterruptedException
     {
         grantSkill(speaker, "outdoors_creaturehandler_novice");
@@ -68,6 +77,7 @@ public class ai_test extends script.base_script
         grantSkill(speaker, "outdoors_creaturehandler_master");
         setObjVar(speaker, "fasttame", 1);
     }
+
     public void start2(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "testPet"))
@@ -86,6 +96,7 @@ public class ai_test extends script.base_script
         location loc = getLocation(self);
         setHomeLocation(newmob, loc);
     }
+
     public void startMounts(obj_id self, obj_id speaker) throws InterruptedException
     {
         if (hasObjVar(self, "testPet"))
@@ -106,40 +117,48 @@ public class ai_test extends script.base_script
         attachScript(newmob, "ai.pet_advance");
         gimme_skills(speaker);
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id whoTriggeredMe) throws InterruptedException
     {
         debugSpeakMsg(self, "Trigger Volume Enter");
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeExited(obj_id self, String volumeName, obj_id whoTriggeredMe) throws InterruptedException
     {
         debugSpeakMsg(self, "Trigger Volume Exit");
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectDamaged(obj_id self, obj_id attacker, obj_id weapon, int damage) throws InterruptedException
     {
         healing.fullHeal(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnCreatureDamaged(obj_id self, obj_id attacker, obj_id weapon, int[] damage) throws InterruptedException
     {
         healing.fullHeal(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
-        if(!isGod(self) || getGodLevel(self) < 10 || !isPlayer(self)){
+        if (!isGod(self) || getGodLevel(self) < 10 || !isPlayer(self))
+        {
             detachScript(self, "test.ai_test");
         }
         setObjVar(self, "blahblah", 1);
         start(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDetach(obj_id self) throws InterruptedException
     {
         end(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnHearSpeech(obj_id self, obj_id speaker, String text) throws InterruptedException
     {
         String[] words = split(text, ' ');
@@ -151,11 +170,13 @@ public class ai_test extends script.base_script
             obj_id objTarget = getLookAtTarget(self);
             obj_id objPlayer = self;
             obj_id[] objDefenders = getCreaturesInCone(objPlayer, objTarget, fltConeLength, fltConeWidth);
-            for (obj_id objDefender1 : objDefenders) {
+            for (obj_id objDefender1 : objDefenders)
+            {
                 debugSpeakMsg(objDefender1, "I am targetsd");
             }
             objDefenders = pvpGetTargetsInCone(objPlayer, objPlayer, objTarget, fltConeLength, fltConeWidth);
-            for (obj_id objDefender : objDefenders) {
+            for (obj_id objDefender : objDefenders)
+            {
                 debugSpeakMsg(objDefender, "I am PVP targetsd");
             }
         }
@@ -172,7 +193,8 @@ public class ai_test extends script.base_script
             debugSpeakMsg(newMob, "i am a spatula");
             return SCRIPT_CONTINUE;
         }
-        switch (words[0]) {
+        switch (words[0])
+        {
             case "start":
                 start(self);
                 return SCRIPT_CONTINUE;
@@ -185,17 +207,21 @@ public class ai_test extends script.base_script
             case "setPetType":
                 setObjVar(self, "testPetType", words[1]);
                 return SCRIPT_CONTINUE;
-            case "spawnCreatures": {
+            case "spawnCreatures":
+            {
                 String creatureType = getStringObjVar(self, "testPetType");
-                for (int i = 0; i < 10; i++) {
+                for (int i = 0; i < 10; i++)
+                {
                     location loc = getLocation(self);
                     create.object(creatureType, loc);
                 }
                 break;
             }
-            case "spawnRandom300": {
+            case "spawnRandom300":
+            {
                 String creatureType = getStringObjVar(self, "testPetType");
-                for (int i = 0; i < 300; i++) {
+                for (int i = 0; i < 300; i++)
+                {
                     location loc = getLocation(self);
                     obj_id mob = create.object(creatureType, loc);
                     loiterTarget(mob, self, 10, 30, 1, 2);
@@ -209,9 +235,11 @@ public class ai_test extends script.base_script
                 ids[0] = idToReload;
                 reloadPathNodes(ids);
                 break;
-            case "testSwarm": {
+            case "testSwarm":
+            {
                 String creatureType = getStringObjVar(self, "testPetType");
-                for (int i = 0; i < 1; i++) {
+                for (int i = 0; i < 1; i++)
+                {
                     location loc = getLocation(self);
                     obj_id mob = create.object(creatureType, loc);
                     swarm(mob, speaker);
@@ -219,9 +247,11 @@ public class ai_test extends script.base_script
                 }
                 break;
             }
-            case "testSwarm2": {
+            case "testSwarm2":
+            {
                 String creatureType = getStringObjVar(self, "testPetType");
-                for (int i = 0; i < 1; i++) {
+                for (int i = 0; i < 1; i++)
+                {
                     location loc = getLocation(self);
                     obj_id mob = create.object(creatureType, loc);
                     swarm(mob, speaker, 8.0f);
@@ -229,9 +259,11 @@ public class ai_test extends script.base_script
                 }
                 break;
             }
-            case "testSwarm3": {
+            case "testSwarm3":
+            {
                 String creatureType = getStringObjVar(self, "testPetType");
-                for (int i = 0; i < 1; i++) {
+                for (int i = 0; i < 1; i++)
+                {
                     location loc = getLocation(self);
                     obj_id mob = create.object(creatureType, loc);
                     swarm(mob, speaker, 16.0f);
@@ -245,7 +277,8 @@ public class ai_test extends script.base_script
             return SCRIPT_CONTINUE;
         }
         obj_id mob = getObjIdObjVar(self, "testPet");
-        switch (words[0]) {
+        switch (words[0])
+        {
             case "follow":
                 debugSpeakMsg(self, "--Now following");
                 follow(mob, speaker, 2.0f, 5.0f);
@@ -280,19 +313,22 @@ public class ai_test extends script.base_script
                 debugSpeakMsg(self, "--Stop");
                 stop(mob);
                 break;
-            case "pathHome": {
+            case "pathHome":
+            {
                 debugSpeakMsg(self, "--Going home");
                 location loc = getLocation(self);
                 pathTo(mob, loc);
                 break;
             }
-            case "pathAway": {
+            case "pathAway":
+            {
                 debugSpeakMsg(self, "--Going to speaker");
                 location loc = getLocation(speaker);
                 pathTo(mob, loc);
                 break;
             }
-            case "moveX": {
+            case "moveX":
+            {
                 debugSpeakMsg(self, "--Going to speaker");
                 location loc = getLocation(mob);
                 loc.x += 1;
@@ -372,9 +408,12 @@ public class ai_test extends script.base_script
                 pathTo(mob, words[1]);
                 break;
             case "canSee":
-                if (canSee(mob, speaker)) {
+                if (canSee(mob, speaker))
+                {
                     debugSpeakMsg(mob, "Can see you");
-                } else {
+                }
+                else
+                {
                     debugSpeakMsg(mob, "Can NOT see you");
                 }
                 break;

@@ -1,19 +1,28 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.*;
 
 public class indigo_siyan extends script.base_script
 {
+    public static String c_stringFile = "conversation/indigo_siyan";
+
     public indigo_siyan()
     {
     }
-    public static String c_stringFile = "conversation/indigo_siyan";
+
     public boolean indigo_siyan_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean indigo_siyan_condition_Campaign(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(npc, "bestine.electionStarted"))
@@ -22,14 +31,12 @@ public class indigo_siyan extends script.base_script
             if (hasObjVar(player, "bestine.campaign"))
             {
                 int electionPlayerIsIn = getIntObjVar(player, "bestine.campaign");
-                if (electionPlayerIsIn >= electionNum)
-                {
-                    return true;
-                }
+                return electionPlayerIsIn >= electionNum;
             }
         }
         return false;
     }
+
     public boolean indigo_siyan_condition_Negative(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(npc, "bestine.electionStarted"))
@@ -38,21 +45,21 @@ public class indigo_siyan extends script.base_script
             if (hasObjVar(player, "bestine.negativeq"))
             {
                 int electionPlayerIsIn = getIntObjVar(player, "bestine.negativeq");
-                if (electionPlayerIsIn >= electionNum)
-                {
-                    return true;
-                }
+                return electionPlayerIsIn >= electionNum;
             }
         }
         return false;
     }
+
     public boolean indigo_siyan_condition_nonoffice(obj_id player, obj_id npc) throws InterruptedException
     {
         return hasObjVar(npc, "bestine.electionEnded");
     }
+
     public void indigo_siyan_action__defaultAction(obj_id player, obj_id npc) throws InterruptedException
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -62,11 +69,13 @@ public class indigo_siyan extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -75,12 +84,14 @@ public class indigo_siyan extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "npc.conversation.indigo_siyan");
         return SCRIPT_CONTINUE;
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         if (ai_lib.isInCombat(self) || ai_lib.isInCombat(player))
@@ -102,7 +113,7 @@ public class indigo_siyan extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_540ac7e9");
@@ -110,7 +121,7 @@ public class indigo_siyan extends script.base_script
                 setObjVar(player, "conversation.indigo_siyan.branchId", 1);
                 npcStartConversation(player, self, "indigo_siyan", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(self, message);
             }
@@ -131,7 +142,7 @@ public class indigo_siyan extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_b9b27823");
@@ -139,7 +150,7 @@ public class indigo_siyan extends script.base_script
                 setObjVar(player, "conversation.indigo_siyan.branchId", 4);
                 npcStartConversation(player, self, "indigo_siyan", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(self, message);
             }
@@ -166,7 +177,7 @@ public class indigo_siyan extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_b9b27823");
@@ -174,7 +185,7 @@ public class indigo_siyan extends script.base_script
                 setObjVar(player, "conversation.indigo_siyan.branchId", 7);
                 npcStartConversation(player, self, "indigo_siyan", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(self, message);
             }
@@ -183,6 +194,7 @@ public class indigo_siyan extends script.base_script
         chat.chat(self, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("indigo_siyan"))
@@ -207,7 +219,7 @@ public class indigo_siyan extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_81fdc59e");
@@ -216,7 +228,7 @@ public class indigo_siyan extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.indigo_siyan.branchId");
                     npcSpeak(player, message);

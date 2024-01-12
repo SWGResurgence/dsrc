@@ -1,5 +1,11 @@
 package script.npc.static_npc;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.hue;
 import script.obj_id;
@@ -9,6 +15,7 @@ public class stella extends script.base_script
     public stella()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         obj_id dress = createObject("object/tangible/wearables/dress/dress_s06.iff", self, "");

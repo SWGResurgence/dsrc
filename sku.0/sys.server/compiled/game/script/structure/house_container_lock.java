@@ -1,5 +1,11 @@
 package script.structure;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.utils;
 
@@ -11,6 +17,7 @@ public class house_container_lock extends script.base_script
     public static final string_id SID_LOCK_BAD_INVENTORY_LOCATION = new string_id("spam", "sid_lock_bad_inventory_location");
     public static final string_id SID_LOCK_BAD_LOCK_CONTAINER = new string_id("spam", "sid_lock_bad_lock_container");
     public static final string_id SID_LOCK_APPLIED = new string_id("spam", "sid_lock_applied");
+
     public house_container_lock()
     {
     }

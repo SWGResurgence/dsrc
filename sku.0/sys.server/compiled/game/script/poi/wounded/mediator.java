@@ -1,5 +1,11 @@
 package script.poi.wounded;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.obj_id;
@@ -9,9 +15,6 @@ import java.util.Vector;
 
 public class mediator extends script.poi.base.scenario_actor
 {
-    public mediator()
-    {
-    }
     public static final String SCRIPT_CONVERSE = "npc.converse.npc_converse_menu";
     public static final int PROGRESS_NONE = 0;
     public static final int ANSWERED_YES = 1;
@@ -19,26 +22,34 @@ public class mediator extends script.poi.base.scenario_actor
     public static final int ANSWERED_NO_AGAIN = 3;
     public static final int PROVIDED_MEDICINE = 4;
     public static final int COMPLETED = 5;
+    public mediator()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         attachScript(self, SCRIPT_CONVERSE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         attachScript(self, SCRIPT_CONVERSE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         messageTo(self, scenario.HANDLER_INCAPACITATION, null, 0, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         messageTo(self, scenario.HANDLER_INCAPACITATION, null, 0, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id speaker) throws InterruptedException
     {
         obj_id poiMaster = poi.getBaseObject(self);
@@ -84,32 +95,32 @@ public class mediator extends script.poi.base.scenario_actor
             switch (progress)
             {
                 case PROGRESS_NONE:
-                responses = utils.addElement(responses, new string_id(convo, "response_no"));
-                break;
+                    responses = utils.addElement(responses, new string_id(convo, "response_no"));
+                    break;
                 case ANSWERED_YES:
-                scenario.say(self, convo, "m_willing");
-                openInventories(speaker, self);
-                npcEndConversation(speaker);
-                return SCRIPT_CONTINUE;
+                    scenario.say(self, convo, "m_willing");
+                    openInventories(speaker, self);
+                    npcEndConversation(speaker);
+                    return SCRIPT_CONTINUE;
                 case ANSWERED_NO:
-                msg_id = "m_rejected";
-                responses = utils.addElement(responses, new string_id(convo, "response_no_again"));
-                break;
+                    msg_id = "m_rejected";
+                    responses = utils.addElement(responses, new string_id(convo, "response_no_again"));
+                    break;
                 case ANSWERED_NO_AGAIN:
-                scenario.say(self, convo, "m_enraged");
-                npcEndConversation(speaker);
-                return SCRIPT_CONTINUE;
+                    scenario.say(self, convo, "m_enraged");
+                    npcEndConversation(speaker);
+                    return SCRIPT_CONTINUE;
                 case PROVIDED_MEDICINE:
-                scenario.say(self, convo, "m_medicine");
-                npcEndConversation(speaker);
-                return SCRIPT_CONTINUE;
+                    scenario.say(self, convo, "m_medicine");
+                    npcEndConversation(speaker);
+                    return SCRIPT_CONTINUE;
                 default:
-                break;
+                    break;
             }
             string_id msg = new string_id(convo, msg_id);
             npcStartConversation(speaker, self, convo, msg, responses);
         }
-        else 
+        else
         {
             int idx = rand(1, 5);
             scenario.say(self, convo, "m_" + idx);
@@ -117,6 +128,7 @@ public class mediator extends script.poi.base.scenario_actor
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String convoName, obj_id speaker, string_id response) throws InterruptedException
     {
         if (ai_lib.isInCombat(self))
@@ -156,7 +168,8 @@ public class mediator extends script.poi.base.scenario_actor
         int progress = scenario.getPlayerProgress(speaker);
         String aId = response.getAsciiId();
         string_id msg = new string_id();
-        switch (aId) {
+        switch (aId)
+        {
             case "response_yes":
                 scenario.say(self, convo, "m_yes");
                 openInventories(speaker, self);
@@ -176,6 +189,7 @@ public class mediator extends script.poi.base.scenario_actor
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean openInventories(obj_id player, obj_id target) throws InterruptedException
     {
         if ((player == null) || (target == null))
@@ -192,17 +206,15 @@ public class mediator extends script.poi.base.scenario_actor
         {
             return false;
         }
-        if (utils.requestContainerOpen(player, pInv) && utils.requestContainerOpen(player, tInv))
-        {
-            return true;
-        }
-        return false;
+        return utils.requestContainerOpen(player, pInv) && utils.requestContainerOpen(player, tInv);
     }
+
     public int handleIncapacitation(obj_id self, dictionary params) throws InterruptedException
     {
         scenario.actorIncapacitated(self);
         return SCRIPT_CONTINUE;
     }
+
     public int giveReward(obj_id self, dictionary params) throws InterruptedException
     {
         int amt = params.getInt("amt");
@@ -211,16 +223,19 @@ public class mediator extends script.poi.base.scenario_actor
         utils.moneyInMetric(self, money.ACCT_NPC_LOOT, amt);
         return SCRIPT_CONTINUE;
     }
+
     public int xferFail(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("poiWounded", "money transaction failed.");
         return SCRIPT_CONTINUE;
     }
+
     public int xferPass(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("poiWounded", "money transaction complete.");
         return SCRIPT_CONTINUE;
     }
+
     public int fromAccountPass(obj_id self, dictionary params) throws InterruptedException
     {
         int amt = params.getInt("amt");
@@ -229,12 +244,13 @@ public class mediator extends script.poi.base.scenario_actor
             LOG("poiWounded", "withdrawing cash");
             withdrawCashFromBank(self, amt, "withdrawPass", "xferFail", params);
         }
-        else 
+        else
         {
             LOG("poiWounded", "fromAccountPass: invalid amount = " + amt);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int withdrawPass(obj_id self, dictionary params) throws InterruptedException
     {
         int amt = params.getInt("amt");
@@ -245,7 +261,7 @@ public class mediator extends script.poi.base.scenario_actor
             {
                 LOG("poiWounded", "invalid cash transfer target!");
             }
-            else 
+            else
             {
                 LOG("poiWounded", "transfering cash");
                 transferCashTo(self, target, amt, "xferPass", "xferFail", params);

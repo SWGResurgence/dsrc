@@ -1,5 +1,11 @@
 package script.event.emp_day;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.create;
 import script.library.firework;
@@ -12,6 +18,7 @@ public class firework_show extends script.base_script
     public firework_show()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         String setting = getConfigSetting("EventTeam", "empireDay");
@@ -25,6 +32,7 @@ public class firework_show extends script.base_script
         messageTo(self, "fireworksTimerPing", null, 30, false);
         return SCRIPT_CONTINUE;
     }
+
     public int fireworksTimerReset(obj_id self, dictionary params) throws InterruptedException
     {
         float rightNow = getGameTime();
@@ -32,6 +40,7 @@ public class firework_show extends script.base_script
         setObjVar(self, "event.next_show_time", nextShowTime);
         return SCRIPT_CONTINUE;
     }
+
     public int fireworksTimerPing(obj_id self, dictionary params) throws InterruptedException
     {
         float nextShowTime = getFloatObjVar(self, "event.next_show_time");
@@ -40,24 +49,27 @@ public class firework_show extends script.base_script
         {
             messageTo(self, "broadcastFireworkAnnouncement", null, 1, false);
         }
-        else 
+        else
         {
             messageTo(self, "fireworksTimerPing", null, 3600, false);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int broadcastFireworkAnnouncement(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id[] objPlayers = getPlayerCreaturesInRange(self, 256.0f);
-        if (objPlayers != null && objPlayers.length > 0)
+        if (objPlayers != null)
         {
-            for (obj_id objPlayer : objPlayers) {
+            for (obj_id objPlayer : objPlayers)
+            {
                 sendSystemMessage(objPlayer, new string_id("event/empire_day", "fireworks_broadcast"));
             }
         }
         messageTo(self, "startHugeFireworkDisplay", null, 10, false);
         return SCRIPT_CONTINUE;
     }
+
     public int startHugeFireworkDisplay(obj_id self, dictionary params) throws InterruptedException
     {
         for (int i = 0; i < 150; i++)
@@ -67,6 +79,7 @@ public class firework_show extends script.base_script
         messageTo(self, "fireworksTimerReset", null, 300, false);
         return SCRIPT_CONTINUE;
     }
+
     public int launchRandomFirework(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id effect = create.object(dataTableGetString(firework.TBL_FX, rand(1, dataTableGetNumRows(firework.TBL_FX)), "template"), utils.getRandomLocationInRing(getLocation(self), 0, 64));
@@ -76,6 +89,7 @@ public class firework_show extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnHearSpeech(obj_id self, obj_id objSpeaker, String strText) throws InterruptedException
     {
         if (isGod(objSpeaker))

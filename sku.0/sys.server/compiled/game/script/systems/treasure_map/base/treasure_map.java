@@ -1,5 +1,11 @@
 package script.systems.treasure_map.base;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -34,6 +40,7 @@ public class treasure_map extends script.base_script
     public static final int EXPLOITER_RANGE = 64;
     public static final int MIN_DISTANCE_TO_MAP_OWNER = 300;
     public static final int MAX_DISTANCE_FOR_SEARCH = 16;
+
     public treasure_map()
     {
     }

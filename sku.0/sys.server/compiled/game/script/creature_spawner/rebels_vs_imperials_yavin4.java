@@ -1,5 +1,11 @@
 package script.creature_spawner;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.create;
@@ -51,6 +57,7 @@ public class rebels_vs_imperials_yavin4 extends script.base_script
     public rebels_vs_imperials_yavin4()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         setObjVar(self, "imperialPoints", 0);
@@ -58,41 +65,56 @@ public class rebels_vs_imperials_yavin4 extends script.base_script
         messageTo(self, "startOver", null, 0, true);
         return SCRIPT_CONTINUE;
     }
-    private obj_id spawnImperial(location loc, String type, obj_id self) throws InterruptedException{
+
+    private obj_id spawnImperial(location loc, String type, obj_id self) throws InterruptedException
+    {
         obj_id npc = spawnNpc(loc, type, "imperialDied", self);
         ai_lib.setDefaultCalmBehavior(npc, ai_lib.BEHAVIOR_SENTINEL);
         return npc;
     }
-    private obj_id spawnNpc(location loc, String type, String message, obj_id self) throws InterruptedException{
+
+    private obj_id spawnNpc(location loc, String type, String message, obj_id self) throws InterruptedException
+    {
         obj_id npc = create.object(type, loc);
         create.addDestroyMessage(npc, message, 10, self);
         return npc;
     }
-    private obj_id[] spawnRebelGroup(location loc, String[] types, String message, obj_id self) throws InterruptedException{
+
+    private obj_id[] spawnRebelGroup(location loc, String[] types, String message, obj_id self) throws InterruptedException
+    {
         obj_id[] members = new obj_id[types.length];
-        for(int i=0; i < types.length; i++){
+        for (int i = 0; i < types.length; i++)
+        {
             members[i] = spawnNpc(loc, types[i], message, self);
             setMovementRun(members[i]);
-            if(i % 2 == 0){
+            if (i % 2 == 0)
+            {
                 loc.z -= 2;
             }
-            else{
+            else
+            {
                 loc.x += 5;
             }
         }
         return members;
     }
-    private void moveGroup(location loc, obj_id[] members, String offset) throws InterruptedException{
-        for (obj_id member : members){
+
+    private void moveGroup(location loc, obj_id[] members, String offset) throws InterruptedException
+    {
+        for (obj_id member : members)
+        {
             ai_lib.aiPathTo(member, loc);
-            if(offset.equals("x")) {
+            if (offset.equals("x"))
+            {
                 loc.x++;
             }
-            else{
+            else
+            {
                 loc.z++;
             }
         }
     }
+
     public int startOver(obj_id self, dictionary params) throws InterruptedException
     {
         String[] rebel1 = {"rebel_corporal", "rebel_first_lieutenant", "rebel_sergeant", "rebel_commando"};
@@ -131,12 +153,13 @@ public class rebels_vs_imperials_yavin4 extends script.base_script
         setObjVar(self, "atst", 1);
 
         // send imperial troops to conflict points based on where each is supposed to go.
-        moveGroup(getConflictPoint(0), new obj_id[] {stormtrooper1, stormtrooper2, stormtrooper4}, "x");
-        moveGroup(getConflictPoint(1), new obj_id[] {stormtrooper5, stormtrooper6, stormtrooper7, stormtrooper8}, "z");
-        moveGroup(getConflictPoint(2), new obj_id[] {stormtrooper9, stormtrooper10, stormtrooper11, stormtrooper12}, "x");
+        moveGroup(getConflictPoint(0), new obj_id[]{stormtrooper1, stormtrooper2, stormtrooper4}, "x");
+        moveGroup(getConflictPoint(1), new obj_id[]{stormtrooper5, stormtrooper6, stormtrooper7, stormtrooper8}, "z");
+        moveGroup(getConflictPoint(2), new obj_id[]{stormtrooper9, stormtrooper10, stormtrooper11, stormtrooper12}, "x");
 
         return SCRIPT_CONTINUE;
     }
+
     public int imperialDied(obj_id self, dictionary params) throws InterruptedException
     {
         if (getIntObjVar(self, "imperials") < 12)
@@ -150,6 +173,7 @@ public class rebels_vs_imperials_yavin4 extends script.base_script
         destroyObject(params.getObjId("object"));
         return SCRIPT_CONTINUE;
     }
+
     public int rebelDied(obj_id self, dictionary params) throws InterruptedException
     {
         if (getIntObjVar(self, "rebels") < 12)
@@ -162,53 +186,71 @@ public class rebels_vs_imperials_yavin4 extends script.base_script
         destroyObject(params.getObjId("object"));
         return SCRIPT_CONTINUE;
     }
+
     public int atstDied(obj_id self, dictionary params) throws InterruptedException
     {
         setObjVar(self, "rebelPoints", getIntObjVar(self, "rebelPoints") + 1);
         messageTo(self, "spawnATST", null, 8, true);
         return SCRIPT_CONTINUE;
     }
+
     public int spawnATST(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id at_st = create.object("at_st", getImperialLocation(2));
         create.addDestroyMessage(at_st, "atstDied", 10, self);
         attachScript(at_st, "creature.yavin4_atst");
 
-        if(params != null) destroyObject(params.getObjId("object"));
+        if (params != null) destroyObject(params.getObjId("object"));
         return SCRIPT_CONTINUE;
     }
+
     public String getRebel() throws InterruptedException
     {
         return rebelTypes[rand(0, rebelTypes.length - 1)];
     }
-    public location getRebelStart() throws InterruptedException{
+
+    public location getRebelStart() throws InterruptedException
+    {
         return getRebelStart(null);
     }
-    public location getRebelStart(Integer loc) throws InterruptedException{
-        if(loc == null) {
+
+    public location getRebelStart(Integer loc) throws InterruptedException
+    {
+        if (loc == null)
+        {
             loc = rand(0, rebelStartPoints.length - 1);
         }
         return new location(rebelStartPoints[loc][0], rebelStartPoints[loc][1], rebelStartPoints[loc][2], "yavin4", null);
     }
-    public location getConflictPoint() throws InterruptedException{
+
+    public location getConflictPoint() throws InterruptedException
+    {
         return getConflictPoint(null);
     }
+
     public location getConflictPoint(Integer loc) throws InterruptedException
     {
-        if(loc == null) {
+        if (loc == null)
+        {
             loc = rand(0, conflictPoints.length - 1);
         }
         return new location(conflictPoints[loc][0], conflictPoints[loc][1], conflictPoints[loc][2], "yavin4", null);
     }
-    public location getImperialLocation() throws InterruptedException{
+
+    public location getImperialLocation() throws InterruptedException
+    {
         return getImperialLocation(null);
     }
-    public location getImperialLocation(Integer loc) throws InterruptedException{
-        if(loc == null) {
+
+    public location getImperialLocation(Integer loc) throws InterruptedException
+    {
+        if (loc == null)
+        {
             loc = rand(0, imperialStartPoints.length - 1);
         }
         return new location(imperialStartPoints[loc][0], imperialStartPoints[loc][1], imperialStartPoints[loc][2], "yavin4", null);
     }
+
     public String getImperial() throws InterruptedException
     {
         return imperialTypes[rand(1, imperialTypes.length - 1)];

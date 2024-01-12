@@ -1,5 +1,11 @@
 package script.systems.missions.base;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.obj_id;
 
@@ -14,7 +20,6 @@ public class mission_structure_base extends script.systems.missions.base.mission
         dictionary dctParams = new dictionary();
         dctParams.put("objListener", objListener);
         messageTo(objTarget, "addListener", dctParams, 0, true);
-        return;
     }
 
     public void removeListener(obj_id objListener, obj_id objTarget) throws InterruptedException
@@ -22,7 +27,6 @@ public class mission_structure_base extends script.systems.missions.base.mission
         dictionary dctParams = new dictionary();
         dctParams.put("objListener", objListener);
         messageTo(objTarget, "removeListener", dctParams, 0, true);
-        return;
     }
 
     public void playerDestructionIncomplete(obj_id objMission) throws InterruptedException
@@ -31,7 +35,6 @@ public class mission_structure_base extends script.systems.missions.base.mission
         obj_id objPlayer = getMissionHolder(objMission);
         debugSpeakMsg(objPlayer, "MISSION IS INCOMPLETE!");
         messageTo(objMission, "destructionIncomplete", dctParams, 0, true);
-        return;
     }
 
     public void playerDestructionFail(obj_id objMission) throws InterruptedException
@@ -40,7 +43,6 @@ public class mission_structure_base extends script.systems.missions.base.mission
         obj_id objPlayer = getMissionHolder(objMission);
         debugSpeakMsg(objPlayer, "MISSION IS FAILED!");
         messageTo(objMission, "destructionFail", dctParams, 0, true);
-        return;
     }
 
     public void playerDestructionSuccess(obj_id objMission) throws InterruptedException
@@ -49,7 +51,6 @@ public class mission_structure_base extends script.systems.missions.base.mission
         obj_id objPlayer = getMissionHolder(objMission);
         debugSpeakMsg(objPlayer, "MISSION IS SUCCESFUL!");
         messageTo(objMission, "destructionSuccess", dctParams, 0, true);
-        return;
     }
 
     public void returnAllCredits(obj_id objMission) throws InterruptedException
@@ -80,7 +81,6 @@ public class mission_structure_base extends script.systems.missions.base.mission
             setObjVar(objPlayer, "bountyInfo." + objBountyHunter + ".1", objMission);
             setObjVar(objPlayer, "bountyInfo." + objBountyHunter + ".intMissionCount", 1);
         }
-        return;
     }
 
     public void removeBountyHunterTrackingInformation(obj_id objPlayer, obj_id objBountyHunter, obj_id objMission) throws InterruptedException
@@ -145,7 +145,6 @@ public class mission_structure_base extends script.systems.missions.base.mission
                 }
             }
         }
-        return;
     }
 
     public void notifyBountyHunterFailure(obj_id objPlayer, obj_id objTarget) throws InterruptedException
@@ -161,7 +160,6 @@ public class mission_structure_base extends script.systems.missions.base.mission
             messageTo(objMission, "bountyHunterFail", dctParams, 0, true);
             intI = intI + 1;
         }
-        return;
     }
 
     public void notifyBountyHunterSuccess(obj_id objPlayer, obj_id objTarget) throws InterruptedException
@@ -178,6 +176,5 @@ public class mission_structure_base extends script.systems.missions.base.mission
             messageTo(objMission, "bountyHunterSuccess", dctParams, 0, true);
             intI = intI + 1;
         }
-        return;
     }
 }

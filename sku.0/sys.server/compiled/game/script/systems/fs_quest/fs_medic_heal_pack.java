@@ -1,5 +1,11 @@
 package script.systems.fs_quest;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.utils;
 import script.obj_id;
 import script.string_id;
@@ -10,6 +16,7 @@ public class fs_medic_heal_pack extends script.base_script
     public static final String CURE_SYMPTOM_ONE = "cureSymptomOne";
     public static final String CURE_SYMPTOM_TWO = "cureSymptomTwo";
     public static final String GIVE_SYMPTOM_ONE = "giveSymptomOne";
+
     public fs_medic_heal_pack()
     {
     }

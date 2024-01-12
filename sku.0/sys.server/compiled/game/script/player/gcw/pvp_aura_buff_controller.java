@@ -1,5 +1,11 @@
 package script.player.gcw;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.obj_id;
@@ -11,6 +17,7 @@ public class pvp_aura_buff_controller extends script.base_script
     public pvp_aura_buff_controller()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (factions.isRebel(self))
@@ -27,13 +34,14 @@ public class pvp_aura_buff_controller extends script.base_script
             messageTo(self, "buffAlly", null, 3.0f, false);
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             messageTo(self, "removeScript", null, 2.0f, false);
             buff.removeBuff(self, "pvp_aura_buff_self");
             return SCRIPT_CONTINUE;
         }
     }
+
     public int buffAlly(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id[] players = null;
@@ -41,7 +49,7 @@ public class pvp_aura_buff_controller extends script.base_script
         {
             players = getCreaturesInRange(self, 20.0f);
         }
-        else 
+        else
         {
             players = trial.getValidPlayersInRadius(self, 20.0f);
         }
@@ -53,7 +61,7 @@ public class pvp_aura_buff_controller extends script.base_script
         {
             applyBuff = false;
         }
-        else 
+        else
         {
             faction = getIntObjVar(self, "pvp_aura_buff.faction");
         }
@@ -61,24 +69,31 @@ public class pvp_aura_buff_controller extends script.base_script
         {
             applyBuff = false;
         }
-        else 
+        else
         {
-            for (obj_id player : players) {
-                if (!isPlayer(player) && !isMob(player) || isDead(player)) {
+            for (obj_id player : players)
+            {
+                if (!isPlayer(player) && !isMob(player) || isDead(player))
+                {
                     continue;
                 }
-                switch (faction) {
+                switch (faction)
+                {
                     case 0:
-                        if (factions.isRebel(player)) {
-                            if (!stealth.hasInvisibleBuff(player)) {
+                        if (factions.isRebel(player))
+                        {
+                            if (!stealth.hasInvisibleBuff(player))
+                            {
                                 utils.addElement(filteredPlayers, player);
                             }
                             break;
                         }
                         break;
                     case 1:
-                        if (factions.isImperial(player)) {
-                            if (!stealth.hasInvisibleBuff(player)) {
+                        if (factions.isImperial(player))
+                        {
+                            if (!stealth.hasInvisibleBuff(player))
+                            {
                                 utils.addElement(filteredPlayers, player);
                             }
                         }
@@ -112,6 +127,7 @@ public class pvp_aura_buff_controller extends script.base_script
         messageTo(self, "buffAlly", null, 4.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int removeFactionObjVar(obj_id self, dictionary params) throws InterruptedException
     {
         removeObjVar(self, "pvp_aura_buff.faction");

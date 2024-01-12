@@ -1,13 +1,16 @@
 package script.player;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
 public class player_faction extends script.base_script
 {
-    public player_faction()
-    {
-    }
     public static final string_id SID_ABORT_RESIGNATION = new string_id("faction_recruiter", "abort_resignation");
     public static final string_id SID_SUI_RESIG_COMPLETE_IN_5 = new string_id("faction_recruiter", "sui_resig_complete_in_5");
     public static final string_id SID_NOT_ALIGNED = new string_id("faction_recruiter", "not_aligned");
@@ -18,6 +21,10 @@ public class player_faction extends script.base_script
     public static final string_id SID_DUNGEON_NOCHANGE = new string_id("faction_recruiter", "dungeon_nochange");
     public static final String COLOR_REBELS = colors_hex.HEADER + colors_hex.COLOR_REBELS;
     public static final String COLOR_IMPERIALS = colors_hex.HEADER + colors_hex.COLOR_IMPERIALS;
+    public player_faction()
+    {
+    }
+
     public int cmdPVP(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (factions.isInAdhocPvpArea(self))
@@ -44,7 +51,7 @@ public class player_faction extends script.base_script
         {
             recruiter = "object/mobile/dressed_imperial_officer_m.iff";
         }
-        else 
+        else
         {
             sendSystemMessage(self, SID_NOT_ALIGNED);
             return SCRIPT_OVERRIDE;
@@ -78,6 +85,7 @@ public class player_faction extends script.base_script
         }
         return SCRIPT_OVERRIDE;
     }
+
     public int OnPvpTypeChanged(obj_id self, int oldType, int newType) throws InterruptedException
     {
         if (newType == PVPTYPE_DECLARED)
@@ -87,10 +95,12 @@ public class player_faction extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnPvpFactionChanged(obj_id self, int oldFaction, int newFaction) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnEnterRegion(obj_id self, String planet, String name) throws InterruptedException
     {
         if (name.startsWith("gcw_") && name.endsWith("_start"))
@@ -106,7 +116,8 @@ public class player_faction extends script.base_script
                     return SCRIPT_CONTINUE;
                 }
             }
-            switch (planet) {
+            switch (planet)
+            {
                 case "talus":
                     baseLoc.x = -4938.0f;
                     baseLoc.y = 0.0f;
@@ -152,16 +163,19 @@ public class player_faction extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnEnteredCombat(obj_id self) throws InterruptedException
     {
         pvp.validatePlayerDamageTracking(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnCreatureDamaged(obj_id self, obj_id attacker, obj_id wpn, int[] damage) throws InterruptedException
     {
         pvp.updatePlayerDamageTracking(self, attacker, wpn, damage);
         return SCRIPT_CONTINUE;
     }
+
     public int handleCloneRespawn(obj_id self, dictionary params) throws InterruptedException
     {
         if (utils.hasScriptVar(self, factions.IN_ADHOC_PVP_AREA) && !(getLocation(self).area).equals("adventure2"))
@@ -178,6 +192,7 @@ public class player_faction extends script.base_script
         pvp.clearPlayerDamageTracking(self);
         return SCRIPT_CONTINUE;
     }
+
     public int msgResignFromFaction(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasSkill(self, "force_rank_light_novice") || hasSkill(self, "force_rank_dark_novice"))
@@ -187,6 +202,7 @@ public class player_faction extends script.base_script
         factions.resignFromFaction(self);
         return SCRIPT_CONTINUE;
     }
+
     public int msgGoCovert(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id top = getTopMostContainer(self);
@@ -215,6 +231,7 @@ public class player_faction extends script.base_script
         factions.goCovert(self);
         return SCRIPT_CONTINUE;
     }
+
     public int msgGoOnLeave(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasScript(self, "force_rank_light_novice") || hasScript(self, "force_rank_dark_novice"))
@@ -224,6 +241,7 @@ public class player_faction extends script.base_script
         factions.goOnLeave(self);
         return SCRIPT_CONTINUE;
     }
+
     public int msgGoOvert(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasScript(self, "force_rank_light_novice") || hasScript(self, "force_rank_dark_novice"))
@@ -240,17 +258,20 @@ public class player_faction extends script.base_script
         factions.goOvert(self);
         return SCRIPT_CONTINUE;
     }
+
     public int gcwStatus(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         string_id strSpam = new string_id("gcw", "gcw_status_info");
         sendSystemMessage(self, strSpam);
         return SCRIPT_CONTINUE;
     }
+
     public int cmdDelegateFactionPoints(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         factions.delegateFactionPoints(self, target, params);
         return SCRIPT_CONTINUE;
     }
+
     public int handleDelegateSui(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id target = utils.getObjIdScriptVar(self, "delegate.target");
@@ -272,6 +293,7 @@ public class player_faction extends script.base_script
         queueCommand(self, (252954210), target, Integer.toString(amt), COMMAND_PRIORITY_DEFAULT);
         return SCRIPT_CONTINUE;
     }
+
     public int handleLeaveFactionSui(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("gcw", "got mst");
@@ -299,6 +321,7 @@ public class player_faction extends script.base_script
         CustomerServiceLog("player_faction", "PLAYER-FACTION ALTERED|TIME:" + getGameTime() + "|PLAYER:" + player + "|PLAYER NAME:" + getName(player) + "|ZONE:" + getCurrentSceneName() + "|PLAYER CONFIRMED DESIRE TO LEAVE THEIR FACTION VIA RECRUITER. TOLD PLAYER OBJECT TO RESIGN FROM FACTION");
         return SCRIPT_CONTINUE;
     }
+
     public int handleGoCovert(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "intChangingFactionStatus"))
@@ -336,6 +359,7 @@ public class player_faction extends script.base_script
         factions.goCovertWithDelay(self, 30);
         return SCRIPT_CONTINUE;
     }
+
     public int handleGoOvert(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "intChangingFactionStatus"))
@@ -367,13 +391,14 @@ public class player_faction extends script.base_script
         factions.goOvertWithDelay(self, 300);
         return SCRIPT_CONTINUE;
     }
+
     public int recievePvpRegionBonus(obj_id self, dictionary params) throws InterruptedException
     {
         if (!utils.hasScriptVar(self, gcw.PVP_REGION_ACTIVITY_PERFORMED))
         {
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             utils.removeScriptVar(self, gcw.PVP_REGION_ACTIVITY_PERFORMED);
         }
@@ -382,11 +407,13 @@ public class player_faction extends script.base_script
         gcw.grantModifiedGcwPoints(self, points, gcw.GCW_POINT_TYPE_GROUND_PVP_REGION, information);
         return SCRIPT_CONTINUE;
     }
+
     public int cmdFactionalHelper(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         factions.neutralMercenaryStatusMenu(self);
         return SCRIPT_CONTINUE;
     }
+
     public int handleFactionalHelperChoice(obj_id self, dictionary params) throws InterruptedException
     {
         if (!utils.hasScriptVar(self, factions.SCRIPTVAR_FACTIONAL_HELPER_SUI_ID))
@@ -425,7 +452,8 @@ public class player_faction extends script.base_script
             int rowSelected = sui.getListboxSelectedRow(params);
             if ((rowSelected >= 0) && (rowSelected < choices.length))
             {
-                switch (choices[rowSelected]) {
+                switch (choices[rowSelected])
+                {
                     case factions.MERC_END_COVERT_IMPERIAL:
                         sendSystemMessage(self, factions.SID_MERC_IMPERIAL_COMBATANT_END);
                         break;
@@ -460,7 +488,7 @@ public class player_faction extends script.base_script
                     sendSystemMessage(self, "Reducing wait to 5 seconds ***BECAUSE YOU ARE IN GOD MODE***.", "");
                     messageTo(self, "executeFactionalHelperChoice", messageToParams, 5.0f, false);
                 }
-                else 
+                else
                 {
                     messageTo(self, "executeFactionalHelperChoice", messageToParams, 60.0f, false);
                 }
@@ -468,6 +496,7 @@ public class player_faction extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int executeFactionalHelperChoice(obj_id self, dictionary params) throws InterruptedException
     {
         if (0 != pvpGetAlignedFaction(self))
@@ -485,7 +514,8 @@ public class player_faction extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        switch (mercenary_type) {
+        switch (mercenary_type)
+        {
             case factions.MERC_END_COVERT_IMPERIAL:
                 pvpNeutralSetMercenaryFaction(self, 0, false);
                 sendSystemMessage(self, factions.SID_MERC_IMPERIAL_COMBATANT_TERMINATED);
@@ -523,21 +553,25 @@ public class player_faction extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cmdGcwScore(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         showGcwScoreboard(self);
         return SCRIPT_CONTINUE;
     }
+
     public int cmdGcwSkirmishCityHelp(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         gcw.gcwCityHelpText(self);
         return SCRIPT_CONTINUE;
     }
+
     public int displayGcwScoreSui(obj_id self, dictionary params) throws InterruptedException
     {
         showGcwScoreboard(self);
         return SCRIPT_CONTINUE;
     }
+
     public void showGcwScoreboard(obj_id self) throws InterruptedException
     {
         if (!isIdValid(self) || !exists(self))
@@ -556,32 +590,32 @@ public class player_faction extends script.base_script
             sendSystemMessage(self, new string_id("spam", "gcw_score_empty"));
             return;
         }
-        String[] table_titles = 
-        {
-            "@guild:table_title_name",
-            "@spam:table_title_faction",
-            "@spam:table_title_profession",
-            "@spam:table_title_level",
-            "@spam:table_title_gcw",
-            "@spam:table_title_pvp_kills",
-            "@spam:table_title_kills",
-            "@spam:table_title_assists",
-            "@spam:table_title_crafted",
-            "@spam:table_title_destroyed"
-        };
-        String[] table_types = 
-        {
-            "text",
-            "text",
-            "text",
-            "integer",
-            "integer",
-            "integer",
-            "integer",
-            "integer",
-            "integer",
-            "integer"
-        };
+        String[] table_titles =
+                {
+                        "@guild:table_title_name",
+                        "@spam:table_title_faction",
+                        "@spam:table_title_profession",
+                        "@spam:table_title_level",
+                        "@spam:table_title_gcw",
+                        "@spam:table_title_pvp_kills",
+                        "@spam:table_title_kills",
+                        "@spam:table_title_assists",
+                        "@spam:table_title_crafted",
+                        "@spam:table_title_destroyed"
+                };
+        String[] table_types =
+                {
+                        "text",
+                        "text",
+                        "text",
+                        "integer",
+                        "integer",
+                        "integer",
+                        "integer",
+                        "integer",
+                        "integer",
+                        "integer"
+                };
         String statisticsTitle = "Invasion Statistics";
         int phase = gcw_score.getGcwPhase();
         int winner = gcw_score.getGcwWinner();
@@ -590,25 +624,25 @@ public class player_faction extends script.base_script
         switch (phase)
         {
             case gcw.GCW_CITY_PHASE_UNKNOWN:
-            invasionPhase = "Invasion Over";
-            if (winner == factions.FACTION_FLAG_REBEL)
-            {
-                invasionWinner = COLOR_REBELS + " Rebels won!";
-            }
-            else if (winner == factions.FACTION_FLAG_IMPERIAL)
-            {
-                invasionWinner = COLOR_IMPERIALS + " Imperials won!";
-            }
-            break;
+                invasionPhase = "Invasion Over";
+                if (winner == factions.FACTION_FLAG_REBEL)
+                {
+                    invasionWinner = COLOR_REBELS + " Rebels won!";
+                }
+                else if (winner == factions.FACTION_FLAG_IMPERIAL)
+                {
+                    invasionWinner = COLOR_IMPERIALS + " Imperials won!";
+                }
+                break;
             case gcw.GCW_CITY_PHASE_CONSTRUCTION:
-            invasionPhase = "Construction Underway";
-            break;
+                invasionPhase = "Construction Underway";
+                break;
             case gcw.GCW_CITY_PHASE_COMBAT:
-            invasionPhase = "Invasion Underway";
-            break;
+                invasionPhase = "Invasion Underway";
+                break;
             default:
-            invasionPhase = "Unknown";
-            break;
+                invasionPhase = "Unknown";
+                break;
         }
         obj_id gcwObject = gcw.getInvasionSequencerNearby(self);
         if (!isIdValid(gcwObject) || !exists(gcwObject))

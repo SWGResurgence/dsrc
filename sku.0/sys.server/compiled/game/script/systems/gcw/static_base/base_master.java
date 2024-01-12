@@ -1,5 +1,11 @@
 package script.systems.gcw.static_base;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.create;
 import script.library.utils;
@@ -22,6 +28,7 @@ public class base_master extends script.base_script
     public static final String VAR_ACCESS_DELAY = "gcw.static_base.access_delay";
     public static final String SCRIPT_VAR_VALIDATION = "gcw.static_base.validation";
     public static final String TABLE_TERMINAL_SPAWN = "datatables/gcw/static_base/terminal_spawn.iff";
+
     public base_master()
     {
     }
@@ -61,7 +68,7 @@ public class base_master extends script.base_script
     public obj_id findMasterObject(obj_id self) throws InterruptedException
     {
         obj_id[] objects = getObjectsInRange(getLocation(self), 100.0f);
-        if (objects == null || objects.length == 0)
+        if (objects == null)
         {
             return obj_id.NULL_ID;
         }
@@ -217,7 +224,7 @@ public class base_master extends script.base_script
         if (hasObjVar(self, VAR_TERMINAL_IDS))
         {
             obj_id[] terminals = getObjIdArrayObjVar(self, VAR_TERMINAL_IDS);
-            if (terminals != null && terminals.length > 0)
+            if (terminals != null)
             {
                 for (obj_id terminal : terminals)
                 {
@@ -343,7 +350,7 @@ public class base_master extends script.base_script
     public int handleTerminalValidation(obj_id self, dictionary params) throws InterruptedException
     {
         int[] validate = utils.getIntArrayScriptVar(self, SCRIPT_VAR_VALIDATION);
-        if (validate == null || validate.length == 0)
+        if (validate == null)
         {
             return SCRIPT_CONTINUE;
         }

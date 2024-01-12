@@ -1,133 +1,144 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.*;
 
 public class ep3_clone_relics_queen_kylantha extends script.base_script
 {
+    public static String c_stringFile = "conversation/ep3_clone_relics_queen_kylantha";
+
     public ep3_clone_relics_queen_kylantha()
     {
     }
-    public static String c_stringFile = "conversation/ep3_clone_relics_queen_kylantha";
+
     public boolean ep3_clone_relics_queen_kylantha_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean ep3_clone_relics_queen_kylantha_condition_playerIsRebel(obj_id player, obj_id npc) throws InterruptedException
     {
         return factions.isRebel(player);
     }
+
     public boolean ep3_clone_relics_queen_kylantha_condition_isWookie(obj_id player, obj_id npc) throws InterruptedException
     {
         return (getSpecies(player) == SPECIES_WOOKIEE);
     }
+
     public boolean ep3_clone_relics_queen_kylantha_condition_hasCompletedQuestOne(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.hasCompletedQuest(player, "ep3_clone_relics_queen_1"));
     }
+
     public boolean ep3_clone_relics_queen_kylantha_condition_hasCompletedSpaceMission(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_quest.hasWonQuest(player, "space_battle", "ep3_clone_relics_queen_3") && !space_quest.hasReceivedReward(player, "space_battle", "ep3_clone_relics_queen_3"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return space_quest.hasWonQuest(player, "space_battle", "ep3_clone_relics_queen_3") && !space_quest.hasReceivedReward(player, "space_battle", "ep3_clone_relics_queen_3");
     }
+
     public boolean ep3_clone_relics_queen_kylantha_condition_failedSpaceMission(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_quest.hasAbortedQuest(player, "space_battle", "ep3_clone_relics_queen_3") || space_quest.hasFailedQuest(player, "space_battle", "ep3_clone_relics_queen_3"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return space_quest.hasAbortedQuest(player, "space_battle", "ep3_clone_relics_queen_3") || space_quest.hasFailedQuest(player, "space_battle", "ep3_clone_relics_queen_3");
     }
+
     public boolean ep3_clone_relics_queen_kylantha_condition_receivedReward(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_quest.hasWonQuest(player, "space_battle", "ep3_clone_relics_queen_3") && space_quest.hasReceivedReward(player, "space_battle", "ep3_clone_relics_queen_3"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return space_quest.hasWonQuest(player, "space_battle", "ep3_clone_relics_queen_3") && space_quest.hasReceivedReward(player, "space_battle", "ep3_clone_relics_queen_3");
     }
+
     public boolean ep3_clone_relics_queen_kylantha_condition_onQuestOne(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isQuestActive(player, "ep3_clone_relics_queen_1"));
     }
+
     public boolean ep3_clone_relics_queen_kylantha_condition_isGm(obj_id player, obj_id npc) throws InterruptedException
     {
         return (hasObjVar(player, "gm"));
     }
+
     public boolean ep3_clone_relics_queen_kylantha_condition_hasEp3(obj_id player, obj_id npc) throws InterruptedException
     {
         return features.hasEpisode3Expansion(player);
     }
+
     public boolean ep3_clone_relics_queen_kylantha_condition_failedQuestTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.hasCompletedQuest(player, "ep3_clone_relics_queen_1") && !groundquests.isQuestActiveOrComplete(player, "ep3_clone_relics_queen_2"));
     }
+
     public boolean ep3_clone_relics_queen_kylantha_condition_playerIsOnEmperor01(obj_id player, obj_id npc) throws InterruptedException
     {
         return factions.isImperial(player) && groundquests.isTaskActive(player, "itp_emperor_02", "itp_emperor_02_02");
     }
+
     public boolean ep3_clone_relics_queen_kylantha_condition_playerIsOnEmperor02(obj_id player, obj_id npc) throws InterruptedException
     {
         return factions.isImperial(player) && groundquests.isTaskActive(player, "itp_emperor_03", "itp_emperor_03_02");
     }
+
     public void ep3_clone_relics_queen_kylantha_action_giveReturnSignal(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "talkedToOvarra");
     }
+
     public void ep3_clone_relics_queen_kylantha_action_grantQuestOne(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "ep3_clone_relics_queen_1");
     }
+
     public void ep3_clone_relics_queen_kylantha_action_removeQuest1(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.clearQuest(player, "ep3_clone_relics_queen_1");
     }
+
     public void ep3_clone_relics_queen_kylantha_action_clearQuestOneAndTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.clearQuest(player, "ep3_clone_relics_queen_1");
         groundquests.clearQuest(player, "ep3_clone_relics_queen_2");
     }
+
     public void ep3_clone_relics_queen_kylantha_action_grantSpaceMission(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "space_battle", "ep3_clone_relics_queen_3");
     }
+
     public void ep3_clone_relics_queen_kylantha_action_grantReward(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.giveReward(player, "space_battle", "ep3_clone_relics_queen_3", 10000, "object/tangible/ship/crafted/chassis/arc170_reward_deed.iff");
     }
+
     public void ep3_clone_relics_queen_kylantha_action_removeQuest2(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.clearQuest(player, "ep3_clone_relics_queen_2");
     }
+
     public void ep3_clone_relics_queen_kylantha_action_removeQuestAll(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.clearQuest(player, "ep3_clone_relics_queen_1");
         groundquests.clearQuest(player, "ep3_clone_relics_queen_2");
     }
+
     public void ep3_clone_relics_queen_kylantha_action_grantQuestTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "ep3_clone_relics_queen_2");
     }
+
     public void ep3_clone_relics_queen_kylantha_action_sendEmperor01Signal(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "itp_emperor_02_02");
     }
+
     public void ep3_clone_relics_queen_kylantha_action_sendEmperor02Signal(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "itp_emperor_03_02");
     }
+
     public int ep3_clone_relics_queen_kylantha_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1135"))
@@ -147,7 +158,7 @@ public class ep3_clone_relics_queen_kylantha extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1139");
@@ -156,7 +167,7 @@ public class ep3_clone_relics_queen_kylantha extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_queen_kylantha.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -195,7 +206,7 @@ public class ep3_clone_relics_queen_kylantha extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1278");
@@ -212,7 +223,7 @@ public class ep3_clone_relics_queen_kylantha extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_queen_kylantha.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -222,6 +233,7 @@ public class ep3_clone_relics_queen_kylantha extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_queen_kylantha_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1139"))
@@ -242,6 +254,7 @@ public class ep3_clone_relics_queen_kylantha extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_queen_kylantha_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1145"))
@@ -262,7 +275,7 @@ public class ep3_clone_relics_queen_kylantha extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1149");
@@ -275,7 +288,7 @@ public class ep3_clone_relics_queen_kylantha extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_queen_kylantha.branchId");
                     prose_package pp = new prose_package();
@@ -318,7 +331,7 @@ public class ep3_clone_relics_queen_kylantha extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1278");
@@ -335,7 +348,7 @@ public class ep3_clone_relics_queen_kylantha extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_queen_kylantha.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -345,6 +358,7 @@ public class ep3_clone_relics_queen_kylantha extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_queen_kylantha_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1149"))
@@ -366,7 +380,7 @@ public class ep3_clone_relics_queen_kylantha extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1153");
@@ -375,7 +389,7 @@ public class ep3_clone_relics_queen_kylantha extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_queen_kylantha.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -385,6 +399,7 @@ public class ep3_clone_relics_queen_kylantha extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_queen_kylantha_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1153"))
@@ -407,6 +422,7 @@ public class ep3_clone_relics_queen_kylantha extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_queen_kylantha_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1159"))
@@ -434,7 +450,7 @@ public class ep3_clone_relics_queen_kylantha extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1163");
@@ -447,7 +463,7 @@ public class ep3_clone_relics_queen_kylantha extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_queen_kylantha.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -486,7 +502,7 @@ public class ep3_clone_relics_queen_kylantha extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1278");
@@ -503,7 +519,7 @@ public class ep3_clone_relics_queen_kylantha extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_queen_kylantha.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -513,6 +529,7 @@ public class ep3_clone_relics_queen_kylantha extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_queen_kylantha_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1163"))
@@ -552,6 +569,7 @@ public class ep3_clone_relics_queen_kylantha extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_queen_kylantha_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_83"))
@@ -572,6 +590,7 @@ public class ep3_clone_relics_queen_kylantha extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_queen_kylantha_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1173"))
@@ -638,7 +657,7 @@ public class ep3_clone_relics_queen_kylantha extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1278");
@@ -655,7 +674,7 @@ public class ep3_clone_relics_queen_kylantha extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_queen_kylantha.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -665,6 +684,7 @@ public class ep3_clone_relics_queen_kylantha extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_queen_kylantha_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1183"))
@@ -685,7 +705,7 @@ public class ep3_clone_relics_queen_kylantha extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1187");
@@ -698,7 +718,7 @@ public class ep3_clone_relics_queen_kylantha extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_queen_kylantha.branchId");
                     prose_package pp = new prose_package();
@@ -759,7 +779,7 @@ public class ep3_clone_relics_queen_kylantha extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1278");
@@ -776,7 +796,7 @@ public class ep3_clone_relics_queen_kylantha extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_queen_kylantha.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -786,6 +806,7 @@ public class ep3_clone_relics_queen_kylantha extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_queen_kylantha_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1187"))
@@ -806,6 +827,7 @@ public class ep3_clone_relics_queen_kylantha extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_queen_kylantha_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1197"))
@@ -833,7 +855,7 @@ public class ep3_clone_relics_queen_kylantha extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1201");
@@ -846,7 +868,7 @@ public class ep3_clone_relics_queen_kylantha extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_queen_kylantha.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -885,7 +907,7 @@ public class ep3_clone_relics_queen_kylantha extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1278");
@@ -902,7 +924,7 @@ public class ep3_clone_relics_queen_kylantha extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_queen_kylantha.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -912,6 +934,7 @@ public class ep3_clone_relics_queen_kylantha extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_queen_kylantha_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1201"))
@@ -940,7 +963,7 @@ public class ep3_clone_relics_queen_kylantha extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1205");
@@ -957,7 +980,7 @@ public class ep3_clone_relics_queen_kylantha extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_queen_kylantha.branchId");
                     prose_package pp = new prose_package();
@@ -987,7 +1010,7 @@ public class ep3_clone_relics_queen_kylantha extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1259");
@@ -1000,7 +1023,7 @@ public class ep3_clone_relics_queen_kylantha extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_queen_kylantha.branchId");
                     prose_package pp = new prose_package();
@@ -1014,6 +1037,7 @@ public class ep3_clone_relics_queen_kylantha extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_queen_kylantha_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1205"))
@@ -1035,7 +1059,7 @@ public class ep3_clone_relics_queen_kylantha extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1209");
@@ -1048,7 +1072,7 @@ public class ep3_clone_relics_queen_kylantha extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_queen_kylantha.branchId");
                     prose_package pp = new prose_package();
@@ -1081,7 +1105,7 @@ public class ep3_clone_relics_queen_kylantha extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1227");
@@ -1098,7 +1122,7 @@ public class ep3_clone_relics_queen_kylantha extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_queen_kylantha.branchId");
                     prose_package pp = new prose_package();
@@ -1129,7 +1153,7 @@ public class ep3_clone_relics_queen_kylantha extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1209");
@@ -1142,7 +1166,7 @@ public class ep3_clone_relics_queen_kylantha extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_queen_kylantha.branchId");
                     prose_package pp = new prose_package();
@@ -1175,7 +1199,7 @@ public class ep3_clone_relics_queen_kylantha extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1227");
@@ -1192,7 +1216,7 @@ public class ep3_clone_relics_queen_kylantha extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_queen_kylantha.branchId");
                     prose_package pp = new prose_package();
@@ -1206,6 +1230,7 @@ public class ep3_clone_relics_queen_kylantha extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_queen_kylantha_handleBranch26(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1209"))
@@ -1234,7 +1259,7 @@ public class ep3_clone_relics_queen_kylantha extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1213");
@@ -1247,7 +1272,7 @@ public class ep3_clone_relics_queen_kylantha extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_queen_kylantha.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1257,6 +1282,7 @@ public class ep3_clone_relics_queen_kylantha extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_queen_kylantha_handleBranch27(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1213"))
@@ -1277,7 +1303,7 @@ public class ep3_clone_relics_queen_kylantha extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1217");
@@ -1290,7 +1316,7 @@ public class ep3_clone_relics_queen_kylantha extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_queen_kylantha.branchId");
                     prose_package pp = new prose_package();
@@ -1321,6 +1347,7 @@ public class ep3_clone_relics_queen_kylantha extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_queen_kylantha_handleBranch28(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1217"))
@@ -1343,6 +1370,7 @@ public class ep3_clone_relics_queen_kylantha extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_queen_kylantha_handleBranch31(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1227"))
@@ -1371,7 +1399,7 @@ public class ep3_clone_relics_queen_kylantha extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1231");
@@ -1384,7 +1412,7 @@ public class ep3_clone_relics_queen_kylantha extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_queen_kylantha.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1417,7 +1445,7 @@ public class ep3_clone_relics_queen_kylantha extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1247");
@@ -1430,7 +1458,7 @@ public class ep3_clone_relics_queen_kylantha extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_queen_kylantha.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1440,6 +1468,7 @@ public class ep3_clone_relics_queen_kylantha extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_queen_kylantha_handleBranch32(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1231"))
@@ -1460,7 +1489,7 @@ public class ep3_clone_relics_queen_kylantha extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1235");
@@ -1473,7 +1502,7 @@ public class ep3_clone_relics_queen_kylantha extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_queen_kylantha.branchId");
                     prose_package pp = new prose_package();
@@ -1504,6 +1533,7 @@ public class ep3_clone_relics_queen_kylantha extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_queen_kylantha_handleBranch33(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1235"))
@@ -1526,6 +1556,7 @@ public class ep3_clone_relics_queen_kylantha extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_queen_kylantha_handleBranch36(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1247"))
@@ -1554,7 +1585,7 @@ public class ep3_clone_relics_queen_kylantha extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1231");
@@ -1567,7 +1598,7 @@ public class ep3_clone_relics_queen_kylantha extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_queen_kylantha.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1594,6 +1625,7 @@ public class ep3_clone_relics_queen_kylantha extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_queen_kylantha_handleBranch38(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1259"))
@@ -1622,7 +1654,7 @@ public class ep3_clone_relics_queen_kylantha extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1205");
@@ -1639,7 +1671,7 @@ public class ep3_clone_relics_queen_kylantha extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_queen_kylantha.branchId");
                     prose_package pp = new prose_package();
@@ -1653,6 +1685,7 @@ public class ep3_clone_relics_queen_kylantha extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_queen_kylantha_handleBranch39(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1278"))
@@ -1690,6 +1723,7 @@ public class ep3_clone_relics_queen_kylantha extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_queen_kylantha_handleBranch43(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1263"))
@@ -1704,6 +1738,7 @@ public class ep3_clone_relics_queen_kylantha extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -1716,6 +1751,7 @@ public class ep3_clone_relics_queen_kylantha extends script.base_script
         setName(self, new string_id("ep3/npc_names", "clone_relics_queen_kylantha"));
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
@@ -1724,6 +1760,7 @@ public class ep3_clone_relics_queen_kylantha extends script.base_script
         setName(self, new string_id("ep3/npc_names", "clone_relics_queen_kylantha"));
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -1733,18 +1770,21 @@ public class ep3_clone_relics_queen_kylantha extends script.base_script
         faceTo(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.ep3_clone_relics_queen_kylantha");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -1790,7 +1830,7 @@ public class ep3_clone_relics_queen_kylantha extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_1135");
@@ -1806,7 +1846,7 @@ public class ep3_clone_relics_queen_kylantha extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "ep3_clone_relics_queen_kylantha", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -1840,7 +1880,7 @@ public class ep3_clone_relics_queen_kylantha extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_1145");
@@ -1856,7 +1896,7 @@ public class ep3_clone_relics_queen_kylantha extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "ep3_clone_relics_queen_kylantha", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -1889,7 +1929,7 @@ public class ep3_clone_relics_queen_kylantha extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_1159");
@@ -1905,7 +1945,7 @@ public class ep3_clone_relics_queen_kylantha extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "ep3_clone_relics_queen_kylantha", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -1932,7 +1972,7 @@ public class ep3_clone_relics_queen_kylantha extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_83");
@@ -1944,7 +1984,7 @@ public class ep3_clone_relics_queen_kylantha extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "ep3_clone_relics_queen_kylantha", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -1985,7 +2025,7 @@ public class ep3_clone_relics_queen_kylantha extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_1173");
@@ -2005,7 +2045,7 @@ public class ep3_clone_relics_queen_kylantha extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "ep3_clone_relics_queen_kylantha", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -2046,7 +2086,7 @@ public class ep3_clone_relics_queen_kylantha extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_1183");
@@ -2066,7 +2106,7 @@ public class ep3_clone_relics_queen_kylantha extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "ep3_clone_relics_queen_kylantha", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -2100,7 +2140,7 @@ public class ep3_clone_relics_queen_kylantha extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_1197");
@@ -2116,7 +2156,7 @@ public class ep3_clone_relics_queen_kylantha extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "ep3_clone_relics_queen_kylantha", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -2141,7 +2181,7 @@ public class ep3_clone_relics_queen_kylantha extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_1263");
@@ -2149,7 +2189,7 @@ public class ep3_clone_relics_queen_kylantha extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_clone_relics_queen_kylantha.branchId", 43);
                 npcStartConversation(player, npc, "ep3_clone_relics_queen_kylantha", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2158,6 +2198,7 @@ public class ep3_clone_relics_queen_kylantha extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("ep3_clone_relics_queen_kylantha"))

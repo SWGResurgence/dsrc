@@ -1,5 +1,11 @@
 package script.npc.celebrity;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.hue;
@@ -11,6 +17,7 @@ public class huff_darklighter extends script.base_script
     public huff_darklighter()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setName(self, "Huff Darklighter");
@@ -26,6 +33,7 @@ public class huff_darklighter extends script.base_script
         setObjVar(self, "quest_table", "huff_darklighter_krayt");
         return SCRIPT_CONTINUE;
     }
+
     public int OnGiveItem(obj_id self, obj_id item, obj_id player) throws InterruptedException
     {
         String itemName = getTemplateName(item);

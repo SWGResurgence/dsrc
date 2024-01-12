@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.mustafar_trials.valley_battleground;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.factions;
 import script.library.trial;
@@ -9,11 +15,12 @@ import script.obj_id;
 
 public class battlefield_destructable extends script.base_script
 {
+    public static final String VOLUME_NAME = "addGeneratorHate";
+    public static final float VOLUME_RANGE = 40.0f;
     public battlefield_destructable()
     {
     }
-    public static final String VOLUME_NAME = "addGeneratorHate";
-    public static final float VOLUME_RANGE = 40.0f;
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         trial.setInterest(self);
@@ -24,6 +31,7 @@ public class battlefield_destructable extends script.base_script
         factions.setIgnorePlayer(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectDisabled(obj_id self, obj_id killer) throws InterruptedException
     {
         location death = getLocation(self);
@@ -34,8 +42,10 @@ public class battlefield_destructable extends script.base_script
         obj_id[] enemies = getWhoIsTargetingMe(self);
         if (enemies != null && enemies.length > 1)
         {
-            for (obj_id enemy : enemies) {
-                if (isPlayer(enemy)) {
+            for (obj_id enemy : enemies)
+            {
+                if (isPlayer(enemy))
+                {
                     setTarget(enemy, null);
                     setCombatTarget(enemy, null);
                 }
@@ -43,6 +53,7 @@ public class battlefield_destructable extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id breacher) throws InterruptedException
     {
         if (volumeName.equals(VOLUME_NAME))
@@ -54,15 +65,18 @@ public class battlefield_destructable extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void setTriggerVolume(obj_id self) throws InterruptedException
     {
         createTriggerVolume(VOLUME_NAME, VOLUME_RANGE, true);
     }
+
     public int destroyDisabledLair(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectDamaged(obj_id self, obj_id attacker, obj_id weapon, int damage) throws InterruptedException
     {
         int curHP = getHitpoints(self);
@@ -79,7 +93,7 @@ public class battlefield_destructable extends script.base_script
                     setObjVar(self, "playingEffect", 1);
                     messageTo(self, "effectManager", null, 15, true);
                 }
-                else 
+                else
                 {
                     location death = getLocation(self);
                     setObjVar(self, "playingEffect", 1);
@@ -89,6 +103,7 @@ public class battlefield_destructable extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int effectManager(obj_id self, dictionary params) throws InterruptedException
     {
         removeObjVar(self, "playingEffect");

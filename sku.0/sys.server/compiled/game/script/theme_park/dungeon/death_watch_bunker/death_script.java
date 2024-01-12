@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.death_watch_bunker;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.obj_id;
 
@@ -8,11 +14,13 @@ public class death_script extends script.base_script
     public death_script()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "doubleCheck", null, 3600, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDeath(obj_id self, obj_id killer, obj_id corpse) throws InterruptedException
     {
         obj_id top = getTopMostContainer(self);
@@ -27,6 +35,7 @@ public class death_script extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int doubleCheck(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id top = getTopMostContainer(self);
@@ -38,13 +47,13 @@ public class death_script extends script.base_script
                 messageTo(self, "doubleCheck", null, 3600, false);
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 detachScript(self, "theme_park.dungeon.death_watch_bunker.death_script");
                 return SCRIPT_CONTINUE;
             }
         }
-        else 
+        else
         {
             detachScript(self, "theme_park.dungeon.death_watch_bunker.death_script");
         }

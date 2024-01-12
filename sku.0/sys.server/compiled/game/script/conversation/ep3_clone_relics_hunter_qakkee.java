@@ -1,142 +1,182 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.*;
 
 public class ep3_clone_relics_hunter_qakkee extends script.base_script
 {
+    public static String c_stringFile = "conversation/ep3_clone_relics_hunter_qakkee";
+
     public ep3_clone_relics_hunter_qakkee()
     {
     }
-    public static String c_stringFile = "conversation/ep3_clone_relics_hunter_qakkee";
+
     public boolean ep3_clone_relics_hunter_qakkee_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean ep3_clone_relics_hunter_qakkee_condition_hasCompletedAllQuests(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.hasCompletedQuest(player, "ep3_clone_relics_hunter_qakkee_5"));
     }
+
     public boolean ep3_clone_relics_hunter_qakkee_condition_hasCompletedTaskOne(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.hasCompletedTask(player, "ep3_clone_relics_hunter_qakkee_1", "killDewbacks"));
     }
+
     public boolean ep3_clone_relics_hunter_qakkee_condition_hasCompletedTaskTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.hasCompletedTask(player, "ep3_clone_relics_hunter_qakkee_2", "killSnorbal"));
     }
+
     public boolean ep3_clone_relics_hunter_qakkee_condition_isOnQuestOne(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isTaskActive(player, "ep3_clone_relics_hunter_qakkee_1", "killDewbacks"));
     }
+
     public boolean ep3_clone_relics_hunter_qakkee_condition_isOnQuestTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isQuestActive(player, "ep3_clone_relics_hunter_qakkee_2"));
     }
+
     public boolean ep3_clone_relics_hunter_qakkee_condition_hasCompletedQuestTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.hasCompletedQuest(player, "ep3_clone_relics_hunter_qakkee_2"));
     }
+
     public boolean ep3_clone_relics_hunter_qakkee_condition_hasCompletedTaskThree(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.hasCompletedTask(player, "ep3_clone_relics_hunter_qakkee_3", "killVoritorLizards"));
     }
+
     public boolean ep3_clone_relics_hunter_qakkee_condition_isOnQuestThree(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isQuestActive(player, "ep3_clone_relics_hunter_qakkee_3"));
     }
+
     public boolean ep3_clone_relics_hunter_qakkee_condition_hasCompletedQuestThree(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.hasCompletedQuest(player, "ep3_clone_relics_hunter_qakkee_3"));
     }
+
     public boolean ep3_clone_relics_hunter_qakkee_condition_isOnQuestFour(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isQuestActive(player, "ep3_clone_relics_hunter_qakkee_4"));
     }
+
     public boolean ep3_clone_relics_hunter_qakkee_condition_hasCompletedTaskFour(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.hasCompletedTask(player, "ep3_clone_relics_hunter_qakkee_4", "killRancor"));
     }
+
     public boolean ep3_clone_relics_hunter_qakkee_condition_hasCompletedQuestFour(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.hasCompletedQuest(player, "ep3_clone_relics_hunter_qakkee_4"));
     }
+
     public boolean ep3_clone_relics_hunter_qakkee_condition_isOnQuestFive(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isQuestActive(player, "ep3_clone_relics_hunter_qakkee_5"));
     }
+
     public boolean ep3_clone_relics_hunter_qakkee_condition_hasCompletedTaskFive(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.hasCompletedTask(player, "ep3_clone_relics_hunter_qakkee_5", "killSawtooth"));
     }
+
     public boolean ep3_clone_relics_hunter_qakkee_condition_isGm(obj_id player, obj_id npc) throws InterruptedException
     {
         return (hasObjVar(player, "gm"));
     }
+
     public boolean ep3_clone_relics_hunter_qakkee_condition_hasEp3(obj_id player, obj_id npc) throws InterruptedException
     {
         return features.hasEpisode3Expansion(player);
     }
+
     public void ep3_clone_relics_hunter_qakkee_action_removeQuestOne(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.clearQuest(player, "ep3_clone_relics_hunter_qakkee_1");
     }
+
     public void ep3_clone_relics_hunter_qakkee_action_removeQuestTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.clearQuest(player, "ep3_clone_relics_hunter_qakkee_2");
     }
+
     public void ep3_clone_relics_hunter_qakkee_action_grantQuestOne(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "ep3_clone_relics_hunter_qakkee_1");
     }
+
     public void ep3_clone_relics_hunter_qakkee_action_grantQuestTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "ep3_clone_relics_hunter_qakkee_2");
     }
+
     public void ep3_clone_relics_hunter_qakkee_action_rewardOne(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "giveRewardOne");
     }
+
     public void ep3_clone_relics_hunter_qakkee_action_grantQuestThree(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "ep3_clone_relics_hunter_qakkee_3");
     }
+
     public void ep3_clone_relics_hunter_qakkee_action_stopTimer(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "completeQuestThree");
     }
+
     public void ep3_clone_relics_hunter_qakkee_action_removeQuestThree(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.clearQuest(player, "ep3_clone_relics_hunter_qakkee_3");
     }
+
     public void ep3_clone_relics_hunter_qakkee_action_grantQuestFour(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "ep3_clone_relics_hunter_qakkee_4");
     }
+
     public void ep3_clone_relics_hunter_qakkee_action_removeQuestFour(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.clearQuest(player, "ep3_clone_relics_hunter_qakkee_4");
     }
+
     public void ep3_clone_relics_hunter_qakkee_action_rewardTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "giveRewardTwo");
     }
+
     public void ep3_clone_relics_hunter_qakkee_action_grantQuestFive(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "ep3_clone_relics_hunter_qakkee_5");
     }
+
     public void ep3_clone_relics_hunter_qakkee_action_rewardThree(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "giveRewardThree");
     }
+
     public void ep3_clone_relics_hunter_qakkee_action_finishQuestOne(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "doneWithDewbacks");
     }
+
     public void ep3_clone_relics_hunter_qakkee_action_removeQuestFive(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.clearQuest(player, "ep3_clone_relics_hunter_qakkee_5");
     }
+
     public void ep3_clone_relics_hunter_qakkee_action_removeQuestAll(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.clearQuest(player, "ep3_clone_relics_hunter_qakkee_1");
@@ -145,6 +185,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
         groundquests.clearQuest(player, "ep3_clone_relics_hunter_qakkee_4");
         groundquests.clearQuest(player, "ep3_clone_relics_hunter_qakkee_5");
     }
+
     public int ep3_clone_relics_hunter_qakkee_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_308"))
@@ -167,7 +208,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_312");
@@ -176,7 +217,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_hunter_qakkee.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -203,7 +244,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_427");
@@ -212,7 +253,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_hunter_qakkee.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -239,7 +280,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_435");
@@ -248,7 +289,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_hunter_qakkee.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -308,7 +349,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_916");
@@ -337,7 +378,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_hunter_qakkee.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -347,6 +388,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_hunter_qakkee_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_312"))
@@ -367,6 +409,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_hunter_qakkee_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_427"))
@@ -383,6 +426,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_hunter_qakkee_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_435"))
@@ -399,6 +443,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_hunter_qakkee_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_441"))
@@ -421,7 +466,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_193");
@@ -434,7 +479,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_hunter_qakkee.branchId");
                     prose_package pp = new prose_package();
@@ -498,7 +543,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_916");
@@ -527,7 +572,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_hunter_qakkee.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -537,6 +582,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_hunter_qakkee_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_193"))
@@ -558,7 +604,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_449");
@@ -567,7 +613,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_hunter_qakkee.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -577,6 +623,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_hunter_qakkee_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_449"))
@@ -598,7 +645,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_453");
@@ -607,7 +654,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_hunter_qakkee.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -617,6 +664,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_hunter_qakkee_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_453"))
@@ -646,7 +694,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_457");
@@ -659,7 +707,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_hunter_qakkee.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -669,6 +717,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_hunter_qakkee_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_457"))
@@ -698,6 +747,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_hunter_qakkee_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_467"))
@@ -780,7 +830,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_916");
@@ -809,7 +859,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_hunter_qakkee.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -819,6 +869,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_hunter_qakkee_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_477"))
@@ -863,7 +914,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_485");
@@ -876,7 +927,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_hunter_qakkee.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -936,7 +987,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_916");
@@ -965,7 +1016,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_hunter_qakkee.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -975,6 +1026,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_hunter_qakkee_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_485"))
@@ -996,7 +1048,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_489");
@@ -1005,7 +1057,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_hunter_qakkee.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1038,7 +1090,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_525");
@@ -1051,7 +1103,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_hunter_qakkee.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1061,6 +1113,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_hunter_qakkee_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_489"))
@@ -1082,7 +1135,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_220");
@@ -1091,7 +1144,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_hunter_qakkee.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1101,6 +1154,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_hunter_qakkee_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_220"))
@@ -1121,7 +1175,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_497");
@@ -1130,7 +1184,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_hunter_qakkee.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1140,6 +1194,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_hunter_qakkee_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_497"))
@@ -1161,7 +1216,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_501");
@@ -1170,7 +1225,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_hunter_qakkee.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1180,6 +1235,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_hunter_qakkee_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_501"))
@@ -1201,7 +1257,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_505");
@@ -1210,7 +1266,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_hunter_qakkee.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1220,6 +1276,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_hunter_qakkee_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_505"))
@@ -1241,7 +1298,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_509");
@@ -1254,7 +1311,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_hunter_qakkee.branchId");
                     prose_package pp = new prose_package();
@@ -1268,6 +1325,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_hunter_qakkee_handleBranch26(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_509"))
@@ -1296,7 +1354,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_513");
@@ -1309,7 +1367,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_hunter_qakkee.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1319,6 +1377,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_hunter_qakkee_handleBranch27(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_513"))
@@ -1356,6 +1415,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_hunter_qakkee_handleBranch30(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_525"))
@@ -1376,7 +1436,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_529");
@@ -1385,7 +1445,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_hunter_qakkee.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1412,7 +1472,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_529");
@@ -1421,7 +1481,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_hunter_qakkee.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1431,6 +1491,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_hunter_qakkee_handleBranch31(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_529"))
@@ -1451,7 +1512,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_533");
@@ -1460,7 +1521,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_hunter_qakkee.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1470,6 +1531,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_hunter_qakkee_handleBranch32(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_533"))
@@ -1491,7 +1553,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_537");
@@ -1500,7 +1562,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_hunter_qakkee.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1510,6 +1572,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_hunter_qakkee_handleBranch33(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_537"))
@@ -1531,7 +1594,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_245");
@@ -1540,7 +1603,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_hunter_qakkee.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1550,6 +1613,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_hunter_qakkee_handleBranch34(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_245"))
@@ -1571,7 +1635,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_545");
@@ -1580,7 +1644,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_hunter_qakkee.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1590,6 +1654,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_hunter_qakkee_handleBranch35(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_545"))
@@ -1617,7 +1682,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_549");
@@ -1630,7 +1695,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_hunter_qakkee.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1640,6 +1705,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_hunter_qakkee_handleBranch36(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_549"))
@@ -1669,6 +1735,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_hunter_qakkee_handleBranch39(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_529"))
@@ -1689,7 +1756,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_533");
@@ -1698,7 +1765,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_hunter_qakkee.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1708,6 +1775,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_hunter_qakkee_handleBranch40(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_563"))
@@ -1729,7 +1797,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_567");
@@ -1742,7 +1810,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_hunter_qakkee.branchId");
                     prose_package pp = new prose_package();
@@ -1772,7 +1840,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_591");
@@ -1781,7 +1849,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_hunter_qakkee.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1841,7 +1909,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_916");
@@ -1870,7 +1938,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_hunter_qakkee.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1880,6 +1948,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_hunter_qakkee_handleBranch41(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_567"))
@@ -1909,7 +1978,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_571");
@@ -1922,7 +1991,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_hunter_qakkee.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1932,6 +2001,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_hunter_qakkee_handleBranch42(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_571"))
@@ -1953,7 +2023,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_575");
@@ -1962,7 +2032,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_hunter_qakkee.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1989,7 +2059,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_583");
@@ -1998,7 +2068,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_hunter_qakkee.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2008,6 +2078,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_hunter_qakkee_handleBranch43(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_575"))
@@ -2024,6 +2095,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_hunter_qakkee_handleBranch45(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_583"))
@@ -2044,6 +2116,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_hunter_qakkee_handleBranch47(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_591"))
@@ -2073,7 +2146,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_571");
@@ -2086,7 +2159,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_hunter_qakkee.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2096,6 +2169,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_hunter_qakkee_handleBranch48(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_288"))
@@ -2193,7 +2267,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_916");
@@ -2222,7 +2296,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_hunter_qakkee.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2232,6 +2306,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_hunter_qakkee_handleBranch52(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_305"))
@@ -2264,7 +2339,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_318");
@@ -2273,7 +2348,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_hunter_qakkee.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2299,7 +2374,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_345");
@@ -2308,7 +2383,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_hunter_qakkee.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2368,7 +2443,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_916");
@@ -2397,7 +2472,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_hunter_qakkee.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2407,6 +2482,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_hunter_qakkee_handleBranch54(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_318"))
@@ -2434,7 +2510,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_322");
@@ -2447,7 +2523,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_hunter_qakkee.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2457,6 +2533,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_hunter_qakkee_handleBranch55(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_322"))
@@ -2478,7 +2555,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_326");
@@ -2487,7 +2564,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_hunter_qakkee.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2509,6 +2586,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_hunter_qakkee_handleBranch56(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_326"))
@@ -2536,7 +2614,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_330");
@@ -2549,7 +2627,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_hunter_qakkee.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2559,6 +2637,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_hunter_qakkee_handleBranch57(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_330"))
@@ -2588,6 +2667,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_hunter_qakkee_handleBranch60(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_345"))
@@ -2615,7 +2695,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_349");
@@ -2628,7 +2708,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_hunter_qakkee.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2638,6 +2718,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_hunter_qakkee_handleBranch61(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_349"))
@@ -2659,7 +2740,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_353");
@@ -2668,7 +2749,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_hunter_qakkee.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2690,6 +2771,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_hunter_qakkee_handleBranch62(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_353"))
@@ -2707,6 +2789,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_hunter_qakkee_handleBranch64(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_362"))
@@ -2728,7 +2811,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_367");
@@ -2737,7 +2820,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_hunter_qakkee.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2764,7 +2847,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_675");
@@ -2777,7 +2860,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_hunter_qakkee.branchId");
                     prose_package pp = new prose_package();
@@ -2841,7 +2924,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_916");
@@ -2870,7 +2953,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_hunter_qakkee.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2880,6 +2963,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_hunter_qakkee_handleBranch65(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_367"))
@@ -2901,7 +2985,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_371");
@@ -2910,7 +2994,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_hunter_qakkee.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2920,6 +3004,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_hunter_qakkee_handleBranch66(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_371"))
@@ -2937,6 +3022,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_hunter_qakkee_handleBranch68(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_675"))
@@ -2954,6 +3040,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_hunter_qakkee_handleBranch70(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_681"))
@@ -3044,7 +3131,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_916");
@@ -3073,7 +3160,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_hunter_qakkee.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3083,6 +3170,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_hunter_qakkee_handleBranch74(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_695"))
@@ -3111,7 +3199,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_699");
@@ -3124,7 +3212,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_hunter_qakkee.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3195,7 +3283,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_916");
@@ -3224,7 +3312,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_hunter_qakkee.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3234,6 +3322,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_hunter_qakkee_handleBranch75(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_699"))
@@ -3255,7 +3344,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_703");
@@ -3264,7 +3353,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_hunter_qakkee.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3291,7 +3380,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_731");
@@ -3300,7 +3389,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_hunter_qakkee.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3310,6 +3399,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_hunter_qakkee_handleBranch76(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_703"))
@@ -3331,7 +3421,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_707");
@@ -3340,7 +3430,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_hunter_qakkee.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3350,6 +3440,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_hunter_qakkee_handleBranch77(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_707"))
@@ -3384,7 +3475,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_711");
@@ -3401,7 +3492,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_hunter_qakkee.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3411,6 +3502,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_hunter_qakkee_handleBranch78(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_711"))
@@ -3445,7 +3537,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_719");
@@ -3454,7 +3546,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_hunter_qakkee.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3476,6 +3568,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_hunter_qakkee_handleBranch80(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_719"))
@@ -3493,6 +3586,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_hunter_qakkee_handleBranch83(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_731"))
@@ -3514,7 +3608,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_703");
@@ -3523,7 +3617,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_hunter_qakkee.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3533,6 +3627,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_hunter_qakkee_handleBranch84(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_703"))
@@ -3554,7 +3649,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_707");
@@ -3563,7 +3658,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_hunter_qakkee.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3573,6 +3668,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_hunter_qakkee_handleBranch86(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_741"))
@@ -3594,7 +3690,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_745");
@@ -3603,7 +3699,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_hunter_qakkee.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3630,7 +3726,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_658");
@@ -3639,7 +3735,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_hunter_qakkee.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3699,7 +3795,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_916");
@@ -3728,7 +3824,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_hunter_qakkee.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3738,6 +3834,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_hunter_qakkee_handleBranch87(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_745"))
@@ -3759,7 +3856,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_749");
@@ -3772,7 +3869,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_hunter_qakkee.branchId");
                     prose_package pp = new prose_package();
@@ -3786,6 +3883,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_hunter_qakkee_handleBranch88(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_749"))
@@ -3802,6 +3900,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_hunter_qakkee_handleBranch90(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_658"))
@@ -3822,7 +3921,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_749");
@@ -3835,7 +3934,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_hunter_qakkee.branchId");
                     prose_package pp = new prose_package();
@@ -3849,6 +3948,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_hunter_qakkee_handleBranch91(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_749"))
@@ -3865,6 +3965,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_hunter_qakkee_handleBranch92(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_672"))
@@ -3943,7 +4044,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_916");
@@ -3972,7 +4073,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_hunter_qakkee.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3982,6 +4083,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_hunter_qakkee_handleBranch95(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_694"))
@@ -4009,7 +4111,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_702");
@@ -4022,7 +4124,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_hunter_qakkee.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4049,7 +4151,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_755");
@@ -4058,7 +4160,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_hunter_qakkee.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4118,7 +4220,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_916");
@@ -4147,7 +4249,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_hunter_qakkee.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4157,6 +4259,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_hunter_qakkee_handleBranch96(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_702"))
@@ -4185,7 +4288,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_710");
@@ -4198,7 +4301,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_hunter_qakkee.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4232,7 +4335,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_721");
@@ -4245,7 +4348,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_hunter_qakkee.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4255,6 +4358,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_hunter_qakkee_handleBranch97(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_710"))
@@ -4297,7 +4401,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_721");
@@ -4310,7 +4414,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_hunter_qakkee.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4320,6 +4424,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_hunter_qakkee_handleBranch99(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_721"))
@@ -4360,7 +4465,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_732");
@@ -4373,7 +4478,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_hunter_qakkee.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4383,6 +4488,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_hunter_qakkee_handleBranch101(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_732"))
@@ -4412,6 +4518,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_hunter_qakkee_handleBranch104(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_755"))
@@ -4439,7 +4546,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_702");
@@ -4452,7 +4559,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_hunter_qakkee.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4462,6 +4569,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_hunter_qakkee_handleBranch105(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_760"))
@@ -4550,7 +4658,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_916");
@@ -4579,7 +4687,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_hunter_qakkee.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4589,6 +4697,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_hunter_qakkee_handleBranch109(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_916"))
@@ -4659,6 +4768,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_hunter_qakkee_handleBranch116(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_788"))
@@ -4679,7 +4789,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_792");
@@ -4688,7 +4798,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_hunter_qakkee.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4715,7 +4825,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_848");
@@ -4724,7 +4834,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_hunter_qakkee.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4746,6 +4856,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_hunter_qakkee_handleBranch117(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_792"))
@@ -4773,7 +4884,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_796");
@@ -4786,7 +4897,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_hunter_qakkee.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4796,6 +4907,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_hunter_qakkee_handleBranch118(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_796"))
@@ -4836,7 +4948,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_804");
@@ -4849,7 +4961,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_hunter_qakkee.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4859,6 +4971,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_hunter_qakkee_handleBranch120(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_804"))
@@ -4886,7 +4999,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_808");
@@ -4899,7 +5012,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_hunter_qakkee.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4933,7 +5046,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_828");
@@ -4946,7 +5059,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_hunter_qakkee.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4956,6 +5069,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_hunter_qakkee_handleBranch121(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_808"))
@@ -4985,6 +5099,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_hunter_qakkee_handleBranch124(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_828"))
@@ -5024,7 +5139,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_808");
@@ -5037,7 +5152,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_hunter_qakkee.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5047,6 +5162,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_hunter_qakkee_handleBranch126(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_848"))
@@ -5067,7 +5183,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_792");
@@ -5076,7 +5192,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_hunter_qakkee.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5086,6 +5202,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_clone_relics_hunter_qakkee_handleBranch127(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_792"))
@@ -5113,7 +5230,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_796");
@@ -5126,7 +5243,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_clone_relics_hunter_qakkee.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -5136,6 +5253,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -5149,6 +5267,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
         equip(cup1, self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
@@ -5158,6 +5277,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
         equip(cup1, self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -5167,18 +5287,21 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
         faceTo(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.ep3_clone_relics_hunter_qakkee");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -5224,7 +5347,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_308");
@@ -5248,7 +5371,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "ep3_clone_relics_hunter_qakkee", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -5281,7 +5404,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_441");
@@ -5293,7 +5416,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_clone_relics_hunter_qakkee.branchId", 8);
                 npcStartConversation(player, npc, "ep3_clone_relics_hunter_qakkee", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -5328,7 +5451,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_467");
@@ -5348,7 +5471,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "ep3_clone_relics_hunter_qakkee", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -5387,7 +5510,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_477");
@@ -5407,7 +5530,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "ep3_clone_relics_hunter_qakkee", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -5447,7 +5570,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_563");
@@ -5467,7 +5590,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "ep3_clone_relics_hunter_qakkee", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -5514,7 +5637,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_288");
@@ -5538,7 +5661,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "ep3_clone_relics_hunter_qakkee", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -5585,7 +5708,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_305");
@@ -5609,7 +5732,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "ep3_clone_relics_hunter_qakkee", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -5649,7 +5772,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_362");
@@ -5665,7 +5788,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_clone_relics_hunter_qakkee.branchId", 64);
                 npcStartConversation(player, npc, "ep3_clone_relics_hunter_qakkee", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -5707,7 +5830,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_681");
@@ -5727,7 +5850,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_clone_relics_hunter_qakkee.branchId", 70);
                 npcStartConversation(player, npc, "ep3_clone_relics_hunter_qakkee", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -5763,7 +5886,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_695");
@@ -5783,7 +5906,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "ep3_clone_relics_hunter_qakkee", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -5823,7 +5946,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_741");
@@ -5839,7 +5962,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_clone_relics_hunter_qakkee.branchId", 86);
                 npcStartConversation(player, npc, "ep3_clone_relics_hunter_qakkee", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -5875,7 +5998,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_672");
@@ -5891,7 +6014,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_clone_relics_hunter_qakkee.branchId", 92);
                 npcStartConversation(player, npc, "ep3_clone_relics_hunter_qakkee", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -5926,7 +6049,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_694");
@@ -5942,7 +6065,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_clone_relics_hunter_qakkee.branchId", 95);
                 npcStartConversation(player, npc, "ep3_clone_relics_hunter_qakkee", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -5985,7 +6108,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_760");
@@ -6005,7 +6128,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_clone_relics_hunter_qakkee.branchId", 105);
                 npcStartConversation(player, npc, "ep3_clone_relics_hunter_qakkee", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -6041,7 +6164,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_788");
@@ -6057,7 +6180,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_clone_relics_hunter_qakkee.branchId", 116);
                 npcStartConversation(player, npc, "ep3_clone_relics_hunter_qakkee", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -6066,6 +6189,7 @@ public class ep3_clone_relics_hunter_qakkee extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("ep3_clone_relics_hunter_qakkee"))

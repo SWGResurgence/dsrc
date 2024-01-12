@@ -1,119 +1,162 @@
 package script.theme_park.dungeon.mustafar_trials.decrepit_droid_factory;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.location;
 import script.obj_id;
 
-public class decrepit_controller extends script.base_script {
-    public decrepit_controller() {
-    }
+public class decrepit_controller extends script.base_script
+{
     public static final String[] LOCKED_ROOMS = {
-        "mainroom27",
-        "hall2",
-        "hall5",
-        "smallroom12",
-        "smallroom11",
-        "hall13",
-        "centralroom28"
+            "mainroom27",
+            "hall2",
+            "hall5",
+            "smallroom12",
+            "smallroom11",
+            "hall13",
+            "centralroom28"
     };
-    public int OnAttach(obj_id self) throws InterruptedException {
+
+    public decrepit_controller()
+    {
+    }
+
+    public int OnAttach(obj_id self) throws InterruptedException
+    {
         return SCRIPT_CONTINUE;
     }
-    public int beginSpawn(obj_id self, dictionary params) throws InterruptedException {
+
+    public int beginSpawn(obj_id self, dictionary params) throws InterruptedException
+    {
         setEventLocks(self);
         setEventStates(self);
         spawnOr5(self);
         return SCRIPT_CONTINUE;
     }
-    public int remoteCommand(obj_id self, dictionary params) throws InterruptedException {
+
+    public int remoteCommand(obj_id self, dictionary params) throws InterruptedException
+    {
         String command = "null";
         command = params.getString("command");
-        if (command.equals("setLock")) {
+        if (command.equals("setLock"))
+        {
             setEventLocks(self);
             return SCRIPT_CONTINUE;
         }
-        if (command.equals("removeLock")) {
+        if (command.equals("removeLock"))
+        {
             removeEventLocks(self);
             return SCRIPT_CONTINUE;
         }
-        if (command.equals("lockCell")) {
+        if (command.equals("lockCell"))
+        {
             lockCell(self, params);
             return SCRIPT_CONTINUE;
         }
-        if (command.equals("deactivateTrap")) {
+        if (command.equals("deactivateTrap"))
+        {
             deactivateTrap(self);
             return SCRIPT_CONTINUE;
         }
-        if (command.equals("setDefaultStates")) {
+        if (command.equals("setDefaultStates"))
+        {
             setEventLocks(self);
             return SCRIPT_CONTINUE;
         }
-        if (command.equals("removeEventStates")) {
+        if (command.equals("removeEventStates"))
+        {
             removeEventStates(self);
             return SCRIPT_CONTINUE;
         }
         return SCRIPT_CONTINUE;
     }
-    public void setEventLocks(obj_id dungeon) throws InterruptedException {
-        for (String lockedRoom : LOCKED_ROOMS) {
+
+    public void setEventLocks(obj_id dungeon) throws InterruptedException
+    {
+        for (String lockedRoom : LOCKED_ROOMS)
+        {
             permissionsMakePrivate(getCellId(dungeon, lockedRoom));
         }
     }
-    public void removeEventLocks(obj_id dungeon) throws InterruptedException {
-        for (String lockedRoom : LOCKED_ROOMS) {
+
+    public void removeEventLocks(obj_id dungeon) throws InterruptedException
+    {
+        for (String lockedRoom : LOCKED_ROOMS)
+        {
             permissionsMakePublic(getCellId(dungeon, lockedRoom));
         }
     }
-    public void setEventStates(obj_id dungeon) throws InterruptedException {
+
+    public void setEventStates(obj_id dungeon) throws InterruptedException
+    {
         trial.setTrapState(dungeon, false);
         trial.setFireCellState(dungeon, true);
         trial.setPowerCoreState(dungeon, false);
         trial.setGuardianLockState(dungeon, true);
         trial.setDecrepitTrialState(dungeon, false);
     }
-    public void removeEventStates(obj_id dungeon) throws InterruptedException {
+
+    public void removeEventStates(obj_id dungeon) throws InterruptedException
+    {
         trial.setTrapState(dungeon, false);
         trial.setFireCellState(dungeon, false);
         trial.setPowerCoreState(dungeon, true);
         trial.setGuardianLockState(dungeon, false);
         trial.setDecrepitTrialState(dungeon, true);
     }
-    public void lockCell(obj_id dungeon, dictionary params) throws InterruptedException {
+
+    public void lockCell(obj_id dungeon, dictionary params) throws InterruptedException
+    {
         String cell = params.getString("cell");
         trial.makeCellPrivate(dungeon, cell);
     }
-    public void spawnOr5(obj_id self) throws InterruptedException {
+
+    public void spawnOr5(obj_id self) throws InterruptedException
+    {
         obj_id cell = getCellId(self, "mediumroom10");
         location spawnLoc = new location(63, -67, -50, getLocation(self).area, cell);
         obj_id colonel = create.object("som_decrepit_colonel_or5", spawnLoc);
         setYaw(colonel, 90);
         attachScript(colonel, "theme_park.dungeon.mustafar_trials.decrepit_droid_factory.colonel_or5");
     }
-    public int codeResetOccured(obj_id self, dictionary params) throws InterruptedException {
+
+    public int codeResetOccured(obj_id self, dictionary params) throws InterruptedException
+    {
         obj_id[] masterTerminals = trial.getObjectsInDungeonWithScript(self, "theme_park.dungeon.mustafar_trials.decrepit_droid_factory.code_terminal_master");
         obj_id[] slaveTerminals = trial.getObjectsInDungeonWithScript(self, "theme_park.dungeon.mustafar_trials.decrepit_droid_factory.code_terminal_slave");
-        if (masterTerminals != null && masterTerminals.length > 0) {
+        if (masterTerminals != null && masterTerminals.length > 0)
+        {
             utils.messageTo(masterTerminals, "handleResetTimer", null, 0, false);
         }
-        if (slaveTerminals != null && slaveTerminals.length > 0) {
+        if (slaveTerminals != null && slaveTerminals.length > 0)
+        {
             utils.messageTo(slaveTerminals, "handleResetTimer", null, 0, false);
         }
         return SCRIPT_CONTINUE;
     }
-    public int colonelDied(obj_id self, dictionary params) throws InterruptedException {
+
+    public int colonelDied(obj_id self, dictionary params) throws InterruptedException
+    {
         trial.makeCellPublic(self, "hall13");
         return SCRIPT_CONTINUE;
     }
-    public int winTrial(obj_id self, dictionary params) throws InterruptedException {
+
+    public int winTrial(obj_id self, dictionary params) throws InterruptedException
+    {
         trial.setDecrepitTrialState(self, true);
         trial.setDungeonCleanOutTimer(self);
         trial.sendCompletionSignal(self, trial.DECREPIT_WIN_SIGNAL);
         obj_id[] players = trial.getPlayersInDungeon(self);
         badge.grantBadge(players, "bdg_must_victory_ddf");
-        
+
         // HEROIC SYSTEM BEGIN
-        
+
         dictionary dict = new dictionary();
         dict.put("tokenIndex", 7);
         dict.put("tokenCount", 4);
@@ -123,16 +166,19 @@ public class decrepit_controller extends script.base_script {
         String realTime = getCalendarTimeStringLocal(calendarTime);
         CustomerServiceLog("instance-mustafar_trials_decrepit_droid_factory", "Factory Guardian Defeated in instance (" + self + ") by group_id (" + group + ") at " + realTime);
         CustomerServiceLog("instance-mustafar_trials_decrepit_droid_factory", "Group (" + group + ") consists of: ");
-        for (int i = 0; i < players.length; ++i) {
+        for (int i = 0; i < players.length; ++i)
+        {
             String strProfession = skill.getProfessionName(getSkillTemplate(players[i]));
             CustomerServiceLog("instance-mustafar_trials_decrepit_droid_factory", "Group (" + group + ") member " + i + " " + getFirstName(players[i]) + "'s(" + players[i] + ") profession is " + strProfession + ".");
         }
-        
+
         // HEROIC SYSTEM END
-        
+
         return SCRIPT_CONTINUE;
     }
-    public void deactivateTrap(obj_id self) throws InterruptedException {
+
+    public void deactivateTrap(obj_id self) throws InterruptedException
+    {
         trial.setTrapState(self, false);
     }
 }

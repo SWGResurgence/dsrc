@@ -1,5 +1,11 @@
 package script.item.structure_deed.generator_installation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 
 public class power_generator_solar_deed extends script.base_script

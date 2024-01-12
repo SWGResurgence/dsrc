@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 
 public class minigame extends script.base_script
@@ -138,6 +144,7 @@ public class minigame extends script.base_script
     public static final String HANDLER_REEL_IN = "handleReelIn";
     public static final String HANDLER_CAUGHT_SOMETHING = "handleCaughtSomething";
     public static final String HANDLER_BAIT_SUI = "handleBaitSui";
+
     public minigame()
     {
     }

@@ -1,5 +1,11 @@
 package script.theme_park.naboo.royal_kidnapping;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.ai_lib;
 import script.library.chat;
@@ -8,18 +14,20 @@ import script.library.xp;
 
 public class nobles_ai extends script.base_script
 {
-    public nobles_ai()
-    {
-    }
     public static final String CONVO_FILE = "theme_park/royal_kidnapping/nobles";
     public static final String ALERT_VOLUME_NAME = "alertTriggerVolume";
     public static final String XP_REWARD_TYPE = "combat_general";
     public static final int XP_REWARD_AMOUNT = 250;
+    public nobles_ai()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!utils.hasScriptVar(self, "awardGranted"))
@@ -30,6 +38,7 @@ public class nobles_ai extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id speaker) throws InterruptedException
     {
         if (ai_lib.isInCombat(self) || ai_lib.isInCombat(speaker) || ai_lib.aiIsDead(self))
@@ -45,16 +54,18 @@ public class nobles_ai extends script.base_script
         faceToBehavior(self, speaker);
         messageTo(self, "handleAngryAnim", null, 2, false);
         string_id greeting = new string_id(CONVO_FILE, "start");
-        string_id response[] = new string_id[1];
+        string_id[] response = new string_id[1];
         response[0] = new string_id(CONVO_FILE, "reply_1");
         npcStartConversation(speaker, self, CONVO_FILE, greeting, response);
         return SCRIPT_CONTINUE;
     }
+
     public int handleAngryAnim(obj_id self, dictionary params) throws InterruptedException
     {
         doAnimationAction(self, "angry");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String convo, obj_id player, string_id response) throws InterruptedException
     {
         if (!convo.equals(CONVO_FILE))
@@ -85,6 +96,7 @@ public class nobles_ai extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleRunAway(obj_id self, dictionary params) throws InterruptedException
     {
         location destLoc = getBuildingEjectLocation(getTopMostContainer(self));
@@ -101,11 +113,13 @@ public class nobles_ai extends script.base_script
         messageTo(self, "handleDelayedDestruct", null, 30, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleDelayedDestruct(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnMovePathComplete(obj_id self) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "awardGranted"))

@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 
 import java.util.*;
@@ -69,6 +75,7 @@ public class gm extends script.base_script
                     "Earn Current Skill",
                     "Set Roadmap Progression"
             };
+
     public gm()
     {
     }

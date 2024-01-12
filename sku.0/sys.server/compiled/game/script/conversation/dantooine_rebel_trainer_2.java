@@ -1,306 +1,202 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.*;
 
 public class dantooine_rebel_trainer_2 extends script.base_script
 {
+    public static String c_stringFile = "conversation/dantooine_rebel_trainer_2";
+
     public dantooine_rebel_trainer_2()
     {
     }
-    public static String c_stringFile = "conversation/dantooine_rebel_trainer_2";
+
     public boolean dantooine_rebel_trainer_2_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean dantooine_rebel_trainer_2_condition_readyForMission1(obj_id player, obj_id npc) throws InterruptedException
     {
-        if ((hasSkill(player, "pilot_rebel_navy_starships_02") || hasSkill(player, "pilot_rebel_navy_weapons_02") || hasSkill(player, "pilot_rebel_navy_procedures_02") || hasSkill(player, "pilot_rebel_navy_droid_02")) && space_flags.hasSpaceFlag(player, "vortexPilot") && !space_quest.hasWonQuest(player, "destroy_surpriseattack", "vortex_mission_1"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return (hasSkill(player, "pilot_rebel_navy_starships_02") || hasSkill(player, "pilot_rebel_navy_weapons_02") || hasSkill(player, "pilot_rebel_navy_procedures_02") || hasSkill(player, "pilot_rebel_navy_droid_02")) && space_flags.hasSpaceFlag(player, "vortexPilot") && !space_quest.hasWonQuest(player, "destroy_surpriseattack", "vortex_mission_1");
     }
+
     public boolean dantooine_rebel_trainer_2_condition_hasFailedMission1(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_quest.hasFailedQuest(player, "destroy_surpriseattack", "vortex_mission_1") || space_quest.hasAbortedQuest(player, "destroy_surpriseattack", "vortex_mission_1") || space_quest.hasFailedQuest(player, "escort", "vortex_mission_1") || space_quest.hasAbortedQuest(player, "escort", "vortex_mission_1") || space_quest.hasFailedQuest(player, "inspect", "vortex_mission_1") || space_quest.hasAbortedQuest(player, "inspect", "vortex_mission_1"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return space_quest.hasFailedQuest(player, "destroy_surpriseattack", "vortex_mission_1") || space_quest.hasAbortedQuest(player, "destroy_surpriseattack", "vortex_mission_1") || space_quest.hasFailedQuest(player, "escort", "vortex_mission_1") || space_quest.hasAbortedQuest(player, "escort", "vortex_mission_1") || space_quest.hasFailedQuest(player, "inspect", "vortex_mission_1") || space_quest.hasAbortedQuest(player, "inspect", "vortex_mission_1");
     }
+
     public boolean dantooine_rebel_trainer_2_condition_hasWonMission1(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_quest.hasWonQuest(player, "destroy_surpriseattack", "vortex_mission_1") && !space_quest.hasReceivedReward(player, "destroy_surpriseattack", "vortex_mission_1"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return space_quest.hasWonQuest(player, "destroy_surpriseattack", "vortex_mission_1") && !space_quest.hasReceivedReward(player, "destroy_surpriseattack", "vortex_mission_1");
     }
+
     public boolean dantooine_rebel_trainer_2_condition_readyForMission2(obj_id player, obj_id npc) throws InterruptedException
     {
-        String[] skills = 
-        {
-            "pilot_rebel_navy_starships_02",
-            "pilot_rebel_navy_weapons_02",
-            "pilot_rebel_navy_procedures_02",
-            "pilot_rebel_navy_droid_02"
-        };
+        String[] skills =
+                {
+                        "pilot_rebel_navy_starships_02",
+                        "pilot_rebel_navy_weapons_02",
+                        "pilot_rebel_navy_procedures_02",
+                        "pilot_rebel_navy_droid_02"
+                };
         int j = 0;
-        for (String skill : skills) {
-            if (hasSkill(player, skill)) {
+        for (String skill : skills)
+        {
+            if (hasSkill(player, skill))
+            {
                 j++;
             }
         }
-        if ((j == 2) && space_flags.hasSpaceFlag(player, "vortexPilot") && !space_quest.hasWonQuest(player, "escort", "vortex_mission_2"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return (j == 2) && space_flags.hasSpaceFlag(player, "vortexPilot") && !space_quest.hasWonQuest(player, "escort", "vortex_mission_2");
     }
+
     public boolean dantooine_rebel_trainer_2_condition_hasWonMission2(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_quest.hasWonQuest(player, "escort", "vortex_mission_2") && !space_quest.hasReceivedReward(player, "escort", "vortex_mission_2"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return space_quest.hasWonQuest(player, "escort", "vortex_mission_2") && !space_quest.hasReceivedReward(player, "escort", "vortex_mission_2");
     }
+
     public boolean dantooine_rebel_trainer_2_condition_hasFailedMission2(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_quest.hasFailedQuest(player, "escort", "vortex_mission_2") || space_quest.hasAbortedQuest(player, "escort", "vortex_mission_2"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return space_quest.hasFailedQuest(player, "escort", "vortex_mission_2") || space_quest.hasAbortedQuest(player, "escort", "vortex_mission_2");
     }
+
     public boolean dantooine_rebel_trainer_2_condition_isOnMission(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_quest.hasQuest(player, "destroy_surpriseattack", "vortex_mission_1") || space_quest.hasQuest(player, "escort", "vortex_mission_1") || space_quest.hasQuest(player, "inspect", "vortex_mission_1") || space_quest.hasQuest(player, "escort", "vortex_mission_2") || space_quest.hasQuest(player, "recovery", "vortex_mission_3") || space_quest.hasQuest(player, "inspect", "vortex_mission_4") || space_quest.hasQuest(player, "escort_duty", "vortex_mission_5") || space_quest.hasQuest(player, "destroy_duty", "vortex_mission_6") || space_quest.hasQuest(player, "recovery_duty", "vortex_mission_7"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return space_quest.hasQuest(player, "destroy_surpriseattack", "vortex_mission_1") || space_quest.hasQuest(player, "escort", "vortex_mission_1") || space_quest.hasQuest(player, "inspect", "vortex_mission_1") || space_quest.hasQuest(player, "escort", "vortex_mission_2") || space_quest.hasQuest(player, "recovery", "vortex_mission_3") || space_quest.hasQuest(player, "inspect", "vortex_mission_4") || space_quest.hasQuest(player, "escort_duty", "vortex_mission_5") || space_quest.hasQuest(player, "destroy_duty", "vortex_mission_6") || space_quest.hasQuest(player, "recovery_duty", "vortex_mission_7");
     }
+
     public boolean dantooine_rebel_trainer_2_condition_readyForMission3(obj_id player, obj_id npc) throws InterruptedException
     {
-        String[] skills = 
-        {
-            "pilot_rebel_navy_starships_02",
-            "pilot_rebel_navy_weapons_02",
-            "pilot_rebel_navy_procedures_02",
-            "pilot_rebel_navy_droid_02"
-        };
+        String[] skills =
+                {
+                        "pilot_rebel_navy_starships_02",
+                        "pilot_rebel_navy_weapons_02",
+                        "pilot_rebel_navy_procedures_02",
+                        "pilot_rebel_navy_droid_02"
+                };
         int j = 0;
-        for (String skill : skills) {
-            if (hasSkill(player, skill)) {
+        for (String skill : skills)
+        {
+            if (hasSkill(player, skill))
+            {
                 j++;
             }
         }
-        if ((j == 3) && space_flags.hasSpaceFlag(player, "vortexPilot") && !space_quest.hasWonQuest(player, "recovery", "vortex_mission_3"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return (j == 3) && space_flags.hasSpaceFlag(player, "vortexPilot") && !space_quest.hasWonQuest(player, "recovery", "vortex_mission_3");
     }
+
     public boolean dantooine_rebel_trainer_2_condition_hasFailedMission3(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_quest.hasFailedQuest(player, "recovery", "vortex_mission_3") || space_quest.hasAbortedQuest(player, "recovery", "vortex_mission_3"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return space_quest.hasFailedQuest(player, "recovery", "vortex_mission_3") || space_quest.hasAbortedQuest(player, "recovery", "vortex_mission_3");
     }
+
     public boolean dantooine_rebel_trainer_2_condition_hasWonMission3(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_quest.hasWonQuest(player, "recovery", "vortex_mission_3") && !space_quest.hasReceivedReward(player, "recovery", "vortex_mission_3"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return space_quest.hasWonQuest(player, "recovery", "vortex_mission_3") && !space_quest.hasReceivedReward(player, "recovery", "vortex_mission_3");
     }
+
     public boolean dantooine_rebel_trainer_2_condition_readyForMission4(obj_id player, obj_id npc) throws InterruptedException
     {
-        String[] skills = 
-        {
-            "pilot_rebel_navy_starships_02",
-            "pilot_rebel_navy_weapons_02",
-            "pilot_rebel_navy_procedures_02",
-            "pilot_rebel_navy_droid_02"
-        };
+        String[] skills =
+                {
+                        "pilot_rebel_navy_starships_02",
+                        "pilot_rebel_navy_weapons_02",
+                        "pilot_rebel_navy_procedures_02",
+                        "pilot_rebel_navy_droid_02"
+                };
         int j = 0;
-        for (String skill : skills) {
-            if (hasSkill(player, skill)) {
+        for (String skill : skills)
+        {
+            if (hasSkill(player, skill))
+            {
                 j++;
             }
         }
-        if ((j == 4) && space_flags.hasSpaceFlag(player, "vortexPilot") && !space_quest.hasWonQuest(player, "inspect", "vortex_mission_4"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return (j == 4) && space_flags.hasSpaceFlag(player, "vortexPilot") && !space_quest.hasWonQuest(player, "inspect", "vortex_mission_4");
     }
+
     public boolean dantooine_rebel_trainer_2_condition_hasWonMission4(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_quest.hasWonQuest(player, "inspect", "vortex_mission_4") && !space_quest.hasReceivedReward(player, "inspect", "vortex_mission_4"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return space_quest.hasWonQuest(player, "inspect", "vortex_mission_4") && !space_quest.hasReceivedReward(player, "inspect", "vortex_mission_4");
     }
+
     public boolean dantooine_rebel_trainer_2_condition_hasFailedMission4(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_quest.hasFailedQuest(player, "inspect", "vortex_mission_4") || space_quest.hasAbortedQuest(player, "inspect", "vortex_mission_4"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return space_quest.hasFailedQuest(player, "inspect", "vortex_mission_4") || space_quest.hasAbortedQuest(player, "inspect", "vortex_mission_4");
     }
+
     public boolean dantooine_rebel_trainer_2_condition_readyForDuty(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_flags.getIntSpaceFlag(player, "vortexPilot") == 2)
-        {
-            return true;
-        }
-        return false;
+        return space_flags.getIntSpaceFlag(player, "vortexPilot") == 2;
     }
+
     public boolean dantooine_rebel_trainer_2_condition_readyForSecondSkill(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (!hasSkill(player, "pilot_rebel_navy_starships_02") && !hasSkill(player, "pilot_rebel_navy_weapons_02") && !hasSkill(player, "pilot_rebel_navy_procedures_02") && !hasSkill(player, "pilot_rebel_navy_droid_02"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return !hasSkill(player, "pilot_rebel_navy_starships_02") && !hasSkill(player, "pilot_rebel_navy_weapons_02") && !hasSkill(player, "pilot_rebel_navy_procedures_02") && !hasSkill(player, "pilot_rebel_navy_droid_02");
     }
+
     public boolean dantooine_rebel_trainer_2_condition_canBuySkill1(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (!hasSkill(player, "pilot_rebel_navy_starships_02") && space_quest.isPlayerQualifiedForSkill(player, "pilot_rebel_navy_starships_02"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return !hasSkill(player, "pilot_rebel_navy_starships_02") && space_quest.isPlayerQualifiedForSkill(player, "pilot_rebel_navy_starships_02");
     }
+
     public boolean dantooine_rebel_trainer_2_condition_canBuySkill2(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (!hasSkill(player, "pilot_rebel_navy_weapons_02") && space_quest.isPlayerQualifiedForSkill(player, "pilot_rebel_navy_weapons_02"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return !hasSkill(player, "pilot_rebel_navy_weapons_02") && space_quest.isPlayerQualifiedForSkill(player, "pilot_rebel_navy_weapons_02");
     }
+
     public boolean dantooine_rebel_trainer_2_condition_canBuySkill3(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (!hasSkill(player, "pilot_rebel_navy_procedures_02") && space_quest.isPlayerQualifiedForSkill(player, "pilot_rebel_navy_procedures_02"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return !hasSkill(player, "pilot_rebel_navy_procedures_02") && space_quest.isPlayerQualifiedForSkill(player, "pilot_rebel_navy_procedures_02");
     }
+
     public boolean dantooine_rebel_trainer_2_condition_canBuySkill4(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (!hasSkill(player, "pilot_rebel_navy_droid_02") && space_quest.isPlayerQualifiedForSkill(player, "pilot_rebel_navy_droid_02"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return !hasSkill(player, "pilot_rebel_navy_droid_02") && space_quest.isPlayerQualifiedForSkill(player, "pilot_rebel_navy_droid_02");
     }
+
     public boolean dantooine_rebel_trainer_2_condition_canBuySkill(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_quest.isPlayerQualifiedForSkill(player, "pilot_rebel_navy_starships_02") || space_quest.isPlayerQualifiedForSkill(player, "pilot_rebel_navy_weapons_02") || space_quest.isPlayerQualifiedForSkill(player, "pilot_rebel_navy_procedures_02") || space_quest.isPlayerQualifiedForSkill(player, "pilot_rebel_navy_droid_02") && space_flags.hasSpaceFlag(player, "vortexPilot"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return space_quest.isPlayerQualifiedForSkill(player, "pilot_rebel_navy_starships_02") || space_quest.isPlayerQualifiedForSkill(player, "pilot_rebel_navy_weapons_02") || space_quest.isPlayerQualifiedForSkill(player, "pilot_rebel_navy_procedures_02") || space_quest.isPlayerQualifiedForSkill(player, "pilot_rebel_navy_droid_02") && space_flags.hasSpaceFlag(player, "vortexPilot");
     }
+
     public boolean dantooine_rebel_trainer_2_condition_hasAllSkills(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_quest.hasReceivedReward(player, "inspect", "vortex_mission_4") && space_flags.hasCompletedTierTwo(player))
-        {
-            return true;
-        }
-        return false;
+        return space_quest.hasReceivedReward(player, "inspect", "vortex_mission_4") && space_flags.hasCompletedTierTwo(player);
     }
+
     public boolean dantooine_rebel_trainer_2_condition_hasCompletedSeries(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_quest.hasCompletedQuestSeries(player, "imperial_corellia_1");
     }
+
     public boolean dantooine_rebel_trainer_2_condition_isGm(obj_id player, obj_id npc) throws InterruptedException
     {
         return (hasObjVar(player, "gm"));
     }
+
     public boolean dantooine_rebel_trainer_2_condition_isNeutralPilot(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (hasSkill(player, "pilot_neutral_novice"))
-        {
-            return true;
-        }
-        return false;
+        return hasSkill(player, "pilot_neutral_novice");
     }
+
     public boolean dantooine_rebel_trainer_2_condition_isRebelNonMember(obj_id player, obj_id npc) throws InterruptedException
     {
         return (hasSkill(player, "pilot_rebel_navy_novice") && !space_flags.hasSpaceFlag(player, "vortexPilot"));
     }
+
     public boolean dantooine_rebel_trainer_2_condition_hasNoSkills(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean dantooine_rebel_trainer_2_condition_isImperial(obj_id player, obj_id npc) throws InterruptedException
     {
         String playerFaction = factions.getFaction(player);
@@ -308,60 +204,50 @@ public class dantooine_rebel_trainer_2 extends script.base_script
         {
             return hasSkill(player, "pilot_imperial_navy_novice");
         }
-        if (playerFaction.equals("Imperial") || hasSkill(player, "pilot_imperial_navy_novice"))
-        {
-            return true;
-        }
-        return false;
+        return playerFaction.equals("Imperial") || hasSkill(player, "pilot_imperial_navy_novice");
     }
+
     public boolean dantooine_rebel_trainer_2_condition_correctRebelPilot(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (hasSkill(player, "pilot_rebel_navy_starships_01") && hasSkill(player, "pilot_rebel_navy_weapons_01") && hasSkill(player, "pilot_rebel_navy_procedures_01") && hasSkill(player, "pilot_rebel_navy_droid_01") && hasSkill(player, "pilot_rebel_navy_novice") && space_flags.getIntSpaceFlag(player, "vortexPilot") == 1)
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return hasSkill(player, "pilot_rebel_navy_starships_01") && hasSkill(player, "pilot_rebel_navy_weapons_01") && hasSkill(player, "pilot_rebel_navy_procedures_01") && hasSkill(player, "pilot_rebel_navy_droid_01") && hasSkill(player, "pilot_rebel_navy_novice") && space_flags.getIntSpaceFlag(player, "vortexPilot") == 1;
     }
+
     public boolean dantooine_rebel_trainer_2_condition_readyForTier3(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_flags.hasCompletedTierTwo(player) && space_flags.hasSpaceFlag(player, "vortexPilot") && space_quest.hasReceivedReward(player, "inspect", "vortex_mission_4"))
-        {
-            return true;
-        }
-        return false;
+        return space_flags.hasCompletedTierTwo(player) && space_flags.hasSpaceFlag(player, "vortexPilot") && space_quest.hasReceivedReward(player, "inspect", "vortex_mission_4");
     }
+
     public boolean dantooine_rebel_trainer_2_condition_isOnAnotherMission(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_quest.hasQuest(player);
     }
+
     public boolean dantooine_rebel_trainer_2_condition_onMyTrack(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_flags.isSpaceTrack(player, space_flags.REBEL_NABOO);
     }
+
     public boolean dantooine_rebel_trainer_2_condition_canFlyNonTrackDuty(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_flags.hasCompletedTierOne(player) && !space_quest.hasQuest(player))
-        {
-            return true;
-        }
-        return false;
+        return space_flags.hasCompletedTierOne(player) && !space_quest.hasQuest(player);
     }
+
     public boolean dantooine_rebel_trainer_2_condition_isPilot(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_flags.hasAnyPilotSkill(player);
     }
+
     public boolean dantooine_rebel_trainer_2_condition_hasNegativeFaction(obj_id player, obj_id npc) throws InterruptedException
     {
         return (factions.getFactionStanding(player, factions.FACTION_REBEL) < 0.0f);
     }
+
     public void dantooine_rebel_trainer_2_action_grantMission1(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         space_quest.grantQuest(player, "escort", "vortex_mission_1");
     }
+
     public void dantooine_rebel_trainer_2_action_giveRewardMission1(obj_id player, obj_id npc) throws InterruptedException
     {
         if (space_quest.hasReceivedReward(player, "destroy_surpriseattack", "vortex_mission_1"))
@@ -372,15 +258,18 @@ public class dantooine_rebel_trainer_2 extends script.base_script
         space_quest.giveReward(player, "destroy_surpriseattack", "vortex_mission_1", 5000, "object/tangible/ship/components/shield_generator/shd_mission_reward_rebel_incom_k77.iff");
         factions.addFactionStanding(player, factions.FACTION_REBEL, 75.0f);
     }
+
     public void dantooine_rebel_trainer_2_action_setVortexPilot(obj_id player, obj_id npc) throws InterruptedException
     {
         space_flags.setSpaceFlag(player, "vortexPilot", 2);
     }
+
     public void dantooine_rebel_trainer_2_action_grantMission2(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         space_quest.grantQuest(player, "escort", "vortex_mission_2");
     }
+
     public void dantooine_rebel_trainer_2_action_giveRewardMission2(obj_id player, obj_id npc) throws InterruptedException
     {
         if (space_quest.hasReceivedReward(player, "escort", "vortex_mission_2"))
@@ -391,10 +280,12 @@ public class dantooine_rebel_trainer_2 extends script.base_script
         space_quest.giveReward(player, "escort", "vortex_mission_2", 5000, "object/tangible/ship/components/droid_interface/ddi_mission_reward_rebel_moncal_d22.iff");
         factions.addFactionStanding(player, factions.FACTION_REBEL, 75.0f);
     }
+
     public void dantooine_rebel_trainer_2_action_grantMission3(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "recovery", "vortex_mission_3");
     }
+
     public void dantooine_rebel_trainer_2_action_giveRewardMission3(obj_id player, obj_id npc) throws InterruptedException
     {
         if (space_quest.hasReceivedReward(player, "recovery", "vortex_mission_3"))
@@ -405,11 +296,13 @@ public class dantooine_rebel_trainer_2 extends script.base_script
         space_quest.giveReward(player, "recovery", "vortex_mission_3", 5000, "object/tangible/ship/components/booster/bst_mission_reward_rebel_novaldex_hypernova.iff");
         factions.addFactionStanding(player, factions.FACTION_REBEL, 75.0f);
     }
+
     public void dantooine_rebel_trainer_2_action_grantMission4(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         space_quest.grantQuest(player, "inspect", "vortex_mission_4");
     }
+
     public void dantooine_rebel_trainer_2_action_giveRewardMission4(obj_id player, obj_id npc) throws InterruptedException
     {
         if (space_quest.hasReceivedReward(player, "inspect", "vortex_mission_4"))
@@ -421,26 +314,31 @@ public class dantooine_rebel_trainer_2 extends script.base_script
         space_flags.setSpaceFlag(player, "vortexPilot", 3);
         factions.addFactionStanding(player, factions.FACTION_REBEL, 75.0f);
     }
+
     public void dantooine_rebel_trainer_2_action_giveSkill1(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         skill.purchaseSkill(player, "pilot_rebel_navy_starships_02");
     }
+
     public void dantooine_rebel_trainer_2_action_giveSkill2(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         skill.purchaseSkill(player, "pilot_rebel_navy_weapons_02");
     }
+
     public void dantooine_rebel_trainer_2_action_giveSkill3(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         skill.purchaseSkill(player, "pilot_rebel_navy_procedures_02");
     }
+
     public void dantooine_rebel_trainer_2_action_giveSkill4(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         skill.purchaseSkill(player, "pilot_rebel_navy_droid_02");
     }
+
     public void dantooine_rebel_trainer_2_action_flagQuestSeriesComplete(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
@@ -448,26 +346,32 @@ public class dantooine_rebel_trainer_2 extends script.base_script
         doAnimationAction(player, "salute1");
         space_quest.setQuestSeriesFlag(player, "imperial_corellia_1", space_quest.QUEST_SERIES_COMPLETED);
     }
+
     public void dantooine_rebel_trainer_2_action_grantDestroyDuty(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "destroy_duty", "vortex_mission_6");
     }
+
     public void dantooine_rebel_trainer_2_action_grantRecoveryDuty(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "recovery_duty", "vortex_mission_7");
     }
+
     public void dantooine_rebel_trainer_2_action_grantEscortDuty(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "escort_duty", "vortex_mission_5");
     }
+
     public void dantooine_rebel_trainer_2_action_removeVortexPilot(obj_id player, obj_id npc) throws InterruptedException
     {
         space_flags.removeSpaceFlag(player, "vortexPilot");
     }
+
     public void dantooine_rebel_trainer_2_action_face(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
     }
+
     public int dantooine_rebel_trainer_2_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_900f01d1"))
@@ -488,7 +392,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f8b02865");
@@ -497,7 +401,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.dantooine_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -507,6 +411,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int dantooine_rebel_trainer_2_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_f8b02865"))
@@ -522,6 +427,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int dantooine_rebel_trainer_2_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_c23a0a19"))
@@ -548,7 +454,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_52917b0d");
@@ -561,7 +467,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.dantooine_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -578,6 +484,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int dantooine_rebel_trainer_2_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_52917b0d"))
@@ -619,7 +526,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_9828194f");
@@ -640,7 +547,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.dantooine_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -660,6 +567,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int dantooine_rebel_trainer_2_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1d85385d"))
@@ -693,6 +601,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int dantooine_rebel_trainer_2_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_f931eb62"))
@@ -723,6 +632,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int dantooine_rebel_trainer_2_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1807105"))
@@ -742,7 +652,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_777420ae");
@@ -755,7 +665,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.dantooine_rebel_trainer_2.branchId");
                     prose_package pp = new prose_package();
@@ -808,7 +718,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_8c4fba26");
@@ -821,7 +731,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.dantooine_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -831,6 +741,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int dantooine_rebel_trainer_2_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_777420ae"))
@@ -859,7 +770,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_8c4fba26");
@@ -872,7 +783,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.dantooine_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -882,6 +793,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int dantooine_rebel_trainer_2_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_8c4fba26"))
@@ -902,7 +814,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_9dbb5a9a");
@@ -915,7 +827,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.dantooine_rebel_trainer_2.branchId");
                     prose_package pp = new prose_package();
@@ -945,7 +857,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_fcf4d778");
@@ -958,7 +870,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.dantooine_rebel_trainer_2.branchId");
                     prose_package pp = new prose_package();
@@ -972,6 +884,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int dantooine_rebel_trainer_2_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_9dbb5a9a"))
@@ -999,7 +912,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_16d870fe");
@@ -1012,7 +925,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.dantooine_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1022,6 +935,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int dantooine_rebel_trainer_2_handleBranch26(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_16d870fe"))
@@ -1055,6 +969,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int dantooine_rebel_trainer_2_handleBranch29(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_fcf4d778"))
@@ -1081,7 +996,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_16d870fe");
@@ -1094,7 +1009,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.dantooine_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1104,6 +1019,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int dantooine_rebel_trainer_2_handleBranch30(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_4d99132b"))
@@ -1149,7 +1065,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_e02f4f90");
@@ -1162,7 +1078,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.dantooine_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1172,6 +1088,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int dantooine_rebel_trainer_2_handleBranch32(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_e02f4f90"))
@@ -1214,7 +1131,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_9828194f");
@@ -1235,7 +1152,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.dantooine_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1260,6 +1177,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int dantooine_rebel_trainer_2_handleBranch34(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_e3516195"))
@@ -1293,6 +1211,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int dantooine_rebel_trainer_2_handleBranch37(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_aa05c8e8"))
@@ -1320,7 +1239,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f520dc9f");
@@ -1333,7 +1252,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.dantooine_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1382,7 +1301,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_87");
@@ -1395,7 +1314,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.dantooine_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1405,6 +1324,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int dantooine_rebel_trainer_2_handleBranch38(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_f520dc9f"))
@@ -1433,7 +1353,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a30c1a53");
@@ -1446,7 +1366,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.dantooine_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1486,7 +1406,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_261519e4");
@@ -1503,7 +1423,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.dantooine_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1513,6 +1433,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int dantooine_rebel_trainer_2_handleBranch39(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_a30c1a53"))
@@ -1549,6 +1470,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int dantooine_rebel_trainer_2_handleBranch42(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_261519e4"))
@@ -1603,6 +1525,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int dantooine_rebel_trainer_2_handleBranch47(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_87"))
@@ -1648,7 +1571,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_2c4789b");
@@ -1665,7 +1588,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.dantooine_rebel_trainer_2.branchId");
                     prose_package pp = new prose_package();
@@ -1679,6 +1602,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int dantooine_rebel_trainer_2_handleBranch49(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_2c4789b"))
@@ -1716,6 +1640,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int dantooine_rebel_trainer_2_handleBranch52(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_fe92f35f"))
@@ -1755,7 +1680,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_e997312f");
@@ -1764,7 +1689,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.dantooine_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1774,6 +1699,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int dantooine_rebel_trainer_2_handleBranch54(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_e997312f"))
@@ -1789,6 +1715,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int dantooine_rebel_trainer_2_handleBranch56(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_105"))
@@ -1810,7 +1737,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_b17504ae");
@@ -1823,7 +1750,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.dantooine_rebel_trainer_2.branchId");
                     prose_package pp = new prose_package();
@@ -1837,6 +1764,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int dantooine_rebel_trainer_2_handleBranch57(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_b17504ae"))
@@ -1864,7 +1792,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_24084ede");
@@ -1877,7 +1805,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.dantooine_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1887,6 +1815,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int dantooine_rebel_trainer_2_handleBranch58(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_24084ede"))
@@ -1922,6 +1851,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int dantooine_rebel_trainer_2_handleBranch61(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_b91de387"))
@@ -1949,7 +1879,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_432be150");
@@ -1962,7 +1892,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.dantooine_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1995,7 +1925,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_de6ce73a");
@@ -2008,7 +1938,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.dantooine_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2029,6 +1959,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int dantooine_rebel_trainer_2_handleBranch62(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_432be150"))
@@ -2057,7 +1988,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_b74318f4");
@@ -2070,7 +2001,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.dantooine_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2103,7 +2034,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_73ff6c2b");
@@ -2116,7 +2047,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.dantooine_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2126,6 +2057,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int dantooine_rebel_trainer_2_handleBranch63(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_b74318f4"))
@@ -2163,6 +2095,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int dantooine_rebel_trainer_2_handleBranch66(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_73ff6c2b"))
@@ -2197,6 +2130,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int dantooine_rebel_trainer_2_handleBranch68(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_de6ce73a"))
@@ -2224,7 +2158,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_8631d353");
@@ -2241,7 +2175,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.dantooine_rebel_trainer_2.branchId");
                     prose_package pp = new prose_package();
@@ -2278,7 +2212,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_e5546db1");
@@ -2291,7 +2225,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.dantooine_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2301,6 +2235,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int dantooine_rebel_trainer_2_handleBranch69(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_8631d353"))
@@ -2328,7 +2263,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_432be150");
@@ -2341,7 +2276,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.dantooine_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2374,7 +2309,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_e5546db1");
@@ -2387,7 +2322,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.dantooine_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2397,6 +2332,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int dantooine_rebel_trainer_2_handleBranch70(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_e5546db1"))
@@ -2424,7 +2360,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_4cf117bb");
@@ -2437,7 +2373,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.dantooine_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2463,7 +2399,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_507325ab");
@@ -2472,7 +2408,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.dantooine_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2482,6 +2418,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int dantooine_rebel_trainer_2_handleBranch71(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_4cf117bb"))
@@ -2509,7 +2446,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1f3a637e");
@@ -2522,7 +2459,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.dantooine_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2549,7 +2486,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_148");
@@ -2558,7 +2495,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.dantooine_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2568,6 +2505,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int dantooine_rebel_trainer_2_handleBranch72(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1f3a637e"))
@@ -2588,7 +2526,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f0eba675");
@@ -2597,7 +2535,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.dantooine_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2630,7 +2568,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_432be150");
@@ -2643,7 +2581,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.dantooine_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2653,6 +2591,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int dantooine_rebel_trainer_2_handleBranch73(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_f0eba675"))
@@ -2680,7 +2619,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_432be150");
@@ -2693,7 +2632,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.dantooine_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2703,6 +2642,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int dantooine_rebel_trainer_2_handleBranch74(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_148"))
@@ -2723,7 +2663,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f0eba675");
@@ -2732,7 +2672,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.dantooine_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2742,6 +2682,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int dantooine_rebel_trainer_2_handleBranch75(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_507325ab"))
@@ -2769,7 +2710,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_4cf117bb");
@@ -2782,7 +2723,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.dantooine_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2792,6 +2733,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int dantooine_rebel_trainer_2_handleBranch77(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_f4f48ced"))
@@ -2821,6 +2763,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int dantooine_rebel_trainer_2_handleBranch80(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_266422af"))
@@ -2840,7 +2783,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_b8b49994");
@@ -2849,7 +2792,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.dantooine_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2870,6 +2813,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int dantooine_rebel_trainer_2_handleBranch81(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_b8b49994"))
@@ -2904,7 +2848,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_9d33db7");
@@ -2921,7 +2865,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.dantooine_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2931,6 +2875,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int dantooine_rebel_trainer_2_handleBranch82(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_9d33db7"))
@@ -2973,7 +2918,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_9828194f");
@@ -2994,7 +2939,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.dantooine_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3028,7 +2973,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_aaf61b87");
@@ -3045,7 +2990,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.dantooine_rebel_trainer_2.branchId");
                     prose_package pp = new prose_package();
@@ -3070,6 +3015,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int dantooine_rebel_trainer_2_handleBranch83(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_aaf61b87"))
@@ -3111,7 +3057,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_9828194f");
@@ -3132,7 +3078,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.dantooine_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3158,6 +3104,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int dantooine_rebel_trainer_2_handleBranch87(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_90297a58"))
@@ -3185,7 +3132,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_9805ba81");
@@ -3202,7 +3149,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.dantooine_rebel_trainer_2.branchId");
                     prose_package pp = new prose_package();
@@ -3238,7 +3185,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f2a21231");
@@ -3251,7 +3198,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.dantooine_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3298,7 +3245,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_92aee067");
@@ -3319,7 +3266,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.dantooine_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3345,6 +3292,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int dantooine_rebel_trainer_2_handleBranch88(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_9805ba81"))
@@ -3371,7 +3319,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f2a21231");
@@ -3384,7 +3332,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.dantooine_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3430,7 +3378,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_92aee067");
@@ -3451,7 +3399,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.dantooine_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3461,6 +3409,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int dantooine_rebel_trainer_2_handleBranch89(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_f2a21231"))
@@ -3501,7 +3450,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_92aee067");
@@ -3522,7 +3471,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.dantooine_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3554,7 +3503,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_9805ba81");
@@ -3571,7 +3520,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.dantooine_rebel_trainer_2.branchId");
                     prose_package pp = new prose_package();
@@ -3585,6 +3534,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int dantooine_rebel_trainer_2_handleBranch90(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_92aee067"))
@@ -3636,7 +3586,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f2a21231");
@@ -3649,7 +3599,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.dantooine_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3681,7 +3631,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_9805ba81");
@@ -3698,7 +3648,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.dantooine_rebel_trainer_2.branchId");
                     prose_package pp = new prose_package();
@@ -3712,6 +3662,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int dantooine_rebel_trainer_2_handleBranch94(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_9b8d2abd"))
@@ -3732,7 +3683,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_345");
@@ -3741,7 +3692,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.dantooine_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3763,7 +3714,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_347");
@@ -3772,7 +3723,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.dantooine_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3794,7 +3745,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_349");
@@ -3803,7 +3754,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.dantooine_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3825,7 +3776,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_351");
@@ -3834,7 +3785,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.dantooine_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3858,6 +3809,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int dantooine_rebel_trainer_2_handleBranch95(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_345"))
@@ -3874,6 +3826,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int dantooine_rebel_trainer_2_handleBranch97(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_347"))
@@ -3890,6 +3843,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int dantooine_rebel_trainer_2_handleBranch99(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_349"))
@@ -3906,6 +3860,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int dantooine_rebel_trainer_2_handleBranch101(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_351"))
@@ -3922,6 +3877,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int dantooine_rebel_trainer_2_handleBranch104(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_9b43a7ee"))
@@ -3964,7 +3920,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_9828194f");
@@ -3985,7 +3941,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.dantooine_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4062,7 +4018,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_165db597");
@@ -4095,7 +4051,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.dantooine_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4105,6 +4061,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int dantooine_rebel_trainer_2_handleBranch105(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_9828194f"))
@@ -4168,6 +4125,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int dantooine_rebel_trainer_2_handleBranch111(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_165db597"))
@@ -4249,6 +4207,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int dantooine_rebel_trainer_2_handleBranch119(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_d049b613"))
@@ -4302,7 +4261,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_e788dfef");
@@ -4323,7 +4282,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.dantooine_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4390,7 +4349,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_281");
@@ -4423,7 +4382,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.dantooine_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4433,6 +4392,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int dantooine_rebel_trainer_2_handleBranch121(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_e788dfef"))
@@ -4455,7 +4415,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_60e93806");
@@ -4464,7 +4424,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.dantooine_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4504,7 +4464,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_22a1e2bb");
@@ -4513,7 +4473,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.dantooine_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4540,7 +4500,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_33f02b70");
@@ -4549,7 +4509,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.dantooine_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4559,6 +4519,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int dantooine_rebel_trainer_2_handleBranch122(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_60e93806"))
@@ -4600,7 +4561,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_9828194f");
@@ -4621,7 +4582,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.dantooine_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4631,6 +4592,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int dantooine_rebel_trainer_2_handleBranch124(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_22a1e2bb"))
@@ -4673,7 +4635,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_9828194f");
@@ -4694,7 +4656,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.dantooine_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4704,6 +4666,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int dantooine_rebel_trainer_2_handleBranch125(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_33f02b70"))
@@ -4746,7 +4709,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_9828194f");
@@ -4767,7 +4730,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.dantooine_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4777,6 +4740,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int dantooine_rebel_trainer_2_handleBranch126(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_281"))
@@ -4856,6 +4820,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int dantooine_rebel_trainer_2_handleBranch134(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_310"))
@@ -4917,7 +4882,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_314");
@@ -4950,7 +4915,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.dantooine_rebel_trainer_2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4982,6 +4947,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int dantooine_rebel_trainer_2_handleBranch135(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_314"))
@@ -5061,6 +5027,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -5073,6 +5040,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
         factions.setFaction(self, factions.FACTION_REBEL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
@@ -5081,6 +5049,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
         factions.setFaction(self, factions.FACTION_REBEL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -5089,18 +5058,21 @@ public class dantooine_rebel_trainer_2 extends script.base_script
         faceTo(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.dantooine_rebel_trainer_2");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -5156,7 +5128,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_900f01d1");
@@ -5168,7 +5140,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "dantooine_rebel_trainer_2", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -5193,7 +5165,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_c23a0a19");
@@ -5201,7 +5173,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 utils.setScriptVar(player, "conversation.dantooine_rebel_trainer_2.branchId", 8);
                 npcStartConversation(player, npc, "dantooine_rebel_trainer_2", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -5258,7 +5230,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_1d85385d");
@@ -5270,7 +5242,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 utils.setScriptVar(player, "conversation.dantooine_rebel_trainer_2.branchId", 15);
                 npcStartConversation(player, npc, "dantooine_rebel_trainer_2", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -5299,7 +5271,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_f931eb62");
@@ -5315,7 +5287,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "dantooine_rebel_trainer_2", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -5357,7 +5329,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_1807105");
@@ -5377,7 +5349,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "dantooine_rebel_trainer_2", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -5411,7 +5383,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_4d99132b");
@@ -5427,7 +5399,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "dantooine_rebel_trainer_2", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -5462,7 +5434,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_e3516195");
@@ -5478,7 +5450,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "dantooine_rebel_trainer_2", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -5520,7 +5492,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_aa05c8e8");
@@ -5540,7 +5512,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "dantooine_rebel_trainer_2", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -5574,7 +5546,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_fe92f35f");
@@ -5590,7 +5562,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "dantooine_rebel_trainer_2", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -5617,7 +5589,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_105");
@@ -5629,7 +5601,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "dantooine_rebel_trainer_2", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -5671,7 +5643,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_b91de387");
@@ -5691,7 +5663,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "dantooine_rebel_trainer_2", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -5725,7 +5697,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_f4f48ced");
@@ -5737,7 +5709,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 utils.setScriptVar(player, "conversation.dantooine_rebel_trainer_2.branchId", 77);
                 npcStartConversation(player, npc, "dantooine_rebel_trainer_2", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -5768,7 +5740,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_266422af");
@@ -5784,7 +5756,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "dantooine_rebel_trainer_2", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -5833,7 +5805,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_90297a58");
@@ -5857,7 +5829,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "dantooine_rebel_trainer_2", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -5892,7 +5864,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_9b8d2abd");
@@ -5908,7 +5880,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "dantooine_rebel_trainer_2", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -5948,7 +5920,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_9b43a7ee");
@@ -5968,7 +5940,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "dantooine_rebel_trainer_2", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -6010,7 +5982,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_d049b613");
@@ -6030,7 +6002,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "dantooine_rebel_trainer_2", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -6071,7 +6043,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_310");
@@ -6087,7 +6059,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 utils.setScriptVar(player, "conversation.dantooine_rebel_trainer_2.branchId", 134);
                 npcStartConversation(player, npc, "dantooine_rebel_trainer_2", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -6096,6 +6068,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("dantooine_rebel_trainer_2"))

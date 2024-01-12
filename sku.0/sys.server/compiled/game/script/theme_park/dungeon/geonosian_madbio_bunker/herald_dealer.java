@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.geonosian_madbio_bunker;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.obj_id;
@@ -10,9 +16,6 @@ import java.util.Vector;
 
 public class herald_dealer extends script.base_script
 {
-    public herald_dealer()
-    {
-    }
     public static final String TBL = "datatables/npc/relic_dealer/relic_geonosian_bio_bunker.iff";
     public static final String SCRIPTVAR_JUNK_SUI = "relicdealer.biogenic.sui";
     public static final String SCRIPTVAR_JUNK_IDS = "relicdealer.biogenic.ids";
@@ -30,12 +33,17 @@ public class herald_dealer extends script.base_script
     public static final String NO_ITEMS_PROMPT = "@" + STF + ":no_items";
     public static final String BTN_SELL = "@" + STF + ":btn_sell";
     public static final String BTN_SELL_ALL = "@" + STF + ":btn_sell_all";
+    public herald_dealer()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
         attachScript(self, "conversation.biogenic_herald_dealer");
         return SCRIPT_CONTINUE;
     }
+
     public obj_id[] getAllJunkItems(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -47,10 +55,13 @@ public class herald_dealer extends script.base_script
         {
             Vector junk = new Vector();
             junk.setSize(0);
-            for (obj_id content : contents) {
+            for (obj_id content : contents)
+            {
                 String template = getTemplateName(content);
-                if ((template != null) && (!template.equals(""))) {
-                    if (dataTableGetInt(TBL, template, "price") >= 0) {
+                if ((template != null) && (!template.equals("")))
+                {
+                    if (dataTableGetInt(TBL, template, "price") >= 0)
+                    {
                         junk = utils.addElement(junk, content);
                     }
                 }
@@ -62,6 +73,7 @@ public class herald_dealer extends script.base_script
         }
         return null;
     }
+
     public void showSellJunkSui(obj_id player, obj_id target) throws InterruptedException
     {
         if (!isIdValid(player) || !isIdValid(target))
@@ -98,23 +110,26 @@ public class herald_dealer extends script.base_script
                 }
             }
         }
-        else 
+        else
         {
             int msgPid = sui.msgbox(target, player, NO_ITEMS_PROMPT, sui.OK_ONLY, SELL_TITLE, "noHandler");
             cleanupSellJunkSui(player);
         }
     }
+
     public void cleanupSellJunkSui(obj_id player) throws InterruptedException
     {
         utils.removeScriptVar(player, SCRIPTVAR_JUNK_SUI);
         utils.removeBatchScriptVar(player, SCRIPTVAR_JUNK_IDS);
     }
+
     public int startDealing(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
         showSellJunkSui(player, self);
         return SCRIPT_CONTINUE;
     }
+
     public int handleSellJunkSui(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -134,7 +149,7 @@ public class herald_dealer extends script.base_script
         {
             sellAllJunk(player, self);
         }
-        else 
+        else
         {
             if (idx < 0)
             {
@@ -152,6 +167,7 @@ public class herald_dealer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void sellJunkItem(obj_id player, obj_id item, boolean reshowSui) throws InterruptedException
     {
         if (!isIdValid(player) || !isIdValid(item))
@@ -176,16 +192,18 @@ public class herald_dealer extends script.base_script
             params.put("reshowSui", reshowSui);
             money.systemPayout(money.ACCT_RELIC_DEALER, player, price, "handleSoldJunk", params);
         }
-        else 
+        else
         {
             prose_package ppNoBuy = prose.getPackage(PROSE_NO_BUY, self, item);
             sendSystemMessageProse(player, ppNoBuy);
         }
     }
+
     public void sellJunkItem(obj_id player, obj_id item) throws InterruptedException
     {
         sellJunkItem(player, item, false);
     }
+
     public int handleSoldJunk(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -221,6 +239,7 @@ public class herald_dealer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void sellAllJunk(obj_id player, obj_id target) throws InterruptedException
     {
         if (!isIdValid(player) || !isIdValid(target))
@@ -246,10 +265,14 @@ public class herald_dealer extends script.base_script
         {
             int now = getGameTime();
             int total = 0;
-            for (Object o : junk) {
-                if (utils.hasScriptVar(((obj_id) o), SCRIPTVAR_SOLD)) {
-                    toRemove = utils.addElement(toRemove, ((obj_id) o));
-                } else {
+            for (Object o : junk)
+            {
+                if (utils.hasScriptVar(((obj_id) o), SCRIPTVAR_SOLD))
+                {
+                    toRemove = utils.addElement(toRemove, o);
+                }
+                else
+                {
                     String template = getTemplateName(((obj_id) o));
                     int price = dataTableGetInt(TBL, template, "price");
                     total += price;
@@ -264,13 +287,14 @@ public class herald_dealer extends script.base_script
                 params.put("total", total);
                 money.systemPayout(money.ACCT_RELIC_DEALER, player, total, "handleSoldAllJunk", params);
             }
-            else 
+            else
             {
                 prose_package ppNoBuy = prose.getPackage(PROSE_NO_BUY_ALL, target);
                 sendSystemMessageProse(player, ppNoBuy);
             }
         }
     }
+
     public int handleSoldAllJunk(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -292,7 +316,8 @@ public class herald_dealer extends script.base_script
         {
             prose_package ppNoSale = prose.getPackage(PROSE_NO_ALL_SALE, self);
             sendSystemMessageProse(player, ppNoSale);
-            for (obj_id obj_id : junk) {
+            for (obj_id obj_id : junk)
+            {
                 utils.removeScriptVar(obj_id, SCRIPTVAR_SOLD);
             }
             return SCRIPT_CONTINUE;

@@ -1,5 +1,11 @@
 package script.theme_park.alderaan.act3;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.badge;
 import script.library.chat;
@@ -7,11 +13,12 @@ import script.library.factions;
 
 public class imperial_research_terminal extends script.base_script
 {
+    public static final String IMPERIAL_SHARED_STF = "theme_park/alderaan/act3/shared_imperial_missions";
+    public static final string_id MISSION_COMPLETE = new string_id(IMPERIAL_SHARED_STF, "mission_complete");
     public imperial_research_terminal()
     {
     }
-    public static final String IMPERIAL_SHARED_STF = "theme_park/alderaan/act3/shared_imperial_missions";
-    public static final string_id MISSION_COMPLETE = new string_id(IMPERIAL_SHARED_STF, "mission_complete");
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         obj_id facility = getObjIdObjVar(self, "coa3.imperial.facility");
@@ -25,6 +32,7 @@ public class imperial_research_terminal extends script.base_script
         mi.addSubMenu(mnu, menu_info_types.FIFTEEN_SEC, new string_id("self_destruct", "fifteen"));
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.THIRTY_SEC)
@@ -53,6 +61,7 @@ public class imperial_research_terminal extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int blowUp(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id viewer = params.getObjId("player");
@@ -72,6 +81,7 @@ public class imperial_research_terminal extends script.base_script
         messageTo(self, "bldgCheck", params, 1, true);
         return SCRIPT_CONTINUE;
     }
+
     public int firstPop(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id viewer = params.getObjId("player");
@@ -80,6 +90,7 @@ public class imperial_research_terminal extends script.base_script
         playClientEffectLoc(viewer, "clienteffect/combat_explosion_lair_large.cef", death, 10.0f);
         return SCRIPT_CONTINUE;
     }
+
     public int bldgCheck(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id viewer = params.getObjId("player");
@@ -89,7 +100,7 @@ public class imperial_research_terminal extends script.base_script
             removeObjVar(self, "coa3.imperial.success");
             sendSystemMessage(viewer, new string_id(IMPERIAL_SHARED_STF, "self_destruct_aborted"));
         }
-        else 
+        else
         {
             obj_id player = getObjIdObjVar(self, "coa3.imperial.playerId");
             setObjVar(player, "coa3.imperial.finalMission", 1);
@@ -107,6 +118,7 @@ public class imperial_research_terminal extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cleanup(obj_id self, dictionary params) throws InterruptedException
     {
         if (!hasObjVar(self, "coa3.imperial.success"))

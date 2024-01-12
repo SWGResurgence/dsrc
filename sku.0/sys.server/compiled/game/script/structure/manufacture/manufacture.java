@@ -1,5 +1,11 @@
 package script.structure.manufacture;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.craftinglib;
 import script.library.player_structure;
@@ -26,6 +32,7 @@ public class manufacture extends script.base_script
     public static final string_id SID_NO_VALID_SCHEMATIC = new string_id("manf_station", "no_valid_schematic");
     public static final String HANDLER_UPDATE_SCHEMATIC = "handleUpdateSchematic";
     public static final String OBJVAR_SCHEMATICS = "crafting.schematics";
+
     public manufacture()
     {
     }

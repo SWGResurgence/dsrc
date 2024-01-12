@@ -1,5 +1,11 @@
 package script.city.bestine;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.ai_lib;
 import script.library.create;
@@ -10,6 +16,7 @@ public class politician_event_spawner extends script.base_script
     public politician_event_spawner()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         deltadictionary dctScriptVars = self.getScriptVars();
@@ -17,6 +24,7 @@ public class politician_event_spawner extends script.base_script
         messageTo(self, "checkForCapitolBuilding", null, 60, false);
         return SCRIPT_CONTINUE;
     }
+
     public int checkForCapitolBuilding(obj_id self, dictionary params) throws InterruptedException
     {
         location here = getLocation(self);
@@ -27,9 +35,11 @@ public class politician_event_spawner extends script.base_script
         {
             obj_id tatooineCapitolObjId = null;
             String capitolName;
-            for (map_location tatooineCapitol : allRegisteredCapitols) {
+            for (map_location tatooineCapitol : allRegisteredCapitols)
+            {
                 capitolName = getString(utils.unpackString(tatooineCapitol.getLocationName()));
-                if (capitolName != null && capitolName.equals("Bestine")) {
+                if (capitolName != null && capitolName.equals("Bestine"))
+                {
                     tatooineCapitolObjId = tatooineCapitol.getLocationId();
                 }
             }
@@ -42,19 +52,19 @@ public class politician_event_spawner extends script.base_script
                     messageTo(self, "checkForCapitolBuilding", null, 60, false);
                     return SCRIPT_CONTINUE;
                 }
-                else 
+                else
                 {
                     LOG("DESIGNER_FATAL", "BESTINE POLITICIAN EVENT: Could not find registered capitol building from here: " + here);
                     return SCRIPT_CONTINUE;
                 }
             }
-            else 
+            else
             {
                 dctScriptVars.put("tatooineCapitolObjId", tatooineCapitolObjId);
                 spawnNpc(self);
             }
         }
-        else 
+        else
         {
             if (numCapitolChecks <= 30)
             {
@@ -63,13 +73,14 @@ public class politician_event_spawner extends script.base_script
                 messageTo(self, "checkForCapitolBuilding", null, 60, false);
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 LOG("DESIGNER_FATAL", "BESTINE POLITICIAN EVENT: Couldn't find a valid map_location for a registered capitol after " + numCapitolChecks + " capitolChecks from here: " + here);
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public void spawnNpc(obj_id self) throws InterruptedException
     {
         String spawn = getStringObjVar(self, "spawns");

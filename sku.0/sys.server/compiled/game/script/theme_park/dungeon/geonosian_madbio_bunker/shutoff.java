@@ -1,13 +1,21 @@
 package script.theme_park.dungeon.geonosian_madbio_bunker;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 
 public class shutoff extends script.base_script
 {
+    public static final String MSGS = "dungeon/geonosian_madbio";
+
     public shutoff()
     {
     }
-    public static final String MSGS = "dungeon/geonosian_madbio";
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         menu_info_data mid = mi.getMenuItemByType(menu_info_types.ITEM_USE);
@@ -18,6 +26,7 @@ public class shutoff extends script.base_script
         mid.setServerNotify(true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)
@@ -27,6 +36,7 @@ public class shutoff extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void shutoffTrap(obj_id gas, obj_id player) throws InterruptedException
     {
         if (!hasObjVar(gas, "trap_off"))
@@ -37,11 +47,10 @@ public class shutoff extends script.base_script
             string_id gaseous = new string_id(MSGS, "gas_off");
             sendSystemMessage(player, gaseous);
         }
-        else 
+        else
         {
             string_id alreadyOff = new string_id(MSGS, "gas_already_off");
             sendSystemMessage(player, alreadyOff);
         }
-        return;
     }
 }

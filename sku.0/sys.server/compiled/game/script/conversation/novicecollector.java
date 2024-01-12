@@ -1,30 +1,43 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
 public class novicecollector extends script.base_script
 {
+    public static final String PID_NAME = "collection_npc";
+    public static String c_stringFile = "conversation/novicecollector";
+
     public novicecollector()
     {
     }
-    public static String c_stringFile = "conversation/novicecollector";
+
     public boolean novicecollector_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean novicecollector_condition_hasPublishGiftToken(obj_id player, obj_id npc) throws InterruptedException
     {
         return (hasCompletedCollectionSlotPrereq(player, "publish_chapter7_click_activation_03"));
     }
+
     public boolean novicecollector_condition_hasFoundClickCollection(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "chapter7_beginning_click_collection", "publishClickCollectionReturnToCollectionNPC");
     }
+
     public boolean novicecollector_condition_hasCompletedClickCollection(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "chapter7_beginning_click_collection");
     }
+
     public boolean novicecollector_condition_hasFoundInventoryCollection(obj_id player, obj_id npc) throws InterruptedException
     {
         if (groundquests.isTaskActive(player, "chapter7_beginning_inventory_collection_01", "returnToCollectorInventoryCollectionComplete"))
@@ -39,12 +52,9 @@ public class novicecollector extends script.base_script
         {
             return true;
         }
-        else if (groundquests.isTaskActive(player, "chapter7_beginning_inventory_collection_04", "returnToCollectorInventoryCollectionComplete"))
-        {
-            return true;
-        }
-        return false;
+        else return groundquests.isTaskActive(player, "chapter7_beginning_inventory_collection_04", "returnToCollectorInventoryCollectionComplete");
     }
+
     public boolean novicecollector_condition_hasCompletedClickInventoryCollection(obj_id player, obj_id npc) throws InterruptedException
     {
         if (groundquests.hasCompletedQuest(player, "chapter7_beginning_click_collection") && groundquests.hasCompletedQuest(player, "chapter7_beginning_inventory_collection_01"))
@@ -59,36 +69,34 @@ public class novicecollector extends script.base_script
         {
             return true;
         }
-        else if (groundquests.hasCompletedQuest(player, "chapter7_beginning_click_collection") && groundquests.hasCompletedQuest(player, "chapter7_beginning_inventory_collection_04"))
-        {
-            return true;
-        }
-        return false;
+        else return groundquests.hasCompletedQuest(player, "chapter7_beginning_click_collection") && groundquests.hasCompletedQuest(player, "chapter7_beginning_inventory_collection_04");
     }
+
     public boolean novicecollector_condition_hasFulfilledCounterQuota(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "chapter7_beginning_counter_collection", "publishCounterReturn");
     }
+
     public boolean novicecollector_condition_allCollectionsComplete(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "chapter7_beginning_counter_collection");
     }
+
     public boolean novicecollector_condition_clickCollectionActive(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "chapter7_beginning_click_collection");
     }
+
     public boolean novicecollector_condition_inventoryCollectionActive(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.isQuestActive(player, "chapter7_beginning_inventory_collection_01") || groundquests.isQuestActive(player, "chapter7_beginning_inventory_collection_02") || groundquests.isQuestActive(player, "chapter7_beginning_inventory_collection_03") || groundquests.isQuestActive(player, "chapter7_beginning_inventory_collection_04"))
-        {
-            return true;
-        }
-        return false;
+        return groundquests.isQuestActive(player, "chapter7_beginning_inventory_collection_01") || groundquests.isQuestActive(player, "chapter7_beginning_inventory_collection_02") || groundquests.isQuestActive(player, "chapter7_beginning_inventory_collection_03") || groundquests.isQuestActive(player, "chapter7_beginning_inventory_collection_04");
     }
+
     public boolean novicecollector_condition_counterCollectionActive(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isQuestActive(player, "chapter7_beginning_counter_collection"));
     }
+
     public boolean novicecollector_condition_noMoreCollections(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(npc, "collection.columnName"))
@@ -98,6 +106,7 @@ public class novicecollector extends script.base_script
         }
         return false;
     }
+
     public boolean novicecollector_condition_cantGetMore(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(npc, "collection.columnName"))
@@ -107,18 +116,22 @@ public class novicecollector extends script.base_script
         }
         return false;
     }
+
     public boolean novicecollector_condition_isSomehowBroken(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isQuestActive(player, "chapter7_beginning_click_collection") && (getCollectionSlotValue(player, "publish_chapter7_click_activation_03") == 0));
     }
+
     public boolean novicecollector_condition_foundUnusedComlink(obj_id player, obj_id npc) throws InterruptedException
     {
         return utils.playerHasItemByTemplateInBankOrInventory(player, "object/tangible/quest/quest_start/chapter7_publish_gift_collection_token.iff");
     }
+
     public boolean novicecollector_condition_hasActivatedOne(obj_id player, obj_id npc) throws InterruptedException
     {
         return (getCollectionSlotValue(player, "publish_chapter7_click_activation_01") == 1);
     }
+
     public boolean novicecollector_condition_hasCollectionsToRemove(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(npc, "collection.columnName"))
@@ -128,16 +141,14 @@ public class novicecollector extends script.base_script
         }
         return false;
     }
+
     public boolean novicecollector_condition_collectorHintEndor(obj_id player, obj_id npc) throws InterruptedException
     {
         String planetName = getCurrentSceneName();
         broadcast(player, planetName);
-        if (planetName.equals("endor"))
-        {
-            return false;
-        }
-        return true;
+        return !planetName.equals("endor");
     }
+
     public boolean novicecollector_condition_hasFinishedInventoryOutOfOrder(obj_id player, obj_id npc) throws InterruptedException
     {
         if (groundquests.hasCompletedQuest(player, "chapter7_beginning_click_collection"))
@@ -170,52 +181,42 @@ public class novicecollector extends script.base_script
                 }
                 if (getCollectionSlotValue(player, "publish_datapad_component_03") == 1)
                 {
-                    if (groundquests.isTaskActive(player, "chapter7_beginning_inventory_collection_0" + questNumber, "publishInventoryCollectionStorageDrive"))
-                    {
-                        return true;
-                    }
+                    return groundquests.isTaskActive(player, "chapter7_beginning_inventory_collection_0" + questNumber, "publishInventoryCollectionStorageDrive");
                 }
             }
         }
         return false;
     }
+
     public boolean novicecollector_condition_collectorHintTatooine(obj_id player, obj_id npc) throws InterruptedException
     {
         String planetName = getCurrentSceneName();
         broadcast(player, planetName);
-        if (planetName.equals("tatooine"))
-        {
-            return false;
-        }
-        return true;
+        return !planetName.equals("tatooine");
     }
+
     public boolean novicecollector_condition_collectorHintYavin4(obj_id player, obj_id npc) throws InterruptedException
     {
         String planetName = getCurrentSceneName();
         broadcast(player, planetName);
-        if (planetName.equals("yavin4"))
-        {
-            return false;
-        }
-        return true;
+        return !planetName.equals("yavin4");
     }
+
     public boolean novicecollector_condition_collectorHintAurilia(obj_id player, obj_id npc) throws InterruptedException
     {
         String planetName = getCurrentSceneName();
         int playerLevel = getLevel(player);
         broadcast(player, planetName);
-        if (planetName.equals("dathomir") || playerLevel < 70)
-        {
-            return false;
-        }
-        return true;
+        return !planetName.equals("dathomir") && playerLevel >= 70;
     }
+
     public void novicecollector_action_grantCollectionQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "publishClickCollectionActivation");
         modifyCollectionSlotValue(player, "publish_chapter7_click_activation_03", 1);
         groundquests.grantQuest(player, "chapter7_beginning_click_collection");
     }
+
     public void novicecollector_action_completeClickCollection(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "publishClickCollectionReturnToCollectionNPC");
@@ -224,6 +225,7 @@ public class novicecollector extends script.base_script
             groundquests.grantQuest(player, "chapter7_give_comlink_reward");
         }
     }
+
     public void novicecollector_action_grantInventoryQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         modifyCollectionSlotValue(player, "publish_chapter7_activation_02", 1);
@@ -252,6 +254,7 @@ public class novicecollector extends script.base_script
             groundquests.sendSignal(player, "publishInventoryCollectionStorageDrive");
         }
     }
+
     public void novicecollector_action_completeInventoryCollection(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "returnToCollectorInventoryCollectionComplete");
@@ -260,20 +263,24 @@ public class novicecollector extends script.base_script
             groundquests.grantQuest(player, "chapter7_give_datapad_reward");
         }
     }
+
     public void novicecollector_action_grantCounterQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         modifyCollectionSlotValue(player, "kill_tusken_activate", 1);
         groundquests.grantQuest(player, "chapter7_beginning_counter_collection");
     }
+
     public void novicecollector_action_completeCounterCollection(obj_id player, obj_id npc) throws InterruptedException
     {
         modifyCollectionSlotValue(player, "kill_tusken_complete", 1);
         groundquests.sendSignal(player, "publishCounterReturn");
     }
+
     public void novicecollector_action_sendActivationSignal(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "publishClickCollectionActivation");
     }
+
     public void novicecollector_action_showCollectionSui(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(npc, "collection.columnName"))
@@ -282,12 +289,14 @@ public class novicecollector extends script.base_script
             collection.showNpcCollections(player, npc, columnName);
         }
     }
+
     public void novicecollector_action_fixPlayer(obj_id player, obj_id npc) throws InterruptedException
     {
         modifyCollectionSlotValue(player, "publish_chapter7_click_activation_01", 1);
         modifyCollectionSlotValue(player, "publish_chapter7_click_activation_02", 1);
         modifyCollectionSlotValue(player, "publish_chapter7_click_activation_03", 1);
     }
+
     public void novicecollector_action_tutorialNoGifts(obj_id player, obj_id npc) throws InterruptedException
     {
         modifyCollectionSlotValue(player, "publish_chapter7_click_activation_01", 1);
@@ -295,6 +304,7 @@ public class novicecollector extends script.base_script
         modifyCollectionSlotValue(player, "publish_chapter7_click_activation_03", 1);
         groundquests.grantQuest(player, "chapter7_beginning_click_collection");
     }
+
     public void novicecollector_action_showRemovalSui(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(npc, "collection.columnName"))
@@ -303,10 +313,12 @@ public class novicecollector extends script.base_script
             collection.showNpcCollectionsRemoval(player, npc, columnName);
         }
     }
+
     public void novicecollector_action_collectionQuestSignal(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "grantCollectionRewardSignal");
     }
+
     public int novicecollector_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_57"))
@@ -347,7 +359,7 @@ public class novicecollector extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_61");
@@ -360,7 +372,7 @@ public class novicecollector extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.novicecollector.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -392,7 +404,7 @@ public class novicecollector extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_97");
@@ -405,7 +417,7 @@ public class novicecollector extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.novicecollector.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -437,7 +449,7 @@ public class novicecollector extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_113");
@@ -446,7 +458,7 @@ public class novicecollector extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.novicecollector.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -466,6 +478,7 @@ public class novicecollector extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int novicecollector_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_61"))
@@ -491,6 +504,7 @@ public class novicecollector extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int novicecollector_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_97"))
@@ -516,6 +530,7 @@ public class novicecollector extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int novicecollector_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_113"))
@@ -556,7 +571,7 @@ public class novicecollector extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_115");
@@ -577,7 +592,7 @@ public class novicecollector extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.novicecollector.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -587,6 +602,7 @@ public class novicecollector extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int novicecollector_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_115"))
@@ -631,6 +647,7 @@ public class novicecollector extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int novicecollector_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_53"))
@@ -645,6 +662,7 @@ public class novicecollector extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int novicecollector_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_43"))
@@ -670,6 +688,7 @@ public class novicecollector extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int novicecollector_handleBranch28(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_71"))
@@ -695,6 +714,7 @@ public class novicecollector extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int novicecollector_handleBranch33(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_86"))
@@ -721,7 +741,7 @@ public class novicecollector extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_90");
@@ -734,7 +754,7 @@ public class novicecollector extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.novicecollector.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -744,6 +764,7 @@ public class novicecollector extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int novicecollector_handleBranch34(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_90"))
@@ -769,6 +790,7 @@ public class novicecollector extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int novicecollector_handleBranch39(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_124"))
@@ -795,7 +817,7 @@ public class novicecollector extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_128");
@@ -808,7 +830,7 @@ public class novicecollector extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.novicecollector.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -818,6 +840,7 @@ public class novicecollector extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int novicecollector_handleBranch40(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_128"))
@@ -843,7 +866,7 @@ public class novicecollector extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
-    public static final String PID_NAME = "collection_npc";
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isTangible(self)) || (isPlayer(self)))
@@ -853,6 +876,7 @@ public class novicecollector extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int handleCollectionNpc(obj_id self, dictionary params) throws InterruptedException
     {
         int btn = sui.getIntButtonPressed(params);
@@ -879,6 +903,7 @@ public class novicecollector extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleCollectionRemoval(obj_id self, dictionary params) throws InterruptedException
     {
         int btn = sui.getIntButtonPressed(params);
@@ -906,6 +931,7 @@ public class novicecollector extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handlePlayerConfirmedCollectionDelete(obj_id self, dictionary params) throws InterruptedException
     {
         int btn = sui.getIntButtonPressed(params);
@@ -930,11 +956,13 @@ public class novicecollector extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -943,18 +971,21 @@ public class novicecollector extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.novicecollector");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -1007,7 +1038,7 @@ public class novicecollector extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_57");
@@ -1027,7 +1058,7 @@ public class novicecollector extends script.base_script
                 utils.setScriptVar(player, "conversation.novicecollector.branchId", 2);
                 npcStartConversation(player, npc, "novicecollector", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1051,7 +1082,7 @@ public class novicecollector extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_53");
@@ -1059,7 +1090,7 @@ public class novicecollector extends script.base_script
                 utils.setScriptVar(player, "conversation.novicecollector.branchId", 19);
                 npcStartConversation(player, npc, "novicecollector", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1093,7 +1124,7 @@ public class novicecollector extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_43");
@@ -1105,7 +1136,7 @@ public class novicecollector extends script.base_script
                 utils.setScriptVar(player, "conversation.novicecollector.branchId", 22);
                 npcStartConversation(player, npc, "novicecollector", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1154,7 +1185,7 @@ public class novicecollector extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_71");
@@ -1166,7 +1197,7 @@ public class novicecollector extends script.base_script
                 utils.setScriptVar(player, "conversation.novicecollector.branchId", 28);
                 npcStartConversation(player, npc, "novicecollector", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1202,7 +1233,7 @@ public class novicecollector extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_86");
@@ -1210,7 +1241,7 @@ public class novicecollector extends script.base_script
                 utils.setScriptVar(player, "conversation.novicecollector.branchId", 33);
                 npcStartConversation(player, npc, "novicecollector", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1243,7 +1274,7 @@ public class novicecollector extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_124");
@@ -1251,7 +1282,7 @@ public class novicecollector extends script.base_script
                 utils.setScriptVar(player, "conversation.novicecollector.branchId", 39);
                 npcStartConversation(player, npc, "novicecollector", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1260,6 +1291,7 @@ public class novicecollector extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("novicecollector"))

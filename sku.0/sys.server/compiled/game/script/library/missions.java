@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.obj_id;
 import script.string_id;
@@ -32,6 +38,7 @@ public class missions extends script.base_script
     public static final String DAILY_MISSION_OBJVAR = "missions.daily";
     public static final String DAILY_MISSION_CLOCK_OBJVAR = "missions.dailyClock";
     public static final string_id DAILY_REWARD_XP = new string_id("base_player", "prose_mission_xp_amount");
+
     public missions()
     {
     }

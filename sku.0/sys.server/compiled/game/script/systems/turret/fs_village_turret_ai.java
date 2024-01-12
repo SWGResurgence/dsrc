@@ -1,5 +1,11 @@
 package script.systems.turret;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.combat_engine;
 import script.combat_engine.attacker_data;
 import script.combat_engine.defender_data;

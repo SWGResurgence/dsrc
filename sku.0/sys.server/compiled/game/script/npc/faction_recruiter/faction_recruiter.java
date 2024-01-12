@@ -1,5 +1,11 @@
 package script.npc.faction_recruiter;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -8,9 +14,6 @@ import java.util.Vector;
 
 public class faction_recruiter extends script.base_script
 {
-    public faction_recruiter()
-    {
-    }
     public static final String DATATABLE_ALLOWED_XP_TYPES = "datatables/npc/faction_recruiter/allowed_xp_types.iff";
     public static final String CONVERSE_FACTION_PERKS = "faction_perks";
     public static final string_id SID_GREETING = new string_id("faction_recruiter", "greeting");
@@ -57,47 +60,47 @@ public class faction_recruiter extends script.base_script
     public static final string_id SID_NO_TO_PROMOTION = new string_id("faction_recruiter", "response_no_to_promotion");
     public static final string_id SID_PROMOTION_COMPLETE = new string_id("faction_recruiter", "response_promotion_complete");
     public static final string_id SID_SELL_SECRETS = new string_id("faction_recruiter", "sell_secrets");
-    public static final string_id SID_NO_SECRETS[] = 
-    {
-        new string_id("faction_recruiter", "no_secrets_1"),
-        new string_id("faction_recruiter", "no_secrets_2"),
-        new string_id("faction_recruiter", "no_secrets_3")
-    };
-    public static final string_id SID_INTERESTED_SECRETS_REB[] = 
-    {
-        new string_id("faction_recruiter", "interested_secrets_reb_1"),
-        new string_id("faction_recruiter", "interested_secrets_reb_2"),
-        new string_id("faction_recruiter", "interested_secrets_reb_3")
-    };
-    public static final string_id SID_INTERESTED_SECRETS_IMP[] = 
-    {
-        new string_id("faction_recruiter", "interested_secrets_imp_1"),
-        new string_id("faction_recruiter", "interested_secrets_imp_2"),
-        new string_id("faction_recruiter", "interested_secrets_imp_3")
-    };
+    public static final string_id[] SID_NO_SECRETS =
+            {
+                    new string_id("faction_recruiter", "no_secrets_1"),
+                    new string_id("faction_recruiter", "no_secrets_2"),
+                    new string_id("faction_recruiter", "no_secrets_3")
+            };
+    public static final string_id[] SID_INTERESTED_SECRETS_REB =
+            {
+                    new string_id("faction_recruiter", "interested_secrets_reb_1"),
+                    new string_id("faction_recruiter", "interested_secrets_reb_2"),
+                    new string_id("faction_recruiter", "interested_secrets_reb_3")
+            };
+    public static final string_id[] SID_INTERESTED_SECRETS_IMP =
+            {
+                    new string_id("faction_recruiter", "interested_secrets_imp_1"),
+                    new string_id("faction_recruiter", "interested_secrets_imp_2"),
+                    new string_id("faction_recruiter", "interested_secrets_imp_3")
+            };
     public static final string_id SID_NEVERMIND = new string_id("faction_recruiter", "nevermind");
     public static final string_id SID_HERE_YOU_GO = new string_id("faction_recruiter", "here_you_go");
     public static final string_id SID_GET_LOST = new string_id("faction_recruiter", "get_lost");
-    public static final string_id SID_GOOD_STUFF[] = 
-    {
-        new string_id("faction_recruiter", "good_stuff_1"),
-        new string_id("faction_recruiter", "good_stuff_2"),
-        new string_id("faction_recruiter", "good_stuff_3")
-    };
-    public static final string_id SID_BAD_STUFF[] = 
-    {
-        new string_id("faction_recruiter", "bad_stuff_1"),
-        new string_id("faction_recruiter", "bad_stuff_2")
-    };
+    public static final string_id[] SID_GOOD_STUFF =
+            {
+                    new string_id("faction_recruiter", "good_stuff_1"),
+                    new string_id("faction_recruiter", "good_stuff_2"),
+                    new string_id("faction_recruiter", "good_stuff_3")
+            };
+    public static final string_id[] SID_BAD_STUFF =
+            {
+                    new string_id("faction_recruiter", "bad_stuff_1"),
+                    new string_id("faction_recruiter", "bad_stuff_2")
+            };
     public static final string_id SID_BUY_FACTION = new string_id("faction_recruiter", "buy_faction");
     public static final string_id SID_NO_FACTION_REB = new string_id("faction_recruiter", "no_faction_reb");
     public static final string_id SID_NO_FACTION_IMP = new string_id("faction_recruiter", "no_faction_imp");
     public static final string_id SID_NO_FACTION = new string_id("faction_recruiter", "no_faction");
-    public static final string_id SID_YES_FACTION[] = 
-    {
-        new string_id("faction_recruiter", "yes_faction_onek"),
-        new string_id("faction_recruiter", "yes_faction_tenk")
-    };
+    public static final string_id[] SID_YES_FACTION =
+            {
+                    new string_id("faction_recruiter", "yes_faction_onek"),
+                    new string_id("faction_recruiter", "yes_faction_tenk")
+            };
     public static final string_id SID_INTERESTED_FACTION_REB = new string_id("faction_recruiter", "interested_faction_reb");
     public static final string_id SID_INTERESTED_FACTION_IMP = new string_id("faction_recruiter", "interested_faction_imp");
     public static final string_id SID_GET_LOST_FACTION = new string_id("faction_recruiter", "get_lost_faction");
@@ -130,6 +133,10 @@ public class faction_recruiter extends script.base_script
     public static final String VAR_GOING_COVERT = "faction_recruiter.going_covert";
     public static final String VAR_AVAILABLE_ITEMS = "faction_recruiter.available_items";
     public static final String VAR_GOING_OVERT_FACTION_ID = "faction_recruiter.factionId";
+    public faction_recruiter()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, VAR_FACTION))
@@ -150,7 +157,7 @@ public class faction_recruiter extends script.base_script
                 LOG("LOG_CHANNEL", "faction_recruiter::OnAttach (" + self + ") -- a faction recruiter must be either of Rebel or Imperial faction.");
                 detachScript(self, faction_perk.SCRIPT_FACTION_RECRUITER);
             }
-            else 
+            else
             {
                 if (!hasScript(self, "systems.gcw.gcw_data_updater"))
                 {
@@ -181,6 +188,7 @@ public class faction_recruiter extends script.base_script
         requestPreloadCompleteTrigger(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (!hasScript(self, "systems.gcw.gcw_data_updater"))
@@ -217,13 +225,13 @@ public class faction_recruiter extends script.base_script
                     LOG("LOG_CHANNEL", "faction_recruiter::OnInitialize (" + self + ") -- a faction recruiter must be either of Rebel or Imperial faction.");
                     detachScript(self, faction_perk.SCRIPT_FACTION_RECRUITER);
                 }
-                else 
+                else
                 {
                     pvpSetAlignedFaction(self, faction_id);
                     pvpMakeDeclared(self);
                 }
             }
-            else 
+            else
             {
                 detachScript(self, faction_perk.SCRIPT_FACTION_RECRUITER);
             }
@@ -231,11 +239,13 @@ public class faction_recruiter extends script.base_script
         requestPreloadCompleteTrigger(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         detachScript(self, faction_perk.SCRIPT_FACTION_RECRUITER);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         int mnu = mi.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -243,6 +253,7 @@ public class faction_recruiter extends script.base_script
         mdata.setServerNotify(false);
         return SCRIPT_CONTINUE;
     }
+
     public int payBribe(obj_id self, dictionary params) throws InterruptedException
     {
         int rec_faction_id = pvpGetAlignedFaction(self);
@@ -254,14 +265,14 @@ public class faction_recruiter extends script.base_script
         {
             chat.chat(self, chat.CHAT_SAY, chat.MOOD_ANGRY, SID_BRIBE_FAIL);
         }
-        else 
+        else
         {
             chat.chat(self, chat.CHAT_SAY, chat.MOOD_HAPPY, SID_BRIBE_SUCCESS);
             if (amt == 20000)
             {
                 factions.addFactionStanding(player, rec_faction, 250.0f);
             }
-            else 
+            else
             {
                 factions.addFactionStanding(player, rec_faction, 1250.0f);
             }
@@ -277,6 +288,7 @@ public class faction_recruiter extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public prose_package createProsePackage(string_id sid, obj_id actor, obj_id target, String str, int number) throws InterruptedException
     {
         prose_package pp = new prose_package();
@@ -287,6 +299,7 @@ public class faction_recruiter extends script.base_script
         pp.digitInteger = number;
         return pp;
     }
+
     public int getFactionId(String faction) throws InterruptedException
     {
         if (faction == null)
@@ -301,6 +314,7 @@ public class faction_recruiter extends script.base_script
         int faction_id = dataTableGetInt("datatables/faction/faction.iff", faction_num, "pvpFaction");
         return faction_id;
     }
+
     public String getProgressObjVarName(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -309,6 +323,7 @@ public class faction_recruiter extends script.base_script
         }
         return VAR_PROGRESS + "." + player.toString();
     }
+
     public string_id[] getConversationResponses(obj_id player, obj_id npc, int progress) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "faction_recruiter::getConversationResponses -- " + progress);
@@ -336,66 +351,66 @@ public class faction_recruiter extends script.base_script
         switch (progress)
         {
             case 1:
-            responses = utils.addElement(responses, SID_JOIN_FACTION);
-            break;
+                responses = utils.addElement(responses, SID_JOIN_FACTION);
+                break;
             case 3:
-            responses = utils.addElement(responses, SID_PROMOTION);
-            if (pvp_type == PVPTYPE_COVERT)
-            {
-                responses = utils.addElement(responses, SID_GO_DECLARED);
-            }
-            else if (pvp_type == PVPTYPE_DECLARED)
-            {
-                if (!hasObjVar(player, VAR_GOING_COVERT))
+                responses = utils.addElement(responses, SID_PROMOTION);
+                if (pvp_type == PVPTYPE_COVERT)
                 {
-                    responses = utils.addElement(responses, SID_GO_COVERT);
+                    responses = utils.addElement(responses, SID_GO_DECLARED);
                 }
-                responses = utils.addElement(responses, SID_HIRELINGS);
-            }
-            responses = utils.addElement(responses, SID_PURCHASE_ITEMS);
-            responses = utils.addElement(responses, SID_SKILL_TRAINING);
-            responses = utils.addElement(responses, SID_RESIGN_FROM_FACTION);
-            break;
+                else if (pvp_type == PVPTYPE_DECLARED)
+                {
+                    if (!hasObjVar(player, VAR_GOING_COVERT))
+                    {
+                        responses = utils.addElement(responses, SID_GO_COVERT);
+                    }
+                    responses = utils.addElement(responses, SID_HIRELINGS);
+                }
+                responses = utils.addElement(responses, SID_PURCHASE_ITEMS);
+                responses = utils.addElement(responses, SID_SKILL_TRAINING);
+                responses = utils.addElement(responses, SID_RESIGN_FROM_FACTION);
+                break;
             case 4:
-            responses = utils.addElement(responses, SID_YES_TO_JOIN);
-            responses = utils.addElement(responses, SID_NO_TO_JOIN);
-            break;
+                responses = utils.addElement(responses, SID_YES_TO_JOIN);
+                responses = utils.addElement(responses, SID_NO_TO_JOIN);
+                break;
             case 5:
-            responses = utils.addElement(responses, SID_YES_TO_SEE_OPTIONS);
-            responses = utils.addElement(responses, SID_NO_TO_SEE_OPTIONS);
-            break;
+                responses = utils.addElement(responses, SID_YES_TO_SEE_OPTIONS);
+                responses = utils.addElement(responses, SID_NO_TO_SEE_OPTIONS);
+                break;
             case 6:
-            responses = utils.addElement(responses, SID_YES_TO_RESIGN);
-            responses = utils.addElement(responses, SID_NO_TO_RESIGN);
-            break;
+                responses = utils.addElement(responses, SID_YES_TO_RESIGN);
+                responses = utils.addElement(responses, SID_NO_TO_RESIGN);
+                break;
             case 7:
-            responses = utils.addElement(responses, SID_YES_TO_GO_DECLARED);
-            responses = utils.addElement(responses, SID_NO_TO_GO_DECLARED);
-            break;
+                responses = utils.addElement(responses, SID_YES_TO_GO_DECLARED);
+                responses = utils.addElement(responses, SID_NO_TO_GO_DECLARED);
+                break;
             case 8:
-            responses = utils.addElement(responses, SID_YES_TO_GO_COVERT);
-            responses = utils.addElement(responses, SID_NO_TO_GO_COVERT);
-            break;
+                responses = utils.addElement(responses, SID_YES_TO_GO_COVERT);
+                responses = utils.addElement(responses, SID_NO_TO_GO_COVERT);
+                break;
             case 9:
-            responses = utils.addElement(responses, SID_PURCHASE_FURNITURE);
-            responses = utils.addElement(responses, SID_PURCHASE_WEAPONS_ARMOR);
-            responses = utils.addElement(responses, SID_PURCHASE_SCHEMATICS);
-            if (pvp_type == PVPTYPE_DECLARED)
-            {
-                responses = utils.addElement(responses, SID_PURCHASE_INSTALLATION);
-                if (!(toLower(faction)).equals("rebel"))
+                responses = utils.addElement(responses, SID_PURCHASE_FURNITURE);
+                responses = utils.addElement(responses, SID_PURCHASE_WEAPONS_ARMOR);
+                responses = utils.addElement(responses, SID_PURCHASE_SCHEMATICS);
+                if (pvp_type == PVPTYPE_DECLARED)
                 {
-                    responses = utils.addElement(responses, SID_PURCHASE_UNIFORMS);
+                    responses = utils.addElement(responses, SID_PURCHASE_INSTALLATION);
+                    if (!(toLower(faction)).equals("rebel"))
+                    {
+                        responses = utils.addElement(responses, SID_PURCHASE_UNIFORMS);
+                    }
                 }
-            }
-            break;
+                break;
             case 10:
-            responses = utils.addElement(responses, SID_YES_TO_PROMOTION);
-            responses = utils.addElement(responses, SID_NO_TO_PROMOTION);
-            break;
+                responses = utils.addElement(responses, SID_YES_TO_PROMOTION);
+                responses = utils.addElement(responses, SID_NO_TO_PROMOTION);
+                break;
             default:
-            responses = utils.addElement(responses, SID_NOTHING);
-            break;
+                responses = utils.addElement(responses, SID_NOTHING);
+                break;
         }
         if (hasSkill(player, "class_smuggler_phase3_novice"))
         {
@@ -413,21 +428,21 @@ public class faction_recruiter extends script.base_script
         }
         return _responses;
     }
+
     public prose_package[] getProseConversationResponses(obj_id player, obj_id npc, String prose_string, int prose_digit, int progress) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "faction_recruiter::getProseConversationResponses -- " + progress);
         prose_package[] responses = new prose_package[0];
-        switch (progress)
+        if (progress == 2)
         {
-            case 2:
             int faction_id = pvpGetAlignedFaction(npc);
             String faction = factions.getFactionNameByHashCode(faction_id);
             prose_package pp = prose.getPackage(SID_CHANGE_FACTION, faction);
             responses = assemblePackageArray(responses, pp);
-            break;
         }
         return responses;
     }
+
     public prose_package[] assemblePackageArray(prose_package[] array, prose_package element) throws InterruptedException
     {
         if (element == null)
@@ -444,6 +459,7 @@ public class faction_recruiter extends script.base_script
         vector.toArray(array);
         return array;
     }
+
     public int[] convertSecondsTime(int time) throws InterruptedException
     {
         if (time < 1)
@@ -456,15 +472,16 @@ public class faction_recruiter extends script.base_script
         int hours = mod_day / 3600;
         int minutes = mod_hour / 60;
         int seconds = mod_hour % 60;
-        int[] converted_time = 
-        {
-            days,
-            hours,
-            minutes,
-            seconds
-        };
+        int[] converted_time =
+                {
+                        days,
+                        hours,
+                        minutes,
+                        seconds
+                };
         return converted_time;
     }
+
     public void invalidResponse(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -475,8 +492,8 @@ public class faction_recruiter extends script.base_script
         string_id[] responses = new string_id[0];
         npcSpeak(player, SID_INVALID_RESPONSE);
         npcSetConversationResponses(player, responses);
-        return;
     }
+
     public boolean displayTrainingSUI(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -498,7 +515,8 @@ public class faction_recruiter extends script.base_script
         }
         Vector names = new Vector();
         names.setSize(0);
-        for (String xp_type : xp_types) {
+        for (String xp_type : xp_types)
+        {
             names = utils.addElement(names, "@exp_n:" + xp_type);
         }
         if (names == null || names.size() == 0)
@@ -512,6 +530,7 @@ public class faction_recruiter extends script.base_script
         }
         return true;
     }
+
     public int msgFactionItemPurchaseSelected(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -521,6 +540,7 @@ public class faction_recruiter extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int msgFactionItemRankSelected(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -547,6 +567,7 @@ public class faction_recruiter extends script.base_script
         faction_perk.displayItemPurchaseSUI(player, rankSelected, playerGcwFaction, self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnGiveItem(obj_id self, obj_id item, obj_id player) throws InterruptedException
     {
         if (hasScript(item, "systems.encoded_disk.base.message_assembled"))
@@ -587,10 +608,12 @@ public class faction_recruiter extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int xferFail(obj_id self, dictionary params) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int fromAccountPass(obj_id self, dictionary params) throws InterruptedException
     {
         int amt = params.getInt("amt");
@@ -600,6 +623,7 @@ public class faction_recruiter extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int xferPass(obj_id self, dictionary params) throws InterruptedException
     {
         int cash = getCashBalance(self);
@@ -611,6 +635,7 @@ public class faction_recruiter extends script.base_script
         transferCashTo(self, player, cash, "gaveReward", "xferFail", params);
         return SCRIPT_CONTINUE;
     }
+
     public int gaveReward(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -623,6 +648,7 @@ public class faction_recruiter extends script.base_script
         sendSystemMessageProse(player, pp);
         return SCRIPT_CONTINUE;
     }
+
     public int msgFactionTrainingTypeSelected(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -678,9 +704,9 @@ public class faction_recruiter extends script.base_script
         {
             prose.setTO(ppSuiExpTrain, "");
         }
-        else 
+        else
         {
-            prose.setTO(ppSuiExpTrain, "" + ratioTo);
+            prose.setTO(ppSuiExpTrain, String.valueOf(ratioTo));
         }
         String prompt = " \0" + packOutOfBandProsePackage(null, ppSuiExpTrain);
         int pid = sui.transfer(self, player, prompt, title, utils.packStringId(SID_SUI_EXPERIENCE_TRAINING_HEADER), available, "Experience", 0, "msgFactionTrainingAmountSelected", ratioFrom, ratioTo);
@@ -693,6 +719,7 @@ public class faction_recruiter extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int msgFactionTrainingAmountSelected(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -723,7 +750,7 @@ public class faction_recruiter extends script.base_script
         int available = factions.getAvailableFactionPoints(player, faction);
         if (cost > available)
         {
-            prose_package pp = prose.getPackage(factions.SID_NOT_ENOUGH_STANDING_SPEND, faction, (int)factions.FACTION_RATING_DECLARABLE_MIN);
+            prose_package pp = prose.getPackage(factions.SID_NOT_ENOUGH_STANDING_SPEND, faction, (int) factions.FACTION_RATING_DECLARABLE_MIN);
             sendSystemMessageProse(player, pp);
             return SCRIPT_CONTINUE;
         }
@@ -748,6 +775,7 @@ public class faction_recruiter extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int msgFactionTrainingAmountSelectedXpResult(obj_id self, dictionary params) throws InterruptedException
     {
         int granted = params.getInt(xp.GRANT_XP_RESULT_VALUE);
@@ -779,7 +807,7 @@ public class faction_recruiter extends script.base_script
         {
             CustomerServiceLog("faction_perk", "(" + player + ")" + getName(player) + " fp->xp purchase complete: " + cost + "fp->" + granted + "xp of " + xp_type);
         }
-        else 
+        else
         {
             CustomerServiceLog("faction_perk", "(" + player + ")" + getName(player) + " fp->xp purchase failed! revoking xp");
             grantExperiencePoints(player, xp_type, -amt);

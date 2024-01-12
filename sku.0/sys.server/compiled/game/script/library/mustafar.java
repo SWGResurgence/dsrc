@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.ai.ai;
 import script.*;
 
@@ -30,6 +36,7 @@ public class mustafar extends script.base_script
     public static final String QUEST_ACCEPT_CANCEL = "@" + STF + ":quest_accept_cancel";
     public static final String BEGIN_QUEST_PROMPT = "@" + STF + ":begin_quest_prompt";
     public static final String BEGIN_QUEST_TITLE = "@" + STF + ":begin_quest_title";
+
     public mustafar()
     {
     }

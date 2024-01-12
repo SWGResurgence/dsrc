@@ -1,5 +1,11 @@
 package script.event.ewok_festival;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.prose;
 import script.library.utils;
 import script.menu_info;
@@ -9,10 +15,12 @@ import script.string_id;
 
 public class loveday_reward_crossbow extends script.base_script
 {
+    public static final string_id SID_ITEM_NOT_IN_INVENTORY = new string_id("base_player", "not_in_your_inventory");
+
     public loveday_reward_crossbow()
     {
     }
-    public static final string_id SID_ITEM_NOT_IN_INVENTORY = new string_id("base_player", "not_in_your_inventory");
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (canManipulate(player, self, true, true, 15, true))
@@ -30,6 +38,7 @@ public class loveday_reward_crossbow extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (utils.getContainingPlayer(self) != player)
@@ -65,12 +74,12 @@ public class loveday_reward_crossbow extends script.base_script
                         doAnimationAction(player, clientAnimation);
                     }
                 }
-                else 
+                else
                 {
                     sendSystemMessage(player, new string_id("base_player", "loveday_crossbow_no_hate"));
                 }
             }
-            else 
+            else
             {
                 sendSystemMessageProse(player, prose.getPackage(new string_id("base_player", "not_yet"), buffTime - getGameTime()));
                 return SCRIPT_CONTINUE;
@@ -82,7 +91,7 @@ public class loveday_reward_crossbow extends script.base_script
             {
                 putInOverloaded(self, getObjectInSlot(player, "inventory"));
             }
-            else 
+            else
             {
                 equip(self, player);
             }
@@ -90,6 +99,7 @@ public class loveday_reward_crossbow extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean reduceHateOnTarget(obj_id player, String clientEffect) throws InterruptedException
     {
         obj_id target = getLookAtTarget(player);
@@ -107,20 +117,25 @@ public class loveday_reward_crossbow extends script.base_script
                 float hate;
                 float difficultyClass;
 
-                for (obj_id hater : thoseWhoHateMe) {
-                    if (hater == target) {
+                for (obj_id hater : thoseWhoHateMe)
+                {
+                    if (hater == target)
+                    {
                         hateReduction = 0.90f;
                         difficultyClass = getIntObjVar(hater, "difficultyClass");
-                        if (difficultyClass > 1) {
+                        if (difficultyClass > 1)
+                        {
                             hateReduction = 0.92f;
                         }
-                        if (playerLevel - getLevel(hater) < -24) {
+                        if (playerLevel - getLevel(hater) < -24)
+                        {
                             hateReduction = 0.96f;
                         }
                         hate = getHate(hater, player);
                         hate *= hateReduction;
                         setHate(hater, player, hate);
-                        if (clientEffect.length() > 0) {
+                        if (clientEffect.length() > 0)
+                        {
                             playClientEffectObj(player, clientEffect, target, "head");
                         }
                         return true;
@@ -128,7 +143,7 @@ public class loveday_reward_crossbow extends script.base_script
                 }
             }
         }
-        else 
+        else
         {
             sendSystemMessage(player, new string_id("base_player", "loveday_crossbow_no_target"));
         }

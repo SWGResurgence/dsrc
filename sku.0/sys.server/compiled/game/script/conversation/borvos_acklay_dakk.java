@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.groundquests;
@@ -8,108 +14,126 @@ import script.*;
 
 public class borvos_acklay_dakk extends script.base_script
 {
+    public static String c_stringFile = "conversation/borvos_acklay_dakk";
+
     public borvos_acklay_dakk()
     {
     }
-    public static String c_stringFile = "conversation/borvos_acklay_dakk";
+
     public boolean borvos_acklay_dakk_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean borvos_acklay_dakk_condition_hasArmorQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isTaskActive(player, "borvo_acklay_find_armorer", "find_armorer") || groundquests.isTaskActive(player, "borvo_acklay_find_armorer_again", "find_dakk"));
     }
+
     public boolean borvos_acklay_dakk_condition_onOrFinishedHelmet(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActiveOrComplete(player, "borvo_acklay_helmet");
     }
+
     public boolean borvos_acklay_dakk_condition_onOrFinishedChest(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActiveOrComplete(player, "borvo_acklay_chest_plate");
     }
+
     public boolean borvos_acklay_dakk_condition_onOrFinishedLeggings(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActiveOrComplete(player, "borvo_acklay_leggings");
     }
+
     public boolean borvos_acklay_dakk_condition_onOrFinishedBootsGolves(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActiveOrComplete(player, "borvo_acklay_boots_gloves");
     }
+
     public boolean borvos_acklay_dakk_condition_onOrFinishedBracers(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActiveOrComplete(player, "borvo_acklay_bracers");
     }
+
     public boolean borvos_acklay_dakk_condition_onOrFinishedBiceps(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActiveOrComplete(player, "borvo_acklay_biceps");
     }
+
     public boolean borvos_acklay_dakk_condition_isOnQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isQuestActive(player, "borvo_acklay_bracers") || groundquests.isQuestActive(player, "borvo_acklay_biceps") || groundquests.isQuestActive(player, "borvo_acklay_leggings") || groundquests.isQuestActive(player, "borvo_acklay_helmet") || groundquests.isQuestActive(player, "borvo_acklay_chest_plate") || groundquests.isQuestActive(player, "borvo_acklay_boots_gloves"));
     }
+
     public boolean borvos_acklay_dakk_condition_backFromHunting(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isTaskActive(player, "borvo_acklay_bracers", "return") || groundquests.isTaskActive(player, "borvo_acklay_biceps", "return") || groundquests.isTaskActive(player, "borvo_acklay_boots_gloves", "return") || groundquests.isTaskActive(player, "borvo_acklay_chest_plate", "return") || groundquests.isTaskActive(player, "borvo_acklay_leggings", "return") || groundquests.isTaskActive(player, "borvo_acklay_helmet", "return"));
     }
+
     public boolean borvos_acklay_dakk_condition_deletedQuest(obj_id player, obj_id npc) throws InterruptedException
     {
-        boolean questDeleted = false;
-        if (hasObjVar(player, "borvo_acklay"))
-        {
-            questDeleted = true;
-        }
+        boolean questDeleted = hasObjVar(player, "borvo_acklay");
         return questDeleted;
     }
+
     public boolean borvos_acklay_dakk_condition_hasAllArmor(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.hasCompletedQuest(player, "borvo_acklay_bracers") && groundquests.hasCompletedQuest(player, "borvo_acklay_biceps") && groundquests.hasCompletedQuest(player, "borvo_acklay_leggings") && groundquests.hasCompletedQuest(player, "borvo_acklay_helmet") && groundquests.hasCompletedQuest(player, "borvo_acklay_chest_plate") && groundquests.hasCompletedQuest(player, "borvo_acklay_boots_gloves"));
     }
+
     public boolean borvos_acklay_dakk_condition_hasFinishedSomeArmor(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.hasCompletedQuest(player, "borvo_acklay_bracers") || groundquests.hasCompletedQuest(player, "borvo_acklay_biceps") || groundquests.hasCompletedQuest(player, "borvo_acklay_leggings") || groundquests.hasCompletedQuest(player, "borvo_acklay_helmet") || groundquests.hasCompletedQuest(player, "borvo_acklay_chest_plate") || groundquests.hasCompletedQuest(player, "borvo_acklay_boots_gloves"));
     }
+
     public void borvos_acklay_dakk_action_grantChest(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "borvo_acklay_chest_plate");
         setObjVar(player, "borvo_acklay", "chest");
         groundquests.sendSignal(player, "acklay_armorer_found");
     }
+
     public void borvos_acklay_dakk_action_grantLeggings(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "borvo_acklay_leggings");
         setObjVar(player, "borvo_acklay", "leggings");
         groundquests.sendSignal(player, "acklay_armorer_found");
     }
+
     public void borvos_acklay_dakk_action_grantBootsGloves(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "borvo_acklay_boots_gloves");
         setObjVar(player, "borvo_acklay", "boots");
         groundquests.sendSignal(player, "acklay_armorer_found");
     }
+
     public void borvos_acklay_dakk_action_grantBiceps(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "borvo_acklay_biceps");
         setObjVar(player, "borvo_acklay", "biceps");
         groundquests.sendSignal(player, "acklay_armorer_found");
     }
+
     public void borvos_acklay_dakk_action_grantBracers(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "borvo_acklay_bracers");
         setObjVar(player, "borvo_acklay", "bracers");
         groundquests.sendSignal(player, "acklay_armorer_found");
     }
+
     public void borvos_acklay_dakk_action_grantHelmet(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "borvo_acklay_helmet");
         setObjVar(player, "borvo_acklay", "helmet");
         groundquests.sendSignal(player, "acklay_armorer_found");
     }
+
     public void borvos_acklay_dakk_action_sendSignalCraft(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "acklay_return");
         removeObjVar(player, "borvo_acklay");
     }
+
     public void borvos_acklay_dakk_action_regrantQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         String questName = getStringObjVar(player, "borvo_acklay");
@@ -138,10 +162,12 @@ public class borvos_acklay_dakk extends script.base_script
             groundquests.grantQuest(player, "borvo_acklay_biceps");
         }
     }
+
     public void borvos_acklay_dakk_action_signalFoundArmorer(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "acklay_armorer_found");
     }
+
     public int borvos_acklay_dakk_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_43"))
@@ -162,7 +188,7 @@ public class borvos_acklay_dakk extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_94");
@@ -171,7 +197,7 @@ public class borvos_acklay_dakk extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.borvos_acklay_dakk.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -181,6 +207,7 @@ public class borvos_acklay_dakk extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int borvos_acklay_dakk_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_94"))
@@ -196,6 +223,7 @@ public class borvos_acklay_dakk extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int borvos_acklay_dakk_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_40"))
@@ -210,6 +238,7 @@ public class borvos_acklay_dakk extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int borvos_acklay_dakk_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_55"))
@@ -225,6 +254,7 @@ public class borvos_acklay_dakk extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int borvos_acklay_dakk_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_59"))
@@ -251,7 +281,7 @@ public class borvos_acklay_dakk extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_62");
@@ -264,7 +294,7 @@ public class borvos_acklay_dakk extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.borvos_acklay_dakk.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -295,6 +325,7 @@ public class borvos_acklay_dakk extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int borvos_acklay_dakk_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_62"))
@@ -349,7 +380,7 @@ public class borvos_acklay_dakk extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_52");
@@ -378,7 +409,7 @@ public class borvos_acklay_dakk extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.borvos_acklay_dakk.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -398,6 +429,7 @@ public class borvos_acklay_dakk extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int borvos_acklay_dakk_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_52"))
@@ -468,6 +500,7 @@ public class borvos_acklay_dakk extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int borvos_acklay_dakk_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_32"))
@@ -487,7 +520,7 @@ public class borvos_acklay_dakk extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_36");
@@ -496,7 +529,7 @@ public class borvos_acklay_dakk extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.borvos_acklay_dakk.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -506,6 +539,7 @@ public class borvos_acklay_dakk extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int borvos_acklay_dakk_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_36"))
@@ -560,7 +594,7 @@ public class borvos_acklay_dakk extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_52");
@@ -589,7 +623,7 @@ public class borvos_acklay_dakk extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.borvos_acklay_dakk.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -599,6 +633,7 @@ public class borvos_acklay_dakk extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int borvos_acklay_dakk_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_52"))
@@ -669,6 +704,7 @@ public class borvos_acklay_dakk extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isTangible(self)) || (isPlayer(self)))
@@ -678,11 +714,13 @@ public class borvos_acklay_dakk extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -691,18 +729,21 @@ public class borvos_acklay_dakk extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.borvos_acklay_dakk");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -725,7 +766,7 @@ public class borvos_acklay_dakk extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_43");
@@ -737,7 +778,7 @@ public class borvos_acklay_dakk extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "borvos_acklay_dakk", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -762,7 +803,7 @@ public class borvos_acklay_dakk extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_40");
@@ -770,7 +811,7 @@ public class borvos_acklay_dakk extends script.base_script
                 utils.setScriptVar(player, "conversation.borvos_acklay_dakk.branchId", 4);
                 npcStartConversation(player, npc, "borvos_acklay_dakk", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -791,7 +832,7 @@ public class borvos_acklay_dakk extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_55");
@@ -803,7 +844,7 @@ public class borvos_acklay_dakk extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "borvos_acklay_dakk", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -842,7 +883,7 @@ public class borvos_acklay_dakk extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_59");
@@ -862,7 +903,7 @@ public class borvos_acklay_dakk extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "borvos_acklay_dakk", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -887,7 +928,7 @@ public class borvos_acklay_dakk extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_32");
@@ -895,7 +936,7 @@ public class borvos_acklay_dakk extends script.base_script
                 utils.setScriptVar(player, "conversation.borvos_acklay_dakk.branchId", 14);
                 npcStartConversation(player, npc, "borvos_acklay_dakk", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -910,6 +951,7 @@ public class borvos_acklay_dakk extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("borvos_acklay_dakk"))

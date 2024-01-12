@@ -1,5 +1,11 @@
 package script.systems.io;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import org.w3c.dom.Comment;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -78,7 +84,7 @@ public class export extends script.base_script
         profession.setTextContent(getHomeLocation(self).toString());
         character.appendChild(bindloc);
         Element salary = doc.createElement("credits");
-        salary.setAttribute("depositbox", getCashBalance(self) + "");
+        salary.setAttribute("depositbox", String.valueOf(getCashBalance(self)));
         salary.setTextContent(getBankBalance(self) + " Galactic Credits");
         character.appendChild(salary);
         Comment comment = doc.createComment("End Player Information");

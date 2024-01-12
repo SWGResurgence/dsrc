@@ -1,5 +1,11 @@
 package script.space_mining;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.features;
 import script.library.space_combat;
 import script.library.space_utils;
@@ -11,15 +17,18 @@ import script.vector;
 
 public class mining_asteroid_dynamic extends script.base_script
 {
+    public static final int MAX_RESOURCE = 1000000;
+
     public mining_asteroid_dynamic()
     {
     }
-    public static final int MAX_RESOURCE = 1000000;
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setHitpoints(self, 50);
         return SCRIPT_CONTINUE;
     }
+
     public int OnShipInternalDamageOverTimeRemoved(obj_id self, int chassisSlot, float damageRate, float damageThreshold) throws InterruptedException
     {
         obj_id pilot = getPilotId(self);
@@ -28,6 +37,7 @@ public class mining_asteroid_dynamic extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnShipWasHit(obj_id self, obj_id attacker, int weaponIndex, boolean isMissile, int missileType, int chassisSlot, boolean isPlayerAutoTurret, float hitLocationX_o, float hitLocationY_o, float hitLocationZ_o) throws InterruptedException
     {
         obj_id attackingPilot = space_utils.getPilotForRealsies(attacker);
@@ -53,7 +63,7 @@ public class mining_asteroid_dynamic extends script.base_script
             fltDamage = fltDamage / 100;
             int maxHitpoints = getMaxHitpoints(self);
             int oldHitpoints = getHitpoints(self);
-            setHitpoints(self, oldHitpoints - (int)fltDamage);
+            setHitpoints(self, oldHitpoints - (int) fltDamage);
             int newHitpoints = getHitpoints(self);
             if (newHitpoints <= 0)
             {
@@ -79,7 +89,7 @@ public class mining_asteroid_dynamic extends script.base_script
                     handleShipDestruction(self, 1.0f);
                 }
             }
-            else 
+            else
             {
                 vector hitLocation_o = new vector(hitLocationX_o, hitLocationY_o, hitLocationZ_o);
                 notifyShipHit(self, attackingLocation_o, hitLocation_o, ship_hit_type.HT_chassis, 0.5f, 1.0f);
@@ -87,6 +97,7 @@ public class mining_asteroid_dynamic extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void giveResourceReward(obj_id objAsteroid, obj_id objAttacker, int intAmount) throws InterruptedException
     {
         String strAsteroidType = getStringObjVar(objAsteroid, "strAsteroidType");
@@ -96,7 +107,7 @@ public class mining_asteroid_dynamic extends script.base_script
         {
             objContainer = getObjIdObjVar(objAttacker, "objLootBox");
         }
-        else 
+        else
         {
             objPilot = space_utils.getPilotForRealsies(objAttacker);
             if (!isIdValid(objPilot))
@@ -133,20 +144,20 @@ public class mining_asteroid_dynamic extends script.base_script
                 addResourceToContainer(objStack, objResourceId, intAmount, null);
                 objStack = null;
             }
-            else 
+            else
             {
                 addResourceToContainer(objStack, objResourceId, intAmount, null);
             }
         }
-        else 
+        else
         {
             objStack = createResourceCrate(objResourceId, intAmount, objContainer);
             if (objStack == null)
             {
             }
         }
-        return;
     }
+
     public obj_id getResourceStack(obj_id objContainer, obj_id objResource) throws InterruptedException
     {
         if (!isIdValid(objContainer))
@@ -158,20 +169,25 @@ public class mining_asteroid_dynamic extends script.base_script
         {
             return null;
         }
-        for (obj_id objContent : objContents) {
+        for (obj_id objContent : objContents)
+        {
             obj_id objType = getResourceContainerResourceType(objContent);
-            if (objType == objResource) {
+            if (objType == objResource)
+            {
                 int intCount = getResourceContainerQuantity(objContent);
-                if (intCount < MAX_RESOURCE) {
+                if (intCount < MAX_RESOURCE)
+                {
                     return objContent;
                 }
             }
         }
         return null;
     }
+
     public String getResourceType(String strAsteroidType) throws InterruptedException
     {
-        switch (strAsteroidType) {
+        switch (strAsteroidType)
+        {
             case "iron":
                 return "space_metal_iron";
             case "carbonaceous":

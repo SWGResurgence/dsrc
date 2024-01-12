@@ -1,5 +1,11 @@
 package script.developer.soe.beta;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.attrib_mod;
 import script.library.consumable;
 import script.library.player_stomach;
@@ -8,10 +14,12 @@ import script.obj_id;
 
 public class medicine extends script.base_script
 {
+    public static final String SCRIPT_BETA_MEDICINE = "beta.medicine";
+
     public medicine()
     {
     }
-    public static final String SCRIPT_BETA_MEDICINE = "beta.medicine";
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         int type = rand(1, 3);
@@ -23,17 +31,17 @@ public class medicine extends script.base_script
             switch (type)
             {
                 case 1:
-                tmp = utils.createHealDamageAttribMod(rand(0, 2) * 3, rand(50, 200));
-                break;
+                    tmp = utils.createHealDamageAttribMod(rand(0, 2) * 3, rand(50, 200));
+                    break;
                 case 2:
-                tmp = utils.createAntidoteAttribMod(rand(HEALTH, WILLPOWER));
-                break;
+                    tmp = utils.createAntidoteAttribMod(rand(HEALTH, WILLPOWER));
+                    break;
                 case 3:
-                tmp = utils.createHealWoundAttribMod(rand(HEALTH, WILLPOWER), rand(10, 35));
-                break;
+                    tmp = utils.createHealWoundAttribMod(rand(HEALTH, WILLPOWER), rand(10, 35));
+                    break;
                 case 4:
-                tmp = utils.createHealShockAttribMod(rand(10, 35));
-                break;
+                    tmp = utils.createHealShockAttribMod(rand(10, 35));
+                    break;
             }
             am[i] = tmp;
         }

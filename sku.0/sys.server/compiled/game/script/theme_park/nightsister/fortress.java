@@ -1,5 +1,11 @@
 package script.theme_park.nightsister;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.obj_id;
 
@@ -8,11 +14,13 @@ public class fortress extends script.base_script
     public fortress()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         spawnEveryone(self);
         return SCRIPT_CONTINUE;
     }
+
     public void spawnEveryone(obj_id self) throws InterruptedException
     {
         debugSpeakMsg(self, "Spawning Everyone");
@@ -22,6 +30,7 @@ public class fortress extends script.base_script
         }
         messageTo(self, "scriptFix", null, 2, false);
     }
+
     public int scriptFix(obj_id self, dictionary params) throws InterruptedException
     {
         attachScript(self, "theme_park.dungeon.generic_spawner");

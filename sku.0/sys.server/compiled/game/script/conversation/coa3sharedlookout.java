@@ -1,19 +1,28 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.ai_lib;
 import script.library.chat;
 
 public class coa3sharedlookout extends script.base_script
 {
+    public static String c_stringFile = "conversation/coa3sharedlookout";
+
     public coa3sharedlookout()
     {
     }
-    public static String c_stringFile = "conversation/coa3sharedlookout";
+
     public boolean coa3sharedlookout_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean coa3sharedlookout_condition_lookoutTrial1(obj_id player, obj_id npc) throws InterruptedException
     {
         if ((getObjIdObjVar(player, "coa3.imperial.missionNpcId") != npc) && (getObjIdObjVar(player, "coa3.rebel.missionNpcId") != npc))
@@ -22,6 +31,7 @@ public class coa3sharedlookout extends script.base_script
         }
         return (getIntObjVar(player, "coa3.convTracker") == 200);
     }
+
     public boolean coa3sharedlookout_condition_lookoutTrial2(obj_id player, obj_id npc) throws InterruptedException
     {
         if ((getObjIdObjVar(player, "coa3.imperial.missionNpcId") != npc) && (getObjIdObjVar(player, "coa3.rebel.missionNpcId") != npc))
@@ -30,6 +40,7 @@ public class coa3sharedlookout extends script.base_script
         }
         return (getIntObjVar(player, "coa3.convTracker") == 201);
     }
+
     public boolean coa3sharedlookout_condition_lookoutTrial3(obj_id player, obj_id npc) throws InterruptedException
     {
         if ((getObjIdObjVar(player, "coa3.imperial.missionNpcId") != npc) && (getObjIdObjVar(player, "coa3.rebel.missionNpcId") != npc))
@@ -38,6 +49,7 @@ public class coa3sharedlookout extends script.base_script
         }
         return (getIntObjVar(player, "coa3.convTracker") == 202);
     }
+
     public boolean coa3sharedlookout_condition_lookoutTrialPass(obj_id player, obj_id npc) throws InterruptedException
     {
         if ((getObjIdObjVar(player, "coa3.imperial.missionNpcId") != npc) && (getObjIdObjVar(player, "coa3.rebel.missionNpcId") != npc))
@@ -48,24 +60,18 @@ public class coa3sharedlookout extends script.base_script
         {
             return true;
         }
-        if (getIntObjVar(player, "coa3.convTracker") == 204)
-        {
-            return true;
-        }
-        return false;
+        return getIntObjVar(player, "coa3.convTracker") == 204;
     }
+
     public boolean coa3sharedlookout_condition_lookoutTrialFail(obj_id player, obj_id npc) throws InterruptedException
     {
         if ((getObjIdObjVar(player, "coa3.imperial.missionNpcId") != npc) && (getObjIdObjVar(player, "coa3.rebel.missionNpcId") != npc))
         {
             return false;
         }
-        if (getIntObjVar(player, "coa3.lookoutLikeMeter") < 2 && getIntObjVar(player, "coa3.convTracker") == 203)
-        {
-            return true;
-        }
-        return false;
+        return getIntObjVar(player, "coa3.lookoutLikeMeter") < 2 && getIntObjVar(player, "coa3.convTracker") == 203;
     }
+
     public boolean coa3sharedlookout_condition_lookoutMissionWait(obj_id player, obj_id npc) throws InterruptedException
     {
         if ((getObjIdObjVar(player, "coa3.imperial.missionNpcId") != npc) && (getObjIdObjVar(player, "coa3.rebel.missionNpcId") != npc))
@@ -74,6 +80,7 @@ public class coa3sharedlookout extends script.base_script
         }
         return (getIntObjVar(player, "coa3.convTracker") == 205);
     }
+
     public boolean coa3sharedlookout_condition_lookoutMissionActive(obj_id player, obj_id npc) throws InterruptedException
     {
         if ((getObjIdObjVar(player, "coa3.imperial.missionNpcId") != npc) && (getObjIdObjVar(player, "coa3.rebel.missionNpcId") != npc))
@@ -82,68 +89,81 @@ public class coa3sharedlookout extends script.base_script
         }
         return (getIntObjVar(player, "coa3.convTracker") == 206);
     }
+
     public void coa3sharedlookout_action__defaultAction(obj_id player, obj_id npc) throws InterruptedException
     {
     }
+
     public void coa3sharedlookout_action_StartLikeMeterNeg(obj_id player, obj_id npc) throws InterruptedException
     {
         setObjVar(player, "coa3.lookoutLikeMeter", -1);
         setObjVar(player, "coa3.convTracker", 201);
     }
+
     public void coa3sharedlookout_action_StartLikeMeterPos(obj_id player, obj_id npc) throws InterruptedException
     {
         setObjVar(player, "coa3.lookoutLikeMeter", 1);
         setObjVar(player, "coa3.convTracker", 201);
     }
+
     public void coa3sharedlookout_action_StartLikeMeterNeut(obj_id player, obj_id npc) throws InterruptedException
     {
         setObjVar(player, "coa3.lookoutLikeMeter", 0);
         setObjVar(player, "coa3.convTracker", 201);
     }
+
     public void coa3sharedlookout_action_decLikeMeterTrial2(obj_id player, obj_id npc) throws InterruptedException
     {
         int likeMeter = getIntObjVar(player, "coa3.lookoutLikeMeter");
         setObjVar(player, "coa3.lookoutLikeMeter", (likeMeter - 1));
         setObjVar(player, "coa3.convTracker", 202);
     }
+
     public void coa3sharedlookout_action_incLikeMeterTrial2(obj_id player, obj_id npc) throws InterruptedException
     {
         int likeMeter = getIntObjVar(player, "coa3.lookoutLikeMeter");
         setObjVar(player, "coa3.lookoutLikeMeter", (likeMeter + 1));
         setObjVar(player, "coa3.convTracker", 202);
     }
+
     public void coa3sharedlookout_action_likeMeterTrialBonus(obj_id player, obj_id npc) throws InterruptedException
     {
         int likeMeter = getIntObjVar(player, "coa3.lookoutLikeMeter");
         setObjVar(player, "coa3.lookoutLikeMeter", (likeMeter + 1));
     }
+
     public void coa3sharedlookout_action_neutLikeMeterTrial3(obj_id player, obj_id npc) throws InterruptedException
     {
         setObjVar(player, "coa3.convTracker", 203);
     }
+
     public void coa3sharedlookout_action_decLikeMeterTrial3(obj_id player, obj_id npc) throws InterruptedException
     {
         int likeMeter = getIntObjVar(player, "coa3.lookoutLikeMeter");
         setObjVar(player, "coa3.lookoutLikeMeter", (likeMeter - 1));
         setObjVar(player, "coa3.convTracker", 203);
     }
+
     public void coa3sharedlookout_action_incLikeMeterTrial3(obj_id player, obj_id npc) throws InterruptedException
     {
         int likeMeter = getIntObjVar(player, "coa3.lookoutLikeMeter");
         setObjVar(player, "coa3.lookoutLikeMeter", (likeMeter + 1));
         setObjVar(player, "coa3.convTracker", 203);
     }
+
     public void coa3sharedlookout_action_passLookoutTrial(obj_id player, obj_id npc) throws InterruptedException
     {
         removeObjVar(player, "coa3.lookoutLikeMeter");
         setObjVar(player, "coa3.convTracker", 204);
     }
+
     public void coa3sharedlookout_action_failLookoutTrial(obj_id player, obj_id npc) throws InterruptedException
     {
         dictionary params = new dictionary();
         params.put("player", player);
         messageTo(npc, "handleAttackPlayer", params, 0, false);
     }
+
     public void coa3sharedlookout_action_lookoutAcceptMission(obj_id player, obj_id npc) throws InterruptedException
     {
         setObjVar(player, "coa3.convTracker", 206);
@@ -153,10 +173,12 @@ public class coa3sharedlookout extends script.base_script
         params.put("value", 2);
         messageTo(npc, "handleStartCaravanMission", params, 0, false);
     }
+
     public void coa3sharedlookout_action_lookoutWaitMissionAccept(obj_id player, obj_id npc) throws InterruptedException
     {
         setObjVar(player, "coa3.convTracker", 205);
     }
+
     public void coa3sharedlookout_action_lookoutRefreshMission(obj_id player, obj_id npc) throws InterruptedException
     {
         dictionary params = new dictionary();
@@ -165,6 +187,7 @@ public class coa3sharedlookout extends script.base_script
         params.put("value", 2);
         messageTo(npc, "handleStartCaravanMission", params, 0, false);
     }
+
     public void coa3sharedlookout_action_lookoutAbortMission(obj_id player, obj_id npc) throws InterruptedException
     {
         setObjVar(player, "coa3.convTracker", 205);
@@ -174,6 +197,7 @@ public class coa3sharedlookout extends script.base_script
         params.put("value", 2);
         messageTo(npc, "handleAbortCaravanMission", params, 0, false);
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -183,11 +207,13 @@ public class coa3sharedlookout extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -196,12 +222,14 @@ public class coa3sharedlookout extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "npc.conversation.coa3sharedlookout");
         return SCRIPT_CONTINUE;
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         if (ai_lib.isInCombat(self) || ai_lib.isInCombat(player))
@@ -244,7 +272,7 @@ public class coa3sharedlookout extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_70614d9f");
@@ -264,7 +292,7 @@ public class coa3sharedlookout extends script.base_script
                 setObjVar(player, "conversation.coa3sharedlookout.branchId", 1);
                 npcStartConversation(player, self, "coa3sharedlookout", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(self, message);
             }
@@ -299,7 +327,7 @@ public class coa3sharedlookout extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_8aa225b4");
@@ -315,7 +343,7 @@ public class coa3sharedlookout extends script.base_script
                 setObjVar(player, "conversation.coa3sharedlookout.branchId", 9);
                 npcStartConversation(player, self, "coa3sharedlookout", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(self, message);
             }
@@ -357,7 +385,7 @@ public class coa3sharedlookout extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_5d8182f2");
@@ -377,7 +405,7 @@ public class coa3sharedlookout extends script.base_script
                 setObjVar(player, "conversation.coa3sharedlookout.branchId", 16);
                 npcStartConversation(player, self, "coa3sharedlookout", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(self, message);
             }
@@ -398,7 +426,7 @@ public class coa3sharedlookout extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_1c8bddbb");
@@ -406,7 +434,7 @@ public class coa3sharedlookout extends script.base_script
                 setObjVar(player, "conversation.coa3sharedlookout.branchId", 24);
                 npcStartConversation(player, self, "coa3sharedlookout", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(self, message);
             }
@@ -427,7 +455,7 @@ public class coa3sharedlookout extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_1c8bddbb");
@@ -435,7 +463,7 @@ public class coa3sharedlookout extends script.base_script
                 setObjVar(player, "conversation.coa3sharedlookout.branchId", 29);
                 npcStartConversation(player, self, "coa3sharedlookout", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(self, message);
             }
@@ -463,7 +491,7 @@ public class coa3sharedlookout extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_69fbc643");
@@ -475,7 +503,7 @@ public class coa3sharedlookout extends script.base_script
                 setObjVar(player, "conversation.coa3sharedlookout.branchId", 31);
                 npcStartConversation(player, self, "coa3sharedlookout", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(self, message);
             }
@@ -503,7 +531,7 @@ public class coa3sharedlookout extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_869a3fda");
@@ -515,7 +543,7 @@ public class coa3sharedlookout extends script.base_script
                 setObjVar(player, "conversation.coa3sharedlookout.branchId", 34);
                 npcStartConversation(player, self, "coa3sharedlookout", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(self, message);
             }
@@ -530,6 +558,7 @@ public class coa3sharedlookout extends script.base_script
         chat.chat(self, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("coa3sharedlookout"))
@@ -583,7 +612,7 @@ public class coa3sharedlookout extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_e1e1e0ac");
@@ -600,7 +629,7 @@ public class coa3sharedlookout extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.coa3sharedlookout.branchId");
                     npcSpeak(player, message);
@@ -739,7 +768,7 @@ public class coa3sharedlookout extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_4957d505");
@@ -756,7 +785,7 @@ public class coa3sharedlookout extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.coa3sharedlookout.branchId");
                     npcSpeak(player, message);
@@ -867,7 +896,7 @@ public class coa3sharedlookout extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a31bb6a5");
@@ -884,7 +913,7 @@ public class coa3sharedlookout extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.coa3sharedlookout.branchId");
                     npcSpeak(player, message);
@@ -981,7 +1010,7 @@ public class coa3sharedlookout extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_39c1d4f4");
@@ -998,7 +1027,7 @@ public class coa3sharedlookout extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.coa3sharedlookout.branchId");
                     npcSpeak(player, message);

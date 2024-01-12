@@ -1,5 +1,11 @@
 package script.theme_park.tatooine.mos_taike;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.colors;
 import script.library.hue;
@@ -10,6 +16,7 @@ public class mos_taike_guard_young extends script.base_script
     public mos_taike_guard_young()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         obj_id shirt = createObject("object/tangible/wearables/armor/padded/armor_padded_s01_chest_plate.iff", self, "");

@@ -1,5 +1,11 @@
 package script.developer.soe.test;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.utils;
 import script.library.weapons;
 import script.obj_id;
@@ -9,13 +15,16 @@ public class create_weapon extends script.base_script
     public create_weapon()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
-        if (!isGod(self) || getGodLevel(self) < 10 || !isPlayer(self)) {
+        if (!isGod(self) || getGodLevel(self) < 10 || !isPlayer(self))
+        {
             detachScript(self, "test.create_weapon");
         }
         return SCRIPT_CONTINUE;
     }
+
     public void makeResource(obj_id self, String rclass) throws InterruptedException
     {
         obj_id[] rtypes = getResourceTypes(rclass);
@@ -41,6 +50,7 @@ public class create_weapon extends script.base_script
             }
         }
     }
+
     public int OnSpeaking(obj_id self, String strText) throws InterruptedException
     {
         String[] strCommands = split(strText, ' ');

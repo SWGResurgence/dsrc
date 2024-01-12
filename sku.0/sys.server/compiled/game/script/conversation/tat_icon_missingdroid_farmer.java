@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.groundquests;
@@ -8,14 +14,17 @@ import script.*;
 
 public class tat_icon_missingdroid_farmer extends script.base_script
 {
+    public static String c_stringFile = "conversation/tat_icon_missingdroid_farmer";
+
     public tat_icon_missingdroid_farmer()
     {
     }
-    public static String c_stringFile = "conversation/tat_icon_missingdroid_farmer";
+
     public boolean tat_icon_missingdroid_farmer_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean tat_icon_missingdroid_farmer_condition_fixingJawa_e6_dealer2Lyrissa(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/tat_icon_fixingjawa_1");
@@ -23,6 +32,7 @@ public class tat_icon_missingdroid_farmer extends script.base_script
         boolean onTask = questIsTaskActive(questId1, tat_icon_dealer_to_lyrissa_e6, player);
         return onTask;
     }
+
     public boolean tat_icon_missingdroid_farmer_condition_fixingJawa_e5_lyrissa2Dealer(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/tat_icon_fixingjawa_1");
@@ -30,6 +40,7 @@ public class tat_icon_missingdroid_farmer extends script.base_script
         boolean onTask = questIsTaskActive(questId1, tat_icon_lyrissa_to_dealer_e5, player);
         return onTask;
     }
+
     public boolean tat_icon_missingdroid_farmer_condition_fixingJawa_e4_dren2Lyrissa(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/tat_icon_fixingjawa_1");
@@ -37,6 +48,7 @@ public class tat_icon_missingdroid_farmer extends script.base_script
         boolean onTask = questIsTaskActive(questId1, tat_icon_dren_to_lyrissa_e4, player);
         return onTask;
     }
+
     public boolean tat_icon_missingdroid_farmer_condition_fixingJawa_e3_droid2Dren(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/tat_icon_fixingjawa_1");
@@ -44,6 +56,7 @@ public class tat_icon_missingdroid_farmer extends script.base_script
         boolean onTask = questIsTaskActive(questId1, tat_icon_droid_to_dren_e3, player);
         return onTask;
     }
+
     public boolean tat_icon_missingdroid_farmer_condition_fixingJawa_e2_jawa2Droid(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/tat_icon_fixingjawa_1");
@@ -51,6 +64,7 @@ public class tat_icon_missingdroid_farmer extends script.base_script
         boolean onTask = questIsTaskActive(questId1, tat_icon_jawa_to_droid_e2, player);
         return onTask;
     }
+
     public boolean tat_icon_missingdroid_farmer_condition_fixingJawa_e1_dren2Jawa(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/tat_icon_fixingjawa_1");
@@ -58,6 +72,7 @@ public class tat_icon_missingdroid_farmer extends script.base_script
         boolean onTask = questIsTaskActive(questId1, tat_icon_dren_to_jawa_e1, player);
         return onTask;
     }
+
     public boolean tat_icon_missingdroid_farmer_condition_fixingJawa_e8_droid2Dren(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/tat_icon_fixingjawa_1");
@@ -65,12 +80,14 @@ public class tat_icon_missingdroid_farmer extends script.base_script
         boolean onTask = questIsTaskActive(questId1, tat_icon_droid_to_dren_e8, player);
         return onTask;
     }
+
     public boolean tat_icon_missingdroid_farmer_condition_fixingJawa_complete(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/tat_icon_fixingjawa_1");
         boolean OnTask = (questIsQuestComplete(questId1, player));
         return OnTask;
     }
+
     public boolean tat_icon_missingdroid_farmer_condition_fixingJawa_e1Plus_pastDren(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/tat_icon_fixingjawa_1");
@@ -80,30 +97,31 @@ public class tat_icon_missingdroid_farmer extends script.base_script
         boolean onTask1 = questIsTaskActive(questId1, tat_icon_dren_to_jawa_e1, player);
         boolean onTask2 = questIsTaskActive(questId1, tat_icon_jawa_to_droid_e2, player);
         boolean onTask3 = questIsTaskActive(questId1, tat_icon_droid_to_dren_e3, player);
-        boolean onTask = false;
-        if (onTask1 || onTask2 || onTask3)
-        {
-            onTask = true;
-        }
+        boolean onTask = onTask1 || onTask2 || onTask3;
         return onTask;
     }
+
     public void tat_icon_missingdroid_farmer_action_facePlayer(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
     }
+
     public void tat_icon_missingdroid_farmer_action_signal_beginQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId = questGetQuestId("quest/tat_icon_fixingjawa_1");
         groundquests.grantQuest(questId, player, npc, true);
     }
+
     public void tat_icon_missingdroid_farmer_action_signal_gotoLyrissa_e4(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "tat_icon_fixingjawa_droid_to_dren_e3");
     }
+
     public void tat_icon_missingdroid_farmer_action_signal_fixingjawa_complete(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "tat_icon_fixingjawa_complete");
     }
+
     public int tat_icon_missingdroid_farmer_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_97"))
@@ -124,7 +142,7 @@ public class tat_icon_missingdroid_farmer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_99");
@@ -133,7 +151,7 @@ public class tat_icon_missingdroid_farmer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tat_icon_missingdroid_farmer.branchId");
                     chat.chat(npc, player, message);
@@ -159,7 +177,7 @@ public class tat_icon_missingdroid_farmer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_104");
@@ -168,7 +186,7 @@ public class tat_icon_missingdroid_farmer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tat_icon_missingdroid_farmer.branchId");
                     chat.chat(npc, player, message);
@@ -190,6 +208,7 @@ public class tat_icon_missingdroid_farmer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tat_icon_missingdroid_farmer_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_99"))
@@ -205,6 +224,7 @@ public class tat_icon_missingdroid_farmer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tat_icon_missingdroid_farmer_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_104"))
@@ -220,6 +240,7 @@ public class tat_icon_missingdroid_farmer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tat_icon_missingdroid_farmer_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_22"))
@@ -239,7 +260,7 @@ public class tat_icon_missingdroid_farmer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_26");
@@ -248,7 +269,7 @@ public class tat_icon_missingdroid_farmer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tat_icon_missingdroid_farmer.branchId");
                     chat.chat(npc, player, message);
@@ -281,6 +302,7 @@ public class tat_icon_missingdroid_farmer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tat_icon_missingdroid_farmer_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_26"))
@@ -300,7 +322,7 @@ public class tat_icon_missingdroid_farmer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_30");
@@ -309,7 +331,7 @@ public class tat_icon_missingdroid_farmer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tat_icon_missingdroid_farmer.branchId");
                     chat.chat(npc, player, message);
@@ -320,6 +342,7 @@ public class tat_icon_missingdroid_farmer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tat_icon_missingdroid_farmer_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_30"))
@@ -339,7 +362,7 @@ public class tat_icon_missingdroid_farmer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_36");
@@ -348,7 +371,7 @@ public class tat_icon_missingdroid_farmer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tat_icon_missingdroid_farmer.branchId");
                     chat.chat(npc, player, message);
@@ -359,6 +382,7 @@ public class tat_icon_missingdroid_farmer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tat_icon_missingdroid_farmer_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_36"))
@@ -378,7 +402,7 @@ public class tat_icon_missingdroid_farmer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_40");
@@ -387,7 +411,7 @@ public class tat_icon_missingdroid_farmer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tat_icon_missingdroid_farmer.branchId");
                     chat.chat(npc, player, message);
@@ -398,6 +422,7 @@ public class tat_icon_missingdroid_farmer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tat_icon_missingdroid_farmer_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_40"))
@@ -414,6 +439,7 @@ public class tat_icon_missingdroid_farmer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tat_icon_missingdroid_farmer_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_54"))
@@ -433,7 +459,7 @@ public class tat_icon_missingdroid_farmer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_58");
@@ -442,7 +468,7 @@ public class tat_icon_missingdroid_farmer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tat_icon_missingdroid_farmer.branchId");
                     chat.chat(npc, player, message);
@@ -475,7 +501,7 @@ public class tat_icon_missingdroid_farmer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_78");
@@ -488,7 +514,7 @@ public class tat_icon_missingdroid_farmer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tat_icon_missingdroid_farmer.branchId");
                     chat.chat(npc, player, message);
@@ -499,6 +525,7 @@ public class tat_icon_missingdroid_farmer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tat_icon_missingdroid_farmer_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_58"))
@@ -525,7 +552,7 @@ public class tat_icon_missingdroid_farmer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_62");
@@ -538,7 +565,7 @@ public class tat_icon_missingdroid_farmer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tat_icon_missingdroid_farmer.branchId");
                     chat.chat(npc, player, message);
@@ -549,6 +576,7 @@ public class tat_icon_missingdroid_farmer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tat_icon_missingdroid_farmer_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_62"))
@@ -568,7 +596,7 @@ public class tat_icon_missingdroid_farmer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_125");
@@ -577,7 +605,7 @@ public class tat_icon_missingdroid_farmer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tat_icon_missingdroid_farmer.branchId");
                     chat.chat(npc, player, message);
@@ -603,7 +631,7 @@ public class tat_icon_missingdroid_farmer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_90");
@@ -612,7 +640,7 @@ public class tat_icon_missingdroid_farmer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tat_icon_missingdroid_farmer.branchId");
                     chat.chat(npc, player, message);
@@ -623,6 +651,7 @@ public class tat_icon_missingdroid_farmer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tat_icon_missingdroid_farmer_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_78"))
@@ -649,7 +678,7 @@ public class tat_icon_missingdroid_farmer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_82");
@@ -662,7 +691,7 @@ public class tat_icon_missingdroid_farmer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tat_icon_missingdroid_farmer.branchId");
                     chat.chat(npc, player, message);
@@ -684,6 +713,7 @@ public class tat_icon_missingdroid_farmer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tat_icon_missingdroid_farmer_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_82"))
@@ -710,7 +740,7 @@ public class tat_icon_missingdroid_farmer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_121");
@@ -723,7 +753,7 @@ public class tat_icon_missingdroid_farmer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tat_icon_missingdroid_farmer.branchId");
                     chat.chat(npc, player, message);
@@ -745,6 +775,7 @@ public class tat_icon_missingdroid_farmer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tat_icon_missingdroid_farmer_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_121"))
@@ -764,7 +795,7 @@ public class tat_icon_missingdroid_farmer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_125");
@@ -773,7 +804,7 @@ public class tat_icon_missingdroid_farmer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tat_icon_missingdroid_farmer.branchId");
                     chat.chat(npc, player, message);
@@ -799,7 +830,7 @@ public class tat_icon_missingdroid_farmer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_90");
@@ -808,7 +839,7 @@ public class tat_icon_missingdroid_farmer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tat_icon_missingdroid_farmer.branchId");
                     chat.chat(npc, player, message);
@@ -819,6 +850,7 @@ public class tat_icon_missingdroid_farmer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tat_icon_missingdroid_farmer_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_125"))
@@ -838,7 +870,7 @@ public class tat_icon_missingdroid_farmer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_129");
@@ -847,7 +879,7 @@ public class tat_icon_missingdroid_farmer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tat_icon_missingdroid_farmer.branchId");
                     chat.chat(npc, player, message);
@@ -858,6 +890,7 @@ public class tat_icon_missingdroid_farmer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tat_icon_missingdroid_farmer_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_129"))
@@ -877,7 +910,7 @@ public class tat_icon_missingdroid_farmer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_133");
@@ -886,7 +919,7 @@ public class tat_icon_missingdroid_farmer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tat_icon_missingdroid_farmer.branchId");
                     chat.chat(npc, player, message);
@@ -897,6 +930,7 @@ public class tat_icon_missingdroid_farmer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tat_icon_missingdroid_farmer_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_133"))
@@ -916,7 +950,7 @@ public class tat_icon_missingdroid_farmer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_90");
@@ -925,7 +959,7 @@ public class tat_icon_missingdroid_farmer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tat_icon_missingdroid_farmer.branchId");
                     chat.chat(npc, player, message);
@@ -936,6 +970,7 @@ public class tat_icon_missingdroid_farmer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tat_icon_missingdroid_farmer_handleBranch26(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_90"))
@@ -955,7 +990,7 @@ public class tat_icon_missingdroid_farmer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_94");
@@ -964,7 +999,7 @@ public class tat_icon_missingdroid_farmer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.tat_icon_missingdroid_farmer.branchId");
                     chat.chat(npc, player, message);
@@ -975,6 +1010,7 @@ public class tat_icon_missingdroid_farmer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tat_icon_missingdroid_farmer_handleBranch27(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_94"))
@@ -991,6 +1027,7 @@ public class tat_icon_missingdroid_farmer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -1004,6 +1041,7 @@ public class tat_icon_missingdroid_farmer extends script.base_script
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
@@ -1013,6 +1051,7 @@ public class tat_icon_missingdroid_farmer extends script.base_script
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -1021,18 +1060,21 @@ public class tat_icon_missingdroid_farmer extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.tat_icon_missingdroid_farmer");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -1084,7 +1126,7 @@ public class tat_icon_missingdroid_farmer extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_97");
@@ -1100,7 +1142,7 @@ public class tat_icon_missingdroid_farmer extends script.base_script
                 utils.setScriptVar(player, "conversation.tat_icon_missingdroid_farmer.branchId", 3);
                 npcStartConversation(player, npc, "tat_icon_missingdroid_farmer", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1136,7 +1178,7 @@ public class tat_icon_missingdroid_farmer extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_22");
@@ -1152,7 +1194,7 @@ public class tat_icon_missingdroid_farmer extends script.base_script
                 utils.setScriptVar(player, "conversation.tat_icon_missingdroid_farmer.branchId", 9);
                 npcStartConversation(player, npc, "tat_icon_missingdroid_farmer", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1181,7 +1223,7 @@ public class tat_icon_missingdroid_farmer extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_54");
@@ -1193,7 +1235,7 @@ public class tat_icon_missingdroid_farmer extends script.base_script
                 utils.setScriptVar(player, "conversation.tat_icon_missingdroid_farmer.branchId", 17);
                 npcStartConversation(player, npc, "tat_icon_missingdroid_farmer", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1202,6 +1244,7 @@ public class tat_icon_missingdroid_farmer extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("tat_icon_missingdroid_farmer"))

@@ -1,5 +1,11 @@
 package script.event.ewok_festival;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.create;
@@ -12,16 +18,19 @@ public class loveday_disillusion_blaire_spawner extends script.base_script
     public loveday_disillusion_blaire_spawner()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "spawnDisillusionedCupid", null, 4, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "spawnDisillusionedCupid", null, 9, false);
         return SCRIPT_CONTINUE;
     }
+
     public int spawnDisillusionedCupid(obj_id self, dictionary params) throws InterruptedException
     {
         if (!utils.hasScriptVar(self, "spawnedDisillusionedCupid"))
@@ -47,7 +56,7 @@ public class loveday_disillusion_blaire_spawner extends script.base_script
                     setName(self, "Disillusion Spawner (Benjamin)");
                 }
             }
-            else 
+            else
             {
                 obj_id crossbow = createObject("object/tangible/quest/content/holiday_loveday_disillusion_crossbow.iff", spawnerLoc);
                 if (isIdValid(crossbow))
@@ -60,16 +69,19 @@ public class loveday_disillusion_blaire_spawner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void areaDebugMessaging(obj_id self, String message) throws InterruptedException
     {
         obj_id[] players = getAllPlayers(getLocation(getTopMostContainer(self)), 35.0f);
-        if (players != null && players.length > 0)
+        if (players != null)
         {
-            for (obj_id player : players) {
+            for (obj_id player : players)
+            {
                 sendSystemMessage(player, message, "");
             }
         }
     }
+
     public int OnHearSpeech(obj_id self, obj_id speaker, String text) throws InterruptedException
     {
         if (!isGod(speaker) || !hasObjVar(speaker, "cupidTestingAuthorized"))

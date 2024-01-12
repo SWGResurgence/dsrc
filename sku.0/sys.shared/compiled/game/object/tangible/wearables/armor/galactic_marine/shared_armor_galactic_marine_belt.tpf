@@ -9,4 +9,4 @@
 objectName = "static_item_n" "armor_galactic_marine_belt"
 detailedDescription = "static_item_d" "armor_galactic_marine_belt"
 appearanceFilename = "appearance/armor_galactic_marine_belt_m.sat"
-gameObjectType = GOT_armor_misc
+

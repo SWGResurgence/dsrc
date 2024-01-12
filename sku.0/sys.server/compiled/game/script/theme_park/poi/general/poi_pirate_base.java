@@ -1,5 +1,11 @@
 package script.theme_park.poi.general;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.create;
 import script.location;
@@ -10,6 +16,7 @@ public class poi_pirate_base extends script.theme_park.poi.base
     public poi_pirate_base()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         String objective = poiGetObjective(self);
@@ -46,6 +53,7 @@ public class poi_pirate_base extends script.theme_park.poi.base
         attachScript(p1, "theme_park.poi.tatooine.behavior.pirate_base");
         return SCRIPT_CONTINUE;
     }
+
     public int attacked(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id p1 = getObjIdObjVar(self, "p1");

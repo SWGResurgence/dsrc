@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.location;
 import script.obj_id;
@@ -151,6 +157,7 @@ public class qa extends script.base_script
     public static final String DAMAGE_TOOL_TITLE = "DAMAGE AMOUNT";
     public static final String FROG_STRING = "object/tangible/terminal/terminal_character_builder.iff";
     public static final String KASHYYYK_FROG_STRING = "object/tangible/terminal/terminal_kashyyyk_content.iff";
+
     public qa()
     {
     }

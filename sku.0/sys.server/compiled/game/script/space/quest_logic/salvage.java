@@ -1,15 +1,22 @@
 package script.space.quest_logic;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
 public class salvage extends script.space.quest_logic.recovery
 {
+    public static final string_id SID_ABANDONED_RESCUE = new string_id("space/quest", "rescue_abandoned");
+    public static final string_id SID_REMAINDER_UPDATE = new string_id("space/quest", "mining_remainder_update");
     public salvage()
     {
     }
-    public static final string_id SID_ABANDONED_RESCUE = new string_id("space/quest", "rescue_abandoned");
-    public static final string_id SID_REMAINDER_UPDATE = new string_id("space/quest", "mining_remainder_update");
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         String questName = getStringObjVar(self, space_quest.QUEST_NAME);
@@ -68,6 +75,7 @@ public class salvage extends script.space.quest_logic.recovery
         }
         return SCRIPT_OVERRIDE;
     }
+
     public int initializedQuestPlayer(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -127,6 +135,7 @@ public class salvage extends script.space.quest_logic.recovery
         }
         return SCRIPT_OVERRIDE;
     }
+
     public void findTargetStart(obj_id self, obj_id player, String destNav) throws InterruptedException
     {
         obj_id navPoint = space_quest.findQuestLocation(self, player, destNav, "nav");
@@ -144,6 +153,7 @@ public class salvage extends script.space.quest_logic.recovery
         }
         setObjVar(self, "initialized", 1);
     }
+
     public int warpInTarget(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = getObjIdObjVar(self, space_quest.QUEST_OWNER);
@@ -185,6 +195,7 @@ public class salvage extends script.space.quest_logic.recovery
         questUpdate(self, status_update);
         return SCRIPT_OVERRIDE;
     }
+
     public int wasSalvaged(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -227,6 +238,7 @@ public class salvage extends script.space.quest_logic.recovery
         }
         return SCRIPT_CONTINUE;
     }
+
     public int launchAttack(obj_id self, dictionary params) throws InterruptedException
     {
         if (!hasObjVar(self, "initialized") || !hasObjVar(self, "target"))
@@ -269,14 +281,11 @@ public class salvage extends script.space.quest_logic.recovery
         {
             targets = new obj_id[count];
         }
-        else 
+        else
         {
             targets = new obj_id[count + oldtargets.length];
             k = oldtargets.length;
-            for (int i = 0; i < oldtargets.length; i++)
-            {
-                targets[i] = oldtargets[i];
-            }
+            System.arraycopy(oldtargets, 0, targets, 0, oldtargets.length);
         }
         int squad = ship_ai.squadCreateSquadId();
         int j = 0;
@@ -322,12 +331,14 @@ public class salvage extends script.space.quest_logic.recovery
         playClientEffectObj(player, SOUND_SPAWN_WAVE, player, "");
         return SCRIPT_CONTINUE;
     }
+
     public void questAborted(obj_id self) throws InterruptedException
     {
         clearMissionWaypoint(self);
         obj_id player = getObjIdObjVar(self, space_quest.QUEST_OWNER);
         space_quest.setQuestAborted(player, self);
     }
+
     public int abortMission(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "noAbort"))
@@ -347,15 +358,17 @@ public class salvage extends script.space.quest_logic.recovery
                 space_quest.groupTaunt(ship, player, pp);
                 messageTo(ship, "missionAbort", null, 2.0f, false);
             }
-            else 
+            else
             {
                 messageTo(ship, "missionAbort", null, 10.0f, false);
             }
             obj_id[] escorts = getObjIdArrayObjVar(self, "escorts");
             if (escorts != null)
             {
-                for (obj_id escort : escorts) {
-                    if (isIdValid(escort) && exists(escort)) {
+                for (obj_id escort : escorts)
+                {
+                    if (isIdValid(escort) && exists(escort))
+                    {
                         messageTo(escort, "missionAbort", null, 10.0f, false);
                     }
                 }

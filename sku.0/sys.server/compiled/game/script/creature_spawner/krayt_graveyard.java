@@ -1,5 +1,11 @@
 package script.creature_spawner;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.create;
 import script.library.locations;
@@ -10,11 +16,13 @@ public class krayt_graveyard extends script.base_script
     public krayt_graveyard()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         doKraytSpawn();
         return SCRIPT_CONTINUE;
     }
+
     public void doKraytSpawn() throws InterruptedException
     {
         obj_id self = getSelf();
@@ -26,11 +34,13 @@ public class krayt_graveyard extends script.base_script
             attachScript(kd, "creature_spawner.death_msg");
         }
     }
+
     public int creatureDied(obj_id self, dictionary params) throws InterruptedException
     {
         messageTo(self, "spawnNew", null, 30, true);
         return SCRIPT_CONTINUE;
     }
+
     public int spawnNew(obj_id self, dictionary params) throws InterruptedException
     {
         removeObjVar(self, "Krayt");

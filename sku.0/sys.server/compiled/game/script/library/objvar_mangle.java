@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.obj_id;
 
 public class objvar_mangle extends script.base_script
@@ -8,6 +14,7 @@ public class objvar_mangle extends script.base_script
     public static final int FLOATS_PER_SEGMENT = 40;
     public static final int STRINGS_PER_SEGMENT = 10;
     public static final int OBJIDS_PER_SEGMENT = 40;
+
     public objvar_mangle()
     {
     }

@@ -1,5 +1,11 @@
 package script.space.quest_logic;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -7,9 +13,6 @@ import java.util.StringTokenizer;
 
 public class escort_duty extends script.base_script
 {
-    public escort_duty()
-    {
-    }
     public static final string_id SID_ABANDONED_MISSION = new string_id("space/quest", "destroy_abandoned");
     public static final string_id SID_ABANDONED_DUTY = new string_id("space/quest", "mission_abandoned");
     public static final string_id SID_TARGETS_REMAINING = new string_id("space/quest", "destroy_duty_targets_remaining");
@@ -17,10 +20,15 @@ public class escort_duty extends script.base_script
     public static final String SOUND_SPAWN_ESCORT = "clienteffect/ui_quest_spawn_escort.cef";
     public static final String SOUND_SPAWN_WAVE = "clienteffect/ui_quest_spawn_wave.cef";
     public static final String SOUND_DESTROYED_WAVE = "clienteffect/ui_quest_destroyed_wave.cef";
+    public escort_duty()
+    {
+    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         String questName = getStringObjVar(self, space_quest.QUEST_NAME);
@@ -97,6 +105,7 @@ public class escort_duty extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int initializedQuestPlayer(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -124,7 +133,7 @@ public class escort_duty extends script.base_script
                     space_quest.showQuestUpdate(self, SID_ABANDONED_DUTY);
                     space_quest.setQuestWon(player, self);
                 }
-                else 
+                else
                 {
                     space_quest.showQuestUpdate(self, SID_ABANDONED_MISSION);
                     space_quest.setQuestFailed(player, self, false);
@@ -163,6 +172,7 @@ public class escort_duty extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void buildRandomNavList(obj_id self) throws InterruptedException
     {
         obj_id player = getObjIdObjVar(self, space_quest.QUEST_OWNER);
@@ -185,17 +195,15 @@ public class escort_duty extends script.base_script
         if (rand() < 0.25)
         {
             String[] sortedPoints = new String[escortPoints.length];
-            for (int j = preSortPoints.length - 1; j >= 0; j--)
-            {
-                sortedPoints[j] = preSortPoints[j];
-            }
+            System.arraycopy(preSortPoints, 0, sortedPoints, 0, preSortPoints.length - 1 + 1);
             setObjVar(self, "escortPoints", sortedPoints);
         }
-        else 
+        else
         {
             setObjVar(self, "escortPoints", preSortPoints);
         }
     }
+
     public void registerEscortLocation(obj_id self, obj_id player, String destNav) throws InterruptedException
     {
         obj_id navPoint = space_quest.findQuestLocation(self, player, destNav, "nav");
@@ -231,6 +239,7 @@ public class escort_duty extends script.base_script
         }
         setObjVar(self, "initialized", 1);
     }
+
     public int arrivedAtLocation(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -270,6 +279,7 @@ public class escort_duty extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int warpShipDelay(obj_id self, dictionary params) throws InterruptedException
     {
         String name = params.getString("name");
@@ -313,6 +323,7 @@ public class escort_duty extends script.base_script
         setObjVar(self, "escorting", 1);
         return SCRIPT_CONTINUE;
     }
+
     public int sayHello(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id ship = getObjIdObjVar(self, "ship");
@@ -331,6 +342,7 @@ public class escort_duty extends script.base_script
         space_quest.groupTaunt(ship, player, pp);
         return SCRIPT_CONTINUE;
     }
+
     public obj_id warpInEscortShip(obj_id self) throws InterruptedException
     {
         String[] shipTypes = getStringArrayObjVar(self, "escortShipTypes");
@@ -339,6 +351,7 @@ public class escort_duty extends script.base_script
         transform spawnLoc = space_quest.getRandomPositionInSphere(trans, 100, 200);
         return space_create.createShipHyperspace(shipType, spawnLoc);
     }
+
     public transform[] getEscortTransforms(obj_id self) throws InterruptedException
     {
         obj_id questManager = getNamedObject(space_quest.QUEST_MANAGER);
@@ -351,15 +364,18 @@ public class escort_duty extends script.base_script
         transform[] translist = new transform[escortPoints.length];
         for (int j = 0; j < escortPoints.length; j++)
         {
-            for (obj_id point : points) {
+            for (obj_id point : points)
+            {
                 String pointName = getStringObjVar(point, "nav_name");
                 String eName = escortPoints[j];
                 StringTokenizer st = new StringTokenizer(eName, ":");
                 String scene = st.nextToken();
                 eName = st.nextToken();
-                if ((pointName != null) && pointName.equals(eName)) {
+                if ((pointName != null) && pointName.equals(eName))
+                {
                     translist[j] = getTransform_o2w(point);
-                    if (j + 1 == escortPoints.length) {
+                    if (j + 1 == escortPoints.length)
+                    {
                         setObjVar(self, "last_loc", getLocation(point));
                     }
                     break;
@@ -368,6 +384,7 @@ public class escort_duty extends script.base_script
         }
         return translist;
     }
+
     public int escortComplete(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -394,8 +411,10 @@ public class escort_duty extends script.base_script
         obj_id[] targets = getObjIdArrayObjVar(self, "targets");
         if (targets != null)
         {
-            for (obj_id target : targets) {
-                if (isIdValid(target)) {
+            for (obj_id target : targets)
+            {
+                if (isIdValid(target))
+                {
                     destroyObjectHyperspace(target);
                 }
             }
@@ -431,6 +450,7 @@ public class escort_duty extends script.base_script
         }
         return SCRIPT_OVERRIDE;
     }
+
     public int escortFailed(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -456,13 +476,14 @@ public class escort_duty extends script.base_script
             {
                 questFailed(self, true);
             }
-            else 
+            else
             {
                 questFailed(self, true);
             }
         }
         return SCRIPT_OVERRIDE;
     }
+
     public void clearMissionWaypoint(obj_id self) throws InterruptedException
     {
         obj_id player = getObjIdObjVar(self, space_quest.QUEST_OWNER);
@@ -479,24 +500,28 @@ public class escort_duty extends script.base_script
             removeLocationTarget(player, loc);
         }
     }
+
     public void questCompleted(obj_id self) throws InterruptedException
     {
         clearMissionWaypoint(self);
         obj_id player = getObjIdObjVar(self, space_quest.QUEST_OWNER);
         space_quest.setQuestWon(player, self);
     }
+
     public void questFailed(obj_id self, boolean split) throws InterruptedException
     {
         clearMissionWaypoint(self);
         obj_id player = getObjIdObjVar(self, space_quest.QUEST_OWNER);
         space_quest.setQuestFailed(player, self, split);
     }
+
     public void questAborted(obj_id self) throws InterruptedException
     {
         obj_id player = getObjIdObjVar(self, space_quest.QUEST_OWNER);
         clearMissionWaypoint(self);
         space_quest.setQuestWon(player, self);
     }
+
     public int abortMission(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = getObjIdObjVar(self, space_quest.QUEST_OWNER);
@@ -513,6 +538,7 @@ public class escort_duty extends script.base_script
         questAborted(self);
         return SCRIPT_CONTINUE;
     }
+
     public void dutyUpdate(obj_id self, string_id update_id) throws InterruptedException
     {
         obj_id player = getObjIdObjVar(self, space_quest.QUEST_OWNER);
@@ -522,6 +548,7 @@ public class escort_duty extends script.base_script
         prose_package pp = prose.getPackage(update_prefix, update_id);
         space_quest.sendQuestMessage(player, pp);
     }
+
     public int launchAttack(obj_id self, dictionary params) throws InterruptedException
     {
         if (!hasObjVar(self, "initialized") || !hasObjVar(self, "escorting") || !hasObjVar(self, "ship"))
@@ -546,7 +573,7 @@ public class escort_duty extends script.base_script
         {
             wavenum = 2;
         }
-        else 
+        else
         {
             wavenum = 1;
         }
@@ -575,14 +602,11 @@ public class escort_duty extends script.base_script
         {
             targets = new obj_id[count];
         }
-        else 
+        else
         {
             targets = new obj_id[count + oldtargets.length];
             k = oldtargets.length;
-            for (int i = 0; i < oldtargets.length; i++)
-            {
-                targets[i] = oldtargets[i];
-            }
+            System.arraycopy(oldtargets, 0, targets, 0, oldtargets.length);
         }
         int squad = ship_ai.squadCreateSquadId();
         int j = 0;
@@ -647,6 +671,7 @@ public class escort_duty extends script.base_script
         messageTo(self, "launchAttack", outparamss, attackPeriod, false);
         return SCRIPT_CONTINUE;
     }
+
     public int targetDestroyed(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -658,24 +683,30 @@ public class escort_duty extends script.base_script
         String questName = getStringObjVar(self, space_quest.QUEST_NAME);
         String questType = getStringObjVar(self, space_quest.QUEST_TYPE);
         obj_id deadship = params.getObjId("ship");
-        obj_id targets[] = getObjIdArrayObjVar(self, "targets");
+        obj_id[] targets = getObjIdArrayObjVar(self, "targets");
         int deadships = getIntObjVar(self, "deadships");
         boolean launchWave = false;
-        for (obj_id target : targets) {
-            if (deadship == target) {
+        for (obj_id target : targets)
+        {
+            if (deadship == target)
+            {
                 deadships++;
                 setObjVar(self, "deadships", deadships);
                 space_quest._removeMissionCriticalShip(player, self, deadship);
                 int shipswave = getIntObjVar(deadship, "wave");
                 int wavecount = getIntObjVar(self, "wave" + shipswave);
                 wavecount--;
-                if (wavecount <= 0) {
+                if (wavecount <= 0)
+                {
                     removeObjVar(self, "wave" + shipswave);
                     launchWave = true;
-                } else {
+                }
+                else
+                {
                     setObjVar(self, "wave" + shipswave, wavecount);
                 }
-                if (deadships == targets.length) {
+                if (deadships == targets.length)
+                {
                     playClientEffectObj(player, SOUND_DESTROYED_WAVE, player, "");
                     int rewardships = getIntObjVar(self, "rewardships");
                     rewardships += deadships;
@@ -709,10 +740,12 @@ public class escort_duty extends script.base_script
         }
         return SCRIPT_OVERRIDE;
     }
+
     public boolean checkSpecialEvent(obj_id self, obj_id player, int attackCount) throws InterruptedException
     {
         return false;
     }
+
     public int removeQuest(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = getObjIdObjVar(self, space_quest.QUEST_OWNER);
@@ -729,6 +762,7 @@ public class escort_duty extends script.base_script
         space_quest._removeQuest(player, self);
         return SCRIPT_CONTINUE;
     }
+
     public int playerShipDestroyed(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -742,6 +776,7 @@ public class escort_duty extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void cleanupShips(obj_id self) throws InterruptedException
     {
         obj_id ship = getObjIdObjVar(self, "ship");
@@ -752,8 +787,10 @@ public class escort_duty extends script.base_script
         obj_id[] targets = getObjIdArrayObjVar(self, "targets");
         if (targets != null)
         {
-            for (obj_id target : targets) {
-                if (isIdValid(target) && exists(target)) {
+            for (obj_id target : targets)
+            {
+                if (isIdValid(target) && exists(target))
+                {
                     destroyObjectHyperspace(target);
                 }
             }

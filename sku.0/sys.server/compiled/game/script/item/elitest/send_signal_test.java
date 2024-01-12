@@ -1,5 +1,11 @@
 package script.item.elitest;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.groundquests;
 import script.*;
 
@@ -7,6 +13,7 @@ public class send_signal_test extends script.base_script
 {
     public static final String STF = "dungeon/avatar_platform";
     public static final string_id SEND_SIGNAL = new string_id(STF, "lockbox_code");
+
     public send_signal_test()
     {
     }

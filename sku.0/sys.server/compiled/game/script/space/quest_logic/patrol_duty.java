@@ -1,5 +1,11 @@
 package script.space.quest_logic;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.badge;
 import script.library.money;
@@ -9,12 +15,13 @@ import script.string_id;
 
 public class patrol_duty extends script.space.quest_logic.patrol
 {
-    public patrol_duty()
-    {
-    }
     public static final string_id SID_LAP_REWARD = new string_id("space/quest", "patrol_lap_reward");
     public static final string_id SID_SPECIAL_REWARD = new string_id("space/quest", "destroy_special_reward");
     public static final string_id SID_BADGE_REWARD = new string_id("space/quest", "destroy_badge_reward");
+    public patrol_duty()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         String questName = getStringObjVar(self, space_quest.QUEST_NAME);
@@ -40,6 +47,7 @@ public class patrol_duty extends script.space.quest_logic.patrol
         setObjVar(self, "badgeReward", questInfo.getInt("badgeReward"));
         return SCRIPT_CONTINUE;
     }
+
     public int arrivedAtLocation(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -102,10 +110,10 @@ public class patrol_duty extends script.space.quest_logic.patrol
                         string_id badgeEmailBody = new string_id("spacequest/" + questType + "_" + questName, "badgebody");
                         String player_name = getName(player);
                         String body_oob = chatMakePersistentMessageOutOfBandBody(null, badgeEmailBody);
-                        chatSendPersistentMessage("@" + badgeEmailFrom.toString(), player_name, "@" + badgeEmailSubject.toString(), null, body_oob);
+                        chatSendPersistentMessage("@" + badgeEmailFrom, player_name, "@" + badgeEmailSubject, null, body_oob);
                     }
                 }
-                else 
+                else
                 {
                     int specialRewardIncrement = getIntObjVar(self, "specialRewardIncrement");
                     if (currentLap % specialRewardIncrement == 0)
@@ -116,7 +124,7 @@ public class patrol_duty extends script.space.quest_logic.patrol
                     }
                 }
             }
-            else 
+            else
             {
                 st = new java.util.StringTokenizer(navPoints[currentNav], ":");
                 scene = st.nextToken();
@@ -126,6 +134,7 @@ public class patrol_duty extends script.space.quest_logic.patrol
         }
         return SCRIPT_OVERRIDE;
     }
+
     public int playerShipDestroyed(obj_id self, dictionary params) throws InterruptedException
     {
         return SCRIPT_OVERRIDE;

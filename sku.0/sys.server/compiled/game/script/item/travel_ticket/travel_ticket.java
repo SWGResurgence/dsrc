@@ -1,5 +1,11 @@
 package script.item.travel_ticket;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.city;
 import script.library.player_structure;
 import script.library.travel;
@@ -16,6 +22,7 @@ public class travel_ticket extends script.base_script
     public static final string_id SID_SUI_TICKET_DEPARTURE_POINT = new string_id("travel/travel", "sui_ticket_departure_point");
     public static final string_id SID_SUI_TICKET_ARRIVAL_POINT = new string_id("travel/travel", "sui_ticket_arrival_point");
     public static final string_id SID_SUI_TICKET_INFORMATION = new string_id("travel/travel", "sui_ticket_information");
+
     public travel_ticket()
     {
     }

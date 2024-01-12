@@ -1,5 +1,11 @@
 package script.space.ship;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.space_transition;
 import script.library.space_utils;
 import script.library.utils;
@@ -10,10 +16,12 @@ import script.string_id;
 
 public class shipoperations_falcon extends script.base_script
 {
+    public static final string_id SID_OPERATIONS = new string_id("space/space_interaction", "operations");
+
     public shipoperations_falcon()
     {
     }
-    public static final string_id SID_OPERATIONS = new string_id("space/space_interaction", "operations");
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         obj_id ship = space_transition.getContainingShip(self);
@@ -23,6 +31,7 @@ public class shipoperations_falcon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         obj_id ship = space_transition.getContainingShip(self);
@@ -32,6 +41,7 @@ public class shipoperations_falcon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         obj_id objShip = space_transition.getContainingShip(player);
@@ -41,6 +51,7 @@ public class shipoperations_falcon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.SERVER_MENU1)
@@ -63,7 +74,7 @@ public class shipoperations_falcon extends script.base_script
                             return SCRIPT_CONTINUE;
                         }
                     }
-                    else 
+                    else
                     {
                         string_id strSpam = new string_id("space/space_interaction", "wrong_faction");
                         sendSystemMessage(player, strSpam);
@@ -81,16 +92,13 @@ public class shipoperations_falcon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean isGCWFaction(int intFaction) throws InterruptedException
     {
         if (intFaction == (-615855020))
         {
             return true;
         }
-        if (intFaction == (370444368))
-        {
-            return true;
-        }
-        return false;
+        return intFaction == (370444368);
     }
 }

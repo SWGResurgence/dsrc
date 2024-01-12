@@ -1,18 +1,27 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.*;
 
 public class defend_the_village extends script.base_script
 {
+    public static String c_stringFile = "conversation/defend_the_village";
+
     public defend_the_village()
     {
     }
-    public static String c_stringFile = "conversation/defend_the_village";
+
     public boolean defend_the_village_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean defend_the_village_condition_percentComplete50(obj_id player, obj_id npc) throws InterruptedException
     {
         boolean result = false;
@@ -32,79 +41,70 @@ public class defend_the_village extends script.base_script
         }
         return result;
     }
+
     public boolean defend_the_village_condition_canAcceptEitherQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return (defend_the_village_condition_canAcceptMeleeDefenseQuest(player, npc) || defend_the_village_condition_canAcceptRangedSpeedQuest(player, npc));
     }
+
     public boolean defend_the_village_condition_isOnRangedSpeedQuest(obj_id player, obj_id npc) throws InterruptedException
     {
-        boolean result = false;
-        if (quests.isActive("fs_defend_wait_01", player))
-        {
-            result = true;
-        }
+        boolean result = quests.isActive("fs_defend_wait_01", player);
         return result;
     }
+
     public boolean defend_the_village_condition_isOnEitherQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return (defend_the_village_condition_isOnMeleeDefenseQuest(player, npc) || defend_the_village_condition_isOnRangedSpeedQuest(player, npc));
     }
+
     public boolean defend_the_village_condition_isOnMeleeDefenseQuest(obj_id player, obj_id npc) throws InterruptedException
     {
-        boolean result = false;
-        if (quests.isActive("fs_defend_wait_02", player))
-        {
-            result = true;
-        }
+        boolean result = quests.isActive("fs_defend_wait_02", player);
         return result;
     }
+
     public boolean defend_the_village_condition_hasCompletedQuest(obj_id player, obj_id npc) throws InterruptedException
     {
-        boolean result = false;
-        if (quests.isComplete("fs_defend_wait_01", player) && quests.isComplete("fs_defend_wait_02", player))
-        {
-            result = true;
-        }
+        boolean result = quests.isComplete("fs_defend_wait_01", player) && quests.isComplete("fs_defend_wait_02", player);
         if ((quests.isComplete("fs_defend_wait_01", player) || quests.isComplete("fs_defend_wait_02", player)) && !defend_the_village_condition_isOnEitherQuest(player, npc) && !defend_the_village_condition_canAcceptEitherQuest(player, npc))
         {
             result = true;
         }
         return result;
     }
+
     public boolean defend_the_village_condition_canAcceptMeleeDefenseQuest(obj_id player, obj_id npc) throws InterruptedException
     {
-        boolean result = false;
-        if (quests.canActivate("fs_defend_set_faction_02", player) && !fs_quests.hasQuestAccepted(player))
-        {
-            result = true;
-        }
+        boolean result = quests.canActivate("fs_defend_set_faction_02", player) && !fs_quests.hasQuestAccepted(player);
         return result;
     }
+
     public boolean defend_the_village_condition_canAcceptRangedSpeedQuest(obj_id player, obj_id npc) throws InterruptedException
     {
-        boolean result = false;
-        if (quests.canActivate("fs_defend_set_faction", player) && !fs_quests.hasQuestAccepted(player))
-        {
-            result = true;
-        }
+        boolean result = quests.canActivate("fs_defend_set_faction", player) && !fs_quests.hasQuestAccepted(player);
         return result;
     }
+
     public void defend_the_village_action_assignDefendTheVillage1(obj_id player, obj_id npc) throws InterruptedException
     {
         attachScript(player, "quest.force_sensitive.fs_defend_01_cleanup");
         quests.activate("fs_defend_set_faction", player, npc);
         fs_quests.setQuestAccepted(player);
     }
+
     public void defend_the_village_action_assignDefendTheVillage2(obj_id player, obj_id npc) throws InterruptedException
     {
         attachScript(player, "quest.force_sensitive.fs_defend_01_cleanup");
         quests.activate("fs_defend_set_faction_02", player, npc);
         fs_quests.setQuestAccepted(player);
     }
+
     public String defend_the_village_tokenTO_delete_me(obj_id player, obj_id npc) throws InterruptedException
     {
-        return new String();
+        return "";
     }
+
     public int defend_the_village_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_6e8bed18"))
@@ -124,7 +124,7 @@ public class defend_the_village extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_25");
@@ -133,7 +133,7 @@ public class defend_the_village extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.defend_the_village.branchId");
                     chat.chat(npc, player, message);
@@ -159,7 +159,7 @@ public class defend_the_village extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_c382b2d0");
@@ -168,7 +168,7 @@ public class defend_the_village extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.defend_the_village.branchId");
                     chat.chat(npc, player, message);
@@ -190,6 +190,7 @@ public class defend_the_village extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int defend_the_village_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_25"))
@@ -216,7 +217,7 @@ public class defend_the_village extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_29");
@@ -229,7 +230,7 @@ public class defend_the_village extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.defend_the_village.branchId");
                     chat.chat(npc, player, message);
@@ -240,6 +241,7 @@ public class defend_the_village extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int defend_the_village_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_29"))
@@ -278,7 +280,7 @@ public class defend_the_village extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_37");
@@ -291,7 +293,7 @@ public class defend_the_village extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.defend_the_village.branchId");
                     chat.chat(npc, player, message);
@@ -302,6 +304,7 @@ public class defend_the_village extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int defend_the_village_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_37"))
@@ -329,6 +332,7 @@ public class defend_the_village extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int defend_the_village_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_c382b2d0"))
@@ -355,7 +359,7 @@ public class defend_the_village extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a30c1a53");
@@ -368,7 +372,7 @@ public class defend_the_village extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.defend_the_village.branchId");
                     chat.chat(npc, player, message);
@@ -379,6 +383,7 @@ public class defend_the_village extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int defend_the_village_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_a30c1a53"))
@@ -417,7 +422,7 @@ public class defend_the_village extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f9a0517");
@@ -430,7 +435,7 @@ public class defend_the_village extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.defend_the_village.branchId");
                     chat.chat(npc, player, message);
@@ -441,6 +446,7 @@ public class defend_the_village extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int defend_the_village_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_f9a0517"))
@@ -468,6 +474,7 @@ public class defend_the_village extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public float getPercentComplete(obj_id self, String questName) throws InterruptedException
     {
         float result = 0.0f;
@@ -481,16 +488,17 @@ public class defend_the_village extends script.base_script
                 int totalKills = utils.stringToInt(totalKillsString);
                 if (totalKills > 0)
                 {
-                    result = 1 - (float)(killsRemaining / totalKills);
+                    result = 1 - (float) (killsRemaining / totalKills);
                 }
             }
-            else 
+            else
             {
                 result = 1.0f;
             }
         }
         return result;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -500,11 +508,13 @@ public class defend_the_village extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -513,18 +523,21 @@ public class defend_the_village extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.defend_the_village");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -582,7 +595,7 @@ public class defend_the_village extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_6e8bed18");
@@ -598,7 +611,7 @@ public class defend_the_village extends script.base_script
                 utils.setScriptVar(player, "conversation.defend_the_village.branchId", 4);
                 npcStartConversation(player, npc, "defend_the_village", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -613,6 +626,7 @@ public class defend_the_village extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("defend_the_village"))

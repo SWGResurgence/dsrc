@@ -1,5 +1,11 @@
 package script.systems.armor_rehue;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.hue;
 import script.library.sui;
@@ -9,6 +15,7 @@ public class composite_rehue extends script.base_script
 {
     public static final string_id MNU_COLOR = new string_id("sui", "set_color");
     public static final String SCRIPTVAR_ARMOR_PID = "armor_rehue.pid";
+
     public composite_rehue()
     {
     }

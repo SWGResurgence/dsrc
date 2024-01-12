@@ -6,7 +6,14 @@ package script.event.gjpud;/*
 @ This script should be used no later than 05/01/2023 but not before 03/01/2023
 */
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
+
 import java.lang.reflect.InvocationTargetException;
 
 public class controller extends script.base_script
@@ -22,6 +29,7 @@ public class controller extends script.base_script
             "Dusty Scrap",
             "Tarnished Scrap",
     };
+
     public int OnAttach(obj_id self)
     {
         return SCRIPT_CONTINUE;
@@ -32,17 +40,18 @@ public class controller extends script.base_script
         return SCRIPT_CONTINUE;
     }
 
-    public int OnObjectMenuRequest( obj_id self, obj_id player, menu_info mi )
+    public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi)
     {
         if (isGod(player))
         {
-            int main = mi.addRootMenu( menu_info_types.ITEM_USE, new string_id("Galactic Junk Pickup Day"));
+            int main = mi.addRootMenu(menu_info_types.ITEM_USE, new string_id("Galactic Junk Pickup Day"));
             mi.addSubMenu(main, menu_info_types.SERVER_MENU1, new string_id("Stats"));
             mi.addSubMenu(main, menu_info_types.SERVER_MENU2, new string_id("Create Junkfield"));
-            mi.addSubMenu(main, menu_info_types.SERVER_MENU3, new string_id( "Force Cleanup"));
+            mi.addSubMenu(main, menu_info_types.SERVER_MENU3, new string_id("Force Cleanup"));
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException, InvocationTargetException
     {
         if (isGod(player))
@@ -75,6 +84,7 @@ public class controller extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int spawnJunk(obj_id self, obj_id player) throws InterruptedException
     {
         for (int i = 0; i <= JUNK_LIMIT; i++)
@@ -83,7 +93,7 @@ public class controller extends script.base_script
             junkLoc.x = junkLoc.x + (rand(-7250.0f, 7250.0f));
             junkLoc.z = junkLoc.z + (rand(-7250.0f, 7250.0f));
             junkLoc.y = getHeightAtLocation(junkLoc.x, junkLoc.z);
-            obj_id junk = createObject("object/tangible/gjpud/gjpud_junk_s0" + rand(1,5) + ".iff", junkLoc);
+            obj_id junk = createObject("object/tangible/gjpud/gjpud_junk_s0" + rand(1, 5) + ".iff", junkLoc);
             attachScript(junk, "event.gjpud.junk");
             setObjVar(junk, "gjpudObject", 1);
             setYaw(junk, rand(0.0f, 359.9f));
@@ -93,10 +103,11 @@ public class controller extends script.base_script
                 randomName = "Junk";
             }
             setName(junk, randomName);
-        };
-        broadcast(player,"Junk spawned.");
+        }
+        broadcast(player, "Junk spawned.");
         return SCRIPT_CONTINUE;
     }
+
     public int destroyJunk(obj_id self) throws InterruptedException
     {
         obj_id[] junkObjects = getObjectsInRange(getLocation(self), PLANETSIDE);
@@ -109,6 +120,7 @@ public class controller extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int getJunkCount(obj_id self) throws InterruptedException
     {
         int junkCount = 0;

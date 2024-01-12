@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.groundquests;
@@ -8,34 +14,42 @@ import script.*;
 
 public class ep3_trandoshan_tempal_buncho extends script.base_script
 {
+    public static String c_stringFile = "conversation/ep3_trandoshan_tempal_buncho";
+
     public ep3_trandoshan_tempal_buncho()
     {
     }
-    public static String c_stringFile = "conversation/ep3_trandoshan_tempal_buncho";
+
     public boolean ep3_trandoshan_tempal_buncho_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean ep3_trandoshan_tempal_buncho_condition_hasCompletedTask01(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "ep3_trando_tempal_buncho", "wookieeKilled");
     }
+
     public boolean ep3_trandoshan_tempal_buncho_condition_isOnQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "ep3_trando_tempal_buncho");
     }
+
     public boolean ep3_trandoshan_tempal_buncho_condition_hasCompletedQuest01(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "ep3_trando_tempal_buncho");
     }
+
     public void ep3_trandoshan_tempal_buncho_action_giveQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "ep3_trando_tempal_buncho");
     }
+
     public void ep3_trandoshan_tempal_buncho_action_doSignal(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "rewardTempal");
     }
+
     public int ep3_trandoshan_tempal_buncho_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1347"))
@@ -52,6 +66,7 @@ public class ep3_trandoshan_tempal_buncho extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_trandoshan_tempal_buncho_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1353"))
@@ -67,6 +82,7 @@ public class ep3_trandoshan_tempal_buncho extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_trandoshan_tempal_buncho_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1359"))
@@ -87,7 +103,7 @@ public class ep3_trandoshan_tempal_buncho extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1363");
@@ -96,7 +112,7 @@ public class ep3_trandoshan_tempal_buncho extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_trandoshan_tempal_buncho.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -106,6 +122,7 @@ public class ep3_trandoshan_tempal_buncho extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_trandoshan_tempal_buncho_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1363"))
@@ -126,7 +143,7 @@ public class ep3_trandoshan_tempal_buncho extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1367");
@@ -135,7 +152,7 @@ public class ep3_trandoshan_tempal_buncho extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_trandoshan_tempal_buncho.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -145,6 +162,7 @@ public class ep3_trandoshan_tempal_buncho extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_trandoshan_tempal_buncho_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1367"))
@@ -172,7 +190,7 @@ public class ep3_trandoshan_tempal_buncho extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1371");
@@ -185,7 +203,7 @@ public class ep3_trandoshan_tempal_buncho extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_trandoshan_tempal_buncho.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -195,6 +213,7 @@ public class ep3_trandoshan_tempal_buncho extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_trandoshan_tempal_buncho_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1371"))
@@ -222,7 +241,7 @@ public class ep3_trandoshan_tempal_buncho extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1375");
@@ -235,7 +254,7 @@ public class ep3_trandoshan_tempal_buncho extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_trandoshan_tempal_buncho.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -256,6 +275,7 @@ public class ep3_trandoshan_tempal_buncho extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_trandoshan_tempal_buncho_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1375"))
@@ -283,6 +303,7 @@ public class ep3_trandoshan_tempal_buncho extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -295,6 +316,7 @@ public class ep3_trandoshan_tempal_buncho extends script.base_script
         setName(self, "Tempal B'uncho");
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
@@ -303,6 +325,7 @@ public class ep3_trandoshan_tempal_buncho extends script.base_script
         setName(self, "Tempal B'uncho");
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -312,18 +335,21 @@ public class ep3_trandoshan_tempal_buncho extends script.base_script
         faceTo(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.ep3_trandoshan_tempal_buncho");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -354,7 +380,7 @@ public class ep3_trandoshan_tempal_buncho extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_1347");
@@ -362,7 +388,7 @@ public class ep3_trandoshan_tempal_buncho extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_trandoshan_tempal_buncho.branchId", 2);
                 npcStartConversation(player, npc, "ep3_trandoshan_tempal_buncho", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -384,7 +410,7 @@ public class ep3_trandoshan_tempal_buncho extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_1353");
@@ -392,7 +418,7 @@ public class ep3_trandoshan_tempal_buncho extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_trandoshan_tempal_buncho.branchId", 4);
                 npcStartConversation(player, npc, "ep3_trandoshan_tempal_buncho", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -414,7 +440,7 @@ public class ep3_trandoshan_tempal_buncho extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_1359");
@@ -422,7 +448,7 @@ public class ep3_trandoshan_tempal_buncho extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_trandoshan_tempal_buncho.branchId", 6);
                 npcStartConversation(player, npc, "ep3_trandoshan_tempal_buncho", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -431,6 +457,7 @@ public class ep3_trandoshan_tempal_buncho extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("ep3_trandoshan_tempal_buncho"))

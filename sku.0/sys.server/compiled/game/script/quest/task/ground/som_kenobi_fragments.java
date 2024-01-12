@@ -1,5 +1,11 @@
 package script.quest.task.ground;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.groundquests;
 import script.library.sui;
@@ -7,9 +13,6 @@ import script.library.utils;
 
 public class som_kenobi_fragments extends script.base_script
 {
-    public som_kenobi_fragments()
-    {
-    }
     public static final string_id RADIAL_INSPECT = new string_id("quest/ground/util/quest_giver_object", "radial_inspect");
     public static final string_id OFFER_QUEST_MSG = new string_id("quest/ground/util/quest_giver_object", "offer_quest");
     public static final string_id SUI_TITLE = new string_id("quest/ground/util/quest_giver_object", "sui_title");
@@ -28,6 +31,10 @@ public class som_kenobi_fragments extends script.base_script
     public static final String DO_NOT_DESTROY = "do_not_destroy";
     public static final String IMPERIAL_ONLY = "imperial_only";
     public static final String REBEL_ONLY = "rebel_only";
+    public som_kenobi_fragments()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         String myTemplate = getTemplateName(self);
@@ -41,7 +48,7 @@ public class som_kenobi_fragments extends script.base_script
                 {
                     int menuOption = mi.addRootMenu(menu_info_types.ITEM_USE, RADIAL_INSPECT);
                 }
-                else 
+                else
                 {
                     if (isGod(player))
                     {
@@ -53,6 +60,7 @@ public class som_kenobi_fragments extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)
@@ -92,6 +100,7 @@ public class som_kenobi_fragments extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleQuestOfferResponse(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))
@@ -138,35 +147,35 @@ public class som_kenobi_fragments extends script.base_script
                                 switch (bp)
                                 {
                                     case sui.BP_OK:
-                                    groundquests.grantQuest(player, questName);
-                                    int doNotDestroy = objectQuestData.getInt(DO_NOT_DESTROY);
-                                    if (doNotDestroy < 1)
-                                    {
-                                        sendSystemMessage(player, OBJECT_UPLOADED);
-                                        destroyObject(self);
-                                    }
-                                    break;
+                                        groundquests.grantQuest(player, questName);
+                                        int doNotDestroy = objectQuestData.getInt(DO_NOT_DESTROY);
+                                        if (doNotDestroy < 1)
+                                        {
+                                            sendSystemMessage(player, OBJECT_UPLOADED);
+                                            destroyObject(self);
+                                        }
+                                        break;
                                     case sui.BP_CANCEL:
-                                    sendSystemMessage(player, DECLINED_QUEST);
-                                    break;
+                                        sendSystemMessage(player, DECLINED_QUEST);
+                                        break;
                                 }
                             }
-                            else 
+                            else
                             {
                                 sendSystemMessage(player, ALREADY_HAS_QUEST);
                             }
                         }
-                        else 
+                        else
                         {
                             sendSystemMessage(player, ALREADY_HAS_QUEST);
                         }
                     }
-                    else 
+                    else
                     {
                         sendSystemMessage(player, ALREADY_HAS_QUEST);
                     }
                 }
-                else 
+                else
                 {
                     sendSystemMessage(player, ALREADY_COMPLETED_QUEST);
                 }

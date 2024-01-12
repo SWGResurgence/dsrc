@@ -1,5 +1,11 @@
 package script.systems.city;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -465,7 +471,6 @@ public class city_furniture extends script.base_script
             LOG("sissynoid", "Setting Owner of | Decoration (" + self + ") | from(" + decorOwner + ") | to(" + new_mayor + ")");
             setOwner(self, new_mayor);
         }
-        return;
     }
 
     public boolean moveCityDecorationToOwnerInventory(obj_id player, obj_id item) throws InterruptedException

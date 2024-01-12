@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.money;
@@ -8,38 +14,42 @@ import script.*;
 
 public class lilas_dinhint extends script.base_script
 {
+    public static String c_stringFile = "conversation/lilas_dinhint";
+
     public lilas_dinhint()
     {
     }
-    public static String c_stringFile = "conversation/lilas_dinhint";
+
     public boolean lilas_dinhint_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean lilas_dinhint_condition_museumEventActive(obj_id player, obj_id npc) throws InterruptedException
     {
         return hasObjVar(npc, "bestine.museumEventStarted");
     }
+
     public boolean lilas_dinhint_condition_artworkAvailable(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(npc, "bestine.museumEventFeaturedSchematic"))
         {
             String schematic = getStringObjVar(npc, "bestine.museumEventFeaturedSchematic");
-            if (schematic != null && !schematic.equals(""))
-            {
-                return true;
-            }
+            return schematic != null && !schematic.equals("");
         }
         return false;
     }
+
     public boolean lilas_dinhint_condition_noEventButArtworkAvailable(obj_id player, obj_id npc) throws InterruptedException
     {
         return hasObjVar(npc, "bestine.museumEventFeaturedSchematic");
     }
+
     public boolean lilas_dinhint_condition_notEnoughCredits(obj_id player, obj_id npc) throws InterruptedException
     {
         return (!money.hasFunds(player, money.MT_TOTAL, 48000));
     }
+
     public boolean lilas_dinhint_condition_noInventorySpace(obj_id player, obj_id npc) throws InterruptedException
     {
         boolean hasNoInvRoom = false;
@@ -54,14 +64,17 @@ public class lilas_dinhint extends script.base_script
         }
         return hasNoInvRoom;
     }
+
     public boolean lilas_dinhint_condition_noEventAndNoArtwork(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean lilas_dinhint_condition_canBuy(obj_id player, obj_id npc) throws InterruptedException
     {
         return (!lilas_dinhint_condition_noInventorySpace(player, npc) && !lilas_dinhint_condition_notEnoughCredits(player, npc));
     }
+
     public boolean lilas_dinhint_condition_inSeanCampaign(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(npc, "bestine.electionStarted"))
@@ -70,43 +83,38 @@ public class lilas_dinhint extends script.base_script
             if (hasObjVar(player, "bestine.campaign"))
             {
                 int electionPlayerIsIn = getIntObjVar(player, "bestine.campaign");
-                if (electionPlayerIsIn >= electionNum)
-                {
-                    return true;
-                }
+                return electionPlayerIsIn >= electionNum;
             }
         }
         return false;
     }
+
     public boolean lilas_dinhint_condition_madeRoomSeanTestimony(obj_id player, obj_id npc) throws InterruptedException
     {
         return ((lilas_dinhint_condition_inSeanCampaign(player, npc)) && (hasObjVar(player, "bestine.sean_museum_noroom")));
     }
+
     public boolean lilas_dinhint_condition_talkAboutSeanTrenwell(obj_id player, obj_id npc) throws InterruptedException
     {
         if (lilas_dinhint_condition_inSeanCampaign(player, npc))
         {
             if (!hasObjVar(player, "bestine.sean_museum_noroom"))
             {
-                if (!utils.playerHasItemByTemplate(player, "object/tangible/loot/quest/sean_questp_ctestimony.iff"))
-                {
-                    return true;
-                }
+                return !utils.playerHasItemByTemplate(player, "object/tangible/loot/quest/sean_questp_ctestimony.iff");
             }
         }
         return false;
     }
+
     public boolean lilas_dinhint_condition_canChooseArtist(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!lilas_dinhint_condition_alreadyVoted(player, npc))
         {
-            if (lilas_dinhint_condition_canVoteArtist01(player, npc) || lilas_dinhint_condition_canVoteArtist02(player, npc) || lilas_dinhint_condition_canVoteArtist03(player, npc) || lilas_dinhint_condition_canVoteArtist04(player, npc) || lilas_dinhint_condition_canVoteArtist05(player, npc) || lilas_dinhint_condition_canVoteArtist06(player, npc))
-            {
-                return true;
-            }
+            return lilas_dinhint_condition_canVoteArtist01(player, npc) || lilas_dinhint_condition_canVoteArtist02(player, npc) || lilas_dinhint_condition_canVoteArtist03(player, npc) || lilas_dinhint_condition_canVoteArtist04(player, npc) || lilas_dinhint_condition_canVoteArtist05(player, npc) || lilas_dinhint_condition_canVoteArtist06(player, npc);
         }
         return false;
     }
+
     public boolean lilas_dinhint_condition_canVoteArtist01(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(npc, "bestine.museumEventStarted"))
@@ -140,15 +148,13 @@ public class lilas_dinhint extends script.base_script
                     {
                         return true;
                     }
-                    if (entry03.equals("bestine_artist01"))
-                    {
-                        return true;
-                    }
+                    return entry03.equals("bestine_artist01");
                 }
             }
         }
         return false;
     }
+
     public boolean lilas_dinhint_condition_canVoteArtist02(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(npc, "bestine.museumEventStarted"))
@@ -182,15 +188,13 @@ public class lilas_dinhint extends script.base_script
                     {
                         return true;
                     }
-                    if (entry03.equals("bestine_artist02"))
-                    {
-                        return true;
-                    }
+                    return entry03.equals("bestine_artist02");
                 }
             }
         }
         return false;
     }
+
     public boolean lilas_dinhint_condition_canVoteArtist03(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(npc, "bestine.museumEventStarted"))
@@ -224,15 +228,13 @@ public class lilas_dinhint extends script.base_script
                     {
                         return true;
                     }
-                    if (entry03.equals("bestine_artist03"))
-                    {
-                        return true;
-                    }
+                    return entry03.equals("bestine_artist03");
                 }
             }
         }
         return false;
     }
+
     public boolean lilas_dinhint_condition_canVoteArtist04(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(npc, "bestine.museumEventStarted"))
@@ -266,15 +268,13 @@ public class lilas_dinhint extends script.base_script
                     {
                         return true;
                     }
-                    if (entry03.equals("bestine_artist04"))
-                    {
-                        return true;
-                    }
+                    return entry03.equals("bestine_artist04");
                 }
             }
         }
         return false;
     }
+
     public boolean lilas_dinhint_condition_canVoteArtist05(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(npc, "bestine.museumEventStarted"))
@@ -308,15 +308,13 @@ public class lilas_dinhint extends script.base_script
                     {
                         return true;
                     }
-                    if (entry03.equals("bestine_artist05"))
-                    {
-                        return true;
-                    }
+                    return entry03.equals("bestine_artist05");
                 }
             }
         }
         return false;
     }
+
     public boolean lilas_dinhint_condition_canVoteArtist06(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(npc, "bestine.museumEventStarted"))
@@ -350,40 +348,37 @@ public class lilas_dinhint extends script.base_script
                     {
                         return true;
                     }
-                    if (entry03.equals("bestine_artist06"))
-                    {
-                        return true;
-                    }
+                    return entry03.equals("bestine_artist06");
                 }
             }
         }
         return false;
     }
+
     public boolean lilas_dinhint_condition_cannotChooseArtistButHasntVoted(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!lilas_dinhint_condition_alreadyVoted(player, npc))
         {
             if (!lilas_dinhint_condition_canVoteArtist01(player, npc) && !lilas_dinhint_condition_canVoteArtist02(player, npc) && !lilas_dinhint_condition_canVoteArtist03(player, npc) && !lilas_dinhint_condition_canVoteArtist04(player, npc) && !lilas_dinhint_condition_canVoteArtist05(player, npc) && !lilas_dinhint_condition_canVoteArtist06(player, npc))
             {
-                
+
             }
             return true;
         }
         return false;
     }
+
     public boolean lilas_dinhint_condition_alreadyVoted(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(player, "bestine.museumEventPlayerVoted"))
         {
             int eventNum = getIntObjVar(npc, "bestine.museumEventStarted");
             int playerEventNum = getIntObjVar(player, "bestine.museumEventPlayerVoted");
-            if (playerEventNum >= eventNum)
-            {
-                return true;
-            }
+            return playerEventNum >= eventNum;
         }
         return false;
     }
+
     public boolean lilas_dinhint_condition_tellAboutArtist01(obj_id player, obj_id npc) throws InterruptedException
     {
         if (utils.hasScriptVar(player, "askedAboutArtist01"))
@@ -413,12 +408,9 @@ public class lilas_dinhint extends script.base_script
         {
             return true;
         }
-        if (entry03.equals("bestine_artist01"))
-        {
-            return true;
-        }
-        return false;
+        return entry03.equals("bestine_artist01");
     }
+
     public boolean lilas_dinhint_condition_tellAboutArtist02(obj_id player, obj_id npc) throws InterruptedException
     {
         if (utils.hasScriptVar(player, "askedAboutArtist02"))
@@ -448,12 +440,9 @@ public class lilas_dinhint extends script.base_script
         {
             return true;
         }
-        if (entry03.equals("bestine_artist02"))
-        {
-            return true;
-        }
-        return false;
+        return entry03.equals("bestine_artist02");
     }
+
     public boolean lilas_dinhint_condition_tellAboutArtist03(obj_id player, obj_id npc) throws InterruptedException
     {
         if (utils.hasScriptVar(player, "askedAboutArtist03"))
@@ -483,12 +472,9 @@ public class lilas_dinhint extends script.base_script
         {
             return true;
         }
-        if (entry03.equals("bestine_artist03"))
-        {
-            return true;
-        }
-        return false;
+        return entry03.equals("bestine_artist03");
     }
+
     public boolean lilas_dinhint_condition_tellAboutArtist04(obj_id player, obj_id npc) throws InterruptedException
     {
         if (utils.hasScriptVar(player, "askedAboutArtist04"))
@@ -518,12 +504,9 @@ public class lilas_dinhint extends script.base_script
         {
             return true;
         }
-        if (entry03.equals("bestine_artist04"))
-        {
-            return true;
-        }
-        return false;
+        return entry03.equals("bestine_artist04");
     }
+
     public boolean lilas_dinhint_condition_tellAboutArtist05(obj_id player, obj_id npc) throws InterruptedException
     {
         if (utils.hasScriptVar(player, "askedAboutArtist05"))
@@ -553,12 +536,9 @@ public class lilas_dinhint extends script.base_script
         {
             return true;
         }
-        if (entry03.equals("bestine_artist05"))
-        {
-            return true;
-        }
-        return false;
+        return entry03.equals("bestine_artist05");
     }
+
     public boolean lilas_dinhint_condition_tellAboutArtist06(obj_id player, obj_id npc) throws InterruptedException
     {
         if (utils.hasScriptVar(player, "askedAboutArtist06"))
@@ -588,12 +568,9 @@ public class lilas_dinhint extends script.base_script
         {
             return true;
         }
-        if (entry03.equals("bestine_artist06"))
-        {
-            return true;
-        }
-        return false;
+        return entry03.equals("bestine_artist06");
     }
+
     public boolean lilas_dinhint_condition_hasAskedAboutALocation(obj_id player, obj_id npc) throws InterruptedException
     {
         if (utils.hasScriptVar(player, "askedAboutArtist01"))
@@ -616,23 +593,18 @@ public class lilas_dinhint extends script.base_script
         {
             return true;
         }
-        if (utils.hasScriptVar(player, "askedAboutArtist06"))
-        {
-            return true;
-        }
-        return false;
+        return utils.hasScriptVar(player, "askedAboutArtist06");
     }
+
     public boolean lilas_dinhint_condition_time_allowTimeLeftRequest(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(npc, "bestine.museumEventEnded"))
         {
-            if (hasObjVar(npc, "bestine.timeNextEventStarts"))
-            {
-                return true;
-            }
+            return hasObjVar(npc, "bestine.timeNextEventStarts");
         }
         return false;
     }
+
     public boolean lilas_dinhint_condition_time_withinTheHour(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(npc, "bestine.museumEventEnded"))
@@ -642,14 +614,12 @@ public class lilas_dinhint extends script.base_script
                 int timeNextElectionStarts = getIntObjVar(npc, "bestine.timeNextEventStarts");
                 int currentTime = getGameTime();
                 int timeUntilElection = timeNextElectionStarts - currentTime;
-                if (timeUntilElection < 3600)
-                {
-                    return true;
-                }
+                return timeUntilElection < 3600;
             }
         }
         return false;
     }
+
     public boolean lilas_dinhint_condition_time_justAFewHours(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(npc, "bestine.museumEventEnded"))
@@ -659,14 +629,12 @@ public class lilas_dinhint extends script.base_script
                 int timeNextElectionStarts = getIntObjVar(npc, "bestine.timeNextEventStarts");
                 int currentTime = getGameTime();
                 int timeUntilElection = timeNextElectionStarts - currentTime;
-                if (timeUntilElection >= 3600 && timeUntilElection < 14400)
-                {
-                    return true;
-                }
+                return timeUntilElection >= 3600 && timeUntilElection < 14400;
             }
         }
         return false;
     }
+
     public boolean lilas_dinhint_condition_time_lessThanADay(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(npc, "bestine.museumEventEnded"))
@@ -676,14 +644,12 @@ public class lilas_dinhint extends script.base_script
                 int timeNextElectionStarts = getIntObjVar(npc, "bestine.timeNextEventStarts");
                 int currentTime = getGameTime();
                 int timeUntilElection = timeNextElectionStarts - currentTime;
-                if (timeUntilElection >= 14400 && timeUntilElection < 86400)
-                {
-                    return true;
-                }
+                return timeUntilElection >= 14400 && timeUntilElection < 86400;
             }
         }
         return false;
     }
+
     public boolean lilas_dinhint_condition_time_moreThanADay(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(npc, "bestine.museumEventEnded"))
@@ -693,14 +659,12 @@ public class lilas_dinhint extends script.base_script
                 int timeNextElectionStarts = getIntObjVar(npc, "bestine.timeNextEventStarts");
                 int currentTime = getGameTime();
                 int timeUntilElection = timeNextElectionStarts - currentTime;
-                if (timeUntilElection >= 86400 && timeUntilElection < 172800)
-                {
-                    return true;
-                }
+                return timeUntilElection >= 86400 && timeUntilElection < 172800;
             }
         }
         return false;
     }
+
     public boolean lilas_dinhint_condition_time_justAFewDays(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(npc, "bestine.museumEventEnded"))
@@ -710,14 +674,12 @@ public class lilas_dinhint extends script.base_script
                 int timeNextElectionStarts = getIntObjVar(npc, "bestine.timeNextEventStarts");
                 int currentTime = getGameTime();
                 int timeUntilElection = timeNextElectionStarts - currentTime;
-                if (timeUntilElection >= 172800 && timeUntilElection < 345600)
-                {
-                    return true;
-                }
+                return timeUntilElection >= 172800 && timeUntilElection < 345600;
             }
         }
         return false;
     }
+
     public boolean lilas_dinhint_condition_time_lessThanAWeek(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(npc, "bestine.museumEventEnded"))
@@ -727,14 +689,12 @@ public class lilas_dinhint extends script.base_script
                 int timeNextElectionStarts = getIntObjVar(npc, "bestine.timeNextEventStarts");
                 int currentTime = getGameTime();
                 int timeUntilElection = timeNextElectionStarts - currentTime;
-                if (timeUntilElection >= 345600 && timeUntilElection < 604800)
-                {
-                    return true;
-                }
+                return timeUntilElection >= 345600 && timeUntilElection < 604800;
             }
         }
         return false;
     }
+
     public boolean lilas_dinhint_condition_time_moreThanAWeek(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(npc, "bestine.museumEventEnded"))
@@ -744,17 +704,16 @@ public class lilas_dinhint extends script.base_script
                 int timeNextElectionStarts = getIntObjVar(npc, "bestine.timeNextEventStarts");
                 int currentTime = getGameTime();
                 int timeUntilElection = timeNextElectionStarts - currentTime;
-                if (timeUntilElection >= 604800)
-                {
-                    return true;
-                }
+                return timeUntilElection >= 604800;
             }
         }
         return false;
     }
+
     public void lilas_dinhint_action__defaultAction(obj_id player, obj_id npc) throws InterruptedException
     {
     }
+
     public void lilas_dinhint_action_giveSchematic(obj_id player, obj_id npc) throws InterruptedException
     {
         String schematicTemplate = getStringObjVar(npc, "bestine.museumEventFeaturedSchematic");
@@ -770,8 +729,8 @@ public class lilas_dinhint extends script.base_script
                 return;
             }
         }
-        return;
     }
+
     public void lilas_dinhint_action_giveSeansTestimony(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(player, "bestine.sean_museum_noroom"))
@@ -791,17 +750,19 @@ public class lilas_dinhint extends script.base_script
                 }
             }
         }
-        return;
     }
+
     public void lilas_dinhint_action_setNoRoomSeanTestimony(obj_id player, obj_id npc) throws InterruptedException
     {
         setObjVar(player, "bestine.sean_museum_noroom", 1);
     }
+
     public void lilas_dinhint_action_setMuseumEventObjVar(obj_id player, obj_id npc) throws InterruptedException
     {
         int eventNum = getIntObjVar(npc, "bestine.museumEventStarted");
         setObjVar(player, "bestine.museumEventPlayer", eventNum);
     }
+
     public void lilas_dinhint_action_voteForArtist01(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(npc, "bestine.museumEventStarted"))
@@ -844,8 +805,8 @@ public class lilas_dinhint extends script.base_script
                 return;
             }
         }
-        return;
     }
+
     public void lilas_dinhint_action_voteForArtist02(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(npc, "bestine.museumEventStarted"))
@@ -888,8 +849,8 @@ public class lilas_dinhint extends script.base_script
                 return;
             }
         }
-        return;
     }
+
     public void lilas_dinhint_action_voteForArtist03(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(npc, "bestine.museumEventStarted"))
@@ -932,8 +893,8 @@ public class lilas_dinhint extends script.base_script
                 return;
             }
         }
-        return;
     }
+
     public void lilas_dinhint_action_voteForArtist04(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(npc, "bestine.museumEventStarted"))
@@ -976,8 +937,8 @@ public class lilas_dinhint extends script.base_script
                 return;
             }
         }
-        return;
     }
+
     public void lilas_dinhint_action_voteForArtist05(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(npc, "bestine.museumEventStarted"))
@@ -1020,8 +981,8 @@ public class lilas_dinhint extends script.base_script
                 return;
             }
         }
-        return;
     }
+
     public void lilas_dinhint_action_voteForArtist06(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(npc, "bestine.museumEventStarted"))
@@ -1064,8 +1025,8 @@ public class lilas_dinhint extends script.base_script
                 return;
             }
         }
-        return;
     }
+
     public void lilas_dinhint_action_removeSpokeToObjVars(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(player, "bestine.spokeToArtist01"))
@@ -1093,6 +1054,7 @@ public class lilas_dinhint extends script.base_script
             removeObjVar(player, "bestine.spokeToArtist06");
         }
     }
+
     public void lilas_dinhint_action_removeEventObjvar(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(player, "bestine.museumEventPlayer"))
@@ -1100,36 +1062,43 @@ public class lilas_dinhint extends script.base_script
             removeObjVar(player, "bestine.museumEventPlayer");
         }
     }
+
     public void lilas_dinhint_action_askedAboutArtist01(obj_id player, obj_id npc) throws InterruptedException
     {
         utils.setScriptVar(player, "askedAboutArtist01", 1);
         lilas_dinhint_action_setMuseumEventObjVar(player, npc);
     }
+
     public void lilas_dinhint_action_askedAboutArtist02(obj_id player, obj_id npc) throws InterruptedException
     {
         utils.setScriptVar(player, "askedAboutArtist02", 1);
         lilas_dinhint_action_setMuseumEventObjVar(player, npc);
     }
+
     public void lilas_dinhint_action_askedAboutArtist03(obj_id player, obj_id npc) throws InterruptedException
     {
         utils.setScriptVar(player, "askedAboutArtist03", 1);
         lilas_dinhint_action_setMuseumEventObjVar(player, npc);
     }
+
     public void lilas_dinhint_action_askedAboutArtist04(obj_id player, obj_id npc) throws InterruptedException
     {
         utils.setScriptVar(player, "askedAboutArtist04", 1);
         lilas_dinhint_action_setMuseumEventObjVar(player, npc);
     }
+
     public void lilas_dinhint_action_askedAboutArtist05(obj_id player, obj_id npc) throws InterruptedException
     {
         utils.setScriptVar(player, "askedAboutArtist05", 1);
         lilas_dinhint_action_setMuseumEventObjVar(player, npc);
     }
+
     public void lilas_dinhint_action_askedAboutArtist06(obj_id player, obj_id npc) throws InterruptedException
     {
         utils.setScriptVar(player, "askedAboutArtist06", 1);
         lilas_dinhint_action_setMuseumEventObjVar(player, npc);
     }
+
     public void lilas_dinhint_action_clearAskedLocationScrVars(obj_id player, obj_id npc) throws InterruptedException
     {
         if (utils.hasScriptVar(player, "askedAboutArtist01"))
@@ -1156,8 +1125,8 @@ public class lilas_dinhint extends script.base_script
         {
             utils.removeScriptVar(player, "askedAboutArtist06");
         }
-        return;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -1167,11 +1136,13 @@ public class lilas_dinhint extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -1180,12 +1151,14 @@ public class lilas_dinhint extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "npc.conversation.lilas_dinhint");
         return SCRIPT_CONTINUE;
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         if (ai_lib.isInCombat(self) || ai_lib.isInCombat(player))
@@ -1250,7 +1223,7 @@ public class lilas_dinhint extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_26152411");
@@ -1282,7 +1255,7 @@ public class lilas_dinhint extends script.base_script
                 setObjVar(player, "conversation.lilas_dinhint.branchId", 1);
                 npcStartConversation(player, self, "lilas_dinhint", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(self, message);
             }
@@ -1332,7 +1305,7 @@ public class lilas_dinhint extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_47df8332");
@@ -1356,7 +1329,7 @@ public class lilas_dinhint extends script.base_script
                 setObjVar(player, "conversation.lilas_dinhint.branchId", 26);
                 npcStartConversation(player, self, "lilas_dinhint", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(self, message);
             }
@@ -1399,7 +1372,7 @@ public class lilas_dinhint extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_b9b27823");
@@ -1419,7 +1392,7 @@ public class lilas_dinhint extends script.base_script
                 setObjVar(player, "conversation.lilas_dinhint.branchId", 29);
                 npcStartConversation(player, self, "lilas_dinhint", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(self, message);
             }
@@ -1428,6 +1401,7 @@ public class lilas_dinhint extends script.base_script
         chat.chat(self, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("lilas_dinhint"))
@@ -1452,7 +1426,7 @@ public class lilas_dinhint extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_5bd69df6");
@@ -1461,7 +1435,7 @@ public class lilas_dinhint extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.lilas_dinhint.branchId");
                     npcSpeak(player, message);
@@ -1524,7 +1498,7 @@ public class lilas_dinhint extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_e09f0f8");
@@ -1553,7 +1527,7 @@ public class lilas_dinhint extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.lilas_dinhint.branchId");
                     npcSpeak(player, message);
@@ -1614,7 +1588,7 @@ public class lilas_dinhint extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_90b0871f");
@@ -1627,7 +1601,7 @@ public class lilas_dinhint extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.lilas_dinhint.branchId");
                     npcSpeak(player, message);
@@ -1662,7 +1636,7 @@ public class lilas_dinhint extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_7552be07");
@@ -1675,7 +1649,7 @@ public class lilas_dinhint extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.lilas_dinhint.branchId");
                     npcSpeak(player, message);
@@ -1703,7 +1677,7 @@ public class lilas_dinhint extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_b67247f1");
@@ -1712,7 +1686,7 @@ public class lilas_dinhint extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.lilas_dinhint.branchId");
                     npcSpeak(player, message);
@@ -1789,7 +1763,7 @@ public class lilas_dinhint extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_82761006");
@@ -1826,7 +1800,7 @@ public class lilas_dinhint extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.lilas_dinhint.branchId");
                     npcSpeak(player, message);
@@ -1904,7 +1878,7 @@ public class lilas_dinhint extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_82761006");
@@ -1941,7 +1915,7 @@ public class lilas_dinhint extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.lilas_dinhint.branchId");
                     npcSpeak(player, message);
@@ -2019,7 +1993,7 @@ public class lilas_dinhint extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_82761006");
@@ -2056,7 +2030,7 @@ public class lilas_dinhint extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.lilas_dinhint.branchId");
                     npcSpeak(player, message);
@@ -2134,7 +2108,7 @@ public class lilas_dinhint extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_82761006");
@@ -2171,7 +2145,7 @@ public class lilas_dinhint extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.lilas_dinhint.branchId");
                     npcSpeak(player, message);
@@ -2249,7 +2223,7 @@ public class lilas_dinhint extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_82761006");
@@ -2286,7 +2260,7 @@ public class lilas_dinhint extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.lilas_dinhint.branchId");
                     npcSpeak(player, message);
@@ -2364,7 +2338,7 @@ public class lilas_dinhint extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_82761006");
@@ -2401,7 +2375,7 @@ public class lilas_dinhint extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.lilas_dinhint.branchId");
                     npcSpeak(player, message);
@@ -2479,7 +2453,7 @@ public class lilas_dinhint extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_82761006");
@@ -2516,7 +2490,7 @@ public class lilas_dinhint extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.lilas_dinhint.branchId");
                     npcSpeak(player, message);
@@ -2622,7 +2596,7 @@ public class lilas_dinhint extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_82761006");
@@ -2659,7 +2633,7 @@ public class lilas_dinhint extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.lilas_dinhint.branchId");
                     npcSpeak(player, message);
@@ -2737,7 +2711,7 @@ public class lilas_dinhint extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_82761006");
@@ -2774,7 +2748,7 @@ public class lilas_dinhint extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.lilas_dinhint.branchId");
                     npcSpeak(player, message);
@@ -2852,7 +2826,7 @@ public class lilas_dinhint extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_82761006");
@@ -2889,7 +2863,7 @@ public class lilas_dinhint extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.lilas_dinhint.branchId");
                     npcSpeak(player, message);
@@ -2967,7 +2941,7 @@ public class lilas_dinhint extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_82761006");
@@ -3004,7 +2978,7 @@ public class lilas_dinhint extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.lilas_dinhint.branchId");
                     npcSpeak(player, message);
@@ -3082,7 +3056,7 @@ public class lilas_dinhint extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_82761006");
@@ -3119,7 +3093,7 @@ public class lilas_dinhint extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.lilas_dinhint.branchId");
                     npcSpeak(player, message);
@@ -3197,7 +3171,7 @@ public class lilas_dinhint extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_82761006");
@@ -3234,7 +3208,7 @@ public class lilas_dinhint extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.lilas_dinhint.branchId");
                     npcSpeak(player, message);
@@ -3340,7 +3314,7 @@ public class lilas_dinhint extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_82761006");
@@ -3377,7 +3351,7 @@ public class lilas_dinhint extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.lilas_dinhint.branchId");
                     npcSpeak(player, message);
@@ -3455,7 +3429,7 @@ public class lilas_dinhint extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_82761006");
@@ -3492,7 +3466,7 @@ public class lilas_dinhint extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.lilas_dinhint.branchId");
                     npcSpeak(player, message);
@@ -3570,7 +3544,7 @@ public class lilas_dinhint extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_82761006");
@@ -3607,7 +3581,7 @@ public class lilas_dinhint extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.lilas_dinhint.branchId");
                     npcSpeak(player, message);
@@ -3685,7 +3659,7 @@ public class lilas_dinhint extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_82761006");
@@ -3722,7 +3696,7 @@ public class lilas_dinhint extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.lilas_dinhint.branchId");
                     npcSpeak(player, message);
@@ -3800,7 +3774,7 @@ public class lilas_dinhint extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_82761006");
@@ -3837,7 +3811,7 @@ public class lilas_dinhint extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.lilas_dinhint.branchId");
                     npcSpeak(player, message);
@@ -3915,7 +3889,7 @@ public class lilas_dinhint extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_82761006");
@@ -3952,7 +3926,7 @@ public class lilas_dinhint extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.lilas_dinhint.branchId");
                     npcSpeak(player, message);
@@ -4058,7 +4032,7 @@ public class lilas_dinhint extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_82761006");
@@ -4095,7 +4069,7 @@ public class lilas_dinhint extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.lilas_dinhint.branchId");
                     npcSpeak(player, message);
@@ -4173,7 +4147,7 @@ public class lilas_dinhint extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_82761006");
@@ -4210,7 +4184,7 @@ public class lilas_dinhint extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.lilas_dinhint.branchId");
                     npcSpeak(player, message);
@@ -4288,7 +4262,7 @@ public class lilas_dinhint extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_82761006");
@@ -4325,7 +4299,7 @@ public class lilas_dinhint extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.lilas_dinhint.branchId");
                     npcSpeak(player, message);
@@ -4403,7 +4377,7 @@ public class lilas_dinhint extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_82761006");
@@ -4440,7 +4414,7 @@ public class lilas_dinhint extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.lilas_dinhint.branchId");
                     npcSpeak(player, message);
@@ -4518,7 +4492,7 @@ public class lilas_dinhint extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_82761006");
@@ -4555,7 +4529,7 @@ public class lilas_dinhint extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.lilas_dinhint.branchId");
                     npcSpeak(player, message);
@@ -4633,7 +4607,7 @@ public class lilas_dinhint extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_82761006");
@@ -4670,7 +4644,7 @@ public class lilas_dinhint extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.lilas_dinhint.branchId");
                     npcSpeak(player, message);
@@ -4776,7 +4750,7 @@ public class lilas_dinhint extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_82761006");
@@ -4813,7 +4787,7 @@ public class lilas_dinhint extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.lilas_dinhint.branchId");
                     npcSpeak(player, message);
@@ -4891,7 +4865,7 @@ public class lilas_dinhint extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_82761006");
@@ -4928,7 +4902,7 @@ public class lilas_dinhint extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.lilas_dinhint.branchId");
                     npcSpeak(player, message);
@@ -5006,7 +4980,7 @@ public class lilas_dinhint extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_82761006");
@@ -5043,7 +5017,7 @@ public class lilas_dinhint extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.lilas_dinhint.branchId");
                     npcSpeak(player, message);
@@ -5121,7 +5095,7 @@ public class lilas_dinhint extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_82761006");
@@ -5158,7 +5132,7 @@ public class lilas_dinhint extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.lilas_dinhint.branchId");
                     npcSpeak(player, message);
@@ -5236,7 +5210,7 @@ public class lilas_dinhint extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_82761006");
@@ -5273,7 +5247,7 @@ public class lilas_dinhint extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.lilas_dinhint.branchId");
                     npcSpeak(player, message);
@@ -5351,7 +5325,7 @@ public class lilas_dinhint extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_82761006");
@@ -5388,7 +5362,7 @@ public class lilas_dinhint extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.lilas_dinhint.branchId");
                     npcSpeak(player, message);
@@ -5494,7 +5468,7 @@ public class lilas_dinhint extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_82761006");
@@ -5531,7 +5505,7 @@ public class lilas_dinhint extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.lilas_dinhint.branchId");
                     npcSpeak(player, message);
@@ -5609,7 +5583,7 @@ public class lilas_dinhint extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_82761006");
@@ -5646,7 +5620,7 @@ public class lilas_dinhint extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.lilas_dinhint.branchId");
                     npcSpeak(player, message);
@@ -5724,7 +5698,7 @@ public class lilas_dinhint extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_82761006");
@@ -5761,7 +5735,7 @@ public class lilas_dinhint extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.lilas_dinhint.branchId");
                     npcSpeak(player, message);
@@ -5839,7 +5813,7 @@ public class lilas_dinhint extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_82761006");
@@ -5876,7 +5850,7 @@ public class lilas_dinhint extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.lilas_dinhint.branchId");
                     npcSpeak(player, message);
@@ -5954,7 +5928,7 @@ public class lilas_dinhint extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_82761006");
@@ -5991,7 +5965,7 @@ public class lilas_dinhint extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.lilas_dinhint.branchId");
                     npcSpeak(player, message);
@@ -6069,7 +6043,7 @@ public class lilas_dinhint extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_82761006");
@@ -6106,7 +6080,7 @@ public class lilas_dinhint extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.lilas_dinhint.branchId");
                     npcSpeak(player, message);
@@ -6212,7 +6186,7 @@ public class lilas_dinhint extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_82761006");
@@ -6249,7 +6223,7 @@ public class lilas_dinhint extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.lilas_dinhint.branchId");
                     npcSpeak(player, message);
@@ -6327,7 +6301,7 @@ public class lilas_dinhint extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_82761006");
@@ -6364,7 +6338,7 @@ public class lilas_dinhint extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.lilas_dinhint.branchId");
                     npcSpeak(player, message);
@@ -6442,7 +6416,7 @@ public class lilas_dinhint extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_82761006");
@@ -6479,7 +6453,7 @@ public class lilas_dinhint extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.lilas_dinhint.branchId");
                     npcSpeak(player, message);
@@ -6557,7 +6531,7 @@ public class lilas_dinhint extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_82761006");
@@ -6594,7 +6568,7 @@ public class lilas_dinhint extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.lilas_dinhint.branchId");
                     npcSpeak(player, message);
@@ -6672,7 +6646,7 @@ public class lilas_dinhint extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_82761006");
@@ -6709,7 +6683,7 @@ public class lilas_dinhint extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.lilas_dinhint.branchId");
                     npcSpeak(player, message);
@@ -6787,7 +6761,7 @@ public class lilas_dinhint extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_82761006");
@@ -6824,7 +6798,7 @@ public class lilas_dinhint extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.lilas_dinhint.branchId");
                     npcSpeak(player, message);
@@ -7014,7 +6988,7 @@ public class lilas_dinhint extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_90b0871f");
@@ -7027,7 +7001,7 @@ public class lilas_dinhint extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.lilas_dinhint.branchId");
                     npcSpeak(player, message);
@@ -7075,7 +7049,7 @@ public class lilas_dinhint extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_7552be07");
@@ -7088,7 +7062,7 @@ public class lilas_dinhint extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.lilas_dinhint.branchId");
                     npcSpeak(player, message);
@@ -7116,7 +7090,7 @@ public class lilas_dinhint extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_b67247f1");
@@ -7125,7 +7099,7 @@ public class lilas_dinhint extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.lilas_dinhint.branchId");
                     npcSpeak(player, message);
@@ -7277,7 +7251,7 @@ public class lilas_dinhint extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_7552be07");
@@ -7290,7 +7264,7 @@ public class lilas_dinhint extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.lilas_dinhint.branchId");
                     npcSpeak(player, message);
@@ -7318,7 +7292,7 @@ public class lilas_dinhint extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_b67247f1");
@@ -7327,7 +7301,7 @@ public class lilas_dinhint extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.lilas_dinhint.branchId");
                     npcSpeak(player, message);
@@ -7429,7 +7403,7 @@ public class lilas_dinhint extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_b67247f1");
@@ -7438,7 +7412,7 @@ public class lilas_dinhint extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.lilas_dinhint.branchId");
                     npcSpeak(player, message);

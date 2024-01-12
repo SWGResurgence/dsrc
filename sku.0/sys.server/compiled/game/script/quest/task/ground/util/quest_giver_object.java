@@ -1,5 +1,11 @@
 package script.quest.task.ground.util;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.groundquests;
 import script.library.sui;
@@ -7,9 +13,6 @@ import script.library.utils;
 
 public class quest_giver_object extends script.base_script
 {
-    public quest_giver_object()
-    {
-    }
     public static final string_id RADIAL_INSPECT = new string_id("quest/ground/util/quest_giver_object", "radial_inspect");
     public static final string_id OFFER_QUEST_MSG = new string_id("quest/ground/util/quest_giver_object", "offer_quest");
     public static final string_id SUI_TITLE = new string_id("quest/ground/util/quest_giver_object", "sui_title");
@@ -30,18 +33,22 @@ public class quest_giver_object extends script.base_script
     public static final String DO_NOT_DESTROY = "do_not_destroy";
     public static final String IMPERIAL_ONLY = "imperial_only";
     public static final String REBEL_ONLY = "rebel_only";
-    public static final String[] TRADER_PROFESSION_QUEST_STARTERS = 
+    public static final String[] TRADER_PROFESSION_QUEST_STARTERS =
+            {
+                    "object/tangible/quest/quest_start/profession_trader_10.iff",
+                    "object/tangible/quest/quest_start/profession_trader_20.iff",
+                    "object/tangible/quest/quest_start/profession_trader_30.iff"
+            };
+    public static final String[] ENT_PROFESSION_QUEST_STARTERS =
+            {
+                    "object/tangible/quest/quest_start/profession_entertainer_10.iff",
+                    "object/tangible/quest/quest_start/profession_entertainer_20.iff",
+                    "object/tangible/quest/quest_start/profession_entertainer_30.iff"
+            };
+    public quest_giver_object()
     {
-        "object/tangible/quest/quest_start/profession_trader_10.iff",
-        "object/tangible/quest/quest_start/profession_trader_20.iff",
-        "object/tangible/quest/quest_start/profession_trader_30.iff"
-    };
-    public static final String[] ENT_PROFESSION_QUEST_STARTERS = 
-    {
-        "object/tangible/quest/quest_start/profession_entertainer_10.iff",
-        "object/tangible/quest/quest_start/profession_entertainer_20.iff",
-        "object/tangible/quest/quest_start/profession_entertainer_30.iff"
-    };
+    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         String template = getTemplateName(self);
@@ -65,6 +72,7 @@ public class quest_giver_object extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         String myTemplate = getTemplateName(self);
@@ -78,7 +86,7 @@ public class quest_giver_object extends script.base_script
                 {
                     int menuOption = mi.addRootMenu(menu_info_types.ITEM_USE, RADIAL_INSPECT);
                 }
-                else 
+                else
                 {
                     if (isGod(player))
                     {
@@ -90,6 +98,7 @@ public class quest_giver_object extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)
@@ -145,6 +154,7 @@ public class quest_giver_object extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleQuestOfferResponse(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))
@@ -191,38 +201,38 @@ public class quest_giver_object extends script.base_script
                         switch (bp)
                         {
                             case sui.BP_OK:
-                            String preQuestName = objectQuestData.getString(PRE_QUEST_NAME);
-                            if (preQuestName != null && preQuestName.length() > 0)
-                            {
-                                if (!groundquests.hasCompletedQuest(player, preQuestName))
+                                String preQuestName = objectQuestData.getString(PRE_QUEST_NAME);
+                                if (preQuestName != null && preQuestName.length() > 0)
                                 {
-                                    if (!groundquests.isQuestActive(player, preQuestName))
+                                    if (!groundquests.hasCompletedQuest(player, preQuestName))
                                     {
-                                        groundquests.grantQuest(player, preQuestName);
-                                        checkForDestroy(self, player, objectQuestData);
-                                        break;
-                                    }
-                                    else 
-                                    {
-                                        sendSystemMessage(player, ALREADY_HAS_QUEST);
-                                        break;
+                                        if (!groundquests.isQuestActive(player, preQuestName))
+                                        {
+                                            groundquests.grantQuest(player, preQuestName);
+                                            checkForDestroy(self, player, objectQuestData);
+                                            break;
+                                        }
+                                        else
+                                        {
+                                            sendSystemMessage(player, ALREADY_HAS_QUEST);
+                                            break;
+                                        }
                                     }
                                 }
-                            }
-                            groundquests.grantQuest(player, questName);
-                            checkForDestroy(self, player, objectQuestData);
-                            break;
+                                groundquests.grantQuest(player, questName);
+                                checkForDestroy(self, player, objectQuestData);
+                                break;
                             case sui.BP_CANCEL:
-                            sendSystemMessage(player, DECLINED_QUEST);
-                            break;
+                                sendSystemMessage(player, DECLINED_QUEST);
+                                break;
                         }
                     }
-                    else 
+                    else
                     {
                         sendSystemMessage(player, ALREADY_HAS_QUEST);
                     }
                 }
-                else 
+                else
                 {
                     sendSystemMessage(player, ALREADY_COMPLETED_QUEST);
                 }
@@ -230,6 +240,7 @@ public class quest_giver_object extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void checkForDestroy(obj_id self, obj_id player, dictionary objectQuestData) throws InterruptedException
     {
         int doNotDestroy = objectQuestData.getInt(DO_NOT_DESTROY);
@@ -238,6 +249,5 @@ public class quest_giver_object extends script.base_script
             sendSystemMessage(player, OBJECT_UPLOADED);
             destroyObject(self);
         }
-        return;
     }
 }

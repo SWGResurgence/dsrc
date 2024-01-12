@@ -1,5 +1,11 @@
 package script.theme_park.script_spawner.spawner_methods;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.location;
@@ -7,10 +13,12 @@ import script.obj_id;
 
 public class gcw_spawner extends script.base_script
 {
+    public static final int MAX_SPAWN_TRIES = 5;
+
     public gcw_spawner()
     {
     }
-    public static final int MAX_SPAWN_TRIES = 5;
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "beginSetup", null, 1, false);
@@ -21,6 +29,7 @@ public class gcw_spawner extends script.base_script
         requestPreloadCompleteTrigger(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnHearSpeech(obj_id self, obj_id speaker, String strText) throws InterruptedException
     {
         String[] strCommands = split(strText, ' ');
@@ -32,11 +41,15 @@ public class gcw_spawner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
-    public int OnInitialize(obj_id self) throws InterruptedException {
+
+    public int OnInitialize(obj_id self) throws InterruptedException
+    {
         requestPreloadCompleteTrigger(self);
         return SCRIPT_CONTINUE;
     }
-    public int OnPreloadComplete(obj_id self) throws InterruptedException {
+
+    public int OnPreloadComplete(obj_id self) throws InterruptedException
+    {
         location here = getLocation(self);
         String planet = here.area;
         String city = locations.getCityName(here);
@@ -59,6 +72,7 @@ public class gcw_spawner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int beginSetup(obj_id self, dictionary params) throws InterruptedException
     {
         String badScript = "poi.interior_spawner.interior_spawner";
@@ -84,6 +98,7 @@ public class gcw_spawner extends script.base_script
         messageTo(self, "beginSpawn", null, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public boolean setTable(obj_id self, int intDtbRowNum, String dtbMasterList) throws InterruptedException
     {
         String tableToSet = dataTableGetString(dtbMasterList, intDtbRowNum, "spawnTable");
@@ -95,6 +110,7 @@ public class gcw_spawner extends script.base_script
         setObjVar(self, "spawn_table_rebel", tableToSet + "_rebel.iff");
         return true;
     }
+
     public int beginSpawn(obj_id self, dictionary params) throws InterruptedException
     {
         dictionary webster = getSpawnFactionData(self);
@@ -144,6 +160,7 @@ public class gcw_spawner extends script.base_script
         utils.setScriptVar(self, "spawnCount", spawnedCount);
         return SCRIPT_CONTINUE;
     }
+
     public obj_id spawnActor(String datatable, int x, boolean hard) throws InterruptedException
     {
         obj_id self = getSelf();
@@ -165,10 +182,11 @@ public class gcw_spawner extends script.base_script
             return obj_id.NULL_ID;
         }
         obj_id room = null;
-        try {
+        try
+        {
             room = getCellId(building, spawnRoom);
-        }
-        catch (Exception e){
+        } catch (Exception e)
+        {
             System.out.println("Unable to get cell id of room (" + spawnRoom + ") in building " + building.toString() + " while looking in datatable \"" + datatable + "\".");
             System.out.println("Script is currently attached to OBJID " + self.toString());
             e.printStackTrace();
@@ -189,7 +207,7 @@ public class gcw_spawner extends script.base_script
                 spawnedCreature = create.object(spawn, spawnPoint);
             }
         }
-        else 
+        else
         {
             spawnedCreature = create.object(spawn, spawnPoint);
         }
@@ -243,6 +261,7 @@ public class gcw_spawner extends script.base_script
         }
         return spawnedCreature;
     }
+
     public int tellingMomIDied(obj_id self, dictionary params) throws InterruptedException
     {
         dictionary webster = getSpawnFactionData(self);
@@ -269,13 +288,14 @@ public class gcw_spawner extends script.base_script
                 spawned[actorNum] = newActor;
                 utils.setScriptVar(self, "spawnList", spawned);
             }
-            else 
+            else
             {
                 messageTo(self, "tellingMomIDied", params, 3, false);
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public dictionary getSpawnFactionData(obj_id self) throws InterruptedException
     {
         dictionary webster = new dictionary();
@@ -291,7 +311,7 @@ public class gcw_spawner extends script.base_script
                 hard = true;
             }
         }
-        else 
+        else
         {
             faction = "rebel";
             if (reb_r > 2.0)
@@ -329,6 +349,7 @@ public class gcw_spawner extends script.base_script
         webster.put("hard", hard);
         return webster;
     }
+
     public int destroyChildren(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id[] spawned = utils.getObjIdArrayScriptVar(self, "spawnList");
@@ -336,8 +357,10 @@ public class gcw_spawner extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        for (obj_id obj_id : spawned) {
-            if (isIdValid(obj_id) && exists(obj_id)) {
+        for (obj_id obj_id : spawned)
+        {
+            if (isIdValid(obj_id) && exists(obj_id))
+            {
                 destroyObject(obj_id);
             }
         }

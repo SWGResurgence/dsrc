@@ -1,5 +1,11 @@
 package script.faction_perk.hq;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.money;
 import script.obj_id;
@@ -9,6 +15,7 @@ public class terminal_insurance_override extends script.base_script
     public terminal_insurance_override()
     {
     }
+
     public int handleRequestedInsurance(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))

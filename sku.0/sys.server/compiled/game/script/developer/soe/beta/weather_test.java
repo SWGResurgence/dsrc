@@ -1,5 +1,11 @@
 package script.developer.soe.beta;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.obj_id;
 
 public class weather_test extends script.base_script
@@ -7,6 +13,7 @@ public class weather_test extends script.base_script
     public weather_test()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         debugSpeakMsg(self, "Weather Test Script Attached");
@@ -14,6 +21,7 @@ public class weather_test extends script.base_script
         setObjVar(self, "weatherIndex", 0);
         return SCRIPT_CONTINUE;
     }
+
     public int OnHearSpeech(obj_id self, obj_id speaker, String text) throws InterruptedException
     {
         if (text.equals("0") || text.equals("clear"))
@@ -42,6 +50,7 @@ public class weather_test extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnDetach(obj_id self) throws InterruptedException
     {
         debugSpeakMsg(self, "Detaching weather script. Resetting weather.");

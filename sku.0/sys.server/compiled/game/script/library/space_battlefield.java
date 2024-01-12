@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 
 import java.util.Vector;
@@ -21,6 +27,7 @@ public class space_battlefield extends script.base_script
     public static final int POINTS_PER_TRANSPORT = 100;
     public static final int POINTS_PER_KILL = 1;
     public static final int POINTS_FOR_STARDESTROYER = 100000;
+
     public space_battlefield()
     {
     }
@@ -403,7 +410,6 @@ public class space_battlefield extends script.base_script
                 dictionary dctParams = new dictionary();
                 space_utils.notifyObject(self, "nextPhase", dctParams);
                 LOG("space", "Notifying of nerxtphase");
-                return;
             }
             else
             {

@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.ai_lib;
 import script.library.chat;
@@ -8,62 +14,41 @@ import script.library.utils;
 
 public class heraldtatooine2 extends script.base_script
 {
+    public static String c_stringFile = "conversation/heraldtatooine2";
+
     public heraldtatooine2()
     {
     }
-    public static String c_stringFile = "conversation/heraldtatooine2";
+
     public boolean heraldtatooine2_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean heraldtatooine2_condition_cashyes50(obj_id player, obj_id npc) throws InterruptedException
     {
         int cash = getTotalMoney(player);
-        if (cash >= 50)
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return cash >= 50;
     }
+
     public boolean heraldtatooine2_condition_cashyes30(obj_id player, obj_id npc) throws InterruptedException
     {
         int cash = getTotalMoney(player);
-        if (cash >= 30)
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return cash >= 30;
     }
+
     public boolean heraldtatooine2_condition_cashyes15(obj_id player, obj_id npc) throws InterruptedException
     {
         int cash = getTotalMoney(player);
-        if (cash >= 15)
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return cash >= 15;
     }
+
     public boolean heraldtatooine2_condition_cashyes60(obj_id player, obj_id npc) throws InterruptedException
     {
         int cash = getTotalMoney(player);
-        if (cash >= 60)
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return cash >= 60;
     }
+
     public void heraldtatooine2_action_getcash50(obj_id player, obj_id npc) throws InterruptedException
     {
         dictionary params = new dictionary();
@@ -75,6 +60,7 @@ public class heraldtatooine2 extends script.base_script
         setWaypointVisible(waypoint, true);
         setWaypointActive(waypoint, true);
     }
+
     public void heraldtatooine2_action_getcash30(obj_id player, obj_id npc) throws InterruptedException
     {
         dictionary params = new dictionary();
@@ -86,6 +72,7 @@ public class heraldtatooine2 extends script.base_script
         setWaypointVisible(waypoint, true);
         setWaypointActive(waypoint, true);
     }
+
     public void heraldtatooine2_action_getcash30a(obj_id player, obj_id npc) throws InterruptedException
     {
         dictionary params = new dictionary();
@@ -97,6 +84,7 @@ public class heraldtatooine2 extends script.base_script
         setWaypointVisible(waypoint, true);
         setWaypointActive(waypoint, true);
     }
+
     public void heraldtatooine2_action_getcash60(obj_id player, obj_id npc) throws InterruptedException
     {
         dictionary params = new dictionary();
@@ -108,14 +96,17 @@ public class heraldtatooine2 extends script.base_script
         setWaypointVisible(waypoint, true);
         setWaypointActive(waypoint, true);
     }
+
     public void heraldtatooine2_action_beckon(obj_id player, obj_id npc) throws InterruptedException
     {
         doAnimationAction(npc, "beckon");
     }
+
     public void heraldtatooine2_action_dismiss(obj_id player, obj_id npc) throws InterruptedException
     {
         doAnimationAction(npc, "wave_on_dismissing");
     }
+
     public int heraldtatooine2_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_72ac291d"))
@@ -152,7 +143,7 @@ public class heraldtatooine2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d0c6151b");
@@ -165,7 +156,7 @@ public class heraldtatooine2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.heraldtatooine2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -175,6 +166,7 @@ public class heraldtatooine2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int heraldtatooine2_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_d0c6151b"))
@@ -218,7 +210,7 @@ public class heraldtatooine2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_7f115744");
@@ -235,7 +227,7 @@ public class heraldtatooine2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.heraldtatooine2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -245,6 +237,7 @@ public class heraldtatooine2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int heraldtatooine2_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_7f115744"))
@@ -271,7 +264,7 @@ public class heraldtatooine2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_34cffb60");
@@ -284,7 +277,7 @@ public class heraldtatooine2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.heraldtatooine2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -323,7 +316,7 @@ public class heraldtatooine2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_c41d4bce");
@@ -336,7 +329,7 @@ public class heraldtatooine2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.heraldtatooine2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -368,7 +361,7 @@ public class heraldtatooine2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_c885bfb0");
@@ -381,7 +374,7 @@ public class heraldtatooine2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.heraldtatooine2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -391,6 +384,7 @@ public class heraldtatooine2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int heraldtatooine2_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_34cffb60"))
@@ -427,7 +421,7 @@ public class heraldtatooine2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_c3dbbcab");
@@ -440,7 +434,7 @@ public class heraldtatooine2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.heraldtatooine2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -450,6 +444,7 @@ public class heraldtatooine2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int heraldtatooine2_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_c3dbbcab"))
@@ -482,6 +477,7 @@ public class heraldtatooine2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int heraldtatooine2_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_c41d4bce"))
@@ -518,7 +514,7 @@ public class heraldtatooine2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_4440ce87");
@@ -531,7 +527,7 @@ public class heraldtatooine2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.heraldtatooine2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -563,7 +559,7 @@ public class heraldtatooine2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d9903b42");
@@ -576,7 +572,7 @@ public class heraldtatooine2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.heraldtatooine2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -586,6 +582,7 @@ public class heraldtatooine2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int heraldtatooine2_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_4440ce87"))
@@ -620,6 +617,7 @@ public class heraldtatooine2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int heraldtatooine2_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_d9903b42"))
@@ -653,6 +651,7 @@ public class heraldtatooine2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int heraldtatooine2_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_c885bfb0"))
@@ -690,7 +689,7 @@ public class heraldtatooine2 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_63855d3f");
@@ -703,7 +702,7 @@ public class heraldtatooine2 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.heraldtatooine2.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -713,6 +712,7 @@ public class heraldtatooine2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int heraldtatooine2_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_63855d3f"))
@@ -746,6 +746,7 @@ public class heraldtatooine2 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isTangible(self)) || (isPlayer(self)))
@@ -755,11 +756,13 @@ public class heraldtatooine2 extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -768,18 +771,21 @@ public class heraldtatooine2 extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.heraldtatooine2");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -810,7 +816,7 @@ public class heraldtatooine2 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_72ac291d");
@@ -822,7 +828,7 @@ public class heraldtatooine2 extends script.base_script
                 utils.setScriptVar(player, "conversation.heraldtatooine2.branchId", 1);
                 npcStartConversation(player, npc, "heraldtatooine2", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -831,6 +837,7 @@ public class heraldtatooine2 extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("heraldtatooine2"))

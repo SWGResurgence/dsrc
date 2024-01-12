@@ -1,5 +1,11 @@
 package script.space.battlefields;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.objvar_mangle;
 import script.library.ship_ai;
@@ -16,6 +22,7 @@ public class battlefield_spawner extends script.base_script
     public battlefield_spawner()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setObjVar(self, "strDefaultBehavior", "specialty");
@@ -23,6 +30,7 @@ public class battlefield_spawner extends script.base_script
         setupPatrolPaths(self);
         return SCRIPT_CONTINUE;
     }
+
     public int setupAttackTarget(obj_id self, dictionary params) throws InterruptedException
     {
         String strTargetName = getStringObjVar(self, "strTargetName");
@@ -41,6 +49,7 @@ public class battlefield_spawner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int singleAttackerSpawned(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id objShip = params.getObjId("objShip");
@@ -50,6 +59,7 @@ public class battlefield_spawner extends script.base_script
         ship_ai.spacePatrol(objShip, trPath);
         return SCRIPT_CONTINUE;
     }
+
     public int squadAttackerSpawned(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id[] objMembers = params.getObjIdArray("objMembers");
@@ -58,7 +68,8 @@ public class battlefield_spawner extends script.base_script
         if ((trPath == null) || (trPath.length == 0))
         {
         }
-        for (transform transform : trPath) {
+        for (transform transform : trPath)
+        {
             location locFoo = space_utils.getLocationFromTransform(transform);
         }
         transform trTest = trPath[trPath.length - 1];
@@ -66,6 +77,7 @@ public class battlefield_spawner extends script.base_script
         ship_ai.squadAddPatrolPath(intSquadId, trPath);
         return SCRIPT_CONTINUE;
     }
+
     public void setupPatrolPaths(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "strPaths"))
@@ -94,7 +106,7 @@ public class battlefield_spawner extends script.base_script
                             {
                                 strTest = strPaths[intM] + "_0";
                             }
-                            else 
+                            else
                             {
                                 strTest = strPaths[intM] + "_";
                             }
@@ -107,14 +119,15 @@ public class battlefield_spawner extends script.base_script
                         }
                     }
                 }
-                for (Object trPatrolPoint : trPatrolPoints) {
+                for (Object trPatrolPoint : trPatrolPoints)
+                {
                     location locTest = space_utils.getLocationFromTransform(((transform) trPatrolPoint));
                 }
                 utils.setLocalVar(self, "trPath" + strPaths[intM], trPatrolPoints);
             }
         }
-        return;
     }
+
     public transform[] getRandomPathsFromSpawner(obj_id objSpawner) throws InterruptedException
     {
         if (!hasObjVar(objSpawner, "strPaths"))

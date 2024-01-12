@@ -1,5 +1,11 @@
 package script.developer.soe.beta;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.deltadictionary;
 import script.library.cloninglib;
 import script.location;
@@ -10,6 +16,7 @@ public class clone_debug extends script.base_script
     public clone_debug()
     {
     }
+
     public int OnSpeaking(obj_id self, String text) throws InterruptedException
     {
         if (text.equals("info"))

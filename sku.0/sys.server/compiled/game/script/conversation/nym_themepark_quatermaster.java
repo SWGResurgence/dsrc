@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.groundquests;
@@ -8,92 +14,112 @@ import script.*;
 
 public class nym_themepark_quatermaster extends script.base_script
 {
+    public static String c_stringFile = "conversation/nym_themepark_quatermaster";
+
     public nym_themepark_quatermaster()
     {
     }
-    public static String c_stringFile = "conversation/nym_themepark_quatermaster";
+
     public boolean nym_themepark_quatermaster_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean nym_themepark_quatermaster_condition_isOnFirstQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return groundquests.isTaskActive(player, "u16_nym_themepark_parts_1", "findQuartermaster") || (groundquests.hasCompletedQuest(player, "u16_nym_themepark_parts_1") && !groundquests.isQuestActiveOrComplete(player, "u16_nym_themepark_smuggler_01"));
     }
+
     public boolean nym_themepark_quatermaster_condition_isOnSecondQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return groundquests.isTaskActive(player, "u16_nym_themepark_parts_2", "goQuartermaster") || (groundquests.hasCompletedQuest(player, "u16_nym_themepark_parts_2") && !groundquests.isQuestActiveOrComplete(player, "u16_nym_themepark_under_pressure"));
     }
+
     public boolean nym_themepark_quatermaster_condition_isOnThridQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return groundquests.isTaskActive(player, "u16_nym_themepark_parts_3", "goQuartermasterAgain") || (groundquests.hasCompletedQuest(player, "u16_nym_themepark_parts_3") && !groundquests.isQuestActiveOrComplete(player, "u16_nym_themepark_save_agent"));
     }
+
     public boolean nym_themepark_quatermaster_condition_isAlmostDone(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return groundquests.isTaskActive(player, "u16_nym_themepark_safe", "backQuartermaster") || (groundquests.hasCompletedQuest(player, "u16_nym_themepark_safe") && !groundquests.isQuestActiveOrComplete(player, "u16_nym_themepark_repair_flocculation_chamber"));
     }
+
     public boolean nym_themepark_quatermaster_condition_hasFailedDelivery(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return groundquests.isTaskActive(player, "u16_nym_themepark_save_agent_fail", "returnRaliaFail");
     }
+
     public boolean nym_themepark_quatermaster_condition_hasSmugglerQuestNotComplete(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return groundquests.isQuestActive(player, "u16_nym_themepark_smuggler_01");
     }
+
     public boolean nym_themepark_quatermaster_condition_hasAgentQuestNotComplete(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return groundquests.isQuestActive(player, "u16_nym_themepark_save_agent");
     }
+
     public boolean nym_themepark_quatermaster_condition_hasPressureQuestNotComplete(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return groundquests.isQuestActive(player, "u16_nym_themepark_under_pressure");
     }
+
     public void nym_themepark_quatermaster_action_signalFirstJumperQuestDone(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "hasFoundQuartermaster");
     }
+
     public void nym_themepark_quatermaster_action_signalSecondJumperQuestDone(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "hasGoneQuartermaster");
     }
+
     public void nym_themepark_quatermaster_action_signalAgentSafe(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "hasGoneBackQuartermaster");
     }
+
     public void nym_themepark_quatermaster_action_grantSmugglerQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "u16_nym_themepark_smuggler_01");
     }
+
     public void nym_themepark_quatermaster_action_grantAgentQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "u16_nym_themepark_save_agent");
     }
+
     public void nym_themepark_quatermaster_action_grantPressureQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "u16_nym_themepark_under_pressure");
     }
+
     public void nym_themepark_quatermaster_action_sendPlayerToFixChamber(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "u16_nym_themepark_repair_flocculation_chamber");
     }
+
     public void nym_themepark_quatermaster_action_clearDeliveryFailQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.clearQuest(player, "u16_nym_themepark_save_agent_fail");
         groundquests.clearQuest(player, "u16_nym_themepark_save_agent");
         nym_themepark_quatermaster_action_grantAgentQuest(player, npc);
     }
+
     public void nym_themepark_quatermaster_action_signalThirdJumperQuestDone(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "hasGoneQuartermasterAgain");
     }
+
     public int nym_themepark_quatermaster_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_17"))
@@ -110,6 +136,7 @@ public class nym_themepark_quatermaster extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int nym_themepark_quatermaster_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_20"))
@@ -127,6 +154,7 @@ public class nym_themepark_quatermaster extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int nym_themepark_quatermaster_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_74"))
@@ -143,6 +171,7 @@ public class nym_themepark_quatermaster extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int nym_themepark_quatermaster_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_15"))
@@ -163,7 +192,7 @@ public class nym_themepark_quatermaster extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_46");
@@ -172,7 +201,7 @@ public class nym_themepark_quatermaster extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.nym_themepark_quatermaster.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -182,6 +211,7 @@ public class nym_themepark_quatermaster extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int nym_themepark_quatermaster_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_46"))
@@ -202,7 +232,7 @@ public class nym_themepark_quatermaster extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_48");
@@ -211,7 +241,7 @@ public class nym_themepark_quatermaster extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.nym_themepark_quatermaster.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -221,6 +251,7 @@ public class nym_themepark_quatermaster extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int nym_themepark_quatermaster_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_48"))
@@ -241,7 +272,7 @@ public class nym_themepark_quatermaster extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_50");
@@ -250,7 +281,7 @@ public class nym_themepark_quatermaster extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.nym_themepark_quatermaster.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -260,6 +291,7 @@ public class nym_themepark_quatermaster extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int nym_themepark_quatermaster_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_50"))
@@ -277,6 +309,7 @@ public class nym_themepark_quatermaster extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int nym_themepark_quatermaster_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_71"))
@@ -292,6 +325,7 @@ public class nym_themepark_quatermaster extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int nym_themepark_quatermaster_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_36"))
@@ -313,7 +347,7 @@ public class nym_themepark_quatermaster extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_40");
@@ -322,7 +356,7 @@ public class nym_themepark_quatermaster extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.nym_themepark_quatermaster.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -332,6 +366,7 @@ public class nym_themepark_quatermaster extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int nym_themepark_quatermaster_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_40"))
@@ -351,7 +386,7 @@ public class nym_themepark_quatermaster extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_44");
@@ -360,7 +395,7 @@ public class nym_themepark_quatermaster extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.nym_themepark_quatermaster.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -370,6 +405,7 @@ public class nym_themepark_quatermaster extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int nym_themepark_quatermaster_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_44"))
@@ -390,7 +426,7 @@ public class nym_themepark_quatermaster extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_54");
@@ -399,7 +435,7 @@ public class nym_themepark_quatermaster extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.nym_themepark_quatermaster.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -409,6 +445,7 @@ public class nym_themepark_quatermaster extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int nym_themepark_quatermaster_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_54"))
@@ -424,6 +461,7 @@ public class nym_themepark_quatermaster extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int nym_themepark_quatermaster_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_68"))
@@ -439,6 +477,7 @@ public class nym_themepark_quatermaster extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int nym_themepark_quatermaster_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_63"))
@@ -458,7 +497,7 @@ public class nym_themepark_quatermaster extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_76");
@@ -467,7 +506,7 @@ public class nym_themepark_quatermaster extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.nym_themepark_quatermaster.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -477,6 +516,7 @@ public class nym_themepark_quatermaster extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int nym_themepark_quatermaster_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_76"))
@@ -497,7 +537,7 @@ public class nym_themepark_quatermaster extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_80");
@@ -506,7 +546,7 @@ public class nym_themepark_quatermaster extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.nym_themepark_quatermaster.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -516,6 +556,7 @@ public class nym_themepark_quatermaster extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int nym_themepark_quatermaster_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_80"))
@@ -531,6 +572,7 @@ public class nym_themepark_quatermaster extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isTangible(self)) || (isPlayer(self)))
@@ -541,12 +583,14 @@ public class nym_themepark_quatermaster extends script.base_script
         setCondition(self, CONDITION_INTERESTING);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         setCondition(self, CONDITION_INTERESTING);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -555,18 +599,21 @@ public class nym_themepark_quatermaster extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.nym_themepark_quatermaster");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -591,7 +638,7 @@ public class nym_themepark_quatermaster extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_17");
@@ -599,7 +646,7 @@ public class nym_themepark_quatermaster extends script.base_script
                 utils.setScriptVar(player, "conversation.nym_themepark_quatermaster.branchId", 1);
                 npcStartConversation(player, npc, "nym_themepark_quatermaster", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -621,7 +668,7 @@ public class nym_themepark_quatermaster extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_20");
@@ -629,7 +676,7 @@ public class nym_themepark_quatermaster extends script.base_script
                 utils.setScriptVar(player, "conversation.nym_themepark_quatermaster.branchId", 3);
                 npcStartConversation(player, npc, "nym_themepark_quatermaster", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -651,7 +698,7 @@ public class nym_themepark_quatermaster extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_74");
@@ -659,7 +706,7 @@ public class nym_themepark_quatermaster extends script.base_script
                 utils.setScriptVar(player, "conversation.nym_themepark_quatermaster.branchId", 5);
                 npcStartConversation(player, npc, "nym_themepark_quatermaster", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -682,7 +729,7 @@ public class nym_themepark_quatermaster extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_15");
@@ -690,7 +737,7 @@ public class nym_themepark_quatermaster extends script.base_script
                 utils.setScriptVar(player, "conversation.nym_themepark_quatermaster.branchId", 7);
                 npcStartConversation(player, npc, "nym_themepark_quatermaster", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -712,7 +759,7 @@ public class nym_themepark_quatermaster extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_71");
@@ -720,7 +767,7 @@ public class nym_themepark_quatermaster extends script.base_script
                 utils.setScriptVar(player, "conversation.nym_themepark_quatermaster.branchId", 12);
                 npcStartConversation(player, npc, "nym_themepark_quatermaster", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -742,7 +789,7 @@ public class nym_themepark_quatermaster extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_36");
@@ -750,7 +797,7 @@ public class nym_themepark_quatermaster extends script.base_script
                 utils.setScriptVar(player, "conversation.nym_themepark_quatermaster.branchId", 14);
                 npcStartConversation(player, npc, "nym_themepark_quatermaster", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -772,7 +819,7 @@ public class nym_themepark_quatermaster extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_68");
@@ -780,7 +827,7 @@ public class nym_themepark_quatermaster extends script.base_script
                 utils.setScriptVar(player, "conversation.nym_themepark_quatermaster.branchId", 19);
                 npcStartConversation(player, npc, "nym_themepark_quatermaster", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -803,7 +850,7 @@ public class nym_themepark_quatermaster extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_63");
@@ -811,7 +858,7 @@ public class nym_themepark_quatermaster extends script.base_script
                 utils.setScriptVar(player, "conversation.nym_themepark_quatermaster.branchId", 21);
                 npcStartConversation(player, npc, "nym_themepark_quatermaster", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -827,6 +874,7 @@ public class nym_themepark_quatermaster extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("nym_themepark_quatermaster"))

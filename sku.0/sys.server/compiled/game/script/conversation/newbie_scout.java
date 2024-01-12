@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.groundquests;
@@ -8,194 +14,206 @@ import script.*;
 
 public class newbie_scout extends script.base_script
 {
+    public static String c_stringFile = "conversation/newbie_scout";
+
     public newbie_scout()
     {
     }
-    public static String c_stringFile = "conversation/newbie_scout";
+
     public boolean newbie_scout_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean newbie_scout_condition_completedCensus(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/newbie_scout_v2");
         boolean OnTask = (questIsQuestComplete(questId1, player));
         return OnTask;
     }
+
     public boolean newbie_scout_condition_completedRills(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/newbie_scout_pt5");
         boolean OnTask = (questIsQuestComplete(questId1, player));
         return OnTask;
     }
+
     public boolean newbie_scout_condition_completedMites(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/newbie_scout_pt6");
         boolean OnTask = (questIsQuestComplete(questId1, player));
         return OnTask;
     }
+
     public boolean newbie_scout_condition_onCensus(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/newbie_scout_v2");
         boolean OnTask = (questIsQuestActive(questId1, player));
         return OnTask;
     }
+
     public boolean newbie_scout_condition_onMites(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/newbie_scout_pt6");
         boolean OnTask = (questIsQuestActive(questId1, player));
         return OnTask;
     }
+
     public boolean newbie_scout_condition_onMitesReward(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.hasCompletedTask(player, "quest/newbie_scout_pt6", "newbie_scout_e60"))
-        {
-            return true;
-        }
-        return false;
+        return groundquests.hasCompletedTask(player, "quest/newbie_scout_pt6", "newbie_scout_e60");
     }
+
     public boolean newbie_scout_condition_mayorSent(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActiveOrComplete(player, "c_scout_trainer");
     }
+
     public boolean newbie_scout_condition_onCensusReward(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.hasCompletedTask(player, "quest/newbie_scout_v2", "newbie_scout_e100"))
-        {
-            return true;
-        }
-        return false;
+        return groundquests.hasCompletedTask(player, "quest/newbie_scout_v2", "newbie_scout_e100");
     }
+
     public boolean newbie_scout_condition_onWomp(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/newbie_scout_pt2");
         boolean OnTask = (questIsQuestActive(questId1, player));
         return OnTask;
     }
+
     public boolean newbie_scout_condition_onWompReward(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.hasCompletedTask(player, "quest/newbie_scout_pt2", "newbie_scout_e21"))
-        {
-            return true;
-        }
-        return false;
+        return groundquests.hasCompletedTask(player, "quest/newbie_scout_pt2", "newbie_scout_e21");
     }
+
     public boolean newbie_scout_condition_completedWomp(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/newbie_scout_pt2");
         boolean OnTask = (questIsQuestComplete(questId1, player));
         return OnTask;
     }
+
     public boolean newbie_scout_condition_onKreetle(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/newbie_scout_pt3");
         boolean OnTask = (questIsQuestActive(questId1, player));
         return OnTask;
     }
+
     public boolean newbie_scout_condition_onKreetleReward(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.hasCompletedTask(player, "quest/newbie_scout_pt3", "newbie_scout_e31"))
-        {
-            return true;
-        }
-        return false;
+        return groundquests.hasCompletedTask(player, "quest/newbie_scout_pt3", "newbie_scout_e31");
     }
+
     public boolean newbie_scout_condition_completedKreetle(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/newbie_scout_pt3");
         boolean OnTask = (questIsQuestComplete(questId1, player));
         return OnTask;
     }
+
     public boolean newbie_scout_condition_onWorrt(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/newbie_scout_pt4");
         boolean OnTask = (questIsQuestActive(questId1, player));
         return OnTask;
     }
+
     public boolean newbie_scout_condition_onWorrtReward(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.hasCompletedTask(player, "quest/newbie_scout_pt4", "newbie_scout_e41"))
-        {
-            return true;
-        }
-        return false;
+        return groundquests.hasCompletedTask(player, "quest/newbie_scout_pt4", "newbie_scout_e41");
     }
+
     public boolean newbie_scout_condition_completeWorrts(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/newbie_scout_pt4");
         boolean OnTask = (questIsQuestComplete(questId1, player));
         return OnTask;
     }
+
     public boolean newbie_scout_condition_onRills(obj_id player, obj_id npc) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/newbie_scout_pt5");
         boolean OnTask = (questIsQuestActive(questId1, player));
         return OnTask;
     }
+
     public boolean newbie_scout_condition_onRillsReward(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (groundquests.hasCompletedTask(player, "quest/newbie_scout_pt5", "newbie_scout_e50"))
-        {
-            return true;
-        }
-        return false;
+        return groundquests.hasCompletedTask(player, "quest/newbie_scout_pt5", "newbie_scout_e50");
     }
+
     public void newbie_scout_action_startCensus(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "quest/newbie_scout_v2");
     }
+
     public void newbie_scout_action_startKreetle(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "quest/newbie_scout_pt3");
     }
+
     public void newbie_scout_action_startMites(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "quest/newbie_scout_pt6");
     }
+
     public void newbie_scout_action_sendRillSignal(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "newbie_scout_trap_rills");
     }
+
     public void newbie_scout_action_endFromMayor(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "newbie_speak_entha");
     }
+
     public void newbie_scout_action_facePlayer(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
     }
+
     public void newbie_scout_action_signalCensusReward(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "newbie_scout_launch_e9");
     }
+
     public void newbie_scout_action_startWomp(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "quest/newbie_scout_pt2");
     }
+
     public void newbie_scout_action_signalWompReward(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "newbie_scout_launch_e24");
     }
+
     public void newbie_scout_action_signalKreetleReward(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "newbie_scout_launch_e34");
     }
+
     public void newbie_scout_action_startWorrts(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "quest/newbie_scout_pt4");
     }
+
     public void newbie_scout_action_signalWorrtReward(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "newbie_scout_launch_e44");
     }
+
     public void newbie_scout_action_startRills(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "quest/newbie_scout_pt5");
     }
+
     public void newbie_scout_action_signalRillsReward(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "newbie_scout_launch_e53");
     }
+
     public int newbie_scout_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_722"))
@@ -225,7 +243,7 @@ public class newbie_scout extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_82");
@@ -234,7 +252,7 @@ public class newbie_scout extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.newbie_scout.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -244,6 +262,7 @@ public class newbie_scout extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int newbie_scout_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_82"))
@@ -258,6 +277,7 @@ public class newbie_scout extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int newbie_scout_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_130"))
@@ -288,7 +308,7 @@ public class newbie_scout extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_138");
@@ -297,7 +317,7 @@ public class newbie_scout extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.newbie_scout.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -307,6 +327,7 @@ public class newbie_scout extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int newbie_scout_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_138"))
@@ -333,7 +354,7 @@ public class newbie_scout extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_142");
@@ -346,7 +367,7 @@ public class newbie_scout extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.newbie_scout.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -356,6 +377,7 @@ public class newbie_scout extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int newbie_scout_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_142"))
@@ -382,6 +404,7 @@ public class newbie_scout extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int newbie_scout_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_127"))
@@ -397,6 +420,7 @@ public class newbie_scout extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int newbie_scout_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_74"))
@@ -412,6 +436,7 @@ public class newbie_scout extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int newbie_scout_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_112"))
@@ -456,7 +481,7 @@ public class newbie_scout extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_116");
@@ -473,7 +498,7 @@ public class newbie_scout extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.newbie_scout.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -483,6 +508,7 @@ public class newbie_scout extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int newbie_scout_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_116"))
@@ -520,7 +546,7 @@ public class newbie_scout extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_119");
@@ -533,7 +559,7 @@ public class newbie_scout extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.newbie_scout.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -554,6 +580,7 @@ public class newbie_scout extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int newbie_scout_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_119"))
@@ -580,6 +607,7 @@ public class newbie_scout extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int newbie_scout_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_112"))
@@ -624,7 +652,7 @@ public class newbie_scout extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_116");
@@ -641,7 +669,7 @@ public class newbie_scout extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.newbie_scout.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -651,6 +679,7 @@ public class newbie_scout extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int newbie_scout_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_76"))
@@ -666,6 +695,7 @@ public class newbie_scout extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int newbie_scout_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_312"))
@@ -703,7 +733,7 @@ public class newbie_scout extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_107");
@@ -716,7 +746,7 @@ public class newbie_scout extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.newbie_scout.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -737,6 +767,7 @@ public class newbie_scout extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int newbie_scout_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_107"))
@@ -774,7 +805,7 @@ public class newbie_scout extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_110");
@@ -787,7 +818,7 @@ public class newbie_scout extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.newbie_scout.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -797,6 +828,7 @@ public class newbie_scout extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int newbie_scout_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_110"))
@@ -823,6 +855,7 @@ public class newbie_scout extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int newbie_scout_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_123"))
@@ -838,6 +871,7 @@ public class newbie_scout extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int newbie_scout_handleBranch27(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_78"))
@@ -853,6 +887,7 @@ public class newbie_scout extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int newbie_scout_handleBranch28(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_698"))
@@ -873,7 +908,7 @@ public class newbie_scout extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_701");
@@ -882,7 +917,7 @@ public class newbie_scout extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.newbie_scout.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -907,7 +942,7 @@ public class newbie_scout extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_99");
@@ -916,7 +951,7 @@ public class newbie_scout extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.newbie_scout.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -937,6 +972,7 @@ public class newbie_scout extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int newbie_scout_handleBranch29(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_701"))
@@ -951,6 +987,7 @@ public class newbie_scout extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int newbie_scout_handleBranch31(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_99"))
@@ -978,7 +1015,7 @@ public class newbie_scout extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_101");
@@ -991,7 +1028,7 @@ public class newbie_scout extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.newbie_scout.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1001,6 +1038,7 @@ public class newbie_scout extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int newbie_scout_handleBranch32(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_101"))
@@ -1021,7 +1059,7 @@ public class newbie_scout extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_701");
@@ -1030,7 +1068,7 @@ public class newbie_scout extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.newbie_scout.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1051,6 +1089,7 @@ public class newbie_scout extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int newbie_scout_handleBranch33(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_94"))
@@ -1066,6 +1105,7 @@ public class newbie_scout extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int newbie_scout_handleBranch35(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_79"))
@@ -1080,6 +1120,7 @@ public class newbie_scout extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int newbie_scout_handleBranch37(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_86"))
@@ -1117,7 +1158,7 @@ public class newbie_scout extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_134");
@@ -1130,7 +1171,7 @@ public class newbie_scout extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.newbie_scout.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1140,6 +1181,7 @@ public class newbie_scout extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int newbie_scout_handleBranch39(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_134"))
@@ -1166,6 +1208,7 @@ public class newbie_scout extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int newbie_scout_handleBranch40(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_145"))
@@ -1193,7 +1236,7 @@ public class newbie_scout extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_86");
@@ -1206,7 +1249,7 @@ public class newbie_scout extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.newbie_scout.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1216,6 +1259,7 @@ public class newbie_scout extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int newbie_scout_handleBranch41(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_86"))
@@ -1253,7 +1297,7 @@ public class newbie_scout extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_134");
@@ -1266,7 +1310,7 @@ public class newbie_scout extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.newbie_scout.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1276,6 +1320,7 @@ public class newbie_scout extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int newbie_scout_handleBranch43(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_154"))
@@ -1310,7 +1355,7 @@ public class newbie_scout extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_158");
@@ -1327,7 +1372,7 @@ public class newbie_scout extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.newbie_scout.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1347,6 +1392,7 @@ public class newbie_scout extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int newbie_scout_handleBranch44(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_158"))
@@ -1377,7 +1423,7 @@ public class newbie_scout extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_166");
@@ -1386,7 +1432,7 @@ public class newbie_scout extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.newbie_scout.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1407,6 +1453,7 @@ public class newbie_scout extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int newbie_scout_handleBranch46(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_166"))
@@ -1433,7 +1480,7 @@ public class newbie_scout extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_170");
@@ -1446,7 +1493,7 @@ public class newbie_scout extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.newbie_scout.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1456,6 +1503,7 @@ public class newbie_scout extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int newbie_scout_handleBranch47(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_170"))
@@ -1483,6 +1531,7 @@ public class newbie_scout extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -1495,6 +1544,7 @@ public class newbie_scout extends script.base_script
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
@@ -1503,6 +1553,7 @@ public class newbie_scout extends script.base_script
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -1511,18 +1562,21 @@ public class newbie_scout extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.newbie_scout");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -1560,7 +1614,7 @@ public class newbie_scout extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_722");
@@ -1572,7 +1626,7 @@ public class newbie_scout extends script.base_script
                 utils.setScriptVar(player, "conversation.newbie_scout.branchId", 2);
                 npcStartConversation(player, npc, "newbie_scout", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1608,7 +1662,7 @@ public class newbie_scout extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_130");
@@ -1620,7 +1674,7 @@ public class newbie_scout extends script.base_script
                 utils.setScriptVar(player, "conversation.newbie_scout.branchId", 7);
                 npcStartConversation(player, npc, "newbie_scout", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1643,7 +1697,7 @@ public class newbie_scout extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_127");
@@ -1651,7 +1705,7 @@ public class newbie_scout extends script.base_script
                 utils.setScriptVar(player, "conversation.newbie_scout.branchId", 11);
                 npcStartConversation(player, npc, "newbie_scout", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1673,7 +1727,7 @@ public class newbie_scout extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_74");
@@ -1681,7 +1735,7 @@ public class newbie_scout extends script.base_script
                 utils.setScriptVar(player, "conversation.newbie_scout.branchId", 13);
                 npcStartConversation(player, npc, "newbie_scout", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1709,7 +1763,7 @@ public class newbie_scout extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_112");
@@ -1721,7 +1775,7 @@ public class newbie_scout extends script.base_script
                 utils.setScriptVar(player, "conversation.newbie_scout.branchId", 15);
                 npcStartConversation(player, npc, "newbie_scout", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1751,7 +1805,7 @@ public class newbie_scout extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_112");
@@ -1763,7 +1817,7 @@ public class newbie_scout extends script.base_script
                 utils.setScriptVar(player, "conversation.newbie_scout.branchId", 15);
                 npcStartConversation(player, npc, "newbie_scout", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1784,7 +1838,7 @@ public class newbie_scout extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_76");
@@ -1792,7 +1846,7 @@ public class newbie_scout extends script.base_script
                 utils.setScriptVar(player, "conversation.newbie_scout.branchId", 20);
                 npcStartConversation(player, npc, "newbie_scout", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1827,7 +1881,7 @@ public class newbie_scout extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_312");
@@ -1843,7 +1897,7 @@ public class newbie_scout extends script.base_script
                 utils.setScriptVar(player, "conversation.newbie_scout.branchId", 21);
                 npcStartConversation(player, npc, "newbie_scout", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1866,7 +1920,7 @@ public class newbie_scout extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_123");
@@ -1874,7 +1928,7 @@ public class newbie_scout extends script.base_script
                 utils.setScriptVar(player, "conversation.newbie_scout.branchId", 25);
                 npcStartConversation(player, npc, "newbie_scout", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1896,7 +1950,7 @@ public class newbie_scout extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_78");
@@ -1904,7 +1958,7 @@ public class newbie_scout extends script.base_script
                 utils.setScriptVar(player, "conversation.newbie_scout.branchId", 27);
                 npcStartConversation(player, npc, "newbie_scout", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1940,7 +1994,7 @@ public class newbie_scout extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_698");
@@ -1956,7 +2010,7 @@ public class newbie_scout extends script.base_script
                 utils.setScriptVar(player, "conversation.newbie_scout.branchId", 28);
                 npcStartConversation(player, npc, "newbie_scout", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -1978,7 +2032,7 @@ public class newbie_scout extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_94");
@@ -1986,7 +2040,7 @@ public class newbie_scout extends script.base_script
                 utils.setScriptVar(player, "conversation.newbie_scout.branchId", 33);
                 npcStartConversation(player, npc, "newbie_scout", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2007,7 +2061,7 @@ public class newbie_scout extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_79");
@@ -2015,7 +2069,7 @@ public class newbie_scout extends script.base_script
                 utils.setScriptVar(player, "conversation.newbie_scout.branchId", 35);
                 npcStartConversation(player, npc, "newbie_scout", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2044,7 +2098,7 @@ public class newbie_scout extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_86");
@@ -2056,7 +2110,7 @@ public class newbie_scout extends script.base_script
                 utils.setScriptVar(player, "conversation.newbie_scout.branchId", 37);
                 npcStartConversation(player, npc, "newbie_scout", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2077,7 +2131,7 @@ public class newbie_scout extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_145");
@@ -2085,7 +2139,7 @@ public class newbie_scout extends script.base_script
                 utils.setScriptVar(player, "conversation.newbie_scout.branchId", 40);
                 npcStartConversation(player, npc, "newbie_scout", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2123,7 +2177,7 @@ public class newbie_scout extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_154");
@@ -2135,7 +2189,7 @@ public class newbie_scout extends script.base_script
                 utils.setScriptVar(player, "conversation.newbie_scout.branchId", 43);
                 npcStartConversation(player, npc, "newbie_scout", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2144,6 +2198,7 @@ public class newbie_scout extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("newbie_scout"))

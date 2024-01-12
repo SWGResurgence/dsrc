@@ -1,5 +1,11 @@
 package script.theme_park.alderaan.act2;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.create;
@@ -11,87 +17,88 @@ import java.util.Vector;
 
 public class rebel_lyda extends script.base_script
 {
+    public static final String[] TEMPLATE_LIST =
+            {
+                    "object/building/poi/generic_flatten_small.iff",
+                    "object/static/structure/general/camp_tent_s01.iff",
+                    "object/static/structure/general/camp_tent_s01.iff",
+                    "object/static/structure/general/campfire_fresh.iff",
+                    "coa2_lyda_thugs",
+                    "coa2_lyda_thugs",
+                    "coa2_lyda_thugs",
+                    "coa2_lyda_thugs",
+                    "coa2_lyda_thugs"
+            };
+    public static final float[][] LOCATION_LIST =
+            {
+
+                    {
+                            0.0f,
+                            0.0f,
+                            0.0f,
+                            0.0f
+                    },
+
+                    {
+                            8.0f,
+                            0.0f,
+                            2.0f,
+                            205.0f
+                    },
+
+                    {
+                            1.0f,
+                            0.0f,
+                            6.0f,
+                            230.0f
+                    },
+
+                    {
+                            2.0f,
+                            0.0f,
+                            2.0f,
+                            0.0f
+                    },
+
+                    {
+                            10.0f,
+                            0.0f,
+                            0.0f,
+                            0.0f
+                    },
+
+                    {
+                            -5.0f,
+                            0.0f,
+                            10.0f,
+                            0.0f
+                    },
+
+                    {
+                            -5.0f,
+                            0.0f,
+                            -5.0f,
+                            0.0f
+                    },
+
+                    {
+                            10.0f,
+                            0.0f,
+                            -5.0f,
+                            0.0f
+                    },
+
+                    {
+                            -8.0f,
+                            0.0f,
+                            -2.0f,
+                            0.0f
+                    }
+            };
     public rebel_lyda()
     {
     }
-    public static final String[] TEMPLATE_LIST = 
-    {
-        "object/building/poi/generic_flatten_small.iff",
-        "object/static/structure/general/camp_tent_s01.iff",
-        "object/static/structure/general/camp_tent_s01.iff",
-        "object/static/structure/general/campfire_fresh.iff",
-        "coa2_lyda_thugs",
-        "coa2_lyda_thugs",
-        "coa2_lyda_thugs",
-        "coa2_lyda_thugs",
-        "coa2_lyda_thugs"
-    };
-    public static final float[][] LOCATION_LIST = 
-    {
-        
-        {
-            0.0f,
-            0.0f,
-            0.0f,
-            0.0f
-        },
-        
-        {
-            8.0f,
-            0.0f,
-            2.0f,
-            205.0f
-        },
-        
-        {
-            1.0f,
-            0.0f,
-            6.0f,
-            230.0f
-        },
-        
-        {
-            2.0f,
-            0.0f,
-            2.0f,
-            0.0f
-        },
-        
-        {
-            10.0f,
-            0.0f,
-            0.0f,
-            0.0f
-        },
-        
-        {
-            -5.0f,
-            0.0f,
-            10.0f,
-            0.0f
-        },
-        
-        {
-            -5.0f,
-            0.0f,
-            -5.0f,
-            0.0f
-        },
-        
-        {
-            10.0f,
-            0.0f,
-            -5.0f,
-            0.0f
-        },
-        
-        {
-            -8.0f,
-            0.0f,
-            -2.0f,
-            0.0f
-        }
-    };
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
@@ -102,6 +109,7 @@ public class rebel_lyda extends script.base_script
         messageTo(self, "spawnNextObject", params, 2, false);
         return SCRIPT_CONTINUE;
     }
+
     public int spawnNextObject(obj_id self, dictionary params) throws InterruptedException
     {
         int objectNum = params.getInt("index");
@@ -131,17 +139,19 @@ public class rebel_lyda extends script.base_script
             params.put("index", objectNum);
             messageTo(self, "spawnNextObject", params, 2, false);
         }
-        else 
+        else
         {
             initCamp();
         }
         return SCRIPT_CONTINUE;
     }
+
     public void initCamp() throws InterruptedException
     {
         obj_id self = getSelf();
         setObjVar(self, "coa2.rebel.numThugs", 5);
     }
+
     public int thugKilled(obj_id self, dictionary params) throws InterruptedException
     {
         int numThugs = getIntObjVar(self, "coa2.rebel.numThugs");
@@ -159,11 +169,14 @@ public class rebel_lyda extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cleanup(obj_id self, dictionary params) throws InterruptedException
     {
         Vector objectList = getResizeableObjIdArrayObjVar(self, "coa2.rebel.obj_list");
-        for (Object o : objectList) {
-            if (isIdValid(((obj_id) o))) {
+        for (Object o : objectList)
+        {
+            if (isIdValid(((obj_id) o)))
+            {
                 destroyObject(((obj_id) o));
             }
         }

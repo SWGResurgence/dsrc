@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.death_watch_bunker;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.create;
 import script.library.permissions;
@@ -7,10 +13,12 @@ import script.library.utils;
 
 public class loot_chest extends script.base_script
 {
+    public static final string_id NO_PERMISSION = new string_id("dungeon/death_watch", "no_permission");
+
     public loot_chest()
     {
     }
-    public static final string_id NO_PERMISSION = new string_id("dungeon/death_watch", "no_permission");
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         detachScript(self, "item.container.loot_crate");
@@ -21,6 +29,7 @@ public class loot_chest extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_OPEN)
@@ -38,18 +47,19 @@ public class loot_chest extends script.base_script
                 switch (getContainerType(self))
                 {
                     case 0:
-                    detachScript(self, "item.container.base.base_container");
-                    break;
+                        detachScript(self, "item.container.base.base_container");
+                        break;
                     case 1:
-                    utils.requestContainerOpen(player, self);
-                    break;
+                        utils.requestContainerOpen(player, self);
+                        break;
                     default:
-                    break;
+                        break;
                 }
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public String pickNewLoot() throws InterruptedException
     {
         String newLoot = "object/tangible/loot/tool/usable_datapad.iff";
@@ -57,49 +67,50 @@ public class loot_chest extends script.base_script
         switch (pickNewLoot)
         {
             case 1:
-            newLoot = "object/tangible/loot/dungeon/death_watch_bunker/usable_datapad.iff";
-            break;
+                newLoot = "object/tangible/loot/dungeon/death_watch_bunker/usable_datapad.iff";
+                break;
             case 2:
-            newLoot = "object/tangible/loot/dungeon/death_watch_bunker/usable_datapad.iff";
-            break;
+                newLoot = "object/tangible/loot/dungeon/death_watch_bunker/usable_datapad.iff";
+                break;
             case 3:
-            newLoot = "object/tangible/wearables/goggles/rebreather.iff";
-            break;
+                newLoot = "object/tangible/wearables/goggles/rebreather.iff";
+                break;
             case 4:
-            newLoot = "object/tangible/loot/dungeon/death_watch_bunker/ducted_fan.iff";
-            break;
+                newLoot = "object/tangible/loot/dungeon/death_watch_bunker/ducted_fan.iff";
+                break;
             case 5:
-            newLoot = "object/tangible/loot/dungeon/death_watch_bunker/fuel_dispersion_unit.iff";
-            break;
+                newLoot = "object/tangible/loot/dungeon/death_watch_bunker/fuel_dispersion_unit.iff";
+                break;
             case 6:
-            newLoot = "object/tangible/loot/dungeon/death_watch_bunker/fuel_injector_tank.iff";
-            break;
+                newLoot = "object/tangible/loot/dungeon/death_watch_bunker/fuel_injector_tank.iff";
+                break;
             case 7:
-            newLoot = "object/tangible/loot/dungeon/death_watch_bunker/usable_datapad.iff";
-            break;
+                newLoot = "object/tangible/loot/dungeon/death_watch_bunker/usable_datapad.iff";
+                break;
             case 8:
-            newLoot = "object/tangible/dungeon/death_watch_bunker/gel_packet.iff";
-            break;
+                newLoot = "object/tangible/dungeon/death_watch_bunker/gel_packet.iff";
+                break;
             case 9:
-            newLoot = "object/tangible/loot/dungeon/death_watch_bunker/art_crate.iff";
-            break;
+                newLoot = "object/tangible/loot/dungeon/death_watch_bunker/art_crate.iff";
+                break;
             case 10:
-            newLoot = "object/tangible/loot/dungeon/death_watch_bunker/art_crate.iff";
-            break;
+                newLoot = "object/tangible/loot/dungeon/death_watch_bunker/art_crate.iff";
+                break;
             case 11:
-            newLoot = "object/tangible/loot/loot_schematic/death_watch_executioners_hack_schematic.iff";
-            break;
+                newLoot = "object/tangible/loot/loot_schematic/death_watch_executioners_hack_schematic.iff";
+                break;
             case 12:
-            newLoot = "object/tangible/loot/dungeon/death_watch_bunker/art_crate.iff";
-            break;
+                newLoot = "object/tangible/loot/dungeon/death_watch_bunker/art_crate.iff";
+                break;
             case 13:
-            newLoot = "object/tangible/loot/loot_schematic/death_watch_pistol_de_10_schematic.iff";
-            break;
+                newLoot = "object/tangible/loot/loot_schematic/death_watch_pistol_de_10_schematic.iff";
+                break;
             default:
-            break;
+                break;
         }
         return newLoot;
     }
+
     public int getLootFromPercentage() throws InterruptedException
     {
         int percent = rand(1, 100);
@@ -158,6 +169,7 @@ public class loot_chest extends script.base_script
         }
         return 1;
     }
+
     public int OnAboutToLoseItem(obj_id self, obj_id destContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         obj_id player = utils.getContainingPlayer(destContainer);
@@ -165,6 +177,7 @@ public class loot_chest extends script.base_script
         messageTo(self, "makeMoreLoot", null, 1200, true);
         return SCRIPT_CONTINUE;
     }
+
     public int makeMoreLoot(obj_id self, dictionary params) throws InterruptedException
     {
         if (!hasObjVar(self, "spawnedLoot"))
@@ -173,6 +186,7 @@ public class loot_chest extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public obj_id spawnLoot(obj_id self) throws InterruptedException
     {
         String setting = getConfigSetting("Dungeon", "Death_Watch");
@@ -185,6 +199,7 @@ public class loot_chest extends script.base_script
         setObjVar(self, "spawnedLoot", cargo);
         return cargo;
     }
+
     public obj_id spawnGuard(obj_id self) throws InterruptedException
     {
         obj_id top = getTopMostContainer(self);

@@ -1,5 +1,11 @@
 package script.space.content_tools;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.space_create;
 import script.library.utils;
 import script.location;
@@ -12,6 +18,7 @@ public class content_manager extends script.base.remote_object_creator
     public content_manager()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         setObjVar(self, "intNoDump", 1);
@@ -28,7 +35,7 @@ public class content_manager extends script.base.remote_object_creator
         {
             strDataTable = "datatables/space_zones/buildout/e3_" + strArea + ".iff";
         }
-        else 
+        else
         {
             strArea = getRootZoneName(strArea);
             strDataTable = "datatables/space_zones/buildout/" + strArea + ".iff";
@@ -62,8 +69,7 @@ public class content_manager extends script.base.remote_object_creator
             try
             {
                 tranCreation = new transform(vctI, vctJ, vctK, vctP);
-            }
-            catch(Throwable err)
+            } catch (Throwable err)
             {
                 vctJ = vector.unitY;
                 vctK = vector.unitZ;
@@ -77,7 +83,7 @@ public class content_manager extends script.base.remote_object_creator
                 if ((!isIdValid(objTest)) || (!objTest.isLoaded()))
                 {
                 }
-                else 
+                else
                 {
                     if (!strObjVars[intI].equals(""))
                     {
@@ -89,14 +95,19 @@ public class content_manager extends script.base.remote_object_creator
                     if (!strScripts[intI].equals(""))
                     {
                         String[] strScriptArray = split(strScripts[intI], ',');
-                        for (String s : strScriptArray) {
-                            if ((isIdValid(objTest)) && (objTest.isLoaded())) {
+                        for (String s : strScriptArray)
+                        {
+                            if ((isIdValid(objTest)) && (objTest.isLoaded()))
+                            {
                                 String script = s;
-                                if (script.contains("script.")) {
+                                if (script.contains("script."))
+                                {
                                     script = script.substring(7);
                                 }
-                                if (!script.equals("")) {
-                                    if (!hasScript(objTest, script)) {
+                                if (!script.equals(""))
+                                {
+                                    if (!hasScript(objTest, script))
+                                    {
                                         attachScript(objTest, script);
                                     }
                                 }
@@ -112,11 +123,13 @@ public class content_manager extends script.base.remote_object_creator
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         registerNamedObject("content_manager", null);
         return SCRIPT_CONTINUE;
     }
+
     public String getRootZoneName(String strName) throws InterruptedException
     {
         int intIndex = strName.indexOf("_2");
@@ -126,7 +139,7 @@ public class content_manager extends script.base.remote_object_creator
             LOG("space", "strTest is " + strTest);
             return strTest;
         }
-        else 
+        else
         {
             return strName;
         }

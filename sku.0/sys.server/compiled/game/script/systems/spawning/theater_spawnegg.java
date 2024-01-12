@@ -1,5 +1,11 @@
 package script.systems.spawning;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.create;
@@ -22,7 +28,7 @@ public class theater_spawnegg extends script.base_script
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         obj_id[] spawnList = getObjIdArrayObjVar(self, "spawnList");
-        if (spawnList == null || spawnList.length == 0)
+        if (spawnList == null)
         {
             return SCRIPT_CONTINUE;
         }

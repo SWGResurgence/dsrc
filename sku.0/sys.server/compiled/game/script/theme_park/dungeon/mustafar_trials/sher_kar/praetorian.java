@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.mustafar_trials.sher_kar;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.buff;
 import script.library.trial;
@@ -7,16 +13,19 @@ import script.obj_id;
 
 public class praetorian extends script.base_script
 {
+    public static final int RECAST = 8;
+
     public praetorian()
     {
     }
-    public static final int RECAST = 8;
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         trial.setHp(self, trial.HP_SHER_KAR_PRAETORIAN);
         trial.bumpSession(self);
         return SCRIPT_CONTINUE;
     }
+
     public int doAttack(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id[] players = trial.getValidTargetsInDungeon(trial.getTop(self));
@@ -24,16 +33,19 @@ public class praetorian extends script.base_script
         startCombat(self, closest);
         return SCRIPT_CONTINUE;
     }
+
     public int OnEnteredCombat(obj_id self) throws InterruptedException
     {
         messageTo(self, "doShockWave", trial.getSessionDict(self), 4, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnExitedCombat(obj_id self) throws InterruptedException
     {
         trial.bumpSession(self);
         return SCRIPT_CONTINUE;
     }
+
     public int doShockWave(obj_id self, dictionary params) throws InterruptedException
     {
         if (!trial.verifySession(self, params))
@@ -46,7 +58,8 @@ public class praetorian extends script.base_script
             messageTo(self, "doShockWave", trial.getSessionDict(self), RECAST, false);
             return SCRIPT_CONTINUE;
         }
-        for (obj_id player : players) {
+        for (obj_id player : players)
+        {
             buff.applyBuff(player, "sk_shockWave");
         }
         messageTo(self, "doShockWave", trial.getSessionDict(self), RECAST, false);

@@ -1,5 +1,11 @@
 package script.terminal;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.guild;
 import script.library.sui;
@@ -7,9 +13,6 @@ import script.library.utils;
 
 public class terminal_guild_cartridge extends script.base_script
 {
-    public terminal_guild_cartridge()
-    {
-    }
     public static final string_id SID_GUILD_LOAD_CARTRIDGE = new string_id("guild", "load_cartridge");
     public static final string_id SID_LOAD_CARTRIDGE_PROMPT = new string_id("guild", "load_cartridge_prompt");
     public static final string_id SID_LOAD_CARTRIDGE_TITLE = new string_id("guild", "load_cartridge_title");
@@ -17,6 +20,10 @@ public class terminal_guild_cartridge extends script.base_script
     public static final String STR_GUILD_CREATE_NAME_TITLE = "@guild:create_name_title";
     public static final String STR_GUILD_CREATE_ABBREV_PROMPT = "@guild:create_abbrev_prompt";
     public static final String STR_GUILD_CREATE_ABBREV_TITLE = "@guild:create_abbrev_title";
+    public terminal_guild_cartridge()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         int playerGuildId = getGuildId(player);
@@ -29,6 +36,7 @@ public class terminal_guild_cartridge extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         sendDirtyObjectMenuNotification(self);
@@ -42,6 +50,7 @@ public class terminal_guild_cartridge extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleLoadCartridge(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())

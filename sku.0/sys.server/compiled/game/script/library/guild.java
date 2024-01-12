@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 
 import java.util.Arrays;
@@ -232,6 +238,7 @@ public class guild extends script.base_script
     public static final int INTERFACE_GUILD_ELECTION = 5;
     public static final int INTERFACE_GUILD_WAR_PREFERENCES = 6;
     public static final String VAR_TIME_JOINED_CURRENT_GUILD = "guild.timeJoinedCurrentGuild";
+
     public guild()
     {
     }

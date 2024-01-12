@@ -1,5 +1,11 @@
 package script.npe;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.npe;
 import script.library.space_dungeon;
@@ -12,6 +18,7 @@ public class npe_instance_travel_player extends script.base_script
     public npe_instance_travel_player()
     {
     }
+
     public int OnClusterWideDataResponse(obj_id self, String manage_name, String name, int request_id, String[] element_name_list, dictionary[] data, int lock_key) throws InterruptedException
     {
         LOG("npe", "npe_instance_travel_player.OnClusterWideDataResponse");
@@ -48,6 +55,7 @@ public class npe_instance_travel_player extends script.base_script
         releaseClusterWideDataLock(manage_name, lock_key);
         return SCRIPT_CONTINUE;
     }
+
     public int msgNpeInstanceTravelComplete(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, space_dungeon.VAR_RESET_DUNGEON))

@@ -1,5 +1,11 @@
 package script.systems.crafting.weapon;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.craftinglib;
 import script.resource_weight;
 
@@ -46,6 +52,7 @@ public class crafting_melee_lightsaber extends script.systems.crafting.weapon.cr
                             })
             };
     public static final resource_weight[] OBJ_MAX_ATTRIBUTE_RESOURCES = OBJ_ASSEMBLY_ATTRIBUTE_RESOURCES;
+
     public crafting_melee_lightsaber()
     {
     }

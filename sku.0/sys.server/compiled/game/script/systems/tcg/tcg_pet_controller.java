@@ -1,5 +1,11 @@
 package script.systems.tcg;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.create;
 import script.library.house_pet;
@@ -21,6 +27,7 @@ public class tcg_pet_controller extends script.base_script
     public static final string_id SID_TURN_OFF = new string_id(TCG_STR, "store_pet");
     public static final string_id SID_FEED = new string_id(TCG_STR, "feed_pet");
     public static final string_id SID_SNACK = new string_id(TCG_STR, "scurrier_snack");
+
     public tcg_pet_controller()
     {
     }

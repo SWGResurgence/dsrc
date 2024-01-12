@@ -6,26 +6,34 @@ package script.event.gjpud;/*
 @ TODO: Add function to purge reward vars on player to reset for next rotation.  Adjust values for scrap trade-in. 25-50 step intervals.
 @
 */
+
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 
 import script.library.*;
 
 public class recycler extends script.base_script
 {
+    public static final int CASH_AMOUNT = rand(15000, 50000);
+    public static final String STF = "city/city";
+    public static String REWARD_SETUP_TITLE = "GJPUD REWARD MENU";
+    public static String REWARD_SETUP_PROMPT = "Paste a static item string here, from master_item table, for the player to be rewarded. You are modifying Tier: ";
     public recycler()
     {
     }
-    public static String REWARD_SETUP_TITLE = "GJPUD REWARD MENU";
-    public static String REWARD_SETUP_PROMPT = "Paste a static item string here, from master_item table, for the player to be rewarded. You are modifying Tier: ";
-    public static final int CASH_AMOUNT = rand(15000, 50000);
-    public static final String STF = "city/city";
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         menu_info_data mid = mi.getMenuItemByType(menu_info_types.ITEM_USE);
         int menu = mi.addRootMenu(menu_info_types.ITEM_USE, new string_id("Recycle Item"));
         int menu2 = mi.addRootMenu(menu_info_types.SERVER_MENU1, new string_id("Check Score"));
         int menu4 = mi.addRootMenu(menu_info_types.SERVER_MENU13, new string_id("Current Rewards"));
-        if(isGod(player))
+        if (isGod(player))
         {
             int menu3 = mi.addRootMenu(menu_info_types.SERVER_MENU2, new string_id("[GodMode] Recycler Menu"));
             mi.addSubMenu(menu3, menu_info_types.SERVER_MENU3, new string_id("Clear Rewards"));
@@ -41,11 +49,13 @@ public class recycler extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setName(self, "Galactic Junk Pickup Day Workstation");
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, "event.reward_cycle"))
@@ -56,6 +66,7 @@ public class recycler extends script.base_script
         setName(self, "Galactic Junk Pickup Day Workstation");
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)
@@ -190,8 +201,8 @@ public class recycler extends script.base_script
             if (hasObjVar(self, "event.earth_day_t1_reward"))
             {
                 prompt = "\\#F1E5ACReward Schedule\\#.: " + getStringObjVar(self, "event.reward_cycle") + "\n";
-                prompt += "\\#FFA500Tier I\\#.: " + getRewardName(self, getStringObjVar(self,  "event.earth_day_t1_reward")) + "\n";
-                prompt += "\t\\#FFD700" + getRewardDesc(self, getStringObjVar(self,  "event.earth_day_t1_reward")) + "\n\\#.\n";
+                prompt += "\\#FFA500Tier I\\#.: " + getRewardName(self, getStringObjVar(self, "event.earth_day_t1_reward")) + "\n";
+                prompt += "\t\\#FFD700" + getRewardDesc(self, getStringObjVar(self, "event.earth_day_t1_reward")) + "\n\\#.\n";
             }
             else
             {
@@ -199,8 +210,8 @@ public class recycler extends script.base_script
             }
             if (hasObjVar(self, "event.earth_day_t2_reward"))
             {
-                prompt += "\\#FFA500Tier II\\#.: " + getRewardName(self, getStringObjVar(self,  "event.earth_day_t2_reward")) + "\n";
-                prompt += "\t\\#FFD700" + getRewardDesc(self, getStringObjVar(self,  "event.earth_day_t2_reward")) + "\n\\#.\n";
+                prompt += "\\#FFA500Tier II\\#.: " + getRewardName(self, getStringObjVar(self, "event.earth_day_t2_reward")) + "\n";
+                prompt += "\t\\#FFD700" + getRewardDesc(self, getStringObjVar(self, "event.earth_day_t2_reward")) + "\n\\#.\n";
             }
             else
             {
@@ -208,8 +219,8 @@ public class recycler extends script.base_script
             }
             if (hasObjVar(self, "event.earth_day_t3_reward"))
             {
-                prompt += "\\#FFA500Tier III\\#.: " + getRewardName(self, getStringObjVar(self,  "event.earth_day_t3_reward")) + "\n";
-                prompt += "\t\\#FFD700" + getRewardDesc(self, getStringObjVar(self,  "event.earth_day_t3_reward")) + "\n\\#.\n";
+                prompt += "\\#FFA500Tier III\\#.: " + getRewardName(self, getStringObjVar(self, "event.earth_day_t3_reward")) + "\n";
+                prompt += "\t\\#FFD700" + getRewardDesc(self, getStringObjVar(self, "event.earth_day_t3_reward")) + "\n\\#.\n";
             }
             else
             {
@@ -217,8 +228,8 @@ public class recycler extends script.base_script
             }
             if (hasObjVar(self, "event.earth_day_t4_reward"))
             {
-                prompt += "\\#FFA500Tier IV\\#.: " + getRewardName(self, getStringObjVar(self,  "event.earth_day_t4_reward")) + "\n";
-                prompt += "\t\\#FFD700" + getRewardDesc(self, getStringObjVar(self,  "event.earth_day_t4_reward")) + "\n\\#.\n";
+                prompt += "\\#FFA500Tier IV\\#.: " + getRewardName(self, getStringObjVar(self, "event.earth_day_t4_reward")) + "\n";
+                prompt += "\t\\#FFD700" + getRewardDesc(self, getStringObjVar(self, "event.earth_day_t4_reward")) + "\n\\#.\n";
             }
             else
             {
@@ -226,8 +237,8 @@ public class recycler extends script.base_script
             }
             if (hasObjVar(self, "event.earth_day_t5_reward"))
             {
-                prompt += "\\#FFA500Tier V\\#.: " + getRewardName(self, getStringObjVar(self,  "event.earth_day_t5_reward")) + "\n";
-                prompt += "\t\\#FFD700" + getRewardDesc(self, getStringObjVar(self,  "event.earth_day_t5_reward")) + "\n\\#.";
+                prompt += "\\#FFA500Tier V\\#.: " + getRewardName(self, getStringObjVar(self, "event.earth_day_t5_reward")) + "\n";
+                prompt += "\t\\#FFD700" + getRewardDesc(self, getStringObjVar(self, "event.earth_day_t5_reward")) + "\n\\#.";
             }
             else
             {
@@ -243,18 +254,21 @@ public class recycler extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public String getRewardName(obj_id self, String key) throws InterruptedException
     {
         dictionary params = static_item.getMasterItemDictionary(key);
         String rewardName = params.getString("string_name");
         return rewardName;
     }
+
     public String getRewardDesc(obj_id self, String key) throws InterruptedException
     {
         dictionary params = static_item.getMasterItemDictionary(key);
         String rewardName = params.getString("string_detail");
         return rewardName;
     }
+
     public int checkForRewards(obj_id self, obj_id player) throws InterruptedException
     {
         int stamps = getIntObjVar(player, "item_turn_in.stamps");
@@ -304,6 +318,7 @@ public class recycler extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int grantT1Reward(obj_id player) throws InterruptedException
     {
         obj_id pInv = utils.getInventoryContainer(player);
@@ -315,6 +330,7 @@ public class recycler extends script.base_script
         broadcast(player, "You have recieved the GJPUD Tier I reward!");
         return SCRIPT_CONTINUE;
     }
+
     public int grantT2Reward(obj_id player) throws InterruptedException
     {
         obj_id pInv = utils.getInventoryContainer(player);
@@ -326,6 +342,7 @@ public class recycler extends script.base_script
         broadcast(player, "You have recieved the GJPUD Tier II reward!");
         return SCRIPT_CONTINUE;
     }
+
     public int grantT3Reward(obj_id player) throws InterruptedException
     {
         obj_id pInv = utils.getInventoryContainer(player);
@@ -337,6 +354,7 @@ public class recycler extends script.base_script
         broadcast(player, "You have recieved the GJPUD Tier III reward!");
         return SCRIPT_CONTINUE;
     }
+
     public int grantT4Reward(obj_id player) throws InterruptedException
     {
         obj_id pInv = utils.getInventoryContainer(player);
@@ -348,6 +366,7 @@ public class recycler extends script.base_script
         broadcast(player, "You have recieved the GJPUD Tier IV reward!");
         return SCRIPT_CONTINUE;
     }
+
     public int grantT5Reward(obj_id player) throws InterruptedException
     {
         obj_id pInv = utils.getInventoryContainer(player);
@@ -359,6 +378,7 @@ public class recycler extends script.base_script
         broadcast(player, "You have recieved the GJPUD Tier V reward!");// and the Galactic Recycling Association badge and title!
         return SCRIPT_CONTINUE;
     }
+
     public void payCredits(obj_id player) throws InterruptedException
     {
         setObjVar(player, "event.starting_earth_day_credits", getCashBalance(player));
@@ -374,6 +394,7 @@ public class recycler extends script.base_script
             broadcast(player, "The Galactic Junk Pickup Day coordinators thank you for all your work, but you currently exceed the maximum amount we can give you. Have you considered donating to a charity?");
         }
     }
+
     public int handlePayoutToPlayer(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("payoutTarget");
@@ -393,6 +414,7 @@ public class recycler extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleCheckRequest(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -418,6 +440,7 @@ public class recycler extends script.base_script
         setObjVar(self, "item_to_use", objectToCheck);
         return SCRIPT_CONTINUE;
     }
+
     public int handleT1Request(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -443,6 +466,7 @@ public class recycler extends script.base_script
         setObjVar(self, "event.earth_day_t1_reward", t1ToCheck);
         return SCRIPT_CONTINUE;
     }
+
     public int handleT2Request(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -468,6 +492,7 @@ public class recycler extends script.base_script
         setObjVar(self, "event.earth_day_t2_reward", t2ToCheck);
         return SCRIPT_CONTINUE;
     }
+
     public int handleT3Request(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -493,6 +518,7 @@ public class recycler extends script.base_script
         setObjVar(self, "event.earth_day_t3_reward", t3ToCheck);
         return SCRIPT_CONTINUE;
     }
+
     public int handleT4Request(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -518,6 +544,7 @@ public class recycler extends script.base_script
         setObjVar(self, "event.earth_day_t4_reward", t4ToCheck);
         return SCRIPT_CONTINUE;
     }
+
     public int handleT5Request(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -543,6 +570,7 @@ public class recycler extends script.base_script
         setObjVar(self, "event.earth_day_t5_reward", t5ToCheck);
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);

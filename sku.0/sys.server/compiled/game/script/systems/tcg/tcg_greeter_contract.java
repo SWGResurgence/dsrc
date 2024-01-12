@@ -1,5 +1,11 @@
 package script.systems.tcg;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.sui;
 import script.library.utils;
@@ -23,6 +29,7 @@ public class tcg_greeter_contract extends script.base_script
     public static final string_id SID_GREETER_APPEARANCE_TYPE_D = new string_id("player_vendor", "greeter_appear_description");
     public static final string_id SID_INVALID_LOCATION_SAME_CELL = new string_id("player_vendor", "greeter_same_cell_only");
     public static final string_id SID_OUT_OF_RANGE = new string_id("player_vendor", "greeter_terminal_out_of_range");
+
     public tcg_greeter_contract()
     {
     }

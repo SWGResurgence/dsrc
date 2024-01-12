@@ -1,5 +1,11 @@
 package script.theme_park.heroic.exar_kun;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.instance;
 import script.menu_info;
 import script.menu_info_types;
@@ -11,6 +17,7 @@ public class exar_exit extends script.base_script
     public exar_exit()
     {
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info item) throws InterruptedException
     {
         if (getDistance(player, self) > 6.0f)
@@ -20,6 +27,7 @@ public class exar_exit extends script.base_script
         item.addRootMenu(menu_info_types.ITEM_USE, new string_id("item_n", "heroic_exar_exit"));
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)

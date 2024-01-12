@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.chat;
@@ -12,22 +18,26 @@ public class aurilia_junk_dealer extends script.conversation.base.conversation_b
 {
     public String conversation = "conversation.aurilia_junk_dealer";
     public String c_stringFile = "conversation/aurilia_junk_dealer";
+
     public aurilia_junk_dealer()
     {
         super.scriptName = "aurilia_junk_dealer";
         super.conversation = conversation;
         super.c_stringFile = c_stringFile;
     }
+
     private boolean aurilia_junk_dealer_condition_check_inv(obj_id player, obj_id npc) throws InterruptedException
     {
         return smuggler.checkInventory(player, npc);
     }
+
     private void aurilia_junk_dealer_action_start_dealing(obj_id player, obj_id npc) throws InterruptedException
     {
         dictionary params = new dictionary();
         params.put("player", player);
         messageTo(npc, "startDealing", params, 1.0f, false);
     }
+
     private int aurilia_junk_dealer_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_c86eba88"))
@@ -45,6 +55,7 @@ public class aurilia_junk_dealer extends script.conversation.base.conversation_b
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         if (ai_lib.isInCombat(self) || ai_lib.isInCombat(player))
@@ -52,14 +63,15 @@ public class aurilia_junk_dealer extends script.conversation.base.conversation_b
             return SCRIPT_OVERRIDE;
         }
         faceTo(self, player);
-        string_id responses[];
+        string_id[] responses;
         if (aurilia_junk_dealer_condition_check_inv(player, self))
-		{
+        {
             responses = new string_id[2];
             responses[0] = new string_id(c_stringFile, "s_c86eba88");
             responses[1] = new string_id(c_stringFile, "s_370a03c");
-		}
-        else {
+        }
+        else
+        {
             responses = new string_id[1];
             responses[0] = new string_id(c_stringFile, "s_370a03c");
         }
@@ -67,6 +79,7 @@ public class aurilia_junk_dealer extends script.conversation.base.conversation_b
         npcStartConversation(player, self, scriptName, new string_id(c_stringFile, "s_3c06418f"), responses);
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("aurilia_junk_dealer"))

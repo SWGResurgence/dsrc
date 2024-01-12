@@ -1,5 +1,11 @@
 package script.test;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.qa;
 import script.library.sui;
@@ -11,63 +17,64 @@ import java.util.HashSet;
 
 public class qascript extends script.base_script
 {
-    public qascript()
-    {
-    }
     public static final String TOOL_TITLE = "QA SCRIPT TOOL";
     public static final String TOOL_PROMPT = "This tool allows the tester to see what Scripts are currently attached to their character and attach/detach each script individually to troubleshoot problems or test functionality.\n\n\rCurrent Scripts Attached:\n";
     public static final String SCRIPTVAR = "qascript";
     public static final String ERROR_MSG_STR = "There was an error in the tool.";
-    public static final String[] ERROR_MSG_ARRAY = 
+    public static final String[] ERROR_MSG_ARRAY =
+            {
+                    "There was an error in the tool."
+            };
+    public static final String[] TOOL_MENU =
+            {
+                    "Attach Script",
+                    "Detach Script"
+            };
+    public static final String[] COMMON_SCRIPTS =
+            {
+                    "csr.get_resource_crate",
+                    "e3demo.e3_demoer",
+                    "gm.cmd",
+                    "player.player_gm",
+                    "developer.soe.e3demo.yavin_e3",
+                    "quest.utility.quest_test",
+                    "space.content_tools.content_generation",
+                    "space.content_tools.missiontest",
+                    "test.qa_cybernetic",
+                    "test.qa_damage",
+                    "test.qa_dynamic",
+                    "test.qa_enhancements",
+                    "test.qa_helper",
+                    "test.qa_jtl_tools",
+                    "test.qa_quest_skipper",
+                    "test.qa_resource_reward",
+                    "test.qa_resources",
+                    "test.qabackpack",
+                    "test.qabadge",
+                    "test.qabuff",
+                    "test.qacube",
+                    "test.qadatapad",
+                    "test.qadna",
+                    "test.qafaction",
+                    "test.qaham",
+                    "test.qainventory",
+                    "test.qaitem",
+                    "test.qange",
+                    "test.qaprofession",
+                    "test.qascript",
+                    "test.qasetup",
+                    "test.qaspace",
+                    "test.qatool",
+                    "test.qaweapon",
+                    "test.qawearables",
+                    "test.qaxp",
+                    "test.ttyson_test",
+                    "working.dantest"
+            };
+    public qascript()
     {
-        "There was an error in the tool."
-    };
-    public static final String[] TOOL_MENU = 
-    {
-        "Attach Script",
-        "Detach Script"
-    };
-    public static final String[] COMMON_SCRIPTS = 
-    {
-        "csr.get_resource_crate",
-        "e3demo.e3_demoer",
-        "gm.cmd",
-        "player.player_gm",
-        "developer.soe.e3demo.yavin_e3",
-        "quest.utility.quest_test",
-        "space.content_tools.content_generation",
-        "space.content_tools.missiontest",
-        "test.qa_cybernetic",
-        "test.qa_damage",
-        "test.qa_dynamic",
-        "test.qa_enhancements",
-        "test.qa_helper",
-        "test.qa_jtl_tools",
-        "test.qa_quest_skipper",
-        "test.qa_resource_reward",
-        "test.qa_resources",
-        "test.qabackpack",
-        "test.qabadge",
-        "test.qabuff",
-        "test.qacube",
-        "test.qadatapad",
-        "test.qadna",
-        "test.qafaction",
-        "test.qaham",
-        "test.qainventory",
-        "test.qaitem",
-        "test.qange",
-        "test.qaprofession",
-        "test.qascript",
-        "test.qasetup",
-        "test.qaspace",
-        "test.qatool",
-        "test.qaweapon",
-        "test.qawearables",
-        "test.qaxp",
-        "test.ttyson_test",
-        "working.dantest"
-    };
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (isGod(self))
@@ -84,6 +91,7 @@ public class qascript extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnSpeaking(obj_id self, String text) throws InterruptedException
     {
         if (isGod(self))
@@ -96,6 +104,7 @@ public class qascript extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleMainMenuOptions(obj_id self, dictionary params) throws InterruptedException
     {
         if (isGod(self))
@@ -117,25 +126,26 @@ public class qascript extends script.base_script
                     qa.refreshMenu(self, "Choose the tool you want to use", "QA Tools", tool_options, "toolMainMenu", true, "qatool.pid");
                     return SCRIPT_CONTINUE;
                 }
-                else 
+                else
                 {
                     switch (idx)
                     {
                         case 0:
-                        toolAttachMenu(self);
-                        break;
+                            toolAttachMenu(self);
+                            break;
                         case 1:
-                        toolDetachMenu(self);
-                        break;
+                            toolDetachMenu(self);
+                            break;
                         default:
-                        removePlayer(player, "");
-                        return SCRIPT_CONTINUE;
+                            removePlayer(player, "");
+                            return SCRIPT_CONTINUE;
                     }
                 }
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleAttachScriptOptions(obj_id self, dictionary params) throws InterruptedException
     {
         if (isGod(self))
@@ -156,14 +166,14 @@ public class qascript extends script.base_script
                     toolMainMenu(self);
                     return SCRIPT_CONTINUE;
                 }
-                String previousMainMenuArray[] = utils.getStringArrayScriptVar(self, "qascript.attachMenu");
+                String[] previousMainMenuArray = utils.getStringArrayScriptVar(self, "qascript.attachMenu");
                 String previousSelection = previousMainMenuArray[idx];
                 if (previousSelection.equals(""))
                 {
                     removePlayer(player, "");
                     return SCRIPT_CONTINUE;
                 }
-                else 
+                else
                 {
                     attachScript(self, previousSelection);
                     broadcast(player, previousSelection + " script attached.");
@@ -174,6 +184,7 @@ public class qascript extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleDetachScriptOptions(obj_id self, dictionary params) throws InterruptedException
     {
         if (isGod(self))
@@ -194,14 +205,14 @@ public class qascript extends script.base_script
                     toolMainMenu(self);
                     return SCRIPT_CONTINUE;
                 }
-                String previousMainMenuArray[] = utils.getStringArrayScriptVar(self, "qascript.detachMenu");
+                String[] previousMainMenuArray = utils.getStringArrayScriptVar(self, "qascript.detachMenu");
                 String previousSelection = previousMainMenuArray[idx];
                 if (previousSelection.equals(""))
                 {
                     removePlayer(player, "");
                     return SCRIPT_CONTINUE;
                 }
-                else 
+                else
                 {
                     detachScript(self, previousSelection);
                     broadcast(player, previousSelection + " script detached.");
@@ -212,11 +223,13 @@ public class qascript extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void toolMainMenu(obj_id player) throws InterruptedException
     {
         String toolPrompt = scriptToolPromptMaker(player);
         qa.refreshMenu(player, toolPrompt, TOOL_TITLE, TOOL_MENU, "handleMainMenuOptions", "qascript.pid", "qascript.mainMenu", sui.OK_CANCEL_REFRESH);
     }
+
     public void toolAttachMenu(obj_id player) throws InterruptedException
     {
         String toolPrompt = "ATTACH MODE\n\n" + scriptToolPromptMaker(player);
@@ -225,11 +238,12 @@ public class qascript extends script.base_script
         {
             qa.refreshMenu(player, toolPrompt, TOOL_TITLE, attachMenu, "handleAttachScriptOptions", "qascript.pid", "qascript.attachMenu", sui.OK_CANCEL_REFRESH);
         }
-        else 
+        else
         {
             broadcast(player, "The menu could not be built because there were no menu items to display");
         }
     }
+
     public void toolDetachMenu(obj_id player) throws InterruptedException
     {
         String toolPrompt = "DETACH MODE\n\n" + scriptToolPromptMaker(player);
@@ -238,16 +252,18 @@ public class qascript extends script.base_script
         {
             qa.refreshMenu(player, toolPrompt, TOOL_TITLE, detachMenu, "handleDetachScriptOptions", "qascript.pid", "qascript.detachMenu", sui.OK_CANCEL_REFRESH);
         }
-        else 
+        else
         {
             broadcast(player, "The menu could not be built because there were no menu items to display");
         }
     }
+
     public String scriptToolPromptMaker(obj_id player) throws InterruptedException
     {
         String scriptList = getCharacterScriptsPrompt(player);
         return TOOL_PROMPT + scriptList;
     }
+
     public String[] filterCharacterScripts(obj_id player) throws InterruptedException
     {
         String strScripts = "";
@@ -255,9 +271,11 @@ public class qascript extends script.base_script
         if (scriptArray.length > -1)
         {
             HashSet theSet = new HashSet();
-            for (String s : scriptArray) {
+            for (String s : scriptArray)
+            {
                 String script = s;
-                if (script.contains("script.")) {
+                if (script.contains("script."))
+                {
                     script = script.substring(7);
                     theSet.add(script);
                 }
@@ -269,6 +287,7 @@ public class qascript extends script.base_script
         }
         return ERROR_MSG_ARRAY;
     }
+
     public String getCharacterScriptsPrompt(obj_id player) throws InterruptedException
     {
         String strScripts = "";
@@ -277,12 +296,18 @@ public class qascript extends script.base_script
         {
             if (!scriptArray[0].equals(ERROR_MSG_ARRAY[0]))
             {
-                for (String s : scriptArray) {
-                    if (s.startsWith("test.")) {
+                for (String s : scriptArray)
+                {
+                    if (s.startsWith("test."))
+                    {
                         strScripts += s + "\r\n";
-                    } else {
-                        for (String commonScript : COMMON_SCRIPTS) {
-                            if (s.equals(commonScript)) {
+                    }
+                    else
+                    {
+                        for (String commonScript : COMMON_SCRIPTS)
+                        {
+                            if (s.equals(commonScript))
+                            {
                                 strScripts += s + "\r\n";
                             }
                         }
@@ -293,6 +318,7 @@ public class qascript extends script.base_script
         }
         return ERROR_MSG_STR;
     }
+
     public String[] getCharacterScripts(obj_id player) throws InterruptedException
     {
         HashSet theSet = new HashSet();
@@ -301,12 +327,18 @@ public class qascript extends script.base_script
         {
             if (!scriptArray[0].equals(ERROR_MSG_ARRAY[0]))
             {
-                for (String s : scriptArray) {
-                    if (s.startsWith("test.")) {
+                for (String s : scriptArray)
+                {
+                    if (s.startsWith("test."))
+                    {
                         theSet.add(s);
-                    } else {
-                        for (String commonScript : COMMON_SCRIPTS) {
-                            if (s.equals(commonScript)) {
+                    }
+                    else
+                    {
+                        for (String commonScript : COMMON_SCRIPTS)
+                        {
+                            if (s.equals(commonScript))
+                            {
                                 theSet.add(s);
                             }
                         }
@@ -320,11 +352,14 @@ public class qascript extends script.base_script
         }
         return ERROR_MSG_ARRAY;
     }
+
     public String[] getAttachableCharacterScripts(obj_id player) throws InterruptedException
     {
         HashSet theSet = new HashSet();
-        for (String commonScript : COMMON_SCRIPTS) {
-            if (findAttached(player, commonScript) == true) {
+        for (String commonScript : COMMON_SCRIPTS)
+        {
+            if (findAttached(player, commonScript))
+            {
                 theSet.add(commonScript);
             }
         }
@@ -333,19 +368,23 @@ public class qascript extends script.base_script
         Arrays.sort(menuArray);
         return menuArray;
     }
+
     public boolean findAttached(obj_id player, String scriptAttached) throws InterruptedException
     {
         String[] arrayOfCurrentScripts = getCharacterScripts(player);
         if (arrayOfCurrentScripts.length > -1)
         {
-            for (String arrayOfCurrentScript : arrayOfCurrentScripts) {
-                if (arrayOfCurrentScript.equals(scriptAttached)) {
+            for (String arrayOfCurrentScript : arrayOfCurrentScripts)
+            {
+                if (arrayOfCurrentScript.equals(scriptAttached))
+                {
                     return false;
                 }
             }
         }
         return true;
     }
+
     public void removePlayer(obj_id player, String err) throws InterruptedException
     {
         broadcast(player, err);

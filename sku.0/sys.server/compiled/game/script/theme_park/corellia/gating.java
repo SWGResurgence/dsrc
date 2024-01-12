@@ -1,12 +1,15 @@
 package script.theme_park.corellia;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.obj_id;
 
 public class gating extends script.base_script
 {
-    public gating()
-    {
-    }
     public static final String QUALDO_QUEST = "qualdoNewbieQuest1";
     public static final String WEDGE_QUEST = "wedgeNewbieQuest1";
     public static final String LANCE_QUEST = "lanceNewbieQuest1";
@@ -22,10 +25,15 @@ public class gating extends script.base_script
     public static final String LEIA_CRAFTING_2 = "leiaCrafting2";
     public static final String LEIA_COMBAT_1 = "leiaCombat1";
     public static final String LEIA_COMBAT_2 = "leiaCombat2";
+    public gating()
+    {
+    }
+
     public static boolean canTakeQuest(obj_id player, String questId) throws InterruptedException
     {
         return true;
     }
+
     public static boolean canTakeInfiltrationMission(obj_id player, String questId) throws InterruptedException
     {
         return true;

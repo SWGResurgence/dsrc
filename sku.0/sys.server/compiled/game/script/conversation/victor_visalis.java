@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.utils;
@@ -8,14 +14,17 @@ import script.*;
 
 public class victor_visalis extends script.base_script
 {
+    public static String c_stringFile = "conversation/victor_visalis";
+
     public victor_visalis()
     {
     }
-    public static String c_stringFile = "conversation/victor_visalis";
+
     public boolean victor_visalis_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean victor_visalis_condition_CampObj(obj_id player, obj_id npc) throws InterruptedException
     {
         if (victor_visalis_condition_votedVictorCurrentElection(player, npc))
@@ -28,14 +37,12 @@ public class victor_visalis extends script.base_script
             if (hasObjVar(player, "bestine.camp"))
             {
                 int electionPlayerIsIn = getIntObjVar(player, "bestine.camp");
-                if (electionPlayerIsIn >= electionNum)
-                {
-                    return true;
-                }
+                return electionPlayerIsIn >= electionNum;
             }
         }
         return false;
     }
+
     public boolean victor_visalis_condition_OpponentObj(obj_id player, obj_id npc) throws InterruptedException
     {
         if (victor_visalis_condition_votedVictorCurrentElection(player, npc))
@@ -48,14 +55,12 @@ public class victor_visalis extends script.base_script
             if (hasObjVar(player, "bestine.opponent"))
             {
                 int electionPlayerIsIn = getIntObjVar(player, "bestine.opponent");
-                if (electionPlayerIsIn >= electionNum)
-                {
-                    return true;
-                }
+                return electionPlayerIsIn >= electionNum;
             }
         }
         return false;
     }
+
     public boolean victor_visalis_condition_votedVictorCurrentElection(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(npc, "bestine.electionStarted"))
@@ -64,14 +69,12 @@ public class victor_visalis extends script.base_script
             if (hasObjVar(player, "bestine.votedVictor"))
             {
                 int electionPlayerIsIn = getIntObjVar(player, "bestine.votedVictor");
-                if (electionPlayerIsIn >= electionNum)
-                {
-                    return true;
-                }
+                return electionPlayerIsIn >= electionNum;
             }
         }
         return false;
     }
+
     public boolean victor_visalis_condition_NoroomObj(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(npc, "bestine.electionStarted"))
@@ -80,14 +83,12 @@ public class victor_visalis extends script.base_script
             if (hasObjVar(player, "bestine.victor_noroom"))
             {
                 int electionPlayerIsIn = getIntObjVar(player, "bestine.victor_noroom");
-                if (electionPlayerIsIn >= electionNum)
-                {
-                    return true;
-                }
+                return electionPlayerIsIn >= electionNum;
             }
         }
         return false;
     }
+
     public boolean victor_visalis_condition_voted(obj_id player, obj_id npc) throws InterruptedException
     {
         int electionNum = 1;
@@ -102,13 +103,11 @@ public class victor_visalis extends script.base_script
         if (hasObjVar(player, "bestine.votedVictor"))
         {
             int electionPlayerIsIn = getIntObjVar(player, "bestine.votedVictor");
-            if (electionPlayerIsIn <= electionNum)
-            {
-                return true;
-            }
+            return electionPlayerIsIn <= electionNum;
         }
         return false;
     }
+
     public boolean victor_visalis_condition_hasEvidence(obj_id player, obj_id npc) throws InterruptedException
     {
         if (utils.playerHasItemByTemplate(player, "object/tangible/loot/quest/sean_questn_gpapers.iff"))
@@ -119,12 +118,9 @@ public class victor_visalis extends script.base_script
         {
             return true;
         }
-        if (utils.playerHasItemByTemplate(player, "object/tangible/loot/quest/sean_questn_alog.iff"))
-        {
-            return true;
-        }
-        return false;
+        return utils.playerHasItemByTemplate(player, "object/tangible/loot/quest/sean_questn_alog.iff");
     }
+
     public boolean victor_visalis_condition_NegativeqsOBJ(obj_id player, obj_id npc) throws InterruptedException
     {
         if (victor_visalis_condition_votedVictorCurrentElection(player, npc))
@@ -137,14 +133,12 @@ public class victor_visalis extends script.base_script
             if (hasObjVar(player, "bestine.negquests"))
             {
                 int electionPlayerIsIn = getIntObjVar(player, "bestine.negquests");
-                if (electionPlayerIsIn >= electionNum)
-                {
-                    return true;
-                }
+                return electionPlayerIsIn >= electionNum;
             }
         }
         return false;
     }
+
     public boolean victor_visalis_condition_notInOffice_noElection(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(npc, "bestine.electionEnded"))
@@ -152,14 +146,12 @@ public class victor_visalis extends script.base_script
             if (hasObjVar(npc, "bestine.electionWinner"))
             {
                 String winner = getStringObjVar(npc, "bestine.electionWinner");
-                if ((!winner.equals("victor")) && (!winner.equals("Victor")))
-                {
-                    return true;
-                }
+                return (!winner.equals("victor")) && (!winner.equals("Victor"));
             }
         }
         return false;
     }
+
     public boolean victor_visalis_condition_InOffice_noElection(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(npc, "bestine.electionEnded"))
@@ -167,14 +159,12 @@ public class victor_visalis extends script.base_script
             if (hasObjVar(npc, "bestine.electionWinner"))
             {
                 String winner = getStringObjVar(npc, "bestine.electionWinner");
-                if ((winner.equals("victor")) || (winner.equals("Victor")))
-                {
-                    return true;
-                }
+                return (winner.equals("victor")) || (winner.equals("Victor"));
             }
         }
         return false;
     }
+
     public boolean victor_visalis_condition_noInventorySpace(obj_id player, obj_id npc) throws InterruptedException
     {
         boolean hasNoInvRoom = false;
@@ -189,14 +179,12 @@ public class victor_visalis extends script.base_script
         }
         return hasNoInvRoom;
     }
+
     public boolean victor_visalis_condition_newElectionStarted(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (hasObjVar(npc, "bestine.electionStarted"))
-        {
-            return true;
-        }
-        return false;
+        return hasObjVar(npc, "bestine.electionStarted");
     }
+
     public boolean victor_visalis_condition_alreadyReceivedElectionReward(obj_id player, obj_id npc) throws InterruptedException
     {
         int electionNum = 1;
@@ -211,13 +199,11 @@ public class victor_visalis extends script.base_script
         if (hasObjVar(player, "bestine.rewardgiven"))
         {
             int electionPlayerIsIn = getIntObjVar(player, "bestine.rewardgiven");
-            if (electionPlayerIsIn <= electionNum)
-            {
-                return true;
-            }
+            return electionPlayerIsIn <= electionNum;
         }
         return false;
     }
+
     public boolean victor_visalis_condition_votedSeanCurrentElection(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(npc, "bestine.electionStarted"))
@@ -226,26 +212,22 @@ public class victor_visalis extends script.base_script
             if (hasObjVar(player, "bestine.votedSean"))
             {
                 int electionPlayerIsIn = getIntObjVar(player, "bestine.votedSean");
-                if (electionPlayerIsIn >= electionNum)
-                {
-                    return true;
-                }
+                return electionPlayerIsIn >= electionNum;
             }
         }
         return false;
     }
+
     public boolean victor_visalis_condition_inOffice(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(npc, "bestine.electionWinner"))
         {
             String winner = getStringObjVar(npc, "bestine.electionWinner");
-            if ((winner.equals("victor")) || (winner.equals("Victor")))
-            {
-                return true;
-            }
+            return (winner.equals("victor")) || (winner.equals("Victor"));
         }
         return false;
     }
+
     public boolean victor_visalis_condition_CheckOnTuskenQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(player, "bestine.tuskenquest"))
@@ -256,7 +238,7 @@ public class victor_visalis extends script.base_script
                 {
                     return true;
                 }
-                else 
+                else
                 {
                     int playerQuestNum = getIntObjVar(player, "bestine.tuskengotreward");
                     int currentQuestNum = 0;
@@ -268,42 +250,36 @@ public class victor_visalis extends script.base_script
                     {
                         currentQuestNum = getIntObjVar(npc, "bestine.electionEnded");
                     }
-                    if (playerQuestNum < currentQuestNum)
-                    {
-                        return true;
-                    }
+                    return playerQuestNum < currentQuestNum;
                 }
             }
         }
         return false;
     }
+
     public boolean victor_visalis_condition_CompleteTuskenQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return hasObjVar(player, "bestine.tuskengotreward");
     }
+
     public boolean victor_visalis_condition_CheckforStones(obj_id player, obj_id npc) throws InterruptedException
     {
         if (utils.playerHasItemByTemplate(player, "object/tangible/loot/quest/carved_stone.iff"))
         {
             return true;
         }
-        if (utils.playerHasItemByTemplate(player, "object/tangible/loot/quest/smooth_stone.iff"))
-        {
-            return true;
-        }
-        return false;
+        return utils.playerHasItemByTemplate(player, "object/tangible/loot/quest/smooth_stone.iff");
     }
+
     public boolean victor_visalis_condition_CheckforTuskenHead(obj_id player, obj_id npc) throws InterruptedException
     {
         if (utils.playerHasItemByTemplate(player, "object/tangible/loot/quest/tusken_head.iff"))
         {
-            if (hasObjVar(player, "bestine.tuskenquest"))
-            {
-                return true;
-            }
+            return hasObjVar(player, "bestine.tuskenquest");
         }
         return false;
     }
+
     public boolean victor_visalis_condition_CheckForTuskeReward(obj_id player, obj_id npc) throws InterruptedException
     {
         int electionNum = 1;
@@ -318,21 +294,16 @@ public class victor_visalis extends script.base_script
         if (hasObjVar(player, "bestine.tuskengotreward"))
         {
             int electionPlayerRewarded = getIntObjVar(player, "bestine.tuskengotreward");
-            if (electionPlayerRewarded <= electionNum)
-            {
-                return true;
-            }
+            return electionPlayerRewarded <= electionNum;
         }
         return false;
     }
+
     public boolean victor_visalis_condition_ChkTuskenQuest(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (hasObjVar(player, "bestine.tuskenquest"))
-        {
-            return true;
-        }
-        return false;
+        return hasObjVar(player, "bestine.tuskenquest");
     }
+
     public void victor_visalis_action_OnTuskenQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(player, "bestine.tuskengotreward"))
@@ -349,11 +320,13 @@ public class victor_visalis extends script.base_script
         setObjVar(player, "bestine.tuskenWaypoint", waypoint1);
         setObjVar(player, "bestine.tuskenquest", true);
     }
+
     public void victor_visalis_action_NoRoom(obj_id player, obj_id npc) throws InterruptedException
     {
         int electionNum = getIntObjVar(npc, "bestine.electionStarted");
         setObjVar(player, "bestine.victor_noroom", true);
     }
+
     public void victor_visalis_action_WayPointTusken(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(player, "bestine.tuskenWaypoint"))
@@ -361,9 +334,8 @@ public class victor_visalis extends script.base_script
             obj_id waypoint = getObjIdObjVar(player, "bestine.tuskenWaypoint");
             if (isIdValid(waypoint))
             {
-                return;
             }
-            else 
+            else
             {
                 setObjVar(player, "bestine.tuskenquest", true);
                 location site = new location(-3960, 0, 6233);
@@ -377,6 +349,7 @@ public class victor_visalis extends script.base_script
             }
         }
     }
+
     public void victor_visalis_action_NegativeQs(obj_id player, obj_id npc) throws InterruptedException
     {
         int electionNum = getIntObjVar(npc, "bestine.electionStarted");
@@ -391,10 +364,12 @@ public class victor_visalis extends script.base_script
             removeObjVar(player, "bestine.already_searched");
         }
     }
+
     public void victor_visalis_action_RemoveNeg(obj_id player, obj_id npc) throws InterruptedException
     {
         removeObjVar(player, "bestine.negquests");
     }
+
     public void victor_visalis_action_giveDiskAndJoinCampaign(obj_id player, obj_id npc) throws InterruptedException
     {
         victor_visalis_action_removeEvidence(player, npc);
@@ -434,8 +409,8 @@ public class victor_visalis extends script.base_script
                 obj_id item = createObject(CAMPAIGN, playerInv, "");
             }
         }
-        return;
     }
+
     public void victor_visalis_action_Givereward(obj_id player, obj_id npc) throws InterruptedException
     {
         int electionNum = 1;
@@ -474,8 +449,8 @@ public class victor_visalis extends script.base_script
                 }
             }
         }
-        return;
     }
+
     public void victor_visalis_action_RemoveTuskenQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         removeObjVar(player, "bestine.tuskenquest");
@@ -489,6 +464,7 @@ public class victor_visalis extends script.base_script
             removeObjVar(player, "bestine.tuskenquest");
         }
     }
+
     public void victor_visalis_action_GiveTuskenReward(obj_id player, obj_id npc) throws InterruptedException
     {
         String REWARD = "object/weapon/ranged/rifle/rifle_victor_tusken.iff";
@@ -500,22 +476,30 @@ public class victor_visalis extends script.base_script
                 obj_id[] objContents = utils.getContents(objInventory);
                 if (objContents != null)
                 {
-                    for (obj_id objContent : objContents) {
-                        if (isIdValid(objContent)) {
+                    for (obj_id objContent : objContents)
+                    {
+                        if (isIdValid(objContent))
+                        {
                             String strItemTemplate = getTemplateName(objContent);
-                            if (strItemTemplate.equals("object/tangible/loot/quest/tusken_head.iff")) {
+                            if (strItemTemplate.equals("object/tangible/loot/quest/tusken_head.iff"))
+                            {
                                 destroyObject(objContent);
                                 obj_id item = weapons.createWeapon(REWARD, objInventory, rand(0.8f, 1.1f));
-                                if (hasObjVar(player, "bestine.tuskenquest")) {
+                                if (hasObjVar(player, "bestine.tuskenquest"))
+                                {
                                     removeObjVar(player, "bestine.tuskenquest");
                                 }
-                                if (hasObjVar(player, "bestine.tuskenquestdone")) {
+                                if (hasObjVar(player, "bestine.tuskenquestdone"))
+                                {
                                     removeObjVar(player, "bestine.tuskenquestdone");
                                 }
                                 int currentQuestNum = 0;
-                                if (hasObjVar(npc, "bestine.electionStarted")) {
+                                if (hasObjVar(npc, "bestine.electionStarted"))
+                                {
                                     currentQuestNum = getIntObjVar(npc, "bestine.electionStarted") - 1;
-                                } else if (hasObjVar(npc, "bestine.electionEnded")) {
+                                }
+                                else if (hasObjVar(npc, "bestine.electionEnded"))
+                                {
                                     currentQuestNum = getIntObjVar(npc, "bestine.electionEnded");
                                 }
                                 setObjVar(player, "bestine.tuskengotreward", currentQuestNum);
@@ -526,8 +510,8 @@ public class victor_visalis extends script.base_script
                 }
             }
         }
-        return;
     }
+
     public void victor_visalis_action_removeEvidence(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id objInventory = utils.getInventoryContainer(player);
@@ -536,25 +520,29 @@ public class victor_visalis extends script.base_script
             obj_id[] objContents = utils.getContents(objInventory);
             if (objContents != null)
             {
-                for (obj_id objContent : objContents) {
+                for (obj_id objContent : objContents)
+                {
                     String strItemTemplate = getTemplateName(objContent);
-                    if (strItemTemplate.equals("object/tangible/loot/quest/sean_questn_gpapers.iff")) {
+                    if (strItemTemplate.equals("object/tangible/loot/quest/sean_questn_gpapers.iff"))
+                    {
                         destroyObject(objContent);
                         return;
                     }
-                    if (strItemTemplate.equals("object/tangible/loot/quest/sean_questn_tdisk.iff")) {
+                    if (strItemTemplate.equals("object/tangible/loot/quest/sean_questn_tdisk.iff"))
+                    {
                         destroyObject(objContent);
                         return;
                     }
-                    if (strItemTemplate.equals("object/tangible/loot/quest/sean_questn_alog.iff")) {
+                    if (strItemTemplate.equals("object/tangible/loot/quest/sean_questn_alog.iff"))
+                    {
                         destroyObject(objContent);
                         return;
                     }
                 }
             }
         }
-        return;
     }
+
     public int victor_visalis_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_c82e9a2f"))
@@ -588,6 +576,7 @@ public class victor_visalis extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int victor_visalis_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_798f58f7"))
@@ -639,6 +628,7 @@ public class victor_visalis extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int victor_visalis_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_b826b85a"))
@@ -664,6 +654,7 @@ public class victor_visalis extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int victor_visalis_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_6ac98e49"))
@@ -690,7 +681,7 @@ public class victor_visalis extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_9e0196ed");
@@ -703,7 +694,7 @@ public class victor_visalis extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.victor_visalis.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -723,6 +714,7 @@ public class victor_visalis extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int victor_visalis_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_9e0196ed"))
@@ -756,6 +748,7 @@ public class victor_visalis extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int victor_visalis_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_edafb11b"))
@@ -789,7 +782,7 @@ public class victor_visalis extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_30e8118");
@@ -802,7 +795,7 @@ public class victor_visalis extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.victor_visalis.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -831,7 +824,7 @@ public class victor_visalis extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_390b2857");
@@ -844,7 +837,7 @@ public class victor_visalis extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.victor_visalis.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -997,7 +990,7 @@ public class victor_visalis extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_435f07d4");
@@ -1022,7 +1015,7 @@ public class victor_visalis extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.victor_visalis.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1032,6 +1025,7 @@ public class victor_visalis extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int victor_visalis_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_30e8118"))
@@ -1056,6 +1050,7 @@ public class victor_visalis extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int victor_visalis_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_390b2857"))
@@ -1082,7 +1077,7 @@ public class victor_visalis extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_23e4ded2");
@@ -1095,7 +1090,7 @@ public class victor_visalis extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.victor_visalis.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1115,6 +1110,7 @@ public class victor_visalis extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int victor_visalis_handleBranch26(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_23e4ded2"))
@@ -1140,6 +1136,7 @@ public class victor_visalis extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int victor_visalis_handleBranch41(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_435f07d4"))
@@ -1184,7 +1181,7 @@ public class victor_visalis extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_540ac7e9");
@@ -1193,7 +1190,7 @@ public class victor_visalis extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.victor_visalis.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1218,7 +1215,7 @@ public class victor_visalis extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_148");
@@ -1227,7 +1224,7 @@ public class victor_visalis extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.victor_visalis.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1252,7 +1249,7 @@ public class victor_visalis extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_174");
@@ -1261,7 +1258,7 @@ public class victor_visalis extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.victor_visalis.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1281,6 +1278,7 @@ public class victor_visalis extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int victor_visalis_handleBranch46(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_84"))
@@ -1300,7 +1298,7 @@ public class victor_visalis extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_540ac7e9");
@@ -1309,7 +1307,7 @@ public class victor_visalis extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.victor_visalis.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1334,7 +1332,7 @@ public class victor_visalis extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_148");
@@ -1343,7 +1341,7 @@ public class victor_visalis extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.victor_visalis.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1368,7 +1366,7 @@ public class victor_visalis extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_174");
@@ -1377,7 +1375,7 @@ public class victor_visalis extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.victor_visalis.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1397,6 +1395,7 @@ public class victor_visalis extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int victor_visalis_handleBranch47(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_540ac7e9"))
@@ -1430,7 +1429,7 @@ public class victor_visalis extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1285849e");
@@ -1447,7 +1446,7 @@ public class victor_visalis extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.victor_visalis.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1457,6 +1456,7 @@ public class victor_visalis extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int victor_visalis_handleBranch48(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1285849e"))
@@ -1476,7 +1476,7 @@ public class victor_visalis extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_91");
@@ -1485,7 +1485,7 @@ public class victor_visalis extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.victor_visalis.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1510,7 +1510,7 @@ public class victor_visalis extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_109");
@@ -1519,7 +1519,7 @@ public class victor_visalis extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.victor_visalis.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1539,6 +1539,7 @@ public class victor_visalis extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int victor_visalis_handleBranch49(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_91"))
@@ -1558,7 +1559,7 @@ public class victor_visalis extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_94");
@@ -1567,7 +1568,7 @@ public class victor_visalis extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.victor_visalis.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1577,6 +1578,7 @@ public class victor_visalis extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int victor_visalis_handleBranch50(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_94"))
@@ -1610,7 +1612,7 @@ public class victor_visalis extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_5492e753");
@@ -1627,7 +1629,7 @@ public class victor_visalis extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.victor_visalis.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1637,6 +1639,7 @@ public class victor_visalis extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int victor_visalis_handleBranch51(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_5492e753"))
@@ -1680,6 +1683,7 @@ public class victor_visalis extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int victor_visalis_handleBranch56(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_109"))
@@ -1706,7 +1710,7 @@ public class victor_visalis extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a76ad142");
@@ -1719,7 +1723,7 @@ public class victor_visalis extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.victor_visalis.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1729,6 +1733,7 @@ public class victor_visalis extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int victor_visalis_handleBranch57(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_a76ad142"))
@@ -1748,7 +1753,7 @@ public class victor_visalis extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_115");
@@ -1757,7 +1762,7 @@ public class victor_visalis extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.victor_visalis.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1777,6 +1782,7 @@ public class victor_visalis extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int victor_visalis_handleBranch58(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_115"))
@@ -1796,7 +1802,7 @@ public class victor_visalis extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_119");
@@ -1805,7 +1811,7 @@ public class victor_visalis extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.victor_visalis.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1815,6 +1821,7 @@ public class victor_visalis extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int victor_visalis_handleBranch59(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_119"))
@@ -1848,7 +1855,7 @@ public class victor_visalis extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_123");
@@ -1865,7 +1872,7 @@ public class victor_visalis extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.victor_visalis.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1875,6 +1882,7 @@ public class victor_visalis extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int victor_visalis_handleBranch60(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_123"))
@@ -1918,6 +1926,7 @@ public class victor_visalis extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int victor_visalis_handleBranch67(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_148"))
@@ -1937,7 +1946,7 @@ public class victor_visalis extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_152");
@@ -1946,7 +1955,7 @@ public class victor_visalis extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.victor_visalis.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1956,6 +1965,7 @@ public class victor_visalis extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int victor_visalis_handleBranch68(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_152"))
@@ -1989,7 +1999,7 @@ public class victor_visalis extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_156");
@@ -2006,7 +2016,7 @@ public class victor_visalis extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.victor_visalis.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2016,6 +2026,7 @@ public class victor_visalis extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int victor_visalis_handleBranch69(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_156"))
@@ -2059,6 +2070,7 @@ public class victor_visalis extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int victor_visalis_handleBranch74(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_174"))
@@ -2085,7 +2097,7 @@ public class victor_visalis extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_178");
@@ -2098,7 +2110,7 @@ public class victor_visalis extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.victor_visalis.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2108,6 +2120,7 @@ public class victor_visalis extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int victor_visalis_handleBranch75(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_178"))
@@ -2127,7 +2140,7 @@ public class victor_visalis extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_182");
@@ -2136,7 +2149,7 @@ public class victor_visalis extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.victor_visalis.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2156,6 +2169,7 @@ public class victor_visalis extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int victor_visalis_handleBranch76(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_182"))
@@ -2175,7 +2189,7 @@ public class victor_visalis extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_186");
@@ -2184,7 +2198,7 @@ public class victor_visalis extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.victor_visalis.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2194,6 +2208,7 @@ public class victor_visalis extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int victor_visalis_handleBranch77(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_186"))
@@ -2227,7 +2242,7 @@ public class victor_visalis extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_190");
@@ -2244,7 +2259,7 @@ public class victor_visalis extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.victor_visalis.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2254,6 +2269,7 @@ public class victor_visalis extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int victor_visalis_handleBranch78(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_190"))
@@ -2297,6 +2313,7 @@ public class victor_visalis extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -2306,11 +2323,13 @@ public class victor_visalis extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -2319,18 +2338,21 @@ public class victor_visalis extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.victor_visalis");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -2360,7 +2382,7 @@ public class victor_visalis extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_c82e9a2f");
@@ -2372,7 +2394,7 @@ public class victor_visalis extends script.base_script
                 utils.setScriptVar(player, "conversation.victor_visalis.branchId", 1);
                 npcStartConversation(player, npc, "victor_visalis", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2414,7 +2436,7 @@ public class victor_visalis extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_798f58f7");
@@ -2434,7 +2456,7 @@ public class victor_visalis extends script.base_script
                 utils.setScriptVar(player, "conversation.victor_visalis.branchId", 5);
                 npcStartConversation(player, npc, "victor_visalis", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2462,7 +2484,7 @@ public class victor_visalis extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_b826b85a");
@@ -2474,7 +2496,7 @@ public class victor_visalis extends script.base_script
                 utils.setScriptVar(player, "conversation.victor_visalis.branchId", 11);
                 npcStartConversation(player, npc, "victor_visalis", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2502,7 +2524,7 @@ public class victor_visalis extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_6ac98e49");
@@ -2514,7 +2536,7 @@ public class victor_visalis extends script.base_script
                 utils.setScriptVar(player, "conversation.victor_visalis.branchId", 14);
                 npcStartConversation(player, npc, "victor_visalis", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2584,7 +2606,7 @@ public class victor_visalis extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_edafb11b");
@@ -2620,7 +2642,7 @@ public class victor_visalis extends script.base_script
                 utils.setScriptVar(player, "conversation.victor_visalis.branchId", 20);
                 npcStartConversation(player, npc, "victor_visalis", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2680,7 +2702,7 @@ public class victor_visalis extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_84");
@@ -2700,7 +2722,7 @@ public class victor_visalis extends script.base_script
                 utils.setScriptVar(player, "conversation.victor_visalis.branchId", 46);
                 npcStartConversation(player, npc, "victor_visalis", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2709,6 +2731,7 @@ public class victor_visalis extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("victor_visalis"))

@@ -1,5 +1,11 @@
 package script.theme_park.naboo.content;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.obj_id;
 
@@ -8,11 +14,13 @@ public class search_skaak_bunker_01 extends script.base_script
     public search_skaak_bunker_01()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "doGating", null, 19, false);
         return SCRIPT_CONTINUE;
     }
+
     public int doGating(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id targetRoom2 = getCellId(self, "war_room");

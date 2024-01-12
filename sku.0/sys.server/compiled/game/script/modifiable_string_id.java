@@ -5,70 +5,84 @@
 
 package script;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 public class modifiable_string_id extends string_id
 {
-	/**
-	 * Class constructor.
-	 *
-	 * @param table		the string table
-	 * @param id		the string table id
-	 */
-	public modifiable_string_id(String table, String id)
-	{
-		super(table, id);
-	}	// modifiable_string_id(String, String)
+    /**
+     * Class constructor.
+     *
+     * @param table
+     *         the string table
+     * @param id
+     *         the string table id
+     */
+    public modifiable_string_id(String table, String id)
+    {
+        super(table, id);
+    }    // modifiable_string_id(String, String)
 
-	/**
-	 * Class constructor.
-	 *
-	 * @param table		the string table
-	 * @param id		the string table id
-	 */
-	public modifiable_string_id(String table, int id)
-	{
-		super(table, id);
-	}	// modifiable_string_id(String, int)
+    /**
+     * Class constructor.
+     *
+     * @param table
+     *         the string table
+     * @param id
+     *         the string table id
+     */
+    public modifiable_string_id(String table, int id)
+    {
+        super(table, id);
+    }    // modifiable_string_id(String, int)
 
-	/**
-	 * Copy constructor.
-	 *
-	 * @param src		class instance to copy
-	 */
-	public modifiable_string_id(string_id src)
-	{
-		super(src);
-	}	// modifiable_string_id(string_id)
+    /**
+     * Copy constructor.
+     *
+     * @param src
+     *         class instance to copy
+     */
+    public modifiable_string_id(string_id src)
+    {
+        super(src);
+    }    // modifiable_string_id(string_id)
 
-	/**
-	 * Sets the table for the string id.
-	 *
-	 * @param table		the table name
-	 */
-	public void setTable(String table)
-	{
-		m_table = table;
-	}	// setTable
+    /**
+     * Sets the table for the string id.
+     *
+     * @param table
+     *         the table name
+     */
+    public void setTable(String table)
+    {
+        m_table = table;
+    }    // setTable
 
-	/**
-	 * Sets the id for the string id.
-	 *
-	 * @param id		the name of the id
-	 */
-	public void setId(String id)
-	{
-		m_asciiId = id;
-		m_indexId = -1;
-	}	// setId(String)
+    /**
+     * Sets the id for the string id.
+     *
+     * @param id
+     *         the name of the id
+     */
+    public void setId(String id)
+    {
+        m_asciiId = id;
+        m_indexId = -1;
+    }    // setId(String)
 
-	/**
-	 * Sets the id for the string id.
-	 *
-	 * @param id		the index of the id
-	 */
-	public void setId(int id)
-	{
-		m_indexId = id;
-		m_asciiId = "";
-	}	// setId(int)
+    /**
+     * Sets the id for the string id.
+     *
+     * @param id
+     *         the index of the id
+     */
+    public void setId(int id)
+    {
+        m_indexId = id;
+        m_asciiId = "";
+    }    // setId(int)
 
-}	// class modifiable_string_id
+}    // class modifiable_string_id

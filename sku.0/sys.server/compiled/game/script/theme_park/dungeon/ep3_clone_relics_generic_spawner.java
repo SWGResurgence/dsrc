@@ -1,5 +1,11 @@
 package script.theme_park.dungeon;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.create;
@@ -12,6 +18,7 @@ public class ep3_clone_relics_generic_spawner extends script.base_script
     public ep3_clone_relics_generic_spawner()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         String name = getTemplateName(self);
@@ -29,6 +36,7 @@ public class ep3_clone_relics_generic_spawner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         String name = getTemplateName(self);
@@ -46,6 +54,7 @@ public class ep3_clone_relics_generic_spawner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int beginSpawn(obj_id self, dictionary params) throws InterruptedException
     {
         String datatable = getStringObjVar(self, "spawn_table");
@@ -65,7 +74,7 @@ public class ep3_clone_relics_generic_spawner extends script.base_script
                     spawnCreatures(x, datatable, self);
                 }
             }
-            else 
+            else
             {
                 spawnCreatures(x, datatable, self);
             }
@@ -81,6 +90,7 @@ public class ep3_clone_relics_generic_spawner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tellingMomIDied(obj_id self, dictionary params) throws InterruptedException
     {
         int spawn_num = params.getInt("spawnNumber");
@@ -92,10 +102,12 @@ public class ep3_clone_relics_generic_spawner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int randomCreatureDied(obj_id self, dictionary params) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public void attachRoomScripts(obj_id self, String datatable) throws InterruptedException
     {
         String[] roomsToLock = dataTableGetStringColumnNoDefaults(datatable, "special_room");
@@ -120,7 +132,7 @@ public class ep3_clone_relics_generic_spawner extends script.base_script
             {
                 roomObj = self;
             }
-            else 
+            else
             {
                 roomObj = getCellId(self, roomName);
             }
@@ -128,8 +140,8 @@ public class ep3_clone_relics_generic_spawner extends script.base_script
             setObjVar(self, "set_room", passThrough);
             passThrough = passThrough + 1;
         }
-        return;
     }
+
     public void setRoomObjVars(obj_id self, String datatable) throws InterruptedException
     {
         String[] roomsToSet = dataTableGetStringColumnNoDefaults(datatable, "room_objvar");
@@ -158,8 +170,8 @@ public class ep3_clone_relics_generic_spawner extends script.base_script
             setObjVar(roomObj, roomObjVar, roomObjVarValue);
             passThrough = passThrough + 1;
         }
-        return;
     }
+
     public void spawnCreatures(int x, String datatable, obj_id self) throws InterruptedException
     {
         String spawn = dataTableGetString(datatable, x, "spawns");
@@ -215,7 +227,8 @@ public class ep3_clone_relics_generic_spawner extends script.base_script
         if (scriptList != null && !scriptList.equals(""))
         {
             String[] scriptArray = split(scriptList, ',');
-            for (String s : scriptArray) {
+            for (String s : scriptArray)
+            {
                 attachScript(spawnedCreature, s);
             }
         }
@@ -264,13 +277,13 @@ public class ep3_clone_relics_generic_spawner extends script.base_script
                 }
             }
         }
-        else 
+        else
         {
             String objVarList = dataTableGetString(datatable, x, "spawn_objvar");
             setCreatureObjVars(spawnedCreature, objVarList);
         }
-        return;
     }
+
     public int animatedMood(obj_id self, dictionary params) throws InterruptedException
     {
         int x = params.getInt("x");
@@ -288,6 +301,7 @@ public class ep3_clone_relics_generic_spawner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void setCreatureObjVars(obj_id creature, String objVarList) throws InterruptedException
     {
         if (objVarList == null || objVarList.equals(""))
@@ -295,13 +309,15 @@ public class ep3_clone_relics_generic_spawner extends script.base_script
             return;
         }
         String[] pairs = split(objVarList, ',');
-        for (String pair : pairs) {
+        for (String pair : pairs)
+        {
             String[] objVarToSet = split(pair, '=');
             String objVarValue = objVarToSet[1];
             String[] objVarNameAndType = split(objVarToSet[0], ':');
             String objVarType = objVarNameAndType[0];
             String objVarName = objVarNameAndType[1];
-            switch (objVarType) {
+            switch (objVarType)
+            {
                 case "string":
                     setObjVar(creature, objVarName, objVarValue);
                     break;

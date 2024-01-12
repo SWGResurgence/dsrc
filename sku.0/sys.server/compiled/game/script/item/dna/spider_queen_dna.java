@@ -1,5 +1,11 @@
 package script.item.dna;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.static_item;
 import script.library.utils;
@@ -9,6 +15,7 @@ public class spider_queen_dna extends script.base_script
 {
     public static final String SPIDER_QUEEN_DNA_LOOT_ITEM = "item_spiderclan_queen_dna";
     public static final int SPIDER_QUEEN_DNA_LOOT_CHANCE = 5;
+
     public spider_queen_dna()
     {
     }

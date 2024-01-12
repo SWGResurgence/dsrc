@@ -1,5 +1,11 @@
 package script.item.dice.base;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.debug;
 import script.library.prose;
@@ -19,6 +25,7 @@ public class base_dice extends script.base_script
     public static final String STF = "dice/dice";
     public static final string_id RED = new string_id(STF, "red");
     public static final string_id BLUE = new string_id(STF, "blue");
+
     public base_dice()
     {
     }

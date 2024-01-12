@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.death_watch_bunker;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.utils;
@@ -8,10 +14,12 @@ import script.obj_id;
 
 public class hall_mini_boss extends script.base_script
 {
+    public static final String TBL_HALL_WAVE = "datatables/dungeon/death_watch/hall_wave.iff";
+
     public hall_mini_boss()
     {
     }
-    public static final String TBL_HALL_WAVE = "datatables/dungeon/death_watch/hall_wave.iff";
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setName(self, "Rageon Vart");
@@ -19,6 +27,7 @@ public class hall_mini_boss extends script.base_script
         messageTo(self, "handleInvestigate", null, 1.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int aiCorpsePrepared(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id corpseInventory = utils.getInventoryContainer(self);
@@ -29,6 +38,7 @@ public class hall_mini_boss extends script.base_script
         createObject("object/tangible/dungeon/death_watch_bunker/passkey_hall.iff", corpseInventory, "");
         return SCRIPT_CONTINUE;
     }
+
     public int handleAttackerCleanUp(obj_id self, dictionary params) throws InterruptedException
     {
         if (ai_lib.isInCombat(self))
@@ -39,6 +49,7 @@ public class hall_mini_boss extends script.base_script
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int handleInvestigate(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id structure = getTopMostContainer(self);

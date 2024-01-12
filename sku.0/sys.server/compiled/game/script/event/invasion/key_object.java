@@ -1,5 +1,11 @@
 package script.event.invasion;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.obj_id;
 
@@ -8,17 +14,20 @@ public class key_object extends script.base_script
     public key_object()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         float expirationTime = getFloatObjVar(self, "event.invasion.keyObject.expirationTime");
         messageTo(self, "cleanUp", null, expirationTime, false);
         return SCRIPT_CONTINUE;
     }
+
     public int cleanUp(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public void checkTimeLimit(obj_id self) throws InterruptedException
     {
         float expirationTime = getFloatObjVar(self, "event.invasion.keyObject.expirationTime");
@@ -29,13 +38,14 @@ public class key_object extends script.base_script
         {
             destroyObject(self);
         }
-        return;
     }
+
     public int OnAddedToWorld(obj_id self) throws InterruptedException
     {
         checkTimeLimit(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnHearSpeech(obj_id self, obj_id objSpeaker, String strText) throws InterruptedException
     {
         obj_id coordinator = getObjIdObjVar(self, "event.invasion.coordinator");

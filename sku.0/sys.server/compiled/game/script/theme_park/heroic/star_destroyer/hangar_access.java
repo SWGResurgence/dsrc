@@ -1,33 +1,41 @@
 package script.theme_park.heroic.star_destroyer;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.trial;
 
 public class hangar_access extends script.base_script
 {
-    public hangar_access()
-    {
-    }
     public static final int STATE_NONE = 0;
     public static final int STATE_ACTIVE = 1;
     public static final int STATE_DONE = 2;
+    public hangar_access()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info item) throws InterruptedException
     {
         int state = getEventState(self);
         switch (state)
         {
             case STATE_NONE:
-            item.addRootMenu(menu_info_types.ITEM_USE, new string_id("instance", "hangar_state_none"));
-            break;
+                item.addRootMenu(menu_info_types.ITEM_USE, new string_id("instance", "hangar_state_none"));
+                break;
             case STATE_ACTIVE:
-            item.addRootMenu(menu_info_types.ITEM_USE, new string_id("instance", "hangar_state_active"));
-            break;
+                item.addRootMenu(menu_info_types.ITEM_USE, new string_id("instance", "hangar_state_active"));
+                break;
             case STATE_DONE:
-            item.addRootMenu(menu_info_types.ITEM_USE, new string_id("instance", "hangar_state_complete"));
-            break;
+                item.addRootMenu(menu_info_types.ITEM_USE, new string_id("instance", "hangar_state_complete"));
+                break;
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item != menu_info_types.ITEM_USE)
@@ -40,31 +48,36 @@ public class hangar_access extends script.base_script
         switch (state)
         {
             case STATE_NONE:
-            messageTo(self, "kickoff_event", trial.getSessionDict(self, "key"), 1.0f, false);
-            break;
+                messageTo(self, "kickoff_event", trial.getSessionDict(self, "key"), 1.0f, false);
+                break;
             case STATE_ACTIVE:
-            break;
+                break;
             case STATE_DONE:
-            break;
+                break;
         }
         return SCRIPT_CONTINUE;
     }
+
     public int getEventState(obj_id self) throws InterruptedException
     {
         return getIntObjVar(self, "event_state");
     }
+
     public boolean isInactive(obj_id self) throws InterruptedException
     {
         return getEventState(self) == STATE_NONE;
     }
+
     public boolean isActive(obj_id self) throws InterruptedException
     {
         return getEventState(self) == STATE_ACTIVE;
     }
+
     public boolean isComplete(obj_id self) throws InterruptedException
     {
         return getEventState(self) == STATE_DONE;
     }
+
     public int kickoff_event(obj_id self, dictionary params) throws InterruptedException
     {
         if (!trial.verifySession(self, params, "key"))

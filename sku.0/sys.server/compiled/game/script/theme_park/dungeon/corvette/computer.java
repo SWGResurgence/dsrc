@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.corvette;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.create;
 import script.library.group;
 import script.library.utils;
@@ -10,11 +16,12 @@ import script.string_id;
 
 public class computer extends script.terminal.base.base_terminal
 {
+    public static final string_id SID_TERMINAL_DISABLED = new string_id("skill_teacher", "skill_terminal_disabled");
+    public static final String MSGS = "dungeon/corvette";
     public computer()
     {
     }
-    public static final string_id SID_TERMINAL_DISABLED = new string_id("skill_teacher", "skill_terminal_disabled");
-    public static final String MSGS = "dungeon/corvette";
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)
@@ -46,23 +53,23 @@ public class computer extends script.terminal.base.base_terminal
                     {
                         int secCode4 = rand(10000, 99999);
                         sendSystemMessage(player, armory);
-                        sendSystemMessage(player, "" + secCode4, null);
+                        sendSystemMessage(player, String.valueOf(secCode4), null);
                         setGroupObjVar(player, "corl_corvette.armorybackroom55", secCode4);
                         setObjVar(self, "code", secCode4);
                     }
-                    else 
+                    else
                     {
                         int armoryCode = getIntObjVar(player, "corl_corvette.armorybackroom55");
                         setObjVar(self, "code", armoryCode);
                         sendSystemMessage(player, armory);
-                        sendSystemMessage(player, "" + armoryCode, null);
+                        sendSystemMessage(player, String.valueOf(armoryCode), null);
                     }
                 }
-                else 
+                else
                 {
                     int existingCode = getIntObjVar(self, "code");
                     sendSystemMessage(player, armory);
-                    sendSystemMessage(player, "" + existingCode, null);
+                    sendSystemMessage(player, String.valueOf(existingCode), null);
                     if (!hasObjVar(player, "corl_corvette.armorybackroom55"))
                     {
                         setGroupObjVar(player, "corl_corvette.armorybackroom55", existingCode);
@@ -87,7 +94,7 @@ public class computer extends script.terminal.base.base_terminal
                     setObjVar(self, "bridgeCode", bridgeCode);
                     string_id bridge = new string_id(MSGS, "bridge_code");
                     sendSystemMessage(player, bridge);
-                    sendSystemMessage(player, "" + bridgeCode, null);
+                    sendSystemMessage(player, String.valueOf(bridgeCode), null);
                     setObjVar(self, "rebooted", 1);
                     setGroupObjVar(player, "corl_corvette.bridge66", bridgeCode);
                     return SCRIPT_CONTINUE;
@@ -104,7 +111,7 @@ public class computer extends script.terminal.base.base_terminal
                             string_id reboot = new string_id(MSGS, "reboot");
                             sendSystemMessage(player, reboot);
                         }
-                        else 
+                        else
                         {
                             string_id sliced = new string_id(MSGS, "sliced");
                             sendSystemMessage(player, sliced);
@@ -113,7 +120,7 @@ public class computer extends script.terminal.base.base_terminal
                             setObjVar(self, "rebooted", 1);
                         }
                     }
-                    else 
+                    else
                     {
                         string_id disk = new string_id(MSGS, "insert_disk");
                         sendSystemMessage(player, disk);
@@ -121,7 +128,7 @@ public class computer extends script.terminal.base.base_terminal
                         destroyObject(bootdisk);
                     }
                 }
-                else 
+                else
                 {
                     int bridgeCode = getIntObjVar(self, "bridgeCode");
                     if (bridgeCode == 0)
@@ -131,7 +138,7 @@ public class computer extends script.terminal.base.base_terminal
                     setObjVar(self, "bridgeCode", bridgeCode);
                     string_id bridge2 = new string_id(MSGS, "bridge_code");
                     sendSystemMessage(player, bridge2);
-                    sendSystemMessage(player, "" + bridgeCode, null);
+                    sendSystemMessage(player, String.valueOf(bridgeCode), null);
                     setObjVar(self, "rebooted", 1);
                     setGroupObjVar(player, "corl_corvette.bridge66", bridgeCode);
                 }
@@ -151,23 +158,23 @@ public class computer extends script.terminal.base.base_terminal
                     {
                         int secCode = rand(10000, 99999);
                         sendSystemMessage(player, starboard);
-                        sendSystemMessage(player, "" + secCode, null);
+                        sendSystemMessage(player, String.valueOf(secCode), null);
                         setGroupObjVar(player, "corl_corvette.officerquarters64", secCode);
                         setObjVar(self, "code", secCode);
                     }
-                    else 
+                    else
                     {
                         int old = getIntObjVar(player, "corl_corvette.officerquarters64");
                         setObjVar(self, "code", old);
                         sendSystemMessage(player, starboard);
-                        sendSystemMessage(player, "" + old, null);
+                        sendSystemMessage(player, String.valueOf(old), null);
                     }
                 }
-                else 
+                else
                 {
                     int theCode = getIntObjVar(self, "code");
                     sendSystemMessage(player, starboard);
-                    sendSystemMessage(player, "" + theCode, null);
+                    sendSystemMessage(player, String.valueOf(theCode), null);
                     if (!hasObjVar(player, "corl_corvette.officerquarters64"))
                     {
                         setGroupObjVar(player, "corl_corvette.officerquarters64", theCode);
@@ -183,23 +190,23 @@ public class computer extends script.terminal.base.base_terminal
                     {
                         int secCode2 = rand(10000, 99999);
                         sendSystemMessage(player, port);
-                        sendSystemMessage(player, "" + secCode2, null);
+                        sendSystemMessage(player, String.valueOf(secCode2), null);
                         setGroupObjVar(player, "corl_corvette.officerquarters65", secCode2);
                         setObjVar(self, "code", secCode2);
                     }
-                    else 
+                    else
                     {
                         int other = getIntObjVar(player, "corl_corvette.officerquarters65");
                         setObjVar(self, "code", other);
                         sendSystemMessage(player, port);
-                        sendSystemMessage(player, "" + other, null);
+                        sendSystemMessage(player, String.valueOf(other), null);
                     }
                 }
-                else 
+                else
                 {
                     int oldCode = getIntObjVar(self, "code");
                     sendSystemMessage(player, port);
-                    sendSystemMessage(player, "" + oldCode, null);
+                    sendSystemMessage(player, String.valueOf(oldCode), null);
                     if (!hasObjVar(player, "corl_corvette.officerquarters65"))
                     {
                         setGroupObjVar(player, "corl_corvette.officerquarters65", oldCode);
@@ -215,23 +222,23 @@ public class computer extends script.terminal.base.base_terminal
                     {
                         int secCode3 = rand(10000, 99999);
                         sendSystemMessage(player, prison);
-                        sendSystemMessage(player, "" + secCode3, null);
+                        sendSystemMessage(player, String.valueOf(secCode3), null);
                         setGroupObjVar(player, "corl_corvette.officerquarters63", secCode3);
                         setObjVar(self, "code", secCode3);
                     }
-                    else 
+                    else
                     {
                         int prisonCode = getIntObjVar(player, "corl_corvette.officerquarters63");
                         setObjVar(self, "code", prisonCode);
                         sendSystemMessage(player, prison);
-                        sendSystemMessage(player, "" + prisonCode, null);
+                        sendSystemMessage(player, String.valueOf(prisonCode), null);
                     }
                 }
-                else 
+                else
                 {
                     int existingCode = getIntObjVar(self, "code");
                     sendSystemMessage(player, prison);
-                    sendSystemMessage(player, "" + existingCode, null);
+                    sendSystemMessage(player, String.valueOf(existingCode), null);
                     if (!hasObjVar(player, "corl_corvette.officerquarters63"))
                     {
                         setGroupObjVar(player, "corl_corvette.officerquarters63", existingCode);
@@ -253,6 +260,7 @@ public class computer extends script.terminal.base.base_terminal
         }
         return SCRIPT_CONTINUE;
     }
+
     public int checkForSlicing(obj_id player) throws InterruptedException
     {
         int slicability = 0;
@@ -260,7 +268,7 @@ public class computer extends script.terminal.base.base_terminal
         {
             return slicability;
         }
-        else 
+        else
         {
             if (hasSkill(player, "class_smuggler_phase1_novice"))
             {
@@ -289,6 +297,7 @@ public class computer extends script.terminal.base.base_terminal
         }
         return slicability;
     }
+
     public void setGroupObjVar(obj_id player, String objvarName, int code) throws InterruptedException
     {
         if (group.isGrouped(player))
@@ -296,18 +305,20 @@ public class computer extends script.terminal.base.base_terminal
             obj_id groupObj = getGroupObject(player);
             obj_id[] groupMembers = getGroupMemberIds(groupObj);
             int numGroupMembers = groupMembers.length;
-            for (obj_id groupie : groupMembers) {
-                if (isIdValid(groupie)) {
+            for (obj_id groupie : groupMembers)
+            {
+                if (isIdValid(groupie))
+                {
                     setObjVar(groupie, objvarName, code);
                 }
             }
         }
-        else 
+        else
         {
             setObjVar(player, objvarName, code);
         }
-        return;
     }
+
     public void spawnEnemies(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id top = getTopMostContainer(self);
@@ -325,10 +336,9 @@ public class computer extends script.terminal.base.base_terminal
         {
             obj_id guard = create.object("imperial_super_battle_droid", loc);
         }
-        else 
+        else
         {
             obj_id guard = create.object("corsec_super_battle_droid", loc);
         }
-        return;
     }
 }

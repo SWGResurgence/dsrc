@@ -1,5 +1,11 @@
 package script.developer.soe.test;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.load_test;
 import script.library.ship_ai;
 import script.library.space_create;
@@ -14,9 +20,6 @@ import java.util.Vector;
 
 public class mbogue_test extends script.base_script
 {
-    public mbogue_test()
-    {
-    }
     public static final String s_logLabel = "space_debug_ai";
     public static final String s_tooFewParameters = "too few parameters\n";
     public static final String s_usageSpaceUnitAddPatrolPath = "Usage: spaceUnitAddPatrolPath <unitObjId>";
@@ -30,13 +33,19 @@ public class mbogue_test extends script.base_script
     public static final String s_usageSpaceUnitSetTargetOrders = "Usage: spaceUnitSetTargetOrders <unitObjId> <int>";
     public static final String s_usageSpaceUnitSetSquad = "Usage: spaceUnitSetSquad <unitObjId> <int>";
     public static final String s_usageSpaceSquadAddPatrolPath = "Usage: spaceSquadAddPatrolPath <int>";
+    public mbogue_test()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
-        if (!isGod(self) || getGodLevel(self) < 50 || !isPlayer(self)) {
+        if (!isGod(self) || getGodLevel(self) < 50 || !isPlayer(self))
+        {
             detachScript(self, "test.mbogue_test");
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnSpeaking(obj_id self, String text) throws InterruptedException
     {
         if (isGod(self))
@@ -132,14 +141,14 @@ public class mbogue_test extends script.base_script
                         if (targetObjectIdList.size() == 1)
                         {
                             error = false;
-                            obj_id targetObjectId = (obj_id)targetObjectIdList.elementAt(0);
+                            obj_id targetObjectId = (obj_id) targetObjectIdList.elementAt(0);
                             ship_ai.unitAddDamageTaken(unitObjectId, targetObjectId, 100000.0f);
                             debugConsoleMsg(self, unitObjectId + " is attacking " + targetObjectId);
                         }
                         else if (targetObjectIdList.size() > 1)
                         {
                             error = false;
-                            obj_id targets[] = new obj_id[targetObjectIdList.size()];
+                            obj_id[] targets = new obj_id[targetObjectIdList.size()];
                             targetObjectIdList.toArray(targets);
                             ship_ai.spaceAttack(unitObjectId, targets);
                             debugConsoleMsg(self, unitObjectId + " is attacking " + targetObjectIdList.size() + " targets");
@@ -238,7 +247,7 @@ public class mbogue_test extends script.base_script
                     {
                         error = false;
                         final int squad = java.lang.Integer.parseInt(tokenizer.nextToken());
-                        transform path[] = new transform[4];
+                        transform[] path = new transform[4];
                         path[0] = transform.identity.setPosition_p(-100, 0, -100);
                         path[1] = transform.identity.setPosition_p(100, 0, -100);
                         path[2] = transform.identity.setPosition_p(100, 0, 100);
@@ -270,7 +279,7 @@ public class mbogue_test extends script.base_script
                     {
                         error = false;
                         final obj_id unitObjectId = obj_id.getObjId(java.lang.Long.parseLong(tokenizer.nextToken()));
-                        transform path[] = new transform[4];
+                        transform[] path = new transform[4];
                         path[0] = transform.identity.setPosition_p(50.0f, 0.0f, 0.0f);
                         path[1] = transform.identity.setPosition_p(00.0f, 50.0f, 0.0f);
                         path[2] = transform.identity.setPosition_p(00.0f, 0.0f, 50.0f);
@@ -365,12 +374,15 @@ public class mbogue_test extends script.base_script
                 }
                 else if (command.equalsIgnoreCase("ai_clear_random"))
                 {
-                    obj_id objectList[] = getObjectsInRange(self, 16000.0f);
+                    obj_id[] objectList = getObjectsInRange(self, 16000.0f);
                     int count = 0;
-                    for (obj_id obj_id : objectList) {
-                        if (isGameObjectTypeOf(obj_id, GOT_ship) && !isGameObjectTypeOf(obj_id, GOT_ship_station) && !(getTemplateName(obj_id)).startsWith("object/ship/player")) {
+                    for (obj_id obj_id : objectList)
+                    {
+                        if (isGameObjectTypeOf(obj_id, GOT_ship) && !isGameObjectTypeOf(obj_id, GOT_ship_station) && !(getTemplateName(obj_id)).startsWith("object/ship/player"))
+                        {
                             Random random = new Random();
-                            if ((Math.abs(random.nextInt()) % 2) == 0) {
+                            if ((Math.abs(random.nextInt()) % 2) == 0)
+                            {
                                 debugDestroyObject(self, obj_id);
                                 ++count;
                             }
@@ -380,10 +392,12 @@ public class mbogue_test extends script.base_script
                 }
                 else if (command.equalsIgnoreCase("ai_clear"))
                 {
-                    obj_id objectList[] = getObjectsInRange(self, 16000.0f);
+                    obj_id[] objectList = getObjectsInRange(self, 16000.0f);
                     int count = 0;
-                    for (obj_id obj_id : objectList) {
-                        if (isGameObjectTypeOf(obj_id, GOT_ship) && !isGameObjectTypeOf(obj_id, GOT_ship_station) && !(getTemplateName(obj_id)).startsWith("object/ship/player")) {
+                    for (obj_id obj_id : objectList)
+                    {
+                        if (isGameObjectTypeOf(obj_id, GOT_ship) && !isGameObjectTypeOf(obj_id, GOT_ship_station) && !(getTemplateName(obj_id)).startsWith("object/ship/player"))
+                        {
                             debugDestroyObject(self, obj_id);
                             ++count;
                         }
@@ -413,14 +427,14 @@ public class mbogue_test extends script.base_script
                     {
                         formationShip = tokenizer.nextToken();
                     }
-                    else 
+                    else
                     {
-                        formationShip = new String("tiefighter");
+                        formationShip = "tiefighter";
                     }
                     final obj_id guardedUnit = createUnit(self, "tiefighter", createRadius);
                     ship_ai.unitSetAttackOrders(guardedUnit, ship_ai.ATTACK_ORDERS_HOLD_FIRE);
                     ship_ai.unitLoiter(guardedUnit, transform.identity, 50.0f, 50.0f);
-                    
+
                     {
                         final int squadLeaderSquad = ship_ai.squadCreateSquadId();
                         final int squadCount = 1;
@@ -449,9 +463,9 @@ public class mbogue_test extends script.base_script
                         {
                             shipName = tokenizer.nextToken();
                         }
-                        else 
+                        else
                         {
-                            shipName = new String("yt1300");
+                            shipName = "yt1300";
                         }
                         final obj_id dockingUnit = createUnit(self, shipName, 200.0f);
                         ship_ai.unitDock(dockingUnit, spaceStation, 10.0f);
@@ -519,7 +533,7 @@ public class mbogue_test extends script.base_script
                         debugConsoleMsg(self, (ship_ai.unitIsAutoAggroImmune(unit) ? "[ENABLED]" : "[DISABLED]") + " ship aggro immunity " + unit);
                         error = false;
                     }
-                    else 
+                    else
                     {
                         obj_id playerShip = space_transition.getContainingShip(self);
                         debugConsoleMsg(self, (ship_ai.unitIsAutoAggroImmune(playerShip) ? "[ENABLED]" : "[DISABLED]") + " player ship aggro immunity " + playerShip);
@@ -541,7 +555,7 @@ public class mbogue_test extends script.base_script
                         debugConsoleMsg(self, (ship_ai.unitIsAutoAggroImmune(unit) ? "[ENABLED]" : "[DISABLED]") + " player ship aggro immunity " + unit);
                         error = false;
                     }
-                    else 
+                    else
                     {
                         obj_id playerShip = space_transition.getContainingShip(self);
                         ship_ai.unitSetAutoAggroImmune(playerShip, !ship_ai.unitIsAutoAggroImmune(playerShip));
@@ -565,7 +579,7 @@ public class mbogue_test extends script.base_script
                         debugConsoleMsg(self, (ship_ai.unitIsAutoAggroImmune(unit) ? "[ENABLED]" : "[DISABLED]") + " player ship aggro immunity " + unit);
                         error = false;
                     }
-                    else 
+                    else
                     {
                         obj_id playerShip = space_transition.getContainingShip(self);
                         ship_ai.unitRemoveFromAllAttackTargetLists(playerShip);
@@ -617,7 +631,7 @@ public class mbogue_test extends script.base_script
                         }
                         for (int index = 0; index < squadCount; ++index)
                         {
-                            final float radian = (float)Math.PI * 2.0f * ((float)index / squadCount);
+                            final float radian = (float) Math.PI * 2.0f * ((float) index / squadCount);
                             final float x = anchorPosition_w.x + (float) StrictMath.sin(radian) * squadSpacingRadius;
                             final float y = anchorPosition_w.y;
                             final float z = anchorPosition_w.z + (float) StrictMath.cos(radian) * squadSpacingRadius;
@@ -692,7 +706,7 @@ public class mbogue_test extends script.base_script
                     obj_id lookAtTarget = getLookAtTarget(self);
                     debugConsoleMsg(self, lookAtTarget + ": hasCondition(CONDITION_ON): " + (hasCondition(lookAtTarget, CONDITION_ON) ? "yes" : "no"));
                 }
-                else 
+                else
                 {
                     LOG("space_debug_ai", "unknown command");
                 }
@@ -700,13 +714,15 @@ public class mbogue_test extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public vector getRandomPosition(float radius) throws InterruptedException
     {
-        final float x = radius * 2.0f * (0.5f - (float)Math.random());
-        final float y = radius * 2.0f * (0.5f - (float)Math.random());
-        final float z = radius * 2.0f * (0.5f - (float)Math.random());
+        final float x = radius * 2.0f * (0.5f - (float) Math.random());
+        final float y = radius * 2.0f * (0.5f - (float) Math.random());
+        final float z = radius * 2.0f * (0.5f - (float) Math.random());
         return new vector(x, y, z);
     }
+
     public obj_id createUnit(obj_id self, String unitName, float radius, vector position) throws InterruptedException
     {
         final vector randomPosition = new vector(getRandomPosition(radius));
@@ -716,34 +732,39 @@ public class mbogue_test extends script.base_script
         obj_id unitId = space_create.createShip(unitName, transform.identity.move_p(new vector(x, y, z)));
         return unitId;
     }
+
     public obj_id createUnit(obj_id self, String unitName, float radius) throws InterruptedException
     {
         obj_id unitId = createUnit(self, unitName, radius, vector.zero);
         return unitId;
     }
+
     public void debugSpaceUnitFollow(obj_id self, obj_id unit, obj_id followedUnit, vector direction, float offset) throws InterruptedException
     {
         debugConsoleMsg(self, "spaceUnitFollow() unit: " + unit + " followedUnit: " + followedUnit + " (" + direction.x + ", " + direction.y + ", " + direction.z + ") offset: " + offset);
         ship_ai.unitFollow(unit, followedUnit, direction, offset);
     }
+
     public void debugDestroyObject(obj_id self, obj_id object) throws InterruptedException
     {
         destroyObject(object);
     }
+
     public void debugSpaceUnitAddPatrolPath(obj_id self, obj_id unit, transform[] path) throws InterruptedException
     {
         debugConsoleMsg(self, "spaceUnitAddPatrolPath() unit: " + unit + " path.length: " + path.length);
         ship_ai.spacePatrol(unit, path);
     }
+
     public transform[] createPatrolPathSpiral(vector position_w, float radius) throws InterruptedException
     {
         final int points = 60;
-        transform path[] = new transform[points];
+        transform[] path = new transform[points];
         for (int i = 0; i < points; ++i)
         {
             final float halfHeightPercent = 2.0f;
-            final float yOffset = ((float)i / points) * radius * (halfHeightPercent * 2.0f) - radius * halfHeightPercent;
-            final float radian = (float)Math.PI * 4.0f * ((float)i / points);
+            final float yOffset = ((float) i / points) * radius * (halfHeightPercent * 2.0f) - radius * halfHeightPercent;
+            final float radian = (float) Math.PI * 4.0f * ((float) i / points);
             final float x = position_w.x + (float) StrictMath.sin(radian) * radius;
             final float y = position_w.y + yOffset;
             final float z = position_w.z + (float) StrictMath.cos(radian) * radius;
@@ -751,6 +772,7 @@ public class mbogue_test extends script.base_script
         }
         return path;
     }
+
     public int createPatrollingSquad(obj_id self, String unitName, int squadSize, vector position_w) throws InterruptedException
     {
         final float createRadius = 200.0f;

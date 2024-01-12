@@ -1,62 +1,69 @@
 package script.theme_park.racing.narmle;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
 public class race_coordinator extends script.base_script
 {
+    public static final String RACING_STF = "theme_park/racing/racing";
+    public static final int[] CHECK_POINT =
+            {
+                    -4987,
+                    0,
+                    -2417,
+                    -5031,
+                    0,
+                    -2425,
+                    -5081,
+                    0,
+                    -2393,
+                    -5172,
+                    0,
+                    -2398,
+                    -5222,
+                    0,
+                    -2317,
+                    -5149,
+                    0,
+                    -2286,
+                    -5114,
+                    0,
+                    -2254,
+                    -5148,
+                    0,
+                    -2274,
+                    -5186,
+                    0,
+                    -2216,
+                    -5328,
+                    0,
+                    -2093,
+                    -5441,
+                    0,
+                    -2098,
+                    -5529,
+                    0,
+                    -2137,
+                    -5475,
+                    0,
+                    -2348,
+                    -5205,
+                    0,
+                    -2614,
+                    -4995,
+                    0,
+                    -2484
+            };
     public race_coordinator()
     {
     }
-    public static final String RACING_STF = "theme_park/racing/racing";
-    public static final int[] CHECK_POINT = 
-    {
-        -4987,
-        0,
-        -2417,
-        -5031,
-        0,
-        -2425,
-        -5081,
-        0,
-        -2393,
-        -5172,
-        0,
-        -2398,
-        -5222,
-        0,
-        -2317,
-        -5149,
-        0,
-        -2286,
-        -5114,
-        0,
-        -2254,
-        -5148,
-        0,
-        -2274,
-        -5186,
-        0,
-        -2216,
-        -5328,
-        0,
-        -2093,
-        -5441,
-        0,
-        -2098,
-        -5529,
-        0,
-        -2137,
-        -5475,
-        0,
-        -2348,
-        -5205,
-        0,
-        -2614,
-        -4995,
-        0,
-        -2484
-    };
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
@@ -70,6 +77,7 @@ public class race_coordinator extends script.base_script
         messageTo(self, "resetDailyTime", null, 60 * 60 * 24, false);
         return SCRIPT_CONTINUE;
     }
+
     public int resetDailyTime(obj_id self, dictionary params) throws InterruptedException
     {
         float topRecord = 350.0f;
@@ -79,6 +87,7 @@ public class race_coordinator extends script.base_script
         messageTo(self, "resetDailyTime", null, 60 * 60 * 24, false);
         return SCRIPT_CONTINUE;
     }
+
     public int messageStartMission(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -98,7 +107,7 @@ public class race_coordinator extends script.base_script
         {
             returnLoc = getLocation(npc);
         }
-        else 
+        else
         {
             returnLoc = getLocation(building);
         }
@@ -123,7 +132,7 @@ public class race_coordinator extends script.base_script
         {
             messageTo(player, "handleRestartMission", params, 0, false);
         }
-        else 
+        else
         {
             attachScript(player, "theme_park.racing.narmle.player_racing");
         }
@@ -131,6 +140,7 @@ public class race_coordinator extends script.base_script
         CustomerServiceLog("Racing", "Player " + playerName + " [" + player + "] started the Narmle Rally race.");
         return SCRIPT_CONTINUE;
     }
+
     public int messageRegisterBest(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -154,9 +164,9 @@ public class race_coordinator extends script.base_script
             {
                 if (!badge.hasBadge(player, "bdg_racing_narmle_memorial"))
                 {
-                    
+
                 }
-                
+
                 {
                     badge.grantBadge(player, "bdg_racing_narmle_memorial");
                 }
@@ -207,6 +217,7 @@ public class race_coordinator extends script.base_script
         CustomerServiceLog("Racing", "Player " + playerName + " [" + player + "] finished the Narmle Rally race in " + bestTime + " seconds.");
         return SCRIPT_CONTINUE;
     }
+
     public int messageDisplayLeader(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -215,9 +226,10 @@ public class race_coordinator extends script.base_script
         String playerName = getStringObjVar(npc, "racing.narmle.topRecordName");
         string_id currentRecordHolder = new string_id(RACING_STF, "current_record_holder");
         sendSystemMessage(player, currentRecordHolder);
-        sendSystemMessage(player, "" + playerName + " with a time of " + topRecord + " seconds.", null);
+        sendSystemMessage(player, playerName + " with a time of " + topRecord + " seconds.", null);
         return SCRIPT_CONTINUE;
     }
+
     public int messageWhatsMyTime(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -232,6 +244,7 @@ public class race_coordinator extends script.base_script
         chat.publicChat(self, null, null, null, myBestTime);
         return SCRIPT_CONTINUE;
     }
+
     public int messageErasePersonalBest(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");

@@ -1,5 +1,11 @@
 package script.theme_park.nightsister;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.obj_id;
 
@@ -8,11 +14,13 @@ public class rancor_attacker_rancor_cave extends script.base_script
     public rancor_attacker_rancor_cave()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "nightsisterCaveSpawn", null, 3.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int nightsisterCaveSpawn(obj_id self, dictionary params) throws InterruptedException
     {
         String cell = getStringObjVar(self, "roomname");

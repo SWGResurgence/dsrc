@@ -1,70 +1,83 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
 public class npe_commando extends script.base_script
 {
+    public static String c_stringFile = "conversation/npe_commando";
+
     public npe_commando()
     {
     }
-    public static String c_stringFile = "conversation/npe_commando";
+
     public boolean npe_commando_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean npe_commando_condition_wantsCommando(obj_id player, obj_id npc) throws InterruptedException
     {
         return npe_commando_condition_isCommandoTemplate(player, npc) && groundquests.isQuestActive(player, "npe_pointer_commando_template");
     }
+
     public boolean npe_commando_condition_isCommandoTemplate(obj_id player, obj_id npc) throws InterruptedException
     {
         String playerTemplate = getSkillTemplate(player);
-        if (playerTemplate.contains("commando"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return playerTemplate.contains("commando");
     }
+
     public boolean npe_commando_condition_fromBrawler(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "npe_commando_tracker", "done");
     }
+
     public boolean npe_commando_condition_finishFinalTask(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "npe_commando", "final_return");
     }
+
     public boolean npe_commando_condition_finishedFirstTask(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "npe_commando", "return1");
     }
+
     public boolean npe_commando_condition_finishedSecondTask(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "npe_commando", "return2");
     }
+
     public boolean npe_commando_condition_isOnTask(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isTaskActive(player, "npe_commando", "elevator_toDroid") || groundquests.isTaskActive(player, "npe_commando", "elevator_toData") || groundquests.isTaskActive(player, "npe_commando", "defuse") || groundquests.isTaskActive(player, "npe_commando", "thugs") || groundquests.isTaskActive(player, "npe_commando", "get_data"));
     }
+
     public boolean npe_commando_condition_defusedBomb(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean npe_commando_condition_finishedAll(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "npe_commando");
     }
+
     public boolean npe_commando_condition_hasFinishedInaldraLt(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.hasCompletedQuest(player, "npe_side_smuggle") && groundquests.hasCompletedQuest(player, "npe_side4") && groundquests.hasCompletedQuest(player, "npe_brawler_4a") && groundquests.hasCompletedQuest(player, "npe_side_hutt_slicers") && groundquests.hasCompletedQuest(player, "npe_scout_1") && groundquests.hasCompletedQuest(player, "npe_side3") && groundquests.hasCompletedQuest(player, "npe_side5") && space_quest.hasWonQuest(player, "escort", "npe_training_3") && space_quest.hasCompletedQuestRecursive(player, "patrol", "npe_easy_main_4") && space_quest.hasWonQuest(player, "destroy", "npe_med_main_4") && space_quest.hasWonQuest(player, "destroy", "npe_hard_main_3") && groundquests.hasCompletedQuest(player, "npe_side2") && groundquests.hasCompletedQuest(player, "npe_side_jolka") && groundquests.hasCompletedQuest(player, "npe_inaldra_quest") && groundquests.hasCompletedQuest(player, "npe_side_dungeon_soldier") && groundquests.hasCompletedQuest(player, "npe_side_dungeon_dna") && groundquests.hasCompletedQuest(player, "npe_frelka_transition") && (groundquests.hasCompletedQuest(player, "npe_imperial_1") || groundquests.hasCompletedQuest(player, "npe_rebel_2")));
     }
+
     public void npe_commando_action_giveInaldraPointer(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "npe_pointer_secretary");
     }
+
     public void npe_commando_action_giveCommandoQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         npe.giveGrenadePopUp(player, npc);
@@ -77,17 +90,20 @@ public class npe_commando extends script.base_script
         }
         boolean hasItem = false;
         obj_id[] playerStuff = getInventoryAndEquipment(player);
-        for (obj_id obj_id : playerStuff) {
+        for (obj_id obj_id : playerStuff)
+        {
             String templateName = static_item.getStaticItemName(obj_id);
-            if (templateName != null) {
-                if (templateName.equals("weapon_grenade_fragmentation_01_01")) {
+            if (templateName != null)
+            {
+                if (templateName.equals("weapon_grenade_fragmentation_01_01"))
+                {
                     hasItem = true;
                     newbieTutorialSetToolbarElement(player, 5, obj_id);
                     newbieTutorialHighlightUIElement(player, "/GroundHUD.Toolbar.volume.5", 5.0f);
                 }
             }
         }
-        if (hasItem == false)
+        if (!hasItem)
         {
             obj_id grenade = static_item.createNewItemFunction("weapon_grenade_fragmentation_01_01", player);
             newbieTutorialSetToolbarElement(player, 5, grenade);
@@ -101,27 +117,33 @@ public class npe_commando extends script.base_script
             messageTo(player, "makeUiElementAnimate", dic, 0.25f, true);
         }
     }
+
     public void npe_commando_action_giveFirstSignal(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "npe_grenade_done");
     }
+
     public void npe_commando_action_giveSecondSignal(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "npe_datapad_done");
     }
+
     public void npe_commando_action_facePlayer(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
     }
+
     public void npe_commando_action_giveReward(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "final_return");
         setObjVar(player, "npe.finishedTemplate", 1);
     }
+
     public void npe_commando_action_giveHanPointer(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "npe_job_pointer_han");
     }
+
     public int npe_commando_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_64"))
@@ -148,6 +170,7 @@ public class npe_commando extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_commando_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_46"))
@@ -167,7 +190,7 @@ public class npe_commando extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_67");
@@ -176,7 +199,7 @@ public class npe_commando extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_commando.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -186,6 +209,7 @@ public class npe_commando extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_commando_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_67"))
@@ -206,7 +230,7 @@ public class npe_commando extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_42");
@@ -215,7 +239,7 @@ public class npe_commando extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_commando.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -225,6 +249,7 @@ public class npe_commando extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_commando_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_42"))
@@ -240,6 +265,7 @@ public class npe_commando extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_commando_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_36"))
@@ -260,7 +286,7 @@ public class npe_commando extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_45");
@@ -269,7 +295,7 @@ public class npe_commando extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_commando.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -279,6 +305,7 @@ public class npe_commando extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_commando_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_45"))
@@ -298,7 +325,7 @@ public class npe_commando extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_53");
@@ -307,7 +334,7 @@ public class npe_commando extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_commando.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -317,6 +344,7 @@ public class npe_commando extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_commando_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_53"))
@@ -332,6 +360,7 @@ public class npe_commando extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_commando_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_56"))
@@ -351,7 +380,7 @@ public class npe_commando extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_63");
@@ -360,7 +389,7 @@ public class npe_commando extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_commando.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -370,6 +399,7 @@ public class npe_commando extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_commando_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_63"))
@@ -389,7 +419,7 @@ public class npe_commando extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_72");
@@ -398,7 +428,7 @@ public class npe_commando extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.npe_commando.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -408,6 +438,7 @@ public class npe_commando extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npe_commando_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_72"))
@@ -423,6 +454,7 @@ public class npe_commando extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -435,6 +467,7 @@ public class npe_commando extends script.base_script
         setName(self, "Sergeant Snopel (Commando)");
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
@@ -443,6 +476,7 @@ public class npe_commando extends script.base_script
         setName(self, "Sergeant Snopel (Commando)");
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -451,18 +485,21 @@ public class npe_commando extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.npe_commando");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -499,7 +536,7 @@ public class npe_commando extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_64");
@@ -515,7 +552,7 @@ public class npe_commando extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "npe_commando", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -541,7 +578,7 @@ public class npe_commando extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_46");
@@ -549,7 +586,7 @@ public class npe_commando extends script.base_script
                 utils.setScriptVar(player, "conversation.npe_commando.branchId", 5);
                 npcStartConversation(player, npc, "npe_commando", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -571,7 +608,7 @@ public class npe_commando extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_36");
@@ -579,7 +616,7 @@ public class npe_commando extends script.base_script
                 utils.setScriptVar(player, "conversation.npe_commando.branchId", 9);
                 npcStartConversation(player, npc, "npe_commando", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -601,7 +638,7 @@ public class npe_commando extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_56");
@@ -609,7 +646,7 @@ public class npe_commando extends script.base_script
                 utils.setScriptVar(player, "conversation.npe_commando.branchId", 13);
                 npcStartConversation(player, npc, "npe_commando", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -625,6 +662,7 @@ public class npe_commando extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("npe_commando"))

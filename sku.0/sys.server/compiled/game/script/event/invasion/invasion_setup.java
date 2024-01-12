@@ -1,5 +1,11 @@
 package script.event.invasion;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.create;
 import script.library.sui;
@@ -9,59 +15,60 @@ import script.obj_id;
 
 public class invasion_setup extends script.base_script
 {
+    public static final String[] PROMPT_TEXT =
+            {
+                    "How many different types of creature will be spawned?",
+                    "Enter the spawn name of creature (e.g nightsister_elder, blood_razor_guard).",
+                    "How many waves of attacks will there be?",
+                    "How many minutes between individual attack waves?",
+                    "How many seconds in between individual spawns?",
+                    "Specify how many of each creature type will spawn per wave. ",
+                    "Type in the area broadcast that will announce the start of the event.",
+                    "Type in the area broadcast that will announce the end of the event.",
+                    "Would you like to specify a special area broadcast that will go off on a particular wave? Type yes or no.",
+                    "On which wave would you like the area broadcast to occur?",
+                    "Type in the special area broadcast that will occur on the wave you specified.",
+                    "How will the waves spawn: In a radius around the target or from spawn points. Type radius or spawn points.",
+                    "Enter the minimum spawn radius distance from the target.",
+                    "Enter the maximum spawn radius distance from the target.",
+                    "How many spawn points will their be?",
+                    "Move to want where you want creatures to spawn and type here in the box.",
+                    "Specify the destination offset. Recommended distance is at least 20m. This is to prevent the invaders clumping together or warping inside a building if that is the target.",
+                    "Does this event use a special object (e.g. a crashed shuttle, a camp)? Type yes or no.",
+                    "Type in the template name for the object (e.g. object/tangible/thingy/certain_thingy.iff).",
+                    "Enter a time in seconds for when the key object will expire. 7200 is 2 hours for example.",
+                    "Would you like to automatically award an Event Badge? Enter yes or no.",
+                    "Setup complete. Scroll up and review all your entries to ensure they are correct. If you need to make changes type BACK. Otherwise, move to the target location and type FINISHED to start the event."
+            };
+    public static final String[] TITLE =
+            {
+                    "Number of Creature Types",
+                    "Spawn Names",
+                    "Number of Attack Waves",
+                    "Minutes between Attack Wave",
+                    "Seconds between Individual Spawns",
+                    "Creature Types to Spawn Per Wave",
+                    "Area Broadcast: Start",
+                    "Area Broadcast: End",
+                    "Extra Area Broadcast",
+                    "Area Broadcast on Wave",
+                    "Area Broadcast: Special",
+                    "Spawning Method",
+                    "Min Spawn Radius",
+                    "Max Spawn Radius",
+                    "Number of Spawn Points",
+                    "Spawn Points",
+                    "Destination Offset",
+                    "Use a Key Object?",
+                    "Key Object Template Name",
+                    "Key Object Expiration",
+                    "Award Event Badge",
+                    "Confirm Data"
+            };
     public invasion_setup()
     {
     }
-    public static final String[] PROMPT_TEXT = 
-    {
-        "How many different types of creature will be spawned?",
-        "Enter the spawn name of creature (e.g nightsister_elder, blood_razor_guard).",
-        "How many waves of attacks will there be?",
-        "How many minutes between individual attack waves?",
-        "How many seconds in between individual spawns?",
-        "Specify how many of each creature type will spawn per wave. ",
-        "Type in the area broadcast that will announce the start of the event.",
-        "Type in the area broadcast that will announce the end of the event.",
-        "Would you like to specify a special area broadcast that will go off on a particular wave? Type yes or no.",
-        "On which wave would you like the area broadcast to occur?",
-        "Type in the special area broadcast that will occur on the wave you specified.",
-        "How will the waves spawn: In a radius around the target or from spawn points. Type radius or spawn points.",
-        "Enter the minimum spawn radius distance from the target.",
-        "Enter the maximum spawn radius distance from the target.",
-        "How many spawn points will their be?",
-        "Move to want where you want creatures to spawn and type here in the box.",
-        "Specify the destination offset. Recommended distance is at least 20m. This is to prevent the invaders clumping together or warping inside a building if that is the target.",
-        "Does this event use a special object (e.g. a crashed shuttle, a camp)? Type yes or no.",
-        "Type in the template name for the object (e.g. object/tangible/thingy/certain_thingy.iff).",
-        "Enter a time in seconds for when the key object will expire. 7200 is 2 hours for example.",
-        "Would you like to automatically award an Event Badge? Enter yes or no.",
-        "Setup complete. Scroll up and review all your entries to ensure they are correct. If you need to make changes type BACK. Otherwise, move to the target location and type FINISHED to start the event."
-    };
-    public static final String[] TITLE = 
-    {
-        "Number of Creature Types",
-        "Spawn Names",
-        "Number of Attack Waves",
-        "Minutes between Attack Wave",
-        "Seconds between Individual Spawns",
-        "Creature Types to Spawn Per Wave",
-        "Area Broadcast: Start",
-        "Area Broadcast: End",
-        "Extra Area Broadcast",
-        "Area Broadcast on Wave",
-        "Area Broadcast: Special",
-        "Spawning Method",
-        "Min Spawn Radius",
-        "Max Spawn Radius",
-        "Number of Spawn Points",
-        "Spawn Points",
-        "Destination Offset",
-        "Use a Key Object?",
-        "Key Object Template Name",
-        "Key Object Expiration",
-        "Award Event Badge",
-        "Confirm Data"
-    };
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         int creatureTypePerWaveSubStep = 1;
@@ -78,6 +85,7 @@ public class invasion_setup extends script.base_script
         showInvasionUI(self, self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnHearSpeech(obj_id self, obj_id objSpeaker, String strText) throws InterruptedException
     {
         if (!isGod(self))
@@ -104,6 +112,7 @@ public class invasion_setup extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int showInvasionUI(obj_id self, obj_id player) throws InterruptedException
     {
         String promptExtra = getStringObjVar(self, "event.invasion.misc.promptExtra");
@@ -111,6 +120,7 @@ public class invasion_setup extends script.base_script
         int pid = sui.inputbox(self, self, PROMPT_TEXT[current] + promptExtra, TITLE[current], "handleUIdata", 255, false, "");
         return pid;
     }
+
     public int handleUIdata(obj_id self, dictionary params) throws InterruptedException
     {
         int bp = sui.getIntButtonPressed(params);
@@ -126,6 +136,7 @@ public class invasion_setup extends script.base_script
         messageTo(self, "storeLastDataObjVar", null, 0, false);
         return SCRIPT_CONTINUE;
     }
+
     public int storeLastDataObjVar(obj_id self, dictionary params) throws InterruptedException
     {
         int setupStep = getIntObjVar(self, "event.invasion.setup.setupStep");
@@ -239,7 +250,7 @@ public class invasion_setup extends script.base_script
             {
                 setObjVar(self, "event.invasion.setup.setupStep", 4);
             }
-            else 
+            else
             {
                 setObjVar(self, "event.invasion.setup.setupStep", 3);
             }
@@ -351,7 +362,7 @@ public class invasion_setup extends script.base_script
             {
                 setObjVar(self, "event.invasion.setup.setupStep", 11);
             }
-            else 
+            else
             {
                 setObjVar(self, "event.invasion.setup.setupStep", 8);
             }
@@ -365,7 +376,7 @@ public class invasion_setup extends script.base_script
             {
                 setObjVar(self, "event.invasion.setup.setupStep", 11);
             }
-            else 
+            else
             {
                 setObjVar(self, "event.invasion.setup.setupStep", 8);
             }
@@ -559,7 +570,7 @@ public class invasion_setup extends script.base_script
                 setObjVar(self, "event.invasion.setup.setupStep", 19);
                 sendSystemMessage(self, TITLE[setupStep] + ": " + lastDataStr, null);
             }
-            else 
+            else
             {
                 setObjVar(self, "event.invasion.keyObject.useKeyObject", 0);
                 setObjVar(self, "event.invasion.setup.setupStep", 20);
@@ -582,7 +593,7 @@ public class invasion_setup extends script.base_script
                 setObjVar(self, "event.invasion.setup.setupStep", 20);
                 sendSystemMessage(self, TITLE[setupStep] + ": " + lastDataStr, null);
             }
-            else 
+            else
             {
                 removeObjVar(self, "event.invasion.keyObject");
                 setObjVar(self, "event.invasion.setup.setupStep", 20);
@@ -620,12 +631,12 @@ public class invasion_setup extends script.base_script
                     setObjVar(self, "event.invasion.setup.setupCompleted", 1);
                     messageTo(self, "setupInvasionTarget", null, 0, false);
                 }
-                else 
+                else
                 {
                     sendSystemMessage(self, "You may NOT start an invasion in a cell. Please go outside.", null);
                 }
             }
-            else 
+            else
             {
                 sendSystemMessage(self, "You must type either FINISHED or BACK.", null);
             }
@@ -638,11 +649,13 @@ public class invasion_setup extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int continueCollectingData(obj_id self, dictionary params) throws InterruptedException
     {
         showInvasionUI(self, self);
         return SCRIPT_CONTINUE;
     }
+
     public void setNumCreatureTypePerWaveString(obj_id self) throws InterruptedException
     {
         int setupCurrentSubStep = getIntObjVar(self, "event.invasion.setup.setupCurrentSubStep");
@@ -650,8 +663,8 @@ public class invasion_setup extends script.base_script
         String currentCritter = getStringObjVar(self, "event.invasion.creature.creatureType" + creatureTypePerWaveSubStep);
         String promptExtra = "  How many (" + currentCritter + ")s will be spawned in wave " + setupCurrentSubStep;
         setObjVar(self, "event.invasion.misc.promptExtra", promptExtra);
-        return;
     }
+
     public int setupInvasionTarget(obj_id self, dictionary params) throws InterruptedException
     {
         location thisSpot = getLocation(self);

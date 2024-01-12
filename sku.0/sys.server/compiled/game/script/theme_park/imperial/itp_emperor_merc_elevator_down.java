@@ -1,19 +1,28 @@
 package script.theme_park.imperial;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.groundquests;
 import script.*;
 
 public class itp_emperor_merc_elevator_down extends script.base_script
 {
+    public static final String STF_FILE = "elevator_text";
+
     public itp_emperor_merc_elevator_down()
     {
     }
-    public static final String STF_FILE = "elevator_text";
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         int mnu2 = mi.addRootMenu(menu_info_types.ITEM_USE, new string_id(STF_FILE, "down"));
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         location here = getLocation(player);
@@ -36,7 +45,7 @@ public class itp_emperor_merc_elevator_down extends script.base_script
                     warpPlayer(player, "endor", 3562.9f, 251.3f, 7441.3f, targetCell, 73.7f, -50.0f, 59.2f, "nullCallback", false);
                 }
             }
-            else 
+            else
             {
                 if (elevatorMove(player, -1) == 0)
                 {

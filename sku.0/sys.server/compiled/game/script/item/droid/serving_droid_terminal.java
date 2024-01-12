@@ -1,5 +1,11 @@
 package script.item.droid;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.player_structure;
 import script.library.utils;
@@ -22,6 +28,7 @@ public class serving_droid_terminal extends script.base_script
     public static final String DROID_ID = "droid.id";
     public static final String DROID_NAMED = "droid.named";
     public static final String PLAYER = "droid.user";
+
     public serving_droid_terminal()
     {
     }

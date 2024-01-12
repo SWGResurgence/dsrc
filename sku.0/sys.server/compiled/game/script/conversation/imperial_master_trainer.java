@@ -1,216 +1,148 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.*;
 
 public class imperial_master_trainer extends script.base_script
 {
+    public static String c_stringFile = "conversation/imperial_master_trainer";
+
     public imperial_master_trainer()
     {
     }
-    public static String c_stringFile = "conversation/imperial_master_trainer";
+
     public boolean imperial_master_trainer_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean imperial_master_trainer_condition_isReadyforMasterImperial(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!space_flags.isImperialPilot(player))
         {
             return false;
         }
-        if (hasSkill(player, "pilot_imperial_navy_starships_04") && hasSkill(player, "pilot_imperial_navy_procedures_04") && hasSkill(player, "pilot_imperial_navy_weapons_04") && hasSkill(player, "pilot_imperial_navy_droid_04"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return hasSkill(player, "pilot_imperial_navy_starships_04") && hasSkill(player, "pilot_imperial_navy_procedures_04") && hasSkill(player, "pilot_imperial_navy_weapons_04") && hasSkill(player, "pilot_imperial_navy_droid_04");
     }
+
     public boolean imperial_master_trainer_condition_isReadyforMasterPrivateer(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!space_flags.isNeutralPilot(player))
         {
             return false;
         }
-        if (hasSkill(player, "pilot_neutral_starships_04") && hasSkill(player, "pilot_neutral_procedures_04") && hasSkill(player, "pilot_neutral_weapons_04") && hasSkill(player, "pilot_neutral_droid_04"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return hasSkill(player, "pilot_neutral_starships_04") && hasSkill(player, "pilot_neutral_procedures_04") && hasSkill(player, "pilot_neutral_weapons_04") && hasSkill(player, "pilot_neutral_droid_04");
     }
+
     public boolean imperial_master_trainer_condition_isRebelPilot(obj_id player, obj_id npc) throws InterruptedException
     {
         return (hasSkill(player, "pilot_rebel_navy_novice"));
     }
+
     public boolean imperial_master_trainer_condition_isSmuggler(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_flags.isSpaceTrack(player, space_flags.PRIVATEER_TATOOINE))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return space_flags.isSpaceTrack(player, space_flags.PRIVATEER_TATOOINE);
     }
+
     public boolean imperial_master_trainer_condition_isWorkingForRebellion(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_flags.hasSpaceFlag(player, "master_mission_rebel"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return space_flags.hasSpaceFlag(player, "master_mission_rebel");
     }
+
     public boolean imperial_master_trainer_condition_hasWonMissionOne(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_quest.hasWonQuest(player, "destroy", "master_imperial_1") && !space_quest.hasReceivedReward(player, "destroy", "master_imperial_1"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return space_quest.hasWonQuest(player, "destroy", "master_imperial_1") && !space_quest.hasReceivedReward(player, "destroy", "master_imperial_1");
     }
+
     public boolean imperial_master_trainer_condition_hasWonMissionTwo(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_quest.hasWonQuest(player, "destroy", "master_imperial_2") && !space_quest.hasReceivedReward(player, "destroy", "master_imperial_2"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return space_quest.hasWonQuest(player, "destroy", "master_imperial_2") && !space_quest.hasReceivedReward(player, "destroy", "master_imperial_2");
     }
+
     public boolean imperial_master_trainer_condition_hasFailedMissionOne(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_quest.hasFailedQuest(player, "destroy", "master_imperial_1") || space_quest.hasAbortedQuest(player, "destroy", "master_imperial_1"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return space_quest.hasFailedQuest(player, "destroy", "master_imperial_1") || space_quest.hasAbortedQuest(player, "destroy", "master_imperial_1");
     }
+
     public boolean imperial_master_trainer_condition_hasFailedMissionTwo(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_quest.hasFailedQuest(player, "destroy", "master_imperial_2") || space_quest.hasAbortedQuest(player, "destroy", "master_imperial_2"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return space_quest.hasFailedQuest(player, "destroy", "master_imperial_2") || space_quest.hasAbortedQuest(player, "destroy", "master_imperial_2");
     }
+
     public boolean imperial_master_trainer_condition_isOnMasterQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.hasQuest(player, "destroy", "master_imperial_1") || space_quest.hasQuest(player, "destroy", "master_imperial_2"));
     }
+
     public boolean imperial_master_trainer_condition_hasMasterImperialSkill(obj_id player, obj_id npc) throws InterruptedException
     {
         return hasSkill(player, "pilot_imperial_navy_master");
     }
+
     public boolean imperial_master_trainer_condition_isPrivateer(obj_id player, obj_id npc) throws InterruptedException
     {
         return (hasSkill(player, "pilot_neutral_novice"));
     }
+
     public boolean imperial_master_trainer_condition_hasReceivedRewardOneNeut(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_quest.hasReceivedReward(player, "destroy", "master_imperial_1") && hasSkill(player, "pilot_neutral_starships_04"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return space_quest.hasReceivedReward(player, "destroy", "master_imperial_1") && hasSkill(player, "pilot_neutral_starships_04");
     }
+
     public boolean imperial_master_trainer_condition_hasReceivedRewardOneImp(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_quest.hasReceivedReward(player, "destroy", "master_imperial_1") && hasSkill(player, "pilot_imperial_navy_starships_04"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return space_quest.hasReceivedReward(player, "destroy", "master_imperial_1") && hasSkill(player, "pilot_imperial_navy_starships_04");
     }
+
     public boolean imperial_master_trainer_condition_isCorsec(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_flags.isSpaceTrack(player, space_flags.PRIVATEER_CORELLIA))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return space_flags.isSpaceTrack(player, space_flags.PRIVATEER_CORELLIA);
     }
+
     public boolean imperial_master_trainer_condition_isRSF(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_flags.isSpaceTrack(player, space_flags.PRIVATEER_NABOO))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return space_flags.isSpaceTrack(player, space_flags.PRIVATEER_NABOO);
     }
+
     public boolean imperial_master_trainer_condition_hasOtherMasterSkill(obj_id player, obj_id npc) throws InterruptedException
     {
         return hasSkill(player, "pilot_neutral_master");
     }
+
     public boolean imperial_master_trainer_condition_isOnQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_quest.hasQuest(player);
     }
+
     public boolean imperial_master_trainer_condition_isNotReadyforMasterImperial(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!space_flags.isImperialPilot(player))
         {
             return false;
         }
-        if (!hasSkill(player, "pilot_imperial_navy_starships_04") || !hasSkill(player, "pilot_imperial_navy_procedures_04") || !hasSkill(player, "pilot_imperial_navy_weapons_04") || !hasSkill(player, "pilot_imperial_navy_droid_04"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return !hasSkill(player, "pilot_imperial_navy_starships_04") || !hasSkill(player, "pilot_imperial_navy_procedures_04") || !hasSkill(player, "pilot_imperial_navy_weapons_04") || !hasSkill(player, "pilot_imperial_navy_droid_04");
     }
+
     public boolean imperial_master_trainer_condition_isNotReadyforMasterPrivateer(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!space_flags.isNeutralPilot(player))
         {
             return false;
         }
-        if (!hasSkill(player, "pilot_neutral_starships_04") || !hasSkill(player, "pilot_neutral_procedures_04") || !hasSkill(player, "pilot_neutral_weapons_04") || !hasSkill(player, "pilot_neutral_droid_04"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return !hasSkill(player, "pilot_neutral_starships_04") || !hasSkill(player, "pilot_neutral_procedures_04") || !hasSkill(player, "pilot_neutral_weapons_04") || !hasSkill(player, "pilot_neutral_droid_04");
     }
+
     public boolean imperial_master_trainer_condition_isImperial(obj_id player, obj_id npc) throws InterruptedException
     {
         return (hasSkill(player, "pilot_imperial_navy_novice"));
     }
+
     public boolean imperial_master_trainer_condition_hasImperialMasterNoMedal(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(player, "master_imperial_medal_recieved"))
@@ -219,6 +151,7 @@ public class imperial_master_trainer extends script.base_script
         }
         return hasSkill(player, "pilot_imperial_navy_master");
     }
+
     public boolean imperial_master_trainer_condition_hasNeutralMasterNoMedal(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(player, "master_neutral_medal_recieved"))
@@ -227,24 +160,29 @@ public class imperial_master_trainer extends script.base_script
         }
         return hasSkill(player, "pilot_neutral_master");
     }
+
     public void imperial_master_trainer_action_setWorkingForImperial(obj_id player, obj_id npc) throws InterruptedException
     {
         space_flags.setSpaceFlag(player, "master_mission_imperial", true);
     }
+
     public void imperial_master_trainer_action_grantMasterSkillBoxImperial(obj_id player, obj_id npc) throws InterruptedException
     {
         skill.noisyGrantSkill(player, "pilot_imperial_navy_master");
     }
+
     public void imperial_master_trainer_action_grantMasterSkillBoxNeutral(obj_id player, obj_id npc) throws InterruptedException
     {
         skill.noisyGrantSkill(player, "pilot_neutral_master");
     }
+
     public void imperial_master_trainer_action_giveRewardOneImp(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         space_quest.giveReward(player, "destroy", "master_imperial_1", 25000, "object/tangible/wearables/jacket/jacket_ace_imperial.iff");
         factions.addFactionStanding(player, factions.FACTION_IMPERIAL, 200.0f);
     }
+
     public void imperial_master_trainer_action_giveRewardTwoImp(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
@@ -253,14 +191,17 @@ public class imperial_master_trainer extends script.base_script
         imperial_master_trainer_action_grantMedalImperial(player, npc);
         space_flags.setSpaceFlag(player, "master_pilot_medal_recieved", true);
     }
+
     public void imperial_master_trainer_action_grantMissionOne(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "destroy", "master_imperial_1");
     }
+
     public void imperial_master_trainer_action_grantMissionTwo(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "destroy", "master_imperial_2");
     }
+
     public void imperial_master_trainer_action_giveRewardTwoPriv(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
@@ -269,12 +210,14 @@ public class imperial_master_trainer extends script.base_script
         imperial_master_trainer_action_grantMedalNeutral(player, npc);
         space_flags.setSpaceFlag(player, "master_pilot_medal_recieved", true);
     }
+
     public void imperial_master_trainer_action_giveRewardOnePriv(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         space_quest.giveReward(player, "destroy", "master_imperial_1", 25000, "object/tangible/wearables/jacket/jacket_ace_privateer.iff");
         factions.addFactionStanding(player, factions.FACTION_IMPERIAL, 200.0f);
     }
+
     public void imperial_master_trainer_action_grantMedalImperial(obj_id player, obj_id npc) throws InterruptedException
     {
         setObjVar(player, "master_imperial_medal_recieved", 1);
@@ -285,6 +228,7 @@ public class imperial_master_trainer extends script.base_script
         pp = prose.setTO(pp, name);
         sendQuestSystemMessage(player, pp);
     }
+
     public void imperial_master_trainer_action_grantMedalNeutral(obj_id player, obj_id npc) throws InterruptedException
     {
         setObjVar(player, "master_neutral_medal_recieved", 1);
@@ -295,10 +239,12 @@ public class imperial_master_trainer extends script.base_script
         pp = prose.setTO(pp, name);
         sendQuestSystemMessage(player, pp);
     }
+
     public String imperial_master_trainer_tokenTO_tokenTO0001(obj_id player, obj_id npc) throws InterruptedException
     {
-        return new String();
+        return "";
     }
+
     public int imperial_master_trainer_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_f2aa6939"))
@@ -314,6 +260,7 @@ public class imperial_master_trainer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_master_trainer_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_21a81b0b"))
@@ -341,7 +288,7 @@ public class imperial_master_trainer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_bb68f6ed");
@@ -354,7 +301,7 @@ public class imperial_master_trainer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_master_trainer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -380,7 +327,7 @@ public class imperial_master_trainer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_278");
@@ -389,7 +336,7 @@ public class imperial_master_trainer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_master_trainer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -399,6 +346,7 @@ public class imperial_master_trainer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_master_trainer_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_bb68f6ed"))
@@ -420,7 +368,7 @@ public class imperial_master_trainer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_4effeedc");
@@ -429,7 +377,7 @@ public class imperial_master_trainer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_master_trainer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -449,6 +397,7 @@ public class imperial_master_trainer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_master_trainer_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_4effeedc"))
@@ -464,6 +413,7 @@ public class imperial_master_trainer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_master_trainer_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_278"))
@@ -485,7 +435,7 @@ public class imperial_master_trainer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_281");
@@ -494,7 +444,7 @@ public class imperial_master_trainer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_master_trainer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -504,6 +454,7 @@ public class imperial_master_trainer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_master_trainer_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_281"))
@@ -519,6 +470,7 @@ public class imperial_master_trainer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_master_trainer_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_fc42e227"))
@@ -539,7 +491,7 @@ public class imperial_master_trainer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_862d3332");
@@ -548,7 +500,7 @@ public class imperial_master_trainer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_master_trainer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -581,7 +533,7 @@ public class imperial_master_trainer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_294");
@@ -594,7 +546,7 @@ public class imperial_master_trainer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_master_trainer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -604,6 +556,7 @@ public class imperial_master_trainer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_master_trainer_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_862d3332"))
@@ -625,7 +578,7 @@ public class imperial_master_trainer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_59047203");
@@ -634,7 +587,7 @@ public class imperial_master_trainer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_master_trainer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -644,6 +597,7 @@ public class imperial_master_trainer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_master_trainer_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_59047203"))
@@ -659,6 +613,7 @@ public class imperial_master_trainer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_master_trainer_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_294"))
@@ -680,7 +635,7 @@ public class imperial_master_trainer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_297");
@@ -689,7 +644,7 @@ public class imperial_master_trainer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_master_trainer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -710,6 +665,7 @@ public class imperial_master_trainer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_master_trainer_handleBranch26(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_297"))
@@ -729,7 +685,7 @@ public class imperial_master_trainer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_301");
@@ -738,7 +694,7 @@ public class imperial_master_trainer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_master_trainer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -748,6 +704,7 @@ public class imperial_master_trainer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_master_trainer_handleBranch27(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_301"))
@@ -763,6 +720,7 @@ public class imperial_master_trainer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_master_trainer_handleBranch30(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_f010d9ab"))
@@ -790,7 +748,7 @@ public class imperial_master_trainer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_2f52e0af");
@@ -803,7 +761,7 @@ public class imperial_master_trainer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_master_trainer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -813,6 +771,7 @@ public class imperial_master_trainer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_master_trainer_handleBranch31(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_2f52e0af"))
@@ -833,7 +792,7 @@ public class imperial_master_trainer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_beb9353a");
@@ -842,7 +801,7 @@ public class imperial_master_trainer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_master_trainer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -868,7 +827,7 @@ public class imperial_master_trainer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_6a66a025");
@@ -877,7 +836,7 @@ public class imperial_master_trainer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_master_trainer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -887,6 +846,7 @@ public class imperial_master_trainer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_master_trainer_handleBranch32(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_beb9353a"))
@@ -908,7 +868,7 @@ public class imperial_master_trainer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_313");
@@ -917,7 +877,7 @@ public class imperial_master_trainer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_master_trainer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -941,7 +901,7 @@ public class imperial_master_trainer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a1669dff");
@@ -950,7 +910,7 @@ public class imperial_master_trainer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_master_trainer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -960,6 +920,7 @@ public class imperial_master_trainer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_master_trainer_handleBranch33(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_313"))
@@ -976,6 +937,7 @@ public class imperial_master_trainer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_master_trainer_handleBranch35(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_a1669dff"))
@@ -992,6 +954,7 @@ public class imperial_master_trainer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_master_trainer_handleBranch37(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_6a66a025"))
@@ -1011,7 +974,7 @@ public class imperial_master_trainer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_323");
@@ -1020,7 +983,7 @@ public class imperial_master_trainer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_master_trainer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1030,6 +993,7 @@ public class imperial_master_trainer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_master_trainer_handleBranch38(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_323"))
@@ -1051,7 +1015,7 @@ public class imperial_master_trainer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_313");
@@ -1060,7 +1024,7 @@ public class imperial_master_trainer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_master_trainer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1084,7 +1048,7 @@ public class imperial_master_trainer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a1669dff");
@@ -1093,7 +1057,7 @@ public class imperial_master_trainer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_master_trainer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1103,6 +1067,7 @@ public class imperial_master_trainer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_master_trainer_handleBranch39(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_b8ead210"))
@@ -1123,7 +1088,7 @@ public class imperial_master_trainer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_3ffe1ded");
@@ -1132,7 +1097,7 @@ public class imperial_master_trainer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_master_trainer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1158,7 +1123,7 @@ public class imperial_master_trainer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a8ea09e9");
@@ -1167,7 +1132,7 @@ public class imperial_master_trainer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_master_trainer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1177,6 +1142,7 @@ public class imperial_master_trainer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_master_trainer_handleBranch40(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_3ffe1ded"))
@@ -1197,7 +1163,7 @@ public class imperial_master_trainer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a8ea09e9");
@@ -1206,7 +1172,7 @@ public class imperial_master_trainer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_master_trainer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1216,6 +1182,7 @@ public class imperial_master_trainer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_master_trainer_handleBranch41(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_a8ea09e9"))
@@ -1236,7 +1203,7 @@ public class imperial_master_trainer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1affba73");
@@ -1245,7 +1212,7 @@ public class imperial_master_trainer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_master_trainer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1269,7 +1236,7 @@ public class imperial_master_trainer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_338");
@@ -1278,7 +1245,7 @@ public class imperial_master_trainer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_master_trainer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1288,6 +1255,7 @@ public class imperial_master_trainer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_master_trainer_handleBranch42(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1affba73"))
@@ -1308,7 +1276,7 @@ public class imperial_master_trainer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_cc0857f4");
@@ -1317,7 +1285,7 @@ public class imperial_master_trainer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_master_trainer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1327,6 +1295,7 @@ public class imperial_master_trainer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_master_trainer_handleBranch43(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_cc0857f4"))
@@ -1342,6 +1311,7 @@ public class imperial_master_trainer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_master_trainer_handleBranch45(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_338"))
@@ -1362,7 +1332,7 @@ public class imperial_master_trainer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_342");
@@ -1371,7 +1341,7 @@ public class imperial_master_trainer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_master_trainer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1381,6 +1351,7 @@ public class imperial_master_trainer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_master_trainer_handleBranch46(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_342"))
@@ -1396,6 +1367,7 @@ public class imperial_master_trainer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_master_trainer_handleBranch48(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_a8ea09e9"))
@@ -1416,7 +1388,7 @@ public class imperial_master_trainer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1affba73");
@@ -1425,7 +1397,7 @@ public class imperial_master_trainer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_master_trainer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1449,7 +1421,7 @@ public class imperial_master_trainer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_338");
@@ -1458,7 +1430,7 @@ public class imperial_master_trainer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_master_trainer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1468,6 +1440,7 @@ public class imperial_master_trainer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_master_trainer_handleBranch49(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_a2bd8a18"))
@@ -1495,7 +1468,7 @@ public class imperial_master_trainer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_6844241f");
@@ -1508,7 +1481,7 @@ public class imperial_master_trainer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_master_trainer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1533,7 +1506,7 @@ public class imperial_master_trainer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_9e28d2b0");
@@ -1542,7 +1515,7 @@ public class imperial_master_trainer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_master_trainer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1552,6 +1525,7 @@ public class imperial_master_trainer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_master_trainer_handleBranch50(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_6844241f"))
@@ -1572,7 +1546,7 @@ public class imperial_master_trainer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_353");
@@ -1581,7 +1555,7 @@ public class imperial_master_trainer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_master_trainer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1606,7 +1580,7 @@ public class imperial_master_trainer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_9e28d2b0");
@@ -1615,7 +1589,7 @@ public class imperial_master_trainer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_master_trainer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1625,6 +1599,7 @@ public class imperial_master_trainer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_master_trainer_handleBranch51(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_353"))
@@ -1645,7 +1620,7 @@ public class imperial_master_trainer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_9e28d2b0");
@@ -1654,7 +1629,7 @@ public class imperial_master_trainer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_master_trainer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1664,6 +1639,7 @@ public class imperial_master_trainer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_master_trainer_handleBranch52(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_9e28d2b0"))
@@ -1691,7 +1667,7 @@ public class imperial_master_trainer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_ef6b4924");
@@ -1704,7 +1680,7 @@ public class imperial_master_trainer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_master_trainer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1714,6 +1690,7 @@ public class imperial_master_trainer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_master_trainer_handleBranch53(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_ef6b4924"))
@@ -1734,7 +1711,7 @@ public class imperial_master_trainer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_5ac61a82");
@@ -1743,7 +1720,7 @@ public class imperial_master_trainer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_master_trainer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1769,7 +1746,7 @@ public class imperial_master_trainer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_9bbd1090");
@@ -1778,7 +1755,7 @@ public class imperial_master_trainer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_master_trainer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1788,6 +1765,7 @@ public class imperial_master_trainer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_master_trainer_handleBranch54(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_5ac61a82"))
@@ -1808,7 +1786,7 @@ public class imperial_master_trainer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_fd386cda");
@@ -1817,7 +1795,7 @@ public class imperial_master_trainer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_master_trainer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1827,6 +1805,7 @@ public class imperial_master_trainer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_master_trainer_handleBranch55(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_fd386cda"))
@@ -1848,7 +1827,7 @@ public class imperial_master_trainer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f352e00f");
@@ -1857,7 +1836,7 @@ public class imperial_master_trainer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_master_trainer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1867,6 +1846,7 @@ public class imperial_master_trainer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_master_trainer_handleBranch56(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_f352e00f"))
@@ -1882,6 +1862,7 @@ public class imperial_master_trainer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_master_trainer_handleBranch58(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_9bbd1090"))
@@ -1903,7 +1884,7 @@ public class imperial_master_trainer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_65d9bf6c");
@@ -1912,7 +1893,7 @@ public class imperial_master_trainer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_master_trainer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1922,6 +1903,7 @@ public class imperial_master_trainer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_master_trainer_handleBranch59(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_65d9bf6c"))
@@ -1937,6 +1919,7 @@ public class imperial_master_trainer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_master_trainer_handleBranch61(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_9e28d2b0"))
@@ -1964,7 +1947,7 @@ public class imperial_master_trainer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_ef6b4924");
@@ -1977,7 +1960,7 @@ public class imperial_master_trainer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_master_trainer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -1987,6 +1970,7 @@ public class imperial_master_trainer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_master_trainer_handleBranch62(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_9e28d2b0"))
@@ -2014,7 +1998,7 @@ public class imperial_master_trainer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_ef6b4924");
@@ -2027,7 +2011,7 @@ public class imperial_master_trainer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_master_trainer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2037,6 +2021,7 @@ public class imperial_master_trainer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_master_trainer_handleBranch63(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_5d519e4c"))
@@ -2057,7 +2042,7 @@ public class imperial_master_trainer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_77e59fd7");
@@ -2066,7 +2051,7 @@ public class imperial_master_trainer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_master_trainer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2076,6 +2061,7 @@ public class imperial_master_trainer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_master_trainer_handleBranch64(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_77e59fd7"))
@@ -2103,7 +2089,7 @@ public class imperial_master_trainer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_b41b5772");
@@ -2116,7 +2102,7 @@ public class imperial_master_trainer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_master_trainer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2126,6 +2112,7 @@ public class imperial_master_trainer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_master_trainer_handleBranch65(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_b41b5772"))
@@ -2153,7 +2140,7 @@ public class imperial_master_trainer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_c7f4c531");
@@ -2166,7 +2153,7 @@ public class imperial_master_trainer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_master_trainer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2192,7 +2179,7 @@ public class imperial_master_trainer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_396");
@@ -2201,7 +2188,7 @@ public class imperial_master_trainer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_master_trainer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2211,6 +2198,7 @@ public class imperial_master_trainer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_master_trainer_handleBranch66(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_c7f4c531"))
@@ -2231,7 +2219,7 @@ public class imperial_master_trainer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f2ba71dd");
@@ -2240,7 +2228,7 @@ public class imperial_master_trainer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_master_trainer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2266,7 +2254,7 @@ public class imperial_master_trainer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_392");
@@ -2275,7 +2263,7 @@ public class imperial_master_trainer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_master_trainer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2285,6 +2273,7 @@ public class imperial_master_trainer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_master_trainer_handleBranch67(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_f2ba71dd"))
@@ -2306,7 +2295,7 @@ public class imperial_master_trainer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_cd48bb84");
@@ -2315,7 +2304,7 @@ public class imperial_master_trainer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_master_trainer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2325,6 +2314,7 @@ public class imperial_master_trainer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_master_trainer_handleBranch68(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_cd48bb84"))
@@ -2340,6 +2330,7 @@ public class imperial_master_trainer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_master_trainer_handleBranch70(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_392"))
@@ -2361,7 +2352,7 @@ public class imperial_master_trainer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_cd48bb84");
@@ -2370,7 +2361,7 @@ public class imperial_master_trainer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_master_trainer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2380,6 +2371,7 @@ public class imperial_master_trainer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_master_trainer_handleBranch71(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_396"))
@@ -2401,7 +2393,7 @@ public class imperial_master_trainer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_cd48bb84");
@@ -2410,7 +2402,7 @@ public class imperial_master_trainer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_master_trainer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2420,6 +2412,7 @@ public class imperial_master_trainer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_master_trainer_handleBranch72(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_47acafeb"))
@@ -2440,7 +2433,7 @@ public class imperial_master_trainer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_401");
@@ -2449,7 +2442,7 @@ public class imperial_master_trainer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_master_trainer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2475,7 +2468,7 @@ public class imperial_master_trainer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_26c66fd1");
@@ -2484,7 +2477,7 @@ public class imperial_master_trainer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_master_trainer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2494,6 +2487,7 @@ public class imperial_master_trainer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_master_trainer_handleBranch73(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_401"))
@@ -2513,7 +2507,7 @@ public class imperial_master_trainer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_5bed3d33");
@@ -2522,7 +2516,7 @@ public class imperial_master_trainer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_master_trainer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2532,6 +2526,7 @@ public class imperial_master_trainer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_master_trainer_handleBranch74(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_5bed3d33"))
@@ -2558,7 +2553,7 @@ public class imperial_master_trainer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_78edd4f");
@@ -2571,7 +2566,7 @@ public class imperial_master_trainer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_master_trainer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2581,6 +2576,7 @@ public class imperial_master_trainer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_master_trainer_handleBranch75(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_78edd4f"))
@@ -2608,7 +2604,7 @@ public class imperial_master_trainer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a4b7535d");
@@ -2621,7 +2617,7 @@ public class imperial_master_trainer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_master_trainer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2647,7 +2643,7 @@ public class imperial_master_trainer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_431");
@@ -2656,7 +2652,7 @@ public class imperial_master_trainer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_master_trainer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2666,6 +2662,7 @@ public class imperial_master_trainer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_master_trainer_handleBranch76(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_a4b7535d"))
@@ -2686,7 +2683,7 @@ public class imperial_master_trainer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_4a7e1397");
@@ -2695,7 +2692,7 @@ public class imperial_master_trainer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_master_trainer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2728,7 +2725,7 @@ public class imperial_master_trainer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a3bdfc08");
@@ -2741,7 +2738,7 @@ public class imperial_master_trainer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_master_trainer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2751,6 +2748,7 @@ public class imperial_master_trainer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_master_trainer_handleBranch77(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_4a7e1397"))
@@ -2778,7 +2776,7 @@ public class imperial_master_trainer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a3bdfc08");
@@ -2791,7 +2789,7 @@ public class imperial_master_trainer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_master_trainer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2801,6 +2799,7 @@ public class imperial_master_trainer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_master_trainer_handleBranch78(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_a3bdfc08"))
@@ -2821,7 +2820,7 @@ public class imperial_master_trainer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1cb9631b");
@@ -2830,7 +2829,7 @@ public class imperial_master_trainer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_master_trainer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2856,7 +2855,7 @@ public class imperial_master_trainer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_78d92576");
@@ -2865,7 +2864,7 @@ public class imperial_master_trainer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_master_trainer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2875,6 +2874,7 @@ public class imperial_master_trainer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_master_trainer_handleBranch79(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1cb9631b"))
@@ -2895,7 +2895,7 @@ public class imperial_master_trainer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_416");
@@ -2904,7 +2904,7 @@ public class imperial_master_trainer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_master_trainer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2914,6 +2914,7 @@ public class imperial_master_trainer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_master_trainer_handleBranch80(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_416"))
@@ -2934,7 +2935,7 @@ public class imperial_master_trainer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_78d92576");
@@ -2943,7 +2944,7 @@ public class imperial_master_trainer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_master_trainer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2953,6 +2954,7 @@ public class imperial_master_trainer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_master_trainer_handleBranch81(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_78d92576"))
@@ -2973,7 +2975,7 @@ public class imperial_master_trainer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_cbf5f6bc");
@@ -2982,7 +2984,7 @@ public class imperial_master_trainer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_master_trainer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2992,6 +2994,7 @@ public class imperial_master_trainer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_master_trainer_handleBranch82(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_cbf5f6bc"))
@@ -3013,7 +3016,7 @@ public class imperial_master_trainer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_e4eceb3e");
@@ -3022,7 +3025,7 @@ public class imperial_master_trainer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_master_trainer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3032,6 +3035,7 @@ public class imperial_master_trainer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_master_trainer_handleBranch83(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_e4eceb3e"))
@@ -3047,6 +3051,7 @@ public class imperial_master_trainer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_master_trainer_handleBranch85(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_78d92576"))
@@ -3067,7 +3072,7 @@ public class imperial_master_trainer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_cbf5f6bc");
@@ -3076,7 +3081,7 @@ public class imperial_master_trainer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_master_trainer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3086,6 +3091,7 @@ public class imperial_master_trainer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_master_trainer_handleBranch86(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_a3bdfc08"))
@@ -3106,7 +3112,7 @@ public class imperial_master_trainer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1cb9631b");
@@ -3115,7 +3121,7 @@ public class imperial_master_trainer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_master_trainer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3141,7 +3147,7 @@ public class imperial_master_trainer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_78d92576");
@@ -3150,7 +3156,7 @@ public class imperial_master_trainer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_master_trainer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3160,6 +3166,7 @@ public class imperial_master_trainer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_master_trainer_handleBranch87(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_431"))
@@ -3187,7 +3194,7 @@ public class imperial_master_trainer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a4b7535d");
@@ -3200,7 +3207,7 @@ public class imperial_master_trainer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_master_trainer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3210,6 +3217,7 @@ public class imperial_master_trainer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_master_trainer_handleBranch88(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_a4b7535d"))
@@ -3230,7 +3238,7 @@ public class imperial_master_trainer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_4a7e1397");
@@ -3239,7 +3247,7 @@ public class imperial_master_trainer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_master_trainer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3272,7 +3280,7 @@ public class imperial_master_trainer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_a3bdfc08");
@@ -3285,7 +3293,7 @@ public class imperial_master_trainer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_master_trainer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3295,6 +3303,7 @@ public class imperial_master_trainer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_master_trainer_handleBranch89(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_26c66fd1"))
@@ -3314,7 +3323,7 @@ public class imperial_master_trainer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_5bed3d33");
@@ -3323,7 +3332,7 @@ public class imperial_master_trainer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_master_trainer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3333,6 +3342,7 @@ public class imperial_master_trainer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_master_trainer_handleBranch90(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_308a9ab1"))
@@ -3360,7 +3370,7 @@ public class imperial_master_trainer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_7964ad2d");
@@ -3377,7 +3387,7 @@ public class imperial_master_trainer extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_master_trainer.branchId");
                     prose_package pp = new prose_package();
@@ -3414,7 +3424,7 @@ public class imperial_master_trainer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_c5aa2921");
@@ -3427,7 +3437,7 @@ public class imperial_master_trainer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_master_trainer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3437,6 +3447,7 @@ public class imperial_master_trainer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_master_trainer_handleBranch91(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_7964ad2d"))
@@ -3464,7 +3475,7 @@ public class imperial_master_trainer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_e9aec8d7");
@@ -3477,7 +3488,7 @@ public class imperial_master_trainer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_master_trainer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3503,7 +3514,7 @@ public class imperial_master_trainer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_913ac8c9");
@@ -3512,7 +3523,7 @@ public class imperial_master_trainer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_master_trainer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3522,6 +3533,7 @@ public class imperial_master_trainer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_master_trainer_handleBranch92(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_e9aec8d7"))
@@ -3542,7 +3554,7 @@ public class imperial_master_trainer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_445");
@@ -3551,7 +3563,7 @@ public class imperial_master_trainer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_master_trainer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3577,7 +3589,7 @@ public class imperial_master_trainer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_448");
@@ -3586,7 +3598,7 @@ public class imperial_master_trainer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_master_trainer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3596,6 +3608,7 @@ public class imperial_master_trainer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_master_trainer_handleBranch93(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_445"))
@@ -3616,7 +3629,7 @@ public class imperial_master_trainer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_448");
@@ -3625,7 +3638,7 @@ public class imperial_master_trainer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_master_trainer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3635,6 +3648,7 @@ public class imperial_master_trainer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_master_trainer_handleBranch94(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_448"))
@@ -3655,7 +3669,7 @@ public class imperial_master_trainer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_fd661a34");
@@ -3664,7 +3678,7 @@ public class imperial_master_trainer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_master_trainer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3674,6 +3688,7 @@ public class imperial_master_trainer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_master_trainer_handleBranch95(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_fd661a34"))
@@ -3701,7 +3716,7 @@ public class imperial_master_trainer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_15f15e84");
@@ -3714,7 +3729,7 @@ public class imperial_master_trainer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_master_trainer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3724,6 +3739,7 @@ public class imperial_master_trainer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_master_trainer_handleBranch96(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_15f15e84"))
@@ -3744,7 +3760,7 @@ public class imperial_master_trainer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_af2fc12f");
@@ -3753,7 +3769,7 @@ public class imperial_master_trainer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_master_trainer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3786,7 +3802,7 @@ public class imperial_master_trainer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_92172df0");
@@ -3799,7 +3815,7 @@ public class imperial_master_trainer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_master_trainer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3809,6 +3825,7 @@ public class imperial_master_trainer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_master_trainer_handleBranch97(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_af2fc12f"))
@@ -3836,7 +3853,7 @@ public class imperial_master_trainer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_92172df0");
@@ -3849,7 +3866,7 @@ public class imperial_master_trainer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_master_trainer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3859,6 +3876,7 @@ public class imperial_master_trainer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_master_trainer_handleBranch98(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_92172df0"))
@@ -3879,7 +3897,7 @@ public class imperial_master_trainer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_60d3f4f8");
@@ -3888,7 +3906,7 @@ public class imperial_master_trainer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_master_trainer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3914,7 +3932,7 @@ public class imperial_master_trainer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_bcb643d");
@@ -3923,7 +3941,7 @@ public class imperial_master_trainer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_master_trainer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3933,6 +3951,7 @@ public class imperial_master_trainer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_master_trainer_handleBranch99(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_60d3f4f8"))
@@ -3954,7 +3973,7 @@ public class imperial_master_trainer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_2bd3a43c");
@@ -3963,7 +3982,7 @@ public class imperial_master_trainer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_master_trainer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3973,6 +3992,7 @@ public class imperial_master_trainer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_master_trainer_handleBranch100(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_2bd3a43c"))
@@ -4001,7 +4021,7 @@ public class imperial_master_trainer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_bb9e4a63");
@@ -4014,7 +4034,7 @@ public class imperial_master_trainer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_master_trainer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4024,6 +4044,7 @@ public class imperial_master_trainer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_master_trainer_handleBranch101(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_bb9e4a63"))
@@ -4061,7 +4082,7 @@ public class imperial_master_trainer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_468");
@@ -4070,7 +4091,7 @@ public class imperial_master_trainer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_master_trainer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4080,6 +4101,7 @@ public class imperial_master_trainer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_master_trainer_handleBranch104(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_468"))
@@ -4101,6 +4123,7 @@ public class imperial_master_trainer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_master_trainer_handleBranch107(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_bcb643d"))
@@ -4121,7 +4144,7 @@ public class imperial_master_trainer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_63f7aad9");
@@ -4130,7 +4153,7 @@ public class imperial_master_trainer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_master_trainer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4140,6 +4163,7 @@ public class imperial_master_trainer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_master_trainer_handleBranch108(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_63f7aad9"))
@@ -4161,7 +4185,7 @@ public class imperial_master_trainer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_2bd3a43c");
@@ -4170,7 +4194,7 @@ public class imperial_master_trainer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_master_trainer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4180,6 +4204,7 @@ public class imperial_master_trainer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_master_trainer_handleBranch109(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_448"))
@@ -4200,7 +4225,7 @@ public class imperial_master_trainer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_fd661a34");
@@ -4209,7 +4234,7 @@ public class imperial_master_trainer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_master_trainer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4219,6 +4244,7 @@ public class imperial_master_trainer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_master_trainer_handleBranch110(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_913ac8c9"))
@@ -4239,7 +4265,7 @@ public class imperial_master_trainer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_8db79f00");
@@ -4248,7 +4274,7 @@ public class imperial_master_trainer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_master_trainer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4258,6 +4284,7 @@ public class imperial_master_trainer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_master_trainer_handleBranch111(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_8db79f00"))
@@ -4278,7 +4305,7 @@ public class imperial_master_trainer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_baca5aeb");
@@ -4287,7 +4314,7 @@ public class imperial_master_trainer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_master_trainer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4297,6 +4324,7 @@ public class imperial_master_trainer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_master_trainer_handleBranch112(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_baca5aeb"))
@@ -4317,7 +4345,7 @@ public class imperial_master_trainer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_448");
@@ -4326,7 +4354,7 @@ public class imperial_master_trainer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_master_trainer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4336,6 +4364,7 @@ public class imperial_master_trainer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_master_trainer_handleBranch113(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_c5aa2921"))
@@ -4356,7 +4385,7 @@ public class imperial_master_trainer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_87ccb642");
@@ -4365,7 +4394,7 @@ public class imperial_master_trainer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_master_trainer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4391,7 +4420,7 @@ public class imperial_master_trainer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_24077de7");
@@ -4400,7 +4429,7 @@ public class imperial_master_trainer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_master_trainer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4410,6 +4439,7 @@ public class imperial_master_trainer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_master_trainer_handleBranch114(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_87ccb642"))
@@ -4430,7 +4460,7 @@ public class imperial_master_trainer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_7b3a873");
@@ -4439,7 +4469,7 @@ public class imperial_master_trainer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_master_trainer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4449,6 +4479,7 @@ public class imperial_master_trainer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_master_trainer_handleBranch115(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_7b3a873"))
@@ -4469,7 +4500,7 @@ public class imperial_master_trainer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_448");
@@ -4478,7 +4509,7 @@ public class imperial_master_trainer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_master_trainer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4488,6 +4519,7 @@ public class imperial_master_trainer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_master_trainer_handleBranch116(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_448"))
@@ -4508,7 +4540,7 @@ public class imperial_master_trainer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_fd661a34");
@@ -4517,7 +4549,7 @@ public class imperial_master_trainer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_master_trainer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4527,6 +4559,7 @@ public class imperial_master_trainer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_master_trainer_handleBranch117(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_24077de7"))
@@ -4547,7 +4580,7 @@ public class imperial_master_trainer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_4041b73c");
@@ -4556,7 +4589,7 @@ public class imperial_master_trainer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_master_trainer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4566,6 +4599,7 @@ public class imperial_master_trainer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_master_trainer_handleBranch118(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_4041b73c"))
@@ -4585,7 +4619,7 @@ public class imperial_master_trainer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_448");
@@ -4594,7 +4628,7 @@ public class imperial_master_trainer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_master_trainer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4604,6 +4638,7 @@ public class imperial_master_trainer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int imperial_master_trainer_handleBranch119(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_448"))
@@ -4624,7 +4659,7 @@ public class imperial_master_trainer extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_fd661a34");
@@ -4633,7 +4668,7 @@ public class imperial_master_trainer extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.imperial_master_trainer.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -4643,6 +4678,7 @@ public class imperial_master_trainer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -4655,6 +4691,7 @@ public class imperial_master_trainer extends script.base_script
         factions.setFaction(self, factions.FACTION_IMPERIAL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
@@ -4663,6 +4700,7 @@ public class imperial_master_trainer extends script.base_script
         factions.setFaction(self, factions.FACTION_IMPERIAL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -4671,18 +4709,21 @@ public class imperial_master_trainer extends script.base_script
         faceTo(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.imperial_master_trainer");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -4727,7 +4768,7 @@ public class imperial_master_trainer extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_f2aa6939");
@@ -4735,7 +4776,7 @@ public class imperial_master_trainer extends script.base_script
                 utils.setScriptVar(player, "conversation.imperial_master_trainer.branchId", 4);
                 npcStartConversation(player, npc, "imperial_master_trainer", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -4813,7 +4854,7 @@ public class imperial_master_trainer extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_21a81b0b");
@@ -4825,7 +4866,7 @@ public class imperial_master_trainer extends script.base_script
                 utils.setScriptVar(player, "conversation.imperial_master_trainer.branchId", 13);
                 npcStartConversation(player, npc, "imperial_master_trainer", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -4854,7 +4895,7 @@ public class imperial_master_trainer extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_fc42e227");
@@ -4866,7 +4907,7 @@ public class imperial_master_trainer extends script.base_script
                 utils.setScriptVar(player, "conversation.imperial_master_trainer.branchId", 21);
                 npcStartConversation(player, npc, "imperial_master_trainer", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -4887,7 +4928,7 @@ public class imperial_master_trainer extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_f010d9ab");
@@ -4895,7 +4936,7 @@ public class imperial_master_trainer extends script.base_script
                 utils.setScriptVar(player, "conversation.imperial_master_trainer.branchId", 30);
                 npcStartConversation(player, npc, "imperial_master_trainer", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -4924,7 +4965,7 @@ public class imperial_master_trainer extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_b8ead210");
@@ -4936,7 +4977,7 @@ public class imperial_master_trainer extends script.base_script
                 utils.setScriptVar(player, "conversation.imperial_master_trainer.branchId", 39);
                 npcStartConversation(player, npc, "imperial_master_trainer", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -4965,7 +5006,7 @@ public class imperial_master_trainer extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_a2bd8a18");
@@ -4977,7 +5018,7 @@ public class imperial_master_trainer extends script.base_script
                 utils.setScriptVar(player, "conversation.imperial_master_trainer.branchId", 49);
                 npcStartConversation(player, npc, "imperial_master_trainer", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -4999,7 +5040,7 @@ public class imperial_master_trainer extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_5d519e4c");
@@ -5007,7 +5048,7 @@ public class imperial_master_trainer extends script.base_script
                 utils.setScriptVar(player, "conversation.imperial_master_trainer.branchId", 63);
                 npcStartConversation(player, npc, "imperial_master_trainer", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -5036,7 +5077,7 @@ public class imperial_master_trainer extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_47acafeb");
@@ -5052,7 +5093,7 @@ public class imperial_master_trainer extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "imperial_master_trainer", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -5085,7 +5126,7 @@ public class imperial_master_trainer extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_308a9ab1");
@@ -5097,7 +5138,7 @@ public class imperial_master_trainer extends script.base_script
                 utils.setScriptVar(player, "conversation.imperial_master_trainer.branchId", 90);
                 npcStartConversation(player, npc, "imperial_master_trainer", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -5113,6 +5154,7 @@ public class imperial_master_trainer extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("imperial_master_trainer"))

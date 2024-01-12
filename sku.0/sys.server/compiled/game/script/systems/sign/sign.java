@@ -1,5 +1,11 @@
 package script.systems.sign;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -19,6 +25,7 @@ public class sign extends script.base_script
     public static final string_id SID_NOT_CITY_ABANDONED = new string_id("city/city", "not_city_abandoned");
     public static final int cityMinTimeDelayBetweenSameServerRequests = 300;
     public static final String cityTimeOfLastSameServerRequest = "timeOfLastSameServerRequest";
+
     public sign()
     {
     }

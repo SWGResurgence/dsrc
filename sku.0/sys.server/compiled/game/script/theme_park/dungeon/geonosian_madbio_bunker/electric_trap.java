@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.geonosian_madbio_bunker;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.location;
 import script.obj_id;
@@ -7,10 +13,12 @@ import script.string_id;
 
 public class electric_trap extends script.base_script
 {
+    public static final String MSGS = "dungeon/geonosian_madbio";
+
     public electric_trap()
     {
     }
-    public static final String MSGS = "dungeon/geonosian_madbio";
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         createTriggerVolume("geonosian_electric_trap", 4.0f, true);
@@ -22,26 +30,27 @@ public class electric_trap extends script.base_script
                 makeShutOffSwitches(self);
             }
         }
-        else 
+        else
         {
             makeShutOffSwitches(self);
         }
         messageTo(self, "showTrap", null, 1, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id player) throws InterruptedException
     {
         if (!isPlayer(player))
         {
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             if (hasObjVar(self, "trap_off"))
             {
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 int dmgLocation = 0;
                 int dmgAmt = rand(300, 700);
@@ -49,20 +58,20 @@ public class electric_trap extends script.base_script
                 switch (hitLoc)
                 {
                     case 1:
-                    dmgLocation = HIT_LOCATION_R_ARM;
-                    break;
+                        dmgLocation = HIT_LOCATION_R_ARM;
+                        break;
                     case 2:
-                    dmgLocation = HIT_LOCATION_L_ARM;
-                    break;
+                        dmgLocation = HIT_LOCATION_L_ARM;
+                        break;
                     case 3:
-                    dmgLocation = HIT_LOCATION_BODY;
-                    break;
+                        dmgLocation = HIT_LOCATION_BODY;
+                        break;
                     case 4:
-                    dmgLocation = HIT_LOCATION_R_LEG;
-                    break;
+                        dmgLocation = HIT_LOCATION_R_LEG;
+                        break;
                     default:
-                    dmgLocation = HIT_LOCATION_L_LEG;
-                    break;
+                        dmgLocation = HIT_LOCATION_L_LEG;
+                        break;
                 }
                 string_id electric = new string_id(MSGS, "shock");
                 sendSystemMessage(player, electric);
@@ -72,6 +81,7 @@ public class electric_trap extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trapShutOff(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id trap = getObjIdObjVar(self, "trap");
@@ -80,6 +90,7 @@ public class electric_trap extends script.base_script
         messageTo(self, "turnTrapOn", null, 27, true);
         return SCRIPT_CONTINUE;
     }
+
     public int turnTrapOn(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "trap_off"))
@@ -89,6 +100,7 @@ public class electric_trap extends script.base_script
         messageTo(self, "showTrap", null, 2, true);
         return SCRIPT_CONTINUE;
     }
+
     public void makeShutOffSwitches(obj_id self) throws InterruptedException
     {
         obj_id top = getTopMostContainer(self);
@@ -112,8 +124,8 @@ public class electric_trap extends script.base_script
         setObjVar(self, "valve", valve);
         setName(shutoff2, "Electrical Power Switch");
         setYaw(shutoff2, 180);
-        return;
     }
+
     public int showTrap(obj_id self, dictionary params) throws InterruptedException
     {
         if (!hasObjVar(self, "trap_off"))

@@ -1,5 +1,11 @@
 package script.object;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.obj_id;
 
@@ -8,21 +14,25 @@ public class destroy_message extends script.base_script
     public destroy_message()
     {
     }
+
     public int OnIncapacitated(obj_id self, obj_id attacker) throws InterruptedException
     {
         sendMessages(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         sendMessages(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectDisabled(obj_id self, obj_id killer) throws InterruptedException
     {
         sendMessages(self);
         return SCRIPT_CONTINUE;
     }
+
     public void sendMessages(obj_id object) throws InterruptedException
     {
         if (!hasObjVar(object, "destroyMessageList"))

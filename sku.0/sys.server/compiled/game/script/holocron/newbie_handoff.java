@@ -1,5 +1,11 @@
 package script.holocron;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -9,33 +15,34 @@ import java.util.Vector;
 
 public class newbie_handoff extends script.base_script
 {
-    public newbie_handoff()
-    {
-    }
+    public static final String STF_PLANET_MAP_CAT = "map_loc_cat_n";
+    public static final string_id SID_NEWBIE_MISSION_HEAL_MENU = new string_id("newbie_handoff/messages", "heal_mission_menu");
+    public static final string_id SID_NEWBIE_MISSION_HEAL_USE = new string_id("newbie_handoff/messages", "heal_mission_use");
+    public static final string_id SID_NEWBIE_MISSION_HEAL_NEED_TARGET = new string_id("newbie_handoff/messages", "heal_mission_need_target");
+    public static final string_id SID_NEWBIE_MISSION_HEAL_WRONG_TARGET = new string_id("newbie_handoff/messages", "heal_mission_wrong_target");
     private static final int MAX_DESTROY_TARGETS = 10;
     private static final int MAX_SEARCH_RANGE = 500;
-    public static final String STF_PLANET_MAP_CAT = "map_loc_cat_n";
     private static final String TARGET_DATATABLE = "datatables/newbie_handoff/destroy_targets.iff";
     private static final String DATATABLE_HOLOCRON_EVENTS = "datatables/holocron/events.iff";
     private static final String VAR_FIND_BASE = "find";
     public static final String VAR_FIND_WAYPOINT = VAR_FIND_BASE + ".waypoint";
     private static final String[] NPC_TYPES =
-    {
-        "artisan",
-        "bodyguard",
-        "businessman",
-        "bothan_diplomat",
-        "entertainer",
-        "explorer",
-        "farmer",
-        "gambler",
-        "info_broker",
-        "miner",
-        "medic",
-        "noble",
-        "pilot",
-        "scientist"
-    };
+            {
+                    "artisan",
+                    "bodyguard",
+                    "businessman",
+                    "bothan_diplomat",
+                    "entertainer",
+                    "explorer",
+                    "farmer",
+                    "gambler",
+                    "info_broker",
+                    "miner",
+                    "medic",
+                    "noble",
+                    "pilot",
+                    "scientist"
+            };
     private static final string_id SID_NEWBIE_MISSION_DESTROY_START = new string_id("newbie_handoff/messages", "destroy_mission_start");
     private static final string_id SID_NEWBIE_MISSION_DESTROY_COMPLETE = new string_id("newbie_handoff/messages", "destroy_mission_complete");
     private static final string_id PROSE_NEWBIE_MISSION_SURVEY_START = new string_id("newbie_handoff/messages", "survey_mission_start");
@@ -47,13 +54,13 @@ public class newbie_handoff extends script.base_script
     private static final string_id PROSE_NEWBIE_MISSION_HEAL_START = new string_id("newbie_handoff/messages", "heal_mission_start");
     private static final string_id PROSE_NEWBIE_MISSION_HEAL_ARRIVAL = new string_id("newbie_handoff/messages", "heal_mission_arrival");
     private static final string_id SID_NEWBIE_MISSION_HEAL_COMPLETE = new string_id("newbie_handoff/messages", "heal_mission_complete");
-    public static final string_id SID_NEWBIE_MISSION_HEAL_MENU = new string_id("newbie_handoff/messages", "heal_mission_menu");
-    public static final string_id SID_NEWBIE_MISSION_HEAL_USE = new string_id("newbie_handoff/messages", "heal_mission_use");
-    public static final string_id SID_NEWBIE_MISSION_HEAL_NEED_TARGET = new string_id("newbie_handoff/messages", "heal_mission_need_target");
-    public static final string_id SID_NEWBIE_MISSION_HEAL_WRONG_TARGET = new string_id("newbie_handoff/messages", "heal_mission_wrong_target");
     private static final string_id SID_NEWBIE_MISSION_HARVEST_START = new string_id("newbie_handoff/messages", "harvest_mission_start");
     private static final string_id SID_NEWBIE_MISSION_HARVEST_KILL = new string_id("newbie_handoff/messages", "harvest_mission_target_dead");
     private static final string_id SID_NEWBIE_MISSION_HARVEST_COMPLETE = new string_id("newbie_handoff/messages", "harvest_mission_complete");
+    public newbie_handoff()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (isJedi(self))
@@ -62,6 +69,7 @@ public class newbie_handoff extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnSpeaking(obj_id self, String text) throws InterruptedException
     {
         if (!hasObjVar(self, "gm"))
@@ -74,7 +82,7 @@ public class newbie_handoff extends script.base_script
         {
             arg = st.nextToken();
         }
-        else 
+        else
         {
             arg = text;
         }
@@ -82,7 +90,8 @@ public class newbie_handoff extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        switch (arg) {
+        switch (arg)
+        {
             case "findBank":
                 LOG("newbie_handoff", "Atempting to find closest Bank");
                 messageTo(self, "tourBank", null, 0, false);
@@ -134,9 +143,11 @@ public class newbie_handoff extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnArrivedAtLocation(obj_id self, String name) throws InterruptedException
     {
-        switch (name) {
+        switch (name)
+        {
             case "tour.bank":
                 openHolocronToNewbiePage(self, "WelcomeToSWG.WhereDoIBegin.Exploring.FindBank.ArrivedBank");
                 clearHolocronDatapadEntry(self, name);
@@ -160,12 +171,14 @@ public class newbie_handoff extends script.base_script
             case "mission.destroy":
                 removeLocationTarget(name);
                 break;
-            case "mission.destroy.spawnGuy": {
+            case "mission.destroy.spawnGuy":
+            {
                 removeLocationTarget(name);
                 location spawnLoc = getLocationObjVar(self, "newbie_handoff.mission.destroy.loc");
                 String npcToSpawn = getStringObjVar(self, "newbie_handoff.mission.destroy.npc");
                 String missionType = getStringObjVar(self, "newbie_handoff.mission.destroy.type");
-                if (npcToSpawn == null) {
+                if (npcToSpawn == null)
+                {
                     debugSpeakMsg(self, "Can't find anyone to spawn");
                     return SCRIPT_CONTINUE;
                 }
@@ -181,12 +194,14 @@ public class newbie_handoff extends script.base_script
             case "mission.harvest":
                 removeLocationTarget(name);
                 break;
-            case "mission.harvest.spawnGuy": {
+            case "mission.harvest.spawnGuy":
+            {
                 removeLocationTarget(name);
                 location spawnLoc = getLocationObjVar(self, "newbie_handoff.mission.harvest.loc");
                 String npcToSpawn = getStringObjVar(self, "newbie_handoff.mission.harvest.npc");
                 String missionType = getStringObjVar(self, "newbie_handoff.mission.harvest.type");
-                if (npcToSpawn == null) {
+                if (npcToSpawn == null)
+                {
                     debugSpeakMsg(self, "Can't find anyone to spawn");
                     return SCRIPT_CONTINUE;
                 }
@@ -203,7 +218,8 @@ public class newbie_handoff extends script.base_script
                 removeLocationTarget(name);
                 sendSystemMessage(self, SID_NEWBIE_MISSION_GIG_ARRIVAL);
                 break;
-            case "mission.heal": {
+            case "mission.heal":
+            {
                 removeLocationTarget(name);
                 obj_id npc = getObjIdObjVar(self, "newbie_handoff.mission.heal.npc_id");
                 prose_package pp = prose.getPackage(PROSE_NEWBIE_MISSION_HEAL_ARRIVAL, npc);
@@ -216,22 +232,26 @@ public class newbie_handoff extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int startHandoff(obj_id self, dictionary params) throws InterruptedException
     {
         playMusic(self, "sound/tut_00_holocron.snd");
         openHolocronToNewbiePage(self, "WelcomeToSWG.WhereDoIBegin");
         return SCRIPT_CONTINUE;
     }
+
     public int disableNewbieHandoff(obj_id self, dictionary params) throws InterruptedException
     {
         setObjVar(self, "newbie_handoff.disabled", 1);
         return SCRIPT_CONTINUE;
     }
+
     public int enableNewbieHandoff(obj_id self, dictionary params) throws InterruptedException
     {
         removeObjVar(self, "newbie_handoff.disabled");
         return SCRIPT_CONTINUE;
     }
+
     public int tourBank(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "newbie_handoff.tour.bank"))
@@ -247,6 +267,7 @@ public class newbie_handoff extends script.base_script
         closeHolocron(self);
         return SCRIPT_CONTINUE;
     }
+
     public int tourCloningCenter(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "newbie_handoff.tour.cloning_center"))
@@ -263,6 +284,7 @@ public class newbie_handoff extends script.base_script
         closeHolocron(self);
         return SCRIPT_CONTINUE;
     }
+
     public int tourHospital(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "newbie_handoff.tour.hospital"))
@@ -271,21 +293,22 @@ public class newbie_handoff extends script.base_script
             messageTo(self, "tourHospital", null, 1.0f, false);
             return SCRIPT_CONTINUE;
         }
-        String[] priSearchList = 
-        {
-            "hospital",
-            "medicalcenter"
-        };
-        String[] secSearchList = 
-        {
-            "tavern",
-            "barracks"
-        };
+        String[] priSearchList =
+                {
+                        "hospital",
+                        "medicalcenter"
+                };
+        String[] secSearchList =
+                {
+                        "tavern",
+                        "barracks"
+                };
         obj_id waypoint = addHolocronDatapadWaypoint(self, "tour.hospital", "City Tour: Hospital", findClosestStructure(self, priSearchList, secSearchList), 5);
         addHolocronWaypointPath(self, waypoint);
         closeHolocron(self);
         return SCRIPT_CONTINUE;
     }
+
     public int tourCantina(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "newbie_handoff.tour.cantina"))
@@ -294,22 +317,23 @@ public class newbie_handoff extends script.base_script
             messageTo(self, "tourCantina", null, 1.0f, false);
             return SCRIPT_CONTINUE;
         }
-        String[] priSearchList = 
-        {
-            "cantina",
-            "guild_theater",
-            "hotel"
-        };
-        String[] secSearchList = 
-        {
-            "tavern",
-            "barracks"
-        };
+        String[] priSearchList =
+                {
+                        "cantina",
+                        "guild_theater",
+                        "hotel"
+                };
+        String[] secSearchList =
+                {
+                        "tavern",
+                        "barracks"
+                };
         obj_id waypoint = addHolocronDatapadWaypoint(self, "tour.cantina", "City Tour: Cantina", findClosestStructure(self, priSearchList, secSearchList), 5);
         addHolocronWaypointPath(self, waypoint);
         closeHolocron(self);
         return SCRIPT_CONTINUE;
     }
+
     public int tourSkillTrainer(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "newbie_handoff.tour.skill_trainer"))
@@ -331,6 +355,7 @@ public class newbie_handoff extends script.base_script
         closeHolocron(self);
         return SCRIPT_CONTINUE;
     }
+
     public int openHolocronToProfession(obj_id self, dictionary params) throws InterruptedException
     {
         String profession = toUpper(getSimpleProfession(getStartingProfession(self)), 0);
@@ -338,6 +363,7 @@ public class newbie_handoff extends script.base_script
         openHolocronToNewbiePage(self, page);
         return SCRIPT_CONTINUE;
     }
+
     public int missionArtisanSurvey(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "newbie_handoff.mission.survey"))
@@ -394,11 +420,12 @@ public class newbie_handoff extends script.base_script
         closeHolocron(self);
         String resourceName = "INSERT NAME HERE";
         String resourceClass = "INSERT CLASS HERE";
-        int resourceEfficiency = (int)(targetEfficiency * 100);
+        int resourceEfficiency = (int) (targetEfficiency * 100);
         prose_package pp = prose.getPackage(PROSE_NEWBIE_MISSION_SURVEY_START, null, null, null, null, resourceName, null, null, resourceClass, null, resourceEfficiency, 0.0f);
         sendSystemMessageProse(self, pp);
         return SCRIPT_CONTINUE;
     }
+
     public int missionEntertainerDanceGig(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "newbie_handoff.mission.gig"))
@@ -418,6 +445,7 @@ public class newbie_handoff extends script.base_script
         sendSystemMessage(self, SID_NEWBIE_MISSION_GIG_DANCE_START);
         return SCRIPT_CONTINUE;
     }
+
     public int missionEntertainerMusicGig(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "newbie_handoff.mission.gig"))
@@ -437,6 +465,7 @@ public class newbie_handoff extends script.base_script
         sendSystemMessage(self, SID_NEWBIE_MISSION_GIG_MUSIC_START);
         return SCRIPT_CONTINUE;
     }
+
     public int missionMedicHeal(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "newbie_handoff.mission.heal"))
@@ -485,6 +514,7 @@ public class newbie_handoff extends script.base_script
         sendSystemMessageProse(self, pp);
         return SCRIPT_CONTINUE;
     }
+
     public int missionBrawlerDestroy(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "newbie_handoff.mission.destroy"))
@@ -524,6 +554,7 @@ public class newbie_handoff extends script.base_script
         sendSystemMessage(self, SID_NEWBIE_MISSION_DESTROY_START);
         return SCRIPT_CONTINUE;
     }
+
     public int missionMarksmanDestroy(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "newbie_handoff.mission.destroy"))
@@ -563,6 +594,7 @@ public class newbie_handoff extends script.base_script
         sendSystemMessage(self, SID_NEWBIE_MISSION_DESTROY_START);
         return SCRIPT_CONTINUE;
     }
+
     public int missionScoutHarvest(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "newbie_handoff.mission.harvest"))
@@ -602,12 +634,15 @@ public class newbie_handoff extends script.base_script
         sendSystemMessage(self, SID_NEWBIE_MISSION_HARVEST_START);
         return SCRIPT_CONTINUE;
     }
+
     public void commandOpenCraftingTool(obj_id player) throws InterruptedException
     {
     }
+
     public void prototypeCompleted() throws InterruptedException
     {
     }
+
     public int eventEarnedSkillBox(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (isSpaceScene())
@@ -619,6 +654,7 @@ public class newbie_handoff extends script.base_script
         messageTo(self, "handleHolocronEvent", holocronParams, 0, false);
         return SCRIPT_CONTINUE;
     }
+
     public int eventTrainedSkillBox(obj_id self, dictionary params) throws InterruptedException
     {
         dictionary holocronParams = new dictionary();
@@ -626,6 +662,7 @@ public class newbie_handoff extends script.base_script
         messageTo(self, "handleHolocronEvent", holocronParams, 0, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleHolocronEvent(obj_id self, dictionary params) throws InterruptedException
     {
         if (isSpaceScene())
@@ -658,6 +695,7 @@ public class newbie_handoff extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int missionSurveyComplete(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("newbie_handoff", "Survey Mission Complete");
@@ -668,6 +706,7 @@ public class newbie_handoff extends script.base_script
         openHolocronToNewbiePage(self, "WelcomeToSWG.WhereDoIBegin.Professions.PlayingArtisan.Resources.Survey.Complete");
         return SCRIPT_CONTINUE;
     }
+
     public int missionGigComplete(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("newbie_handoff", "Gig Mission Complete");
@@ -677,6 +716,7 @@ public class newbie_handoff extends script.base_script
         messageTo(self, "openHolocronAfterGigMission", null, 5, false);
         return SCRIPT_CONTINUE;
     }
+
     public int missionHealComplete(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("newbie_handoff", "Heal Mission Complete");
@@ -686,6 +726,7 @@ public class newbie_handoff extends script.base_script
         messageTo(self, "openHolocronAfterHealMission", null, 5, false);
         return SCRIPT_CONTINUE;
     }
+
     public int missionDestroyComplete(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("newbie_handoff", "Destroy Mission Complete");
@@ -699,7 +740,7 @@ public class newbie_handoff extends script.base_script
             sendSystemMessage(self, SID_NEWBIE_MISSION_DESTROY_COMPLETE);
             messageTo(self, "openHolocronAfterBrawlerMission", null, 5, false);
         }
-        else 
+        else
         {
             LOG("newbie_handoff", "	Sending messeage to open Holocron");
             sendSystemMessage(self, SID_NEWBIE_MISSION_DESTROY_COMPLETE);
@@ -707,12 +748,14 @@ public class newbie_handoff extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int missionHarvestTargetDead(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("newbie_handoff_harvest", "Creature Killed: Telling player to harvest.");
         sendSystemMessage(self, SID_NEWBIE_MISSION_HARVEST_KILL);
         return SCRIPT_CONTINUE;
     }
+
     public int missionHarvestComplete(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("newbie_handoff", "Harvest Mission Complete");
@@ -723,18 +766,21 @@ public class newbie_handoff extends script.base_script
         messageTo(self, "openHolocronAfterScoutMission", null, 5, false);
         return SCRIPT_CONTINUE;
     }
+
     public int openHolocronAfterGigMission(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("newbie_handoff", "Opening Holocron to Entertainer Gig Complete Section");
         openHolocronToNewbiePage(self, "WelcomeToSWG.WhereDoIBegin.Professions.PlayingEntertainer.Instruments.Gig.Complete");
         return SCRIPT_CONTINUE;
     }
+
     public int openHolocronAfterHealMission(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("newbie_handoff", "Opening Holocron to Medic Heal Complete Section");
         openHolocronToNewbiePage(self, "WelcomeToSWG.WhereDoIBegin.Professions.PlayingMedic");
         return SCRIPT_CONTINUE;
     }
+
     public int openHolocronAfterBrawlerMission(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("newbie_handoff", "Opening Holocron to Brawler Destroy Complete Section");
@@ -743,12 +789,13 @@ public class newbie_handoff extends script.base_script
             LOG("newbie_handoff", "	Still in combat, wait 15 seconds");
             messageTo(self, "openHolocronAfterBrawlerMission", null, 15, false);
         }
-        else 
+        else
         {
             openHolocronToNewbiePage(self, "WelcomeToSWG.WhereDoIBegin.Professions.PlayingBrawler.MeleeTactics.Destroy.Complete");
         }
         return SCRIPT_CONTINUE;
     }
+
     public int openHolocronAfterMarksmanMission(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("newbie_handoff", "Opening Holocron to Marksman Destroy Complete Section");
@@ -757,12 +804,13 @@ public class newbie_handoff extends script.base_script
             LOG("newbie_handoff", "	Still in combat, wait 15 seconds");
             messageTo(self, "openHolocronAfterMarksmanMission", null, 15, false);
         }
-        else 
+        else
         {
             openHolocronToNewbiePage(self, "WelcomeToSWG.WhereDoIBegin.Professions.PlayingMarksman.RangedTactics.Destroy.Complete");
         }
         return SCRIPT_CONTINUE;
     }
+
     public int openHolocronAfterScoutMission(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("newbie_handoff", "Opening Holocron to Scout Harvest Complete Section");
@@ -771,12 +819,13 @@ public class newbie_handoff extends script.base_script
             LOG("newbie_handoff", "	Still in combat, wait 15 seconds");
             messageTo(self, "openHolocronAfterScoutMission", null, 15, false);
         }
-        else 
+        else
         {
             openHolocronToNewbiePage(self, "WelcomeToSWG.WhereDoIBegin.Professions.PlayingScout.Harvesting.Harvest.Complete");
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnWaypointDestroyed(obj_id self, obj_id waypoint) throws InterruptedException
     {
         LOG("newbie_handoff", "	Trying to remove data for Waypoint: " + waypoint);
@@ -789,7 +838,7 @@ public class newbie_handoff extends script.base_script
             LOG("newbie_handoff", "	Sending message to remove data");
             messageTo(self, "removeDatapadEntryData", params, 0, false);
         }
-        else 
+        else
         {
             Vector waypointIds = getResizeableObjIdArrayObjVar(self, "newbie_handoff.waypoint.idList");
             Vector waypointNames = getResizeableStringArrayObjVar(self, "newbie_handoff.waypoint.nameList");
@@ -798,7 +847,7 @@ public class newbie_handoff extends script.base_script
             {
                 dictionary params = new dictionary();
                 params.put("waypoint", waypoint);
-                params.put("name", ((String)waypointNames.get(idx)));
+                params.put("name", ((String) waypointNames.get(idx)));
                 params.put("index", idx);
                 LOG("newbie_handoff", "	Sending message to remove data");
                 messageTo(self, "removeDatapadEntryData", params, 0, false);
@@ -806,6 +855,7 @@ public class newbie_handoff extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int removeDatapadEntryData(obj_id self, dictionary params) throws InterruptedException
     {
         String name = params.getString("name");
@@ -846,13 +896,13 @@ public class newbie_handoff extends script.base_script
                     setObjVar(self, "newbie_handoff.waypoint.idList", waypointIds);
                     setObjVar(self, "newbie_handoff.waypoint.nameList", waypointNames);
                 }
-                else 
+                else
                 {
                     removeObjVar(self, "newbie_handoff.waypoint.idList");
                     removeObjVar(self, "newbie_handoff.waypoint.nameList");
                 }
             }
-            else 
+            else
             {
                 if (hasObjVar(self, "newbie_handoff.waypoint." + waypoint))
                 {
@@ -862,6 +912,7 @@ public class newbie_handoff extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     private obj_id addHolocronDatapadWaypoint(obj_id player, String name, String display, location loc, float radius) throws InterruptedException
     {
         LOG("newbie_handoff", "Creating Waypoint: '" + display + "' in Datapad...");
@@ -888,6 +939,7 @@ public class newbie_handoff extends script.base_script
         }
         return waypoint;
     }
+
     private obj_id addHolocronDatapadEntry(obj_id player, String name, String display) throws InterruptedException
     {
         LOG("newbie_handoff", "Creating Entry: '" + display + "' in Datapad...");
@@ -902,6 +954,7 @@ public class newbie_handoff extends script.base_script
         setObjVar(entry, "newbie_handoff.player", player);
         return entry;
     }
+
     private void clearHolocronDatapadEntry(obj_id player, String name) throws InterruptedException
     {
         if (hasObjVar(player, "newbie_handoff." + name + ".dataEntry"))
@@ -924,6 +977,7 @@ public class newbie_handoff extends script.base_script
             removeLocationTarget(name);
         }
     }
+
     private void addHolocronWaypointPath(obj_id player, obj_id waypoint) throws InterruptedException
     {
         if (utils.hasScriptVar(player, "hasClientPath"))
@@ -943,14 +997,18 @@ public class newbie_handoff extends script.base_script
         if (hereCity != null && hereCity.length > 0 && thereCity != null && thereCity.length > 0)
         {
             boolean areInSameCity = false;
-            for (region aHereCity : hereCity) {
-                for (region aThereCity : thereCity) {
-                    if (((aHereCity.getName())).equals(aThereCity.getName())) {
+            for (region aHereCity : hereCity)
+            {
+                for (region aThereCity : thereCity)
+                {
+                    if (((aHereCity.getName())).equals(aThereCity.getName()))
+                    {
                         areInSameCity = true;
                         break;
                     }
                 }
-                if (areInSameCity) {
+                if (areInSameCity)
+                {
                     break;
                 }
             }
@@ -966,7 +1024,7 @@ public class newbie_handoff extends script.base_script
                 {
                     broadcast(player, "The system was unable to create a client path for you.");
                 }
-                else 
+                else
                 {
                     if (here.cell != start.cell)
                     {
@@ -977,6 +1035,7 @@ public class newbie_handoff extends script.base_script
             }
         }
     }
+
     private int findWaypointIndex(Vector idList, obj_id waypoint) throws InterruptedException
     {
         if (idList != null && idList.size() > 0)
@@ -991,6 +1050,7 @@ public class newbie_handoff extends script.base_script
         }
         return -1;
     }
+
     private void openHolocronToNewbiePage(obj_id player, String page) throws InterruptedException
     {
         if (!hasObjVar(player, "newbie_handoff.disabled"))
@@ -998,6 +1058,7 @@ public class newbie_handoff extends script.base_script
             openHolocronToPage(player, page);
         }
     }
+
     private location findClosestStructure(obj_id player, String[] priSearchList, String[] secSearchList) throws InterruptedException
     {
         float priDist = Float.POSITIVE_INFINITY;
@@ -1009,20 +1070,24 @@ public class newbie_handoff extends script.base_script
         String sub;
         map_location destination;
         location loc;
-        for (String aPriSearchList : priSearchList) {
+        for (String aPriSearchList : priSearchList)
+        {
             st = new StringTokenizer(aPriSearchList, "_");
             cat = st.nextToken();
             sub = "";
-            if (st.hasMoreTokens()) {
+            if (st.hasMoreTokens())
+            {
                 sub = st.nextToken();
             }
             destination = planetary_map.findClosestLocation(player, cat, sub);
-            if (destination == null) {
+            if (destination == null)
+            {
                 continue;
             }
             loc = new location(destination.getX(), 0, destination.getY());
             float dist = utils.getDistance2D(getLocation(player), loc);
-            if (dist < priDist) {
+            if (dist < priDist)
+            {
                 priDist = dist;
                 priLoc = loc;
             }
@@ -1031,20 +1096,24 @@ public class newbie_handoff extends script.base_script
         {
             return priLoc;
         }
-        for (String aSecSearchList : secSearchList) {
+        for (String aSecSearchList : secSearchList)
+        {
             st = new StringTokenizer(aSecSearchList, "_");
             cat = st.nextToken();
             sub = "";
-            if (st.hasMoreTokens()) {
+            if (st.hasMoreTokens())
+            {
                 sub = st.nextToken();
             }
             destination = planetary_map.findClosestLocation(player, cat, sub);
-            if (destination == null) {
+            if (destination == null)
+            {
                 continue;
             }
             loc = new location(destination.getX(), 0, destination.getY());
             float dist = utils.getDistance2D(getLocation(player), loc);
-            if (dist < secDist) {
+            if (dist < secDist)
+            {
                 secDist = dist;
                 secLoc = loc;
             }
@@ -1057,11 +1126,12 @@ public class newbie_handoff extends script.base_script
         {
             return priLoc;
         }
-        else 
+        else
         {
             return secLoc;
         }
     }
+
     private String getStartingProfession(obj_id player) throws InterruptedException
     {
         String[] skillList = getSkillListingForPlayer(player);
@@ -1074,8 +1144,10 @@ public class newbie_handoff extends script.base_script
             return ("");
         }
         String skillName = null;
-        for (String aSkillList : skillList) {
-            if (aSkillList.endsWith("_novice")) {
+        for (String aSkillList : skillList)
+        {
+            if (aSkillList.endsWith("_novice"))
+            {
                 skillName = aSkillList;
             }
         }
@@ -1086,6 +1158,7 @@ public class newbie_handoff extends script.base_script
         String profession = getSkillProfession(skillName);
         return Objects.requireNonNullElse(profession, (""));
     }
+
     private String getSimpleProfession(String profession) throws InterruptedException
     {
         java.util.StringTokenizer st = new java.util.StringTokenizer(profession, "_");
@@ -1096,6 +1169,7 @@ public class newbie_handoff extends script.base_script
         }
         return tmp;
     }
+
     private String getTrainerType(String profession) throws InterruptedException
     {
         if (profession == null || profession.equals(""))
@@ -1104,6 +1178,7 @@ public class newbie_handoff extends script.base_script
         }
         return ("trainer_" + getSimpleProfession(profession));
     }
+
     private String determineDestroyTarget(obj_id player) throws InterruptedException
     {
         String planet = getCurrentSceneName();
@@ -1111,6 +1186,7 @@ public class newbie_handoff extends script.base_script
         LOG("newbie_handoff", "Seraching for destroy mission target at " + planet + ": " + city);
         return loadRandomDestroyTarget(planet, city);
     }
+
     private String loadRandomDestroyTarget(String planet, String city) throws InterruptedException
     {
         String[] targets = new String[MAX_DESTROY_TARGETS];

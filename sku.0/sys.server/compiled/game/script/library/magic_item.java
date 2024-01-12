@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.obj_id;
 
 import java.util.Arrays;
@@ -10,6 +16,7 @@ public class magic_item extends script.base_script
     public static final float PT_DELTA = 0.15f;
     public static final String TBL_COST = "datatables/magic_item/mod_cost.iff";
     public static final String COL_MAX = "MAX";
+
     public magic_item()
     {
     }

@@ -1,5 +1,11 @@
 package script.developer.soe.hnguyen;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.location;
 import script.obj_id;
@@ -11,10 +17,12 @@ public class online_jedi_test extends script.base_script
     public online_jedi_test()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnHearSpeech(obj_id self, obj_id objSpeaker, String strText) throws InterruptedException
     {
         if (objSpeaker != self)
@@ -39,7 +47,7 @@ public class online_jedi_test extends script.base_script
                     {
                         strOutput = "requestJedi() returned NULL dctJediInfo\r\n";
                     }
-                    else 
+                    else
                     {
                         obj_id[] objJedis = dctJediInfo.getObjIdArray("id");
                         boolean[] boolOnline = dctJediInfo.getBooleanArray("online");
@@ -49,7 +57,7 @@ public class online_jedi_test extends script.base_script
                         int[] level = dctJediInfo.getIntArray("level");
                         int[] faction = dctJediInfo.getIntArray("faction");
                         location[] loc = dctJediInfo.getLocationArray("location");
-                        obj_id[][] bounties = (obj_id[][])(dctJediInfo.get("bounties"));
+                        obj_id[][] bounties = (obj_id[][]) (dctJediInfo.get("bounties"));
                         if (objJedis != null && boolOnline != null && strNames != null && visibility != null)
                         {
                             strOutput = "requestJedi() returned " + objJedis.length + " jedis\r\n";
@@ -85,7 +93,7 @@ public class online_jedi_test extends script.base_script
                                     strOutput += ")";
                                     strOutput += "] is online\r\n";
                                 }
-                                else 
+                                else
                                 {
                                     ++numOfflineJedis;
                                     strOffline += objJedis[i];
@@ -117,7 +125,7 @@ public class online_jedi_test extends script.base_script
                                 }
                             }
                         }
-                        else 
+                        else
                         {
                             strOutput = "requestJedi() returned null data\r\n";
                         }
@@ -133,6 +141,7 @@ public class online_jedi_test extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int hnguyencrbtConfirmed(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id bhId = params.getObjId("hunter");
@@ -151,6 +160,7 @@ public class online_jedi_test extends script.base_script
         broadcast(self, "SUCCESS - bounty created bh=(" + bhId + "," + bhName + ") jedi=(" + jediId + "," + jediName + "," + bounties + ")");
         return SCRIPT_CONTINUE;
     }
+
     public int hnguyencrbtFailed(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id bhId = params.getObjId("hunter");
@@ -169,6 +179,7 @@ public class online_jedi_test extends script.base_script
         broadcast(self, "FAILED - bounty not created bh=(" + bhId + "," + bhName + ") jedi=(" + jediId + "," + jediName + "," + bounties + ")");
         return SCRIPT_CONTINUE;
     }
+
     public String getFactionString(int iTefFac) throws InterruptedException
     {
         String sTefFacName = "<unknown>";

@@ -1,5 +1,11 @@
 package script.systems.movement;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -22,6 +28,7 @@ public class zone_transition extends script.base_script
     public static final string_id bad_zone_data = new string_id(STF, "bad_zone_data");
     public static final string_id invalid_travel = new string_id(STF, "invalid_travel");
     public static final boolean doLogging = false;
+
     public zone_transition()
     {
     }

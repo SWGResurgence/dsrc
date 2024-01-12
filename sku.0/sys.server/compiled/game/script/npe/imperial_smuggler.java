@@ -1,5 +1,11 @@
 package script.npe;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.chat;
 import script.library.create;
@@ -12,11 +18,13 @@ public class imperial_smuggler extends script.base_script
     public imperial_smuggler()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         createTriggerVolume("npe_imperial_radius", 3.0f, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String name, obj_id player) throws InterruptedException
     {
         if (!isPlayer(player))
@@ -28,12 +36,13 @@ public class imperial_smuggler extends script.base_script
             chat.chat(self, "Hey you! Get over here!");
             groundquests.sendSignal(player, "impTalks");
         }
-        else 
+        else
         {
             return SCRIPT_CONTINUE;
         }
         return SCRIPT_CONTINUE;
     }
+
     public int help(obj_id self, dictionary params) throws InterruptedException
     {
         location me = getLocation(self);

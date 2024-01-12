@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.obj_id;
 import script.prose_package;
@@ -134,6 +140,7 @@ public class money extends script.base_script
     public static final int MILLION = 1000000;
     public static final int BILLION = 1000000000;
     public static final int HUNDRED_MILLION = 100000000;
+
     public money()
     {
     }

@@ -1,5 +1,11 @@
 package script.theme_park.kashyyyk;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.obj_id;
 
@@ -8,6 +14,7 @@ public class hracca_spawned_tracker extends script.base_script
     public hracca_spawned_tracker()
     {
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         if (!hasObjVar(self, "cleaningUp"))
@@ -19,6 +26,7 @@ public class hracca_spawned_tracker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, "cleaningUp"))

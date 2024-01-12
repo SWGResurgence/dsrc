@@ -1,5 +1,11 @@
 package script.quest.task;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.prose;
 import script.library.quests;
@@ -11,6 +17,7 @@ public class destroy_multi extends script.base_script
     public destroy_multi()
     {
     }
+
     public int receiveCreditForKill(obj_id self, dictionary params) throws InterruptedException
     {
         String targetType = params.getString("creatureName");
@@ -59,7 +66,7 @@ public class destroy_multi extends script.base_script
                                     }
                                     quests.complete(questName, self, true);
                                 }
-                                else 
+                                else
                                 {
                                     objvarName = "quest." + questName + ".parameter";
                                     setObjVar(self, objvarName, killsRemaining);
@@ -73,22 +80,23 @@ public class destroy_multi extends script.base_script
                         }
                     }
                 }
-                else 
+                else
                 {
                     LOG("newquests", "destroy_multi: onReceiveCreditForKill: questNames objvar \"" + objvarName + "\" string array is empty");
                 }
             }
-            else 
+            else
             {
                 LOG("newquests", "destroy_multi: onReceiveCreditForKill: could not retrieve objvar " + objvarName);
             }
         }
-        else 
+        else
         {
             LOG("newquests", "destroy_multi: onReceiveCreditForKill: could not determine target type name from target creature");
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnQuestActivated(obj_id self, int questRow) throws InterruptedException
     {
         if (quests.isMyQuest(questRow, "quest.task.destroy_multi"))
@@ -101,7 +109,7 @@ public class destroy_multi extends script.base_script
             {
                 target = getStringObjVar(self, objvarName);
             }
-            else 
+            else
             {
                 target = quests.getDataEntry(questRow, "TARGET");
             }
@@ -114,7 +122,7 @@ public class destroy_multi extends script.base_script
                 {
                     killCount = getIntObjVar(self, objvarName);
                 }
-                else 
+                else
                 {
                     String countName = quests.getDataEntry(questRow, "PARAMETER");
                     if (countName != null && countName.length() > 0)
@@ -133,7 +141,7 @@ public class destroy_multi extends script.base_script
                         newQuestNames = new String[1];
                         newQuestNames[0] = questName;
                     }
-                    else 
+                    else
                     {
                         newQuestNames = new String[questNames.length + 1];
                         int iter = 0;
@@ -147,17 +155,17 @@ public class destroy_multi extends script.base_script
                     {
                         setObjVar(self, objvarName, newQuestNames);
                     }
-                    else 
+                    else
                     {
                         LOG("newquests", "destroy_multi: OnQuestActivated: Could not set questnames string array objvar");
                     }
                 }
-                else 
+                else
                 {
                     LOG("newquests", "destroy_multi: OnQuestActivated: could not determine kill count");
                 }
             }
-            else 
+            else
             {
                 LOG("newquests", "destroy_multi: OnQuestActivated: could not determine target creature type");
             }

@@ -1,5 +1,11 @@
 package script.theme_park.meatlump.hideout;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.obj_id;
@@ -8,28 +14,30 @@ import script.string_id;
 
 public class angry_meatlump extends script.base_script
 {
-    public angry_meatlump()
-    {
-    }
     public static final String ANGRY_MEATLUMP_DATATABLE = "datatables/theme_park/meatlump/angry_meatlump.iff";
     public static final String EMOTES_COLUMN = "requiredEmote";
     public static final String HINTS_COLUMN = "hintString";
     public static final String STF = "theme_park/corellia/quest";
     public static final String REQUIRED_EMOTE_OBJVAR = "angryMeatlump.requiredEmote";
     public static final String HIDEOUT_ID_OBJVAR = "angryMeatlump.hideout";
-    public static final String[] NEGATIVE_EMOTES = 
+    public static final String[] NEGATIVE_EMOTES =
+            {
+                    "dismiss",
+                    "mock",
+                    "refuse_offer_affection",
+                    "rude",
+                    "shoo"
+            };
+    public angry_meatlump()
     {
-        "dismiss",
-        "mock",
-        "refuse_offer_affection",
-        "rude",
-        "shoo"
-    };
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setAngryMealumpRequiredEmote(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnSawEmote(obj_id self, obj_id emoteSayer, String emoteSeen) throws InterruptedException
     {
         if (!isPlayer(emoteSayer) || ai_lib.isInCombat(emoteSayer) || isIncapacitated(emoteSayer) || isDead(emoteSayer))
@@ -58,7 +66,7 @@ public class angry_meatlump extends script.base_script
                 doAnimationAction(self, "celebrate");
                 becomeHappyMeatlump(self, emoteSayer);
             }
-            else 
+            else
             {
                 doAnimationAction(self, NEGATIVE_EMOTES[rand(0, NEGATIVE_EMOTES.length - 1)]);
                 if (!utils.hasScriptVar(emoteSayer, "angryMeatlumpHint_" + self))
@@ -80,7 +88,7 @@ public class angry_meatlump extends script.base_script
                         }
                     }
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(emoteSayer, "angryMeatlumpHint_" + self);
                 }
@@ -88,13 +96,14 @@ public class angry_meatlump extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void setAngryMealumpRequiredEmote(obj_id self) throws InterruptedException
     {
         String[] listOfEmotes = dataTableGetStringColumn(ANGRY_MEATLUMP_DATATABLE, EMOTES_COLUMN);
         String requiredEmote = listOfEmotes[rand(0, listOfEmotes.length - 1)];
         setObjVar(self, REQUIRED_EMOTE_OBJVAR, requiredEmote);
-        return;
     }
+
     public void becomeHappyMeatlump(obj_id self, obj_id player) throws InterruptedException
     {
         dictionary webster = new dictionary();
@@ -111,8 +120,8 @@ public class angry_meatlump extends script.base_script
             messageTo(hideout, "makeNewAngryMeatlump", webster, 5, false);
         }
         buff.applyBuff(self, "mtp_meatlump_happy");
-        return;
     }
+
     public int OnIncapacitated(obj_id self, obj_id objAttacker) throws InterruptedException
     {
         obj_id hideout = getObjIdObjVar(self, HIDEOUT_ID_OBJVAR);
@@ -124,6 +133,7 @@ public class angry_meatlump extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         obj_id hideout = getObjIdObjVar(self, HIDEOUT_ID_OBJVAR);

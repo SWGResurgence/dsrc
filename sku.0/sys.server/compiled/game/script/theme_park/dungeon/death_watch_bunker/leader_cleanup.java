@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.death_watch_bunker;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.obj_id;
@@ -9,11 +15,13 @@ public class leader_cleanup extends script.base_script
     public leader_cleanup()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "handleAttackerCleanUp", null, 1500.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleAttackerCleanUp(obj_id self, dictionary params) throws InterruptedException
     {
         if (ai_lib.isInCombat(self))

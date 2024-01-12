@@ -1,53 +1,60 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
 public class space_duty_vendor extends script.base_script
 {
+    public static String c_stringFile = "conversation/space_duty_vendor";
+
     public space_duty_vendor()
     {
     }
-    public static String c_stringFile = "conversation/space_duty_vendor";
+
     public boolean space_duty_vendor_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean space_duty_vendor_condition_canAffordComp(obj_id player, obj_id npc) throws InterruptedException
     {
         int tokens = trial.getTokenTotal(player, trial.SPACE_DUTY_TOKEN);
         int level = utils.getIntScriptVar(player, "dutyVendor.level");
         int price = trial.getSpaceDutyTokenPrice(level);
-        if (tokens >= price)
-        {
-            return true;
-        }
-        return false;
+        return tokens >= price;
     }
+
     public boolean space_duty_vendor_condition_canAffortSchematic(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (trial.getTokenTotal(player, trial.SPACE_DUTY_TOKEN) >= 50)
-        {
-            return true;
-        }
-        return false;
+        return trial.getTokenTotal(player, trial.SPACE_DUTY_TOKEN) >= 50;
     }
+
     public void space_duty_vendor_action_setLevel1(obj_id player, obj_id npc) throws InterruptedException
     {
         utils.setScriptVar(player, "dutyVendor.level", 1);
     }
+
     public void space_duty_vendor_action_setLevel2(obj_id player, obj_id npc) throws InterruptedException
     {
         utils.setScriptVar(player, "dutyVendor.level", 2);
     }
+
     public void space_duty_vendor_action_setLevel3(obj_id player, obj_id npc) throws InterruptedException
     {
         utils.setScriptVar(player, "dutyVendor.level", 3);
     }
+
     public void space_duty_vendor_action_setLevel4(obj_id player, obj_id npc) throws InterruptedException
     {
         utils.setScriptVar(player, "dutyVendor.level", 4);
     }
+
     public void space_duty_vendor_action_buyArmor(obj_id player, obj_id npc) throws InterruptedException
     {
         int level = utils.getIntScriptVar(player, "dutyVendor.level");
@@ -58,30 +65,37 @@ public class space_duty_vendor extends script.base_script
         messageTo(npc, "buySpaceDutyItem", params, 0, false);
         utils.removeScriptVar(player, "dutyVendor.level");
     }
+
     public void space_duty_vendor_action_setLevel5(obj_id player, obj_id npc) throws InterruptedException
     {
         utils.setScriptVar(player, "dutyVendor.level", 5);
     }
+
     public void space_duty_vendor_action_setLevel6(obj_id player, obj_id npc) throws InterruptedException
     {
         utils.setScriptVar(player, "dutyVendor.level", 6);
     }
+
     public void space_duty_vendor_action_setLevel7(obj_id player, obj_id npc) throws InterruptedException
     {
         utils.setScriptVar(player, "dutyVendor.level", 7);
     }
+
     public void space_duty_vendor_action_setLevel8(obj_id player, obj_id npc) throws InterruptedException
     {
         utils.setScriptVar(player, "dutyVendor.level", 8);
     }
+
     public void space_duty_vendor_action_setLevel9(obj_id player, obj_id npc) throws InterruptedException
     {
         utils.setScriptVar(player, "dutyVendor.level", 9);
     }
+
     public void space_duty_vendor_action_setLevel10(obj_id player, obj_id npc) throws InterruptedException
     {
         utils.setScriptVar(player, "dutyVendor.level", 10);
     }
+
     public void space_duty_vendor_action_buyBooster(obj_id player, obj_id npc) throws InterruptedException
     {
         int level = utils.getIntScriptVar(player, "dutyVendor.level");
@@ -92,6 +106,7 @@ public class space_duty_vendor extends script.base_script
         messageTo(npc, "buySpaceDutyItem", params, 0, false);
         utils.removeScriptVar(player, "dutyVendor.level");
     }
+
     public void space_duty_vendor_action_buyWeapCap(obj_id player, obj_id npc) throws InterruptedException
     {
         int level = utils.getIntScriptVar(player, "dutyVendor.level");
@@ -102,6 +117,7 @@ public class space_duty_vendor extends script.base_script
         messageTo(npc, "buySpaceDutyItem", params, 0, false);
         utils.removeScriptVar(player, "dutyVendor.level");
     }
+
     public void space_duty_vendor_action_buyWeapon(obj_id player, obj_id npc) throws InterruptedException
     {
         int level = utils.getIntScriptVar(player, "dutyVendor.level");
@@ -112,6 +128,7 @@ public class space_duty_vendor extends script.base_script
         messageTo(npc, "buySpaceDutyItem", params, 0, false);
         utils.removeScriptVar(player, "dutyVendor.level");
     }
+
     public void space_duty_vendor_action_buyShield(obj_id player, obj_id npc) throws InterruptedException
     {
         int level = utils.getIntScriptVar(player, "dutyVendor.level");
@@ -122,6 +139,7 @@ public class space_duty_vendor extends script.base_script
         messageTo(npc, "buySpaceDutyItem", params, 0, false);
         utils.removeScriptVar(player, "dutyVendor.level");
     }
+
     public void space_duty_vendor_action_buyReactor(obj_id player, obj_id npc) throws InterruptedException
     {
         int level = utils.getIntScriptVar(player, "dutyVendor.level");
@@ -132,6 +150,7 @@ public class space_duty_vendor extends script.base_script
         messageTo(npc, "buySpaceDutyItem", params, 0, false);
         utils.removeScriptVar(player, "dutyVendor.level");
     }
+
     public void space_duty_vendor_action_buyEngine(obj_id player, obj_id npc) throws InterruptedException
     {
         int level = utils.getIntScriptVar(player, "dutyVendor.level");
@@ -142,6 +161,7 @@ public class space_duty_vendor extends script.base_script
         messageTo(npc, "buySpaceDutyItem", params, 0, false);
         utils.removeScriptVar(player, "dutyVendor.level");
     }
+
     public void space_duty_vendor_action_buyDroidInterface(obj_id player, obj_id npc) throws InterruptedException
     {
         int level = utils.getIntScriptVar(player, "dutyVendor.level");
@@ -152,6 +172,7 @@ public class space_duty_vendor extends script.base_script
         messageTo(npc, "buySpaceDutyItem", params, 0, false);
         utils.removeScriptVar(player, "dutyVendor.level");
     }
+
     public void space_duty_vendor_action_buyInterdictionGenerator(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id inventory = utils.getInventoryContainer(player);
@@ -165,6 +186,7 @@ public class space_duty_vendor extends script.base_script
             destroyObject(generator);
         }
     }
+
     public void space_duty_vendor_action_buyInterfaceScanner(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id inventory = utils.getInventoryContainer(player);
@@ -178,17 +200,20 @@ public class space_duty_vendor extends script.base_script
             destroyObject(scanner);
         }
     }
+
     public String space_duty_vendor_tokenTO_certLevel(obj_id player, obj_id npc) throws InterruptedException
     {
         String cert = "Certification Level " + (utils.getIntScriptVar(player, "dutyVendor.level"));
         return cert;
     }
+
     public int space_duty_vendor_tokenDI_DiPrice(obj_id player, obj_id npc) throws InterruptedException
     {
         int level = utils.getIntScriptVar(player, "dutyVendor.level");
         int price = trial.getSpaceDutyTokenPrice(level);
         return price;
     }
+
     public int space_duty_vendor_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_22"))
@@ -271,7 +296,7 @@ public class space_duty_vendor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_26");
@@ -316,7 +341,7 @@ public class space_duty_vendor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.space_duty_vendor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -348,7 +373,7 @@ public class space_duty_vendor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_163");
@@ -361,7 +386,7 @@ public class space_duty_vendor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.space_duty_vendor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -400,7 +425,7 @@ public class space_duty_vendor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_176");
@@ -417,7 +442,7 @@ public class space_duty_vendor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.space_duty_vendor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -427,6 +452,7 @@ public class space_duty_vendor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int space_duty_vendor_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_26"))
@@ -503,7 +529,7 @@ public class space_duty_vendor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_37");
@@ -549,7 +575,7 @@ public class space_duty_vendor extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.space_duty_vendor.branchId");
                     prose_package pp = new prose_package();
@@ -636,7 +662,7 @@ public class space_duty_vendor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_37");
@@ -682,7 +708,7 @@ public class space_duty_vendor extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.space_duty_vendor.branchId");
                     prose_package pp = new prose_package();
@@ -769,7 +795,7 @@ public class space_duty_vendor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_37");
@@ -815,7 +841,7 @@ public class space_duty_vendor extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.space_duty_vendor.branchId");
                     prose_package pp = new prose_package();
@@ -902,7 +928,7 @@ public class space_duty_vendor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_37");
@@ -948,7 +974,7 @@ public class space_duty_vendor extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.space_duty_vendor.branchId");
                     prose_package pp = new prose_package();
@@ -1035,7 +1061,7 @@ public class space_duty_vendor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_37");
@@ -1081,7 +1107,7 @@ public class space_duty_vendor extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.space_duty_vendor.branchId");
                     prose_package pp = new prose_package();
@@ -1168,7 +1194,7 @@ public class space_duty_vendor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_37");
@@ -1214,7 +1240,7 @@ public class space_duty_vendor extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.space_duty_vendor.branchId");
                     prose_package pp = new prose_package();
@@ -1301,7 +1327,7 @@ public class space_duty_vendor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_37");
@@ -1347,7 +1373,7 @@ public class space_duty_vendor extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.space_duty_vendor.branchId");
                     prose_package pp = new prose_package();
@@ -1434,7 +1460,7 @@ public class space_duty_vendor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_37");
@@ -1480,7 +1506,7 @@ public class space_duty_vendor extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.space_duty_vendor.branchId");
                     prose_package pp = new prose_package();
@@ -1567,7 +1593,7 @@ public class space_duty_vendor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_37");
@@ -1613,7 +1639,7 @@ public class space_duty_vendor extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.space_duty_vendor.branchId");
                     prose_package pp = new prose_package();
@@ -1700,7 +1726,7 @@ public class space_duty_vendor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_37");
@@ -1746,7 +1772,7 @@ public class space_duty_vendor extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.space_duty_vendor.branchId");
                     prose_package pp = new prose_package();
@@ -1761,6 +1787,7 @@ public class space_duty_vendor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int space_duty_vendor_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_37"))
@@ -1787,7 +1814,7 @@ public class space_duty_vendor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_55");
@@ -1806,7 +1833,7 @@ public class space_duty_vendor extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.space_duty_vendor.branchId");
                     prose_package pp = new prose_package();
@@ -1851,7 +1878,7 @@ public class space_duty_vendor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_59");
@@ -1870,7 +1897,7 @@ public class space_duty_vendor extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.space_duty_vendor.branchId");
                     prose_package pp = new prose_package();
@@ -1915,7 +1942,7 @@ public class space_duty_vendor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_63");
@@ -1934,7 +1961,7 @@ public class space_duty_vendor extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.space_duty_vendor.branchId");
                     prose_package pp = new prose_package();
@@ -1979,7 +2006,7 @@ public class space_duty_vendor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_67");
@@ -1998,7 +2025,7 @@ public class space_duty_vendor extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.space_duty_vendor.branchId");
                     prose_package pp = new prose_package();
@@ -2043,7 +2070,7 @@ public class space_duty_vendor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_71");
@@ -2062,7 +2089,7 @@ public class space_duty_vendor extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.space_duty_vendor.branchId");
                     prose_package pp = new prose_package();
@@ -2107,7 +2134,7 @@ public class space_duty_vendor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_83");
@@ -2126,7 +2153,7 @@ public class space_duty_vendor extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.space_duty_vendor.branchId");
                     prose_package pp = new prose_package();
@@ -2171,7 +2198,7 @@ public class space_duty_vendor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_102");
@@ -2190,7 +2217,7 @@ public class space_duty_vendor extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.space_duty_vendor.branchId");
                     prose_package pp = new prose_package();
@@ -2235,7 +2262,7 @@ public class space_duty_vendor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_116");
@@ -2254,7 +2281,7 @@ public class space_duty_vendor extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.space_duty_vendor.branchId");
                     prose_package pp = new prose_package();
@@ -2287,6 +2314,7 @@ public class space_duty_vendor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int space_duty_vendor_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_55"))
@@ -2312,6 +2340,7 @@ public class space_duty_vendor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int space_duty_vendor_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_59"))
@@ -2337,6 +2366,7 @@ public class space_duty_vendor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int space_duty_vendor_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_63"))
@@ -2362,6 +2392,7 @@ public class space_duty_vendor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int space_duty_vendor_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_67"))
@@ -2387,6 +2418,7 @@ public class space_duty_vendor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int space_duty_vendor_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_71"))
@@ -2412,6 +2444,7 @@ public class space_duty_vendor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int space_duty_vendor_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_83"))
@@ -2437,6 +2470,7 @@ public class space_duty_vendor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int space_duty_vendor_handleBranch28(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_102"))
@@ -2462,6 +2496,7 @@ public class space_duty_vendor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int space_duty_vendor_handleBranch32(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_116"))
@@ -2487,6 +2522,7 @@ public class space_duty_vendor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int space_duty_vendor_handleBranch37(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_163"))
@@ -2513,7 +2549,7 @@ public class space_duty_vendor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_168");
@@ -2522,7 +2558,7 @@ public class space_duty_vendor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.space_duty_vendor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2554,7 +2590,7 @@ public class space_duty_vendor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_171");
@@ -2563,7 +2599,7 @@ public class space_duty_vendor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.space_duty_vendor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2573,6 +2609,7 @@ public class space_duty_vendor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int space_duty_vendor_handleBranch39(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_168"))
@@ -2588,6 +2625,7 @@ public class space_duty_vendor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int space_duty_vendor_handleBranch42(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_171"))
@@ -2603,6 +2641,7 @@ public class space_duty_vendor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int space_duty_vendor_handleBranch44(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_176"))
@@ -2636,7 +2675,7 @@ public class space_duty_vendor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_176");
@@ -2653,7 +2692,7 @@ public class space_duty_vendor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.space_duty_vendor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2692,7 +2731,7 @@ public class space_duty_vendor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_176");
@@ -2709,7 +2748,7 @@ public class space_duty_vendor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.space_duty_vendor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2748,7 +2787,7 @@ public class space_duty_vendor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_22");
@@ -2765,7 +2804,7 @@ public class space_duty_vendor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.space_duty_vendor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2775,6 +2814,7 @@ public class space_duty_vendor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int space_duty_vendor_handleBranch45(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_176"))
@@ -2808,7 +2848,7 @@ public class space_duty_vendor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_176");
@@ -2825,7 +2865,7 @@ public class space_duty_vendor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.space_duty_vendor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2864,7 +2904,7 @@ public class space_duty_vendor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_176");
@@ -2881,7 +2921,7 @@ public class space_duty_vendor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.space_duty_vendor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2920,7 +2960,7 @@ public class space_duty_vendor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_22");
@@ -2937,7 +2977,7 @@ public class space_duty_vendor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.space_duty_vendor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -2947,6 +2987,7 @@ public class space_duty_vendor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int space_duty_vendor_handleBranch46(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_176"))
@@ -2980,7 +3021,7 @@ public class space_duty_vendor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_176");
@@ -2997,7 +3038,7 @@ public class space_duty_vendor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.space_duty_vendor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3036,7 +3077,7 @@ public class space_duty_vendor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_176");
@@ -3053,7 +3094,7 @@ public class space_duty_vendor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.space_duty_vendor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3092,7 +3133,7 @@ public class space_duty_vendor extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_22");
@@ -3109,7 +3150,7 @@ public class space_duty_vendor extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.space_duty_vendor.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -3119,6 +3160,7 @@ public class space_duty_vendor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isTangible(self)) || (isPlayer(self)))
@@ -3128,11 +3170,13 @@ public class space_duty_vendor extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -3141,18 +3185,21 @@ public class space_duty_vendor extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.space_duty_vendor");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -3189,7 +3236,7 @@ public class space_duty_vendor extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_22");
@@ -3205,7 +3252,7 @@ public class space_duty_vendor extends script.base_script
                 utils.setScriptVar(player, "conversation.space_duty_vendor.branchId", 1);
                 npcStartConversation(player, npc, "space_duty_vendor", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -3214,6 +3261,7 @@ public class space_duty_vendor extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("space_duty_vendor"))

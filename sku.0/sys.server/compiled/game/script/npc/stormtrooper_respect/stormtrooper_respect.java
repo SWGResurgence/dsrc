@@ -1,13 +1,16 @@
 package script.npc.stormtrooper_respect;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
 public class stormtrooper_respect extends script.base_script
 {
-    public stormtrooper_respect()
-    {
-    }
     public static final String EMOTE_DATATABLE = "datatables/npc/stormtrooper_attitude/emote.iff";
     public static final String RANK_DATATABLE = "datatables/npc/stormtrooper_attitude/imprank.iff";
     public static final String KEYPHRASES = "datatables/npc/stormtrooper_attitude/keyphrases.iff";
@@ -22,6 +25,10 @@ public class stormtrooper_respect extends script.base_script
     public static int curCash = 0;
     public static int stealCash = 0;
     public static int fineRemainder = 0;
+    public stormtrooper_respect()
+    {
+    }
+
     public int getEmoteBeligerence(String emote) throws InterruptedException
     {
         int emote_row = dataTableSearchColumnForString(emote, 0, EMOTE_DATATABLE);
@@ -55,17 +62,19 @@ public class stormtrooper_respect extends script.base_script
         {
             return 0;
         }
-        else 
+        else
         {
             return -1;
         }
     }
+
     public prose_package getTroopQuip(obj_id target, int quipRow) throws InterruptedException
     {
         string_id response = new string_id(PP_FILE_LOC, utils.dataTableGetString(RESPONSE_TEXT, quipRow, 1));
         prose_package pp = prose.getPackage(response, target);
         return pp;
     }
+
     public void playKnockdown(obj_id victim, obj_id attacker) throws InterruptedException
     {
         if (!isIdValid(victim) || !isIdValid(attacker))
@@ -80,7 +89,7 @@ public class stormtrooper_respect extends script.base_script
         {
             strPlaybackScript = "ranged_melee_light";
         }
-        else 
+        else
         {
             strPlaybackScript = "attack_high_center_light_0";
         }
@@ -99,6 +108,7 @@ public class stormtrooper_respect extends script.base_script
         cbtDefenderResults[0].id = victim;
         doCombatResults(strPlaybackScript, cbtAttackerResults, cbtDefenderResults);
     }
+
     public int getImpRank(obj_id object) throws InterruptedException
     {
         int final_rank = 0;
@@ -111,42 +121,42 @@ public class stormtrooper_respect extends script.base_script
             {
                 setObjVar(object, "imp_rank", st_rank_type);
             }
-            else 
+            else
             {
                 switch (st_rank_type)
                 {
                     case 80:
-                    final_rank = rand(0, 7);
-                    break;
+                        final_rank = rand(0, 7);
+                        break;
                     case 81:
-                    final_rank = (rand(0, 5) + 8);
-                    break;
+                        final_rank = (rand(0, 5) + 8);
+                        break;
                     case 82:
-                    final_rank = (rand(0, 7) + 14);
-                    break;
+                        final_rank = (rand(0, 7) + 14);
+                        break;
                     case 83:
-                    final_rank = (rand(0, 13) + 5);
-                    break;
+                        final_rank = (rand(0, 13) + 5);
+                        break;
                     case 84:
-                    final_rank = (rand(0, 2) + 19);
-                    break;
+                        final_rank = (rand(0, 2) + 19);
+                        break;
                     case 85:
-                    final_rank = -1;
-                    break;
+                        final_rank = -1;
+                        break;
                     case 86:
-                    final_rank = -1;
-                    break;
+                        final_rank = -1;
+                        break;
                     case 87:
-                    final_rank = -1;
-                    break;
+                        final_rank = -1;
+                        break;
                     case 88:
-                    final_rank = -1;
-                    break;
+                        final_rank = -1;
+                        break;
                     case 89:
-                    final_rank = -1;
-                    break;
+                        final_rank = -1;
+                        break;
                     default:
-                    final_rank = -1;
+                        final_rank = -1;
                 }
                 if (final_rank > -1)
                 {
@@ -154,12 +164,13 @@ public class stormtrooper_respect extends script.base_script
                 }
             }
         }
-        else 
+        else
         {
             final_rank = getIntObjVar(object, "imp_rank");
         }
         return final_rank;
     }
+
     public void returnToDuties(obj_id troop) throws InterruptedException
     {
         if (utils.hasScriptVar(troop, "tmpBehavior"))
@@ -168,6 +179,7 @@ public class stormtrooper_respect extends script.base_script
             utils.removeScriptVar(troop, "tmpBehavior");
         }
     }
+
     public void paySTFines(obj_id payer, obj_id payee, int amount, int Quip) throws InterruptedException
     {
         if (fineAmt > ST_FINE_CAP)
@@ -194,6 +206,7 @@ public class stormtrooper_respect extends script.base_script
             detachScript(payer, "npc.stormtrooper_respect.overdue_fines");
         }
     }
+
     public int handleFine(obj_id self, dictionary params) throws InterruptedException
     {
         int bp = sui.getIntButtonPressed(params);
@@ -224,7 +237,7 @@ public class stormtrooper_respect extends script.base_script
             utils.moneyOutMetric(self, money.ACCT_ST_FINES, totCreds);
             returnToDuties(self);
         }
-        else 
+        else
         {
             if (totCreds > fineAmt * 1000)
             {
@@ -244,7 +257,7 @@ public class stormtrooper_respect extends script.base_script
                 ai_lib.doAction(self, "laugh_pointing");
                 randQuip = rand(0, 5);
             }
-            else 
+            else
             {
                 ai_lib.doAction(self, "point_accusingly");
                 randQuip = (rand(0, 3) + 45);
@@ -254,6 +267,7 @@ public class stormtrooper_respect extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int stFilterHandler(obj_id self, dictionary params) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "stFilterSpeaker") && !isIncapacitated(self) && !isDead(self) && !ai_lib.isInCombat(self))
@@ -264,8 +278,10 @@ public class stormtrooper_respect extends script.base_script
                 String stSpeech = utils.getStringScriptVar(speakerTarget, "stFilterSpeech");
                 String[] keyphrases = dataTableGetStringColumn(KEYPHRASES, "keyphrase");
                 String stSayFaction = factions.getFaction(speakerTarget);
-                for (String keyphrase : keyphrases) {
-                    if ((toLower(stSpeech)).contains(toLower(keyphrase))) {
+                for (String keyphrase : keyphrases)
+                {
+                    if ((toLower(stSpeech)).contains(toLower(keyphrase)))
+                    {
                         randQuip = 40;
                         chat.publicChat(self, null, null, null, getTroopQuip(speakerTarget, randQuip));
                         faceTo(self, speakerTarget);
@@ -275,10 +291,13 @@ public class stormtrooper_respect extends script.base_script
                         utils.setScriptVar(self, "coming_to_kill_u", speakerTarget);
                         setMovementRun(self);
                         pathTo(self, pcAttackLoc);
-                        if (!utils.hasObjVar(speakerTarget, "trooper_fine")) {
+                        if (!utils.hasObjVar(speakerTarget, "trooper_fine"))
+                        {
                             utils.setObjVar(speakerTarget, "trooper_fine", 10000);
                             sui.msgbox(self, speakerTarget, "@stormtrooper_attitude/st_response:imperial_fine_10000", sui.OK_ONLY, "@stormtrooper_attitude/st_response:imperial_fine_t", "handleFine");
-                        } else {
+                        }
+                        else
+                        {
                             int previousDebt = utils.getIntObjVar(speakerTarget, "trooper_fine");
                             utils.removeObjVar(speakerTarget, "trooper_fine");
                             previousDebt += 10000;
@@ -294,6 +313,7 @@ public class stormtrooper_respect extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnSawEmote(obj_id self, obj_id emoteSayer, String emotein) throws InterruptedException
     {
         int fine_debt = 0;
@@ -324,331 +344,331 @@ public class stormtrooper_respect extends script.base_script
                         switch (getEmoteBeligerence(emotein))
                         {
                             case 6:
-                            ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_STOP);
-                            fineAmt = 5000;
-                            curCash = money.getCashBalance(emoteSayer);
-                            if (!utils.hasObjVar(emoteSayer, "trooper_fine"))
-                            {
-                                utils.setObjVar(emoteSayer, "trooper_fine", 5000);
-                                faceTo(self, emoteSayer);
-                                factions.addFactionStanding(emoteSayer, factions.FACTION_IMPERIAL, -50);
-                                sui.msgbox(self, emoteSayer, "@stormtrooper_attitude/st_response:imperial_fine_5000", sui.OK_ONLY, "@stormtrooper_attitude/st_response:imperial_fine_t", "handleFine");
-                                playKnockdown(emoteSayer, self);
-                                showFlyText(emoteSayer, strFlyText, 1.5f, colors.TOMATO);
-                                randQuip = (rand(0, 3) + 13);
-                                chat.publicChat(self, null, null, null, getTroopQuip(emoteSayer, randQuip));
-                            }
-                            else 
-                            {
-                                fine_debt = utils.getIntObjVar(emoteSayer, "trooper_fine");
-                                fine_debt += 5000;
-                                faceTo(self, emoteSayer);
-                                factions.addFactionStanding(emoteSayer, factions.FACTION_IMPERIAL, -50);
-                                sui.msgbox(self, emoteSayer, getString(new string_id(PP_FILE_LOC, "imperial_fine_5000")) + " " + getString(new string_id(PP_FILE_LOC, "imperial_fine_outstanding")) + fine_debt + ".", sui.OK_ONLY, "@stormtrooper_attitude/st_response:imperial_fine_t", "handleFine");
-                                utils.setObjVar(emoteSayer, "trooper_fine", fine_debt);
-                                playKnockdown(emoteSayer, self);
-                                setAttrib(emoteSayer, HEALTH, (rand(30, 90) * -1));
-                                showFlyText(emoteSayer, strFlyText, 1.5f, colors.TOMATO);
-                                randQuip = (rand(0, 3) + 13);
-                                chat.publicChat(self, null, null, null, getTroopQuip(emoteSayer, randQuip));
-                            }
-                            break;
-                            case 5:
-                            ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_STOP);
-                            fineAmt = 5000;
-                            curCash = money.getCashBalance(emoteSayer);
-                            if (!utils.hasObjVar(emoteSayer, "trooper_fine"))
-                            {
-                                utils.setObjVar(emoteSayer, "trooper_fine", 5000);
-                                faceTo(self, emoteSayer);
-                                factions.addFactionStanding(emoteSayer, factions.FACTION_IMPERIAL, -50);
-                                sui.msgbox(self, emoteSayer, "@stormtrooper_attitude/st_response:imperial_fine_5000", sui.OK_ONLY, "@stormtrooper_attitude/st_response:imperial_fine_t", "handleFine");
-                                playKnockdown(emoteSayer, self);
-                                setAttrib(emoteSayer, HEALTH, (rand(30, 90) * -1));
-                                showFlyText(emoteSayer, strFlyText, 1.5f, colors.TOMATO);
-                                randQuip = (rand(0, 3) + 13);
-                                chat.publicChat(self, null, null, null, getTroopQuip(emoteSayer, randQuip));
-                            }
-                            else 
-                            {
-                                fine_debt = utils.getIntObjVar(emoteSayer, "trooper_fine");
-                                fine_debt += 5000;
-                                faceTo(self, emoteSayer);
-                                factions.addFactionStanding(emoteSayer, factions.FACTION_IMPERIAL, -50);
-                                sui.msgbox(self, emoteSayer, getString(new string_id(PP_FILE_LOC, "imperial_fine_5000")) + " " + getString(new string_id(PP_FILE_LOC, "imperial_fine_outstanding")) + fine_debt + ".", sui.OK_ONLY, "@stormtrooper_attitude/st_response:imperial_fine_t", "handleFine");
-                                utils.setObjVar(emoteSayer, "trooper_fine", fine_debt);
-                                playKnockdown(emoteSayer, self);
-                                setAttrib(emoteSayer, HEALTH, (rand(30, 90) * -1));
-                                showFlyText(emoteSayer, strFlyText, 1.5f, colors.TOMATO);
-                                randQuip = (rand(0, 3) + 13);
-                                chat.publicChat(self, null, null, null, getTroopQuip(emoteSayer, randQuip));
-                            }
-                            break;
-                            case 4:
-                            ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_STOP);
-                            if (!utils.hasObjVar(emoteSayer, "trooper_fine"))
-                            {
-                                utils.setObjVar(emoteSayer, "trooper_fine", 2000);
-                                faceTo(self, emoteSayer);
-                                factions.addFactionStanding(emoteSayer, factions.FACTION_IMPERIAL, -20);
-                                sui.msgbox(self, emoteSayer, "@stormtrooper_attitude/st_response:imperial_fine_2000", sui.OK_ONLY, "@stormtrooper_attitude/st_response:imperial_fine_t", "handleFine");
-                                randQuip = (rand(0, 3) + 13);
-                                chat.publicChat(self, null, null, null, getTroopQuip(emoteSayer, randQuip));
-                            }
-                            else 
-                            {
-                                fine_debt = utils.getIntObjVar(emoteSayer, "trooper_fine");
-                                fine_debt += 2000;
-                                faceTo(self, emoteSayer);
-                                factions.addFactionStanding(emoteSayer, factions.FACTION_IMPERIAL, -20);
-                                sui.msgbox(self, emoteSayer, getString(new string_id(PP_FILE_LOC, "imperial_fine_2000")) + " " + getString(new string_id(PP_FILE_LOC, "imperial_fine_outstanding")) + fine_debt + ".", sui.OK_ONLY, "@stormtrooper_attitude/st_response:imperial_fine_t", "handleFine");
-                                utils.setObjVar(emoteSayer, "trooper_fine", fine_debt);
-                                randQuip = (rand(0, 3) + 13);
-                                chat.publicChat(self, null, null, null, getTroopQuip(emoteSayer, randQuip));
-                            }
-                            break;
-                            case 3:
-                            ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_STOP);
-                            if (!utils.hasObjVar(emoteSayer, "trooper_fine"))
-                            {
-                                utils.setObjVar(emoteSayer, "trooper_fine", 2000);
-                                faceTo(self, emoteSayer);
-                                factions.addFactionStanding(emoteSayer, factions.FACTION_IMPERIAL, -20);
-                                sui.msgbox(self, emoteSayer, "@stormtrooper_attitude/st_response:imperial_fine_2000", sui.OK_ONLY, "@stormtrooper_attitude/st_response:imperial_fine_t", "handleFine");
-                                randQuip = (rand(0, 3) + 13);
-                                chat.publicChat(self, null, null, null, getTroopQuip(emoteSayer, randQuip));
-                            }
-                            else 
-                            {
-                                fine_debt = utils.getIntObjVar(emoteSayer, "trooper_fine");
-                                fine_debt += 2000;
-                                faceTo(self, emoteSayer);
-                                factions.addFactionStanding(emoteSayer, factions.FACTION_IMPERIAL, -20);
-                                sui.msgbox(self, emoteSayer, getString(new string_id(PP_FILE_LOC, "imperial_fine_2000")) + " " + getString(new string_id(PP_FILE_LOC, "imperial_fine_outstanding")) + fine_debt + ".", sui.OK_ONLY, "@stormtrooper_attitude/st_response:imperial_fine_t", "handleFine");
-                                utils.setObjVar(emoteSayer, "trooper_fine", fine_debt);
-                                randQuip = (rand(0, 3) + 13);
-                                chat.publicChat(self, null, null, null, getTroopQuip(emoteSayer, randQuip));
-                            }
-                            break;
-                            case 2:
-                            ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_STOP);
-                            if (!utils.hasObjVar(emoteSayer, "trooper_fine"))
-                            {
-                                utils.setObjVar(emoteSayer, "trooper_fine", 500);
-                                faceTo(self, emoteSayer);
-                                factions.addFactionStanding(emoteSayer, factions.FACTION_IMPERIAL, -5);
-                                sui.msgbox(self, emoteSayer, "@stormtrooper_attitude/st_response:imperial_fine_500", sui.OK_ONLY, "@stormtrooper_attitude/st_response:imperial_fine_t", "handleFine");
-                                randQuip = (rand(0, 3) + 13);
-                                chat.publicChat(self, null, null, null, getTroopQuip(emoteSayer, randQuip));
-                            }
-                            else 
-                            {
-                                fine_debt = utils.getIntObjVar(emoteSayer, "trooper_fine");
-                                fine_debt += 500;
-                                faceTo(self, emoteSayer);
-                                factions.addFactionStanding(emoteSayer, factions.FACTION_IMPERIAL, -5);
-                                sui.msgbox(self, emoteSayer, getString(new string_id(PP_FILE_LOC, "imperial_fine_500")) + " " + getString(new string_id(PP_FILE_LOC, "imperial_fine_outstanding")) + fine_debt + ".", sui.OK_ONLY, "@stormtrooper_attitude/st_response:imperial_fine_t", "handleFine");
-                                utils.setObjVar(emoteSayer, "trooper_fine", fine_debt);
-                                randQuip = (rand(0, 3) + 13);
-                                chat.publicChat(self, null, null, null, getTroopQuip(emoteSayer, randQuip));
-                            }
-                            break;
-                            case 1:
-                            ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_STOP);
-                            if (!utils.hasObjVar(emoteSayer, "trooper_fine"))
-                            {
-                                utils.setObjVar(emoteSayer, "trooper_fine", 500);
-                                faceTo(self, emoteSayer);
-                                factions.addFactionStanding(emoteSayer, factions.FACTION_IMPERIAL, -5);
-                                sui.msgbox(self, emoteSayer, "@stormtrooper_attitude/st_response:imperial_fine_500", sui.OK_ONLY, "@stormtrooper_attitude/st_response:imperial_fine_t", "handleFine");
-                                randQuip = (rand(0, 3) + 13);
-                                chat.publicChat(self, null, null, null, getTroopQuip(emoteSayer, randQuip));
-                            }
-                            else 
-                            {
-                                fine_debt = utils.getIntObjVar(emoteSayer, "trooper_fine");
-                                fine_debt += 500;
-                                faceTo(self, emoteSayer);
-                                factions.addFactionStanding(emoteSayer, factions.FACTION_IMPERIAL, -5);
-                                sui.msgbox(self, emoteSayer, getString(new string_id(PP_FILE_LOC, "imperial_fine_500")) + " " + getString(new string_id(PP_FILE_LOC, "imperial_fine_outstanding")) + fine_debt + ".", sui.OK_ONLY, "@stormtrooper_attitude/st_response:imperial_fine_t", "handleFine");
-                                utils.setObjVar(emoteSayer, "trooper_fine", fine_debt);
-                                randQuip = (rand(0, 3) + 13);
-                                chat.publicChat(self, null, null, null, getTroopQuip(emoteSayer, randQuip));
-                            }
-                            break;
-                            case 0:
-                            if (utils.hasObjVar(emoteSayer, "trooper_fine") & emotein.equals("hail"))
-                            {
                                 ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_STOP);
-                                fine_debt = utils.getIntObjVar(emoteSayer, "trooper_fine");
-                                faceTo(self, emoteSayer);
-                                ai_lib.doAction(self, "point_accusingly");
-                                sui.msgbox(self, emoteSayer, getString(new string_id(PP_FILE_LOC, "pay_outstanding_fine_prefix")) + "\n \n" + getString(new string_id(PP_FILE_LOC, "pay_fine_total_suffix")) + fine_debt + getString(new string_id(PP_FILE_LOC, "imperial_fine_credits")), sui.OK_ONLY, "@stormtrooper_attitude/st_response:imperial_fine_t", "handleFine");
-                                utils.setObjVar(emoteSayer, "trooper_fine", fine_debt);
-                            }
-                            break;
+                                fineAmt = 5000;
+                                curCash = money.getCashBalance(emoteSayer);
+                                if (!utils.hasObjVar(emoteSayer, "trooper_fine"))
+                                {
+                                    utils.setObjVar(emoteSayer, "trooper_fine", 5000);
+                                    faceTo(self, emoteSayer);
+                                    factions.addFactionStanding(emoteSayer, factions.FACTION_IMPERIAL, -50);
+                                    sui.msgbox(self, emoteSayer, "@stormtrooper_attitude/st_response:imperial_fine_5000", sui.OK_ONLY, "@stormtrooper_attitude/st_response:imperial_fine_t", "handleFine");
+                                    playKnockdown(emoteSayer, self);
+                                    showFlyText(emoteSayer, strFlyText, 1.5f, colors.TOMATO);
+                                    randQuip = (rand(0, 3) + 13);
+                                    chat.publicChat(self, null, null, null, getTroopQuip(emoteSayer, randQuip));
+                                }
+                                else
+                                {
+                                    fine_debt = utils.getIntObjVar(emoteSayer, "trooper_fine");
+                                    fine_debt += 5000;
+                                    faceTo(self, emoteSayer);
+                                    factions.addFactionStanding(emoteSayer, factions.FACTION_IMPERIAL, -50);
+                                    sui.msgbox(self, emoteSayer, getString(new string_id(PP_FILE_LOC, "imperial_fine_5000")) + " " + getString(new string_id(PP_FILE_LOC, "imperial_fine_outstanding")) + fine_debt + ".", sui.OK_ONLY, "@stormtrooper_attitude/st_response:imperial_fine_t", "handleFine");
+                                    utils.setObjVar(emoteSayer, "trooper_fine", fine_debt);
+                                    playKnockdown(emoteSayer, self);
+                                    setAttrib(emoteSayer, HEALTH, (rand(30, 90) * -1));
+                                    showFlyText(emoteSayer, strFlyText, 1.5f, colors.TOMATO);
+                                    randQuip = (rand(0, 3) + 13);
+                                    chat.publicChat(self, null, null, null, getTroopQuip(emoteSayer, randQuip));
+                                }
+                                break;
+                            case 5:
+                                ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_STOP);
+                                fineAmt = 5000;
+                                curCash = money.getCashBalance(emoteSayer);
+                                if (!utils.hasObjVar(emoteSayer, "trooper_fine"))
+                                {
+                                    utils.setObjVar(emoteSayer, "trooper_fine", 5000);
+                                    faceTo(self, emoteSayer);
+                                    factions.addFactionStanding(emoteSayer, factions.FACTION_IMPERIAL, -50);
+                                    sui.msgbox(self, emoteSayer, "@stormtrooper_attitude/st_response:imperial_fine_5000", sui.OK_ONLY, "@stormtrooper_attitude/st_response:imperial_fine_t", "handleFine");
+                                    playKnockdown(emoteSayer, self);
+                                    setAttrib(emoteSayer, HEALTH, (rand(30, 90) * -1));
+                                    showFlyText(emoteSayer, strFlyText, 1.5f, colors.TOMATO);
+                                    randQuip = (rand(0, 3) + 13);
+                                    chat.publicChat(self, null, null, null, getTroopQuip(emoteSayer, randQuip));
+                                }
+                                else
+                                {
+                                    fine_debt = utils.getIntObjVar(emoteSayer, "trooper_fine");
+                                    fine_debt += 5000;
+                                    faceTo(self, emoteSayer);
+                                    factions.addFactionStanding(emoteSayer, factions.FACTION_IMPERIAL, -50);
+                                    sui.msgbox(self, emoteSayer, getString(new string_id(PP_FILE_LOC, "imperial_fine_5000")) + " " + getString(new string_id(PP_FILE_LOC, "imperial_fine_outstanding")) + fine_debt + ".", sui.OK_ONLY, "@stormtrooper_attitude/st_response:imperial_fine_t", "handleFine");
+                                    utils.setObjVar(emoteSayer, "trooper_fine", fine_debt);
+                                    playKnockdown(emoteSayer, self);
+                                    setAttrib(emoteSayer, HEALTH, (rand(30, 90) * -1));
+                                    showFlyText(emoteSayer, strFlyText, 1.5f, colors.TOMATO);
+                                    randQuip = (rand(0, 3) + 13);
+                                    chat.publicChat(self, null, null, null, getTroopQuip(emoteSayer, randQuip));
+                                }
+                                break;
+                            case 4:
+                                ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_STOP);
+                                if (!utils.hasObjVar(emoteSayer, "trooper_fine"))
+                                {
+                                    utils.setObjVar(emoteSayer, "trooper_fine", 2000);
+                                    faceTo(self, emoteSayer);
+                                    factions.addFactionStanding(emoteSayer, factions.FACTION_IMPERIAL, -20);
+                                    sui.msgbox(self, emoteSayer, "@stormtrooper_attitude/st_response:imperial_fine_2000", sui.OK_ONLY, "@stormtrooper_attitude/st_response:imperial_fine_t", "handleFine");
+                                    randQuip = (rand(0, 3) + 13);
+                                    chat.publicChat(self, null, null, null, getTroopQuip(emoteSayer, randQuip));
+                                }
+                                else
+                                {
+                                    fine_debt = utils.getIntObjVar(emoteSayer, "trooper_fine");
+                                    fine_debt += 2000;
+                                    faceTo(self, emoteSayer);
+                                    factions.addFactionStanding(emoteSayer, factions.FACTION_IMPERIAL, -20);
+                                    sui.msgbox(self, emoteSayer, getString(new string_id(PP_FILE_LOC, "imperial_fine_2000")) + " " + getString(new string_id(PP_FILE_LOC, "imperial_fine_outstanding")) + fine_debt + ".", sui.OK_ONLY, "@stormtrooper_attitude/st_response:imperial_fine_t", "handleFine");
+                                    utils.setObjVar(emoteSayer, "trooper_fine", fine_debt);
+                                    randQuip = (rand(0, 3) + 13);
+                                    chat.publicChat(self, null, null, null, getTroopQuip(emoteSayer, randQuip));
+                                }
+                                break;
+                            case 3:
+                                ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_STOP);
+                                if (!utils.hasObjVar(emoteSayer, "trooper_fine"))
+                                {
+                                    utils.setObjVar(emoteSayer, "trooper_fine", 2000);
+                                    faceTo(self, emoteSayer);
+                                    factions.addFactionStanding(emoteSayer, factions.FACTION_IMPERIAL, -20);
+                                    sui.msgbox(self, emoteSayer, "@stormtrooper_attitude/st_response:imperial_fine_2000", sui.OK_ONLY, "@stormtrooper_attitude/st_response:imperial_fine_t", "handleFine");
+                                    randQuip = (rand(0, 3) + 13);
+                                    chat.publicChat(self, null, null, null, getTroopQuip(emoteSayer, randQuip));
+                                }
+                                else
+                                {
+                                    fine_debt = utils.getIntObjVar(emoteSayer, "trooper_fine");
+                                    fine_debt += 2000;
+                                    faceTo(self, emoteSayer);
+                                    factions.addFactionStanding(emoteSayer, factions.FACTION_IMPERIAL, -20);
+                                    sui.msgbox(self, emoteSayer, getString(new string_id(PP_FILE_LOC, "imperial_fine_2000")) + " " + getString(new string_id(PP_FILE_LOC, "imperial_fine_outstanding")) + fine_debt + ".", sui.OK_ONLY, "@stormtrooper_attitude/st_response:imperial_fine_t", "handleFine");
+                                    utils.setObjVar(emoteSayer, "trooper_fine", fine_debt);
+                                    randQuip = (rand(0, 3) + 13);
+                                    chat.publicChat(self, null, null, null, getTroopQuip(emoteSayer, randQuip));
+                                }
+                                break;
+                            case 2:
+                                ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_STOP);
+                                if (!utils.hasObjVar(emoteSayer, "trooper_fine"))
+                                {
+                                    utils.setObjVar(emoteSayer, "trooper_fine", 500);
+                                    faceTo(self, emoteSayer);
+                                    factions.addFactionStanding(emoteSayer, factions.FACTION_IMPERIAL, -5);
+                                    sui.msgbox(self, emoteSayer, "@stormtrooper_attitude/st_response:imperial_fine_500", sui.OK_ONLY, "@stormtrooper_attitude/st_response:imperial_fine_t", "handleFine");
+                                    randQuip = (rand(0, 3) + 13);
+                                    chat.publicChat(self, null, null, null, getTroopQuip(emoteSayer, randQuip));
+                                }
+                                else
+                                {
+                                    fine_debt = utils.getIntObjVar(emoteSayer, "trooper_fine");
+                                    fine_debt += 500;
+                                    faceTo(self, emoteSayer);
+                                    factions.addFactionStanding(emoteSayer, factions.FACTION_IMPERIAL, -5);
+                                    sui.msgbox(self, emoteSayer, getString(new string_id(PP_FILE_LOC, "imperial_fine_500")) + " " + getString(new string_id(PP_FILE_LOC, "imperial_fine_outstanding")) + fine_debt + ".", sui.OK_ONLY, "@stormtrooper_attitude/st_response:imperial_fine_t", "handleFine");
+                                    utils.setObjVar(emoteSayer, "trooper_fine", fine_debt);
+                                    randQuip = (rand(0, 3) + 13);
+                                    chat.publicChat(self, null, null, null, getTroopQuip(emoteSayer, randQuip));
+                                }
+                                break;
+                            case 1:
+                                ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_STOP);
+                                if (!utils.hasObjVar(emoteSayer, "trooper_fine"))
+                                {
+                                    utils.setObjVar(emoteSayer, "trooper_fine", 500);
+                                    faceTo(self, emoteSayer);
+                                    factions.addFactionStanding(emoteSayer, factions.FACTION_IMPERIAL, -5);
+                                    sui.msgbox(self, emoteSayer, "@stormtrooper_attitude/st_response:imperial_fine_500", sui.OK_ONLY, "@stormtrooper_attitude/st_response:imperial_fine_t", "handleFine");
+                                    randQuip = (rand(0, 3) + 13);
+                                    chat.publicChat(self, null, null, null, getTroopQuip(emoteSayer, randQuip));
+                                }
+                                else
+                                {
+                                    fine_debt = utils.getIntObjVar(emoteSayer, "trooper_fine");
+                                    fine_debt += 500;
+                                    faceTo(self, emoteSayer);
+                                    factions.addFactionStanding(emoteSayer, factions.FACTION_IMPERIAL, -5);
+                                    sui.msgbox(self, emoteSayer, getString(new string_id(PP_FILE_LOC, "imperial_fine_500")) + " " + getString(new string_id(PP_FILE_LOC, "imperial_fine_outstanding")) + fine_debt + ".", sui.OK_ONLY, "@stormtrooper_attitude/st_response:imperial_fine_t", "handleFine");
+                                    utils.setObjVar(emoteSayer, "trooper_fine", fine_debt);
+                                    randQuip = (rand(0, 3) + 13);
+                                    chat.publicChat(self, null, null, null, getTroopQuip(emoteSayer, randQuip));
+                                }
+                                break;
+                            case 0:
+                                if (utils.hasObjVar(emoteSayer, "trooper_fine") & emotein.equals("hail"))
+                                {
+                                    ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_STOP);
+                                    fine_debt = utils.getIntObjVar(emoteSayer, "trooper_fine");
+                                    faceTo(self, emoteSayer);
+                                    ai_lib.doAction(self, "point_accusingly");
+                                    sui.msgbox(self, emoteSayer, getString(new string_id(PP_FILE_LOC, "pay_outstanding_fine_prefix")) + "\n \n" + getString(new string_id(PP_FILE_LOC, "pay_fine_total_suffix")) + fine_debt + getString(new string_id(PP_FILE_LOC, "imperial_fine_credits")), sui.OK_ONLY, "@stormtrooper_attitude/st_response:imperial_fine_t", "handleFine");
+                                    utils.setObjVar(emoteSayer, "trooper_fine", fine_debt);
+                                }
+                                break;
                             default:
-                            ai_lib.setDefaultCalmBehavior(self, utils.getIntScriptVar(self, "tmpBehavior"));
-                            if (utils.hasScriptVar(self, "tmpBehavior"))
-                            {
-                                utils.removeScriptVar(self, "tmpBehavior");
-                            }
-                            break;
+                                ai_lib.setDefaultCalmBehavior(self, utils.getIntScriptVar(self, "tmpBehavior"));
+                                if (utils.hasScriptVar(self, "tmpBehavior"))
+                                {
+                                    utils.removeScriptVar(self, "tmpBehavior");
+                                }
+                                break;
                         }
                     }
-                    else 
+                    else
                     {
                         switch (getEmoteBeligerence(emotein))
                         {
                             case 6:
-                            fineAmt = 3500;
-                            curCash = money.getCashBalance(emoteSayer);
-                            ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_STOP);
-                            if (!utils.hasObjVar(emoteSayer, "trooper_fine"))
-                            {
-                                utils.setObjVar(emoteSayer, "trooper_fine", 3500);
-                                faceTo(self, emoteSayer);
-                                ai_lib.doAction(self, "point_accusingly");
-                                factions.addFactionStanding(emoteSayer, factions.FACTION_IMPERIAL, -35);
-                                sui.msgbox(self, emoteSayer, "@stormtrooper_attitude/st_response:imperial_fine_3500", sui.OK_ONLY, "@stormtrooper_attitude/st_response:imperial_fine_t", "handleFine");
-                                playKnockdown(emoteSayer, self);
-                                setAttrib(emoteSayer, HEALTH, (rand(30, 90) * -1));
-                                showFlyText(emoteSayer, strFlyText, 1.5f, colors.TOMATO);
-                                randQuip = (rand(0, 3) + 21);
-                                chat.publicChat(self, null, null, null, getTroopQuip(emoteSayer, randQuip));
-                            }
-                            else 
-                            {
-                                fine_debt = utils.getIntObjVar(emoteSayer, "trooper_fine");
-                                fine_debt += 3500;
-                                faceTo(self, emoteSayer);
-                                factions.addFactionStanding(emoteSayer, factions.FACTION_IMPERIAL, -35);
-                                sui.msgbox(self, emoteSayer, getString(new string_id(PP_FILE_LOC, "imperial_fine_3500")) + " " + getString(new string_id(PP_FILE_LOC, "imperial_fine_outstanding")) + fine_debt + ".", sui.OK_ONLY, "@stormtrooper_attitude/st_response:imperial_fine_t", "handleFine");
-                                utils.setObjVar(emoteSayer, "trooper_fine", fine_debt);
-                                playKnockdown(emoteSayer, self);
-                                setAttrib(emoteSayer, HEALTH, (rand(30, 90) * -1));
-                                showFlyText(emoteSayer, strFlyText, 1.5f, colors.TOMATO);
-                                randQuip = (rand(0, 3) + 21);
-                                chat.publicChat(self, null, null, null, getTroopQuip(emoteSayer, randQuip));
-                            }
-                            break;
-                            case 5:
-                            ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_STOP);
-                            if (!utils.hasObjVar(emoteSayer, "trooper_fine"))
-                            {
-                                utils.setObjVar(emoteSayer, "trooper_fine", 2000);
-                                faceTo(self, emoteSayer);
-                                factions.addFactionStanding(emoteSayer, factions.FACTION_IMPERIAL, -20);
-                                sui.msgbox(self, emoteSayer, "@stormtrooper_attitude/st_response:imperial_fine_2000", sui.OK_ONLY, "@stormtrooper_attitude/st_response:imperial_fine_t", "handleFine");
-                                randQuip = (rand(0, 3) + 21);
-                                chat.publicChat(self, null, null, null, getTroopQuip(emoteSayer, randQuip));
-                            }
-                            else 
-                            {
-                                fine_debt = utils.getIntObjVar(emoteSayer, "trooper_fine");
-                                fine_debt += 2000;
-                                faceTo(self, emoteSayer);
-                                factions.addFactionStanding(emoteSayer, factions.FACTION_IMPERIAL, -20);
-                                sui.msgbox(self, emoteSayer, getString(new string_id(PP_FILE_LOC, "imperial_fine_2000")) + " " + getString(new string_id(PP_FILE_LOC, "imperial_fine_outstanding")) + fine_debt + ".", sui.OK_ONLY, "@stormtrooper_attitude/st_response:imperial_fine_t", "handleFine");
-                                utils.setObjVar(emoteSayer, "trooper_fine", fine_debt);
-                                randQuip = (rand(0, 3) + 21);
-                                chat.publicChat(self, null, null, null, getTroopQuip(emoteSayer, randQuip));
-                            }
-                            break;
-                            case 4:
-                            ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_STOP);
-                            if (!utils.hasObjVar(emoteSayer, "trooper_fine"))
-                            {
-                                utils.setObjVar(emoteSayer, "trooper_fine", 2000);
-                                faceTo(self, emoteSayer);
-                                factions.addFactionStanding(emoteSayer, factions.FACTION_IMPERIAL, -20);
-                                sui.msgbox(self, emoteSayer, "@stormtrooper_attitude/st_response:imperial_fine_2000", sui.OK_ONLY, "@stormtrooper_attitude/st_response:imperial_fine_t", "handleFine");
-                                randQuip = (rand(0, 3) + 21);
-                                chat.publicChat(self, null, null, null, getTroopQuip(emoteSayer, randQuip));
-                            }
-                            else 
-                            {
-                                fine_debt = utils.getIntObjVar(emoteSayer, "trooper_fine");
-                                fine_debt += 2000;
-                                faceTo(self, emoteSayer);
-                                factions.addFactionStanding(emoteSayer, factions.FACTION_IMPERIAL, -20);
-                                sui.msgbox(self, emoteSayer, getString(new string_id(PP_FILE_LOC, "imperial_fine_2000")) + " " + getString(new string_id(PP_FILE_LOC, "imperial_fine_outstanding")), sui.OK_ONLY, "@stormtrooper_attitude/st_response:imperial_fine_t", "handleFine");
-                                utils.setObjVar(emoteSayer, "trooper_fine", fine_debt);
-                                randQuip = (rand(0, 3) + 21);
-                                chat.publicChat(self, null, null, null, getTroopQuip(emoteSayer, randQuip));
-                            }
-                            break;
-                            case 3:
-                            ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_STOP);
-                            if (!utils.hasObjVar(emoteSayer, "trooper_fine"))
-                            {
-                                utils.setObjVar(emoteSayer, "trooper_fine", 500);
-                                faceTo(self, emoteSayer);
-                                factions.addFactionStanding(emoteSayer, factions.FACTION_IMPERIAL, -5);
-                                sui.msgbox(self, emoteSayer, "@stormtrooper_attitude/st_response:imperial_fine_500", sui.OK_ONLY, "@stormtrooper_attitude/st_response:imperial_fine_t", "handleFine");
-                                randQuip = (rand(0, 3) + 21);
-                                chat.publicChat(self, null, null, null, getTroopQuip(emoteSayer, randQuip));
-                            }
-                            else 
-                            {
-                                fine_debt = utils.getIntObjVar(emoteSayer, "trooper_fine");
-                                fine_debt += 500;
-                                faceTo(self, emoteSayer);
-                                factions.addFactionStanding(emoteSayer, factions.FACTION_IMPERIAL, -5);
-                                sui.msgbox(self, emoteSayer, getString(new string_id(PP_FILE_LOC, "imperial_fine_500")) + " " + getString(new string_id(PP_FILE_LOC, "imperial_fine_outstanding")) + fine_debt + ".", sui.OK_ONLY, "@stormtrooper_attitude/st_response:imperial_fine_t", "handleFine");
-                                utils.setObjVar(emoteSayer, "trooper_fine", fine_debt);
-                                randQuip = (rand(0, 3) + 21);
-                                chat.publicChat(self, null, null, null, getTroopQuip(emoteSayer, randQuip));
-                            }
-                            break;
-                            case 2:
-                            ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_STOP);
-                            if (!utils.hasObjVar(emoteSayer, "trooper_fine"))
-                            {
-                                utils.setObjVar(emoteSayer, "trooper_fine", 500);
-                                faceTo(self, emoteSayer);
-                                factions.addFactionStanding(emoteSayer, factions.FACTION_IMPERIAL, -5);
-                                sui.msgbox(self, emoteSayer, "@stormtrooper_attitude/st_response:imperial_fine_500", sui.OK_ONLY, "@stormtrooper_attitude/st_response:imperial_fine_t", "handleFine");
-                                randQuip = (rand(0, 3) + 21);
-                                chat.publicChat(self, null, null, null, getTroopQuip(emoteSayer, randQuip));
-                            }
-                            else 
-                            {
-                                fine_debt = utils.getIntObjVar(emoteSayer, "trooper_fine");
-                                fine_debt += 500;
-                                faceTo(self, emoteSayer);
-                                factions.addFactionStanding(emoteSayer, factions.FACTION_IMPERIAL, -5);
-                                sui.msgbox(self, emoteSayer, getString(new string_id(PP_FILE_LOC, "imperial_fine_500")) + " " + getString(new string_id(PP_FILE_LOC, "imperial_fine_outstanding")) + fine_debt + ".", sui.OK_ONLY, "@stormtrooper_attitude/st_response:imperial_fine_t", "handleFine");
-                                utils.setObjVar(emoteSayer, "trooper_fine", fine_debt);
-                                randQuip = (rand(0, 3) + 21);
-                                chat.publicChat(self, null, null, null, getTroopQuip(emoteSayer, randQuip));
-                            }
-                            break;
-                            case 1:
-                            ai_lib.setDefaultCalmBehavior(self, utils.getIntScriptVar(self, "tmpBehavior"));
-                            if (utils.hasScriptVar(self, "tmpBehavior"))
-                            {
-                                utils.removeScriptVar(self, "tmpBehavior");
-                            }
-                            break;
-                            case 0:
-                            if (utils.hasObjVar(emoteSayer, "trooper_fine") & emotein.equals("hail"))
-                            {
+                                fineAmt = 3500;
+                                curCash = money.getCashBalance(emoteSayer);
                                 ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_STOP);
-                                fine_debt = utils.getIntObjVar(emoteSayer, "trooper_fine");
-                                faceTo(self, emoteSayer);
-                                ai_lib.doAction(self, "point_accusingly");
-                                sui.msgbox(self, emoteSayer, getString(new string_id(PP_FILE_LOC, "pay_outstanding_fine_prefix")) + "\n \n" + getString(new string_id(PP_FILE_LOC, "pay_fine_total_suffix")) + fine_debt + getString(new string_id(PP_FILE_LOC, "imperial_fine_credits")), sui.OK_ONLY, "@stormtrooper_attitude/st_response:imperial_fine_t", "handleFine");
-                                utils.setObjVar(emoteSayer, "trooper_fine", fine_debt);
-                            }
-                            break;
+                                if (!utils.hasObjVar(emoteSayer, "trooper_fine"))
+                                {
+                                    utils.setObjVar(emoteSayer, "trooper_fine", 3500);
+                                    faceTo(self, emoteSayer);
+                                    ai_lib.doAction(self, "point_accusingly");
+                                    factions.addFactionStanding(emoteSayer, factions.FACTION_IMPERIAL, -35);
+                                    sui.msgbox(self, emoteSayer, "@stormtrooper_attitude/st_response:imperial_fine_3500", sui.OK_ONLY, "@stormtrooper_attitude/st_response:imperial_fine_t", "handleFine");
+                                    playKnockdown(emoteSayer, self);
+                                    setAttrib(emoteSayer, HEALTH, (rand(30, 90) * -1));
+                                    showFlyText(emoteSayer, strFlyText, 1.5f, colors.TOMATO);
+                                    randQuip = (rand(0, 3) + 21);
+                                    chat.publicChat(self, null, null, null, getTroopQuip(emoteSayer, randQuip));
+                                }
+                                else
+                                {
+                                    fine_debt = utils.getIntObjVar(emoteSayer, "trooper_fine");
+                                    fine_debt += 3500;
+                                    faceTo(self, emoteSayer);
+                                    factions.addFactionStanding(emoteSayer, factions.FACTION_IMPERIAL, -35);
+                                    sui.msgbox(self, emoteSayer, getString(new string_id(PP_FILE_LOC, "imperial_fine_3500")) + " " + getString(new string_id(PP_FILE_LOC, "imperial_fine_outstanding")) + fine_debt + ".", sui.OK_ONLY, "@stormtrooper_attitude/st_response:imperial_fine_t", "handleFine");
+                                    utils.setObjVar(emoteSayer, "trooper_fine", fine_debt);
+                                    playKnockdown(emoteSayer, self);
+                                    setAttrib(emoteSayer, HEALTH, (rand(30, 90) * -1));
+                                    showFlyText(emoteSayer, strFlyText, 1.5f, colors.TOMATO);
+                                    randQuip = (rand(0, 3) + 21);
+                                    chat.publicChat(self, null, null, null, getTroopQuip(emoteSayer, randQuip));
+                                }
+                                break;
+                            case 5:
+                                ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_STOP);
+                                if (!utils.hasObjVar(emoteSayer, "trooper_fine"))
+                                {
+                                    utils.setObjVar(emoteSayer, "trooper_fine", 2000);
+                                    faceTo(self, emoteSayer);
+                                    factions.addFactionStanding(emoteSayer, factions.FACTION_IMPERIAL, -20);
+                                    sui.msgbox(self, emoteSayer, "@stormtrooper_attitude/st_response:imperial_fine_2000", sui.OK_ONLY, "@stormtrooper_attitude/st_response:imperial_fine_t", "handleFine");
+                                    randQuip = (rand(0, 3) + 21);
+                                    chat.publicChat(self, null, null, null, getTroopQuip(emoteSayer, randQuip));
+                                }
+                                else
+                                {
+                                    fine_debt = utils.getIntObjVar(emoteSayer, "trooper_fine");
+                                    fine_debt += 2000;
+                                    faceTo(self, emoteSayer);
+                                    factions.addFactionStanding(emoteSayer, factions.FACTION_IMPERIAL, -20);
+                                    sui.msgbox(self, emoteSayer, getString(new string_id(PP_FILE_LOC, "imperial_fine_2000")) + " " + getString(new string_id(PP_FILE_LOC, "imperial_fine_outstanding")) + fine_debt + ".", sui.OK_ONLY, "@stormtrooper_attitude/st_response:imperial_fine_t", "handleFine");
+                                    utils.setObjVar(emoteSayer, "trooper_fine", fine_debt);
+                                    randQuip = (rand(0, 3) + 21);
+                                    chat.publicChat(self, null, null, null, getTroopQuip(emoteSayer, randQuip));
+                                }
+                                break;
+                            case 4:
+                                ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_STOP);
+                                if (!utils.hasObjVar(emoteSayer, "trooper_fine"))
+                                {
+                                    utils.setObjVar(emoteSayer, "trooper_fine", 2000);
+                                    faceTo(self, emoteSayer);
+                                    factions.addFactionStanding(emoteSayer, factions.FACTION_IMPERIAL, -20);
+                                    sui.msgbox(self, emoteSayer, "@stormtrooper_attitude/st_response:imperial_fine_2000", sui.OK_ONLY, "@stormtrooper_attitude/st_response:imperial_fine_t", "handleFine");
+                                    randQuip = (rand(0, 3) + 21);
+                                    chat.publicChat(self, null, null, null, getTroopQuip(emoteSayer, randQuip));
+                                }
+                                else
+                                {
+                                    fine_debt = utils.getIntObjVar(emoteSayer, "trooper_fine");
+                                    fine_debt += 2000;
+                                    faceTo(self, emoteSayer);
+                                    factions.addFactionStanding(emoteSayer, factions.FACTION_IMPERIAL, -20);
+                                    sui.msgbox(self, emoteSayer, getString(new string_id(PP_FILE_LOC, "imperial_fine_2000")) + " " + getString(new string_id(PP_FILE_LOC, "imperial_fine_outstanding")), sui.OK_ONLY, "@stormtrooper_attitude/st_response:imperial_fine_t", "handleFine");
+                                    utils.setObjVar(emoteSayer, "trooper_fine", fine_debt);
+                                    randQuip = (rand(0, 3) + 21);
+                                    chat.publicChat(self, null, null, null, getTroopQuip(emoteSayer, randQuip));
+                                }
+                                break;
+                            case 3:
+                                ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_STOP);
+                                if (!utils.hasObjVar(emoteSayer, "trooper_fine"))
+                                {
+                                    utils.setObjVar(emoteSayer, "trooper_fine", 500);
+                                    faceTo(self, emoteSayer);
+                                    factions.addFactionStanding(emoteSayer, factions.FACTION_IMPERIAL, -5);
+                                    sui.msgbox(self, emoteSayer, "@stormtrooper_attitude/st_response:imperial_fine_500", sui.OK_ONLY, "@stormtrooper_attitude/st_response:imperial_fine_t", "handleFine");
+                                    randQuip = (rand(0, 3) + 21);
+                                    chat.publicChat(self, null, null, null, getTroopQuip(emoteSayer, randQuip));
+                                }
+                                else
+                                {
+                                    fine_debt = utils.getIntObjVar(emoteSayer, "trooper_fine");
+                                    fine_debt += 500;
+                                    faceTo(self, emoteSayer);
+                                    factions.addFactionStanding(emoteSayer, factions.FACTION_IMPERIAL, -5);
+                                    sui.msgbox(self, emoteSayer, getString(new string_id(PP_FILE_LOC, "imperial_fine_500")) + " " + getString(new string_id(PP_FILE_LOC, "imperial_fine_outstanding")) + fine_debt + ".", sui.OK_ONLY, "@stormtrooper_attitude/st_response:imperial_fine_t", "handleFine");
+                                    utils.setObjVar(emoteSayer, "trooper_fine", fine_debt);
+                                    randQuip = (rand(0, 3) + 21);
+                                    chat.publicChat(self, null, null, null, getTroopQuip(emoteSayer, randQuip));
+                                }
+                                break;
+                            case 2:
+                                ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_STOP);
+                                if (!utils.hasObjVar(emoteSayer, "trooper_fine"))
+                                {
+                                    utils.setObjVar(emoteSayer, "trooper_fine", 500);
+                                    faceTo(self, emoteSayer);
+                                    factions.addFactionStanding(emoteSayer, factions.FACTION_IMPERIAL, -5);
+                                    sui.msgbox(self, emoteSayer, "@stormtrooper_attitude/st_response:imperial_fine_500", sui.OK_ONLY, "@stormtrooper_attitude/st_response:imperial_fine_t", "handleFine");
+                                    randQuip = (rand(0, 3) + 21);
+                                    chat.publicChat(self, null, null, null, getTroopQuip(emoteSayer, randQuip));
+                                }
+                                else
+                                {
+                                    fine_debt = utils.getIntObjVar(emoteSayer, "trooper_fine");
+                                    fine_debt += 500;
+                                    faceTo(self, emoteSayer);
+                                    factions.addFactionStanding(emoteSayer, factions.FACTION_IMPERIAL, -5);
+                                    sui.msgbox(self, emoteSayer, getString(new string_id(PP_FILE_LOC, "imperial_fine_500")) + " " + getString(new string_id(PP_FILE_LOC, "imperial_fine_outstanding")) + fine_debt + ".", sui.OK_ONLY, "@stormtrooper_attitude/st_response:imperial_fine_t", "handleFine");
+                                    utils.setObjVar(emoteSayer, "trooper_fine", fine_debt);
+                                    randQuip = (rand(0, 3) + 21);
+                                    chat.publicChat(self, null, null, null, getTroopQuip(emoteSayer, randQuip));
+                                }
+                                break;
+                            case 1:
+                                ai_lib.setDefaultCalmBehavior(self, utils.getIntScriptVar(self, "tmpBehavior"));
+                                if (utils.hasScriptVar(self, "tmpBehavior"))
+                                {
+                                    utils.removeScriptVar(self, "tmpBehavior");
+                                }
+                                break;
+                            case 0:
+                                if (utils.hasObjVar(emoteSayer, "trooper_fine") & emotein.equals("hail"))
+                                {
+                                    ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_STOP);
+                                    fine_debt = utils.getIntObjVar(emoteSayer, "trooper_fine");
+                                    faceTo(self, emoteSayer);
+                                    ai_lib.doAction(self, "point_accusingly");
+                                    sui.msgbox(self, emoteSayer, getString(new string_id(PP_FILE_LOC, "pay_outstanding_fine_prefix")) + "\n \n" + getString(new string_id(PP_FILE_LOC, "pay_fine_total_suffix")) + fine_debt + getString(new string_id(PP_FILE_LOC, "imperial_fine_credits")), sui.OK_ONLY, "@stormtrooper_attitude/st_response:imperial_fine_t", "handleFine");
+                                    utils.setObjVar(emoteSayer, "trooper_fine", fine_debt);
+                                }
+                                break;
                             default:
-                            ai_lib.setDefaultCalmBehavior(self, utils.getIntScriptVar(self, "tmpBehavior"));
-                            if (utils.hasScriptVar(self, "tmpBehavior"))
-                            {
-                                utils.removeScriptVar(self, "tmpBehavior");
-                            }
-                            break;
+                                ai_lib.setDefaultCalmBehavior(self, utils.getIntScriptVar(self, "tmpBehavior"));
+                                if (utils.hasScriptVar(self, "tmpBehavior"))
+                                {
+                                    utils.removeScriptVar(self, "tmpBehavior");
+                                }
+                                break;
                         }
                     }
                 }
@@ -658,47 +678,47 @@ public class stormtrooper_respect extends script.base_script
                     switch (getEmoteBeligerence(emotein))
                     {
                         case 6:
-                        faceTo(self, emoteSayer);
-                        ai_lib.doAction(self, "standing_placate");
-                        randQuip = (rand(0, 1) + 35);
-                        chat.publicChat(self, null, null, null, getTroopQuip(emoteSayer, randQuip));
-                        break;
+                            faceTo(self, emoteSayer);
+                            ai_lib.doAction(self, "standing_placate");
+                            randQuip = (rand(0, 1) + 35);
+                            chat.publicChat(self, null, null, null, getTroopQuip(emoteSayer, randQuip));
+                            break;
                         case 5:
-                        faceTo(self, emoteSayer);
-                        ai_lib.doAction(self, "salute2");
-                        randQuip = (rand(0, 1) + 35);
-                        chat.publicChat(self, null, null, null, getTroopQuip(emoteSayer, randQuip));
-                        break;
+                            faceTo(self, emoteSayer);
+                            ai_lib.doAction(self, "salute2");
+                            randQuip = (rand(0, 1) + 35);
+                            chat.publicChat(self, null, null, null, getTroopQuip(emoteSayer, randQuip));
+                            break;
                         case 4:
-                        faceTo(self, emoteSayer);
-                        ai_lib.doAction(self, "salute2");
-                        randQuip = (rand(0, 2) + 37);
-                        chat.publicChat(self, null, null, null, getTroopQuip(emoteSayer, randQuip));
-                        break;
+                            faceTo(self, emoteSayer);
+                            ai_lib.doAction(self, "salute2");
+                            randQuip = (rand(0, 2) + 37);
+                            chat.publicChat(self, null, null, null, getTroopQuip(emoteSayer, randQuip));
+                            break;
                         case 3:
-                        faceTo(self, emoteSayer);
-                        ai_lib.doAction(self, "salute2");
-                        randQuip = (rand(0, 2) + 37);
-                        chat.publicChat(self, null, null, null, getTroopQuip(emoteSayer, randQuip));
-                        break;
+                            faceTo(self, emoteSayer);
+                            ai_lib.doAction(self, "salute2");
+                            randQuip = (rand(0, 2) + 37);
+                            chat.publicChat(self, null, null, null, getTroopQuip(emoteSayer, randQuip));
+                            break;
                         case 2:
-                        faceTo(self, emoteSayer);
-                        ai_lib.doAction(self, "salute1");
-                        randQuip = (rand(0, 2) + 37);
-                        chat.publicChat(self, null, null, null, getTroopQuip(emoteSayer, randQuip));
-                        break;
+                            faceTo(self, emoteSayer);
+                            ai_lib.doAction(self, "salute1");
+                            randQuip = (rand(0, 2) + 37);
+                            chat.publicChat(self, null, null, null, getTroopQuip(emoteSayer, randQuip));
+                            break;
                         case 1:
-                        faceTo(self, emoteSayer);
-                        ai_lib.doAction(self, "salute1");
-                        randQuip = (rand(0, 2) + 37);
-                        chat.publicChat(self, null, null, null, getTroopQuip(emoteSayer, randQuip));
-                        break;
+                            faceTo(self, emoteSayer);
+                            ai_lib.doAction(self, "salute1");
+                            randQuip = (rand(0, 2) + 37);
+                            chat.publicChat(self, null, null, null, getTroopQuip(emoteSayer, randQuip));
+                            break;
                         case 0:
-                        faceTo(self, emoteSayer);
-                        ai_lib.doAction(self, "salute1");
-                        break;
+                            faceTo(self, emoteSayer);
+                            ai_lib.doAction(self, "salute1");
+                            break;
                         default:
-                        break;
+                            break;
                     }
                     ai_lib.setDefaultCalmBehavior(self, utils.getIntScriptVar(self, "tmpBehavior"));
                     if (utils.hasScriptVar(self, "tmpBehavior"))
@@ -706,7 +726,7 @@ public class stormtrooper_respect extends script.base_script
                         utils.removeScriptVar(self, "tmpBehavior");
                     }
                 }
-                else 
+                else
                 {
                     if (getEmoteBeligerence(emotein) > 4)
                     {
@@ -719,7 +739,7 @@ public class stormtrooper_respect extends script.base_script
                             randQuip = (rand(0, 3) + 21);
                             chat.publicChat(self, null, null, null, getTroopQuip(emoteSayer, randQuip));
                         }
-                        else 
+                        else
                         {
                             faceTo(self, emoteSayer);
                             factions.addFactionStanding(emoteSayer, factions.FACTION_IMPERIAL, -25);
@@ -734,7 +754,7 @@ public class stormtrooper_respect extends script.base_script
                     }
                 }
             }
-            else 
+            else
             {
                 int species = getSpecies(emoteSayer);
                 if (species != SPECIES_HUMAN)
@@ -742,331 +762,332 @@ public class stormtrooper_respect extends script.base_script
                     switch (getEmoteBeligerence(emotein))
                     {
                         case 6:
-                        ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_STOP);
-                        if (!utils.hasObjVar(emoteSayer, "trooper_fine"))
-                        {
-                            utils.setObjVar(emoteSayer, "trooper_fine", 5000);
-                            faceTo(self, emoteSayer);
-                            factions.addFactionStanding(emoteSayer, factions.FACTION_IMPERIAL, -50);
-                            sui.msgbox(self, emoteSayer, "@stormtrooper_attitude/st_response:imperial_fine_5000", sui.OK_ONLY, "@stormtrooper_attitude/st_response:imperial_fine_t", "handleFine");
-                            playKnockdown(emoteSayer, self);
-                            setAttrib(emoteSayer, HEALTH, (rand(30, 90) * -1));
-                            showFlyText(emoteSayer, strFlyText, 1.5f, colors.TOMATO);
-                            randQuip = (rand(0, 3) + 27);
-                            chat.publicChat(self, null, null, null, getTroopQuip(emoteSayer, randQuip));
-                        }
-                        else 
-                        {
-                            fine_debt = utils.getIntObjVar(emoteSayer, "trooper_fine");
-                            fine_debt += 5000;
-                            faceTo(self, emoteSayer);
-                            factions.addFactionStanding(emoteSayer, factions.FACTION_IMPERIAL, -50);
-                            sui.msgbox(self, emoteSayer, getString(new string_id(PP_FILE_LOC, "imperial_fine_5000")) + " " + getString(new string_id(PP_FILE_LOC, "imperial_fine_outstanding")) + fine_debt + ".", sui.OK_ONLY, "@stormtrooper_attitude/st_response:imperial_fine_t", "handleFine");
-                            utils.setObjVar(emoteSayer, "trooper_fine", fine_debt);
-                            playKnockdown(emoteSayer, self);
-                            setAttrib(emoteSayer, HEALTH, (rand(30, 90) * -1));
-                            showFlyText(emoteSayer, strFlyText, 1.5f, colors.TOMATO);
-                            randQuip = (rand(0, 3) + 27);
-                            chat.publicChat(self, null, null, null, getTroopQuip(emoteSayer, randQuip));
-                        }
-                        break;
-                        case 5:
-                        ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_STOP);
-                        if (!utils.hasObjVar(emoteSayer, "trooper_fine"))
-                        {
-                            utils.setObjVar(emoteSayer, "trooper_fine", 5000);
-                            faceTo(self, emoteSayer);
-                            factions.addFactionStanding(emoteSayer, factions.FACTION_IMPERIAL, -50);
-                            sui.msgbox(self, emoteSayer, "@stormtrooper_attitude/st_response:imperial_fine_5000", sui.OK_ONLY, "@stormtrooper_attitude/st_response:imperial_fine_t", "handleFine");
-                            playKnockdown(emoteSayer, self);
-                            setAttrib(emoteSayer, HEALTH, (rand(30, 90) * -1));
-                            showFlyText(emoteSayer, strFlyText, 1.5f, colors.TOMATO);
-                            randQuip = (rand(0, 3) + 27);
-                            chat.publicChat(self, null, null, null, getTroopQuip(emoteSayer, randQuip));
-                        }
-                        else 
-                        {
-                            fine_debt = utils.getIntObjVar(emoteSayer, "trooper_fine");
-                            fine_debt += 5000;
-                            faceTo(self, emoteSayer);
-                            factions.addFactionStanding(emoteSayer, factions.FACTION_IMPERIAL, -50);
-                            sui.msgbox(self, emoteSayer, getString(new string_id(PP_FILE_LOC, "imperial_fine_5000")) + " " + getString(new string_id(PP_FILE_LOC, "imperial_fine_outstanding")) + fine_debt + ".", sui.OK_ONLY, "@stormtrooper_attitude/st_response:imperial_fine_t", "handleFine");
-                            utils.setObjVar(emoteSayer, "trooper_fine", fine_debt);
-                            playKnockdown(emoteSayer, self);
-                            setAttrib(emoteSayer, HEALTH, (rand(30, 90) * -1));
-                            showFlyText(emoteSayer, strFlyText, 1.5f, colors.TOMATO);
-                            randQuip = (rand(0, 3) + 27);
-                            chat.publicChat(self, null, null, null, getTroopQuip(emoteSayer, randQuip));
-                        }
-                        break;
-                        case 4:
-                        ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_STOP);
-                        if (!utils.hasObjVar(emoteSayer, "trooper_fine"))
-                        {
-                            utils.setObjVar(emoteSayer, "trooper_fine", 3500);
-                            faceTo(self, emoteSayer);
-                            factions.addFactionStanding(emoteSayer, factions.FACTION_IMPERIAL, -35);
-                            sui.msgbox(self, emoteSayer, "@stormtrooper_attitude/st_response:imperial_fine_3500", sui.OK_ONLY, "@stormtrooper_attitude/st_response:imperial_fine_t", "handleFine");
-                            randQuip = (rand(0, 3) + 27);
-                            chat.publicChat(self, null, null, null, getTroopQuip(emoteSayer, randQuip));
-                        }
-                        else 
-                        {
-                            fine_debt = utils.getIntObjVar(emoteSayer, "trooper_fine");
-                            fine_debt += 3500;
-                            faceTo(self, emoteSayer);
-                            factions.addFactionStanding(emoteSayer, factions.FACTION_IMPERIAL, -35);
-                            sui.msgbox(self, emoteSayer, getString(new string_id(PP_FILE_LOC, "imperial_fine_3500")) + " " + getString(new string_id(PP_FILE_LOC, "imperial_fine_outstanding")) + fine_debt + ".", sui.OK_ONLY, "@stormtrooper_attitude/st_response:imperial_fine_t", "handleFine");
-                            utils.setObjVar(emoteSayer, "trooper_fine", fine_debt);
-                            randQuip = (rand(0, 3) + 27);
-                            chat.publicChat(self, null, null, null, getTroopQuip(emoteSayer, randQuip));
-                        }
-                        break;
-                        case 3:
-                        ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_STOP);
-                        if (!utils.hasObjVar(emoteSayer, "trooper_fine"))
-                        {
-                            utils.setObjVar(emoteSayer, "trooper_fine", 3500);
-                            faceTo(self, emoteSayer);
-                            factions.addFactionStanding(emoteSayer, factions.FACTION_IMPERIAL, -35);
-                            sui.msgbox(self, emoteSayer, "@stormtrooper_attitude/st_response:imperial_fine_3500", sui.OK_ONLY, "@stormtrooper_attitude/st_response:imperial_fine_t", "handleFine");
-                            randQuip = (rand(0, 3) + 27);
-                            chat.publicChat(self, null, null, null, getTroopQuip(emoteSayer, randQuip));
-                        }
-                        else 
-                        {
-                            fine_debt = utils.getIntObjVar(emoteSayer, "trooper_fine");
-                            fine_debt += 3500;
-                            faceTo(self, emoteSayer);
-                            factions.addFactionStanding(emoteSayer, factions.FACTION_IMPERIAL, -35);
-                            sui.msgbox(self, emoteSayer, getString(new string_id(PP_FILE_LOC, "imperial_fine_3500")) + " " + getString(new string_id(PP_FILE_LOC, "imperial_fine_outstanding")) + fine_debt + ".", sui.OK_ONLY, "@stormtrooper_attitude/st_response:imperial_fine_t", "handleFine");
-                            utils.setObjVar(emoteSayer, "trooper_fine", fine_debt);
-                            randQuip = (rand(0, 3) + 27);
-                            chat.publicChat(self, null, null, null, getTroopQuip(emoteSayer, randQuip));
-                        }
-                        break;
-                        case 2:
-                        ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_STOP);
-                        if (!utils.hasObjVar(emoteSayer, "trooper_fine"))
-                        {
-                            utils.setObjVar(emoteSayer, "trooper_fine", 1000);
-                            faceTo(self, emoteSayer);
-                            factions.addFactionStanding(emoteSayer, factions.FACTION_IMPERIAL, -10);
-                            sui.msgbox(self, emoteSayer, "@stormtrooper_attitude/st_response:imperial_fine_1000", sui.OK_ONLY, "@stormtrooper_attitude/st_response:imperial_fine_t", "handleFine");
-                            randQuip = (rand(0, 3) + 27);
-                            chat.publicChat(self, null, null, null, getTroopQuip(emoteSayer, randQuip));
-                        }
-                        else 
-                        {
-                            fine_debt = utils.getIntObjVar(emoteSayer, "trooper_fine");
-                            fine_debt += 1000;
-                            faceTo(self, emoteSayer);
-                            factions.addFactionStanding(emoteSayer, factions.FACTION_IMPERIAL, -10);
-                            sui.msgbox(self, emoteSayer, getString(new string_id(PP_FILE_LOC, "imperial_fine_1000")) + " " + getString(new string_id(PP_FILE_LOC, "imperial_fine_outstanding")) + fine_debt + ".", sui.OK_ONLY, "@stormtrooper_attitude/st_response:imperial_fine_t", "handleFine");
-                            utils.setObjVar(emoteSayer, "trooper_fine", fine_debt);
-                            randQuip = (rand(0, 3) + 27);
-                            chat.publicChat(self, null, null, null, getTroopQuip(emoteSayer, randQuip));
-                        }
-                        break;
-                        case 1:
-                        ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_STOP);
-                        if (!utils.hasObjVar(emoteSayer, "trooper_fine"))
-                        {
-                            utils.setObjVar(emoteSayer, "trooper_fine", 1000);
-                            faceTo(self, emoteSayer);
-                            factions.addFactionStanding(emoteSayer, factions.FACTION_IMPERIAL, -10);
-                            sui.msgbox(self, emoteSayer, "@stormtrooper_attitude/st_response:imperial_fine_1000", sui.OK_ONLY, "@stormtrooper_attitude/st_response:imperial_fine_t", "handleFine");
-                            randQuip = (rand(0, 3) + 27);
-                            chat.publicChat(self, null, null, null, getTroopQuip(emoteSayer, randQuip));
-                        }
-                        else 
-                        {
-                            fine_debt = utils.getIntObjVar(emoteSayer, "trooper_fine");
-                            fine_debt += 1000;
-                            faceTo(self, emoteSayer);
-                            factions.addFactionStanding(emoteSayer, factions.FACTION_IMPERIAL, -10);
-                            sui.msgbox(self, emoteSayer, getString(new string_id(PP_FILE_LOC, "imperial_fine_1000")) + " " + getString(new string_id(PP_FILE_LOC, "imperial_fine_outstanding")) + fine_debt + ".", sui.OK_ONLY, "@stormtrooper_attitude/st_response:imperial_fine_t", "handleFine");
-                            utils.setObjVar(emoteSayer, "trooper_fine", fine_debt);
-                            randQuip = (rand(0, 3) + 27);
-                            chat.publicChat(self, null, null, null, getTroopQuip(emoteSayer, randQuip));
-                        }
-                        break;
-                        case 0:
-                        if (utils.hasObjVar(emoteSayer, "trooper_fine") & emotein.equals("hail"))
-                        {
                             ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_STOP);
-                            fine_debt = utils.getIntObjVar(emoteSayer, "trooper_fine");
-                            faceTo(self, emoteSayer);
-                            ai_lib.doAction(self, "point_accusingly");
-                            sui.msgbox(self, emoteSayer, "You have an outstanding fine, I suggest you pay it! It comes to a total of " + fine_debt + " credits.", sui.OK_ONLY, "@stormtrooper_attitude/st_response:imperial_fine_t", "handleFine");
-                            utils.setObjVar(emoteSayer, "trooper_fine", fine_debt);
-                        }
-                        break;
+                            if (!utils.hasObjVar(emoteSayer, "trooper_fine"))
+                            {
+                                utils.setObjVar(emoteSayer, "trooper_fine", 5000);
+                                faceTo(self, emoteSayer);
+                                factions.addFactionStanding(emoteSayer, factions.FACTION_IMPERIAL, -50);
+                                sui.msgbox(self, emoteSayer, "@stormtrooper_attitude/st_response:imperial_fine_5000", sui.OK_ONLY, "@stormtrooper_attitude/st_response:imperial_fine_t", "handleFine");
+                                playKnockdown(emoteSayer, self);
+                                setAttrib(emoteSayer, HEALTH, (rand(30, 90) * -1));
+                                showFlyText(emoteSayer, strFlyText, 1.5f, colors.TOMATO);
+                                randQuip = (rand(0, 3) + 27);
+                                chat.publicChat(self, null, null, null, getTroopQuip(emoteSayer, randQuip));
+                            }
+                            else
+                            {
+                                fine_debt = utils.getIntObjVar(emoteSayer, "trooper_fine");
+                                fine_debt += 5000;
+                                faceTo(self, emoteSayer);
+                                factions.addFactionStanding(emoteSayer, factions.FACTION_IMPERIAL, -50);
+                                sui.msgbox(self, emoteSayer, getString(new string_id(PP_FILE_LOC, "imperial_fine_5000")) + " " + getString(new string_id(PP_FILE_LOC, "imperial_fine_outstanding")) + fine_debt + ".", sui.OK_ONLY, "@stormtrooper_attitude/st_response:imperial_fine_t", "handleFine");
+                                utils.setObjVar(emoteSayer, "trooper_fine", fine_debt);
+                                playKnockdown(emoteSayer, self);
+                                setAttrib(emoteSayer, HEALTH, (rand(30, 90) * -1));
+                                showFlyText(emoteSayer, strFlyText, 1.5f, colors.TOMATO);
+                                randQuip = (rand(0, 3) + 27);
+                                chat.publicChat(self, null, null, null, getTroopQuip(emoteSayer, randQuip));
+                            }
+                            break;
+                        case 5:
+                            ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_STOP);
+                            if (!utils.hasObjVar(emoteSayer, "trooper_fine"))
+                            {
+                                utils.setObjVar(emoteSayer, "trooper_fine", 5000);
+                                faceTo(self, emoteSayer);
+                                factions.addFactionStanding(emoteSayer, factions.FACTION_IMPERIAL, -50);
+                                sui.msgbox(self, emoteSayer, "@stormtrooper_attitude/st_response:imperial_fine_5000", sui.OK_ONLY, "@stormtrooper_attitude/st_response:imperial_fine_t", "handleFine");
+                                playKnockdown(emoteSayer, self);
+                                setAttrib(emoteSayer, HEALTH, (rand(30, 90) * -1));
+                                showFlyText(emoteSayer, strFlyText, 1.5f, colors.TOMATO);
+                                randQuip = (rand(0, 3) + 27);
+                                chat.publicChat(self, null, null, null, getTroopQuip(emoteSayer, randQuip));
+                            }
+                            else
+                            {
+                                fine_debt = utils.getIntObjVar(emoteSayer, "trooper_fine");
+                                fine_debt += 5000;
+                                faceTo(self, emoteSayer);
+                                factions.addFactionStanding(emoteSayer, factions.FACTION_IMPERIAL, -50);
+                                sui.msgbox(self, emoteSayer, getString(new string_id(PP_FILE_LOC, "imperial_fine_5000")) + " " + getString(new string_id(PP_FILE_LOC, "imperial_fine_outstanding")) + fine_debt + ".", sui.OK_ONLY, "@stormtrooper_attitude/st_response:imperial_fine_t", "handleFine");
+                                utils.setObjVar(emoteSayer, "trooper_fine", fine_debt);
+                                playKnockdown(emoteSayer, self);
+                                setAttrib(emoteSayer, HEALTH, (rand(30, 90) * -1));
+                                showFlyText(emoteSayer, strFlyText, 1.5f, colors.TOMATO);
+                                randQuip = (rand(0, 3) + 27);
+                                chat.publicChat(self, null, null, null, getTroopQuip(emoteSayer, randQuip));
+                            }
+                            break;
+                        case 4:
+                            ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_STOP);
+                            if (!utils.hasObjVar(emoteSayer, "trooper_fine"))
+                            {
+                                utils.setObjVar(emoteSayer, "trooper_fine", 3500);
+                                faceTo(self, emoteSayer);
+                                factions.addFactionStanding(emoteSayer, factions.FACTION_IMPERIAL, -35);
+                                sui.msgbox(self, emoteSayer, "@stormtrooper_attitude/st_response:imperial_fine_3500", sui.OK_ONLY, "@stormtrooper_attitude/st_response:imperial_fine_t", "handleFine");
+                                randQuip = (rand(0, 3) + 27);
+                                chat.publicChat(self, null, null, null, getTroopQuip(emoteSayer, randQuip));
+                            }
+                            else
+                            {
+                                fine_debt = utils.getIntObjVar(emoteSayer, "trooper_fine");
+                                fine_debt += 3500;
+                                faceTo(self, emoteSayer);
+                                factions.addFactionStanding(emoteSayer, factions.FACTION_IMPERIAL, -35);
+                                sui.msgbox(self, emoteSayer, getString(new string_id(PP_FILE_LOC, "imperial_fine_3500")) + " " + getString(new string_id(PP_FILE_LOC, "imperial_fine_outstanding")) + fine_debt + ".", sui.OK_ONLY, "@stormtrooper_attitude/st_response:imperial_fine_t", "handleFine");
+                                utils.setObjVar(emoteSayer, "trooper_fine", fine_debt);
+                                randQuip = (rand(0, 3) + 27);
+                                chat.publicChat(self, null, null, null, getTroopQuip(emoteSayer, randQuip));
+                            }
+                            break;
+                        case 3:
+                            ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_STOP);
+                            if (!utils.hasObjVar(emoteSayer, "trooper_fine"))
+                            {
+                                utils.setObjVar(emoteSayer, "trooper_fine", 3500);
+                                faceTo(self, emoteSayer);
+                                factions.addFactionStanding(emoteSayer, factions.FACTION_IMPERIAL, -35);
+                                sui.msgbox(self, emoteSayer, "@stormtrooper_attitude/st_response:imperial_fine_3500", sui.OK_ONLY, "@stormtrooper_attitude/st_response:imperial_fine_t", "handleFine");
+                                randQuip = (rand(0, 3) + 27);
+                                chat.publicChat(self, null, null, null, getTroopQuip(emoteSayer, randQuip));
+                            }
+                            else
+                            {
+                                fine_debt = utils.getIntObjVar(emoteSayer, "trooper_fine");
+                                fine_debt += 3500;
+                                faceTo(self, emoteSayer);
+                                factions.addFactionStanding(emoteSayer, factions.FACTION_IMPERIAL, -35);
+                                sui.msgbox(self, emoteSayer, getString(new string_id(PP_FILE_LOC, "imperial_fine_3500")) + " " + getString(new string_id(PP_FILE_LOC, "imperial_fine_outstanding")) + fine_debt + ".", sui.OK_ONLY, "@stormtrooper_attitude/st_response:imperial_fine_t", "handleFine");
+                                utils.setObjVar(emoteSayer, "trooper_fine", fine_debt);
+                                randQuip = (rand(0, 3) + 27);
+                                chat.publicChat(self, null, null, null, getTroopQuip(emoteSayer, randQuip));
+                            }
+                            break;
+                        case 2:
+                            ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_STOP);
+                            if (!utils.hasObjVar(emoteSayer, "trooper_fine"))
+                            {
+                                utils.setObjVar(emoteSayer, "trooper_fine", 1000);
+                                faceTo(self, emoteSayer);
+                                factions.addFactionStanding(emoteSayer, factions.FACTION_IMPERIAL, -10);
+                                sui.msgbox(self, emoteSayer, "@stormtrooper_attitude/st_response:imperial_fine_1000", sui.OK_ONLY, "@stormtrooper_attitude/st_response:imperial_fine_t", "handleFine");
+                                randQuip = (rand(0, 3) + 27);
+                                chat.publicChat(self, null, null, null, getTroopQuip(emoteSayer, randQuip));
+                            }
+                            else
+                            {
+                                fine_debt = utils.getIntObjVar(emoteSayer, "trooper_fine");
+                                fine_debt += 1000;
+                                faceTo(self, emoteSayer);
+                                factions.addFactionStanding(emoteSayer, factions.FACTION_IMPERIAL, -10);
+                                sui.msgbox(self, emoteSayer, getString(new string_id(PP_FILE_LOC, "imperial_fine_1000")) + " " + getString(new string_id(PP_FILE_LOC, "imperial_fine_outstanding")) + fine_debt + ".", sui.OK_ONLY, "@stormtrooper_attitude/st_response:imperial_fine_t", "handleFine");
+                                utils.setObjVar(emoteSayer, "trooper_fine", fine_debt);
+                                randQuip = (rand(0, 3) + 27);
+                                chat.publicChat(self, null, null, null, getTroopQuip(emoteSayer, randQuip));
+                            }
+                            break;
+                        case 1:
+                            ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_STOP);
+                            if (!utils.hasObjVar(emoteSayer, "trooper_fine"))
+                            {
+                                utils.setObjVar(emoteSayer, "trooper_fine", 1000);
+                                faceTo(self, emoteSayer);
+                                factions.addFactionStanding(emoteSayer, factions.FACTION_IMPERIAL, -10);
+                                sui.msgbox(self, emoteSayer, "@stormtrooper_attitude/st_response:imperial_fine_1000", sui.OK_ONLY, "@stormtrooper_attitude/st_response:imperial_fine_t", "handleFine");
+                                randQuip = (rand(0, 3) + 27);
+                                chat.publicChat(self, null, null, null, getTroopQuip(emoteSayer, randQuip));
+                            }
+                            else
+                            {
+                                fine_debt = utils.getIntObjVar(emoteSayer, "trooper_fine");
+                                fine_debt += 1000;
+                                faceTo(self, emoteSayer);
+                                factions.addFactionStanding(emoteSayer, factions.FACTION_IMPERIAL, -10);
+                                sui.msgbox(self, emoteSayer, getString(new string_id(PP_FILE_LOC, "imperial_fine_1000")) + " " + getString(new string_id(PP_FILE_LOC, "imperial_fine_outstanding")) + fine_debt + ".", sui.OK_ONLY, "@stormtrooper_attitude/st_response:imperial_fine_t", "handleFine");
+                                utils.setObjVar(emoteSayer, "trooper_fine", fine_debt);
+                                randQuip = (rand(0, 3) + 27);
+                                chat.publicChat(self, null, null, null, getTroopQuip(emoteSayer, randQuip));
+                            }
+                            break;
+                        case 0:
+                            if (utils.hasObjVar(emoteSayer, "trooper_fine") & emotein.equals("hail"))
+                            {
+                                ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_STOP);
+                                fine_debt = utils.getIntObjVar(emoteSayer, "trooper_fine");
+                                faceTo(self, emoteSayer);
+                                ai_lib.doAction(self, "point_accusingly");
+                                sui.msgbox(self, emoteSayer, "You have an outstanding fine, I suggest you pay it! It comes to a total of " + fine_debt + " credits.", sui.OK_ONLY, "@stormtrooper_attitude/st_response:imperial_fine_t", "handleFine");
+                                utils.setObjVar(emoteSayer, "trooper_fine", fine_debt);
+                            }
+                            break;
                         default:
-                        ai_lib.setDefaultCalmBehavior(self, utils.getIntScriptVar(self, "tmpBehavior"));
-                        if (utils.hasScriptVar(self, "tmpBehavior"))
-                        {
-                            utils.removeScriptVar(self, "tmpBehavior");
-                        }
-                        break;
+                            ai_lib.setDefaultCalmBehavior(self, utils.getIntScriptVar(self, "tmpBehavior"));
+                            if (utils.hasScriptVar(self, "tmpBehavior"))
+                            {
+                                utils.removeScriptVar(self, "tmpBehavior");
+                            }
+                            break;
                     }
                 }
-                else 
+                else
                 {
                     switch (getEmoteBeligerence(emotein))
                     {
                         case 6:
-                        ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_STOP);
-                        if (!utils.hasObjVar(emoteSayer, "trooper_fine"))
-                        {
-                            utils.setObjVar(emoteSayer, "trooper_fine", 3500);
-                            faceTo(self, emoteSayer);
-                            factions.addFactionStanding(emoteSayer, factions.FACTION_IMPERIAL, -35);
-                            sui.msgbox(self, emoteSayer, "You have been fined 3500 credits by the Empire.", sui.OK_ONLY, "@stormtrooper_attitude/st_response:imperial_fine_t", "handleFine");
-                            playKnockdown(emoteSayer, self);
-                            setAttrib(emoteSayer, HEALTH, (rand(30, 90) * -1));
-                            showFlyText(emoteSayer, strFlyText, 1.5f, colors.TOMATO);
-                            randQuip = (rand(0, 3) + 31);
-                            chat.publicChat(self, null, null, null, getTroopQuip(emoteSayer, randQuip));
-                        }
-                        else 
-                        {
-                            fine_debt = utils.getIntObjVar(emoteSayer, "trooper_fine");
-                            fine_debt += 3500;
-                            faceTo(self, emoteSayer);
-                            factions.addFactionStanding(emoteSayer, factions.FACTION_IMPERIAL, -35);
-                            sui.msgbox(self, emoteSayer, "You have been fined 3500 credits by the Empire. \n Added to your outstanding fines, it comes to " + fine_debt + ".", sui.OK_ONLY, "@stormtrooper_attitude/st_response:imperial_fine_t", "handleFine");
-                            utils.setObjVar(emoteSayer, "trooper_fine", fine_debt);
-                            playKnockdown(emoteSayer, self);
-                            setAttrib(emoteSayer, HEALTH, (rand(30, 90) * -1));
-                            showFlyText(emoteSayer, strFlyText, 1.5f, colors.TOMATO);
-                            randQuip = (rand(0, 3) + 31);
-                            chat.publicChat(self, null, null, null, getTroopQuip(emoteSayer, randQuip));
-                        }
-                        break;
-                        case 5:
-                        ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_STOP);
-                        if (!utils.hasObjVar(emoteSayer, "trooper_fine"))
-                        {
-                            utils.setObjVar(emoteSayer, "trooper_fine", 2000);
-                            faceTo(self, emoteSayer);
-                            factions.addFactionStanding(emoteSayer, factions.FACTION_IMPERIAL, -20);
-                            sui.msgbox(self, emoteSayer, "You have been fined 2000 credits by the Empire.", sui.OK_ONLY, "@stormtrooper_attitude/st_response:imperial_fine_t", "handleFine");
-                            randQuip = (rand(0, 3) + 31);
-                            chat.publicChat(self, null, null, null, getTroopQuip(emoteSayer, randQuip));
-                        }
-                        else 
-                        {
-                            fine_debt = utils.getIntObjVar(emoteSayer, "trooper_fine");
-                            fine_debt += 2000;
-                            faceTo(self, emoteSayer);
-                            factions.addFactionStanding(emoteSayer, factions.FACTION_IMPERIAL, -20);
-                            sui.msgbox(self, emoteSayer, "You have been fined 2000 credits by the Empire. \n Added to your outstanding fines, it comes to " + fine_debt + ".", sui.OK_ONLY, "@stormtrooper_attitude/st_response:imperial_fine_t", "handleFine");
-                            utils.setObjVar(emoteSayer, "trooper_fine", fine_debt);
-                            randQuip = (rand(0, 3) + 31);
-                            chat.publicChat(self, null, null, null, getTroopQuip(emoteSayer, randQuip));
-                        }
-                        break;
-                        case 4:
-                        ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_STOP);
-                        if (!utils.hasObjVar(emoteSayer, "trooper_fine"))
-                        {
-                            utils.setObjVar(emoteSayer, "trooper_fine", 2000);
-                            faceTo(self, emoteSayer);
-                            factions.addFactionStanding(emoteSayer, factions.FACTION_IMPERIAL, -20);
-                            sui.msgbox(self, emoteSayer, "You have been fined 2000 credits by the Empire.", sui.OK_ONLY, "@stormtrooper_attitude/st_response:imperial_fine_t", "handleFine");
-                            randQuip = (rand(0, 3) + 31);
-                            chat.publicChat(self, null, null, null, getTroopQuip(emoteSayer, randQuip));
-                        }
-                        else 
-                        {
-                            fine_debt = utils.getIntObjVar(emoteSayer, "trooper_fine");
-                            fine_debt += 2000;
-                            faceTo(self, emoteSayer);
-                            factions.addFactionStanding(emoteSayer, factions.FACTION_IMPERIAL, -20);
-                            sui.msgbox(self, emoteSayer, "You have been fined 2000 credits by the Empire. \n Added to your outstanding fines, it comes to " + fine_debt + ".", sui.OK_ONLY, "@stormtrooper_attitude/st_response:imperial_fine_t", "handleFine");
-                            utils.setObjVar(emoteSayer, "trooper_fine", fine_debt);
-                            randQuip = (rand(0, 3) + 31);
-                            chat.publicChat(self, null, null, null, getTroopQuip(emoteSayer, randQuip));
-                        }
-                        break;
-                        case 3:
-                        ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_STOP);
-                        if (!utils.hasObjVar(emoteSayer, "trooper_fine"))
-                        {
-                            utils.setObjVar(emoteSayer, "trooper_fine", 500);
-                            faceTo(self, emoteSayer);
-                            factions.addFactionStanding(emoteSayer, factions.FACTION_IMPERIAL, -5);
-                            sui.msgbox(self, emoteSayer, "You have been fined 500 credits by the Empire.", sui.OK_ONLY, "@stormtrooper_attitude/st_response:imperial_fine_t", "handleFine");
-                            randQuip = (rand(0, 3) + 31);
-                            chat.publicChat(self, null, null, null, getTroopQuip(emoteSayer, randQuip));
-                        }
-                        else 
-                        {
-                            fine_debt = utils.getIntObjVar(emoteSayer, "trooper_fine");
-                            fine_debt += 500;
-                            faceTo(self, emoteSayer);
-                            factions.addFactionStanding(emoteSayer, factions.FACTION_IMPERIAL, -5);
-                            sui.msgbox(self, emoteSayer, "You have been fined 500 credits by the Empire. \n Added to your outstanding fines, it comes to " + fine_debt + ".", sui.OK_ONLY, "@stormtrooper_attitude/st_response:imperial_fine_t", "handleFine");
-                            utils.setObjVar(emoteSayer, "trooper_fine", fine_debt);
-                            randQuip = (rand(0, 3) + 31);
-                            chat.publicChat(self, null, null, null, getTroopQuip(emoteSayer, randQuip));
-                        }
-                        break;
-                        case 2:
-                        ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_STOP);
-                        if (!utils.hasObjVar(emoteSayer, "trooper_fine"))
-                        {
-                            utils.setObjVar(emoteSayer, "trooper_fine", 500);
-                            faceTo(self, emoteSayer);
-                            factions.addFactionStanding(emoteSayer, factions.FACTION_IMPERIAL, -5);
-                            sui.msgbox(self, emoteSayer, "You have been fined 500 credits by the Empire.", sui.OK_ONLY, "@stormtrooper_attitude/st_response:imperial_fine_t", "handleFine");
-                            randQuip = (rand(0, 3) + 31);
-                            chat.publicChat(self, null, null, null, getTroopQuip(emoteSayer, randQuip));
-                        }
-                        else 
-                        {
-                            fine_debt = utils.getIntObjVar(emoteSayer, "trooper_fine");
-                            fine_debt += 500;
-                            faceTo(self, emoteSayer);
-                            factions.addFactionStanding(emoteSayer, factions.FACTION_IMPERIAL, -5);
-                            sui.msgbox(self, emoteSayer, "You have been fined 500 credits by the Empire. \n Added to your outstanding fines, it comes to " + fine_debt + ".", sui.OK_ONLY, "@stormtrooper_attitude/st_response:imperial_fine_t", "handleFine");
-                            utils.setObjVar(emoteSayer, "trooper_fine", fine_debt);
-                            randQuip = (rand(0, 3) + 31);
-                            chat.publicChat(self, null, null, null, getTroopQuip(emoteSayer, randQuip));
-                        }
-                        break;
-                        case 1:
-                        ai_lib.setDefaultCalmBehavior(self, utils.getIntScriptVar(self, "tmpBehavior"));
-                        if (utils.hasScriptVar(self, "tmpBehavior"))
-                        {
-                            utils.removeScriptVar(self, "tmpBehavior");
-                        }
-                        break;
-                        case 0:
-                        if (utils.hasObjVar(emoteSayer, "trooper_fine") & emotein.equals("hail"))
-                        {
                             ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_STOP);
-                            fine_debt = utils.getIntObjVar(emoteSayer, "trooper_fine");
-                            faceTo(self, emoteSayer);
-                            ai_lib.doAction(self, "point_accusingly");
-                            sui.msgbox(self, emoteSayer, getString(new string_id(PP_FILE_LOC, "pay_outstanding_fine_prefix")) + "\n \n" + getString(new string_id(PP_FILE_LOC, "pay_fine_total_suffix")) + fine_debt + getString(new string_id(PP_FILE_LOC, "imperial_fine_credits")), sui.OK_ONLY, "@stormtrooper_attitude/st_response:imperial_fine_t", "handleFine");
-                            utils.setObjVar(emoteSayer, "trooper_fine", fine_debt);
-                        }
-                        break;
+                            if (!utils.hasObjVar(emoteSayer, "trooper_fine"))
+                            {
+                                utils.setObjVar(emoteSayer, "trooper_fine", 3500);
+                                faceTo(self, emoteSayer);
+                                factions.addFactionStanding(emoteSayer, factions.FACTION_IMPERIAL, -35);
+                                sui.msgbox(self, emoteSayer, "You have been fined 3500 credits by the Empire.", sui.OK_ONLY, "@stormtrooper_attitude/st_response:imperial_fine_t", "handleFine");
+                                playKnockdown(emoteSayer, self);
+                                setAttrib(emoteSayer, HEALTH, (rand(30, 90) * -1));
+                                showFlyText(emoteSayer, strFlyText, 1.5f, colors.TOMATO);
+                                randQuip = (rand(0, 3) + 31);
+                                chat.publicChat(self, null, null, null, getTroopQuip(emoteSayer, randQuip));
+                            }
+                            else
+                            {
+                                fine_debt = utils.getIntObjVar(emoteSayer, "trooper_fine");
+                                fine_debt += 3500;
+                                faceTo(self, emoteSayer);
+                                factions.addFactionStanding(emoteSayer, factions.FACTION_IMPERIAL, -35);
+                                sui.msgbox(self, emoteSayer, "You have been fined 3500 credits by the Empire. \n Added to your outstanding fines, it comes to " + fine_debt + ".", sui.OK_ONLY, "@stormtrooper_attitude/st_response:imperial_fine_t", "handleFine");
+                                utils.setObjVar(emoteSayer, "trooper_fine", fine_debt);
+                                playKnockdown(emoteSayer, self);
+                                setAttrib(emoteSayer, HEALTH, (rand(30, 90) * -1));
+                                showFlyText(emoteSayer, strFlyText, 1.5f, colors.TOMATO);
+                                randQuip = (rand(0, 3) + 31);
+                                chat.publicChat(self, null, null, null, getTroopQuip(emoteSayer, randQuip));
+                            }
+                            break;
+                        case 5:
+                            ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_STOP);
+                            if (!utils.hasObjVar(emoteSayer, "trooper_fine"))
+                            {
+                                utils.setObjVar(emoteSayer, "trooper_fine", 2000);
+                                faceTo(self, emoteSayer);
+                                factions.addFactionStanding(emoteSayer, factions.FACTION_IMPERIAL, -20);
+                                sui.msgbox(self, emoteSayer, "You have been fined 2000 credits by the Empire.", sui.OK_ONLY, "@stormtrooper_attitude/st_response:imperial_fine_t", "handleFine");
+                                randQuip = (rand(0, 3) + 31);
+                                chat.publicChat(self, null, null, null, getTroopQuip(emoteSayer, randQuip));
+                            }
+                            else
+                            {
+                                fine_debt = utils.getIntObjVar(emoteSayer, "trooper_fine");
+                                fine_debt += 2000;
+                                faceTo(self, emoteSayer);
+                                factions.addFactionStanding(emoteSayer, factions.FACTION_IMPERIAL, -20);
+                                sui.msgbox(self, emoteSayer, "You have been fined 2000 credits by the Empire. \n Added to your outstanding fines, it comes to " + fine_debt + ".", sui.OK_ONLY, "@stormtrooper_attitude/st_response:imperial_fine_t", "handleFine");
+                                utils.setObjVar(emoteSayer, "trooper_fine", fine_debt);
+                                randQuip = (rand(0, 3) + 31);
+                                chat.publicChat(self, null, null, null, getTroopQuip(emoteSayer, randQuip));
+                            }
+                            break;
+                        case 4:
+                            ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_STOP);
+                            if (!utils.hasObjVar(emoteSayer, "trooper_fine"))
+                            {
+                                utils.setObjVar(emoteSayer, "trooper_fine", 2000);
+                                faceTo(self, emoteSayer);
+                                factions.addFactionStanding(emoteSayer, factions.FACTION_IMPERIAL, -20);
+                                sui.msgbox(self, emoteSayer, "You have been fined 2000 credits by the Empire.", sui.OK_ONLY, "@stormtrooper_attitude/st_response:imperial_fine_t", "handleFine");
+                                randQuip = (rand(0, 3) + 31);
+                                chat.publicChat(self, null, null, null, getTroopQuip(emoteSayer, randQuip));
+                            }
+                            else
+                            {
+                                fine_debt = utils.getIntObjVar(emoteSayer, "trooper_fine");
+                                fine_debt += 2000;
+                                faceTo(self, emoteSayer);
+                                factions.addFactionStanding(emoteSayer, factions.FACTION_IMPERIAL, -20);
+                                sui.msgbox(self, emoteSayer, "You have been fined 2000 credits by the Empire. \n Added to your outstanding fines, it comes to " + fine_debt + ".", sui.OK_ONLY, "@stormtrooper_attitude/st_response:imperial_fine_t", "handleFine");
+                                utils.setObjVar(emoteSayer, "trooper_fine", fine_debt);
+                                randQuip = (rand(0, 3) + 31);
+                                chat.publicChat(self, null, null, null, getTroopQuip(emoteSayer, randQuip));
+                            }
+                            break;
+                        case 3:
+                            ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_STOP);
+                            if (!utils.hasObjVar(emoteSayer, "trooper_fine"))
+                            {
+                                utils.setObjVar(emoteSayer, "trooper_fine", 500);
+                                faceTo(self, emoteSayer);
+                                factions.addFactionStanding(emoteSayer, factions.FACTION_IMPERIAL, -5);
+                                sui.msgbox(self, emoteSayer, "You have been fined 500 credits by the Empire.", sui.OK_ONLY, "@stormtrooper_attitude/st_response:imperial_fine_t", "handleFine");
+                                randQuip = (rand(0, 3) + 31);
+                                chat.publicChat(self, null, null, null, getTroopQuip(emoteSayer, randQuip));
+                            }
+                            else
+                            {
+                                fine_debt = utils.getIntObjVar(emoteSayer, "trooper_fine");
+                                fine_debt += 500;
+                                faceTo(self, emoteSayer);
+                                factions.addFactionStanding(emoteSayer, factions.FACTION_IMPERIAL, -5);
+                                sui.msgbox(self, emoteSayer, "You have been fined 500 credits by the Empire. \n Added to your outstanding fines, it comes to " + fine_debt + ".", sui.OK_ONLY, "@stormtrooper_attitude/st_response:imperial_fine_t", "handleFine");
+                                utils.setObjVar(emoteSayer, "trooper_fine", fine_debt);
+                                randQuip = (rand(0, 3) + 31);
+                                chat.publicChat(self, null, null, null, getTroopQuip(emoteSayer, randQuip));
+                            }
+                            break;
+                        case 2:
+                            ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_STOP);
+                            if (!utils.hasObjVar(emoteSayer, "trooper_fine"))
+                            {
+                                utils.setObjVar(emoteSayer, "trooper_fine", 500);
+                                faceTo(self, emoteSayer);
+                                factions.addFactionStanding(emoteSayer, factions.FACTION_IMPERIAL, -5);
+                                sui.msgbox(self, emoteSayer, "You have been fined 500 credits by the Empire.", sui.OK_ONLY, "@stormtrooper_attitude/st_response:imperial_fine_t", "handleFine");
+                                randQuip = (rand(0, 3) + 31);
+                                chat.publicChat(self, null, null, null, getTroopQuip(emoteSayer, randQuip));
+                            }
+                            else
+                            {
+                                fine_debt = utils.getIntObjVar(emoteSayer, "trooper_fine");
+                                fine_debt += 500;
+                                faceTo(self, emoteSayer);
+                                factions.addFactionStanding(emoteSayer, factions.FACTION_IMPERIAL, -5);
+                                sui.msgbox(self, emoteSayer, "You have been fined 500 credits by the Empire. \n Added to your outstanding fines, it comes to " + fine_debt + ".", sui.OK_ONLY, "@stormtrooper_attitude/st_response:imperial_fine_t", "handleFine");
+                                utils.setObjVar(emoteSayer, "trooper_fine", fine_debt);
+                                randQuip = (rand(0, 3) + 31);
+                                chat.publicChat(self, null, null, null, getTroopQuip(emoteSayer, randQuip));
+                            }
+                            break;
+                        case 1:
+                            ai_lib.setDefaultCalmBehavior(self, utils.getIntScriptVar(self, "tmpBehavior"));
+                            if (utils.hasScriptVar(self, "tmpBehavior"))
+                            {
+                                utils.removeScriptVar(self, "tmpBehavior");
+                            }
+                            break;
+                        case 0:
+                            if (utils.hasObjVar(emoteSayer, "trooper_fine") & emotein.equals("hail"))
+                            {
+                                ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_STOP);
+                                fine_debt = utils.getIntObjVar(emoteSayer, "trooper_fine");
+                                faceTo(self, emoteSayer);
+                                ai_lib.doAction(self, "point_accusingly");
+                                sui.msgbox(self, emoteSayer, getString(new string_id(PP_FILE_LOC, "pay_outstanding_fine_prefix")) + "\n \n" + getString(new string_id(PP_FILE_LOC, "pay_fine_total_suffix")) + fine_debt + getString(new string_id(PP_FILE_LOC, "imperial_fine_credits")), sui.OK_ONLY, "@stormtrooper_attitude/st_response:imperial_fine_t", "handleFine");
+                                utils.setObjVar(emoteSayer, "trooper_fine", fine_debt);
+                            }
+                            break;
                         default:
-                        ai_lib.setDefaultCalmBehavior(self, utils.getIntScriptVar(self, "tmpBehavior"));
-                        if (utils.hasScriptVar(self, "tmpBehavior"))
-                        {
-                            utils.removeScriptVar(self, "tmpBehavior");
-                        }
-                        break;
+                            ai_lib.setDefaultCalmBehavior(self, utils.getIntScriptVar(self, "tmpBehavior"));
+                            if (utils.hasScriptVar(self, "tmpBehavior"))
+                            {
+                                utils.removeScriptVar(self, "tmpBehavior");
+                            }
+                            break;
                     }
                 }
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnHearSpeech(obj_id self, obj_id speaker, String speech) throws InterruptedException
     {
         if (speaker == self || !isPlayer(speaker))
@@ -1104,13 +1125,13 @@ public class stormtrooper_respect extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        else 
+        else
         {
             if (!isIdValid(speakerCell))
             {
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 if (myCell != speakerCell)
                 {
@@ -1127,6 +1148,7 @@ public class stormtrooper_respect extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnMovePathComplete(obj_id self) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "coming_to_kill_u"))

@@ -1,5 +1,11 @@
 package script.systems.missions.base;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -194,6 +200,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
                     //add in dxun outpost when it is added
             };
     public static final float PREFERRED_DISTANCE = 1000.0f;
+
     public mission_dynamic_base()
     {
     }
@@ -1019,7 +1026,6 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
     {
         dictionary dctParams = new dictionary();
         messageTo(objMission, "onArrivedAtLocation", dctParams, 0, true);
-        return;
     }
 
     public void cleanupLocationTargets(obj_id objMission) throws InterruptedException
@@ -1118,7 +1124,6 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         updateMissionWaypoint(objMission, locFinalLocation);
         sendMissionStartMovementSpam(objMission);
         setupSpawn(objMission, locFinalLocation);
-        return;
     }
 
     public boolean createDestructionTarget(obj_id objMission, obj_id objPlayer) throws InterruptedException
@@ -1837,12 +1842,10 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         }
         setMissionTitle(objMissionData, strTitleId);
         setMissionDescription(objMissionData, strDescriptionId);
-        return;
     }
 
     public void sendMissionPersistentMessage(obj_id objMission, String strType) throws InterruptedException
     {
-        return;
     }
 
     public void createDeliverInterestNPC(obj_id objMission) throws InterruptedException
@@ -1896,14 +1899,12 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
                 attachScript(objNPC, "systems.missions.dynamic.mission_deliver_interest_npc_single_attacker");
             }
         }
-        return;
     }
 
     public void cleanUpInterestNPC(obj_id objNPC) throws InterruptedException
     {
         obj_id objMission = getObjIdObjVar(objNPC, "objMission");
         destroyObject(objNPC);
-        return;
     }
 
     public void removeSpawnedTemplateElement(obj_id objMissionData, obj_id objTemplate) throws InterruptedException
@@ -2032,7 +2033,6 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
 
     public void preLoadDestructionDataTables(obj_id objMissionBoard, String strPlanet) throws InterruptedException
     {
-        return;
     }
 
     public void registerBountyInformant(obj_id objInformant) throws InterruptedException
@@ -2047,7 +2047,6 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         Vector objInformants = dctMissionInformation.getResizeableObjIdArray(strArrayName);
         objInformants = utils.addElement(objInformants, objInformant);
         dctMissionInformation.put(strArrayName, objInformants);
-        return;
     }
 
     public void removeBountyInformant(obj_id objInformant) throws InterruptedException
@@ -2071,7 +2070,6 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
             }
             dctMissionInformation.put(strArrayName, objInformants);
         }
-        return;
     }
 
     public void setupInvisibleWaypoint(obj_id objMission) throws InterruptedException
@@ -2142,7 +2140,6 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
             obj_id objTargetWaypoint = getObjIdObjVar(objMission, "objTargetWaypoint");
             setWaypointActive(objTargetWaypoint, true);
         }
-        return;
     }
 
     public obj_id generateNPCMissions(obj_id objNPC) throws InterruptedException
@@ -2307,7 +2304,6 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
             }
             intI = intI + 1;
         }
-        return;
     }
 
     public boolean hasMissionFromNPC(obj_id objPlayer, obj_id objNPC) throws InterruptedException
@@ -2363,7 +2359,6 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
     {
         assignMission(objMissionData, objPlayer);
         removeMissionObjectFromNPC(objNPC, objMissionData);
-        return;
     }
 
     public obj_id getAssignedNPCMission(obj_id objNPC, obj_id objPlayer) throws InterruptedException
@@ -2693,7 +2688,6 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         dctParams.put("objMission", objMission);
         dctParams.put("fltDistance", fltDistance);
         messageTo(objTarget, "setupArrivedAtLocation", dctParams, 0, true);
-        return;
     }
 
     public boolean createReconTarget(obj_id objMission, obj_id objPlayer) throws InterruptedException
@@ -2960,7 +2954,6 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         dictionary dctParams = new dictionary();
         dctParams.put("objObject", objObject);
         messageTo(objMission, "objectCreated", dctParams, 0, true);
-        return;
     }
 
     public void cleanupObjects(obj_id objMission) throws InterruptedException
@@ -2975,7 +2968,6 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
                 intI = intI + 1;
             }
         }
-        return;
     }
 
     public location getGoodTheaterLocation(obj_id objMissionData, location locSpawnLocation) throws InterruptedException
@@ -3435,7 +3427,6 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         int intNumGranted = getIntObjVar(objPlayer, "mission." + strSchematic);
         intNumGranted = intNumGranted + 1;
         setObjVar(objPlayer, "mission." + strSchematic, intNumGranted);
-        return;
     }
 
     public void revokeMissionSchematic(obj_id objPlayer, obj_id objMission) throws InterruptedException
@@ -3459,7 +3450,6 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
             setObjVar(objPlayer, "mission." + strSchematic, intNumGranted);
             return;
         }
-        return;
     }
 
     public void reContextualizationTerminalToNPCMission(obj_id objMissionData, obj_id objCreator) throws InterruptedException
@@ -3534,7 +3524,6 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         setMissionCreator(objMissionData, getName(objCreator));
         setMissionTitle(objMissionData, strTitleId);
         setMissionDescription(objMissionData, strDescriptionId);
-        return;
     }
 
     public obj_id dynamicDestroyToThemePark(obj_id objMissionData, obj_id objCreator) throws InterruptedException
@@ -3651,7 +3640,6 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         string_id strDescriptionId = new string_id(strFileName, strDescription);
         setMissionTitle(objMissionData, strTitleId);
         setMissionDescription(objMissionData, strDescriptionId);
-        return;
     }
 
     public obj_id dynamicEscortToCreatorToThemePark(obj_id objMissionData, obj_id objCreator) throws InterruptedException
@@ -3731,7 +3719,6 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         strId = strId + intId;
         string_id strSpam = new string_id("mission/mission_generic", strId);
         chat.chat(objNPC, player, strSpam);
-        return;
     }
 
     public boolean validateNPCMissionForPlayer(obj_id objNPC, obj_id objMissionData, obj_id objPlayer) throws InterruptedException

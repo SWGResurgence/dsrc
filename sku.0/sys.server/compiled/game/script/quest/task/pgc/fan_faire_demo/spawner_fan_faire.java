@@ -1,5 +1,11 @@
 package script.quest.task.pgc.fan_faire_demo;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.create;
@@ -12,6 +18,7 @@ public class spawner_fan_faire extends script.base_script
     public spawner_fan_faire()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, "registerWithController"))
@@ -28,6 +35,7 @@ public class spawner_fan_faire extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, "registerWithController"))
@@ -44,6 +52,7 @@ public class spawner_fan_faire extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int doSpawnEvent(obj_id self, dictionary params) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "spawned"))
@@ -60,6 +69,7 @@ public class spawner_fan_faire extends script.base_script
         createMob(spawnType, locTest, self);
         return SCRIPT_CONTINUE;
     }
+
     public void createMob(String spawnType, location locLocation, obj_id self) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "spawned"))
@@ -81,7 +91,7 @@ public class spawner_fan_faire extends script.base_script
         {
             ai_lib.setDefaultCalmBehavior(objMob, ai_lib.BEHAVIOR_LOITER);
         }
-        else 
+        else
         {
             ai_lib.setDefaultCalmBehavior(objMob, ai_lib.BEHAVIOR_SENTINEL);
         }
@@ -94,18 +104,19 @@ public class spawner_fan_faire extends script.base_script
         {
             attachScript(objMob, "conversation.fan_faire_pgc_c3po");
         }
-        else 
+        else
         {
             attachScript(objMob, "quest.task.pgc.fan_faire_demo.quest_pinata");
         }
-        return;
     }
+
     public int spawnDestroyed(obj_id self, dictionary params) throws InterruptedException
     {
         utils.removeScriptVar(self, "spawned");
         messageTo(self, "doSpawnEvent", null, 2, false);
         return SCRIPT_CONTINUE;
     }
+
     public boolean canSpawnByConfigSetting() throws InterruptedException
     {
         String disableSpawners = getConfigSetting("GameServer", "disableAreaSpawners");
@@ -113,12 +124,9 @@ public class spawner_fan_faire extends script.base_script
         {
             return true;
         }
-        if (disableSpawners.equals("true") || disableSpawners.equals("1"))
-        {
-            return false;
-        }
-        return true;
+        return !disableSpawners.equals("true") && !disableSpawners.equals("1");
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "spawned"))

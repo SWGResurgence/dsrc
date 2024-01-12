@@ -1,5 +1,11 @@
 package script.systems.camping;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -40,6 +46,7 @@ public class camp_master extends script.base_script
     public static final int HEALING_PULSE_MAX = 300;
     public static final int WOUND_HEAL = 5;
     public static final int SHOCK_HEAL = 1;
+
     public camp_master()
     {
     }
@@ -91,7 +98,6 @@ public class camp_master extends script.base_script
         obj_id[] children = getObjIdArrayObjVar(self, theater.VAR_CHILDREN);
         if ((children == null) || (children.length == 0))
         {
-            return;
         }
         else
         {

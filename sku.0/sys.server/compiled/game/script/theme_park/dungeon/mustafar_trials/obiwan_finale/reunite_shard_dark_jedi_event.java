@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.mustafar_trials.obiwan_finale;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.chat;
@@ -11,25 +17,28 @@ import script.string_id;
 
 public class reunite_shard_dark_jedi_event extends script.base_script
 {
-    public reunite_shard_dark_jedi_event()
-    {
-    }
     public static final String STF_INQ_MSGS = "mustafar/inquisitor_event";
     public static final string_id DARK_SPAWN = new string_id(STF_INQ_MSGS, "dark_trooper_spawn");
     public static final string_id INQ_ATTACK = new string_id(STF_INQ_MSGS, "inquisitor_attack");
     public static final String TRIGGER_VOLUME_JEDI = "jedi_interest_volume";
     public static final float JEDI_INTEREST_RADIUS = 35.0f;
     public static final boolean CONST_FLAG_DO_LOGGING = true;
+    public reunite_shard_dark_jedi_event()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         launchObjectTriggerVolumeInitializer(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         launchObjectTriggerVolumeInitializer(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id breacher) throws InterruptedException
     {
         debugLogging("OnTriggerVolumeEntered: ", " entered.");
@@ -48,6 +57,7 @@ public class reunite_shard_dark_jedi_event extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void debugLogging(String section, String message) throws InterruptedException
     {
         if (CONST_FLAG_DO_LOGGING)
@@ -55,26 +65,30 @@ public class reunite_shard_dark_jedi_event extends script.base_script
             LOG("debug/reunite_jedi_event/" + section, message);
         }
     }
+
     public void launchObjectTriggerVolumeInitializer(obj_id self) throws InterruptedException
     {
         if (!hasTriggerVolume(self, TRIGGER_VOLUME_JEDI))
         {
             createTriggerVolume(TRIGGER_VOLUME_JEDI, JEDI_INTEREST_RADIUS, true);
         }
-        else 
+        else
         {
             obj_id[] denizens = getTriggerVolumeContents(self, TRIGGER_VOLUME_JEDI);
-            for (obj_id denizen : denizens) {
-                if (isPlayer(denizen) && !isIncapacitated(denizen)) {
-                    if (canCallEnemies(self)) {
+            for (obj_id denizen : denizens)
+            {
+                if (isPlayer(denizen) && !isIncapacitated(denizen))
+                {
+                    if (canCallEnemies(self))
+                    {
                         spawnEnemies(self, self);
                         return;
                     }
                 }
             }
         }
-        return;
     }
+
     public obj_id callInquisitor(obj_id self, obj_id landmark) throws InterruptedException
     {
         debugLogging("//***// callInquisitor: ", "////>>>> entered.");
@@ -99,6 +113,7 @@ public class reunite_shard_dark_jedi_event extends script.base_script
         setObjVar(inquisitor, "inquisitor", 1);
         return inquisitor;
     }
+
     public obj_id callDark_trooper_1(obj_id self, obj_id landmark) throws InterruptedException
     {
         debugLogging("//***// callDark_trooper_1: ", "////>>>> entered.");
@@ -123,6 +138,7 @@ public class reunite_shard_dark_jedi_event extends script.base_script
         setObjVar(dark_trooper_1, "inquisitor", 1);
         return dark_trooper_1;
     }
+
     public obj_id callDark_trooper_2(obj_id self, obj_id landmark) throws InterruptedException
     {
         debugLogging("//***// callDark_trooper_2: ", "////>>>> entered.");
@@ -147,6 +163,7 @@ public class reunite_shard_dark_jedi_event extends script.base_script
         setObjVar(dark_trooper_2, "inquisitor", 1);
         return dark_trooper_2;
     }
+
     public boolean canCallEnemies(obj_id self) throws InterruptedException
     {
         debugLogging("canCallEnemies: ", " entered.");
@@ -162,6 +179,7 @@ public class reunite_shard_dark_jedi_event extends script.base_script
         }
         return false;
     }
+
     public boolean enemiesAlreadyPresent(obj_id self) throws InterruptedException
     {
         debugLogging("enemiesAlreadyPresent: ", " entered.");
@@ -175,6 +193,7 @@ public class reunite_shard_dark_jedi_event extends script.base_script
         debugLogging("enemyAlreadyPresent: ", "there is no pre-existing inquisitor object");
         return false;
     }
+
     public void spawnEnemies(obj_id self, obj_id landmark) throws InterruptedException
     {
         obj_id inquisitor = callInquisitor(self, landmark);
@@ -189,8 +208,8 @@ public class reunite_shard_dark_jedi_event extends script.base_script
         messageTo(self, "inquisitorAttack", inqs, 7, false);
         messageTo(self, "dontRespawn", null, 480, false);
         setObjVar(self, "noRespawn", 1);
-        return;
     }
+
     public int noHate(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id inquisitor = params.getObjId("inquisitor");
@@ -201,6 +220,7 @@ public class reunite_shard_dark_jedi_event extends script.base_script
         clearHateList(dark_trooper_2);
         return SCRIPT_CONTINUE;
     }
+
     public int inquisitorAttack(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id inquisitor = params.getObjId("inquisitor");
@@ -216,6 +236,7 @@ public class reunite_shard_dark_jedi_event extends script.base_script
         startCombat(dark_trooper_2, self);
         return SCRIPT_CONTINUE;
     }
+
     public int dontRespawn(obj_id self, dictionary params) throws InterruptedException
     {
         removeObjVar(self, "noRespawn");

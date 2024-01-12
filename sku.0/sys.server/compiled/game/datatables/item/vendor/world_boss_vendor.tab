@@ -5,7 +5,7 @@ item_krayt_dragon_skull_itv		75				ITV: Polished Krayt Dragon Skull
 item_tcg_loot_reward_series5_atat_head_itv		50				ITV: AT-AT Head
 item_tcg_loot_reward_series8_yoda_house_deed	5000000	75				Structure Deed: Yoda House
 item_tcg_loot_reward_series5_xj6_air_speeder		15				Vehicle Deed: XJ6 Air Speeder
-item_loot_roll_bonus	950000	7				Holographic Item Synthesizer
+item_loot_roll_bonus	1000000	24				Holographic Item Synthesizer
 rare_loot_chest_quality_1		1				Rare Loot Chest
 rare_loot_chest_quality_2		2				Exceptional Loot Chest
 rare_loot_chest_quality_3		4				Legendary Loot Chest

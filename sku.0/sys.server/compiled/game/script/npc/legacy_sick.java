@@ -1,5 +1,11 @@
 package script.npc;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.chat;
@@ -11,12 +17,13 @@ import script.string_id;
 
 public class legacy_sick extends script.base_script
 {
-    public legacy_sick()
-    {
-    }
     public static final String PP_FILE_LOC = "quest/legacy/legacy_sick";
     public static final String RESPONSE_TEXT = "datatables/npc/legacy/legacy_sick.iff";
     public static int INITIAL_DELAY = 10;
+    public legacy_sick()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (hasScript(self, "ai.creature_combat"))
@@ -35,6 +42,7 @@ public class legacy_sick extends script.base_script
         messageTo(self, "legSick", null, INITIAL_DELAY, false);
         return SCRIPT_CONTINUE;
     }
+
     public int legSick(obj_id self, dictionary params) throws InterruptedException
     {
         int randSick = rand(0, 6);
@@ -44,6 +52,7 @@ public class legacy_sick extends script.base_script
         messageTo(self, "legSick", null, randRepeatMsg, false);
         return SCRIPT_CONTINUE;
     }
+
     public prose_package getRandSick(obj_id target, int sickRow) throws InterruptedException
     {
         string_id response = new string_id(PP_FILE_LOC, utils.dataTableGetString(RESPONSE_TEXT, sickRow, 1));

@@ -1,5 +1,11 @@
 package script.event;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.utils;
 import script.obj_id;
 
@@ -7,29 +13,30 @@ import java.util.StringTokenizer;
 
 public class quick_weapon extends script.base_script
 {
+    private static final String WEAPON_LIST = "datatables/event/weapons.iff";
+    private static final String[] HELP_TEXT =
+            {
+                    "=========================================",
+                    "USAGE: weapon [Weapon Index Number] [MIN Damage] [MAX Damage] [SPEED]",
+                    "Say \"categories\" to get a rough range of where different weapons lie in the index.",
+                    "Say \"detach\" to detach this script immediately.",
+                    "========================================="
+            };
+    private static final String[] CATEGORIES =
+            {
+                    "2H Sword 0-15",
+                    "Polearm 28-44",
+                    "Sword 54-59",
+                    "Carbine 60-72",
+                    "Grenade 73-100",
+                    "Heavy Weapons 101-107 (Flame Thrower 132)",
+                    "Pistol 108-130",
+                    "Rifle 133-151"
+            };
     public quick_weapon()
     {
     }
-    private static final String WEAPON_LIST = "datatables/event/weapons.iff";
-    private static final String[] HELP_TEXT =
-    {
-        "=========================================",
-        "USAGE: weapon [Weapon Index Number] [MIN Damage] [MAX Damage] [SPEED]",
-        "Say \"categories\" to get a rough range of where different weapons lie in the index.",
-        "Say \"detach\" to detach this script immediately.",
-        "========================================="
-    };
-    private static final String[] CATEGORIES =
-    {
-        "2H Sword 0-15",
-        "Polearm 28-44",
-        "Sword 54-59",
-        "Carbine 60-72",
-        "Grenade 73-100",
-        "Heavy Weapons 101-107 (Flame Thrower 132)",
-        "Pistol 108-130",
-        "Rifle 133-151"
-    };
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (!isPlayer(self))
@@ -54,6 +61,7 @@ public class quick_weapon extends script.base_script
         sendSystemMessage(self, "Say \"Help\" for usage and options.", null);
         return SCRIPT_CONTINUE;
     }
+
     public int OnLogin(obj_id self) throws InterruptedException
     {
         if (!isGod(self))
@@ -72,6 +80,7 @@ public class quick_weapon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnHearSpeech(obj_id self, obj_id objSpeaker, String strText) throws InterruptedException
     {
         if (objSpeaker != self)
@@ -99,7 +108,7 @@ public class quick_weapon extends script.base_script
             int maxDamage;
             float weaponSpeed;
             int weaponNum;
-            String weaponType[] = dataTableGetStringColumn(WEAPON_LIST, 0);
+            String[] weaponType = dataTableGetStringColumn(WEAPON_LIST, 0);
             StringTokenizer st = new StringTokenizer(strText);
             if (st.countTokens() == 5)
             {
@@ -145,14 +154,16 @@ public class quick_weapon extends script.base_script
         }
         else if ((toLower(strText)).equals("help"))
         {
-            for (String helpText : HELP_TEXT) {
+            for (String helpText : HELP_TEXT)
+            {
                 sendSystemMessage(self, helpText, null);
             }
             return SCRIPT_CONTINUE;
         }
         else if ((toLower(strText)).equals("categories"))
         {
-            for (String category : CATEGORIES) {
+            for (String category : CATEGORIES)
+            {
                 sendSystemMessage(self, category, null);
             }
             return SCRIPT_CONTINUE;

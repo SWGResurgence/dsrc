@@ -1,5 +1,11 @@
 package script.creature_spawner;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.obj_id;
 
@@ -11,6 +17,7 @@ public class corellia_npc_medium extends base_newbie_npc_spawner
     public corellia_npc_medium()
     {
     }
+
     public String pickCreature() throws InterruptedException
     {
         switch (rand(1, 5))
@@ -28,6 +35,7 @@ public class corellia_npc_medium extends base_newbie_npc_spawner
         }
         return "swooper_leader";
     }
+
     public int creatureDied(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())

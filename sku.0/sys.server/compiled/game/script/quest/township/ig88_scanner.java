@@ -1,5 +1,11 @@
 package script.quest.township;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.groundquests;
 import script.library.instance;
@@ -8,15 +14,16 @@ import script.library.sui;
 
 public class ig88_scanner extends script.base_script
 {
-    public ig88_scanner()
-    {
-    }
     public static final int COUNTDOWN_TIME = 5;
     public static final String QUEST_NAME = "found_ig88_encounter";
     public static final String QUEST_TASK_NAME = "ig88_enter_compound";
     public static final String QUEST_SIGNAL = "ig88_compound_enter_signal";
     public static final String INSTANCE_NAME = "heroic_ig88";
     public static final string_id SCANNER_TEXT = new string_id("spam", "ig88_use_scanner");
+    public ig88_scanner()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         if (isDead(player) || isIncapacitated(player))
@@ -31,6 +38,7 @@ public class ig88_scanner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (isDead(player) || isIncapacitated(player))
@@ -49,12 +57,13 @@ public class ig88_scanner extends script.base_script
             stealth.testInvisNonCombatAction(player, self);
             int countdownSui = sui.smartCountdownTimerSUI(self, player, "quest_countdown_timer", menuStringId, startTime, COUNTDOWN_TIME, handler, range, flags);
         }
-        else 
+        else
         {
             sendSystemMessage(player, new string_id("nexus", "retina_not_recognized"));
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleCountdownTimer(obj_id self, dictionary params) throws InterruptedException
     {
         int pid = params.getInt("id");

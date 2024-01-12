@@ -1,5 +1,11 @@
 package script.theme_park.heroic.ig88;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.trial;
 import script.library.utils;
@@ -10,6 +16,7 @@ public class ig88_controller extends script.base_script
     public ig88_controller()
     {
     }
+
     public int ig88Died(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isIdValid(self))
@@ -19,6 +26,7 @@ public class ig88_controller extends script.base_script
         trial.setDungeonCleanOutTimer(self, 15);
         return SCRIPT_CONTINUE;
     }
+
     public int killNPC(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isIdValid(self))
@@ -30,6 +38,7 @@ public class ig88_controller extends script.base_script
         trial.cleanupNpc(npc);
         return SCRIPT_CONTINUE;
     }
+
     public int ig88_failed(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isIdValid(self))
@@ -47,10 +56,12 @@ public class ig88_controller extends script.base_script
         }
         obj_id[] spawn_ids = trial.getObjectsInDungeonWithObjVar(self, "spawn_id");
         dictionary sessionDict = new dictionary();
-        if (spawn_ids != null && spawn_ids.length > 0)
+        if (spawn_ids != null)
         {
-            for (obj_id spawn_id : spawn_ids) {
-                if (isIdValid(spawn_id)) {
+            for (obj_id spawn_id : spawn_ids)
+            {
+                if (isIdValid(spawn_id))
+                {
                     messageTo(spawn_id, "shoutFailed", sessionDict, 1, false);
                 }
             }
@@ -58,6 +69,7 @@ public class ig88_controller extends script.base_script
         messageTo(self, "restartSpawn", sessionDict, 5, false);
         return SCRIPT_CONTINUE;
     }
+
     public int ig88_failure_check(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isIdValid(self))
@@ -79,7 +91,7 @@ public class ig88_controller extends script.base_script
             }
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             messageTo(self, "ig88_failure_check", sessionDict, 5, false);
         }

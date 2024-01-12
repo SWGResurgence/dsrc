@@ -1,5 +1,11 @@
 package script.item.armor;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.armor;
 import script.library.utils;
@@ -14,6 +20,7 @@ public class psg extends script.base_script
     public static final String PSG_EFFECT_TIME = "psgEffectTime";
     public static final String SCRIPTVAR_RECHARGE_RATE = armor.OBJVAR_ARMOR_BASE + "." + armor.OBJVAR_PSG_RECHARGE_RATE;
     public static final String SCRIPTVAR_MESSAGE_ID = armor.OBJVAR_ARMOR_BASE + "." + PARAM_MESSAGE_ID;
+
     public psg()
     {
     }

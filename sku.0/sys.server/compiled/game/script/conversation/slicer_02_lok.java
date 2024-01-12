@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.groundquests;
@@ -8,65 +14,78 @@ import script.*;
 
 public class slicer_02_lok extends script.base_script
 {
+    public static String c_stringFile = "conversation/slicer_02_lok";
+
     public slicer_02_lok()
     {
     }
-    public static String c_stringFile = "conversation/slicer_02_lok";
+
     public boolean slicer_02_lok_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean slicer_02_lok_condition_isGoingToDungeon(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return groundquests.isTaskActive(player, "quest_06_conspire_cale", "GoToLabratory");
     }
+
     public boolean slicer_02_lok_condition_isGoingToDathomir(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return groundquests.isTaskActive(player, "quest_08_dathomir_outpost", "travelDathomir");
     }
+
     public boolean slicer_02_lok_condition_isReadyForDungeon(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return groundquests.isTaskActive(player, "quest_06_conspire_cale", "TravelToLokOutpost");
     }
+
     public boolean slicer_02_lok_condition_hasCompletedlokDungeon(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return groundquests.isTaskActive(player, "quest_07_descend_into_labratory", "TakeDataPadCale");
     }
+
     public boolean slicer_02_lok_condition_canceledQuest06(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return !groundquests.isQuestActiveOrComplete(player, "quest_06_conspire_cale") && (groundquests.hasCompletedQuest(player, "quest_05_frame_valarians_failed_assassin") || groundquests.hasCompletedQuest(player, "quest_05_frame_valarians_success_assassin"));
     }
+
     public boolean slicer_02_lok_condition_canceledQuest07(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return groundquests.hasCompletedQuest(player, "quest_06_conspire_cale") && !groundquests.isQuestActiveOrComplete(player, "quest_07_descend_into_labratory");
     }
+
     public boolean slicer_02_lok_condition_canceledQuest08(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         return groundquests.hasCompletedQuest(player, "quest_07_descend_into_labratory") && !groundquests.isQuestActiveOrComplete(player, "quest_08_dathomir_outpost_final");
     }
+
     public void slicer_02_lok_action_sendSignalLokDungeon(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         groundquests.sendSignal(player, "TravelToLokOutpostComplete");
     }
+
     public void slicer_02_lok_action_grantQuest07WithWaypoint(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         groundquests.grantQuest(player, "quest_07_descend_into_labratory");
         slicer_02_lok_action_giveDungeonWaypoint(player, npc);
     }
+
     public void slicer_02_lok_action_sendDathomirSignal(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
         groundquests.sendSignal(player, "TookDataPadCale");
     }
+
     public void slicer_02_lok_action_giveDungeonWaypoint(obj_id player, obj_id npc) throws InterruptedException
     {
         faceTo(npc, player);
@@ -75,10 +94,12 @@ public class slicer_02_lok extends script.base_script
         setWaypointName(maraWpt, "Secret Laboratory");
         setWaypointActive(maraWpt, true);
     }
+
     public void slicer_02_lok_action_giveQuest08(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.grantQuest(player, "quest_08_dathomir_outpost_final");
     }
+
     public int slicer_02_lok_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_131"))
@@ -98,7 +119,7 @@ public class slicer_02_lok extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_136");
@@ -107,7 +128,7 @@ public class slicer_02_lok extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.slicer_02_lok.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -117,6 +138,7 @@ public class slicer_02_lok extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int slicer_02_lok_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_136"))
@@ -136,7 +158,7 @@ public class slicer_02_lok extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_138");
@@ -145,7 +167,7 @@ public class slicer_02_lok extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.slicer_02_lok.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -155,6 +177,7 @@ public class slicer_02_lok extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int slicer_02_lok_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_138"))
@@ -174,7 +197,7 @@ public class slicer_02_lok extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_140");
@@ -183,7 +206,7 @@ public class slicer_02_lok extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.slicer_02_lok.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -193,6 +216,7 @@ public class slicer_02_lok extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int slicer_02_lok_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_140"))
@@ -212,7 +236,7 @@ public class slicer_02_lok extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_142");
@@ -221,7 +245,7 @@ public class slicer_02_lok extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.slicer_02_lok.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -231,6 +255,7 @@ public class slicer_02_lok extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int slicer_02_lok_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_142"))
@@ -250,7 +275,7 @@ public class slicer_02_lok extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_144");
@@ -259,7 +284,7 @@ public class slicer_02_lok extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.slicer_02_lok.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -269,6 +294,7 @@ public class slicer_02_lok extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int slicer_02_lok_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_144"))
@@ -288,7 +314,7 @@ public class slicer_02_lok extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_146");
@@ -297,7 +323,7 @@ public class slicer_02_lok extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.slicer_02_lok.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -307,6 +333,7 @@ public class slicer_02_lok extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int slicer_02_lok_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_146"))
@@ -326,7 +353,7 @@ public class slicer_02_lok extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_148");
@@ -335,7 +362,7 @@ public class slicer_02_lok extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.slicer_02_lok.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -345,6 +372,7 @@ public class slicer_02_lok extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int slicer_02_lok_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_148"))
@@ -360,6 +388,7 @@ public class slicer_02_lok extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int slicer_02_lok_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_150"))
@@ -379,7 +408,7 @@ public class slicer_02_lok extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_152");
@@ -388,7 +417,7 @@ public class slicer_02_lok extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.slicer_02_lok.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -398,6 +427,7 @@ public class slicer_02_lok extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int slicer_02_lok_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_152"))
@@ -417,7 +447,7 @@ public class slicer_02_lok extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_156");
@@ -426,7 +456,7 @@ public class slicer_02_lok extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.slicer_02_lok.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -436,6 +466,7 @@ public class slicer_02_lok extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int slicer_02_lok_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_156"))
@@ -455,7 +486,7 @@ public class slicer_02_lok extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_158");
@@ -464,7 +495,7 @@ public class slicer_02_lok extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.slicer_02_lok.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -474,6 +505,7 @@ public class slicer_02_lok extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int slicer_02_lok_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_158"))
@@ -489,6 +521,7 @@ public class slicer_02_lok extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isTangible(self)) || (isPlayer(self)))
@@ -498,11 +531,13 @@ public class slicer_02_lok extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -511,18 +546,21 @@ public class slicer_02_lok extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.slicer_02_lok");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -579,7 +617,7 @@ public class slicer_02_lok extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_131");
@@ -587,7 +625,7 @@ public class slicer_02_lok extends script.base_script
                 utils.setScriptVar(player, "conversation.slicer_02_lok.branchId", 6);
                 npcStartConversation(player, npc, "slicer_02_lok", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -608,7 +646,7 @@ public class slicer_02_lok extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_150");
@@ -616,7 +654,7 @@ public class slicer_02_lok extends script.base_script
                 utils.setScriptVar(player, "conversation.slicer_02_lok.branchId", 15);
                 npcStartConversation(player, npc, "slicer_02_lok", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -632,6 +670,7 @@ public class slicer_02_lok extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("slicer_02_lok"))

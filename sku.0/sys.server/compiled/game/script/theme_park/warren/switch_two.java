@@ -1,15 +1,23 @@
 package script.theme_park.warren;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.colors;
 import script.library.utils;
 
 public class switch_two extends script.base_script
 {
+    public static final String SYSTEM_MESSAGES = "theme_park/warren/warren_system_messages";
+
     public switch_two()
     {
     }
-    public static final String SYSTEM_MESSAGES = "theme_park/warren/warren_system_messages";
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         setName(self, "");
@@ -17,6 +25,7 @@ public class switch_two extends script.base_script
         messageTo(self, "handleResetSwitches", null, 600, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         setName(self, "");
@@ -50,6 +59,7 @@ public class switch_two extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleResetSwitches(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id bldg = getTopMostContainer(self);
@@ -63,6 +73,7 @@ public class switch_two extends script.base_script
         permissionsMakePrivate(getCellId(getTopMostContainer(self), "smallroom44"));
         return SCRIPT_CONTINUE;
     }
+
     public int handleDelayedDoneMessage(obj_id self, dictionary params) throws InterruptedException
     {
         showFlyText(self, new string_id(SYSTEM_MESSAGES, "switch_done"), 1.75f, colors.RED);

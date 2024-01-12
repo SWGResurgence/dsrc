@@ -1,5 +1,11 @@
 package script.event;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.create;
 import script.library.locations;
@@ -10,10 +16,12 @@ import script.string_id;
 
 public class ep3_trando_herald extends script.base_script
 {
+    public static final String STF_FILE = "event/ep3_trando_herald";
+
     public ep3_trando_herald()
     {
     }
-    public static final String STF_FILE = "event/ep3_trando_herald";
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "ep3HeraldGiveAnotherWp", null, 1, false);
@@ -22,6 +30,7 @@ public class ep3_trando_herald extends script.base_script
         messageTo(self, "ep3HeraldTimeUp", null, 1800, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnLogin(obj_id self) throws InterruptedException
     {
         float rightNow = getGameTime();
@@ -33,6 +42,7 @@ public class ep3_trando_herald extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3HeraldGiveAnotherWp(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "event.ep3_trando_herald.waypoint"))
@@ -65,6 +75,7 @@ public class ep3_trando_herald extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3HeraldTimeUp(obj_id self, dictionary params) throws InterruptedException
     {
         int questId1 = questGetQuestId("quest/ep3_trando_herald");
@@ -79,13 +90,14 @@ public class ep3_trando_herald extends script.base_script
             removeObjVar(self, "event.ep3_trando_herald");
             detachScript(self, "event.ep3_trando_herald");
         }
-        else 
+        else
         {
             removeObjVar(self, "event.ep3_trando_herald");
             detachScript(self, "event.ep3_trando_herald");
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnArrivedAtLocation(obj_id self, String name) throws InterruptedException
     {
         if (name.equals("ep3HeraldWookieeSpawn"))

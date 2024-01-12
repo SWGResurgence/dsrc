@@ -1,5 +1,11 @@
 package script.systems.loot;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.collection;
 import script.library.loot;
 import script.library.static_item;
@@ -12,15 +18,19 @@ import script.string_id;
 import java.util.ArrayList;
 import java.util.List;
 
-public class contraband_spice_chest extends script.base_script {
-    public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException {
-        if (utils.getContainingPlayer(self) == player) {
+public class contraband_spice_chest extends script.base_script
+{
+    public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
+    {
+        if (utils.getContainingPlayer(self) == player)
+        {
             int mnu2 = mi.addRootMenu(menu_info_types.ITEM_USE, new string_id("npe", "steal_spice"));
         }
         return SCRIPT_CONTINUE;
     }
 
-    public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException {
+    public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
+    {
         sendDirtyObjectMenuNotification(self);
         if (item == menu_info_types.ITEM_USE)
         {
@@ -28,6 +38,7 @@ public class contraband_spice_chest extends script.base_script {
         }
         return SCRIPT_CONTINUE;
     }
+
     public void stealSpice(obj_id self, obj_id player) throws InterruptedException
     {
         int which_one = rand(1, 3);

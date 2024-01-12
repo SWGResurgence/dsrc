@@ -1,5 +1,11 @@
 package script.systems.storyteller;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.static_item;
 import script.library.storyteller;
 import script.library.trial;
@@ -59,7 +65,7 @@ public class theater_controller extends script.base_script
         if (cellIds != null && cellIds.length > 0)
         {
             obj_id[] interiorObjects = trial.getAllObjectsInDungeon(theater);
-            if (interiorObjects != null && interiorObjects.length > 0)
+            if (interiorObjects != null)
             {
                 for (obj_id interiorObject : interiorObjects)
                 {
@@ -69,7 +75,7 @@ public class theater_controller extends script.base_script
         }
         float range = getTheaterBuildoutRange(getStaticItemName(theater));
         obj_id[] objectsInRange = getObjectsInRange(getLocation(theater), range);
-        if (objectsInRange != null && objectsInRange.length > 0)
+        if (objectsInRange != null)
         {
             for (obj_id obj_id : objectsInRange)
             {

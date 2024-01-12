@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.space_quest;
@@ -8,77 +14,77 @@ import script.*;
 
 public class dath_bh_wanted_list_01 extends script.base_script
 {
+    public static String c_stringFile = "conversation/dath_bh_wanted_list_01";
+
     public dath_bh_wanted_list_01()
     {
     }
-    public static String c_stringFile = "conversation/dath_bh_wanted_list_01";
+
     public boolean dath_bh_wanted_list_01_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean dath_bh_wanted_list_01_condition_remembersPlayer(obj_id player, obj_id npc) throws InterruptedException
     {
         return (utils.hasScriptVar(player, "metRsfTrainer"));
     }
+
     public boolean dath_bh_wanted_list_01_condition_hasCompleted_Quest_4(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.hasCompletedQuest(player, "assassinate", "dath_bh_wanted_list_04"));
     }
+
     public boolean dath_bh_wanted_list_01_condition_alreadyHasAQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.hasQuest(player));
     }
+
     public boolean dath_bh_wanted_list_01_condition_isPilot_IMPERIAL(obj_id player, obj_id npc) throws InterruptedException
     {
         return (hasSkill(player, "pilot_imperial_navy_novice"));
     }
+
     public boolean dath_bh_wanted_list_01_condition_isPilot_REBEL(obj_id player, obj_id npc) throws InterruptedException
     {
         return (hasSkill(player, "pilot_rebel_navy_novice"));
     }
+
     public boolean dath_bh_wanted_list_01_condition_has_hate(obj_id player, obj_id npc) throws InterruptedException
     {
         return (hasObjVar(player, "dath_bh_hate"));
     }
+
     public boolean dath_bh_wanted_list_01_condition_hasCompleted_Quest_1(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.hasCompletedQuest(player, "assassinate", "dath_bh_wanted_list_01"));
     }
+
     public boolean dath_bh_wanted_list_01_condition_hasCompleted_Quest_3(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.hasCompletedQuest(player, "assassinate", "dath_bh_wanted_list_03_c"));
     }
+
     public boolean dath_bh_wanted_list_01_condition_hasCompleted_Quest_2(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.hasCompletedQuest(player, "assassinate", "dath_bh_wanted_list_02"));
     }
+
     public boolean dath_bh_wanted_list_01_condition_hasFailed_Quest_2(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_quest.hasFailedQuest(player, "destroy", "lok_bounty_hunter_2") || space_quest.hasAbortedQuest(player, "destroy", "lok_bounty_hunter_2"))
-        {
-            return true;
-        }
-        return false;
+        return space_quest.hasFailedQuest(player, "destroy", "lok_bounty_hunter_2") || space_quest.hasAbortedQuest(player, "destroy", "lok_bounty_hunter_2");
     }
+
     public boolean dath_bh_wanted_list_01_condition_hasSkill_BOUNTY_HUNTER(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (!hasSkill(player, "class_bountyhunter_phase1_novice"))
-        {
-            return false;
-        }
-        else 
-        {
-            return true;
-        }
+        return hasSkill(player, "class_bountyhunter_phase1_novice");
     }
+
     public boolean dath_bh_wanted_list_01_condition_hasFailed_Quest_4(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_quest.hasFailedQuest(player, "destroy", "lok_bounty_hunter_4") || space_quest.hasAbortedQuest(player, "destroy", "lok_bounty_hunter_4"))
-        {
-            return true;
-        }
-        return false;
+        return space_quest.hasFailedQuest(player, "destroy", "lok_bounty_hunter_4") || space_quest.hasAbortedQuest(player, "destroy", "lok_bounty_hunter_4");
     }
+
     public boolean dath_bh_wanted_list_01_condition_hasBeenRewarded_Quest_2(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!space_quest.hasCompletedQuest(player, "assassinate", "dath_bh_wanted_list_02"))
@@ -87,10 +93,12 @@ public class dath_bh_wanted_list_01 extends script.base_script
         }
         return ((space_quest.hasCompletedQuest(player, "assassinate", "dath_bh_wanted_list_02")) && (space_quest.hasReceivedReward(player, "assassinate", "dath_bh_wanted_list_02")));
     }
+
     public boolean dath_bh_wanted_list_01_condition_hasBeenRewarded_Quest_4(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.hasReceivedReward(player, "assassinate", "dath_bh_wanted_list_04"));
     }
+
     public boolean dath_bh_wanted_list_01_condition_hasBeenRewarded_Quest_3(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!space_quest.hasCompletedQuest(player, "assassinate", "dath_bh_wanted_list_03_c"))
@@ -99,6 +107,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
         }
         return ((space_quest.hasCompletedQuest(player, "assassinate", "dath_bh_wanted_list_03_c")) && (space_quest.hasReceivedReward(player, "assassinate", "dath_bh_wanted_list_03_c")));
     }
+
     public boolean dath_bh_wanted_list_01_condition_hasBeenRewarded_Quest_1(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!space_quest.hasCompletedQuest(player, "assassinate", "dath_bh_wanted_list_01"))
@@ -107,49 +116,42 @@ public class dath_bh_wanted_list_01 extends script.base_script
         }
         return ((space_quest.hasCompletedQuest(player, "assassinate", "dath_bh_wanted_list_01")) && (space_quest.hasReceivedReward(player, "assassinate", "dath_bh_wanted_list_01")));
     }
+
     public boolean dath_bh_wanted_list_01_condition_hasFailed_Quest_3(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_quest.hasFailedQuest(player, "destroy", "lok_bounty_hunter_3_a") || space_quest.hasAbortedQuest(player, "destroy", "lok_bounty_hunter_3_a"))
-        {
-            return true;
-        }
-        return false;
+        return space_quest.hasFailedQuest(player, "destroy", "lok_bounty_hunter_3_a") || space_quest.hasAbortedQuest(player, "destroy", "lok_bounty_hunter_3_a");
     }
+
     public boolean dath_bh_wanted_list_01_condition_hasFailed_Quest_1(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (space_quest.hasFailedQuest(player, "assassinate", "dath_bh_wanted_list_01") || space_quest.hasAbortedQuest(player, "assassinate", "dath_bh_wanted_list_01"))
-        {
-            return true;
-        }
-        return false;
+        return space_quest.hasFailedQuest(player, "assassinate", "dath_bh_wanted_list_01") || space_quest.hasAbortedQuest(player, "assassinate", "dath_bh_wanted_list_01");
     }
+
     public boolean dath_bh_wanted_list_01_condition_hasSkill_BOUNTY_HUNTER_isMale(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (!hasSkill(player, "class_bountyhunter_phase1_novice") && (getGender(player) == Gender.MALE))
-        {
-            return false;
-        }
-        else 
-        {
-            return true;
-        }
+        return hasSkill(player, "class_bountyhunter_phase1_novice") || (getGender(player) != Gender.MALE);
     }
+
     public boolean dath_bh_wanted_list_01_condition_isGender_Male(obj_id player, obj_id npc) throws InterruptedException
     {
         return (getGender(player) == Gender.MALE);
     }
+
     public void dath_bh_wanted_list_01_action_rememberPlayer(obj_id player, obj_id npc) throws InterruptedException
     {
         utils.setScriptVar(player, "metRsfTrainer", true);
     }
+
     public void dath_bh_wanted_list_01_action_set_hate(obj_id player, obj_id npc) throws InterruptedException
     {
         setObjVar(player, "dath_bh_hate", true);
     }
+
     public void dath_bh_wanted_list_01_action_giveQuest_Revenge_1(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "destroy_surpriseattack", "dath_bh_revenge_01");
     }
+
     public void dath_bh_wanted_list_01_action_giveReward_Quest_2(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!space_quest.hasReceivedReward(player, "assassinate", "dath_bh_wanted_list_02"))
@@ -157,6 +159,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
             space_quest.giveReward(player, "assassinate", "dath_bh_wanted_list_02", 0);
         }
     }
+
     public void dath_bh_wanted_list_01_action_giveReward_Quest_4(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!space_quest.hasReceivedReward(player, "assassinate", "dath_bh_wanted_list_04"))
@@ -164,6 +167,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
             space_quest.giveReward(player, "assassinate", "dath_bh_wanted_list_04", 1000);
         }
     }
+
     public void dath_bh_wanted_list_01_action_giveReward_Quest_3(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!space_quest.hasReceivedReward(player, "assassinate", "dath_bh_wanted_list_03_c"))
@@ -171,6 +175,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
             space_quest.giveReward(player, "assassinate", "dath_bh_wanted_list_03_c", 0);
         }
     }
+
     public void dath_bh_wanted_list_01_action_giveReward_Quest_1(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!space_quest.hasReceivedReward(player, "assassinate", "dath_bh_wanted_list_01"))
@@ -178,22 +183,27 @@ public class dath_bh_wanted_list_01 extends script.base_script
             space_quest.giveReward(player, "assassinate", "dath_bh_wanted_list_01", 200);
         }
     }
+
     public void dath_bh_wanted_list_01_action_giveQuest_Quest_1(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "assassinate", "dath_bh_wanted_list_01");
     }
+
     public void dath_bh_wanted_list_01_action_giveQuest_Quest_2(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "assassinate", "dath_bh_wanted_list_02");
     }
+
     public void dath_bh_wanted_list_01_action_giveQuest_Quest_3(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "assassinate", "dath_bh_wanted_list_03_a");
     }
+
     public void dath_bh_wanted_list_01_action_giveQuest_Quest_4(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "assassinate", "dath_bh_wanted_list_04");
     }
+
     public int dath_bh_wanted_list_01_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_6c03db3"))
@@ -209,6 +219,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int dath_bh_wanted_list_01_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_d424c740"))
@@ -238,6 +249,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int dath_bh_wanted_list_01_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_e6772f13"))
@@ -254,6 +266,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int dath_bh_wanted_list_01_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_6bef416f"))
@@ -274,7 +287,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_53fb1d89");
@@ -283,7 +296,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.dath_bh_wanted_list_01.branchId");
                     chat.chat(npc, player, message);
@@ -294,6 +307,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int dath_bh_wanted_list_01_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_53fb1d89"))
@@ -321,7 +335,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_52917b0d");
@@ -338,7 +352,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.dath_bh_wanted_list_01.branchId");
                     prose_package pp = new prose_package();
@@ -353,6 +367,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int dath_bh_wanted_list_01_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_52917b0d"))
@@ -380,7 +395,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_d70dba34");
@@ -393,7 +408,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.dath_bh_wanted_list_01.branchId");
                     chat.chat(npc, player, message);
@@ -421,6 +436,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int dath_bh_wanted_list_01_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_d70dba34"))
@@ -441,7 +457,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_92ccbd55");
@@ -450,7 +466,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.dath_bh_wanted_list_01.branchId");
                     chat.chat(npc, player, message);
@@ -474,6 +490,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int dath_bh_wanted_list_01_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_92ccbd55"))
@@ -509,7 +526,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_37778692");
@@ -526,7 +543,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.dath_bh_wanted_list_01.branchId");
                     chat.chat(npc, player, message);
@@ -537,6 +554,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int dath_bh_wanted_list_01_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_37778692"))
@@ -574,6 +592,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int dath_bh_wanted_list_01_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_a019416c"))
@@ -594,7 +613,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_159911f5");
@@ -607,7 +626,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.dath_bh_wanted_list_01.branchId");
                     prose_package pp = new prose_package();
@@ -622,6 +641,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int dath_bh_wanted_list_01_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_159911f5"))
@@ -641,7 +661,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_47efee53");
@@ -650,7 +670,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.dath_bh_wanted_list_01.branchId");
                     chat.chat(npc, player, message);
@@ -661,6 +681,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int dath_bh_wanted_list_01_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_47efee53"))
@@ -689,7 +710,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_21ef58ea");
@@ -702,7 +723,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.dath_bh_wanted_list_01.branchId");
                     chat.chat(npc, player, message);
@@ -713,6 +734,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int dath_bh_wanted_list_01_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_21ef58ea"))
@@ -739,7 +761,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_21ef58ea");
@@ -756,7 +778,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.dath_bh_wanted_list_01.branchId");
                     prose_package pp = new prose_package();
@@ -782,6 +804,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int dath_bh_wanted_list_01_handleBranch26(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_21ef58ea"))
@@ -808,7 +831,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_21ef58ea");
@@ -825,7 +848,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
                     npcSpeak(player, pp);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.dath_bh_wanted_list_01.branchId");
                     prose_package pp = new prose_package();
@@ -851,6 +874,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int dath_bh_wanted_list_01_handleBranch28(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1287b3"))
@@ -871,7 +895,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_6bd02793");
@@ -880,7 +904,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.dath_bh_wanted_list_01.branchId");
                     chat.chat(npc, player, message);
@@ -891,6 +915,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int dath_bh_wanted_list_01_handleBranch29(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_6bd02793"))
@@ -911,7 +936,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f8a99129");
@@ -920,7 +945,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.dath_bh_wanted_list_01.branchId");
                     chat.chat(npc, player, message);
@@ -931,6 +956,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int dath_bh_wanted_list_01_handleBranch30(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_f8a99129"))
@@ -965,7 +991,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_782c3536");
@@ -982,7 +1008,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.dath_bh_wanted_list_01.branchId");
                     chat.chat(npc, player, message);
@@ -993,6 +1019,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int dath_bh_wanted_list_01_handleBranch31(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_782c3536"))
@@ -1037,7 +1064,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_782c3536");
@@ -1054,7 +1081,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.dath_bh_wanted_list_01.branchId");
                     chat.chat(npc, player, message);
@@ -1094,7 +1121,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_782c3536");
@@ -1111,7 +1138,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.dath_bh_wanted_list_01.branchId");
                     chat.chat(npc, player, message);
@@ -1122,6 +1149,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int dath_bh_wanted_list_01_handleBranch33(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_782c3536"))
@@ -1166,7 +1194,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_782c3536");
@@ -1183,7 +1211,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.dath_bh_wanted_list_01.branchId");
                     chat.chat(npc, player, message);
@@ -1223,7 +1251,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_782c3536");
@@ -1240,7 +1268,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.dath_bh_wanted_list_01.branchId");
                     chat.chat(npc, player, message);
@@ -1251,6 +1279,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int dath_bh_wanted_list_01_handleBranch34(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_782c3536"))
@@ -1295,7 +1324,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_782c3536");
@@ -1312,7 +1341,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.dath_bh_wanted_list_01.branchId");
                     chat.chat(npc, player, message);
@@ -1352,7 +1381,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_782c3536");
@@ -1369,7 +1398,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.dath_bh_wanted_list_01.branchId");
                     chat.chat(npc, player, message);
@@ -1380,6 +1409,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int dath_bh_wanted_list_01_handleBranch35(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_a560e84c"))
@@ -1400,7 +1430,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_1a71ed59");
@@ -1409,7 +1439,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.dath_bh_wanted_list_01.branchId");
                     chat.chat(npc, player, message);
@@ -1420,6 +1450,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int dath_bh_wanted_list_01_handleBranch36(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_1a71ed59"))
@@ -1454,7 +1485,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_315f7d8");
@@ -1471,7 +1502,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.dath_bh_wanted_list_01.branchId");
                     chat.chat(npc, player, message);
@@ -1482,6 +1513,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int dath_bh_wanted_list_01_handleBranch37(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_315f7d8"))
@@ -1502,7 +1534,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f8a99129");
@@ -1511,7 +1543,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.dath_bh_wanted_list_01.branchId");
                     chat.chat(npc, player, message);
@@ -1551,7 +1583,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_315f7d8");
@@ -1568,7 +1600,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.dath_bh_wanted_list_01.branchId");
                     chat.chat(npc, player, message);
@@ -1608,7 +1640,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_315f7d8");
@@ -1625,7 +1657,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.dath_bh_wanted_list_01.branchId");
                     chat.chat(npc, player, message);
@@ -1636,6 +1668,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int dath_bh_wanted_list_01_handleBranch38(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_f8a99129"))
@@ -1671,7 +1704,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_265d5a02");
@@ -1688,7 +1721,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.dath_bh_wanted_list_01.branchId");
                     chat.chat(npc, player, message);
@@ -1699,6 +1732,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int dath_bh_wanted_list_01_handleBranch39(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_265d5a02"))
@@ -1732,7 +1766,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_265d5a02");
@@ -1749,7 +1783,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.dath_bh_wanted_list_01.branchId");
                     chat.chat(npc, player, message);
@@ -1789,7 +1823,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_265d5a02");
@@ -1806,7 +1840,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.dath_bh_wanted_list_01.branchId");
                     chat.chat(npc, player, message);
@@ -1828,6 +1862,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int dath_bh_wanted_list_01_handleBranch40(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_265d5a02"))
@@ -1861,7 +1896,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_265d5a02");
@@ -1878,7 +1913,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.dath_bh_wanted_list_01.branchId");
                     chat.chat(npc, player, message);
@@ -1918,7 +1953,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_265d5a02");
@@ -1935,7 +1970,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.dath_bh_wanted_list_01.branchId");
                     chat.chat(npc, player, message);
@@ -1957,6 +1992,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int dath_bh_wanted_list_01_handleBranch41(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_265d5a02"))
@@ -1990,7 +2026,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_265d5a02");
@@ -2007,7 +2043,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.dath_bh_wanted_list_01.branchId");
                     chat.chat(npc, player, message);
@@ -2047,7 +2083,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_265d5a02");
@@ -2064,7 +2100,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.dath_bh_wanted_list_01.branchId");
                     chat.chat(npc, player, message);
@@ -2086,6 +2122,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int dath_bh_wanted_list_01_handleBranch43(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_315f7d8"))
@@ -2106,7 +2143,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f8a99129");
@@ -2115,7 +2152,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.dath_bh_wanted_list_01.branchId");
                     chat.chat(npc, player, message);
@@ -2155,7 +2192,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_315f7d8");
@@ -2172,7 +2209,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.dath_bh_wanted_list_01.branchId");
                     chat.chat(npc, player, message);
@@ -2212,7 +2249,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_315f7d8");
@@ -2229,7 +2266,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.dath_bh_wanted_list_01.branchId");
                     chat.chat(npc, player, message);
@@ -2240,6 +2277,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int dath_bh_wanted_list_01_handleBranch44(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_315f7d8"))
@@ -2260,7 +2298,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_f8a99129");
@@ -2269,7 +2307,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.dath_bh_wanted_list_01.branchId");
                     chat.chat(npc, player, message);
@@ -2309,7 +2347,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_315f7d8");
@@ -2326,7 +2364,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.dath_bh_wanted_list_01.branchId");
                     chat.chat(npc, player, message);
@@ -2366,7 +2404,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_315f7d8");
@@ -2383,7 +2421,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "conversation.dath_bh_wanted_list_01.branchId");
                     chat.chat(npc, player, message);
@@ -2394,6 +2432,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -2405,6 +2444,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
         setCondition(self, CONDITION_SPACE_INTERESTING);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
@@ -2412,6 +2452,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
         setCondition(self, CONDITION_SPACE_INTERESTING);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -2420,18 +2461,21 @@ public class dath_bh_wanted_list_01 extends script.base_script
         faceTo(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.dath_bh_wanted_list_01");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -2466,7 +2510,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_6c03db3");
@@ -2474,7 +2518,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
                 setObjVar(player, "conversation.dath_bh_wanted_list_01.branchId", 2);
                 npcStartConversation(player, npc, "dath_bh_wanted_list_01", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2519,7 +2563,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_d424c740");
@@ -2531,7 +2575,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
                 setObjVar(player, "conversation.dath_bh_wanted_list_01.branchId", 6);
                 npcStartConversation(player, npc, "dath_bh_wanted_list_01", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2554,7 +2598,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_e6772f13");
@@ -2566,7 +2610,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "dath_bh_wanted_list_01", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -2592,7 +2636,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_6bef416f");
@@ -2600,7 +2644,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
                 setObjVar(player, "conversation.dath_bh_wanted_list_01.branchId", 11);
                 npcStartConversation(player, npc, "dath_bh_wanted_list_01", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2622,7 +2666,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_a019416c");
@@ -2630,7 +2674,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
                 setObjVar(player, "conversation.dath_bh_wanted_list_01.branchId", 22);
                 npcStartConversation(player, npc, "dath_bh_wanted_list_01", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2652,7 +2696,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_1287b3");
@@ -2660,7 +2704,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
                 setObjVar(player, "conversation.dath_bh_wanted_list_01.branchId", 28);
                 npcStartConversation(player, npc, "dath_bh_wanted_list_01", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -2682,7 +2726,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_a560e84c");
@@ -2694,7 +2738,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "dath_bh_wanted_list_01", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -2714,6 +2758,7 @@ public class dath_bh_wanted_list_01 extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("dath_bh_wanted_list_01"))

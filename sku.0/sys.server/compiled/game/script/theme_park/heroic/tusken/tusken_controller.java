@@ -1,5 +1,11 @@
 package script.theme_park.heroic.tusken;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.instance;
 import script.library.skill;
@@ -11,6 +17,7 @@ public class tusken_controller extends script.base_script
     public tusken_controller()
     {
     }
+
     public int kingDied(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id[] players = getPlayerCreaturesInRange(getLocation(self), 1000.0f);
@@ -31,6 +38,7 @@ public class tusken_controller extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int instanceFailed(obj_id self, dictionary params) throws InterruptedException
     {
         instance.setClock(self, 10);

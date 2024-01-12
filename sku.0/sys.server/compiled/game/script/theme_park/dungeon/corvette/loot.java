@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.corvette;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.create;
 import script.library.permissions;
 import script.library.utils;
@@ -14,6 +20,7 @@ public class loot extends script.base_script
     public loot()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         detachScript(self, "item.container.loot_crate");
@@ -25,7 +32,7 @@ public class loot extends script.base_script
         {
             cargo = weapons.createWeapon(newLoot, self, rand(0.80f, 0.95f));
         }
-        else 
+        else
         {
             cargo = createObject(newLoot, self, "");
         }
@@ -41,6 +48,7 @@ public class loot extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         String classTemplate = getSkillTemplate(player);
@@ -61,18 +69,19 @@ public class loot extends script.base_script
                 switch (getContainerType(self))
                 {
                     case 0:
-                    detachScript(self, "item.container.base.base_container");
-                    break;
+                        detachScript(self, "item.container.base.base_container");
+                        break;
                     case 1:
-                    utils.requestContainerOpen(player, self);
-                    break;
+                        utils.requestContainerOpen(player, self);
+                        break;
                     default:
-                    break;
+                        break;
                 }
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public String pickNewLoot(obj_id dungeon) throws InterruptedException
     {
         String newLoot = "object/tangible/wearables/shirt/shirt_s03_rebel.iff";
@@ -87,37 +96,37 @@ public class loot extends script.base_script
             switch (pickNewLoot)
             {
                 case 1:
-                newLoot = "object/tangible/wearables/shirt/shirt_s03_rebel.iff";
-                break;
+                    newLoot = "object/tangible/wearables/shirt/shirt_s03_rebel.iff";
+                    break;
                 case 2:
-                newLoot = "object/tangible/wearables/armor/marine/armor_marine_chest_plate_rebel.iff";
-                break;
+                    newLoot = "object/tangible/wearables/armor/marine/armor_marine_chest_plate_rebel.iff";
+                    break;
                 case 3:
-                newLoot = "object/tangible/component/vehicle/veh_power_plant_av21.iff";
-                break;
+                    newLoot = "object/tangible/component/vehicle/veh_power_plant_av21.iff";
+                    break;
                 case 4:
-                newLoot = "object/tangible/food/spice/spice_giggledust.iff";
-                break;
+                    newLoot = "object/tangible/food/spice/spice_giggledust.iff";
+                    break;
                 case 5:
-                newLoot = "object/weapon/melee/sword/sword_blade_ryyk.iff";
-                break;
+                    newLoot = "object/weapon/melee/sword/sword_blade_ryyk.iff";
+                    break;
                 case 6:
-                newLoot = "object/weapon/ranged/rifle/rifle_lightning.iff";
-                break;
+                    newLoot = "object/weapon/ranged/rifle/rifle_lightning.iff";
+                    break;
                 case 7:
-                newLoot = "object/tangible/wearables/shirt/shirt_s03_rebel.iff";
-                break;
+                    newLoot = "object/tangible/wearables/shirt/shirt_s03_rebel.iff";
+                    break;
                 case 8:
-                newLoot = "object/tangible/wearables/armor/marine/armor_marine_chest_plate_rebel.iff";
-                break;
+                    newLoot = "object/tangible/wearables/armor/marine/armor_marine_chest_plate_rebel.iff";
+                    break;
                 case 9:
-                newLoot = "object/weapon/ranged/pistol/pistol_fwg5.iff";
-                break;
+                    newLoot = "object/weapon/ranged/pistol/pistol_fwg5.iff";
+                    break;
                 case 10:
-                newLoot = "object/tangible/loot/quest/bantha_doll.iff";
-                break;
+                    newLoot = "object/tangible/loot/quest/bantha_doll.iff";
+                    break;
                 default:
-                break;
+                    break;
             }
         }
         else if (missionType.equals("imperial_assassin") || missionType.equals("imperial_rescue") || missionType.equals("imperial_destroy"))
@@ -125,79 +134,80 @@ public class loot extends script.base_script
             switch (pickNewLoot)
             {
                 case 1:
-                newLoot = "object/tangible/loot/loot_schematic/corellian_corvette_rifle_berserker_schematic.iff";
-                break;
+                    newLoot = "object/tangible/loot/loot_schematic/corellian_corvette_rifle_berserker_schematic.iff";
+                    break;
                 case 2:
-                newLoot = "object/tangible/component/weapon/corvette_rifle_barrel.iff";
-                break;
+                    newLoot = "object/tangible/component/weapon/corvette_rifle_barrel.iff";
+                    break;
                 case 3:
-                newLoot = "object/tangible/component/vehicle/veh_power_plant_av21.iff";
-                break;
+                    newLoot = "object/tangible/component/vehicle/veh_power_plant_av21.iff";
+                    break;
                 case 4:
-                newLoot = "object/weapon/ranged/rifle/rifle_e11.iff";
-                break;
+                    newLoot = "object/weapon/ranged/rifle/rifle_e11.iff";
+                    break;
                 case 5:
-                newLoot = "object/weapon/ranged/rifle/rifle_lightning.iff";
-                break;
+                    newLoot = "object/weapon/ranged/rifle/rifle_lightning.iff";
+                    break;
                 case 6:
-                newLoot = "object/weapon/ranged/pistol/pistol_fwg5.iff";
-                break;
+                    newLoot = "object/weapon/ranged/pistol/pistol_fwg5.iff";
+                    break;
                 case 7:
-                newLoot = "object/weapon/melee/sword/sword_blade_ryyk.iff";
-                break;
+                    newLoot = "object/weapon/melee/sword/sword_blade_ryyk.iff";
+                    break;
                 case 8:
-                newLoot = "object/tangible/loot/quest/bantha_doll.iff";
-                break;
+                    newLoot = "object/tangible/loot/quest/bantha_doll.iff";
+                    break;
                 case 9:
-                newLoot = "object/tangible/food/spice/spice_crash_n_burn.iff";
-                break;
+                    newLoot = "object/tangible/food/spice/spice_crash_n_burn.iff";
+                    break;
                 case 10:
-                newLoot = "object/weapon/melee/baton/baton_stun.iff";
-                break;
+                    newLoot = "object/weapon/melee/baton/baton_stun.iff";
+                    break;
                 default:
-                break;
+                    break;
             }
         }
-        else 
+        else
         {
             switch (pickNewLoot)
             {
                 case 1:
-                newLoot = "object/tangible/component/vehicle/veh_power_plant_av21.iff";
-                break;
+                    newLoot = "object/tangible/component/vehicle/veh_power_plant_av21.iff";
+                    break;
                 case 2:
-                newLoot = "object/tangible/loot/quest/bantha_doll.iff";
-                break;
+                    newLoot = "object/tangible/loot/quest/bantha_doll.iff";
+                    break;
                 case 3:
-                newLoot = "object/tangible/food/spice/spice_giggledust.iff";
-                break;
+                    newLoot = "object/tangible/food/spice/spice_giggledust.iff";
+                    break;
                 case 4:
-                newLoot = "object/weapon/melee/baton/baton_stun.iff";
-                break;
+                    newLoot = "object/weapon/melee/baton/baton_stun.iff";
+                    break;
                 case 5:
-                newLoot = "object/weapon/ranged/rifle/rifle_lightning.iff";
-                break;
+                    newLoot = "object/weapon/ranged/rifle/rifle_lightning.iff";
+                    break;
                 case 6:
-                newLoot = "object/weapon/melee/baton/baton_stun.iff";
-                break;
+                    newLoot = "object/weapon/melee/baton/baton_stun.iff";
+                    break;
                 case 7:
-                newLoot = "object/weapon/ranged/rifle/rifle_lightning.iff";
-                break;
+                    newLoot = "object/weapon/ranged/rifle/rifle_lightning.iff";
+                    break;
                 case 8:
-                newLoot = "object/weapon/ranged/rifle/rifle_e11.iff";
-                break;
+                    newLoot = "object/weapon/ranged/rifle/rifle_e11.iff";
+                    break;
                 case 9:
-                newLoot = "object/weapon/melee/sword/sword_blade_ryyk.iff";
-                break;
+                    newLoot = "object/weapon/melee/sword/sword_blade_ryyk.iff";
+                    break;
                 case 10:
-                newLoot = "object/tangible/food/spice/spice_crash_n_burn.iff";
-                break;
+                    newLoot = "object/tangible/food/spice/spice_crash_n_burn.iff";
+                    break;
                 default:
-                break;
+                    break;
             }
         }
         return newLoot;
     }
+
     public void spawnEnemies(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id top = getTopMostContainer(self);
@@ -215,10 +225,9 @@ public class loot extends script.base_script
         {
             obj_id guard = create.object("imperial_super_battle_droid", loc);
         }
-        else 
+        else
         {
             obj_id guard = create.object("corsec_super_battle_droid", loc);
         }
-        return;
     }
 }

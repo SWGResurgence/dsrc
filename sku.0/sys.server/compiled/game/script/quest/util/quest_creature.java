@@ -1,20 +1,28 @@
 package script.quest.util;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.obj_id;
 
 public class quest_creature extends script.base_script
 {
+    public static final String VAR_SPAWNER_CURRENT_POPULATION = "quest_spawner.current_pop";
+    public static final String VAR_SPAWNED_BY = "quest_spawner.spawned_by";
     public quest_creature()
     {
     }
-    public static final String VAR_SPAWNER_CURRENT_POPULATION = "quest_spawner.current_pop";
-    public static final String VAR_SPAWNED_BY = "quest_spawner.spawned_by";
+
     public int OnIncapacitated(obj_id self, obj_id attacker) throws InterruptedException
     {
         LOG("quests", "quest_creature.OnIncapacitated(" + self + ", " + attacker + ") - notifying spawner");
         notifySpawner();
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         LOG("quests", "quest_creature.OnDestroy(" + self + ") - notifying spawner");
@@ -24,6 +32,7 @@ public class quest_creature extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void notifySpawner() throws InterruptedException
     {
         obj_id self = getSelf();
@@ -37,17 +46,17 @@ public class quest_creature extends script.base_script
                     int population = getIntObjVar(spawner, VAR_SPAWNER_CURRENT_POPULATION);
                     setObjVar(spawner, VAR_SPAWNER_CURRENT_POPULATION, population - 1);
                 }
-                else 
+                else
                 {
                     LOG("quests", "quest_creature.notifySpawner(" + self + ") - spawner doesn't have objvar " + VAR_SPAWNER_CURRENT_POPULATION);
                 }
             }
-            else 
+            else
             {
                 LOG("quests", "quest_creature.notifySpawner(" + self + ") - spawner " + spawner + " isn't loaded");
             }
         }
-        else 
+        else
         {
             LOG("quests", "quest_creature.notifySpawner(" + self + ") - invalid spawner id");
         }

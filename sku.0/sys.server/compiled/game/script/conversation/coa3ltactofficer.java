@@ -1,5 +1,11 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.ai_lib;
 import script.library.badge;
@@ -7,41 +13,51 @@ import script.library.chat;
 
 public class coa3ltactofficer extends script.base_script
 {
+    public static String c_stringFile = "conversation/coa3ltactofficer";
+
     public coa3ltactofficer()
     {
     }
-    public static String c_stringFile = "conversation/coa3ltactofficer";
+
     public boolean coa3ltactofficer_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean coa3ltactofficer_condition_extraFloraMissionActive(obj_id player, obj_id npc) throws InterruptedException
     {
         return (getIntObjVar(player, "coa3.extraFlora") == 1);
     }
+
     public boolean coa3ltactofficer_condition_hasWonStory(obj_id player, obj_id npc) throws InterruptedException
     {
         return (badge.hasBadge(player, "event_coa3_imperial"));
     }
+
     public boolean coa3ltactofficer_condition_storyFloraMissionComplete(obj_id player, obj_id npc) throws InterruptedException
     {
         return (getIntObjVar(player, "coa3.convTracker") > 302);
     }
+
     public boolean coa3ltactofficer_condition_talkedToCoordinator(obj_id player, obj_id npc) throws InterruptedException
     {
         return (getIntObjVar(player, "coa3.convTracker") == 301);
     }
+
     public boolean coa3ltactofficer_condition_storyFloraMissionActive(obj_id player, obj_id npc) throws InterruptedException
     {
         return (getIntObjVar(player, "coa3.convTracker") == 302);
     }
+
     public boolean coa3ltactofficer_condition_temp(obj_id player, obj_id npc) throws InterruptedException
     {
         return false;
     }
+
     public void coa3ltactofficer_action__defaultAction(obj_id player, obj_id npc) throws InterruptedException
     {
     }
+
     public void coa3ltactofficer_action_refreshExtraFloraMission(obj_id player, obj_id npc) throws InterruptedException
     {
         dictionary params = new dictionary();
@@ -50,6 +66,7 @@ public class coa3ltactofficer extends script.base_script
         params.put("value", 3);
         messageTo(npc, "messageStartMission", params, 0, false);
     }
+
     public void coa3ltactofficer_action_abortExtraFloraMission(obj_id player, obj_id npc) throws InterruptedException
     {
         removeObjVar(player, "coa3.extraFlora");
@@ -59,6 +76,7 @@ public class coa3ltactofficer extends script.base_script
         params.put("value", -1);
         messageTo(player, "handleAbortMission", params, 0, false);
     }
+
     public void coa3ltactofficer_action_getExtraFloraMission(obj_id player, obj_id npc) throws InterruptedException
     {
         setObjVar(player, "coa3.extraFlora", 1);
@@ -68,6 +86,7 @@ public class coa3ltactofficer extends script.base_script
         params.put("value", 3);
         messageTo(npc, "messageStartMission", params, 0, false);
     }
+
     public void coa3ltactofficer_action_getStoryFloraMission(obj_id player, obj_id npc) throws InterruptedException
     {
         setObjVar(player, "coa3.convTracker", 302);
@@ -77,6 +96,7 @@ public class coa3ltactofficer extends script.base_script
         params.put("value", 3);
         messageTo(npc, "messageStartMission", params, 0, false);
     }
+
     public void coa3ltactofficer_action_refreshStoryFloraMission(obj_id player, obj_id npc) throws InterruptedException
     {
         setObjVar(player, "coa3.convTracker", 302);
@@ -86,6 +106,7 @@ public class coa3ltactofficer extends script.base_script
         params.put("value", 3);
         messageTo(npc, "messageStartMission", params, 0, false);
     }
+
     public void coa3ltactofficer_action_abortStoryFloraMission(obj_id player, obj_id npc) throws InterruptedException
     {
         setObjVar(player, "coa3.convTracker", 301);
@@ -95,6 +116,7 @@ public class coa3ltactofficer extends script.base_script
         params.put("value", 3);
         messageTo(player, "handleAbortMission", params, 0, false);
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -104,11 +126,13 @@ public class coa3ltactofficer extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -117,12 +141,14 @@ public class coa3ltactofficer extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "npc.conversation.coa3ltactofficer");
         return SCRIPT_CONTINUE;
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         if (ai_lib.isInCombat(self) || ai_lib.isInCombat(player))
@@ -158,7 +184,7 @@ public class coa3ltactofficer extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_688721b0");
@@ -174,7 +200,7 @@ public class coa3ltactofficer extends script.base_script
                 setObjVar(player, "conversation.coa3ltactofficer.branchId", 1);
                 npcStartConversation(player, self, "coa3ltactofficer", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(self, message);
             }
@@ -202,7 +228,7 @@ public class coa3ltactofficer extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_1cb2157b");
@@ -214,7 +240,7 @@ public class coa3ltactofficer extends script.base_script
                 setObjVar(player, "conversation.coa3ltactofficer.branchId", 5);
                 npcStartConversation(player, self, "coa3ltactofficer", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(self, message);
             }
@@ -242,7 +268,7 @@ public class coa3ltactofficer extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_1cb2157b");
@@ -254,7 +280,7 @@ public class coa3ltactofficer extends script.base_script
                 setObjVar(player, "conversation.coa3ltactofficer.branchId", 8);
                 npcStartConversation(player, self, "coa3ltactofficer", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(self, message);
             }
@@ -282,7 +308,7 @@ public class coa3ltactofficer extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_f96e5eed");
@@ -294,7 +320,7 @@ public class coa3ltactofficer extends script.base_script
                 setObjVar(player, "conversation.coa3ltactofficer.branchId", 11);
                 npcStartConversation(player, self, "coa3ltactofficer", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(self, message);
             }
@@ -329,7 +355,7 @@ public class coa3ltactofficer extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_ba1a3080");
@@ -345,7 +371,7 @@ public class coa3ltactofficer extends script.base_script
                 setObjVar(player, "conversation.coa3ltactofficer.branchId", 14);
                 npcStartConversation(player, self, "coa3ltactofficer", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(self, message);
             }
@@ -366,6 +392,7 @@ public class coa3ltactofficer extends script.base_script
         chat.chat(self, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("coa3ltactofficer"))

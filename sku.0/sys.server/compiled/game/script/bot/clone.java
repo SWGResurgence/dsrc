@@ -1,5 +1,11 @@
 package script.bot;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import java.io.File;
 import java.nio.file.Files;
 import java.util.Random;
@@ -12,32 +18,6 @@ import script.combat_engine.combat_data;
 
 public class clone extends script.base_script
 {
-    public clone() { }
-
-    public int OnAttach(obj_id self) throws InterruptedException
-    {
-        Object[] triggerParams = new Object[] { self };
-        try { int err = script_entry.runScripts("OnLogin", triggerParams); }
-        catch(Exception ex) { }
-        transferPlayerData(self, null, null);
-        return SCRIPT_CONTINUE;
-    }
-
-    public static int getFactionId(String faction) throws InterruptedException
-    {
-        if (faction == null)
-        {
-            LOG("force_rank", "force_rank.getFactionId -- faction is null.");
-            return 0;
-        }
-        int faction_num = factions.getFactionNumber(faction);
-        if (faction_num == -1)
-        {
-            return 0;
-        }
-        int faction_id = dataTableGetInt("datatables/faction/faction.iff", faction_num, "pvpFaction");
-        return faction_id;
-    }
     public static final String[] buffComponentKeys =
             {
                     "kinetic",
@@ -77,28 +57,64 @@ public class clone extends script.base_script
                     15,
                     15
             };
+
+    public clone()
+    {
+    }
+
+    public static int getFactionId(String faction) throws InterruptedException
+    {
+        if (faction == null)
+        {
+            LOG("force_rank", "force_rank.getFactionId -- faction is null.");
+            return 0;
+        }
+        int faction_num = factions.getFactionNumber(faction);
+        if (faction_num == -1)
+        {
+            return 0;
+        }
+        int faction_id = dataTableGetInt("datatables/faction/faction.iff", faction_num, "pvpFaction");
+        return faction_id;
+    }
+
+    public int OnAttach(obj_id self) throws InterruptedException
+    {
+        Object[] triggerParams = new Object[]{self};
+        try
+        {
+            int err = script_entry.runScripts("OnLogin", triggerParams);
+        } catch (Exception ex)
+        {
+        }
+        transferPlayerData(self, null, null);
+        return SCRIPT_CONTINUE;
+    }
+
     public int OnHearSpeech(obj_id self, obj_id speaker, String text) throws InterruptedException
     {
         if (text.equals("update"))
         {
             transferPlayerData(self, speaker, null);
         }
-        else if(text.equals("duel"))
+        else if (text.equals("duel"))
         {
-            queueCommand(self, getStringCrc((toLower("duel")).toString()), speaker, "", COMMAND_PRIORITY_NORMAL);
+            queueCommand(self, getStringCrc((toLower("duel"))), speaker, "", COMMAND_PRIORITY_NORMAL);
         }
-        else if(text.equals("faction"))
+        else if (text.equals("faction"))
         {
             int n = (int) (Math.random() * 100);
-            if (n <= 50) {
+            if (n <= 50)
+            {
                 pvpSetAlignedFaction(self, getFactionId("Imperial"));
             }
-            else {
+            else
+            {
                 pvpSetAlignedFaction(self, getFactionId("Rebel"));
             }
             pvpMakeDeclared(self);
         }
-        else if(text.equals("buffs"))
+        else if (text.equals("buffs"))
         {
             buff.applyBuff(self, "buildabuff_inspiration", 7200);
             utils.setScriptVar(self, "performance.buildabuff.buffComponentKeys", buffComponentKeys);
@@ -124,51 +140,54 @@ public class clone extends script.base_script
             buff.applyBuff(self, "banner_buff_force_sensitive", 7200);
             broadcast(self, "GOD Buffs Granted");
         }
-        else if(text.equals("revive"))
+        else if (text.equals("revive"))
         {
-            if(isDead(self)) {
+            if (isDead(self))
+            {
                 resurrect(self);
             }
-            if(getHealth(self) < 2500) {
+            if (getHealth(self) < 2500)
+            {
                 setHealth(self, getMaxHealth(self));
             }
         }
-        else if(text.equals("level"))
+        else if (text.equals("level"))
         {
             int level = getLevel(speaker);
             setLevel(self, level);
         }
-        else if(text.equals("ai"))
+        else if (text.equals("ai"))
         {
             int on = utils.getIntScriptVar(self, "playerAi.on");
-            if(on != 1) {
+            if (on != 1)
+            {
                 messageTo(self, "playerMiscLoop", null, 1, false);
                 messageTo(self, "playerCombatLoop", null, 1, false);
                 messageTo(self, "playerMovementLoop", null, 1, false);
                 utils.setScriptVar(self, "playerAi.on", 1);
             }
         }
-        else if(text.equals("stance"))
+        else if (text.equals("stance"))
         {
-            queueCommand(self, getStringCrc((toLower("fs_buff_def_1_1")).toString()), self, "", COMMAND_PRIORITY_NORMAL);
+            queueCommand(self, getStringCrc((toLower("fs_buff_def_1_1"))), self, "", COMMAND_PRIORITY_NORMAL);
         }
-        else if(text.equals("die"))
+        else if (text.equals("die"))
         {
             destroyObjectSimulator(self);
         }
-        else if(text.equals("follow"))
+        else if (text.equals("follow"))
         {
             follow(self, getIntendedTarget(speaker), 1, 5);
         }
-        else if(text.equals("stay"))
+        else if (text.equals("stay"))
         {
             stop(self);
         }
-        else if(text.equals("attack"))
+        else if (text.equals("attack"))
         {
             combat.startCombat(self, getIntendedTarget(speaker));
         }
-        else if(text.equals("do"))
+        else if (text.equals("do"))
         {
             StringTokenizer st = new StringTokenizer(text);
             String completeToken = st.nextToken();
@@ -178,7 +197,7 @@ public class clone extends script.base_script
             }
             queueCommand(self, getStringCrc((toLower(completeToken))), self, "", COMMAND_PRIORITY_NORMAL);
         }
-        else if(text.equals("teach"))
+        else if (text.equals("teach"))
         {
             String[] skills = getSkillListingForPlayer(speaker);
             for (int i = 0; i < skills.length; i++)
@@ -189,7 +208,7 @@ public class clone extends script.base_script
                 }
             }
         }
-        else if(text.equals("scrub"))
+        else if (text.equals("scrub"))
         {
             String[] skills = getSkillListingForPlayer(self);
             for (int i = 0; i < skills.length; i++)
@@ -208,7 +227,7 @@ public class clone extends script.base_script
     {
         location loc = getLocation(self);
         warpPlayer(self, loc.area, loc.x, 0.0f, loc.z, null, 0.0f, 0.0f, 0.0f);
-        if(isDead(self))
+        if (isDead(self))
         {
             resurrect(self);
             setHealth(self, getMaxHealth(self));
@@ -222,7 +241,8 @@ public class clone extends script.base_script
     public boolean performCmd(obj_id self, obj_id target, String cmd) throws InterruptedException
     {
         combat_data cd = combat_engine.getCombatData(cmd);
-        if (cd == null) {
+        if (cd == null)
+        {
             return false;
         }
 
@@ -231,10 +251,12 @@ public class clone extends script.base_script
         if (coolDownLeft <= 0.0f)
         {
             int currentActionCrc = 0;
-            if (combat.canPerformAction(cmd, self) == combat.ACTION_SUCCESS) {
+            if (combat.canPerformAction(cmd, self) == combat.ACTION_SUCCESS)
+            {
                 currentActionCrc = getStringCrc(cmd.toLowerCase());
             }
-            if(currentActionCrc != 0) {
+            if (currentActionCrc != 0)
+            {
                 queueCommand(self, currentActionCrc, target, "", COMMAND_PRIORITY_FRONT);
                 return true;
             }
@@ -247,7 +269,7 @@ public class clone extends script.base_script
     {
         int n = 0;
         obj_id enemy = findBestEnemy(self);
-        if(enemy == null)
+        if (enemy == null)
             return SCRIPT_CONTINUE;
         else
             utils.setScriptVar(self, "playerAi.enemy_oid", enemy);
@@ -257,14 +279,20 @@ public class clone extends script.base_script
         startCombat(self, enemy);
 
         // find a new enemy if we've failed to engage with our current one
-        if(!isEnemyWithinRange(self, enemy, 0.80f)) {
+        if (!isEnemyWithinRange(self, enemy, 0.80f))
+        {
             int retries = utils.getIntScriptVar(self, "playerAi.attack_attempts");
-            if(retries >= 30) {
+            if (retries >= 30)
+            {
                 enemy = findBestEnemy(self);
-            } else {
+            }
+            else
+            {
                 utils.setScriptVar(self, "playerAi.attack_attempts", retries + 1);
             }
-        } else {
+        }
+        else
+        {
             utils.setScriptVar(self, "playerAi.attack_attempts", 0);
         }
 
@@ -277,12 +305,13 @@ public class clone extends script.base_script
         String skillTemplate = getSkillTemplate(self);
         if (skillTemplate.indexOf("force") > -1)
         {
-            if(getHealth(self) <= 8000) {
+            if (getHealth(self) <= 8000)
+            {
                 //queueCommand(self, getStringCrc((toLower("fs_sh_3")).toString()), null, "", COMMAND_PRIORITY_FRONT);
                 performCmd(self, null, "fs_sh_3");
             }
 
-            String[] hostile = new String[] {
+            String[] hostile = new String[]{
                     "fs_sweep_7",
                     "fs_force_spark",
                     "fs_dm_7",
@@ -293,7 +322,7 @@ public class clone extends script.base_script
             //queueCommand(self, getStringCrc(hostile[n]), enemy, "", COMMAND_PRIORITY_FRONT);
             performCmd(self, enemy, hostile[n]);
 
-            String[] helps = new String[] {
+            String[] helps = new String[]{
                     "fs_saber_reflect",
                     "saber_block",
                     "saberblock"
@@ -330,7 +359,8 @@ public class clone extends script.base_script
 
         // move towards our target, ensuring we're in range
         // goal: distance less than 10% from max range
-        if(flee || !isEnemyWithinRange(self, enemy, 0.80f)) {
+        if (flee || !isEnemyWithinRange(self, enemy, 0.80f))
+        {
             location newLoc = flee ? getEnemyAvgLoc(self) : getLocation(enemy);
             moveToPosition(self, newLoc, nextInterval / 2, flee);
         }
@@ -351,12 +381,13 @@ public class clone extends script.base_script
     {
         location enemyAvgLoc = null;
         obj_id[] enemies = getWhoIsTargetingMe(self);
-        for(obj_id e : enemies)
+        for (obj_id e : enemies)
         {
             boolean isValidEnemy = isValidEnemy(self, e);
-            if(isValidEnemy)
+            if (isValidEnemy)
             {
-                if (enemyAvgLoc == null) {
+                if (enemyAvgLoc == null)
+                {
                     enemyAvgLoc = getLocation(e);
                 }
                 else
@@ -370,35 +401,38 @@ public class clone extends script.base_script
         return enemyAvgLoc;
     }
 
-    public obj_id findBestEnemy(obj_id self)  throws InterruptedException
+    public obj_id findBestEnemy(obj_id self) throws InterruptedException
     {
-        int      n       = 0;
-        obj_id   enemy   = null;
+        int n = 0;
+        obj_id enemy = null;
         obj_id[] enemies = null;
 
         // first priority is existing target
         enemy = utils.getObjIdScriptVar(self, "playerAi.enemy_oid");
-        if (isValidEnemy(self, enemy)) {
+        if (isValidEnemy(self, enemy))
+        {
             return enemy;
         }
 
         // second priority are people who are targetting us right now
         enemies = getWhoIsTargetingMe(self);
-        for(obj_id e : enemies)
+        for (obj_id e : enemies)
         {
-            if (isValidEnemy(self, e)) {
+            if (isValidEnemy(self, e))
+            {
                 return e;
             }
         }
 
         // third priority is any pvp target we can attack, aka enemies
         enemies = pvpGetEnemiesInRange(self, self, 128.0f);
-        for(int i = 0; i < enemies.length; i++)
+        for (int i = 0; i < enemies.length; i++)
         {
             // randomly select a pvp enemy for combat
             n = (int) (Math.random() * enemies.length);
             enemy = enemies[n];
-            if(isValidEnemy(self, enemy)) {
+            if (isValidEnemy(self, enemy))
+            {
                 return enemy;
             }
         }
@@ -422,7 +456,8 @@ public class clone extends script.base_script
         float movementSpeed = getRunSpeed(self);
         float travelDistance = movementSpeed * deltaTime;
 
-        if(flee) {
+        if (flee)
+        {
             travelDistance = -travelDistance;
         }
 
@@ -447,9 +482,11 @@ public class clone extends script.base_script
     {
         String[] templates = new File("./saves/").list();
         String selectedTemplate = null;
-        while(selectedTemplate == null) {
+        while (selectedTemplate == null)
+        {
             int i = new Random().nextInt(templates.length);
-            if(templates[i].startsWith("char_template.")) {
+            if (templates[i].startsWith("char_template."))
+            {
                 selectedTemplate = "./saves/" + templates[i];
             }
         }
@@ -458,11 +495,11 @@ public class clone extends script.base_script
         {
             byte[] data = Files.readAllBytes(new File(selectedTemplate).getAbsoluteFile().toPath());
             unpackPlayerData(self, data);
-        }
-        catch(Exception e)
+        } catch (Exception e)
         {
-            if(speaker != null) {
-                broadcast(speaker, "Exception: " + e.toString());
+            if (speaker != null)
+            {
+                broadcast(speaker, "Exception: " + e);
             }
         }
         return SCRIPT_CONTINUE;
@@ -476,7 +513,8 @@ public class clone extends script.base_script
         try
         {
             script_entry.runScripts("OnDownloadCharacter", triggerParams);
+        } catch (Throwable t)
+        {
         }
-        catch(Throwable t) { }
     }
 }

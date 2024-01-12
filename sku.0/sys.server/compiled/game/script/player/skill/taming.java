@@ -1,5 +1,11 @@
 package script.player.skill;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.location;
@@ -8,10 +14,12 @@ import script.string_id;
 
 public class taming extends script.base_script
 {
+    public static final string_id SHAPECHANGE = new string_id("spam", "not_while_shapechanged");
+
     public taming()
     {
     }
-    public static final string_id SHAPECHANGE = new string_id("spam", "not_while_shapechanged");
+
     public int cmdTellPet(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!callable.hasAnyCallable(self) || params == null || params.length() > 30)
@@ -19,8 +27,10 @@ public class taming extends script.base_script
             return SCRIPT_CONTINUE;
         }
         obj_id[] callableList = callable.getCallables(self);
-        for (obj_id obj_id : callableList) {
-            if (getDistance(obj_id, self) < 200.0f && !ai_lib.aiIsDead(obj_id) && !beast_lib.isBeast(obj_id)) {
+        for (obj_id obj_id : callableList)
+        {
+            if (getDistance(obj_id, self) < 200.0f && !ai_lib.aiIsDead(obj_id) && !beast_lib.isBeast(obj_id))
+            {
                 dictionary parms = new dictionary();
                 parms.put("text", params);
                 parms.put("master", self);
@@ -29,6 +39,7 @@ public class taming extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tellPetAttack(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (callable.hasAnyCallable(self))
@@ -36,8 +47,10 @@ public class taming extends script.base_script
             obj_id[] callableList = callable.getCallables(self);
             if (callableList.length > 0 && callableList != null)
             {
-                for (obj_id obj_id : callableList) {
-                    if (getDistance(obj_id, self) < 200.0f && !ai_lib.aiIsDead(obj_id) && !beast_lib.isBeast(obj_id)) {
+                for (obj_id obj_id : callableList)
+                {
+                    if (getDistance(obj_id, self) < 200.0f && !ai_lib.aiIsDead(obj_id) && !beast_lib.isBeast(obj_id))
+                    {
                         pet_lib.doCommandNum(obj_id, pet_lib.COMMAND_ATTACK, self);
                     }
                 }
@@ -45,6 +58,7 @@ public class taming extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tellPetFollow(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (callable.hasAnyCallable(self))
@@ -52,8 +66,10 @@ public class taming extends script.base_script
             obj_id[] callableList = callable.getCallables(self);
             if (callableList.length > 0 && callableList != null)
             {
-                for (obj_id obj_id : callableList) {
-                    if (getDistance(obj_id, self) < 200.0f && !ai_lib.aiIsDead(obj_id) && !beast_lib.isBeast(obj_id)) {
+                for (obj_id obj_id : callableList)
+                {
+                    if (getDistance(obj_id, self) < 200.0f && !ai_lib.aiIsDead(obj_id) && !beast_lib.isBeast(obj_id))
+                    {
                         pet_lib.doCommandNum(obj_id, pet_lib.COMMAND_FOLLOW, self);
                     }
                 }
@@ -61,6 +77,7 @@ public class taming extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int mount(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         LOG("mount", "mount(): enter self: " + self + " target: " + target);
@@ -153,7 +170,7 @@ public class taming extends script.base_script
                 debugServerConsoleMsg(self, "+++ PLAYER.skill.taming +++ commandHandler mount() +++ mountCreature (self,target) returned FALSE");
                 sendSystemMessage(self, pet_lib.SID_SYS_CANT_MOUNT);
             }
-            else 
+            else
             {
                 pet_lib.setMountedMovementRate(self, target);
                 debugServerConsoleMsg(self, "+++ PLAYER.skill.taming +++ commandHandler mount() +++ mountCreature (self,target) returned TRUE");
@@ -168,12 +185,13 @@ public class taming extends script.base_script
                 }
             }
         }
-        else 
+        else
         {
             debugServerConsoleMsg(self, "+++ PLAYER.skill.taming +++ commandHandler mount() +++ pet_lib.canMount(target, self) returned FALSE");
         }
         return SCRIPT_CONTINUE;
     }
+
     public int battlefieldMount(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         obj_id mount = target;
@@ -205,7 +223,7 @@ public class taming extends script.base_script
         {
             debugSpeakMsg(self, "Epic fail");
         }
-        else 
+        else
         {
             obj_id pilot = getRiderId(mount);
             if (!isIdValid(getMaster(mount)) || (pilot != getMaster(mount) && pilot == getObjectInSlot(mount, "rider")))
@@ -218,6 +236,7 @@ public class taming extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int dismount(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         debugServerConsoleMsg(null, "+++ player.skill.taming.commandHandler dismount +++ just entered the dismount command handler");
@@ -250,6 +269,7 @@ public class taming extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int battlefieldDismount(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         obj_id mount = getMountId(self);
@@ -260,17 +280,19 @@ public class taming extends script.base_script
         if (isIdValid(master) && master == self)
         {
             obj_id[] passengerList = utils.getAllRidersInVehicle(self, mount);
-            if (passengerList != null && passengerList.length > 0)
+            if (passengerList != null)
             {
-                for (obj_id obj_id : passengerList) {
-                    if (isIdValid(obj_id)) {
+                for (obj_id obj_id : passengerList)
+                {
+                    if (isIdValid(obj_id))
+                    {
                         dismountCreature(obj_id);
                     }
                 }
             }
             setMaster(mount, null);
         }
-        else 
+        else
         {
             if (isIdValid(master))
             {
@@ -289,6 +311,7 @@ public class taming extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int dismountandstore(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!isIdValid(self) || !getMountsEnabled())
@@ -309,7 +332,7 @@ public class taming extends script.base_script
             setObjVar(petControlDevice, "pet.timeStored", getGameTime());
             destroyObject(playerCurrentMount);
         }
-        else 
+        else
         {
             sendSystemMessage(self, pet_lib.SID_SYS_CANT_DISMOUNT);
         }

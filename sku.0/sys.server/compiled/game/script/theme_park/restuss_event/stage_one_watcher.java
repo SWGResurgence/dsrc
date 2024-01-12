@@ -1,18 +1,24 @@
 package script.theme_park.restuss_event;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.restuss_event;
 import script.obj_id;
 
 public class stage_one_watcher extends script.base_script
 {
-    private boolean evaluating = false;
-
+    public static final String FACTION_REBEL = "completed_factions.rebel";
+    public static final String FACTION_IMPERIAL = "completed_factions.imperial";
+    private final boolean evaluating = false;
     public stage_one_watcher()
     {
     }
-    public static final String FACTION_REBEL = "completed_factions.rebel";
-    public static final String FACTION_IMPERIAL = "completed_factions.imperial";
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, FACTION_REBEL))
@@ -25,6 +31,7 @@ public class stage_one_watcher extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int updateStageData(obj_id self, dictionary params) throws InterruptedException
     {
         String finishedFaction = params.getString("faction");
@@ -43,6 +50,7 @@ public class stage_one_watcher extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int setWinningFaction(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, restuss_event.WINNING_FACTION))
@@ -65,6 +73,7 @@ public class stage_one_watcher extends script.base_script
         }
         return -1;
     }
+
     public void sendStartNotification(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "sent_signal_one"))
@@ -75,6 +84,7 @@ public class stage_one_watcher extends script.base_script
         setObjVar(self, "sent_signal_one", true);
         getClusterWideData("event", "stage_two_crier*", true, self);
     }
+
     public int beginEventNotification(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "sent_signal_two"))
@@ -85,6 +95,7 @@ public class stage_one_watcher extends script.base_script
         getClusterWideData("event", "stage_two_crier*", true, self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnClusterWideDataResponse(obj_id self, String manage_name, String name, int request_id, String[] element_name_list, dictionary[] dungeon_data, int lock_key) throws InterruptedException
     {
         if (dungeon_data == null || dungeon_data.length == 0)
@@ -94,14 +105,16 @@ public class stage_one_watcher extends script.base_script
         }
         if (hasObjVar(self, "sent_signal_one") && hasObjVar(self, "sent_signal_two"))
         {
-            for (dictionary dungeon_datum : dungeon_data) {
+            for (dictionary dungeon_datum : dungeon_data)
+            {
                 obj_id crier_id = dungeon_datum.getObjId("dungeon_id");
                 messageTo(crier_id, "beginMessage", null, 0, false);
             }
         }
         if (hasObjVar(self, "sent_signal_one") && !hasObjVar(self, "sent_signal_two"))
         {
-            for (dictionary dungeon_datum : dungeon_data) {
+            for (dictionary dungeon_datum : dungeon_data)
+            {
                 obj_id crier_id = dungeon_datum.getObjId("dungeon_id");
                 messageTo(crier_id, "beginSpawn", null, 0, false);
             }

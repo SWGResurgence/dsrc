@@ -1,5 +1,11 @@
 package script.player;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.community_crafting;
 import script.library.utils;
@@ -8,9 +14,6 @@ import script.string_id;
 
 public class player_community_crafting extends script.base_script
 {
-    public player_community_crafting()
-    {
-    }
     public static final float MIN_NPC_DISTANCE = 6.0f;
     public static final String OBJVAR_CLEANUP = community_crafting.OBJVAR_COMMUNITY_CRAFTING_BASE + ".cleanup";
     public static final String OBJVAR_REWARD_PRIZE = community_crafting.OBJVAR_COMMUNITY_CRAFTING_BASE + "." + community_crafting.REWARD_PRIZE;
@@ -20,6 +23,10 @@ public class player_community_crafting extends script.base_script
     public static final string_id SID_CC_PRIZE_INVENTORY_FULL = new string_id("crafting", "cc_prize_inventory_full");
     public static final string_id SID_CC_PRIZE_INVENTORY_FULL_SUBJECT = new string_id("system_msg", "inventory_full");
     public static final string_id SID_CC_PRIZE_INVENTORY_FROM = new string_id("crafting", "cc_prize_inventory_full_from");
+    public player_community_crafting()
+    {
+    }
+
     public int OnLogin(obj_id self) throws InterruptedException
     {
         boolean canCleanup = true;
@@ -33,7 +40,7 @@ public class player_community_crafting extends script.base_script
             {
                 removeObjVar(self, OBJVAR_REWARD_PRIZE);
             }
-            else 
+            else
             {
                 canCleanup = false;
             }
@@ -44,18 +51,20 @@ public class player_community_crafting extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleCleanupCommunityCrafting(obj_id self, dictionary params) throws InterruptedException
     {
         if (!hasObjVar(self, OBJVAR_REWARD_PRIZE))
         {
             cleanup(self);
         }
-        else 
+        else
         {
             setObjVar(self, OBJVAR_CLEANUP, true);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleCommunityCraftingReward(obj_id self, dictionary params) throws InterruptedException
     {
         int prizeCrc = params.getInt(community_crafting.REWARD_PRIZE);
@@ -74,6 +83,7 @@ public class player_community_crafting extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleViewingNpcInventory(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id npc = params.getObjId("npc");
@@ -87,13 +97,14 @@ public class player_community_crafting extends script.base_script
                     queueCommand(self, (822776054), npcInventory, "", COMMAND_PRIORITY_IMMEDIATE);
                 }
             }
-            else 
+            else
             {
                 messageTo(self, "handleViewingNpcInventory", params, 15, false);
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public void cleanup(obj_id self) throws InterruptedException
     {
         if (!isIdValid(self))
@@ -104,8 +115,10 @@ public class player_community_crafting extends script.base_script
         int[] schematics = getIntArrayObjVar(self, community_crafting.OBJVAR_COMMUNITY_CRAFTING_PLAYER_SCHEMATICS);
         if (schematics != null)
         {
-            for (int schematic : schematics) {
-                if (schematic != 0) {
+            for (int schematic : schematics)
+            {
+                if (schematic != 0)
+                {
                     revokeSchematic(self, schematic);
                 }
             }
@@ -113,6 +126,7 @@ public class player_community_crafting extends script.base_script
         removeObjVar(self, community_crafting.OBJVAR_COMMUNITY_CRAFTING_BASE);
         detachScript(self, community_crafting.SCRIPT_COMMUNITY_CRAFTING_PLAYER);
     }
+
     public boolean givePlayerPrize(obj_id self, int prizeCrc, int slot, int type, String script) throws InterruptedException
     {
         if (!isIdValid(self))

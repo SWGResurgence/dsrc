@@ -1,13 +1,16 @@
 package script.city.imperial_crackdown;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
 public class st_static extends script.base_script
 {
-    public st_static()
-    {
-    }
     public static final String VOLUME_NAME = "perception";
     public static final String STRING_FILE = "conversation/crackdown_st_static";
     public static final string_id REBEL_BREACH = new string_id(STRING_FILE, "rebel_breach");
@@ -16,12 +19,17 @@ public class st_static extends script.base_script
     public static final string_id FOLLOW_GIVEUP = new string_id(STRING_FILE, "follow_giveup");
     public static final string_id SALUTE = new string_id(STRING_FILE, "salute");
     public static final string_id SALUTE_NAME = new string_id(STRING_FILE, "salute_name");
+    public st_static()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
         createTriggerVolume(VOLUME_NAME, 10.0f, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id player) throws InterruptedException
     {
         if (volumeName.equals(VOLUME_NAME))
@@ -65,7 +73,7 @@ public class st_static extends script.base_script
                         }
                         return SCRIPT_CONTINUE;
                     }
-                    else 
+                    else
                     {
                         lotto = rand(1, 1000);
                         if (lotto <= 5)
@@ -95,6 +103,7 @@ public class st_static extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnFollowTargetLost(obj_id self, obj_id oldTarget) throws InterruptedException
     {
         location homeLoc = getHomeLocation(self);
@@ -108,6 +117,7 @@ public class st_static extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnFollowPathNotFound(obj_id self, obj_id target) throws InterruptedException
     {
         location homeLoc = getHomeLocation(self);
@@ -121,6 +131,7 @@ public class st_static extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnMovePathNotFound(obj_id self) throws InterruptedException
     {
         pathTo(self, getHomeLocation(self));
@@ -129,11 +140,13 @@ public class st_static extends script.base_script
         messageTo(self, "amIStuck", params, 20, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnArrivedAtLocation(obj_id self, String loc) throws InterruptedException
     {
         utils.removeScriptVar(self, "event");
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         obj_id mom = getObjIdObjVar(self, "mom");
@@ -157,6 +170,7 @@ public class st_static extends script.base_script
         messageTo(mom, "tellingMomIDied", info, respawnTime, false);
         return SCRIPT_CONTINUE;
     }
+
     public int rebelBreach(obj_id self, dictionary params) throws InterruptedException
     {
         if (!ai_lib.isInCombat(self))
@@ -166,6 +180,7 @@ public class st_static extends script.base_script
         utils.removeScriptVar(self, "event");
         return SCRIPT_CONTINUE;
     }
+
     public int playerFollow(obj_id self, dictionary params) throws InterruptedException
     {
         if (!ai_lib.isInCombat(self))
@@ -182,6 +197,7 @@ public class st_static extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int stopPersuit(obj_id self, dictionary params) throws InterruptedException
     {
         location homeLoc = getHomeLocation(self);
@@ -195,6 +211,7 @@ public class st_static extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int amIStuck(obj_id self, dictionary params) throws InterruptedException
     {
         if (params.getLocation("oldLocation").equals(getLocation(self)))
@@ -203,6 +220,7 @@ public class st_static extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int playerBark(obj_id self, dictionary params) throws InterruptedException
     {
         if (!ai_lib.isInCombat(self))
@@ -212,6 +230,7 @@ public class st_static extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int playerLoiter(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -219,15 +238,21 @@ public class st_static extends script.base_script
         utils.removeScriptVar(self, "event");
         if (isIdValid(player))
         {
-            for (obj_id aNearby : nearby) {
-                if (aNearby == player) {
-                    if (!ai_lib.isInCombat(self)) {
+            for (obj_id aNearby : nearby)
+            {
+                if (aNearby == player)
+                {
+                    if (!ai_lib.isInCombat(self))
+                    {
                         faceTo(self, player);
                         chat.chat(self, new string_id(STRING_FILE, "loiter_s" + rand(1, 2)));
                         int randAnim = rand(0, 2);
-                        if (randAnim == 0) {
+                        if (randAnim == 0)
+                        {
                             doAnimationAction(self, "point_left");
-                        } else if (randAnim == 1) {
+                        }
+                        else if (randAnim == 1)
+                        {
                             doAnimationAction(self, "wave_on_directing");
                         }
                         return SCRIPT_CONTINUE;
@@ -237,6 +262,7 @@ public class st_static extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int officerBreach(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -259,7 +285,7 @@ public class st_static extends script.base_script
             String lastName = st.nextToken();
             pp = prose.getPackage(SALUTE_NAME, factions.getRankNameStringId(rank, faction), lastName);
         }
-        else 
+        else
         {
             pp = prose.getPackage(SALUTE, factions.getRankNameStringId(rank, faction));
         }
@@ -267,6 +293,7 @@ public class st_static extends script.base_script
         messageTo(self, "removeEvent", null, 10, true);
         return SCRIPT_CONTINUE;
     }
+
     public int removeEvent(obj_id self, dictionary params) throws InterruptedException
     {
         utils.removeScriptVar(self, "event");

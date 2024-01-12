@@ -1,68 +1,89 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.*;
 
 public class ep3_cpg_veteran extends script.base_script
 {
+    public static String c_stringFile = "conversation/ep3_cpg_veteran";
+
     public ep3_cpg_veteran()
     {
     }
-    public static String c_stringFile = "conversation/ep3_cpg_veteran";
+
     public boolean ep3_cpg_veteran_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean ep3_cpg_veteran_condition_isOnQuest_escort_alpha(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.hasQuest(player, "escort", "ep3_kash_station_escort_alpha"));
     }
+
     public boolean ep3_cpg_veteran_condition_hasFailedQuest_02(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.hasFailedQuest(player, "escort", "ep3_kash_station_escort_bravo") || space_quest.hasAbortedQuest(player, "escort", "ep3_kash_station_escort_bravo"));
     }
+
     public boolean ep3_cpg_veteran_condition_hasWon_assassinations(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.hasReceivedReward(player, "assassinate", "ep3_kash_station_assassinate_neutral") || space_quest.hasReceivedReward(player, "assassinate", "ep3_kash_station_assassinate_rebel") || space_quest.hasReceivedReward(player, "assassinate", "ep3_kash_station_assassinate_imperial"));
     }
+
     public boolean ep3_cpg_veteran_condition_isOnQuest_AMBUSH(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.hasQuest(player, "destroy_surpriseattack", "ep3_kash_station_ghrag_ambush"));
     }
+
     public boolean ep3_cpg_veteran_condition_hasFailedQuest_03(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.hasFailedQuest(player, "rescue", "ep3_kash_station_rescue_alpha") || space_quest.hasAbortedQuest(player, "rescue", "ep3_kash_station_rescue_alpha"));
     }
+
     public boolean ep3_cpg_veteran_condition_isOnQuest_rescue_alpha(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.hasQuest(player, "rescue", "ep3_kash_station_rescue_alpha"));
     }
+
     public boolean ep3_cpg_veteran_condition_isOnQuest_escort_bravo(obj_id player, obj_id npc) throws InterruptedException
     {
         return (space_quest.hasQuest(player, "escort", "ep3_kash_station_escort_bravo"));
     }
+
     public boolean ep3_cpg_veteran_condition_isTooFar(obj_id player, obj_id npc) throws InterruptedException
     {
         space_combat.playCombatTauntSound(player);
         obj_id containingShip = space_transition.getContainingShip(player);
         return (getDistance(npc, containingShip) > space_transition.STATION_COMM_MAX_DISTANCE);
     }
+
     public boolean ep3_cpg_veteran_condition_hasBadge_visited_Kachirho(obj_id player, obj_id npc) throws InterruptedException
     {
         return badge.hasBadge(player, "exp_kash_kachirho_found");
     }
+
     public boolean ep3_cpg_veteran_condition_isAttacking(obj_id player, obj_id npc) throws InterruptedException
     {
         return _spaceUnitIsAttacking(npc);
     }
+
     public boolean ep3_cpg_veteran_condition_isOnQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return space_quest.hasQuest(player);
     }
+
     public void ep3_cpg_veteran_action_grantDuty_destroy(obj_id player, obj_id npc) throws InterruptedException
     {
         space_quest.grantQuest(player, "destroy_duty", "ep3_kash_station_destroy_duty_veteran");
     }
+
     public int ep3_cpg_veteran_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_239"))
@@ -82,7 +103,7 @@ public class ep3_cpg_veteran extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_27");
@@ -91,7 +112,7 @@ public class ep3_cpg_veteran extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_cpg_veteran.branchId");
                     chat.chat(npc, player, message);
@@ -102,6 +123,7 @@ public class ep3_cpg_veteran extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_cpg_veteran_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_27"))
@@ -117,6 +139,7 @@ public class ep3_cpg_veteran extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_cpg_veteran_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_159"))
@@ -136,7 +159,7 @@ public class ep3_cpg_veteran extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_24");
@@ -145,7 +168,7 @@ public class ep3_cpg_veteran extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_cpg_veteran.branchId");
                     chat.chat(npc, player, message);
@@ -171,7 +194,7 @@ public class ep3_cpg_veteran extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_23");
@@ -180,7 +203,7 @@ public class ep3_cpg_veteran extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_cpg_veteran.branchId");
                     chat.chat(npc, player, message);
@@ -191,6 +214,7 @@ public class ep3_cpg_veteran extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_cpg_veteran_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_24"))
@@ -206,6 +230,7 @@ public class ep3_cpg_veteran extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_cpg_veteran_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_23"))
@@ -221,6 +246,7 @@ public class ep3_cpg_veteran extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_cpg_veteran_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_37"))
@@ -240,7 +266,7 @@ public class ep3_cpg_veteran extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_39");
@@ -249,7 +275,7 @@ public class ep3_cpg_veteran extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_cpg_veteran.branchId");
                     chat.chat(npc, player, message);
@@ -260,6 +286,7 @@ public class ep3_cpg_veteran extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_cpg_veteran_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_39"))
@@ -279,7 +306,7 @@ public class ep3_cpg_veteran extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_41");
@@ -288,7 +315,7 @@ public class ep3_cpg_veteran extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_cpg_veteran.branchId");
                     chat.chat(npc, player, message);
@@ -299,6 +326,7 @@ public class ep3_cpg_veteran extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_cpg_veteran_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_41"))
@@ -325,7 +353,7 @@ public class ep3_cpg_veteran extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_43");
@@ -338,7 +366,7 @@ public class ep3_cpg_veteran extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_cpg_veteran.branchId");
                     chat.chat(npc, player, message);
@@ -349,6 +377,7 @@ public class ep3_cpg_veteran extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_cpg_veteran_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_43"))
@@ -376,6 +405,7 @@ public class ep3_cpg_veteran extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_cpg_veteran_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_168"))
@@ -395,7 +425,7 @@ public class ep3_cpg_veteran extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_54");
@@ -404,7 +434,7 @@ public class ep3_cpg_veteran extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_cpg_veteran.branchId");
                     chat.chat(npc, player, message);
@@ -415,6 +445,7 @@ public class ep3_cpg_veteran extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_cpg_veteran_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_54"))
@@ -441,7 +472,7 @@ public class ep3_cpg_veteran extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_57");
@@ -454,7 +485,7 @@ public class ep3_cpg_veteran extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.ep3_cpg_veteran.branchId");
                     chat.chat(npc, player, message);
@@ -465,6 +496,7 @@ public class ep3_cpg_veteran extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ep3_cpg_veteran_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_57"))
@@ -491,16 +523,19 @@ public class ep3_cpg_veteran extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -509,18 +544,21 @@ public class ep3_cpg_veteran extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.ep3_cpg_veteran");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -577,7 +615,7 @@ public class ep3_cpg_veteran extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_239");
@@ -585,7 +623,7 @@ public class ep3_cpg_veteran extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_cpg_veteran.branchId", 6);
                 npcStartConversation(player, npc, "ep3_cpg_veteran", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -623,7 +661,7 @@ public class ep3_cpg_veteran extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_159");
@@ -635,7 +673,7 @@ public class ep3_cpg_veteran extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_cpg_veteran.branchId", 10);
                 npcStartConversation(player, npc, "ep3_cpg_veteran", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -662,7 +700,7 @@ public class ep3_cpg_veteran extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_37");
@@ -674,7 +712,7 @@ public class ep3_cpg_veteran extends script.base_script
                 pp.target.set(npc);
                 npcStartConversation(player, npc, "ep3_cpg_veteran", null, pp, responses);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = message;
@@ -699,7 +737,7 @@ public class ep3_cpg_veteran extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_168");
@@ -707,7 +745,7 @@ public class ep3_cpg_veteran extends script.base_script
                 utils.setScriptVar(player, "conversation.ep3_cpg_veteran.branchId", 22);
                 npcStartConversation(player, npc, "ep3_cpg_veteran", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -716,6 +754,7 @@ public class ep3_cpg_veteran extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("ep3_cpg_veteran"))

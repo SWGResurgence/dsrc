@@ -1,5 +1,11 @@
 package script.ai;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.buff;
 import script.library.callable;
@@ -8,20 +14,24 @@ import script.obj_id;
 
 public class hand_sampling extends script.base_script
 {
+    public static final int BUFF_TICK_TIME = 20;
+
     public hand_sampling()
     {
     }
-    public static final int BUFF_TICK_TIME = 20;
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "handlerApplySamplerBuff", null, 3, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "handlerApplySamplerBuff", null, 3, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handlerApplySamplerBuff(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id petControlDevice = callable.getCallableCD(self);

@@ -1,5 +1,11 @@
 package script.theme_park.heroic.tusken;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.factions;
@@ -14,6 +20,7 @@ public class medic extends script.base_script
     public medic()
     {
     }
+
     public int findSquad(obj_id self, dictionary params) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "squad"))
@@ -29,17 +36,22 @@ public class medic extends script.base_script
         allies.setSize(0);
         Vector gods = new Vector();
         gods.setSize(0);
-        for (obj_id obj_id : allObj) {
-            if (!isValidTarget(self, obj_id)) {
+        for (obj_id obj_id : allObj)
+        {
+            if (!isValidTarget(self, obj_id))
+            {
                 continue;
             }
-            if (isGod(obj_id)) {
+            if (isGod(obj_id))
+            {
                 gods.add(obj_id);
             }
-            if (utils.hasScriptVar(obj_id, "squad")) {
+            if (utils.hasScriptVar(obj_id, "squad"))
+            {
                 continue;
             }
-            if (obj_id == self) {
+            if (obj_id == self)
+            {
                 continue;
             }
             allies.add(obj_id);
@@ -50,7 +62,7 @@ public class medic extends script.base_script
             sendGodMessage(gods, "I could locate no valid allies to attach to, will try again in 60 seconds");
             return SCRIPT_CONTINUE;
         }
-        obj_id mySquad = ((obj_id)allies.get(rand(0, allies.size() - 1)));
+        obj_id mySquad = ((obj_id) allies.get(rand(0, allies.size() - 1)));
         setCreatureCoverVisibility(self, false);
         setLocation(self, getLocation(mySquad));
         dictionary dict = new dictionary();
@@ -59,6 +71,7 @@ public class medic extends script.base_script
         sendGodMessage(gods, "Medic(" + self + ") just attached myself to espa personel (" + mySquad + "). Come to " + getLocation(mySquad) + " to see the happy couple");
         return SCRIPT_CONTINUE;
     }
+
     public int followMySquad(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id mySquad = params.getObjId("squad");
@@ -68,17 +81,20 @@ public class medic extends script.base_script
         messageTo(self, "performHeal", trial.getSessionDict(self), 12.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnEnteredCombat(obj_id self) throws InterruptedException
     {
         trial.bumpSession(self);
         messageTo(self, "performHeal", trial.getSessionDict(self), 10.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnExitedCombat(obj_id self) throws InterruptedException
     {
         trial.bumpSession(self);
         return SCRIPT_CONTINUE;
     }
+
     public int performHeal(obj_id self, dictionary params) throws InterruptedException
     {
         if (!trial.verifySession(self, params))
@@ -88,8 +104,10 @@ public class medic extends script.base_script
         obj_id[] targets = getObjectsInRange(getLocation(self), 25.0f);
         Vector toHeal = new Vector();
         toHeal.setSize(0);
-        for (obj_id target : targets) {
-            if (!isValidTarget(self, target)) {
+        for (obj_id target : targets)
+        {
+            if (!isValidTarget(self, target))
+            {
                 continue;
             }
             toHeal.add(target);
@@ -100,11 +118,13 @@ public class medic extends script.base_script
             return SCRIPT_CONTINUE;
         }
         int valueHealed = 0;
-        for (Object o : toHeal) {
+        for (Object o : toHeal)
+        {
             int curHealth = getHealth(((obj_id) o));
             int maxHealth = getMaxHealth(((obj_id) o));
             int difference = maxHealth - curHealth;
-            if (difference > 0) {
+            if (difference > 0)
+            {
                 int capIt = difference > 5000 ? 5000 : difference;
                 addToHealth(((obj_id) o), capIt);
                 valueHealed += capIt;
@@ -118,6 +138,7 @@ public class medic extends script.base_script
         messageTo(self, "performHeal", trial.getSessionDict(self), rand(15.0f, 30.0f), false);
         return SCRIPT_CONTINUE;
     }
+
     public boolean isValidTarget(obj_id self, obj_id target) throws InterruptedException
     {
         if (!isMob(target) && !isPlayer(target))
@@ -140,17 +161,15 @@ public class medic extends script.base_script
         {
             return false;
         }
-        if (!getCreatureCoverVisibility(target))
-        {
-            return false;
-        }
-        return true;
+        return getCreatureCoverVisibility(target);
     }
+
     public int OnDeath(obj_id self, obj_id killer, obj_id corpseId) throws InterruptedException
     {
         trial.bumpSession(self);
         return SCRIPT_CONTINUE;
     }
+
     public void sendGodMessage(Vector gods, String message) throws InterruptedException
     {
         if (gods != null || gods.size() > 0)

@@ -1,5 +1,11 @@
 package script.systems.skills.performance;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.sui;
 import script.library.xp;
@@ -9,6 +15,7 @@ public class dance_advancement extends script.base_script
     public static final String ADVANCEMENT_OBJVAR = "dance_advancement";
     public static final string_id SUI_PROMPT0 = new string_id("dance_advancement", "sui_prompt0");
     public static final string_id SUI_PROMPT1 = new string_id("dance_advancement", "sui_prompt1");
+
     public dance_advancement()
     {
     }

@@ -1,40 +1,51 @@
 package script.city;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.utils;
 import script.obj_id;
 
 public class city_pathing_npc extends script.base_script
 {
-    public city_pathing_npc()
-    {
-    }
     public static final int NEXT_ACTION_NONE = -1;
     public static final int NEXT_ACTION_FACETO = 0;
     public static final int NEXT_ACTION_DOANIM = 1;
     public static final int NEXT_ACTION_PATHTONEXT = 2;
     public static final int LAST_POSSIBLE_ACTION = 2;
+    public city_pathing_npc()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         executeAction(self, NEXT_ACTION_NONE);
         return SCRIPT_CONTINUE;
     }
+
     public int resumeDefaultCalmBehavior(obj_id self, dictionary params) throws InterruptedException
     {
         executeAction(self, NEXT_ACTION_NONE);
         return SCRIPT_OVERRIDE;
     }
+
     public int OnMovePathComplete(obj_id self) throws InterruptedException
     {
         executeAction(self, NEXT_ACTION_FACETO);
         return SCRIPT_CONTINUE;
     }
+
     public int OnMovePathNotFound(obj_id self) throws InterruptedException
     {
         executeAction(self, NEXT_ACTION_PATHTONEXT);
         checkForFeetGluedToFloor(self);
         return SCRIPT_CONTINUE;
     }
+
     public void executeAction(obj_id npc, int lastAction) throws InterruptedException
     {
         obj_id currentStop = utils.getObjIdScriptVar(npc, "pathing.currentStop");
@@ -72,12 +83,14 @@ public class city_pathing_npc extends script.base_script
         }
         executeAction(npc, lastAction);
     }
+
     public int handleNextAction(obj_id self, dictionary params) throws InterruptedException
     {
         int nextAction = params.getInt("nextAction");
         executeAction(self, nextAction);
         return SCRIPT_CONTINUE;
     }
+
     public void doFacingAction(obj_id npc, obj_id currentStop) throws InterruptedException
     {
         obj_id objThingToFace = utils.stringToObjId(Integer.toString(getIntObjVar(currentStop, "faceto")));
@@ -89,6 +102,7 @@ public class city_pathing_npc extends script.base_script
         parms.put("nextAction", NEXT_ACTION_DOANIM);
         messageTo(npc, "handleNextAction", parms, 3, false);
     }
+
     public void executeAnimation(obj_id npc, obj_id currentStop) throws InterruptedException
     {
         String animToDo = getStringObjVar(currentStop, "anim");
@@ -105,6 +119,7 @@ public class city_pathing_npc extends script.base_script
         parms.put("nextAction", NEXT_ACTION_PATHTONEXT);
         messageTo(npc, "handleNextAction", parms, delay, false);
     }
+
     public void pathToNext(obj_id npc, obj_id currentStop) throws InterruptedException
     {
         if (hasObjVar(currentStop, "destination"))
@@ -113,16 +128,18 @@ public class city_pathing_npc extends script.base_script
             utils.setScriptVar(npc, "pathing.currentStop", dest);
             pathTo(npc, getLocation(dest));
         }
-        else 
+        else
         {
             executeAction(npc, NEXT_ACTION_NONE);
         }
     }
+
     public void checkForFeetGluedToFloor(obj_id self) throws InterruptedException
     {
         setObjVar(self, "mightBeStuck", getLocation(self));
         messageTo(self, "amIStuck", null, 300, false);
     }
+
     public int amIStuck(obj_id self, dictionary params) throws InterruptedException
     {
         if (getLocation(self).equals(getLocationObjVar(self, "mightBeStuck")))

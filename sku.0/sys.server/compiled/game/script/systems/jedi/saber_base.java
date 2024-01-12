@@ -1,5 +1,11 @@
 package script.systems.jedi;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -159,7 +165,6 @@ public class saber_base extends script.base_script
         if (idx >= saberList.size())
         {
             sendSystemMessage(player, new string_id("jedi_spam", "saber_cant_convert"));
-            return;
         }
         else
         {
@@ -188,7 +193,6 @@ public class saber_base extends script.base_script
             {
                 CustomerServiceLog("jedi_saber", "%TU saber dismantling, Didn't add any pearls because Inventory of player was full.", player);
                 sendSystemMessage(player, new string_id("jedi_spam", "saber_convert_full"));
-                return;
             }
             else
             {
@@ -208,7 +212,6 @@ public class saber_base extends script.base_script
                 CustomerServiceLog("jedi_saber", "%TU saber dismantling, completed dismantling saber and destroyed the object which was %TT.", player, self);
                 destroyObject(self);
                 sendSystemMessage(player, new string_id("jedi_spam", "saber_convert_complete"));
-                return;
             }
         }
     }

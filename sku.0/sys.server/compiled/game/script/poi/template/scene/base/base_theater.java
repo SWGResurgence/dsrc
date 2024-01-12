@@ -1,5 +1,11 @@
 package script.poi.template.scene.base;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.factions;
 import script.library.poi;
@@ -11,6 +17,7 @@ public class base_theater extends script.base_script
     public base_theater()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setObjVar(self, theater.VAR_STAMP, getGameTime());
@@ -21,14 +28,16 @@ public class base_theater extends script.base_script
         messageTo(self, theater.HANDLE_THEATER_SETUP, null, 5, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDetach(obj_id self) throws InterruptedException
     {
         theater.cleanup(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
-        if (self.isBuildoutObject() == false)
+        if (!self.isBuildoutObject())
         {
             int now = getGameTime();
             int stamp = getIntObjVar(self, theater.VAR_STAMP);
@@ -45,11 +54,13 @@ public class base_theater extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         theater.cleanup(self);
         return SCRIPT_CONTINUE;
     }
+
     public int startTheaterFromBuildout(obj_id self, dictionary params) throws InterruptedException
     {
         removeObjVar(self, "intPrespawned");
@@ -61,6 +72,7 @@ public class base_theater extends script.base_script
         theater.spawnDatatableOffsetQueued(self, 0);
         return SCRIPT_CONTINUE;
     }
+
     public int handleTheaterSetup(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, theater.VAR_THEATER_BASE) && !hasObjVar(self, theater.VAR_CHILDREN))
@@ -69,6 +81,7 @@ public class base_theater extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleTheaterComplete(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, poi.POI_BASE))
@@ -77,7 +90,7 @@ public class base_theater extends script.base_script
             if ((master == null) || (master == obj_id.NULL_ID))
             {
             }
-            else 
+            else
             {
                 params.put(theater.DICT_MASTER, self);
                 messageTo(master, theater.HANDLE_THEATER_COMPLETE, params, 1, false);
@@ -85,6 +98,7 @@ public class base_theater extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int theaterFinished(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, poi.POI_BASE))
@@ -100,6 +114,7 @@ public class base_theater extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int continueTheater(obj_id self, dictionary params) throws InterruptedException
     {
         int intIndex = params.getInt("intIndex");

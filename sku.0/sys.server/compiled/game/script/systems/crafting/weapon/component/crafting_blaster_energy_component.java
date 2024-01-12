@@ -1,5 +1,11 @@
 package script.systems.crafting.weapon.component;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.craftinglib;
 import script.resource_weight;
 
@@ -48,6 +54,7 @@ public class crafting_blaster_energy_component extends script.systems.crafting.w
                                     new resource_weight.weight(craftinglib.RESOURCE_CONDUCTIVITY, 1)
                             })
             };
+
     public crafting_blaster_energy_component()
     {
     }

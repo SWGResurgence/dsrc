@@ -5,6 +5,12 @@ package script.item;/*
 
 */
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.ai_lib;
 import script.library.create;
@@ -34,7 +40,7 @@ public class transport_coordination_terminal extends script.base_script
         return SCRIPT_CONTINUE;
     }
 
-    public int OnAboutToRecieveItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item)
+    public int OnAboutToReceiveItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item)
     {
         if (isPlayer(transferer))
         {
@@ -54,6 +60,7 @@ public class transport_coordination_terminal extends script.base_script
             return SCRIPT_OVERRIDE;
         }
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi)
     {
         mi.addRootMenu(menu_info_types.ITEM_USE, new string_id("Travel"));
@@ -64,6 +71,7 @@ public class transport_coordination_terminal extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         obj_id[] contents = getContents(self);
@@ -82,7 +90,7 @@ public class transport_coordination_terminal extends script.base_script
                         setObjVar(self, VAR_ITV_TRANSIT_PREFIX + i + VAR_ITV_TRANSIT_SUFFIX, getStringObjVar(contents[i], VAR_ITV_NAME + i + ".2"));
                     }
                 }
-                broadcast(self,"Transit locations have been updated.");
+                broadcast(self, "Transit locations have been updated.");
             }
         }
         if (item == menu_info_types.ITEM_USE)
@@ -97,7 +105,7 @@ public class transport_coordination_terminal extends script.base_script
                     {
                         locationNames[i] = String.valueOf(getLocationObjVar(contents[i], VAR_ITV_LOCATION_ROOT + i + ".1"));
                         locationNames[i++] = String.valueOf(getLocationObjVar(contents[i], VAR_ITV_LOCATION_ROOT + i + ".2"));
-                        descNames[i++] = getStringObjVar(contents[i], VAR_ITV_NAME + i + ".2");
+                        descNames[i++] = getStringObjVar(contents[i], VAR_ITV_NAME + i + ".1");
                         descNames[i++] = getStringObjVar(contents[i], VAR_ITV_NAME + i + ".2");
                     }
                 }
@@ -109,6 +117,7 @@ public class transport_coordination_terminal extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleLocationSelect(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);

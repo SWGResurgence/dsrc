@@ -1,5 +1,11 @@
 package script.theme_park.stp;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.colors_hex;
 import script.library.sui;
@@ -25,7 +31,7 @@ public class door_corvette extends script.base_script
         if (item == menu_info_types.ITEM_USE)
         {
             String title = "Confirm Departure";
-            String prompt = colors_hex.HEADER + colors_hex.AQUAMARINE +  "Are you sure you want to head back to Mos Deltro?" + colors_hex.FOOTER;
+            String prompt = colors_hex.HEADER + colors_hex.AQUAMARINE + "Are you sure you want to head back to Mos Deltro?" + colors_hex.FOOTER;
             sui.msgbox(self, player, prompt, sui.OK_CANCEL, title, "handleConfirm");
         }
         return SCRIPT_CONTINUE;

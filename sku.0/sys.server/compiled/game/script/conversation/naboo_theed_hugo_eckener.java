@@ -1,78 +1,102 @@
 package script.conversation;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.*;
 
 public class naboo_theed_hugo_eckener extends script.base_script
 {
+    public static String c_stringFile = "conversation/naboo_theed_hugo_eckener";
+
     public naboo_theed_hugo_eckener()
     {
     }
-    public static String c_stringFile = "conversation/naboo_theed_hugo_eckener";
+
     public boolean naboo_theed_hugo_eckener_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
+
     public boolean naboo_theed_hugo_eckener_condition_readyForHugo(obj_id player, obj_id npc) throws InterruptedException
     {
         return badge.hasBadge(player, "bdg_content_rsf_clearance_4");
     }
+
     public boolean naboo_theed_hugo_eckener_condition_needsSkaakQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return !groundquests.isQuestActive(player, "naboo_theed_goto_toff") && !groundquests.isQuestActive(player, "naboo_theed_hugo_skaak") && !groundquests.hasCompletedQuest(player, "naboo_theed_hugo_skaak");
     }
+
     public boolean naboo_theed_hugo_eckener_condition_completedSkaakAndDarkwalker(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.hasCompletedQuest(player, "naboo_theed_hugo_skaak") && groundquests.hasCompletedQuest(player, "naboo_theed_hugo_darkwalker");
     }
+
     public boolean naboo_theed_hugo_eckener_condition_hasSkaakOrDarkwalkerQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "naboo_theed_goto_toff") || groundquests.isQuestActive(player, "naboo_theed_hugo_skaak") || groundquests.hasCompletedQuest(player, "naboo_theed_hugo_skaak") || groundquests.isQuestActive(player, "naboo_theed_goto_jorgellansel") || groundquests.isQuestActive(player, "naboo_theed_hugo_darkwalker") || groundquests.hasCompletedQuest(player, "naboo_theed_hugo_darkwalker");
     }
+
     public boolean naboo_theed_hugo_eckener_condition_needsDarkwalkerQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return !groundquests.isQuestActive(player, "naboo_theed_goto_jorgellansel") && !groundquests.isQuestActive(player, "naboo_theed_hugo_darkwalker") && !groundquests.hasCompletedQuest(player, "naboo_theed_hugo_darkwalker");
     }
+
     public boolean naboo_theed_hugo_eckener_condition_finishedHugo(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isTaskActive(player, "naboo_theed_hugo_rescue", "theed_hugo_rescue_08") || groundquests.hasCompletedQuest(player, "naboo_theed_hugo_rescue") || groundquests.isTaskActive(player, "naboo_theed_hugo_rescue_skaak", "theed_hugo_rescue_08") || groundquests.hasCompletedQuest(player, "naboo_theed_hugo_rescue_skaak") || groundquests.isTaskActive(player, "naboo_theed_hugo_rescue_darkwalker", "theed_hugo_rescue_08") || groundquests.hasCompletedQuest(player, "naboo_theed_hugo_rescue_darkwalker"));
     }
+
     public boolean naboo_theed_hugo_eckener_condition_isOnBorvoQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isQuestActive(player, "naboo_theed_hugo_borvo");
     }
+
     public boolean naboo_theed_hugo_eckener_condition_lastStepBorvoQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return groundquests.isTaskActive(player, "naboo_theed_hugo_borvo", "theed_hugo_borvo_05") || groundquests.hasCompletedQuest(player, "naboo_theed_hugo_borvo");
     }
+
     public boolean naboo_theed_hugo_eckener_condition_lastStepRescueQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isTaskActive(player, "naboo_theed_hugo_rescue", "theed_hugo_rescue_07") || groundquests.isTaskActive(player, "naboo_theed_hugo_rescue_skaak", "theed_hugo_rescue_07") || groundquests.isTaskActive(player, "naboo_theed_hugo_rescue_darkwalker", "theed_hugo_rescue_07"));
     }
+
     public boolean naboo_theed_hugo_eckener_condition_onRescueQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         return (groundquests.isQuestActive(player, "naboo_theed_hugo_rescue") || groundquests.isQuestActive(player, "naboo_theed_hugo_rescue_skaak") || groundquests.isQuestActive(player, "naboo_theed_hugo_rescue_darkwalker"));
     }
+
     public boolean naboo_theed_hugo_eckener_condition_offerSkaakLoc(obj_id player, obj_id npc) throws InterruptedException
     {
         return !groundquests.isQuestActive(player, "naboo_theed_hugo_goto_skaak");
     }
+
     public boolean naboo_theed_hugo_eckener_condition_offerDarkwalkerLoc(obj_id player, obj_id npc) throws InterruptedException
     {
         return !groundquests.isQuestActive(player, "naboo_theed_hugo_goto_darkwalker");
     }
+
     public void naboo_theed_hugo_eckener_action_grantDarkwalkerQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.requestGrantQuest(player, "naboo_theed_goto_jorgellansel");
     }
+
     public void naboo_theed_hugo_eckener_action_grantRescueQuest_skaak(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.requestGrantQuest(player, "naboo_theed_hugo_rescue_skaak");
     }
+
     public void naboo_theed_hugo_eckener_action_grantSkaakQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.requestGrantQuest(player, "naboo_theed_goto_toff");
     }
+
     public void naboo_theed_hugo_eckener_action_grantHugoBorvo(obj_id player, obj_id npc) throws InterruptedException
     {
         if (groundquests.isQuestActive(player, "naboo_theed_goto_pooja"))
@@ -80,44 +104,49 @@ public class naboo_theed_hugo_eckener extends script.base_script
             groundquests.sendSignal(player, "theed_goto_pooja");
         }
         groundquests.requestGrantQuest(player, "naboo_theed_hugo_borvo");
-        return;
     }
+
     public void naboo_theed_hugo_eckener_action_signal_rescue_07(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "theed_hugo_rescue_07");
     }
+
     public void naboo_theed_hugo_eckener_action_endGotoHugo(obj_id player, obj_id npc) throws InterruptedException
     {
         if (groundquests.isQuestActive(player, "naboo_theed_goto_hugo"))
         {
             groundquests.sendSignal(player, "theed_goto_hugo");
         }
-        return;
     }
+
     public void naboo_theed_hugo_eckener_action_endHugoBorvoQuest(obj_id player, obj_id npc) throws InterruptedException
     {
         if (groundquests.isTaskActive(player, "naboo_theed_hugo_borvo", "theed_hugo_borvo_05"))
         {
             groundquests.sendSignal(player, "theed_hugo_borvo_05");
         }
-        return;
     }
+
     public void naboo_theed_hugo_eckener_action_endReturnToHugo(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.sendSignal(player, "theed_hugo_return");
     }
+
     public void naboo_theed_hugo_eckener_action_grantDarkwalkerLoc(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.requestGrantQuest(player, "naboo_theed_hugo_goto_darkwalker");
     }
+
     public void naboo_theed_hugo_eckener_action_grantSkaakLoc(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.requestGrantQuest(player, "naboo_theed_hugo_goto_skaak");
     }
+
     public void naboo_theed_hugo_eckener_action_grantRescueQuest_darkwalker(obj_id player, obj_id npc) throws InterruptedException
     {
         groundquests.requestGrantQuest(player, "naboo_theed_hugo_rescue_darkwalker");
     }
+
     public int naboo_theed_hugo_eckener_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_100"))
@@ -133,6 +162,7 @@ public class naboo_theed_hugo_eckener extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_theed_hugo_eckener_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_59"))
@@ -152,7 +182,7 @@ public class naboo_theed_hugo_eckener extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_93");
@@ -161,7 +191,7 @@ public class naboo_theed_hugo_eckener extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_theed_hugo_eckener.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -181,6 +211,7 @@ public class naboo_theed_hugo_eckener extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_theed_hugo_eckener_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_93"))
@@ -207,7 +238,7 @@ public class naboo_theed_hugo_eckener extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_96");
@@ -220,7 +251,7 @@ public class naboo_theed_hugo_eckener extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_theed_hugo_eckener.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -230,6 +261,7 @@ public class naboo_theed_hugo_eckener extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_theed_hugo_eckener_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_96"))
@@ -256,6 +288,7 @@ public class naboo_theed_hugo_eckener extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_theed_hugo_eckener_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_66"))
@@ -275,7 +308,7 @@ public class naboo_theed_hugo_eckener extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_78");
@@ -284,7 +317,7 @@ public class naboo_theed_hugo_eckener extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_theed_hugo_eckener.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -309,7 +342,7 @@ public class naboo_theed_hugo_eckener extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_86");
@@ -318,7 +351,7 @@ public class naboo_theed_hugo_eckener extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_theed_hugo_eckener.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -328,6 +361,7 @@ public class naboo_theed_hugo_eckener extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_theed_hugo_eckener_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_67"))
@@ -347,7 +381,7 @@ public class naboo_theed_hugo_eckener extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_70");
@@ -356,7 +390,7 @@ public class naboo_theed_hugo_eckener extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_theed_hugo_eckener.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -366,6 +400,7 @@ public class naboo_theed_hugo_eckener extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_theed_hugo_eckener_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_70"))
@@ -399,7 +434,7 @@ public class naboo_theed_hugo_eckener extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_74");
@@ -416,7 +451,7 @@ public class naboo_theed_hugo_eckener extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_theed_hugo_eckener.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -426,6 +461,7 @@ public class naboo_theed_hugo_eckener extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_theed_hugo_eckener_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_74"))
@@ -445,7 +481,7 @@ public class naboo_theed_hugo_eckener extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_78");
@@ -454,7 +490,7 @@ public class naboo_theed_hugo_eckener extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_theed_hugo_eckener.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -479,7 +515,7 @@ public class naboo_theed_hugo_eckener extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_86");
@@ -488,7 +524,7 @@ public class naboo_theed_hugo_eckener extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_theed_hugo_eckener.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -508,6 +544,7 @@ public class naboo_theed_hugo_eckener extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_theed_hugo_eckener_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_78"))
@@ -523,6 +560,7 @@ public class naboo_theed_hugo_eckener extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_theed_hugo_eckener_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_86"))
@@ -538,6 +576,7 @@ public class naboo_theed_hugo_eckener extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_theed_hugo_eckener_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_54"))
@@ -557,7 +596,7 @@ public class naboo_theed_hugo_eckener extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_58");
@@ -566,7 +605,7 @@ public class naboo_theed_hugo_eckener extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_theed_hugo_eckener.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -576,6 +615,7 @@ public class naboo_theed_hugo_eckener extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_theed_hugo_eckener_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_58"))
@@ -595,7 +635,7 @@ public class naboo_theed_hugo_eckener extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_71");
@@ -604,7 +644,7 @@ public class naboo_theed_hugo_eckener extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_theed_hugo_eckener.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -614,6 +654,7 @@ public class naboo_theed_hugo_eckener extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_theed_hugo_eckener_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_71"))
@@ -640,7 +681,7 @@ public class naboo_theed_hugo_eckener extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_79");
@@ -653,7 +694,7 @@ public class naboo_theed_hugo_eckener extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_theed_hugo_eckener.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -663,6 +704,7 @@ public class naboo_theed_hugo_eckener extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_theed_hugo_eckener_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_79"))
@@ -693,7 +735,7 @@ public class naboo_theed_hugo_eckener extends script.base_script
                 if (hasResponse)
                 {
                     int responseIndex = 0;
-                    string_id responses[] = new string_id[numberOfResponses];
+                    string_id[] responses = new string_id[numberOfResponses];
                     if (hasResponse0)
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_112");
@@ -702,7 +744,7 @@ public class naboo_theed_hugo_eckener extends script.base_script
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "conversation.naboo_theed_hugo_eckener.branchId");
                     npcEndConversationWithMessage(player, message);
@@ -712,6 +754,7 @@ public class naboo_theed_hugo_eckener extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int naboo_theed_hugo_eckener_handleBranch26(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_112"))
@@ -727,6 +770,7 @@ public class naboo_theed_hugo_eckener extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))
@@ -738,6 +782,7 @@ public class naboo_theed_hugo_eckener extends script.base_script
         setInvulnerable(self, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
@@ -745,6 +790,7 @@ public class naboo_theed_hugo_eckener extends script.base_script
         setInvulnerable(self, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -753,18 +799,21 @@ public class naboo_theed_hugo_eckener extends script.base_script
         faceTo(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
         detachScript(self, "conversation.naboo_theed_hugo_eckener");
         return SCRIPT_CONTINUE;
     }
+
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) throws InterruptedException
     {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -793,7 +842,7 @@ public class naboo_theed_hugo_eckener extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_100");
@@ -801,7 +850,7 @@ public class naboo_theed_hugo_eckener extends script.base_script
                 utils.setScriptVar(player, "conversation.naboo_theed_hugo_eckener.branchId", 2);
                 npcStartConversation(player, npc, "naboo_theed_hugo_eckener", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -836,7 +885,7 @@ public class naboo_theed_hugo_eckener extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_59");
@@ -848,7 +897,7 @@ public class naboo_theed_hugo_eckener extends script.base_script
                 utils.setScriptVar(player, "conversation.naboo_theed_hugo_eckener.branchId", 5);
                 npcStartConversation(player, npc, "naboo_theed_hugo_eckener", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -877,7 +926,7 @@ public class naboo_theed_hugo_eckener extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_66");
@@ -889,7 +938,7 @@ public class naboo_theed_hugo_eckener extends script.base_script
                 utils.setScriptVar(player, "conversation.naboo_theed_hugo_eckener.branchId", 11);
                 npcStartConversation(player, npc, "naboo_theed_hugo_eckener", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -911,7 +960,7 @@ public class naboo_theed_hugo_eckener extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_67");
@@ -919,7 +968,7 @@ public class naboo_theed_hugo_eckener extends script.base_script
                 utils.setScriptVar(player, "conversation.naboo_theed_hugo_eckener.branchId", 12);
                 npcStartConversation(player, npc, "naboo_theed_hugo_eckener", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -947,7 +996,7 @@ public class naboo_theed_hugo_eckener extends script.base_script
             if (hasResponse)
             {
                 int responseIndex = 0;
-                string_id responses[] = new string_id[numberOfResponses];
+                string_id[] responses = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_54");
@@ -955,7 +1004,7 @@ public class naboo_theed_hugo_eckener extends script.base_script
                 utils.setScriptVar(player, "conversation.naboo_theed_hugo_eckener.branchId", 21);
                 npcStartConversation(player, npc, "naboo_theed_hugo_eckener", message, responses);
             }
-            else 
+            else
             {
                 chat.chat(npc, player, message);
             }
@@ -970,6 +1019,7 @@ public class naboo_theed_hugo_eckener extends script.base_script
         chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("naboo_theed_hugo_eckener"))

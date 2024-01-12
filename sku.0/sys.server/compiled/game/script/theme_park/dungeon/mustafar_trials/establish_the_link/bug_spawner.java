@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.mustafar_trials.establish_the_link;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.create;
 import script.library.trial;
@@ -9,14 +15,15 @@ import script.obj_id;
 
 public class bug_spawner extends script.base_script
 {
-    public bug_spawner()
-    {
-    }
     public static final String BUG_COUNT = "spawning.bugCount";
     public static final int BUG_MAX = 8;
     public static final String DRONE = "som_link_lava_beetle_drone";
     public static final String WORKER = "som_link_lava_beetle_worker";
     public static final boolean LOGGING = false;
+    public bug_spawner()
+    {
+    }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         if (trial.isUplinkActive(self))
@@ -35,6 +42,7 @@ public class bug_spawner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "spawnNewBug", null, 5, false);
@@ -43,6 +51,7 @@ public class bug_spawner extends script.base_script
         messageTo(self, "beginRepair", null, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectDamaged(obj_id self, obj_id attacker, obj_id weapon, int damage) throws InterruptedException
     {
         int curHP = getHitpoints(self);
@@ -54,6 +63,7 @@ public class bug_spawner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int beginRepair(obj_id self, dictionary params) throws InterruptedException
     {
         int maxHitPoints = getMaxHitpoints(self);
@@ -65,6 +75,7 @@ public class bug_spawner extends script.base_script
         messageTo(self, "beginRepair", null, 10, false);
         return SCRIPT_CONTINUE;
     }
+
     public int spawnNewBug(obj_id self, dictionary params) throws InterruptedException
     {
         String toSpawn = DRONE;
@@ -82,6 +93,7 @@ public class bug_spawner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int incrementBugCount(obj_id self) throws InterruptedException
     {
         int count = 0;
@@ -93,6 +105,7 @@ public class bug_spawner extends script.base_script
         utils.setScriptVar(self, BUG_COUNT, count);
         return count;
     }
+
     public int decrementBugCount(obj_id self) throws InterruptedException
     {
         int count = 0;
@@ -108,6 +121,7 @@ public class bug_spawner extends script.base_script
         utils.setScriptVar(self, BUG_COUNT, count);
         return count;
     }
+
     public boolean canSpawnMoreBugs(obj_id self) throws InterruptedException
     {
         if (!utils.hasScriptVar(self, BUG_COUNT))
@@ -123,6 +137,7 @@ public class bug_spawner extends script.base_script
         doLogging("canSpawnMoreBugs", "Bug max exceeded, stop spawning bugs");
         return false;
     }
+
     public int droneDied(obj_id self, dictionary params) throws InterruptedException
     {
         decrementBugCount(self);
@@ -131,12 +146,13 @@ public class bug_spawner extends script.base_script
             messageTo(self, "spawnNewBug", null, 0, false);
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             doLogging("droneDied", "Cannot spawn more bugs because limit has been reached");
             return SCRIPT_CONTINUE;
         }
     }
+
     public void doLogging(String section, String message) throws InterruptedException
     {
         if (LOGGING || trial.UPLINK_LOGGING)

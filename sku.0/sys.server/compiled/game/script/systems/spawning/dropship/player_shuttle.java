@@ -1,5 +1,11 @@
 package script.systems.spawning.dropship;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.location;
 import script.obj_id;
@@ -35,7 +41,7 @@ public class player_shuttle extends script.systems.spawning.dropship.base
         if (params != null)
         {
             location[] locList = params.getLocationArray("explosionLocaitonList");
-            if (locList != null && locList.length > 0)
+            if (locList != null)
             {
                 for (location aLocList : locList)
                 {

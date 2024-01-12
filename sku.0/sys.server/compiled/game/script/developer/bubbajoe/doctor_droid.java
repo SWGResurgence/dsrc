@@ -4,6 +4,12 @@ package script.developer.bubbajoe;/*
 @Purpose: Medic Summon. Battlefield 2.0 reward.
 */
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
@@ -16,6 +22,7 @@ public class doctor_droid extends script.base_script
         setDescriptionStringId(self, new string_id("This FX-7 medical droid is a prototype model. It is designed to stay stationary and heal all those who are nearby."));
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self)//dynamic load
     {
         createTriggerVolume("healDroid", 3.0f, true);
@@ -54,17 +61,18 @@ public class doctor_droid extends script.base_script
             ai_lib.aiStopFollowing(self);
             stop(self);
             faceToBehavior(self, breacher);
-            buff.applyBuff(breacher,"me_buff_health_2", (float) cooldownTime, 265);
-            buff.applyBuff(breacher,"me_buff_action_3", (float) cooldownTime, 265);
-            buff.applyBuff(breacher,"me_buff_strength_3", (float) cooldownTime, 100);
-            buff.applyBuff(breacher,"me_buff_agility_3", (float) cooldownTime, 100);
-            buff.applyBuff(breacher,"me_buff_precision_3", (float) cooldownTime, 100);
-            buff.applyBuff(breacher,"me_buff_melee_gb_1", (float) cooldownTime, 15);
-            buff.applyBuff(breacher,"me_buff_ranged_gb_1", (float) cooldownTime, 15);
+            buff.applyBuff(breacher, "me_buff_health_2", (float) cooldownTime, 265);
+            buff.applyBuff(breacher, "me_buff_action_3", (float) cooldownTime, 265);
+            buff.applyBuff(breacher, "me_buff_strength_3", (float) cooldownTime, 100);
+            buff.applyBuff(breacher, "me_buff_agility_3", (float) cooldownTime, 100);
+            buff.applyBuff(breacher, "me_buff_precision_3", (float) cooldownTime, 100);
+            buff.applyBuff(breacher, "me_buff_melee_gb_1", (float) cooldownTime, 15);
+            buff.applyBuff(breacher, "me_buff_ranged_gb_1", (float) cooldownTime, 15);
             setObjVar(breacher, "healDroid.cooldown", getGameTime() + cooldownTime);
         }
         return SCRIPT_CONTINUE;
     }
+
     public String convertToBinary(String text)
     {
         String binary = "";

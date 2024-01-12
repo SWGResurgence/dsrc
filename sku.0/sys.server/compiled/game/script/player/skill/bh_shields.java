@@ -1,5 +1,11 @@
 package script.player.skill;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.buff;
 import script.obj_id;
 
@@ -8,6 +14,7 @@ public class bh_shields extends script.base_script
     public bh_shields()
     {
     }
+
     public int OnCreatureDamaged(obj_id self, obj_id attacker, obj_id weapon, int[] damage) throws InterruptedException
     {
         String shield_buff = "bh_shields";
@@ -17,8 +24,8 @@ public class bh_shields extends script.base_script
             detachScript(self, "player.skill.bh_shields");
             return SCRIPT_CONTINUE;
         }
-        int stackCount = (int)buff.getBuffStackCount(self, shield_buff);
-        int timeLeft = (int)buff.getBuffTimeRemaining(self, "bh_shields");
+        int stackCount = (int) buff.getBuffStackCount(self, shield_buff);
+        int timeLeft = (int) buff.getBuffTimeRemaining(self, "bh_shields");
         if (stackCount < 2 || timeLeft < 2)
         {
             buff.applyBuff(self, "bh_shields_block");

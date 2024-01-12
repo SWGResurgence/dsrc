@@ -1,5 +1,11 @@
 package script.systems.crafting.food.crafted_items;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 public class crafting_artisan_food extends script.systems.crafting.food.crafted_items.crafting_food
 {
     public static final String[] REQUIRED_SKILLS =
@@ -14,6 +20,7 @@ public class crafting_artisan_food extends script.systems.crafting.food.crafted_
             {
                     "general_experimentation"
             };
+
     public crafting_artisan_food()
     {
     }

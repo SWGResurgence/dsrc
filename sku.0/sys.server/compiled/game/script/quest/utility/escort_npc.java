@@ -1,5 +1,11 @@
 package script.quest.utility;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.ai_lib;
 import script.menu_info;
 import script.menu_info_types;
@@ -11,6 +17,7 @@ public class escort_npc extends script.base_script
     public escort_npc()
     {
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!hasObjVar(self, "quests.supressFollowMenu") && getMaster(self) == player)
@@ -19,6 +26,7 @@ public class escort_npc extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (hasObjVar(self, "quests.supressFollowMenu") || getMaster(self) != player)

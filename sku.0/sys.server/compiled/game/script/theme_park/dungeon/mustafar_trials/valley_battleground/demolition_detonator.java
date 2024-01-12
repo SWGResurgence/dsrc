@@ -1,5 +1,11 @@
 package script.theme_park.dungeon.mustafar_trials.valley_battleground;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.trial;
 import script.library.utils;
 import script.menu_info;
@@ -9,13 +15,14 @@ import script.string_id;
 
 public class demolition_detonator extends script.base_script
 {
-    public demolition_detonator()
-    {
-    }
     public static final String STF = "npc_landmines";
     public static final string_id DETONATE = new string_id(STF, "detonate_charge");
     public static final string_id PAGE = new string_id(STF, "page_charge");
     public static final boolean LOGGING = false;
+    public demolition_detonator()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!utils.verifyLocationBasedDestructionAnchor(self, 500))
@@ -26,6 +33,7 @@ public class demolition_detonator extends script.base_script
         mi.addSubMenu(root_menu, menu_info_types.ITEM_USE_OTHER, PAGE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)
@@ -38,14 +46,17 @@ public class demolition_detonator extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public void detonateCharge(obj_id player, obj_id detonator) throws InterruptedException
     {
         if (!utils.hasScriptVar(detonator, "chargeId"))
@@ -63,8 +74,8 @@ public class demolition_detonator extends script.base_script
         }
         messageTo(charge, "detonateCharge", null, 0, false);
         destroyObject(detonator);
-        return;
     }
+
     public void pageDetonationCharge(obj_id player, obj_id detonator) throws InterruptedException
     {
         if (!utils.hasScriptVar(detonator, "chargeId"))
@@ -82,6 +93,7 @@ public class demolition_detonator extends script.base_script
         }
         messageTo(charge, "pageCharge", null, 0, false);
     }
+
     public void doLogging(String section, String message) throws InterruptedException
     {
         if (LOGGING || trial.VALLEY_LOGGING)

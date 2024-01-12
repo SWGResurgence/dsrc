@@ -1,5 +1,11 @@
 package script.theme_park.dungeon;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.create;
@@ -13,18 +19,21 @@ public class empire_day_interior_npc_spawner extends script.base_script
     public empire_day_interior_npc_spawner()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         //CustomerServiceLog("holidayEvent", "empire_day_interior_npc_spawner.OnAttach: Initialized.");
         messageTo(self, "beginEmpireDaySpawning", null, (holiday.EMPIRE_DAY_EVENT_START_DELAY + 300), false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         //CustomerServiceLog("holidayEvent", "empire_day_interior_npc_spawner.OnInitialize: Initialized.");
         messageTo(self, "beginEmpireDaySpawning", null, (holiday.EMPIRE_DAY_EVENT_START_DELAY + 300), false);
         return SCRIPT_CONTINUE;
     }
+
     public int beginEmpireDaySpawning(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isEmpireDayRunning())
@@ -58,7 +67,7 @@ public class empire_day_interior_npc_spawner extends script.base_script
                     spawnCreatures(x, datatable, self);
                 }
             }
-            else 
+            else
             {
                 spawnCreatures(x, datatable, self);
             }
@@ -74,6 +83,7 @@ public class empire_day_interior_npc_spawner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tellingMomIDied(obj_id self, dictionary params) throws InterruptedException
     {
         int spawn_num = params.getInt("spawnNumber");
@@ -85,10 +95,12 @@ public class empire_day_interior_npc_spawner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int randomCreatureDied(obj_id self, dictionary params) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public void attachRoomScripts(obj_id self, String datatable) throws InterruptedException
     {
         String[] roomsToLock = dataTableGetStringColumnNoDefaults(datatable, "special_room");
@@ -113,7 +125,7 @@ public class empire_day_interior_npc_spawner extends script.base_script
             {
                 roomObj = self;
             }
-            else 
+            else
             {
                 roomObj = getCellId(self, roomName);
             }
@@ -121,8 +133,8 @@ public class empire_day_interior_npc_spawner extends script.base_script
             setObjVar(self, "set_room", passThrough);
             passThrough = passThrough + 1;
         }
-        return;
     }
+
     public void setRoomObjVars(obj_id self, String datatable) throws InterruptedException
     {
         String[] roomsToSet = dataTableGetStringColumnNoDefaults(datatable, "room_objvar");
@@ -151,8 +163,8 @@ public class empire_day_interior_npc_spawner extends script.base_script
             setObjVar(roomObj, roomObjVar, roomObjVarValue);
             passThrough = passThrough + 1;
         }
-        return;
     }
+
     public void spawnCreatures(int x, String datatable, obj_id self) throws InterruptedException
     {
         //CustomerServiceLog("holidayEvent", "empire_day_interior_npc_spawner.spawnCreatures: Init");
@@ -199,7 +211,8 @@ public class empire_day_interior_npc_spawner extends script.base_script
         if (scriptList != null && !scriptList.equals(""))
         {
             String[] scriptArray = split(scriptList, ',');
-            for (String s : scriptArray) {
+            for (String s : scriptArray)
+            {
                 attachScript(spawnedCreature, s);
             }
         }
@@ -248,13 +261,13 @@ public class empire_day_interior_npc_spawner extends script.base_script
                 }
             }
         }
-        else 
+        else
         {
             String objVarList = dataTableGetString(datatable, x, "spawn_objvar");
             setCreatureObjVars(spawnedCreature, objVarList);
         }
-        return;
     }
+
     public int animatedMood(obj_id self, dictionary params) throws InterruptedException
     {
         int x = params.getInt("x");
@@ -272,6 +285,7 @@ public class empire_day_interior_npc_spawner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void setCreatureObjVars(obj_id creature, String objVarList) throws InterruptedException
     {
         if (objVarList == null || objVarList.equals(""))
@@ -279,13 +293,15 @@ public class empire_day_interior_npc_spawner extends script.base_script
             return;
         }
         String[] pairs = split(objVarList, ',');
-        for (String pair : pairs) {
+        for (String pair : pairs)
+        {
             String[] objVarToSet = split(pair, '=');
             String objVarValue = objVarToSet[1];
             String[] objVarNameAndType = split(objVarToSet[0], ':');
             String objVarType = objVarNameAndType[0];
             String objVarName = objVarNameAndType[1];
-            switch (objVarType) {
+            switch (objVarType)
+            {
                 case "string":
                     setObjVar(creature, objVarName, objVarValue);
                     break;
@@ -305,11 +321,13 @@ public class empire_day_interior_npc_spawner extends script.base_script
             }
         }
     }
+
     public boolean isEmpireDayRunning() throws InterruptedException
     {
         //CustomerServiceLog("holidayEvent", "empire_day_interior_npc_spawner.isEmpireDayRunning: Initializing check for building.");
         String empiredayRunning = getConfigSetting("GameServer", "empireday_ceremony");
-        if(empiredayRunning == null || empiredayRunning.equals("0") || empiredayRunning.equals("false")){
+        if (empiredayRunning == null || empiredayRunning.equals("0") || empiredayRunning.equals("false"))
+        {
             return false;
         }
         String empiredayString = getCurrentUniverseWideEvents();
@@ -323,7 +341,7 @@ public class empire_day_interior_npc_spawner extends script.base_script
                 //CustomerServiceLog("holidayEvent", "empire_day_interior_npc_spawner.isEmpireDayRunning: There is a config that shows the event is running. Sending a message to later to see if we tried to spawn too soon.");
                 messageTo(self, "beginEmpireDaySpawning", null, (holiday.EMPIRE_DAY_EVENT_START_DELAY + 300), false);
             }
-            else 
+            else
             {
                 //CustomerServiceLog("holidayEvent", "empire_day_interior_npc_spawner.isEmpireDayRunning: There is a config that shows the event is NOT running.");
             }

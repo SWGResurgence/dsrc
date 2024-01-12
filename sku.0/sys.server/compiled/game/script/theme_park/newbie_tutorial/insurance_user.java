@@ -1,5 +1,11 @@
 package script.theme_park.newbie_tutorial;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.chat;
 import script.menu_info;
@@ -11,11 +17,13 @@ public class insurance_user extends script.theme_park.newbie_tutorial.tutorial_b
     public insurance_user()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "handleUseBank", null, rand(15, 30), false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         setObjVar(self, "newbie.playingAnim", true);
@@ -25,17 +33,18 @@ public class insurance_user extends script.theme_park.newbie_tutorial.tutorial_b
         switch (rand(1, 3))
         {
             case 1:
-            doAnimationAction(self, "alert");
-            break;
+                doAnimationAction(self, "alert");
+                break;
             case 2:
-            doAnimationAction(self, "greet");
-            break;
+                doAnimationAction(self, "greet");
+                break;
             case 3:
-            doAnimationAction(self, "hug_self");
-            break;
+                doAnimationAction(self, "hug_self");
+                break;
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleUseTerminal(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id bldg = getTopMostContainer(self);
@@ -44,6 +53,7 @@ public class insurance_user extends script.theme_park.newbie_tutorial.tutorial_b
         doAnimationAction(self, "manipulate_medium");
         return SCRIPT_CONTINUE;
     }
+
     public int handleUseBank(obj_id self, dictionary params) throws InterruptedException
     {
         messageTo(self, "handleUseTerminal", null, 5, false);

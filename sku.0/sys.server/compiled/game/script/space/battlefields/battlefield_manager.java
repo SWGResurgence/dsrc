@@ -1,5 +1,11 @@
 package script.space.battlefields;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.space_battlefield;
 import script.obj_id;
@@ -9,6 +15,7 @@ public class battlefield_manager extends script.base_script
     public battlefield_manager()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         LOG("space", "manager preloading");
@@ -17,15 +24,18 @@ public class battlefield_manager extends script.base_script
         setObjVar(self, "intPhase", 2);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int bootStrapZone(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("space", "preload compltede");
         return SCRIPT_CONTINUE;
     }
+
     public int shipHyperspacing(obj_id self, dictionary params) throws InterruptedException
     {
         int intPhase = getIntObjVar(self, "intPhase");
@@ -53,12 +63,14 @@ public class battlefield_manager extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int nextPhase(obj_id self, dictionary params) throws InterruptedException
     {
         setObjVar(self, "intPhase", 2);
         space_battlefield.doDestroyerPhase(self);
         return SCRIPT_CONTINUE;
     }
+
     public int resetBattlefield(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("space", "RESETTING");

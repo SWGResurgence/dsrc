@@ -1,36 +1,45 @@
 package script.theme_park.dungeon.mustafar_trials.obiwan_finale;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.utils;
 import script.obj_id;
 
 public class obiwan_dynamic_timeout extends script.base_script
 {
-    public obiwan_dynamic_timeout()
-    {
-    }
     public static final String TRIGGER_VOLUME_OBI = "obiwan_interest_volume";
     public static final float OBI_INTEREST_RADIUS = 7.0f;
     public static final boolean CONST_FLAG_DO_LOGGING = false;
     public static final int OBIWAN_DESPAWN_DELAY = 150;
+    public obiwan_dynamic_timeout()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (!utils.hasScriptVar(self, "player"))
         {
             detachScript(self, "theme_park.dungeon.mustafar_trials.obiwan_finale.obiwan_dynamic_timeout");
         }
-        else 
+        else
         {
             obiwanTriggerVolumeInitializer(self);
             messageTo(self, "obiwanTimeoutDelay", null, OBIWAN_DESPAWN_DELAY, false);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "obiwanTimeoutDelay", null, OBIWAN_DESPAWN_DELAY, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id breacher) throws InterruptedException
     {
         if (isPlayer(breacher) && !isIncapacitated(breacher))
@@ -50,6 +59,7 @@ public class obiwan_dynamic_timeout extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void debugLogging(String section, String message) throws InterruptedException
     {
         if (CONST_FLAG_DO_LOGGING)
@@ -57,20 +67,25 @@ public class obiwan_dynamic_timeout extends script.base_script
             LOG("debug/obiwan_dynamic_timeout/" + section, message);
         }
     }
+
     public void obiwanTriggerVolumeInitializer(obj_id self) throws InterruptedException
     {
         if (!hasTriggerVolume(self, TRIGGER_VOLUME_OBI))
         {
             createTriggerVolume(TRIGGER_VOLUME_OBI, OBI_INTEREST_RADIUS, true);
         }
-        else 
+        else
         {
             obj_id[] triggerVolumeDenizens = getTriggerVolumeContents(self, TRIGGER_VOLUME_OBI);
-            for (obj_id triggerVolumeDenizen : triggerVolumeDenizens) {
-                if (isPlayer(triggerVolumeDenizen) && !isIncapacitated(triggerVolumeDenizen)) {
-                    if (utils.hasScriptVar(self, "player")) {
+            for (obj_id triggerVolumeDenizen : triggerVolumeDenizens)
+            {
+                if (isPlayer(triggerVolumeDenizen) && !isIncapacitated(triggerVolumeDenizen))
+                {
+                    if (utils.hasScriptVar(self, "player"))
+                    {
                         obj_id player = utils.getObjIdScriptVar(self, "player");
-                        if (triggerVolumeDenizen == player) {
+                        if (triggerVolumeDenizen == player)
+                        {
                             utils.setScriptVar(self, "approachedByPlayer", 1);
                             messageTo(self, "despawnObiwanDelay", null, 120, false);
                         }
@@ -79,8 +94,8 @@ public class obiwan_dynamic_timeout extends script.base_script
                 }
             }
         }
-        return;
     }
+
     public int obiwanTimeoutDelay(obj_id self, dictionary params) throws InterruptedException
     {
         debugLogging("obiwanTimeoutDelay: ", " entered.");
@@ -90,6 +105,7 @@ public class obiwan_dynamic_timeout extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int despawnObiwanDelay(obj_id self, dictionary params) throws InterruptedException
     {
         debugLogging("despawnObiwanDelay: ", " entered.");
@@ -97,7 +113,7 @@ public class obiwan_dynamic_timeout extends script.base_script
         {
             messageTo(self, "despawnObiwanDelay", null, OBIWAN_DESPAWN_DELAY, false);
         }
-        else 
+        else
         {
             setCreatureCover(self, 125);
             setCreatureCoverVisibility(self, false);

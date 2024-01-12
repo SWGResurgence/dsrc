@@ -1,5 +1,11 @@
 package script.theme_park.corellia.content;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.create;
@@ -14,6 +20,7 @@ public class meatlump_act1_spawner extends script.base_script
     public meatlump_act1_spawner()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "tempStartUpMarker"))
@@ -23,11 +30,13 @@ public class meatlump_act1_spawner extends script.base_script
         messageTo(self, "spawnerStartUp", null, 9, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "spawnerStartUp", null, 11, true);
         return SCRIPT_CONTINUE;
     }
+
     public int spawnerStartUp(obj_id self, dictionary params) throws InterruptedException
     {
         if (!utils.hasScriptVar(self, "tempStartUpMarker"))
@@ -35,7 +44,8 @@ public class meatlump_act1_spawner extends script.base_script
             if (utils.hasScriptVar(self, "myCreations"))
             {
                 Vector theList = utils.getResizeableObjIdArrayScriptVar(self, "myCreations");
-                for (Object o : theList) {
+                for (Object o : theList)
+                {
                     destroyObject(((obj_id) o));
                 }
                 utils.removeScriptVar(self, "myCreations");
@@ -46,6 +56,7 @@ public class meatlump_act1_spawner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int removeTempStartUpObjvar(obj_id self, dictionary params) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "tempStartUpMarker"))
@@ -54,6 +65,7 @@ public class meatlump_act1_spawner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int spawnMeatlumpThugs(obj_id self, dictionary params) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "myCreations"))
@@ -63,7 +75,7 @@ public class meatlump_act1_spawner extends script.base_script
             {
                 utils.removeScriptVar(self, "myCreations");
             }
-            else 
+            else
             {
                 return SCRIPT_CONTINUE;
             }
@@ -106,6 +118,7 @@ public class meatlump_act1_spawner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int spawnMerkie(obj_id self, dictionary params) throws InterruptedException
     {
         Vector myCreations = new Vector();
@@ -125,6 +138,7 @@ public class meatlump_act1_spawner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int meatlumpDead(obj_id self, dictionary params) throws InterruptedException
     {
         if (!params.containsKey("deadNpc"))
@@ -145,14 +159,14 @@ public class meatlump_act1_spawner extends script.base_script
                     {
                         utils.setScriptVar(self, "myCreations", meatlumpList);
                     }
-                    else 
+                    else
                     {
                         utils.removeScriptVar(self, "myCreations");
                         if (deadType.equals("meatlump_stooge"))
                         {
                             messageTo(self, "spawnMerkie", null, 2, true);
                         }
-                        else 
+                        else
                         {
                             int delay = rand(199, 249);
                             utils.setScriptVar(self, "respawnMeatlumpsDelay", delay);

@@ -1,20 +1,28 @@
 package script.poi.mystic_tree;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.groundquests;
 import script.library.utils;
 
 public class mystic_tree extends script.base_script
 {
+    public static final string_id HEAL_TREE = new string_id("ep3/mystic_tree", "heal_tree");
+    public static final string_id TRANSFORM = new string_id("ep3/mystic_tree", "transform");
     public mystic_tree()
     {
     }
-    public static final string_id HEAL_TREE = new string_id("ep3/mystic_tree", "heal_tree");
-    public static final string_id TRANSFORM = new string_id("ep3/mystic_tree", "transform");
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         int menu = mi.addRootMenu(menu_info_types.ITEM_USE, HEAL_TREE);
@@ -25,6 +33,7 @@ public class mystic_tree extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)
@@ -42,18 +51,19 @@ public class mystic_tree extends script.base_script
                     messageTo(self, "spawnHealthyTree", null, 1.5f, true);
                     utils.setScriptVar(self, "playerId", player);
                 }
-                else 
+                else
                 {
                     sendSystemMessage(player, new string_id("ep3/mystic_tree", "cannot_heal"));
                 }
             }
-            else 
+            else
             {
                 sendSystemMessage(player, new string_id("ep3/mystic_tree", "not_sickly"));
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int respawnSickTree(obj_id self, dictionary params) throws InterruptedException
     {
         location selfLoc = getLocation(self);
@@ -63,6 +73,7 @@ public class mystic_tree extends script.base_script
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int spawnHealthyTree(obj_id self, dictionary params) throws InterruptedException
     {
         location selfLoc = getLocation(self);

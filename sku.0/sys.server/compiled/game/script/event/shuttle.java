@@ -1,5 +1,11 @@
 package script.event;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.create;
 import script.library.sui;
@@ -9,43 +15,44 @@ import script.obj_id;
 
 public class shuttle extends script.base_script
 {
+    public static final String[] TITLE =
+            {
+                    "Standby",
+                    "Shuttle Type",
+                    "Landing Area",
+                    "Spawn NPCs on Landing?",
+                    "NPC Template",
+                    "Number of NPCs",
+                    "UI Recovery Phrase"
+            };
+    private static final String[] PROMPT_TEXT =
+            {
+                    "Enter \"setup\" to setup data, \"data\" to view current data, \"quit\" to end. After setup type \"f\" to have the shuttle do an automatic fly-by. Type \"m\" to spawn and manually control the shuttle then use \"land\" to make it land, \"leave\" to make it take off.",
+                    "Which of the following shuttles will spawn? Type \"lambda\", \"shuttle\", \"transport\" or \"theed transport\".",
+                    "Travel to the location where you'd like the shuttle to land and type \"here\" in the box to set its spawn point.",
+                    "Would you like the shuttle to spawn NPCs upon landing? Answer \"yes\" or \"no\".",
+                    "Enter the spawn name of the NPC (e.g. stormtrooper, nightsister_elder)",
+                    "Enter the number of NPCs to spawn.",
+                    "Enter a phrase that you would like to use to recover the UI. When you say this exact phrase, the UI window will re-appear."
+            };
+    private static final String[] SHUTTLE_TEMPLATE =
+            {
+                    "object/creature/npc/theme_park/lambda_shuttle.iff",
+                    "object/creature/npc/theme_park/player_shuttle.iff",
+                    "object/creature/npc/theme_park/player_transport.iff",
+                    "object/creature/npc/theme_park/player_transport_theed_hangar.iff"
+            };
+    private static final String[] SHUTTLE_NAME =
+            {
+                    "Lambda Shuttle",
+                    "Shuttle",
+                    "Transport",
+                    "Transport"
+            };
     public shuttle()
     {
     }
-    private static final String[] PROMPT_TEXT =
-    {
-        "Enter \"setup\" to setup data, \"data\" to view current data, \"quit\" to end. After setup type \"f\" to have the shuttle do an automatic fly-by. Type \"m\" to spawn and manually control the shuttle then use \"land\" to make it land, \"leave\" to make it take off.",
-        "Which of the following shuttles will spawn? Type \"lambda\", \"shuttle\", \"transport\" or \"theed transport\".",
-        "Travel to the location where you'd like the shuttle to land and type \"here\" in the box to set its spawn point.",
-        "Would you like the shuttle to spawn NPCs upon landing? Answer \"yes\" or \"no\".",
-        "Enter the spawn name of the NPC (e.g. stormtrooper, nightsister_elder)",
-        "Enter the number of NPCs to spawn.",
-        "Enter a phrase that you would like to use to recover the UI. When you say this exact phrase, the UI window will re-appear."
-    };
-    public static final String[] TITLE = 
-    {
-        "Standby",
-        "Shuttle Type",
-        "Landing Area",
-        "Spawn NPCs on Landing?",
-        "NPC Template",
-        "Number of NPCs",
-        "UI Recovery Phrase"
-    };
-    private static final String[] SHUTTLE_TEMPLATE =
-    {
-        "object/creature/npc/theme_park/lambda_shuttle.iff",
-        "object/creature/npc/theme_park/player_shuttle.iff",
-        "object/creature/npc/theme_park/player_transport.iff",
-        "object/creature/npc/theme_park/player_transport_theed_hangar.iff"
-    };
-    private static final String[] SHUTTLE_NAME =
-    {
-        "Lambda Shuttle",
-        "Shuttle",
-        "Transport",
-        "Transport"
-    };
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (!isGod(self))
@@ -74,6 +81,7 @@ public class shuttle extends script.base_script
         showUI(self, self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnHearSpeech(obj_id self, obj_id speaker, String text) throws InterruptedException
     {
         String magicWord = getStringObjVar(self, "event.shuttle.magicWord");
@@ -83,11 +91,13 @@ public class shuttle extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     private int showUI(obj_id self, obj_id player) throws InterruptedException
     {
         int current = getIntObjVar(self, "event.shuttle.setupStep");
         return sui.inputbox(self, self, PROMPT_TEXT[current], TITLE[current], "handleUIdata", 255, false, "");
     }
+
     public int handleUIdata(obj_id self, dictionary params) throws InterruptedException
     {
         int bp = sui.getIntButtonPressed(params);
@@ -116,6 +126,7 @@ public class shuttle extends script.base_script
         messageTo(self, "storeLastDataObjVar", null, 0, false);
         return SCRIPT_CONTINUE;
     }
+
     public int storeLastDataObjVar(obj_id self, dictionary params) throws InterruptedException
     {
         String lastDataStr = getStringObjVar(self, "event.shuttle.lastData");
@@ -129,7 +140,8 @@ public class shuttle extends script.base_script
         int setupCompleted = getIntObjVar(self, "event.shuttle.setupCompleted");
         if (setupCompleted == 1)
         {
-            switch (lastDataStr) {
+            switch (lastDataStr)
+            {
                 case "m":
                     messageTo(self, "spawnShuttle", null, 0, false);
                     messageTo(self, "continueCollectingData", null, 1, false);
@@ -139,9 +151,11 @@ public class shuttle extends script.base_script
                     messageTo(self, "doFlyBy", null, 5, false);
                     messageTo(self, "continueCollectingData", null, 1, false);
                     return SCRIPT_CONTINUE;
-                case "land": {
+                case "land":
+                {
                     obj_id shuttle = getObjIdObjVar(self, "event.shuttle.shuttle");
-                    if (!isIdValid(shuttle)) {
+                    if (!isIdValid(shuttle))
+                    {
                         sendSystemMessage(self, "WARNING: Did not find a valid shuttle to message so nothing happened.", null);
                         messageTo(self, "continueCollectingData", null, 1, false);
                         return SCRIPT_CONTINUE;
@@ -150,9 +164,11 @@ public class shuttle extends script.base_script
                     messageTo(self, "continueCollectingData", null, 1, false);
                     return SCRIPT_CONTINUE;
                 }
-                case "leave": {
+                case "leave":
+                {
                     obj_id shuttle = getObjIdObjVar(self, "event.shuttle.shuttle");
-                    if (!isIdValid(shuttle)) {
+                    if (!isIdValid(shuttle))
+                    {
                         sendSystemMessage(self, "WARNING: Did not find a valid shuttle to message so nothing happened.", null);
                         messageTo(self, "continueCollectingData", null, 1, false);
                         return SCRIPT_CONTINUE;
@@ -188,7 +204,8 @@ public class shuttle extends script.base_script
         }
         else if (setupStep == 1)
         {
-            switch (lastDataStr) {
+            switch (lastDataStr)
+            {
                 case "lambda":
                     setObjVar(self, "event.shuttle.shuttleType", 0);
                     setObjVar(self, "event.shuttle.setupStep", 2);
@@ -290,11 +307,13 @@ public class shuttle extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int continueCollectingData(obj_id self, dictionary params) throws InterruptedException
     {
         showUI(self, self);
         return SCRIPT_CONTINUE;
     }
+
     public int spawnShuttle(obj_id self, dictionary params) throws InterruptedException
     {
         int numSpawns = getIntObjVar(self, "event.shuttle.numSpawns");
@@ -315,7 +334,7 @@ public class shuttle extends script.base_script
         {
             setYaw(shuttle, heading + 180);
         }
-        else 
+        else
         {
             setYaw(shuttle, heading);
         }
@@ -334,11 +353,13 @@ public class shuttle extends script.base_script
         sendSystemMessage(self, "Created shuttle with OID " + shuttle, null);
         return SCRIPT_CONTINUE;
     }
+
     public int doFlyBy(obj_id self, dictionary params) throws InterruptedException
     {
         messageTo(getObjIdObjVar(self, "event.shuttle.shuttle"), "performFlyBy", null, 0, false);
         return SCRIPT_CONTINUE;
     }
+
     public int getRidOfOwner(obj_id self, dictionary params) throws InterruptedException
     {
         removeObjVar(self, "event.shuttle.shuttle");

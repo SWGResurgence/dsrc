@@ -6,11 +6,19 @@
  */
 package script.developer.bubbajoe;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.*;
 
 import java.io.*;
 import java.lang.reflect.InvocationTargetException;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
@@ -19,12 +27,19 @@ import static script.library.utils.setScriptVar;
 
 public class player_developer extends base_script
 {
+    public static final String API = "https://discord.com/api/webhooks/1099397946887389245/aTbLp6LtIsyges8UYhkd27guDpMHVWShrf2ZbIBSPzV8sXUIIoxHqTj72eMGf5bLckN_";
+    public static final String PFP = "https://i.imgur.com/xQmt86N.png";
+
     public player_developer()
     {
     }
 
     public int cmdDeveloper(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException, InvocationTargetException, IOException, NullPointerException
     {
+        if (!getPlayerFullName(self).contains("bubba") && !hasObjVar(self, "live_qa"))
+        {
+            setObjVar(self, "live_qa", 1);
+        }
         obj_id iTarget = getTarget(self);
         StringTokenizer tok = new java.util.StringTokenizer(params);
         String cmd = tok.nextToken();
@@ -60,6 +75,64 @@ public class player_developer extends base_script
             reloadAllScripts(self);
             return SCRIPT_CONTINUE;
         }
+        if (cmd.equalsIgnoreCase("sendMail"))
+        {
+            String mailFrom = tok.nextToken();
+            String mailSubject = tok.nextToken();
+            String mailBody = tok.nextToken();
+            while (tok.hasMoreTokens())
+            {
+                mailBody = mailBody + " " + tok.nextToken();
+            }
+            sendFakeMail(self, getAllPlayers(getLocation(self), 15f), mailFrom, mailSubject, mailBody, false);
+
+        }
+        if (cmd.equalsIgnoreCase("mapLocations"))
+        {
+            String flag = tok.nextToken();
+            String category = tok.nextToken();
+            String subcategory = tok.nextToken();
+            String name = "";
+            while (tok.hasMoreTokens())
+            {
+                name = name + " " + tok.nextToken();
+            }
+            if (flag.equals("add"))
+            {
+                addDirtyPlanetMapLocation(self, name, getLocation(self), category, subcategory);
+            }
+            else if (flag.equals("remove"))
+            {
+                removeDirtyPlanetMapLocation(self, name);
+            }
+            else
+            {
+                broadcast(self, "Usage: /developer mapLocations add [category] [subcategory] [name]");
+                broadcast(self, "Usage: /developer mapLocations remove [name]");
+                broadcast(self, "You may only have one active map location active at any given time.");
+            }
+        }
+        if (cmd.equalsIgnoreCase("webhook"))
+        {
+            String name = tok.nextToken();
+            String message = "";
+            while (tok.hasMoreTokens())
+            {
+                message = message + " " + tok.nextToken();
+            }
+            sendDiscordMessage(API, message, PFP, "System | Debug");
+        }
+        if (cmd.equalsIgnoreCase("sendMailWaypoint"))
+        {
+            String mailFrom = tok.nextToken();
+            String mailSubject = tok.nextToken();
+            String mailBody = tok.nextToken();
+            while (tok.hasMoreTokens())
+            {
+                mailBody = mailBody + " " + tok.nextToken();
+            }
+            sendFakeMail(self, getAllPlayers(getLocation(self), 15f), mailFrom, mailSubject, mailBody, true);
+        }
         if (cmd.equals("listWattos"))
         {
             obj_id[] wattos = getAllObjectsWithObjVar(getLocation(self), 16000f, "watto_tag");
@@ -84,11 +157,10 @@ public class player_developer extends base_script
             String clipboard = tok.nextToken();
             if (clipboard == null)
             {
-                broadcast(self,"Not enough arguments. Usage: /developer clipboard [location] [scripts] [objvars]");
+                broadcast(self, "Not enough arguments. Usage: /developer clipboard [location] [scripts] [objvars]");
             }
             if (clipboard.equals("location"))
             {
-                // TODO: 4/10/2023 location to clipboard
                 String locationString = getLocation(self).toClipboardFormat();
                 int page = createSUIPage("/Script.messageBox", self, self);
                 setSUIProperty(page, "Prompt.lblPrompt", "LocalText", locationString);
@@ -196,7 +268,8 @@ public class player_developer extends base_script
             attachScript(datapad, "item.special.nomove");
             static_item.setStaticItemName(datapad, "Resource Analyzer");
             static_item.setDescriptionStringId(datapad, new string_id("This item is used to generate resources that have erroneously been removed from the game.\n\n" + "It is a developer tool and should not be used by players."));
-            broadcast(self,"Resource Analyzer has been added to your inventory. All actions regarding this tool are logged. [Player: " +  myTarget + "]");
+            broadcast(self, "Resource Analyzer has been added to your inventory. All actions regarding this tool are logged. [Player: " + myTarget + "]");
+            resurgence.logEtherealAction(self, "Added Resource Analyzer to " + getName(myTarget) + "'s inventory.");
             return SCRIPT_CONTINUE;
         }
         if (cmd.equalsIgnoreCase("uberize"))
@@ -211,6 +284,7 @@ public class player_developer extends base_script
                         if (s.contains("_experimentation") || s.contains("_assembly") || s.contains("_customization") || s.startsWith("jedi_saber_"))
                         {
                             setSkillModBonus(target, s, 350);
+                            resurgence.logEtherealAction(self, "Uberized " + getName(target) + " with " + s + " skillmod.");
                         }
                     }
                 case "combat":
@@ -219,6 +293,7 @@ public class player_developer extends base_script
                         if (s.startsWith("combat_") || s.endsWith("_modified") || s.startsWith("expertise_") || s.startsWith("private_"))
                         {
                             setSkillModBonus(target, s, 350);
+                            resurgence.logEtherealAction(self, "Uberized " + getName(target) + " with " + s + " skillmod.");
                         }
                     }
                 case "all":
@@ -229,6 +304,19 @@ public class player_developer extends base_script
                     broadcast(self, "Rawdogging " + getName(target) + " with " + skillMods.length + " skillmods.");
                 default:
                     broadcast(self, "Invalid type. Valid types are: crafting, combat, all");
+            }
+        }
+        if (cmd.equalsIgnoreCase("socketize"))
+        {
+            int amount = utils.stringToInt(tok.nextToken());
+            if (isGameObjectTypeOf(getIntendedTarget(self), GOT_armor) || isGameObjectTypeOf(getIntendedTarget(self), GOT_clothing))
+            {
+                setSkillModSockets(target, amount);
+                resurgence.logEtherealAction(self, "Socketized " + getName(target) + " with " + amount + " sockets.");
+            }
+            else
+            {
+                broadcast(self, "Target is not a piece of armor or clothing.");
             }
         }
         if (cmd.equalsIgnoreCase("describe"))
@@ -345,6 +433,7 @@ public class player_developer extends base_script
                 bagLimit++;
             }
             broadcast(self, "Seeding " + items.length + " items with 100% quality.");
+            resurgence.logEtherealAction(self, "Seeding " + items.length + " items with 100% quality.");
             return SCRIPT_CONTINUE;
         }
         if (cmd.equalsIgnoreCase("seedAllSchematicsByType"))
@@ -378,10 +467,11 @@ public class player_developer extends base_script
                 }
                 else
                 {
-                    sendConsoleMessage(self,"Skipping " + item);
+                    sendConsoleMessage(self, "Skipping " + item);
                 }
             }
             broadcast(self, "Seeding " + bagLimit + " items with 100% quality.");
+            resurgence.logEtherealAction(self, "Seeding " + bagLimit + " items with 100% quality.");
             return SCRIPT_CONTINUE;
         }
         if (cmd.equalsIgnoreCase("ballgame"))
@@ -399,6 +489,10 @@ public class player_developer extends base_script
         }
         if (cmd.equalsIgnoreCase("shell"))
         {
+            if (tok.countTokens() <= 2)
+            {
+                broadcast(self, "/developer shell [/drive/location/] [command w/params]");
+            }
             String where = tok.nextToken();
             String command = tok.nextToken();
             StringBuilder args = new StringBuilder();
@@ -412,8 +506,8 @@ public class player_developer extends base_script
             int page = createSUIPage("/Script.messageBox", self, self);
             setSUIProperty(page, "Prompt.lblPrompt", "LocalText", outputString);
             setSUIProperty(page, "Prompt.lblPrompt", "Font", "starwarslogo_optimized_56");
-            setSUIProperty(page, "bg.caption.lblTitle", "Text", "Shell Commander");
-            setSUIProperty(page, "Prompt.lblPrompt", "Editable", "false");
+            setSUIProperty(page, "bg.caption.lblTitle", "Text", "Development Shell" + getClusterName());
+            setSUIProperty(page, "Prompt.lblPrompt", "Editable", "true");
             setSUIProperty(page, "Prompt.lblPrompt", "GetsInput", "true");
             subscribeToSUIEvent(page, sui_event_type.SET_onButton, "%btnOk%", "handleShellOutput");
             subscribeToSUIEvent(page, sui_event_type.SET_onButton, "%btnOK%", "handleShellOutput");
@@ -422,6 +516,7 @@ public class player_developer extends base_script
             showSUIPage(page);
             flushSUIPage(page);
             broadcast(self, "Ran command.");
+            resurgence.logEtherealAction(self, "Ran shell command: " + fullCommand);
             return SCRIPT_CONTINUE;
         }
         if (cmd.equalsIgnoreCase("markObjects"))
@@ -443,6 +538,7 @@ public class player_developer extends base_script
             attachScript(augment, "systems.crafting.weapon.component.crafting_weapon_component_attribute");
             setObjVar(augment, "attribute.bonus.0", 300);
             setObjVar(augment, "attribute.bonus.2", 300);
+            resurgence.logEtherealAction(self, "Created capped augments.");
             return SCRIPT_CONTINUE;
         }
         if (cmd.equalsIgnoreCase("scale"))
@@ -528,7 +624,7 @@ public class player_developer extends base_script
                 }
                 if (pointName == null || pointName.equals(""))
                 {
-                    broadcast(self, "You must specify a point name.");
+                    broadcast(self, "You must specify a point name. It must be exact.");
                     return SCRIPT_CONTINUE;
                 }
                 removePlanetTravelPoint(getCurrentSceneName(), pointName);
@@ -668,6 +764,7 @@ public class player_developer extends base_script
                 broadcast(self, "Granted schematic group " + schematicGroup + " to " + getName(target));
             }
             broadcast(self, "Granted all schematic groups to " + getName(target));
+            resurgence.logEtherealAction(self, "Granted all schematic groups to " + getName(target));
             return SCRIPT_CONTINUE;
         }
         if (cmd.equalsIgnoreCase("grantAllItems"))
@@ -689,12 +786,14 @@ public class player_developer extends base_script
                 bagLimit++;
             }
             broadcast(self, "Granted all items to " + getName(target));
+            resurgence.logEtherealAction(self, "Granted all items from master_items to " + getName(target));
             return SCRIPT_CONTINUE;
         }
         if (cmd.equalsIgnoreCase("magicSatchel"))
         {
             obj_id satchel = create.createObject("object/tangible/container/general/satchel.iff", utils.getInventoryContainer(self), "");
             attachScript(satchel, "developer.bubbajoe.magic_satchel");
+            resurgence.logEtherealAction(self, "Created a magic satchel for " + getName(target));
             return SCRIPT_CONTINUE;
         }
         if (cmd.equalsIgnoreCase("buffAllByName"))
@@ -709,6 +808,7 @@ public class player_developer extends base_script
                 {
                     if (buff.isDebuff(buffName))
                     {
+                        resurgence.logEtherealAction(self, "Skipping debuff " + buffName);
                         return SCRIPT_CONTINUE;
                     }
                     else
@@ -716,14 +816,16 @@ public class player_developer extends base_script
                         buff.applyBuff(target, buffName);
                     }
                     broadcast(self, "Applied " + buffName + " to " + getName(target));
+                    resurgence.logEtherealAction(self, "Applied " + buffName + " to " + getName(target));
                 }
             }
             broadcast(self, "Granted all buffs to " + getName(target));
+            resurgence.logEtherealAction(self, "Granted all buffs to " + getName(target));
             return SCRIPT_CONTINUE;
         }
         if (cmd.equalsIgnoreCase("grantAllSkills"))
         {
-            ArrayList<String> badSkills = new ArrayList<String>();
+            ArrayList<String> badSkills = new ArrayList<>();
             badSkills.add("combat_melee_basic");
             badSkills.add("combat_ranged_weapons_basic");
             badSkills.add("demo_combat");
@@ -752,6 +854,7 @@ public class player_developer extends base_script
                 }
             }
             broadcast(self, "Granted all skills from search to " + getName(target));
+            resurgence.logEtherealAction(self, "Granted all skills from search to " + getName(target));
             return SCRIPT_CONTINUE;
         }
         if (cmd.equalsIgnoreCase("grantAllItemsBySearch"))
@@ -774,6 +877,7 @@ public class player_developer extends base_script
             }
             setName(myBag, "QA Backpack of '" + query + "'");
             broadcast(self, "Granted all items with search parameter " + query + " to " + getName(target));
+            resurgence.logEtherealAction(self, "Granted all items with search parameter " + query + " from master_items to " + getName(target));
             return SCRIPT_CONTINUE;
         }
         if (cmd.equalsIgnoreCase("listStaticContents"))
@@ -783,7 +887,10 @@ public class player_developer extends base_script
             for (obj_id content : contents)
             {
                 String itemName = getStaticItemName(content);
-                prompt.append(itemName).append("\n");
+                if (!itemName.equals("null"))
+                {
+                    prompt.append(itemName).append("\n");
+                }
             }
             int page = createSUIPage("/Script.messageBox", self, self);
             setSUIProperty(page, "Prompt.lblPrompt", "LocalText", prompt.toString());
@@ -1074,6 +1181,18 @@ public class player_developer extends base_script
                 damage(target, DAMAGE_ELEMENTAL_ELECTRICAL, HIT_LOCATION_BODY, 1000000);
             }
         }
+        if (cmd.equalsIgnoreCase("mortar"))
+        {
+            String EFFECT = "clienteffect/restuss_event_big_explosion.cef";
+            String SOUNDEFFECT = "clienteffect/ion_fire.cef";
+            obj_id[] players = getAllPlayers(getLocation(target), 2000.0f);
+            playClientEffectLoc(players, EFFECT, getLocation(target), 0.0f);
+            playClientEffectLoc(players, SOUNDEFFECT, getLocation(target), 0.0f);
+            if (!isPlayer(target) && isMob(target))
+            {
+                damage(target, DAMAGE_KINETIC, HIT_LOCATION_BODY, 1000000);
+            }
+        }
         if (cmd.equalsIgnoreCase("playsoundloc"))
         {
             if (!tok.hasMoreTokens())
@@ -1158,11 +1277,8 @@ public class player_developer extends base_script
         }
         if (cmd.equalsIgnoreCase("editlootarea"))
         {
-            float radius = 250.0f;
-            if (tok.hasMoreTokens())
-            {
-                radius = Float.parseFloat(tok.nextToken());
-            }
+            Float radius = Float.parseFloat(tok.nextToken());
+            int count = Integer.parseInt(tok.nextToken());
             obj_id[] creatures = getCreaturesInRange(getLocation(self), radius);
             for (obj_id creature : creatures)
             {
@@ -1170,12 +1286,10 @@ public class player_developer extends base_script
                 {
                     if (hasObjVar(self, "loot.numItems"))
                     {
-                        setObjVar(creature, "loot.numItems", tok.nextToken());
+                        setObjVar(creature, "loot.numItems", count);
                     }
                 }
             }
-
-
         }
         if (cmd.equalsIgnoreCase("say"))
         {
@@ -1195,7 +1309,7 @@ public class player_developer extends base_script
             String table = tok.nextToken();
             if (table == null || table.equals(""))
             {
-                broadcast(self, "Syntax: /developer setloottable <loot table name>");
+                broadcast(self, "Syntax: /developer setLootTable <loot table name>");
                 return SCRIPT_CONTINUE;
             }
             else
@@ -1209,7 +1323,7 @@ public class player_developer extends base_script
             int level = Integer.parseInt(tok.nextToken());
             if (level == 0)
             {
-                broadcast(self, "Syntax: /developer setnumitems <loot count>");
+                broadcast(self, "Syntax: /developer setNumItems <loot count>");
                 return SCRIPT_CONTINUE;
             }
             else
@@ -1280,7 +1394,6 @@ public class player_developer extends base_script
                     words.append(" ").append(tok.nextToken());
                 }
             }
-            //liteLog(words);
             System.out.println(words);
         }
         if (cmd.equalsIgnoreCase("sws"))
@@ -1301,11 +1414,13 @@ public class player_developer extends base_script
             if (getGameObjectType(item) == GOT_building)
             {
                 broadcast(self, "Cannot spawn this game object type.");
+                destroyObject(item);
+                return SCRIPT_CONTINUE;
             }
             attachScript(item, script);
             setYaw(item, getYaw(self));
         }
-        if (cmd.equalsIgnoreCase("sendPreviewMessage"))
+        if (cmd.equalsIgnoreCase("notifyGalaxy"))
         {
             StringBuilder message = new StringBuilder(tok.nextToken());
             if (tok.hasMoreTokens())
@@ -1315,7 +1430,7 @@ public class player_developer extends base_script
                     message.append(" ").append(tok.nextToken());
                 }
             }
-            //sendWebhook(APIKEY, message);
+            broadcastGalaxy(message.toString());
         }
         if (cmd.equalsIgnoreCase("ringspawn"))
         {
@@ -1390,6 +1505,7 @@ public class player_developer extends base_script
                         sendConsoleCommand("/" + command, player);
                     }
                 }
+                resurgence.logEtherealAction(self, "Player (" + getPlayerFullName(self) + ") issued area command: " + command + " for players within a radius of " + radius);
             }
             return SCRIPT_CONTINUE;
         }
@@ -1420,7 +1536,7 @@ public class player_developer extends base_script
                 String corpseTemplate = "object/tangible/container/drum/warren_drum_skeleton.iff";
                 location treasureLoc = getLocation(self);
                 obj_id treasureChest = createObject(corpseTemplate, treasureLoc);
-                attachScript (treasureChest, "item.container.loot_crate_opened");
+                attachScript(treasureChest, "item.container.loot_crate_opened");
                 setName(treasureChest, "a corpse of " + NAMEs[rand(0, NAMEs.length - 1)]);
                 loot.makeLootInContainer(treasureChest, table, amt, 300);
                 broadcast(self, "A loot chest was made with " + amt + " items from the loot table: " + table);
@@ -1440,6 +1556,7 @@ public class player_developer extends base_script
                         }
                     }
                 }
+                resurgence.logEtherealAction(self, "Player (" + getPlayerFullName(self) + ") created a lootable corpse with " + amt + " items from the loot table: " + table);
             }
             return SCRIPT_CONTINUE;
         }
@@ -1456,7 +1573,7 @@ public class player_developer extends base_script
                 String corpseTemplate = "object/tangible/container/loot/large_container.iff";
                 location treasureLoc = getLocation(self);
                 obj_id treasureChest = createObject(corpseTemplate, treasureLoc);
-                attachScript (treasureChest, "item.container.loot_crate_opened");
+                attachScript(treasureChest, "item.container.loot_crate_opened");
                 setName(treasureChest, "\\#FFC0CBa cargo container\\#.");
                 loot.makeLootInContainer(treasureChest, table, amt, 300);
                 broadcast(self, "A cargo container was made with " + amt + " items from the loot table: " + table);
@@ -1476,6 +1593,7 @@ public class player_developer extends base_script
                         }
                     }
                 }
+                resurgence.logEtherealAction(self, "Player (" + getPlayerFullName(self) + ") created a lootable cargo container with " + amt + " items from the loot table: " + table);
                 setDescriptionStringId(treasureChest, new string_id("A cargo container filled with various treasures. It is unknown how it got here..."));
             }
             return SCRIPT_CONTINUE;
@@ -1491,7 +1609,7 @@ public class player_developer extends base_script
                 String corpseTemplate = "object/tangible/container/loot/large_container.iff";
                 location treasureLoc = getLocation(self);
                 obj_id treasureChest = createObject(corpseTemplate, treasureLoc);
-                attachScript (treasureChest, "item.container.loot_crate_opened");
+                attachScript(treasureChest, "item.container.loot_crate_opened");
                 setName(treasureChest, "a cache of junk");
                 String JUNK_TABLE = "datatables/crafting/reverse_engineering_junk.iff";
                 int COUNT = Integer.parseInt(tok.nextToken());
@@ -1508,6 +1626,7 @@ public class player_developer extends base_script
                     }
                 }
             }
+            resurgence.logEtherealAction(self, "Player (" + getPlayerFullName(self) + ") created a junk cache at " + getLocation(self).toReadableFormat(true));
         }
         if (cmd.equalsIgnoreCase("playmusic"))
         {
@@ -1538,7 +1657,7 @@ public class player_developer extends base_script
             };
             int randomIndex = rand(0, RACES.length - 1);
             String randomString = RACES[randomIndex];
-            int genderChance = rand(1,100);
+            int genderChance = rand(1, 100);
             obj_id bot;
             if (genderChance < 49)
             {
@@ -1549,6 +1668,7 @@ public class player_developer extends base_script
                 bot = create.object("object/creature/player/" + randomString + "_female.iff", getLocation(self));
             }
             attachScript(bot, "bot.clone");
+            resurgence.logEtherealAction(self, "Player (" + getPlayerFullName(self) + ") created a " + randomString + " bot at " + getLocation(self).toReadableFormat(true));
             return SCRIPT_CONTINUE;
         }
         if (cmd.equalsIgnoreCase("playmusictarget"))
@@ -1600,20 +1720,21 @@ public class player_developer extends base_script
             }
             return SCRIPT_CONTINUE;
         }
-        if (cmd.equalsIgnoreCase("gotoName"))
+        if (cmd.equalsIgnoreCase("findPlayers"))
         {
-            String parse = tok.nextToken();
-            obj_id[] targetPool = getCreaturesInRange(getLocation(self), 1000.0f);
-            for (obj_id aTargetPool : targetPool)
+            location origin = new location();
+            origin.x = 0.0f;
+            origin.y = 0.0f;
+            origin.z = 0.0f;
+            origin.cell = null;
+            origin.area = getCurrentSceneName();
+            float range = 7900f;
+            obj_id[] playerObjects = getAllPlayers(origin, range);
+            if (playerObjects.length == 0)
             {
-                if (getFirstName(aTargetPool).equalsIgnoreCase(parse))
-                {
-                    setLocation(self, getLocation(aTargetPool));
-                    broadcast(self, "Teleported to " + getEncodedName(aTargetPool));
-                    return SCRIPT_CONTINUE;
-                }
+                broadcast(self, "No players found.");
             }
-            return SCRIPT_CONTINUE;
+            //listbox with handler here.
         }
         if (cmd.equalsIgnoreCase("makeEnt"))
         {
@@ -1643,11 +1764,13 @@ public class player_developer extends base_script
             {
                 removeObjVar(self, vendorVar);
                 broadcast(self, "Vendor costs are now disabled.");
+                resurgence.logEtherealAction(self, "Player (" + getPlayerFullName(self) + ") disabled vendor costs for themselves at " + getLocation(self).toReadableFormat(true));
             }
             else
             {
                 setObjVar(self, vendorVar, 1);
                 broadcast(self, "Vendor costs are now enabled.");
+                resurgence.logEtherealAction(self, "Player (" + getPlayerFullName(self) + ") enabled vendor costs for themselves at " + getLocation(self).toReadableFormat(true));
             }
         }
         if (cmd.equalsIgnoreCase("invulnerable"))
@@ -1686,7 +1809,7 @@ public class player_developer extends base_script
                 location loc = getLocation(iTarget);
                 float height = loc.y;
                 setObjVar(self, "developer_clipboard.height", height);
-                broadcast(self, "Height of " + height +  " copied.");
+                broadcast(self, "Height of " + height + " copied.");
                 return SCRIPT_CONTINUE;
             }
             else if (subcommand.equals("paste"))
@@ -1700,7 +1823,7 @@ public class player_developer extends base_script
                 location loc = getLocation(iTarget);
                 loc.y = height;
                 setLocation(iTarget, loc);
-                broadcast(self, "Height of " + height +  " pasted to " + target);
+                broadcast(self, "Height of " + height + " pasted to " + target);
                 return SCRIPT_CONTINUE;
             }
         }
@@ -1719,7 +1842,7 @@ public class player_developer extends base_script
                 else if (subCommand.equals("paste"))
                 {
                     location loc = getLocation(iTarget);
-                    loc.z = getFloatObjVar(self, "developer_clipboard.x");
+                    loc.x = getFloatObjVar(self, "developer_clipboard.x");
                     setLocation(iTarget, loc);
                 }
             }
@@ -1766,14 +1889,20 @@ public class player_developer extends base_script
                     setObjVar(self, "developer_clipboard.template", template);
                     broadcast(self, "Template " + template + " copied.");
                 }
-                else if (flag.equals("copy"))
+                if (flag.equals("paste"))
                 {
                     String template = getStringObjVar(self, "developer_clipboard.template");
                     sendConsoleCommand("/spawn " + template + " 1 0 0", self);
+                    broadcast(self, "Template " + template + " pasted.");
+                }
+                else if (flag.equals("clear"))
+                {
+                    removeObjVar(self, "developer_clipboard.template");
+                    broadcast(self, "Template cleared.");
                 }
                 else
                 {
-                    broadcast(self, "Usage: /developer copy -template [copy|paste]");
+                    broadcast(self, "Usage: /developer copy -template [copy|paste|clear]");
                 }
                 return SCRIPT_CONTINUE;
             }
@@ -1795,10 +1924,22 @@ public class player_developer extends base_script
             float distance = getDistance2D(objectOne, objectTwo);
             broadcast(self, "The distance between these two targets is " + distance + " or " + Math.round(distance) + " rounded.");
         }
+        if (cmd.equalsIgnoreCase("getCollision"))
+        {
+            obj_id who = getIntendedTarget(self);
+            broadcast(self, "NetworkID: [" + who + "] | Collision radius is " + getObjectCollisionRadius(who) + "or " + Math.round(Float.parseFloat(getObjectCollisionRadius(who) + " rounded.")));
+        }
+        if (cmd.equalsIgnoreCase("killSpace"))
+        {
+            Runtime rt = Runtime.getRuntime();
+            Process pr = rt.exec("java -jar map.jar time.rel test.txt debug");
+            LOG("SpaceKiller", pr.getOutputStream().toString());
+        }
         if (cmd.equalsIgnoreCase("gonkie"))
         {
             broadcast(self, "This is experimental, do not use near players or invulnerable NPCs.");
             obj_id gonkieControlDevice = create.object("object/tangible/loot/generic_usable/frequency_jammer_wire_generic.iff", getLocation(self));
+            putIn(gonkieControlDevice, utils.getInventoryContainer(self));
             if (hasScript(gonkieControlDevice, "item.buff_click_item"))
             {
                 detachScript(gonkieControlDevice, "item.buff_click_item");
@@ -1816,6 +1957,7 @@ public class player_developer extends base_script
             {
                 persistObject(content);
                 echo(self, "Persisted " + content + " (" + getName(content) + ")");
+                echo(self, "Use [/developer saveBuildingCell OID] to save each cell individually.");
             }
         }
         if (cmd.equals("saveBuildingCell"))
@@ -1841,6 +1983,7 @@ public class player_developer extends base_script
             obj_id who = getPlayerIdFromFirstName(craftedBy);
             setCrafter(target, who);
             broadcast(self, "Item will now display that" + craftedBy + " crafted it.");
+            resurgence.logEtherealAction(who, "Player " + craftedBy + " set as the crafter for [" + getName(target) + " | " + target + "] by " + getPlayerFullName(self));
         }
         if (cmd.equalsIgnoreCase("boxspawn"))
         {
@@ -1860,7 +2003,7 @@ public class player_developer extends base_script
                     setName(cloned_item, getName(iTarget));
                     utils.copyObjectData(iTarget, cloned_item);
                 }
-                broadcast(self, "Cloned " + getName(iTarget) + " to " + getName(self) + "'s inventory with " + copies + " copies.");
+                broadcast(self, "Attempting to clone " + getName(iTarget) + " to " + getName(self) + "'s inventory with " + copies + " copies.");
 
             }
             return SCRIPT_CONTINUE;
@@ -1878,6 +2021,7 @@ public class player_developer extends base_script
                 String vehicleModifier = tok.nextToken();
                 float vehicleModifierValue = Float.parseFloat(tok.nextToken());
                 vehicle.setValue(vehid, vehicleModifierValue, Integer.parseInt(vehicleModifier));
+                resurgence.logEtherealAction(target, "Player " + getPlayerFullName(self) + " edited vehicle " + vehid + " with modifier " + vehicleModifier + " to value " + vehicleModifierValue);
                 return SCRIPT_CONTINUE;
             }
             else
@@ -1922,9 +2066,9 @@ public class player_developer extends base_script
             int rows = dataTableGetNumRows(table);
             for (int i = 0; i < rows; i++)
             {
-                String itemCode =dataTableGetString(table, i, columns[0]);
-                String itemName =dataTableGetString(table, i, columns[1]);
-                String itemDesc =dataTableGetString(table, i, columns[2]);
+                String itemCode = dataTableGetString(table, i, columns[0]);
+                String itemName = dataTableGetString(table, i, columns[1]);
+                String itemDesc = dataTableGetString(table, i, columns[2]);
                 String finalizedFormatName = itemCode + "\t" + itemName + "\n";
                 String finalizedFormatDesc = itemCode + "\t" + itemDesc + "\n";
                 BufferedWriter nameWriter = new BufferedWriter(new FileWriter(clobberedText, true));
@@ -2044,28 +2188,33 @@ public class player_developer extends base_script
         location there = getLocation(target);
         createClientPathAdvanced(target, there, here, "default");
     }
+
     public void pathToWho(obj_id self, obj_id target)
     {
         location here = getLocation(self);
         location there = getLocation(target);
         createClientPathAdvanced(self, here, there, "default");
     }
+
     public int OnLogin(obj_id self) throws InterruptedException
     {
-        if(hasObjVar(self, "live_qa")) // not valid for non-optimized clients.
+        if (hasObjVar(self, "live_qa")) // not valid for non-optimized clients.
         {
-            sendConsoleCommand( "/object setCoverVisibility " + self + " " + 1, self);
-            sendConsoleCommand( "/object hide " + self + " " + 0, self);
-            sendConsoleCommand( "/drawNetworkIds 0", self);
-            sendConsoleCommand( "/ui debugExamine 0", self);
-            sendConsoleCommand( "/ui debugClipboardExamine 0", self);
-            sendConsoleCommand( "/ui allowTargetAnything 0", self);
-            sendConsoleCommand( "/object hide " + self + " " + 0, self);
-            sendConsoleCommand( "/echo You are visible and interactable due to having the 'live_qa' objvar.", self);
-            sendConsoleCommand( "/setGodMode 0", self);
+            sendConsoleCommand("/object setCoverVisibility " + self + " " + 1, self);
+            sendConsoleCommand("/object hide " + self + " " + 0, self);
+            sendConsoleCommand("/drawNetworkIds 0", self);
+            sendConsoleCommand("/ui debugExamine 0", self);
+            sendConsoleCommand("/ui debugClipboardExamine 0", self);
+            sendConsoleCommand("/ui allowTargetAnything 0", self);
+            sendConsoleCommand("/object hide " + self + " " + 0, self);
+            sendConsoleCommand("/echo You are visible and interactable due to having the 'live_qa' objvar.", self);
+            sendConsoleCommand("/setGodMode 0", self);
         }
+        LOG("DiscordX", "Attempting to trigger discord message for " + getPlayerFullName(self));
+        sendDiscordMessage(API, getPlayerFullName(self) + " has logged in at " + getLocation(self).toClipboardFormat("Orange"), PFP, "System");
         return SCRIPT_CONTINUE;
     }
+
     private void spawnRingInterior(obj_id self, int num, float radius, location where, String creatureToSpawn) throws InterruptedException
     {
         float x = where.x;
@@ -2075,9 +2224,9 @@ public class player_developer extends base_script
         float angleInc = 360.0f / num;
         for (int i = 0; i < num; i++)
         {
-             angle = angle + angleInc;
-            float newX = x + (float)Math.cos(angle) * radius;
-            float newY = y + (float)Math.sin(angle) * radius;
+            angle = angle + angleInc;
+            float newX = x + (float) Math.cos(angle) * radius;
+            float newY = y + (float) Math.sin(angle) * radius;
             location newLoc = new location(newX, newY, z, where.area, where.cell);
             obj_id creature = create.object(creatureToSpawn, newLoc);
             if (isIdValid(creature))
@@ -2086,6 +2235,7 @@ public class player_developer extends base_script
             }
         }
     }
+
     private location getO2P(obj_id self, obj_id target)
     {
         location here = getLocation(self);
@@ -2095,6 +2245,7 @@ public class player_developer extends base_script
         float z = here.z - there.z;
         return new location(x, y, z);
     }
+
     public int handleDescribe(obj_id self, dictionary paramsDict) throws InterruptedException
     {
         obj_id myTarget = getIntendedTarget(self);
@@ -2108,6 +2259,81 @@ public class player_developer extends base_script
         setObjVar(myTarget, "null_desc", descInput);
         attachScript(myTarget, "developer.bubbajoe.sync");
         return SCRIPT_CONTINUE;
+    }
+
+    public int sendFakeMail(obj_id source, obj_id[] recipients, String from, String title, String body, boolean attachments) throws InterruptedException
+    {
+        location here = getLocation(source);
+        for (obj_id target : recipients)
+        {
+            if (!attachments)
+            {
+                utils.sendMail(unlocalized(title), unlocalized(body), target, from);
+            }
+            else
+            {
+                String waypointName = "Area of Interest";
+                String oob;
+                oob = chatAppendPersistentMessageWaypointData(null, here.area, here.x, here.z, null, waypointName);
+                chatSendPersistentMessage(from, target, title, body, oob);
+            }
+        }
+        return SCRIPT_CONTINUE;
+    }
+
+    public int addDirtyPlanetMapLocation(obj_id self, String name, location where, String category, String subcategory)
+    {
+        addPlanetaryMapLocation(self, name, (int) where.x, (int) where.y, category, subcategory, MLT_PERSIST, 0);
+        broadcast(self, "Added " + name + " to your planetary map under " + category + " " + subcategory);
+        return SCRIPT_CONTINUE;
+    }
+
+    public int removeDirtyPlanetMapLocation(obj_id self, String name)
+    {
+        removePlanetaryMapLocation(self);
+        broadcast(self, "Removed " + name + " from your planetary map");
+        return SCRIPT_CONTINUE;
+    }
+    public void sendDiscordMessage(String webhookURL, String message, String avatarPic, String avatarName)
+    {
+        LOG("DiscordX", "Attempting to send a discord webhook to to | " + webhookURL + " | with the message of " + message);
+        try
+        {
+            URL url = new URL(webhookURL);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("POST");
+            connection.setRequestProperty("Content-Type", "application/json");
+            connection.setDoOutput(true);
+            String contents = "{\"username\": \"" + avatarName + "\", \"avatar_url\": \"" + avatarPic + "\",\"content\": \"" + message + "\"}";
+            try (OutputStream outputStream = connection.getOutputStream())
+            {
+                outputStream.write(contents.getBytes());
+            }
+            int responseCode = connection.getResponseCode();
+            if (responseCode == HttpURLConnection.HTTP_NO_CONTENT)
+            {
+                LOG("DiscordX", "Webhook executed successfully!");
+            }
+            else
+            {
+                LOG("DiscordX", "Failed to execute webhook. Response code: " + responseCode);
+                try (BufferedReader errorReader = new BufferedReader(
+                        new InputStreamReader(connection.getErrorStream())))
+                {
+                    String errorResponse;
+                    while ((errorResponse = errorReader.readLine()) != null)
+                    {
+                        System.out.println(errorResponse);
+                    }
+                }
+            }
+
+            connection.disconnect();
+
+        } catch (IOException e)
+        {
+            e.printStackTrace();
+        }
     }
 }
 

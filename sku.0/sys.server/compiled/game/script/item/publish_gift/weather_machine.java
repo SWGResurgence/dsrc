@@ -1,5 +1,11 @@
 package script.item.publish_gift;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.player_structure;
 import script.library.utils;
@@ -17,6 +23,7 @@ public class weather_machine extends script.base_script
     public static final String OBJVAR_WEATHER_PARTICLE_02 = "particle_2";
     public static final String OBJVAR_WEATHER_PARTICLE_03 = "particle_3";
     public static final String CS_TCG_5_RAIN_MACHINE_CATEGORY = "tcg_set5_rain_machine";
+
     public weather_machine()
     {
     }

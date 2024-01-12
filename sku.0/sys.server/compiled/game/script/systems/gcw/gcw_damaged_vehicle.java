@@ -1,5 +1,11 @@
 package script.systems.gcw;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.*;
 import script.library.factions;
 import script.library.gcw;
@@ -54,7 +60,7 @@ public class gcw_damaged_vehicle extends script.base_script
         int repairCount = getIntObjVar(self, gcw.GCW_OBJECT_REPAIR_COUNT);
         if (repairCount > 0)
         {
-            attribs[idx] = "" + repairCount + " out of 4";
+            attribs[idx] = repairCount + " out of 4";
         }
         else
         {

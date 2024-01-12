@@ -1,15 +1,22 @@
 package script.npc.skillteacher;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.library.*;
 import script.*;
 
 public class dance_advancement_trainer extends script.base_script
 {
+    public static final String CONVO = "dance_advancement";
+    public static final String ADVANCEMENT_OBJVAR = "dance_advancement";
     public dance_advancement_trainer()
     {
     }
-    public static final String CONVO = "dance_advancement";
-    public static final String ADVANCEMENT_OBJVAR = "dance_advancement";
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
@@ -17,6 +24,7 @@ public class dance_advancement_trainer extends script.base_script
         fixName(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
@@ -27,6 +35,7 @@ public class dance_advancement_trainer extends script.base_script
         fixName(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id speaker) throws InterruptedException
     {
         if (!hasObjVar(speaker, ADVANCEMENT_OBJVAR))
@@ -42,6 +51,7 @@ public class dance_advancement_trainer extends script.base_script
         npcStartConversation(speaker, self, CONVO, msg, responses);
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String conversation, obj_id speaker, string_id response) throws InterruptedException
     {
         if ((response.getAsciiId()).equals("greeting_r0"))
@@ -67,7 +77,7 @@ public class dance_advancement_trainer extends script.base_script
                 npcAddConversationResponse(speaker, new string_id(CONVO, "offer_r10"));
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 msg = new string_id(CONVO, "cant_teach");
                 npcSpeak(speaker, msg);
@@ -138,7 +148,7 @@ public class dance_advancement_trainer extends script.base_script
                             return SCRIPT_CONTINUE;
                         }
                     }
-                    else 
+                    else
                     {
                         string_id msg = new string_id(CONVO, "cant_teach_yet");
                         npcSpeak(speaker, msg);
@@ -203,6 +213,7 @@ public class dance_advancement_trainer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void fixName(obj_id self) throws InterruptedException
     {
         String name_title = getName(self);
@@ -213,7 +224,7 @@ public class dance_advancement_trainer extends script.base_script
         {
             name = name_title + " ";
         }
-        else 
+        else
         {
             name = name_title.substring(0, idx);
         }

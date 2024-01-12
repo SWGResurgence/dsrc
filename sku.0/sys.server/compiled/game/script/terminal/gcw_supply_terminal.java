@@ -1,5 +1,11 @@
 package script.terminal;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.library.*;
 import script.obj_id;
@@ -7,20 +13,21 @@ import script.string_id;
 
 public class gcw_supply_terminal extends script.base_script
 {
-    public gcw_supply_terminal()
-    {
-    }
     public static final String SLICE = "You slice the ";
     public static final int BASE_SLICING_TIME = 5;
     public static final String STRING_FILE = "gcw";
     public static final string_id SID_SLICE = new string_id(STRING_FILE, "slice_terminal");
-    public static final String[] SLICE_OPTIONS = 
+    public static final String[] SLICE_OPTIONS =
+            {
+                    "Data Pipeline",
+                    "Instruction Handler",
+                    "Operations Core",
+                    "Reset"
+            };
+    public gcw_supply_terminal()
     {
-        "Data Pipeline",
-        "Instruction Handler",
-        "Operations Core",
-        "Reset"
-    };
+    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (!isIdValid(self) || !exists(self))
@@ -30,6 +37,7 @@ public class gcw_supply_terminal extends script.base_script
         messageTo(self, "decreaseSliced", null, 60.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public void initiateSlicing(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player) || !exists(player))
@@ -40,6 +48,7 @@ public class gcw_supply_terminal extends script.base_script
         utils.setScriptVar(player, "gcw.maxTier", 0);
         makeSliceSequence(player);
     }
+
     public void makeSliceSequence(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player) || !exists(player))
@@ -57,6 +66,7 @@ public class gcw_supply_terminal extends script.base_script
             utils.setScriptVar(player, "gcw.sliceSequence", sliceSeqence);
         }
     }
+
     public int startSlicing(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -68,9 +78,10 @@ public class gcw_supply_terminal extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        stageMenu(self, player, "" + getText(self, player), "Slice Supply Terminal", SLICE_OPTIONS, "slicingChoice", true, "PIDvar", "scriptVar.scriptVar");
+        stageMenu(self, player, getText(self, player), "Slice Supply Terminal", SLICE_OPTIONS, "slicingChoice", true, "PIDvar", "scriptVar.scriptVar");
         return SCRIPT_CONTINUE;
     }
+
     public void correctChoice(obj_id self, obj_id player) throws InterruptedException
     {
         if (!isIdValid(player) || !exists(player) || !isIdValid(self) || !exists(self))
@@ -99,7 +110,7 @@ public class gcw_supply_terminal extends script.base_script
                     int count = 1;
                     if (multiplier > 1)
                     {
-                        count = (int)(count * (float)multiplier);
+                        count = (int) (count * multiplier);
                     }
                     if (count > 1)
                     {
@@ -108,7 +119,7 @@ public class gcw_supply_terminal extends script.base_script
                             static_item.createNewItemFunction(gcw.GCW_IMPERIAL_TOKEN, pInv);
                         }
                     }
-                    else 
+                    else
                     {
                         static_item.createNewItemFunction(gcw.GCW_IMPERIAL_TOKEN, pInv);
                     }
@@ -124,7 +135,7 @@ public class gcw_supply_terminal extends script.base_script
                     int count = 1;
                     if (multiplier > 1)
                     {
-                        count = (int)(count * (float)multiplier);
+                        count = (int) (count * multiplier);
                     }
                     if (count > 1)
                     {
@@ -133,7 +144,7 @@ public class gcw_supply_terminal extends script.base_script
                             static_item.createNewItemFunction(gcw.GCW_REBEL_TOKEN, pInv);
                         }
                     }
-                    else 
+                    else
                     {
                         static_item.createNewItemFunction(gcw.GCW_REBEL_TOKEN, pInv);
                     }
@@ -146,6 +157,7 @@ public class gcw_supply_terminal extends script.base_script
         }
         utils.setScriptVar(player, "gcw.tier", tier);
     }
+
     public void applyFatigue(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player) || !exists(player))
@@ -155,6 +167,7 @@ public class gcw_supply_terminal extends script.base_script
         buff.applyBuffWithStackCount(player, "gcw_fatigue", 5);
         sendSystemMessage(player, "You trigger the defense system, resulting in a deblitating shock", null);
     }
+
     public int slicingChoice(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -184,7 +197,7 @@ public class gcw_supply_terminal extends script.base_script
         if (idx > 3)
         {
             utils.setScriptVar(player, "gcw.tier", 0);
-            stageMenu(self, player, "" + getText(self, player), "Slice Supply Terminal", SLICE_OPTIONS, "slicingChoice", true, "PIDvar", "scriptVar.scriptVar");
+            stageMenu(self, player, getText(self, player), "Slice Supply Terminal", SLICE_OPTIONS, "slicingChoice", true, "PIDvar", "scriptVar.scriptVar");
             return SCRIPT_CONTINUE;
         }
         utils.setScriptVar(player, "gcw.slicing_idx", idx);
@@ -207,6 +220,7 @@ public class gcw_supply_terminal extends script.base_script
         int pid = sui.smartCountdownTimerSUI(self, player, "gcwPylonConstruction", SID_SLICE, 0, captureTime, "handleSlicingAttemptResults", 4.0f, flags);
         return SCRIPT_CONTINUE;
     }
+
     public int handleSlicingAttemptResults(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -264,7 +278,7 @@ public class gcw_supply_terminal extends script.base_script
         {
             correctChoice(self, player);
         }
-        else 
+        else
         {
             utils.setScriptVar(player, "gcw.tier", 0);
             applyFatigue(player);
@@ -274,9 +288,10 @@ public class gcw_supply_terminal extends script.base_script
             sendSystemMessage(player, "You have sliced all 10 levels of security", null);
             return SCRIPT_CONTINUE;
         }
-        stageMenu(self, player, "" + getText(self, player), "Slice Supply Terminal", SLICE_OPTIONS, "slicingChoice", true, "PIDvar", "scriptVar.scriptVar");
+        stageMenu(self, player, getText(self, player), "Slice Supply Terminal", SLICE_OPTIONS, "slicingChoice", true, "PIDvar", "scriptVar.scriptVar");
         return SCRIPT_CONTINUE;
     }
+
     public String getText(obj_id self, obj_id player) throws InterruptedException
     {
         if (!isIdValid(player) || !exists(player) || !isIdValid(self) || !exists(self))
@@ -301,14 +316,15 @@ public class gcw_supply_terminal extends script.base_script
         String txt = "Current security level: " + txtTier + "\nYour Highest Security Breach: " + txtMaxTier + "\nTerminal Security Levels Disabled: " + txtSliced;
         return txt;
     }
+
     public int decreaseSliced(obj_id self, dictionary params) throws InterruptedException
     {
         int sliced = 0;
         if (hasObjVar(self, "gcw.contraband"))
         {
-            
+
         }
-        
+
         {
             sliced = getIntObjVar(self, "gcw.contraband");
         }
@@ -320,14 +336,12 @@ public class gcw_supply_terminal extends script.base_script
         messageTo(self, "decreaseSliced", null, 120.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public boolean hasQuest(obj_id player) throws InterruptedException
     {
-        if (groundquests.isQuestActive(player, gcw.GCW_SMUGGLER_SLICING))
-        {
-            return true;
-        }
-        return false;
+        return groundquests.isQuestActive(player, gcw.GCW_SMUGGLER_SLICING);
     }
+
     public void stageMenu(obj_id self, obj_id player, String prompt, String title, String[] options, String myHandler, boolean cancel, String PIDVar, String scriptVar) throws InterruptedException
     {
         closeOldWindow(player, scriptVar);
@@ -336,6 +350,7 @@ public class gcw_supply_terminal extends script.base_script
         setWindowPid(player, pid, PIDVar);
         utils.setScriptVar(player, scriptVar, options);
     }
+
     public void closeOldWindow(obj_id player, String scriptVar) throws InterruptedException
     {
         if (utils.hasScriptVar(player, scriptVar))
@@ -345,6 +360,7 @@ public class gcw_supply_terminal extends script.base_script
             utils.removeScriptVarTree(player, scriptVar);
         }
     }
+
     public void setWindowPid(obj_id player, int pid, String scriptVar) throws InterruptedException
     {
         if (pid > -1)

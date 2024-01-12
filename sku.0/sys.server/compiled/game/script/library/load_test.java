@@ -1,5 +1,11 @@
 package script.library;
 
+/*
+ * Copyright © SWG:Resurgence 2023.
+ *
+ * Unauthorized usage, viewing or sharing of this file is prohibited.
+ */
+
 import script.dictionary;
 import script.location;
 import script.obj_id;
@@ -74,6 +80,7 @@ public class load_test extends script.base_script
                     "pilot_neutral_droid_04",
                     "pilot_neutral_master"
             };
+
     public load_test()
     {
     }
